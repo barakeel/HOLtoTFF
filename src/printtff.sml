@@ -1,7 +1,7 @@
 structure printtff :> printtff =
 struct
 
-open HolKernel numSyntax name extractterm extracttype stringtools listtools mydatatype (*not all structures are necessary*)
+open HolKernel numSyntax higherorder name extractvar extracttype stringtools listtools mydatatype (*not all structures are necessary*)
 
 fun PRINTTFF_ERR function message =
     HOL_ERR{origin_structure = "printtff",
@@ -9,9 +9,9 @@ fun PRINTTFF_ERR function message =
             message = message}
 
 (*PRINTTERM*)
-val bvcounter = ref 0; (*warning: use of a global reference*)
+val bvcounter = ref 0; (* warning: use of a global reference *)
 
-(*modify bvcounter*)
+(* modify bvcounter *)
 fun addbvltobvnm bvl bvnm = 
   case bvl of
     [] => bvnm
@@ -23,29 +23,30 @@ fun addbvltobvnm bvl bvnm =
 fun printbvl2 bvl bvnm alphanm  =
   case bvl of
     [] => raise PRINTTFF_ERR "printbvl2" "emptylist"
-  | [a] => (map a bvnm) ^ ": " ^ (nametype (type_of a) alphanm)
-  | a :: m => (map a bvnm) ^ ": " ^ (nametype (type_of a) alphanm) ^ 
+  | [bv] => (lookup bv bvnm) ^ ": " ^ (namesimpletype (type_of bv) alphanm) (* the bound variables should have a simple type *)
+  | bv :: m => (lookup bv bvnm) ^ ": " ^ (namesimpletype (type_of bv) alphanm) ^ 
               "," ^ (printbvl2 m bvnm alphanm)
 
 fun printbvl bvl bvnm alphanm = "[" ^ (printbvl2 bvl bvnm alphanm) ^ "]"
   
-(*#1 state : list of (a free variable or an undefined constant c, its name) *)
-(*#2 state : list of (bound variable, its name) *)
-(*#3 state : list of (alphatype, its name) *)
-(*warning: should have the same structure as getfvcl in extractterm.sml*)
-(*modify bvcounter*)
+
+(* #1 state : list of (a free variable or an undefined constant c, its name) *)
+(* #2 state : list of (bound variable, its name)  the type should defintly be a simple type *)
+(* #3 state : list of (alphatype, its name) *)
+(* warning: should have the same structure as getfvcl in extractterm.sml *)
+(* modify bvcounter *)
 fun printterm term state =
   case termstructure term of
-    Numeral => term_to_string term
+    Numeral => namenumeral term
   | Var => if ismember term (fstcomponent (#2 state))
-           then map term (#2 state) (*boundvar*)
-           else map term (#1 state) (*freevar*) 
+           then lookup term (#2 state) (*boundvar*)
+           else lookup term (#1 state) (*freevar*) 
   
   | Const => (
              case leafconst term of
                True => "$true"
              | False => "$false"
-             | Newleafconst => map term (#1 state)
+             | Newleafconst => lookup term (#1 state)
              )
   | Comb => (
             case connective term of
@@ -62,8 +63,8 @@ fun printterm term state =
             | App => let val (operator,argl) = strip_comb term in
                      let val argstr =  "(" ^ (printterml argl state) ^ ")" in
                        case termstructure operator of
-                         Numeral => raise PRINTTFF_ERR "printterm" "a numeral is not an operator"
-                       | Var => (map operator (#1 state)) ^ argstr
+                         Numeral => raise PRINTTFF_ERR "printterm" "operator is numeral"
+                       | Var => (lookup operator (#1 state)) ^ argstr (* don't need to test if it's bound because operator can't be bound *)
                        | Const => (
                                   case nodeconst term of
                                     Eq => tffbinop "=" term state
@@ -74,9 +75,9 @@ fun printterm term state =
                                   | Greater => "$greater" ^ argstr
                                   | Geq => "$greatereq" ^ argstr 
                                   | Leq => "$lesseq" ^ argstr  
-                                  | Newnodeconst => (map operator (#1 state)) ^ argstr      
+                                  | Newnodeconst => (lookup operator (#1 state)) ^ argstr      
                                   )
-                       | Comb => raise PRINTTFF_ERR "printterm" "second order"
+                       | Comb => raise PRINTTFF_ERR "printterm" "operator is comb"
                        | Abs => raise PRINTTFF_ERR "printterm" "abstraction"
                      end end
              )
@@ -105,49 +106,38 @@ and quantifier str bvl term state =
     str ^ " " ^ (printbvl bvl newbvnm (#3 state)) ^ " : " ^   
     "( " ^ (printterm term (#1 state,newbvnm,#3 state)) ^ " )"
   end
+(* END PRINTTERM *)
 
-fun printtermlocal term = 
-  let val strresult = ref "" in
-  (
-  bvcounter := 0; 
-  strresult := printterm term (namefvcl [term],[],namealphal [term]);
-  bvcounter := 0;
-  !strresult
-  )
-  end
-(*END PRINTTERM*)
+(* PRINTTHM *)
+fun printtype nm tynm =
+ "tff(" ^ nm ^ "_type,type,(" ^
+ (indent 4) ^ nm ^ ": " ^ tynm ^ " ))." 
 
-(*PRINTTHM*)
-fun printtypestr name str =
- "tff(" ^ name ^ "_type,type,(" ^
- (indent 4) ^ name ^ ": " ^ str ^ " ))." 
-
-fun printtype name holtype alphanm =
-  printtypestr name (nametype holtype alphanm) 
-
-(*alpha*) 
+(* alphatype *) 
 fun printalphatypel alphanm = 
   case alphanm of
     [] => ""
-  | (alpha,name) :: m => (printtypestr name "$tType") ^ "\n\n" ^ printalphatypel m
+  | (alpha,nm) :: m => (printtype nm "$tType") ^ "\n\n" ^ (printalphatypel m)
 
-(*simpletype*)
+(* simpletype *)
 fun printsimpletypel simpletypel =   
   case simpletypel of
     [] => ""
-  | a :: m => (printtypestr (nametype a []) "$tType") ^ "\n\n" ^ printsimpletypel m
+  | tynm :: m => (printtype tynm "$tType") ^ "\n\n" ^ (printsimpletypel m)
               
-(*free variables*)
-fun printfvtypel fvcnm alphanm =
-  case fvcnm of
+(* free variables *)
+fun printfvtypel fvc_nbarg_nm_tynm =
+  case fvc_nbarg_nm_tynm of
     [] => "" 
-  | (a,name) :: m => (printtype name (type_of a) alphanm) ^ "\n\n" ^ (printfvtypel m alphanm)
+  | (fvc,nbarg,nm,tynm) :: m => (printtype nm tynm) ^ "\n\n" ^ (printfvtypel m)
 
-(*add an axiom "greater than 0" for numtype free variables*)
+(* axiom *)
+  (* add numaxiom *)
 fun numl fvcnm = 
   case fvcnm of
     [] => []
-  | (fvc,nm) :: m => (
+  | (fvc,nm) :: m => 
+                     (
                      case typecat (type_of fvc) of
                        Numtype => (fvc,nm) :: numl m 
                      | _ => numl m   
@@ -164,9 +154,8 @@ fun printnumaxiom2 fvcnmnum =
     [] => ""
   | _ => "tff(num_axiom,axiom,(" ^ (indent 4) ^ (numaxiom fvcnmnum) ^ " ))." ^ "\n\n" 
 
-fun printnumaxiom fvcnm = printnumaxiom2 (numl fvcnm)
-
-(*axiom*)
+fun printnumaxiom fvcnm = printnumaxiom2 (numl fvcnm) 
+  (* end numaxiom *)
 fun printaxiom name holprop state =
   "tff(" ^ name ^ "_axiom,axiom,(" ^ (indent 4) ^
    (printterm holprop state) ^ " ))." 
@@ -177,42 +166,56 @@ fun printaxioml axiomnm fvcnm alphanm=
   | (a,name) :: m => (printaxiom name a (fvcnm,[],alphanm)) ^ "\n\n" 
                       ^ (printaxioml m fvcnm alphanm)
 
-(*conjecture*)
+(* conjecture *)
 fun printconjecture name holprop fvcnm alphanm=
   "tff(" ^ name ^ "_conjecture,conjecture,(" ^ 
   (indent 4) ^ (printterm holprop (fvcnm,[],alphanm)) ^ " ))." 
 
-(*modify bvcounter*)
+(* modify bvcounter *)
 fun printthm thm =
   let val strresult = ref "" in
     (
     bvcounter := 0
     ;
     let val hypl = hyp thm in 
-    let val propl = hypl @ [concl thm]  in
-    let 
-      val fvcnm = namefvcl propl 
-      val simpletyl = simpletypel propl 
-      val alphanm = namealphal propl 
-      val axiomnm = nameaxioml hypl 
-    in
-      strresult :=
-      (printalphatypel alphanm) ^ 
-      (printsimpletypel simpletyl) ^
-      (printfvtypel fvcnm alphanm) ^ 
-      (printnumaxiom fvcnm) ^ 
-      (printaxioml axiomnm fvcnm alphanm) ^
-      (printconjecture "goal" (concl thm) fvcnm alphanm) 
-    end end end
+    let val propl = hypl @ [concl thm] in
+    let val alphanm = namealphal propl in  
+    let val varl =  extractvarl propl in (* will check if function is used as bound variable *)
+    let val fvcdcl = erasedouble (erasenumber (erasebv varl)) in
+    let val fvcl = erasetffc fvcdcl in 
+    let val fvc_nbarg_nm = namefvcl fvcl in
+    let val fvcnm = erase2ndcomponent fvc_nbarg_nm in
+    let val fvc_nbarg_nm_tynm = addtypenm fvc_nbarg_nm alphanm in
+    let val simptyl = erasedouble (simpletypel fvc_nbarg_nm_tynm) in 
+    let val axiomnm = nameaxioml hypl in
+    
+    if firstorderfvcdcl fvcdcl
+    then
+      let 
+        val str1 = printalphatypel alphanm
+        val str2 = printsimpletypel simptyl
+        val str3 = printfvtypel fvc_nbarg_nm_tynm
+        val str4 = printnumaxiom fvcnm
+        val str5 = printaxioml axiomnm fvcnm alphanm
+        val str6 = printconjecture "goal" (concl thm) fvcnm alphanm
+      in
+        strresult := str1 ^ str2 ^ str3 ^ str4 ^ str5 ^ str6
+      end
+    else
+      raise PRINTTFF_ERR "printthm" "shouldnothappen"
+    
+    end end end end end 
+    end end end end end
+    end
     ;
     bvcounter := 0
     ;
     !strresult
     )
   end
-(*END PRINTTHM*)
+(* END PRINTTHM *)
 
-(*need the full path of your file (eg /home/problem.p)*)
+(* need the full path of your file (eg /home/problem.p) *)
 fun outputtff path thm =
   let val str = printthm thm in
   let val myfile = TextIO.openOut path in 

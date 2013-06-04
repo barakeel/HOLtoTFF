@@ -1,47 +1,64 @@
 structure name :> name =
 struct
 
-open HolKernel extractterm extracttype stringtools listtools mydatatype
+open HolKernel extractvar extracttype stringtools listtools mydatatype numSyntax
 
 fun NAME_ERR function message =
   HOL_ERR{origin_structure = "name",
           origin_function = function,
           message = message}
 
+(* HOLNAME *)
+fun holnamety holtype = 
+  case typecat holtype of
+    Booltype => fst (dest_type holtype)
+  | Numtype => fst (dest_type holtype)
+  | Alphatype => raise NAME_ERR "holnamety" "alphatype"
+  | Leaftype => fst (dest_type holtype)
+  | Funtype => raise NAME_ERR "holnamety" "funtype"
+  | Prodtype => raise NAME_ERR "holnamety" "prodtype"
+  
+fun holnamet term =
+  case termstructure term of
+    Numeral => Int.toString (int_of_term term)
+  | Var => fst (dest_var term)
+  | Const => fst (dest_const term)
+  | Comb => raise NAME_ERR "holnamet" "comb"
+  | Abs => raise NAME_ERR "holnamet" "abs"
+(* END HOLNAME *)
+
 (* NAMETYPE *)
+(* name alphatype *)
 fun namestrn str n = str ^ (Int.toString n) 
 
 fun namealphal2 alphatypel start = 
   case alphatypel of
     [] => []
-  | a :: m =>  (a,namestrn "alpha" start) :: namealphal2 m (start + 1) 
+  | alpha :: m => (alpha,namestrn "alpha" start) :: namealphal2 m (start + 1) 
  
 fun namealphal propl = namealphal2 (alphatypel propl) 0
+
  
-(*convert an Funtype or Prodtype into a unique name when called*) 
-(*type collison may happen*)
+(* namesimpletype *) (* clash may occurs at several points in this code*)
 fun namesimpletype2 holtype alphanm = 
   case typecat holtype of
-    Booltype => "bool"
-  | Numtype => "num"
-  | Alphatype => map holtype alphanm (*clash could occur if your name your type alpha...num*)
-  | Simpletype => let val str = erasechar (type_to_string holtype) in
+    Booltype => holnamety holtype
+  | Numtype => holnamety holtype
+  | Alphatype => lookup holtype alphanm (* clash could occur if your name your type alpha...num *)
+  | Leaftype => let val str = holnamety holtype in
                     switchargerr str 
                       [
                       (islowerword   ,str),
-                      (isalphanumor_ ,"ty_" ^ str)  (*all types should be alphanumor_*)
+                      (isalphanumor_ ,"ty_" ^ str)  (* all types should be alphanumor_ for now *)
                       ]
                       (NAME_ERR "namesimpletype2" "not alphanumor_")
                   end
-
-(*shouldn't be apply to anything*)
   | Funtype => let val (str,list) = dest_type holtype in
                let val ty1 = hd list
                    val ty2 = hd (tl list)
                in 
                  "t_" ^ (namesimpletype2 ty1 alphanm) ^ "_to_" ^ (namesimpletype2 ty2 alphanm) ^ "_t" 
                end end  
-(*everything that is under a product type is now unreachable*) 
   | Prodtype => let val (str,list) = dest_type holtype in         
                 let val ty1 = hd list
                     val ty2 = hd (tl list)
@@ -58,96 +75,129 @@ fun namesimpletype holtype alphanm =
 fun namesimpletypel typel alphanm =
   case typel of
     [] => ""
-  | [a] => namesimpletype a alphanm
-  | a::m => (namesimpletype a alphanm) ^ " * " ^ (namesimpletypel m alphanm)
- 
-fun namecompoundtype typel holtype alphanm =
-  case typel of
-    [] => raise  NAME_ERR "namecompoundtype" ""
-  | [a] => (namesimpletype a alphanm) ^ " > " ^ (namesimpletype holtype alphanm)
-  | _ => "( " ^ (namesimpletypel typel alphanm) ^ " ) > " ^ (namesimpletype holtype alphanm) 
+  | [ty] => namesimpletype ty alphanm
+  | ty :: m => (namesimpletype ty alphanm) ^ " * " ^ (namesimpletypel m alphanm)
 
-(*can now be replace by strip_fun*) 
-(*fun striptype holtype =
-  case typecat holtype of 
-    Booltype => ([],holtype)
-  | Numtype => ([],holtype)
-  | Alphatype => ([],holtype)
-  | Simpletype => ([],holtype)
-  | Funtype => let val (str,list) = dest_type holtype in
-               let val ty = hd list
-                   val l = hd (tl list)
-               in
-                 (ty :: fst(striptype l), snd(striptype l)) 
-               end end
-  | Prodtype => ([], holtype) *)
- 
-fun nametype holtype alphanm = 
+fun namecompoundtype argl image alphanm = 
+  case argl of
+    [] => namesimpletype image alphanm
+  | [ty] => (namesimpletype ty alphanm) ^ " > " ^ (namesimpletype image alphanm)
+  | _ => "( " ^ (namesimpletypel argl alphanm) ^ " )" ^ " > " ^ (namesimpletype image alphanm)
+
+fun desttypenb holtype nbarg = (* to be redefined to cope with prod type at least raise an exception *)
+  case nbarg of
+    0 => ([],holtype)
+  | n => if n > 0 
+         then 
+           let val (str,list) = dest_type holtype in
+           let 
+             val ty1 = hd list
+             val ty2 = hd (tl list) in
+           let val resl = desttypenb ty2 (n-1) in
+           let
+             val argl = fst resl
+             val image = snd resl in
+           (ty1 :: argl,image) 
+           end end end end
+         else raise NAME_ERR "desttypenb" "negative number"
+
+fun nametype holtype nbarg alphanm = 
   case typecat holtype of
     Booltype => namesimpletype holtype alphanm
   | Numtype => namesimpletype holtype alphanm
   | Alphatype => namesimpletype holtype alphanm
-  | Simpletype => namesimpletype holtype alphanm
-  | Funtype => let val (a,b) = strip_fun holtype in
-               namecompoundtype a b alphanm
+  | Leaftype => namesimpletype holtype alphanm
+  | Funtype => let val (argl,image) = desttypenb holtype nbarg in (* strip_fun is bad *)
+               namecompoundtype argl image alphanm
                end
   | Prodtype => namesimpletype holtype alphanm
 (* END NAMETYPE *)
 
-(* NAMETERM *)
+(* NAMEVAR *)
+(* numeral *)
+fun namenumeral term =  
+  case termstructure term of
+    Numeral => holnamet term
+  | _ => raise NAME_ERR "namenumeral" "not a numeral"
 
 (* bv : bound variable *)
 fun namebvn bv n = 
-  if isalphanumor_ (term_to_string bv) 
-  then "X" ^ (Int.toString n)  ^ (term_to_string bv)
+  if isalphanumor_ (holnamet bv) 
+  then "X" ^ (Int.toString n)  ^ (holnamet bv)
   else "X" ^ (Int.toString n)
+
 
 
 (* fv : free variable *)
 (* c : constant *)
 (* fvc : free variable or constant*)
+
+(* first give a name and a type for each variable and constant even defined constant *)
+(* I have a list of variables *)
+
 fun namefvc2 term =
-  let val str = term_to_string term in
+  let val str = holnamet term in
      switch 
        [
        (islowerword str   ,str),
-       (isalphanumor_ str ,"x" ^ str),  (*all free variables should be alphanumor_*)
-       (str = "$," , "pair") (*bad but can't help too hard to call is_pair here*)
+       (isalphanumor_ str ,"x" ^ str),  
+       (str = "," , "pair") 
        ]
        "holConst"
   end
 
 fun namefvc term =  
-  let val str = term_to_string term in
+  let val str = holnamet term in
     case termstructure term of
       Var => namefvc2 term
     | Const => namefvc2 term
     | _ => raise NAME_ERR "namefvc" "not a variable or a constant"
   end
 
-fun namefvcl2 fvclist used = 
-  case fvclist of
-    [] => []
-  | a :: m => let 
-                val name = namefvc a
-                val nameref = ref name
-                val n = ref 0 
-              in
-                ( 
-                while ismember (!nameref) used do 
-                  (
-                  nameref := name ^ (Int.toString (!n))  
-                  ;
-                  n := (!n) + 1
-                  )
-                ; 
-                (a,(!nameref)) :: ( namefvcl2 m ((!nameref) :: used) )
-                )
-              end
- 
-fun namefvcl terml = namefvcl2 (getfvcl terml) []
-(*END NAMETERM*)
 
+(* now we don't need to detect higher order so we can erasetffconst
+except if we want the simpletype *)
+fun erasetffconst fvcl = 
+  case fvcl of 
+    [] => []
+  | (_,_,Tffconst) :: m => erasebv m 
+  | a :: m =>  a :: erasebv m
+
+  
+(* fvcl is a triplelist (fv,nbarg,varcat) *)
+(* return a triplelist (fv,nbarg,name) *)
+fun namefvcl2 fvcl used = 
+  case fvcl of
+    [] => []
+ | (_,_,Tffconst) :: m => raise NAME_ERR "namefvc" "tff constant" 
+ | (fvc,nbarg,_) :: m => 
+    let 
+      val name = namefvc fvc
+      val nameref = ref name
+      val n = ref 0 
+    in
+    ( 
+    while ismember (!nameref) used do 
+    (
+    nameref := name ^ (Int.toString (!n))  
+    ;
+    n := (!n) + 1
+    )
+    ; 
+    (fvc,nbarg,(!nameref)) :: namefvcl2 m ((!nameref) :: used) 
+    )
+    end
+
+fun namefvcl fvcl = namefvcl2 fvcl []
+
+fun addtypenm fvcnml alphanm =
+  case fvcnml of
+    [] => []
+  | (fv,nbarg,nm) :: m => (fv,nbarg,nm,nametype (type_of fv) nbarg alphanm) :: addtypenm m alphanm
+  
+
+
+(*END NAMEVAR*)
 fun nameaxioml2 axioml start = 
   case axioml of
     [] => []

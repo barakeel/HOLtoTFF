@@ -8,11 +8,6 @@ fun STRINGTOOLS_ERR function message =
           origin_function = function,
           message = message}
 
-fun erasechar str =
-  if (String.size str) > 0
-  then String.extract (str,1,NONE)
-  else raise STRINGTOOLS_ERR "erasechar" ""
-
 fun space n =
   case n of
     0 => ""

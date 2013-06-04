@@ -8,7 +8,7 @@ fun DATATYPE_ERR function message =
 	    origin_function = function,
             message = message}
 
-datatype TYPECAT = Booltype | Numtype | Alphatype | Simpletype | Funtype | Prodtype
+datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype | Funtype | Prodtype
 
 fun typecat holtype =
   case (holtype = ``:bool``,holtype = ``:num``,is_vartype holtype) of
@@ -16,10 +16,10 @@ fun typecat holtype =
   | (_,true,_) => Numtype
   | (_,_,true) => Alphatype (*represents alpha type*)
   | (_,_,_) => case (dest_type holtype) of  
-                 (_,[]) => Simpletype
+                 (_,[]) => Leaftype
                | ("fun",_) => Funtype
                | ("prod",_) => Prodtype
-               | _ => raise DATATYPE_ERR "typecat" ""
+               | _ => raise DATATYPE_ERR "typecat" "unknown typeconstructor"
 
 datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
 
@@ -32,7 +32,7 @@ fun termstructure term =
     (is_comb    ,Comb),
     (is_abs     ,Abs)
     ]
-    (DATATYPE_ERR "termstructure" "unknown term structure")   
+    (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
 datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
 

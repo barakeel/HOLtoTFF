@@ -11,17 +11,15 @@ fun alltypel2 varl =
 fun alltypel propl = erasedouble (alltypel2 (all_varsl propl))
 
 fun alphatypel propl = type_varsl (alltypel propl)
+ 
 
-fun simpletypel2 typel =
- case typel of
-   [] => []  
- | a :: m => (
-             case typecat a of
-               Simpletype => a :: simpletypel2 m
-             | _ => simpletypel2 m  
-             )
+(* can be applied after erasing tffconstant 
+because there is no need of a type for them *)
 
-fun simpletypel propl = simpletypel2 (alltypel propl)
-
+fun simpletypel fvc_arity_nm_typenm =
+  case fvc_arity_nm_typenm of
+    [] => []
+  | (fvc,0,nm,typenm) :: m => typenm :: simpletypel m  
+  | a :: m => simpletypel m 
 
 end

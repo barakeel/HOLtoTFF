@@ -1,7 +1,6 @@
 signature stringtools =
 sig
 
-  val erasechar : string -> string 
   val space : int -> string 
   val indent : int -> string
   

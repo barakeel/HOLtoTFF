@@ -23,13 +23,25 @@ fun erasedouble list =
               then erasedouble m 
               else a :: erasedouble m
 
-fun map elem couplelist =
+fun lookup elem couplelist =
   case couplelist of 
-  [] => raise LISTTOOLS_ERR "map" ""
-  | (a,b) :: m =>  if a = elem then b else map elem m
+  [] => raise LISTTOOLS_ERR "lookup" ""
+  | (a,b) :: m =>  if a = elem then b else lookup elem m
 
+fun fstcomponent couplel = 
+  case couplel of
+    [] => []
+  | (a,_) :: m => a :: fstcomponent m
 
-fun fstcomponent couplel= fst (split couplel)
+fun erase3rdcomponent triplel =
+  case triplel of
+    [] => []
+  | (a,b,_) :: m => (a,b) :: erase3rdcomponent m
+
+fun erase2ndcomponent triplel =
+  case triplel of
+    [] => []  
+  | (a,_,c) :: m => (a,c) :: erase2ndcomponent m
 
 
 fun switch condresultl defaultresult = 
