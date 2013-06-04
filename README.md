@@ -1,10 +1,9 @@
 One way to use these files:
 
-(to be sure that the .ui files are up to date)
-go to your directory
-run Holmake 
-(end)
-
-open emacs with interactive hol mode 
-open test.sml in emacs (if you like)
-use the command you like after you open the structure you need
+- open a terminal
+- go to the directory HOLtoTFF (cd ... HOLtoTFF)
+- run Holmake (type Holmake)
+- open emacs (type emacs be sure to be in the same directory)
+- open test.sml
+- run holinteractivemode (M-h h)
+- select instructions you want to excecute and then M-h M-r
