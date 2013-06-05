@@ -1,7 +1,7 @@
 One way to use these files:
 
 - open a terminal
-- go to the directory HOLtoTFF (i.e. cd HOLtoTFF)
+- go to the directory HOLtoTFF (e.g. cd HOLtoTFF)
 - run Holmake (type Holmake)
 - open emacs from the terminal (be sure to be in the same directory)
 - open test.sml

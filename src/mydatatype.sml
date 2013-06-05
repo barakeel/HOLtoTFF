@@ -8,6 +8,7 @@ fun DATATYPE_ERR function message =
 	    origin_function = function,
             message = message}
 
+
 datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype | Funtype | Prodtype
 
 fun typecat holtype =
@@ -74,6 +75,7 @@ fun connective term =
     ]
     App
 
+datatype VARCAT = Number | Free | Bound | Tffconst | Undefconst
 
 end
 
