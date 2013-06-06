@@ -2,8 +2,8 @@
 open stringtools;
 open listtools;
 open mydatatype;
-open extracttype;
 open extractvar;
+open extracttype;
 open name;
 open higherorder;
 open printtff;
@@ -17,20 +17,28 @@ val hyp4 = ``?x. P x``;
 val hyp5 = ``!x. (P x ==> Q x)``;
 val hyp6 = ``!f:num->num. f = g``;  (* false higher order test *)
 val hyp7 = ``g = h:num->num ``;
-val hyp8 = ``!x.?y.!z. x + y = z``;
+val hyp8 = ``!x.?y.!z. x + y = z``; (* pretty printing *)
+val hyp9 = ``(\x.x) 5 = 5``; (* simplest abstraction *)
 
+(* shouldn't work in beagle *)
+val hyp10 =  ``f (x:bool) = (~x)``;
+val hyp11 =  `` x = F ``;
+val goal4 = ``f x = T ``;
 
 val goal = ``!x:num. f x = 0``;
 val goal2 = ``!x. Q x``; 
 val goal3 = ``!f:num->num. f x = 0``;
+val goalfalse = ``F``;
 
-val thm = mk_thm ([hyp8],hyp8);
+val thm = mk_thm ([hyp10,hyp11],goal4); (* mk_thm may not work  as expected *)
 outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
 (* end testproblem *)
 (* cd Desktop/eclipsefile/beagleproject *)
 (*  *)
 
-(* testfunctions *)
+
+
+(* TESTFUNCTIONS *)
 val hypl = hyp thm;
 val propl = hypl @ [concl thm]; 
 val varl = extractvarl propl; 
@@ -38,7 +46,7 @@ val fvcdcl = erasedouble (erasenumber (erasebv varl));
 strip_forall hyp6;
 free_varsl propl;
 
-namefvcl [hyp1,hyp2,hyp2,goal];
+namefvcl [hyp1,hyp2,hyp2,goal]; 
 open HolKernel;
 is_minus ``5:int-6:int``;
 airSyntax
@@ -56,7 +64,6 @@ drop;
 open Hol_pp;
 print_term goal;
 
-
 open intSyntax;
 type_of ``~1``;
 open pairSyntax
@@ -69,37 +76,50 @@ strip_fun ``:(num->num) -> 'a ``;
 
 dest_type ``:num``;
 numSyntax.int_of_term ``-521``;
-(* end testfunctions *) 
+(* END TESTFUNCTIONS *) 
 
 (* ISSUES *)
-(* clash occurs between names *)
-(* raise an exception when there is an abstraction *)
-(* don't raise an exception when applying a quantifier to a compound type term (need to)*)
-(* need to transform second order type term if they are not apply to anything *)
-(* don't manage pairSyntax *)
-(* don't manage intSyntax *)
-(* manage a part of numSyntax *)
-(* ~ can be seen as as neg or intneg *)
-(* should translate at least -a from the intSyntax*)
-(* all types should be alphanumor_ for now *)
-(* don't manage ?! *)
-(* clash between names of variables and name for types because types are variables of ttype in tff *)
-(* pretty printing no break *)
+
+(* types  *)
+  (* already defined type appears in the list of declared type *)
+  (* clash occurs between names *)
+  (* declare predefined types *)
+  (* doesn't declare type for bound variables *)
+  (* sometimes declare twice a type *)
+(* betaeta - red *) 
+  (* raise an exception when there is an abstraction *)
+(* higher order *)
+  (* raise a exception when encountering higher order *)
+(* pretty printing *)
+  (* no break *)
+(* functionnality *)
+  (* pairSyntax *)
+  (* intSyntax *)
+  (* numSyntax *)
+  (* boolSyntax *)
+    (* argument can not be of $otype maybe need to rewrite boolean *)
+    (* equality as boolean equality *)
+    (* ~ can be seen as as neg or intneg *)
+    (* don't manage ?! , = as equivalence *)
+
 
 (* IDEA *)
-(* define a newtype pair_num_num for num # (num->num) *)
-(* FOL_NORM deals with abstraction *)
-(* it does beta-eta reduction first *)
+
 (* use dest_var dest_thy_const *)
-(* replace the use of dest_const by dest_thy_const to add the axioms of the theory pair is i (case by case analysis maybe better) *)
+(* replace the use of dest_const by dest_thy_const to add the axioms of the theory pair*)
 (* get rid of alphanm everywhere if possible *)
 (* name the variables starting by a "x" constant by starting with "c" *)
 
+
 (* CODE QUESTIONS *)
+(* some code keep appearing in my text editor when I am doing alt+ h then 
+ alt + h alt + r *)
 (* how to open emacs faster *)
 
+
 (* TODO *)
-(* beta-eta reduction *)
+
+(* beta-eta reduction *) (* lambda-abstraction *)
   (* skolemisation *)
 (* second order *)
 (* definition for fvc,type *)

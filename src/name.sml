@@ -31,12 +31,12 @@ fun holnamet term =
 (* name alphatype *)
 fun namestrn str n = str ^ (Int.toString n) 
 
-fun namealphal2 alphatypel start = 
-  case alphatypel of
+fun namealphal2 alphatyl start = 
+  case alphatyl of
     [] => []
   | alpha :: m => (alpha,namestrn "alpha" start) :: namealphal2 m (start + 1) 
  
-fun namealphal propl = namealphal2 (alphatypel propl) 0
+fun namealphal var_narg_cat = namealphal2 (alphatypel var_narg_cat) 0
 
  
 (* namesimpletype *) (* clash may occurs at several points in this code*)
@@ -126,21 +126,13 @@ fun namebvn bv n =
   then "X" ^ (Int.toString n)  ^ (holnamet bv)
   else "X" ^ (Int.toString n)
 
-
-
-(* fv : free variable *)
-(* c : constant *)
 (* fvc : free variable or constant*)
-
-(* first give a name and a type for each variable and constant even defined constant *)
-(* I have a list of variables *)
-
-fun namefvc2 term =
+fun namefvc2 startstr term =
   let val str = holnamet term in
      switch 
        [
        (islowerword str   ,str),
-       (isalphanumor_ str ,"x" ^ str),  
+       (isalphanumor_ str , startstr ^ str),  
        (str = "," , "pair") 
        ]
        "holConst"
@@ -149,28 +141,16 @@ fun namefvc2 term =
 fun namefvc term =  
   let val str = holnamet term in
     case termstructure term of
-      Var => namefvc2 term
-    | Const => namefvc2 term
+      Var => namefvc2 "x" term
+    | Const => namefvc2 "c" term
     | _ => raise NAME_ERR "namefvc" "not a variable or a constant"
   end
 
-
-(* now we don't need to detect higher order so we can erasetffconst
-except if we want the simpletype *)
-fun erasetffconst fvcl = 
-  case fvcl of 
-    [] => []
-  | (_,_,Tffconst) :: m => erasebv m 
-  | a :: m =>  a :: erasebv m
-
-  
-(* fvcl is a triplelist (fv,nbarg,varcat) *)
-(* return a triplelist (fv,nbarg,name) *)
+(* return a triplelist (fvc,nbarg,name) *)
 fun namefvcl2 fvcl used = 
   case fvcl of
     [] => []
- | (_,_,Tffconst) :: m => raise NAME_ERR "namefvc" "tff constant" 
- | (fvc,nbarg,_) :: m => 
+ | (fvc,nbarg) :: m => 
     let 
       val name = namefvc fvc
       val nameref = ref name

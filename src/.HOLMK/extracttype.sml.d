@@ -1,1 +1,1 @@
-extracttype.uo: extracttype.ui /home/thibault/HOL/sigobj/HolKernel.ui listtools.ui mydatatype.ui 
+extracttype.uo: extracttype.ui /home/thibault/HOL/sigobj/HolKernel.ui extractvar.ui listtools.ui mydatatype.ui 

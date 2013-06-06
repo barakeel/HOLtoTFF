@@ -88,7 +88,7 @@ fun printterm pps term state =
                                   | Less => application pps "$less" argl state  
                                   | Greater => application pps "$greater" argl state  
                                   | Geq => application pps "$greatereq" argl state  
-                                  | Leq => application pps "$lesseq" argl state   
+                                  | Leq => application pps "$lesseq" argl state
                                   | Newnodeconst => application pps (lookup operator (#1 state)) argl state      
                                   )
                        | Comb => raise PRINTTFF_ERR "printterm" "operator is comb"
@@ -132,7 +132,7 @@ and binop pps str term state =
 and quantifier pps str bvl term state =
   let val newbvnm = addbvltobvnm bvl (#2 state) in
     ( 
-    begin_block pps CONSISTENT 2; 
+    begin_block pps CONSISTENT 0;
       add_string pps (str ^ " ");
       printbvl pps bvl newbvnm (#3 state);
       add_string pps " : ";  
@@ -165,6 +165,33 @@ fun indent4 pps = ((* to be replaced with begin block maybe *)
 )
 
 (* type *)
+  (* preformat the type to be printed *)
+
+fun bvsimpletypel bvl alphanm = 
+  case bvl of
+    [] => []
+  | bv :: m => case typecat (type_of bv) of
+                 Booltype => bvsimpletypel m alphanm
+               | Numtype => bvsimpletypel m alphanm
+               | _ =>  namesimpletype (type_of bv) alphanm :: bvsimpletypel m alphanm
+
+
+fun fvcsimpletypel fvc_narg_nm_tynm =
+  case fvc_narg_nm_tynm of
+    [] => []
+  | (fvc,0,nm,tynm) :: m => (
+                              case typecat (type_of fvc) of
+                                Booltype => fvcsimpletypel m  
+                              | Numtype => fvcsimpletypel m  
+                              | _ =>  tynm :: fvcsimpletypel m
+                              )  
+   | a :: m => fvcsimpletypel m 
+
+fun simpletypel bvl fvc_narg_nm_typenm alphanm =
+  erasedouble ((bvsimpletypel bvl alphanm) @ (fvcsimpletypel fvc_narg_nm_typenm))
+
+ (* end of preformat *)
+
 fun printtype pps nm tynm =
   ( 
   add_string pps ("tff(" ^ nm ^ "_type,type,(");
@@ -172,35 +199,23 @@ fun printtype pps nm tynm =
   add_string pps (nm ^ ": " ^ tynm ^ " )).")
   ) 
 
-  (* alphatype *) 
-fun printalphatypel pps alphanm = 
-  case alphanm of
-    [] => ()
-  | (alpha,nm) :: m => (
-                       printtype pps nm "$tType";
-                       nl2 pps;
-                       printalphatypel pps m
-                       )
-
-  (* simpletype *) (* may include alphatype *)
-fun printsimpletypel pps simpletypel =   
-  case simpletypel of
+fun printtypel pps simpletypel =
+   case simpletypel of
     [] => ()
   | tynm :: m => (
                  printtype pps tynm "$tType";
                  nl2 pps;
-                 printsimpletypel pps m
+                 printtypel pps m
                  )
-
               
 (* free variables or undefined constant *)
-fun printfvctypel pps fvc_nbarg_nm_tynm =
-  case fvc_nbarg_nm_tynm of
+fun printfvcl pps fvc_narg_nm_tynm =
+  case fvc_narg_nm_tynm of
     [] => () 
-  | (fvc,nbarg,nm,tynm) :: m => (
+  | (fvc,narg,nm,tynm) :: m => (
                                 printtype pps nm tynm;
                                 nl2 pps;
-                                printfvctypel pps m
+                                printfvcl pps m
                                 )
 
 (* axiom *)
@@ -269,24 +284,37 @@ fun printthm pps thm =
   ;
   let val hypl = hyp thm in 
   let val propl = hypl @ [concl thm] in
-  let val alphanm = namealphal propl in  
-  let val varl =  extractvarl propl in (* will check if function is used as bound variable *)
-  let val fvcdcl = erasedouble (erasenumber (erasebv varl)) in
-  let val fvcl = erasetffc fvcdcl in 
-  let val fvc_nbarg_nm = namefvcl fvcl in
-  let val fvcnm = erase2ndcomponent fvc_nbarg_nm in
-  let val fvc_nbarg_nm_tynm = addtypenm fvc_nbarg_nm alphanm in
-  let val simptyl = erasedouble (simpletypel fvc_nbarg_nm_tynm) in 
+  (* variable extraction *)
+  let val var_narg_cat = extractvarl propl in
+  (* alphatype *)
+  let val alphanm = namealphal var_narg_cat in  
+  (* bound variable type *)
+  let val bv_narg = getbvnargl var_narg_cat in 
+  let val bvl = fstcomponent bv_narg in
+  let val bvtyl = bvsimpletypel bvl in  
+  (* free variable naming *)
+  let val fvcdc_narg_cat = erasenumber (erasebv var_narg_cat) in
+  let val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat in
+  let val fvc_narg = getfvcnargl var_narg_cat in 
+  let val fvc_narg_nm = namefvcl fvc_narg in
+  let val fvcnm = erase2ndcomponent fvc_narg_nm in
+  let val fvc_narg_nm_tynm = addtypenm fvc_narg_nm alphanm in
+  let val fvctyl = fvcsimpletypel fvc_narg_nm_tynm in 
+  (* list of all the types to be printed *)
+  let val simpletyl = simpletypel bvl fvc_narg_nm_tynm alphanm in
+  (* axiom *)
   let val axiomnm = nameaxioml hypl in
+  (* needed to call printterm *)
   let val state = (fvcnm,[],alphanm) in
     
-  if firstorderfvcdcl fvcdcl
+  if firstorderbvl bv_narg
+     andalso 
+     firstorderfvcdcl fvcdc_narg
   then
     (
     begin_block pps CONSISTENT 0;
-      printalphatypel pps alphanm;
-      printsimpletypel pps simptyl;
-      printfvctypel pps fvc_nbarg_nm_tynm;
+      printtypel pps simpletyl;
+      printfvcl pps fvc_narg_nm_tynm;
       printnumaxiom pps fvcnm;
       printaxioml pps axiomnm state;
       printconjecture pps "goal" (concl thm) state;
@@ -294,7 +322,9 @@ fun printthm pps thm =
     )
   else
     raise PRINTTFF_ERR "printthm" "should not happen"
+
   end end end end end 
+  end end end end end
   end end end end end
   end end
   ;
@@ -313,11 +343,10 @@ fun outputtff path thm =
                   flush  = fn () => TextIO.flushOut file
                   } 
   in
-  (
-  printthm ppstff thm             
-  ;
-  TextIO.closeOut file
-  )  
+    (
+    printthm ppstff thm;
+    TextIO.closeOut file
+    )  
   end end
   
 

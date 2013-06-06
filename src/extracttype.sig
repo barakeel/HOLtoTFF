@@ -3,9 +3,9 @@ sig
 
   type term     = Term.term
   type hol_type = Type.hol_type
+  type VARCAT = mydatatype.VARCAT
 
-  val alltypel : term list -> hol_type list 
-  val alphatypel : term list -> hol_type list
-  val simpletypel : (term * int * string * string) list -> string list
-
+  val alltypel : (term * int * VARCAT) list -> hol_type list 
+  val alphatypel : (term * int * VARCAT) list -> hol_type list
+ 
 end

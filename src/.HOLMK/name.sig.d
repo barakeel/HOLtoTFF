@@ -1,1 +1,1 @@
-name.ui: /home/thibault/HOL/sigobj/Term.ui /home/thibault/HOL/sigobj/Type.ui extractvar.ui 
+name.ui: /home/thibault/HOL/sigobj/Term.ui /home/thibault/HOL/sigobj/Type.ui mydatatype.ui 

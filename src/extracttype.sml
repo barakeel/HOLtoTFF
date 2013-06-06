@@ -1,25 +1,17 @@
 structure extracttype :> extracttype =
 struct
 
-open HolKernel listtools mydatatype
+open HolKernel listtools mydatatype extractvar
 
-fun alltypel2 varl = 
-  case varl of
+
+fun alltypel2 var_narg_nm = 
+  case var_narg_nm of
     [] => []
-  | a :: m => type_of a :: alltypel2 m
+  | (var,narg,nm) :: m => (type_of var) :: alltypel2 m
 
-fun alltypel propl = erasedouble (alltypel2 (all_varsl propl))
-
-fun alphatypel propl = type_varsl (alltypel propl)
+fun alltypel var_narg_nm = erasedouble (alltypel2 (var_narg_nm))
  
+fun alphatypel var_narg_nm = type_varsl (alltypel var_narg_nm)
 
-(* can be applied after erasing tffconstant 
-because there is no need of a type for them *)
-
-fun simpletypel fvc_arity_nm_typenm =
-  case fvc_arity_nm_typenm of
-    [] => []
-  | (fvc,0,nm,typenm) :: m => typenm :: simpletypel m  
-  | a :: m => simpletypel m 
 
 end
