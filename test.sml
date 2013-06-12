@@ -30,13 +30,15 @@ val goal2 = ``!x. Q x``;
 val goal3 = ``!f:num->num. f x = 0``;
 val goalfalse = ``F``;
 
-val thm = mk_thm ([hyp10,hyp11],goal4); (* mk_thm may not work  as expected *)
+val thm = mk_thm ([hyp4],hyp4); (* mk_thm may not work  as expected *)
 outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
+
 (* end testproblem *)
 (* cd Desktop/eclipsefile/beagleproject *)
 (*  *)
-
-
+(* failure *)
+val thm = mk_thm ([hyp4],hyp4); (* pp (now works but if you add begin block at quantifier then it doesn't work) *)
+folTools.FOL_NORM ([mk_thm([],``(\z.x) = (\y.y)``)]); (* mk_thm *)
 
 (* TESTFUNCTIONS *)
 val hypl = hyp thm;
@@ -45,59 +47,71 @@ val varl = extractvarl propl;
 val fvcdcl = erasedouble (erasenumber (erasebv varl));
 strip_forall hyp6;
 free_varsl propl;
-
 namefvcl [hyp1,hyp2,hyp2,goal]; 
+
 open HolKernel;
 is_minus ``5:int-6:int``;
-airSyntax
+pairSyntax
+
 open folTools;
 FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* rename bound variable *)
-FOL_NORM ([mk_thm([],``(\z.x) = (\y.y) ``)]);
-FOL_NORM ([mk_thm([],``(\x.x) = (\z.w) ``)]);
 FOL_NORM ([ASSUME ``(\x.x) = (\z.w) ``]);
-FOL_NORM ([ASSUME goal3]);
-folTools.pp_logic_map;
-folTools.build_map
 set_goal([],goal3);
 e(FOL_NORM_TAC);
 drop;
+
 open Hol_pp;
 print_term goal;
 
 open intSyntax;
 type_of ``~1``;
+
 open pairSyntax
-
-fun NAME_ERR function message =
-  HOL_ERR{origin_structure = "name",
-          origin_function = function,
-          message = message};
 strip_fun ``:(num->num) -> 'a ``;  
-
 dest_type ``:num``;
 numSyntax.int_of_term ``-521``;
+
+open mlibTerm;
+open mlibTptp;
+read {filename = "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p"};
+val formula = False;
+write {filename = "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p"} formula;
+
+(* betared *)
+val term = `` ((\x.x) 0 = 0) /\ (\y.M y) x`` ;
+val term = ``(\x.x) \x. f x ``;
+
+val term2 = rand (concl (REDEPTH_CONV BETA_CONV term));  (* to be rewritten *)
+(* may raise unchanged *)
+val term3 = rand (concl (REDEPTH_CONV ETA_CONV term2)); (* may raise QConv.UNCHANGED *)
+
+val SKOLEM_CONV
+
+(* skolemisation *) 
+
+
+
+
+
+
 (* END TESTFUNCTIONS *) 
 
 (* ISSUES *)
 
 (* types  *)
-  (* already defined type appears in the list of declared type *)
-  (* clash occurs between names *)
-  (* declare predefined types *)
-  (* doesn't declare type for bound variables *)
-  (* sometimes declare twice a type *)
+  (* clash occurs between names * )
 (* betaeta - red *) 
   (* raise an exception when there is an abstraction *)
 (* higher order *)
   (* raise a exception when encountering higher order *)
 (* pretty printing *)
-  (* no break *)
+  (* don't understand how it works *)
 (* functionnality *)
   (* pairSyntax *)
   (* intSyntax *)
   (* numSyntax *)
   (* boolSyntax *)
-    (* argument can not be of $otype maybe need to rewrite boolean *)
+    (* argument can not be of $otype raise an exception *)
     (* equality as boolean equality *)
     (* ~ can be seen as as neg or intneg *)
     (* don't manage ?! , = as equivalence *)
@@ -108,20 +122,30 @@ numSyntax.int_of_term ``-521``;
 (* use dest_var dest_thy_const *)
 (* replace the use of dest_const by dest_thy_const to add the axioms of the theory pair*)
 (* get rid of alphanm everywhere if possible *)
-(* name the variables starting by a "x" constant by starting with "c" *)
 
 
-(* CODE QUESTIONS *)
+
+  (* CODE QUESTIONS *)
 (* some code keep appearing in my text editor when I am doing alt+ h then 
- alt + h alt + r *)
+ alt + h, alt + r *)
 (* how to open emacs faster *)
-
+(* is there a good editor for sml, i am currently using the text editor *)
 
 (* TODO *)
 
-(* beta-eta reduction *) (* lambda-abstraction *)
+(* modify hol formula *)
+  (* beta-eta reduction *) (* lambda-abstraction *)
   (* skolemisation *)
-(* second order *)
-(* definition for fvc,type *)
-  (* add important theorem *) (* my appreciation *)
+
+(* after modifying holformula *)
+(* modify the type *)
+
+
+  (* second order *)
+  (* standardize the way my code is *)
+
+
+
+  (* definition for fvc,type *)
+  (* add important theorem *) (* user appreciation maybe can defined a function that says what theorem is important *)
   (* add all the theory *)

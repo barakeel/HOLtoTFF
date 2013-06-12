@@ -25,7 +25,7 @@ fun printbvl2 pps bvl bvnm alphanm  =
   case bvl of
     [] => raise PRINTTFF_ERR "printbvl2" "emptylist"
   | [bv] => ( (* the bound variables should have a simple type *)
-            add_string pps (lookup bv bvnm);
+            add_string pps (lookup bv bvnm); 
             add_string pps ": ";
             add_string pps (namesimpletype (type_of bv) alphanm)
             ) 
@@ -47,9 +47,7 @@ fun printbvl pps bvl bvnm alphanm =
 (* #1 state : list of (a free variable or an undefined constant c, its name) *)
 (* #2 state : list of (bound variable, its name)  the type should defintly be a simple type *)
 (* #3 state : list of (alphatype, its name) *)
-(* warning: should have the same structure as getfvcl in extractterm.sml *)
 (* modify bvcounter *)
-(* pretty printing *)
 
 fun printterm pps term state =
   case termstructure term of
@@ -78,7 +76,7 @@ fun printterm pps term state =
             | App => let val (operator,argl) = strip_comb term in
                        case termstructure operator of
                          Numeral => raise PRINTTFF_ERR "printterm" "operator is numeral"
-                       | Var => application pps (lookup operator (#1 state)) argl state (* don't need to test if it's bound because operator can't be bound *)
+                       | Var => application pps (lookup operator (#1 state)) argl state  (* don't need to test if it's bound because operator can't be bound *)
                        | Const => (
                                   case nodeconst term of
                                     Eq => binop pps "=" term state
@@ -132,14 +130,12 @@ and binop pps str term state =
 and quantifier pps str bvl term state =
   let val newbvnm = addbvltobvnm bvl (#2 state) in
     ( 
-    begin_block pps CONSISTENT 0;
       add_string pps (str ^ " ");
       printbvl pps bvl newbvnm (#3 state);
       add_string pps " : ";  
         add_string pps "( "; 
         printterm pps term (#1 state,newbvnm,#3 state);
-        add_string pps " )"; 
-    end_block pps 
+        add_string pps " )" 
     )
   end
 and application pps str argl state =
@@ -149,8 +145,8 @@ and application pps str argl state =
   printterml pps argl state; 
   add_string pps " )"
   )
-
 (* END PRINTTERM *)
+
 
 (* PRINTTHM *)
 
@@ -248,7 +244,8 @@ fun printnumaxiom pps fvcnm =
            add_string pps "tff(num_axiom,axiom,("; 
            indent4 pps;
            numaxiom pps fvcnmnum;
-           add_string pps " ))."
+           add_string pps " )).";
+           nl2 pps
            )   
   end
   (* end numaxiom *)
@@ -288,11 +285,11 @@ fun printthm pps thm =
   let val var_narg_cat = extractvarl propl in
   (* alphatype *)
   let val alphanm = namealphal var_narg_cat in  
-  (* bound variable type *)
+  (* bound variable *)
   let val bv_narg = getbvnargl var_narg_cat in 
   let val bvl = fstcomponent bv_narg in
   let val bvtyl = bvsimpletypel bvl in  
-  (* free variable naming *)
+  (* free variable *)
   let val fvcdc_narg_cat = erasenumber (erasebv var_narg_cat) in
   let val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat in
   let val fvc_narg = getfvcnargl var_narg_cat in 
@@ -336,15 +333,15 @@ fun printthm pps thm =
 
 fun outputtff path thm =
   let val file = TextIO.openOut path in 
-  let val ppstff = PP.mk_ppstream 
-                  {
-                  consumer  = fn s => TextIO.output (file,s),
-                  linewidth = 79,
-                  flush  = fn () => TextIO.flushOut file
-                  } 
-  in
+  let val pps_tff = PP.mk_ppstream 
+                      {
+                      consumer  = fn s => TextIO.output (file,s),
+                      linewidth = 79,
+                      flush  = fn () => TextIO.flushOut file
+                      } 
+  in 
     (
-    printthm ppstff thm;
+    printthm pps_tff thm;
     TextIO.closeOut file
     )  
   end end
