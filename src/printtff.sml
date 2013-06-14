@@ -1,15 +1,34 @@
 structure printtff :> printtff =
 struct
 
-open HolKernel HOLPP numSyntax higherorder name extractvar extracttype stringtools listtools mydatatype  (*not all structures are necessary*)
+open HolKernel HOLPP numSyntax higherorder namevar extractvar nametype extracttype 
+stringtools listtools mydatatype (*not all structures are necessary*)
 
 fun PRINTTFF_ERR function message =
     HOL_ERR{origin_structure = "printtff",
             origin_function = function,
             message = message}
 
+
+val bvcounter = ref 0 (* warning: use of a global reference *)
 (*PRINTTERM*)
-val bvcounter = ref 0; (* warning: use of a global reference *)
+
+(* add some properties for numeral *) (* does two things at once *)
+fun numl l =
+  case l of
+    [] => []
+  | v :: m => (
+              case typecat (type_of v) of
+                Numtype => mk_geq (v,``0``) :: numl m
+              | _ => numl m 
+              )
+
+fun addnumprop l term = 
+  case (numl l) of
+    [] => term
+  | _ => mk_conj (list_mk_conj (numl l),term) 
+(* end *)
+ 
 
 (* name a list of bv and push it over the stack *)
 (* warning: modify bvcounter *)
@@ -21,31 +40,31 @@ fun addbvltobvnm bvl bvnm =
                (bv,namebvn bv ((!bvcounter) - 1)) :: (addbvltobvnm m bvnm) 
                )
  
-fun printbvl2 pps bvl bvnm alphanm  =
+fun printbvl2 pps bvl bvnm tynm  =
   case bvl of
     [] => raise PRINTTFF_ERR "printbvl2" "emptylist"
   | [bv] => ( (* the bound variables should have a simple type *)
             add_string pps (lookup bv bvnm); 
             add_string pps ": ";
-            add_string pps (namesimpletype (type_of bv) alphanm)
+            add_string pps (lookup (type_of bv,0) tynm)
             ) 
   | bv :: m => (
                add_string pps (lookup bv bvnm); 
                add_string pps ": ";
-               add_string pps (namesimpletype (type_of bv) alphanm); 
+               add_string pps (lookup (type_of bv,0) tynm); 
                add_string pps ","; 
-               printbvl2 pps m bvnm alphanm
+               printbvl2 pps m bvnm tynm
                )  
 
-fun printbvl pps bvl bvnm alphanm = 
+fun printbvl pps bvl bvnm tynm = 
   (
   add_string pps "[";
-  printbvl2 pps bvl bvnm alphanm;
+  printbvl2 pps bvl bvnm tynm;
   add_string pps "]"
   )
 
-(* #1 state : list of (a free variable or an undefined constant c, its name) *)
-(* #2 state : list of (bound variable, its name)  the type should defintly be a simple type *)
+(* #1 state : list of (free variable or undefined constant, its name) *)
+(* #2 state : list of (bound variable, its name)  *)
 (* #3 state : list of (alphatype, its name) *)
 (* modify bvcounter *)
 
@@ -127,23 +146,25 @@ and binop pps str term state =
     add_string pps " )"
     )
   end end
-and quantifier pps str bvl term state =
+and quantifier pps str bvl term state = (* to do add num axiom for bound variable *)
   let val newbvnm = addbvltobvnm bvl (#2 state) in
-    ( 
+  let val newterm = addnumprop bvl term in
+  ( 
       add_string pps (str ^ " ");
       printbvl pps bvl newbvnm (#3 state);
       add_string pps " : ";  
-        add_string pps "( "; 
-        printterm pps term (#1 state,newbvnm,#3 state);
-        add_string pps " )" 
+        
+      add_string pps "( "; 
+      printterm pps newterm (#1 state,newbvnm,#3 state);
+      add_string pps " )" 
     )
-  end
+  end end
 and application pps str argl state =
   (
   add_string pps str;
-  add_string pps "( ";
+  add_string pps "(";
   printterml pps argl state; 
-  add_string pps " )"
+  add_string pps ")"
   )
 (* END PRINTTERM *)
 
@@ -160,103 +181,75 @@ fun indent4 pps = ((* to be replaced with begin block maybe *)
                     add_string pps (space 4)
 )
 
-(* type *)
-  (* preformat the type to be printed *)
-
-fun bvsimpletypel bvl alphanm = 
-  case bvl of
+(* could be in extracttype *)
+fun erasedefinedtype leafvty_nm = 
+  case leafvty_nm of
     [] => []
-  | bv :: m => case typecat (type_of bv) of
-                 Booltype => bvsimpletypel m alphanm
-               | Numtype => bvsimpletypel m alphanm
-               | _ =>  namesimpletype (type_of bv) alphanm :: bvsimpletypel m alphanm
+  | (leafvty,nm) :: m => 
+    (
+    case typecat (fst leafvty) of
+      Booltype => erasedefinedtype m
+    | Numtype => erasedefinedtype m
+    | _ => (leafvty,nm) :: erasedefinedtype m
+    )
 
-
-fun fvcsimpletypel fvc_narg_nm_tynm =
-  case fvc_narg_nm_tynm of
-    [] => []
-  | (fvc,0,nm,tynm) :: m => (
-                              case typecat (type_of fvc) of
-                                Booltype => fvcsimpletypel m  
-                              | Numtype => fvcsimpletypel m  
-                              | _ =>  tynm :: fvcsimpletypel m
-                              )  
-   | a :: m => fvcsimpletypel m 
-
-fun simpletypel bvl fvc_narg_nm_typenm alphanm =
-  erasedouble ((bvsimpletypel bvl alphanm) @ (fvcsimpletypel fvc_narg_nm_typenm))
-
- (* end of preformat *)
-
-fun printtype pps nm tynm =
+fun printtype pps str tystr =
   ( 
-  add_string pps ("tff(" ^ nm ^ "_type,type,(");
+  add_string pps ("tff(" ^ str ^ "_type,type,(");
   indent4 pps;
-  add_string pps (nm ^ ": " ^ tynm ^ " )).")
+  add_string pps (str ^ ": " ^ tystr ^ " )).")
   ) 
 
-fun printtypel pps simpletypel =
-   case simpletypel of
+(* should only print leafvty *)
+fun printtypel pps tydict =
+   case tydict of
     [] => ()
-  | tynm :: m => (
-                 printtype pps tynm "$tType";
-                 nl2 pps;
-                 printtypel pps m
-                 )
-              
+  | (ty,nm) :: m => (
+                    printtype pps nm "$tType";
+                    nl2 pps;
+                    printtypel pps m
+                    )         
+
 (* free variables or undefined constant *)
-fun printfvcl pps fvc_narg_nm_tynm =
-  case fvc_narg_nm_tynm of
+fun printfvcl pps fvc_narg_nm tydict =
+  case fvc_narg_nm of
     [] => () 
-  | (fvc,narg,nm,tynm) :: m => (
-                                printtype pps nm tynm;
-                                nl2 pps;
-                                printfvcl pps m
-                                )
+  | (fvc,narg,nm) :: m => (
+                          printtype pps nm (lookup (type_of fvc,narg) tydict);
+                          nl2 pps;
+                          printfvcl pps m tydict
+                          )
 
 (* axiom *)
-  (* numaxiom *)
-fun numl fvcnm = 
-  case fvcnm of
+  (* tools *)
+fun nameaxioml2 axioml start = 
+  case axioml of
     [] => []
-  | (fvc,nm) :: m => 
-                     (
-                     case typecat (type_of fvc) of
-                       Numtype => (fvc,nm) :: numl m 
-                     | _ => numl m   
-                     )
-
-fun numaxiom pps fvcnmnum =
-  case fvcnmnum of
-    [] => ()   
-  | [(fvc,nm)] => add_string pps ("$greatereq" ^ "(" ^ nm ^ ",0)")
-  | (fvc,nm) :: m => (
-                     add_string pps ("$greatereq" ^ "(" ^ nm ^ ",0)");
-                     add_string pps " & ";
-                     numaxiom pps m 
-                     )
-
-fun printnumaxiom pps fvcnm =
-  let val fvcnmnum = numl fvcnm in
-    case fvcnmnum of
-      [] => ()  
-    | _ => (
-           add_string pps "tff(num_axiom,axiom,("; 
-           indent4 pps;
-           numaxiom pps fvcnmnum;
-           add_string pps " )).";
-           nl2 pps
-           )   
-  end
-  (* end numaxiom *)
-fun printaxiom pps name holprop state = 
+  | a :: m => (a,namestrn "axiom" start) :: nameaxioml2 m (start + 1)
+ 
+fun nameaxioml axioml = nameaxioml2 axioml 0
+  
+fun printaxiom pps name prop state = 
   (
   add_string pps ("tff(" ^ name ^ "_axiom,axiom,(");
   indent4 pps;
-  printterm pps holprop state;
+  printterm pps prop state;
   add_string pps " ))." 
   )
-
+  (* numaxiom *)
+fun printnumaxiom pps state =
+  let val fvcl = fstcomponent (#1 state) in
+  let val l = numl fvcl in
+  
+    if isempty l then ()
+    else let val prop = list_mk_conj l in
+         (
+         printaxiom pps "numeral" prop state;
+         nl2 pps
+         )
+         end
+  end end
+  (* axiomlist *)
 fun printaxioml pps axiomnm state =
   case axiomnm of
     [] => ()
@@ -265,12 +258,13 @@ fun printaxioml pps axiomnm state =
                        nl2 pps;
                        printaxioml pps m state
                        )
+
 (* conjecture *)
-fun printconjecture pps name holprop state =
+fun printconjecture pps name prop state =
   (
   add_string pps ("tff(" ^ name ^ "_conjecture,conjecture,(");
   indent4 pps;
-  printterm pps holprop state;
+  printterm pps prop state;
   add_string pps " ))." 
   )
 
@@ -279,42 +273,49 @@ fun printthm pps thm =
   (
   bvcounter := 0
   ;
+  let val goal = concl thm in
   let val hypl = hyp thm in 
   let val propl = hypl @ [concl thm] in
   (* variable extraction *)
   let val var_narg_cat = extractvarl propl in
-  (* alphatype *)
-  let val alphanm = namealphal var_narg_cat in  
+  let val var_narg = erase3rdcomponent var_narg_cat in
+  (* type extraction *)
+  let val ty_narg = alltypel var_narg in
+  let 
+    val leafvtyl = leafvtypel ty_narg 
+    val alphatyl = alphatypel ty_narg  
+    val nodevtyl = nodevtypel ty_narg 
+  in
+  (* type name *)
+  let val leafvty_nm = addleafvtypel leafvtyl [] in
+  let val simplety_nm = addnodevsimpletypel nodevtyl leafvty_nm in
+  let val tydict = addnodevtypel nodevtyl simplety_nm in 
   (* bound variable *)
   let val bv_narg = getbvnargl var_narg_cat in 
-  let val bvl = fstcomponent bv_narg in
-  let val bvtyl = bvsimpletypel bvl in  
   (* free variable *)
-  let val fvcdc_narg_cat = erasenumber (erasebv var_narg_cat) in
+  let val fvcdc_narg_cat = erasebv var_narg_cat in
   let val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat in
   let val fvc_narg = getfvcnargl var_narg_cat in 
   let val fvc_narg_nm = namefvcl fvc_narg in
-  let val fvcnm = erase2ndcomponent fvc_narg_nm in
-  let val fvc_narg_nm_tynm = addtypenm fvc_narg_nm alphanm in
-  let val fvctyl = fvcsimpletypel fvc_narg_nm_tynm in 
-  (* list of all the types to be printed *)
-  let val simpletyl = simpletypel bvl fvc_narg_nm_tynm alphanm in
+  let val fvc_nm = erase2ndcomponent fvc_narg_nm in
   (* axiom *)
   let val axiomnm = nameaxioml hypl in
   (* needed to call printterm *)
-  let val state = (fvcnm,[],alphanm) in
+  let val state = (fvc_nm,[],tydict) in
     
   if firstorderbvl bv_narg
      andalso 
      firstorderfvcdcl fvcdc_narg
+     andalso 
+     not (booleanargl var_narg)
   then
     (
     begin_block pps CONSISTENT 0;
-      printtypel pps simpletyl;
-      printfvcl pps fvc_narg_nm_tynm;
-      printnumaxiom pps fvcnm;
+      printtypel pps (erasedefinedtype simplety_nm);
+      printfvcl pps fvc_narg_nm tydict;
+      printnumaxiom pps state;
       printaxioml pps axiomnm state;
-      printconjecture pps "goal" (concl thm) state;
+      printconjecture pps "goal" goal state; 
     end_block pps
     )
   else
@@ -323,7 +324,8 @@ fun printthm pps thm =
   end end end end end 
   end end end end end
   end end end end end
-  end end
+  end end end 
+  (* Some day I'll get rich with all this ends *)
   ;
   bvcounter := 0
   )

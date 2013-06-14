@@ -17,7 +17,13 @@ fun space n =
 
 fun indent n = "\n" ^ (space n)
 
-(*warning: include the empty string*)
+fun namestrn str n = str ^ (Int.toString n) 
+
+ 
+
+
+
+(* warning: include the empty string *)
 fun isalphanumor_charl charl= 
   case charl of
     [] => true    
@@ -26,14 +32,14 @@ fun isalphanumor_charl charl=
 
 fun isalphanumor_ str = isalphanumor_charl (explode str)
 
-(*name supported by the tptp for a free variable or a type*)              
+(* name supported by the tptp for a free variable or a type *)              
 fun islowerword str =
   case String.explode str of
     [] => false
   | [a] => Char.isLower a  
   | a :: m => (Char.isLower a) andalso (isalphanumor_charl m)
 
-(*name supported by the tptp for a bound variable*)
+(* name supported by the tptp for a bound variable *)
 fun isupperword str =
   case String.explode str of
     [] => false

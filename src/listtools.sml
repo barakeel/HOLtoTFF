@@ -16,6 +16,11 @@ fun ismember elem list =
               then true 
               else ismember elem m     
 
+fun isempty list =
+  case list of
+    [] => true
+  | _ => false
+
 fun erasedouble list = 
   case list of
     [] => []
@@ -23,11 +28,7 @@ fun erasedouble list =
               then erasedouble m 
               else a :: erasedouble m
 
-fun lookup elem couplelist =
-  case couplelist of 
-  [] => raise LISTTOOLS_ERR "lookup" ""
-  | (a,b) :: m =>  if a = elem then b else lookup elem m
-
+(* dictionnary *)
 fun fstcomponent couplel = 
   case couplel of
     [] => []
@@ -43,7 +44,18 @@ fun erase2ndcomponent triplel =
     [] => []  
   | (a,_,c) :: m => (a,c) :: erase2ndcomponent m
 
+fun addentry entry dict = 
+  if ismember (fst entry) (fstcomponent dict)
+  then dict
+  else entry :: dict
 
+fun lookup elem couplelist =
+  case couplelist of 
+  [] => raise LISTTOOLS_ERR "lookup" ""
+  | (a,b) :: m =>  if a = elem then b else lookup elem m
+
+
+(* condition *)
 fun switch condresultl defaultresult = 
     case condresultl of
       [] => defaultresult  
