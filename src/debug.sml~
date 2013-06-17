@@ -1,6 +1,0 @@
-structure debug :> debug =
-struct
-
-  val debug = ref false
-
-end

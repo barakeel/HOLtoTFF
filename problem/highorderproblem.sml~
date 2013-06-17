@@ -1,9 +1,0 @@
-structure highorderproblem :> highorderproblem =
-struct
-
-open HolKernel
-
-let val goal = ``(x = 1)  ==> (x + 1 = 2)`` in
-  val pb_ho1 = mk_thm ([],goal)
-
-end

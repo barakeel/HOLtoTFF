@@ -1,0 +1,32 @@
+Version 0.2.3
+
+Does:
+  - Translate a HOL formula into TFF format.
+
+Supports:
+  formula :
+  - first order formula without abstraction
+  - false second order formula (!f:int->int f = g)
+  - raise an exception when a function is applied to a boolean 
+ 
+  variable:
+  - use an injective mapping on free variables ( P,Q,r,s => xP,xQ,r,s )
+  - use an injective mapping on undefined constant ( P,Q,r,s => cP,cQ,r,s )
+  - use an injective mapping on bound varibles ( x,y => X0x,X1y ) 
+
+  type:
+  - numeral (num => $int)
+  - boolean (bool => $o)
+  - use an injective mapping ( rational,real => ty1rational,ty2real) 
+    and append an indicative type
+
+  axiom:
+  - add an axiom for numeral (i.e x=y is translated to x > 0 and y > 0 and x=y)
+
+  problems library:
+  - 5 boolean problems
+  - 1 numeral problem
+  - 1 type test
+
+Remarks : 
+  - all the injective mappings joined together are injective as a global functions, so no clashes can occurs

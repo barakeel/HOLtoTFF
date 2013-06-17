@@ -1,7 +1,0 @@
-signature debug =
-sig
-
-  val debug : bool ref
-  
- 
-end

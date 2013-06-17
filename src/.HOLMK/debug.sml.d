@@ -1,1 +1,0 @@
-debug.uo: debug.ui 
