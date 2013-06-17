@@ -1,0 +1,11 @@
+signature higherorder =
+sig
+
+  type term = Term.term
+  type VARCAT = mydatatype.VARCAT
+
+  val firstorderbvl : (term * int) list -> bool  
+  val firstorderfvcdcl : (term * int) list -> bool
+  val booleanargl : (term * int) list -> bool
+  
+end
