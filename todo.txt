@@ -1,31 +1,25 @@
 ISSUES
 
-betaeta - red 
-  raise an exception when there is an abstraction
-
+betaeta reduction 
+  after beta-eta red use some trick to remove lambda abstraction.
+  
 pretty printing
-  don't understand how it works
+  just do it
 
 functionnality
-  pairSyntax
-  intSyntax
-  numSyntax
-    no x >= 0 for bound variables
-  boolSyntax
-    equality as boolean equality
-    ~ can be seen as as neg or intneg
-    don't manage ?! , = as equivalence ?
-
+  boolTheory ( not even there )
+  
 type
-  how to extract an indicative string which would be alphanumor_ from a vartype?
-
+  change substring and use String.size 
+  
 
 CODE QUESTIONS
 
-some code keep appearing in my text editor when I am doing alt+ h then 
- alt + h, alt + r
-is there a good editor for sml, i am currently using the text editor ?
-
+   instantiation of bound variables to specific types
+   Why can't the user do it ? Because if we generate all the possible instantiation (possible but it will be big)
+   nbty      number of different types ( generally 10 to 100 ) 
+   nbalphaty number of different alpha type to be instantiate 
+   nbty ^ nbalphaty number of instantiation
 
 TODO
 
@@ -40,10 +34,21 @@ documentation
 free variable
   Use a dictionnary to make the code more readable
   Use the implemented dictionnary for types
+  
 
 modify hol formula
+  
+  include definition and do monomorphisme
+  replacing definition 
   beta-eta reduction lambda-abstraction
   skolemisation
+
+create a tree to represent my formula
+change the tree to make it first order
+
+use dictionnaries to undo conflicts between variables 
+create a new tree with the name of everything
+output the tree (very easy)
 
 higher order ( today and tomorrow )
   only add "app" if a term of arity 0 is applied to one ore more constant
