@@ -66,6 +66,8 @@ fun printbvl pps bvl bvnm tynm =
 (* #1 state : list of (free variable or undefined constant, its name) *)
 (* #2 state : list of (bound variable, its name)  *)
 (* #3 state : list of (alphatype, its name) *)
+(* #4 state : appdict *)
+
 (* modify bvcounter *)
 
 fun printterm pps term state =
