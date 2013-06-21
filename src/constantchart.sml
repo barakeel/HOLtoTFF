@@ -53,6 +53,7 @@ fun editl_constchart (recordl : constinfos list) (constchart : constinfos list) 
   | a :: m => editl_constchart m (edit_constchart a constchart)
   
 fun default_constchart = 
+  
 
 
  
