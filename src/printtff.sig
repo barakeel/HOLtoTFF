@@ -16,7 +16,3 @@ sig
   val outputtff : string -> thm -> unit
 
 end
-
-
-
-  
