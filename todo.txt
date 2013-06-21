@@ -2,6 +2,7 @@ ISSUES
 
 betaeta reduction 
   after beta-eta red use some trick to remove lambda abstraction.
+  I forgot where eq alphaconv is to equate \x.x and \y.y
   
 pretty printing
   just do it
@@ -43,16 +44,26 @@ modify hol formula
   beta-eta reduction lambda-abstraction
   skolemisation
 
-create a tree to represent my formula
-change the tree to make it first order
+normalized
+  I don't know
+  do boolean changed 
+  f( !x. x = 5 )
+ 
+ create a tree to represent my formula
+not necessarly first order
+
+
+
+change the tree to make it first order (construct appdict at the same time)
+higher order ( today and tomorrow )
+  only add "app" if a term of arity 0 is applied to one ore more constant
+  different "app" for different number of arguments and type
+
 
 use dictionnaries to undo conflicts between variables 
 create a new tree with the name of everything
 output the tree (very easy)
 
-higher order ( today and tomorrow )
-  only add "app" if a term of arity 0 is applied to one ore more constant
-  different "app" for different number of arguments and type
 
 product
   verify if it's working correctly i think it 's not 
