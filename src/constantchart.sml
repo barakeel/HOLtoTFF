@@ -29,10 +29,7 @@ fun mk_constchart (constl : term list) =
 
 fun get_constinfos c (constchart : constinfos list) =
   case constchart of
-    [] => raise CONSTANTCHART_ERR "fun editl_constchart (recordl : constinfos list) (constchart : constinfos list) =
-  case recordl of
-    [] => constchart
-  | a :: m => editl_constchart m (edit_constchart a constchart)get_constinfo" "not found"
+    [] => raise CONSTANTCHART_ERR "get_constinfos" "notfound"
   | record :: m => 
         if c = #term record
         then
@@ -53,7 +50,13 @@ fun editl_constchart (recordl : constinfos list) (constchart : constinfos list) 
   | a :: m => editl_constchart m (edit_constchart a constchart)
   
 fun default_constchart = 
-  
+  let val initchart = mk_constchart (all_consts ()) in
+    editl_constchart [
+                     { term = ``$?!``, 
+                        def = SOME of EXISTS_UNIQUE_DEF,
+                        axiom = false, 
+                        replace = true }
+                     ]
 
 
  
