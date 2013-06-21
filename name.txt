@@ -1,0 +1,24 @@
+RULES
+  separate different objects by an underscore
+  
+HOL CONSTANT
+  filename: constant
+  function: const
+  value: const 
+  alone : c or in a non-ambiguous long name
+  
+NAME
+  filename: name
+  function: name
+  value: name
+ 
+LIST
+  filename: list
+  function: l
+  value: l   
+  head : a
+  tail : m
+  
+TERM
+  value: t | term
+  
