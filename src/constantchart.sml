@@ -1,7 +1,7 @@
 structure constantchart :> constantchart =
 struct
 
-open HolKernel stringtools
+open HolKernel 
 
 type thm = Thm.thm
 type term = Term.term
@@ -49,14 +49,15 @@ fun editl_constchart (recordl : constinfos list) (constchart : constinfos list) 
     [] => constchart
   | a :: m => editl_constchart m (edit_constchart a constchart)
   
-fun default_constchart = 
+fun default_constchart () = 
   let val initchart = mk_constchart (all_consts ()) in
     editl_constchart [
                      { term = ``$?!``, 
-                        def = SOME of EXISTS_UNIQUE_DEF,
-                        axiom = false, 
-                        replace = true }
+                       def = SOME EXISTS_UNIQUE_DEF,
+                       axiom = false, 
+                       replace = true }
                      ]
-
+                     initchart
+  end
 
  
