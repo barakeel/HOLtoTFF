@@ -73,7 +73,7 @@ fun printbvl pps bvl bvnm tynm =
 fun printterm pps term state =
   case termstructure term of
     Numeral => add_string pps (namenumeral term)
-  | Var => if ismember term (fstcomponent (#2 state))
+  | Var => if is_member term (fstcomponent (#2 state))
            then add_string pps (lookup term (#2 state)) (*boundvar*)
            else add_string pps (lookup term (#1 state)) (*freevar*)
   | Const => (
@@ -293,11 +293,11 @@ fun printthm pps thm =
   let val simplety_nm = addnodevsimpletypel nodevtyl leafvty_nm in
   let val tydict = addnodevtypel nodevtyl simplety_nm in 
   (* bound variable *)
-  let val bv_narg = getbvnargl var_narg_cat in 
+  let val bv_narg = get_bval var_narg_cat in 
   (* free variable *)
-  let val fvcdc_narg_cat = erasebv var_narg_cat in
+  let val fvcdc_narg_cat = erase_bv var_narg_cat in
   let val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat in
-  let val fvc_narg = getfvcnargl var_narg_cat in 
+  let val fvc_narg = get_fvcal var_narg_cat in 
   let val fvc_narg_nm = namefvcl fvc_narg in
   let val fvc_nm = erase2ndcomponent fvc_narg_nm in
   (* axiom *)

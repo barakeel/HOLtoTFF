@@ -15,10 +15,10 @@ fun EXTRACTVAR_ERR function message =
 fun extractvar2 term bvl =
   case termstructure term of
     Numeral => [((term,0),Numeralvar)]
-  | Var => if ismember term bvl
+  | Var => if is_member term bvl
            then [((term,0),Boundvar)] 
            else [((term,0),Freevar)]
-  | Const => [(term,0),Constvar)]
+  | Const => [((term,0),Constvar)]
   | Comb => (
             case connective term of
               Conj => extractvar2binop term bvl
@@ -38,7 +38,7 @@ fun extractvar2 term bvl =
                      in
                        case termstructure operator of
                          Numeral => raise EXTRACTVAR_ERR "extractvar2" "operator is numeral"
-                       | Var =>  if ismember operator bvl
+                       | Var =>  if is_member operator bvl
                                  then ((operator,n),Boundvar) :: l
                                  else ((operator,n),Freevar) :: l
                        | Const => ((operator,n),Constvar) :: l
@@ -68,36 +68,46 @@ and extractvar2binop term bvl =
 and extractvar2quantifier qbvl term bvl = 
   (extractvar2l qbvl (qbvl @ bvl)) @ (extractvar2 term (qbvl @ bvl))
 
-fun erasenumber l =
+fun erase_number l =
   case l of 
     [] => []
-  | (_,_,Numeralvar) :: m => erasenumber m 
-  | a :: m =>  a :: erasenumber m
+  | (_,Numeralvar) :: m => erase_number m 
+  | a :: m =>  a :: erase_number m
 
 
-fun extractvar term = erasenumber (erasedouble (extractvar2 term [])) 
-fun extractvarl terml = erasenumber (erasedouble (extractvar2l terml []))
+fun extractvar term = erase_number (erase_double (extractvar2 term [])) 
+fun extractvarl terml = erase_number (erase_double (extractvar2l terml []))
 (* return a list of triple (variable,number of arguments,category) *)
 
-fun erasebv l =
+fun erase_bv l =
   case l of 
     [] => []
-  | (_,_,Bound) :: m => erasebv m 
-  | a :: m =>  a :: erasebv m
+  | (_,Boundvar) :: m => erase_bv m 
+  | a :: m =>  a :: erase_bv m
 
-
-fun getbvnargl l =   
+fun get_bval l =   
   case l of 
     [] => []
-  | (bv,narg,Bound) :: m => (bv,narg) :: getbvnargl m
-  | a :: m => getbvnargl m
+  | (bva,Boundvar) :: m => bva :: get_bval m
+  | a :: m => get_bval m
 
-fun getfvcl l =   
+fun get_fvcal l =   
   case l of 
     [] => []
-  | (fv,narg,Free) :: m => (fv,narg) :: getfvcnargl m
-  | (c,narg,Undefconst) :: m => (c,narg) :: getfvcnargl m
-  | a :: m => getfvcnargl m
+  | (fva,Freevar) :: m => fva :: get_fvcal m
+  | (ca,Constvar) :: m => ca :: get_fvcal m
+  | a :: m => get_fvcal m
+
+fun get_fvcl_thm thm = 
+  let
+    val hypl = hyp thm
+    val goal = concl thm
+  in
+   let val varacat = extractvarl (hypl @ [goal]) in
+   let val fvcal = get_fvcal varacat in
+     fstcomponent fvcal
+   end end
+  end
 
 
-end
+end 

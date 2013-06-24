@@ -39,11 +39,11 @@ outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
     val simp y_nm = addnodevsimp ypel nodevtyl leafvty_nm ;
     val tydict = addnodevtypel nodevtyl simp y_nm ; 
   (* bound variable *)
-    val bv_narg = getbvnargl var_narg_cat ; 
+    val bv_narg = get_bval var_narg_cat ; 
   (* free variable *)
-    val fvcdc_narg_cat = erasebv var_narg_cat ;
+    val fvcdc_narg_cat = erase_bv var_narg_cat ;
     val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat ;
-    val fvc_narg = getfvcnargl var_narg_cat ; 
+    val fvc_narg = get_fvcal var_narg_cat ; 
     val fvc_narg_nm = namefvcl fvc_narg ;
     val fvc_nm = erase2ndcomponent fvc_narg_nm ;
   (* axiom *)

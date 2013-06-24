@@ -29,7 +29,7 @@ fun termstructure term =
     [
     (is_numeral ,Numeral),
     (is_var     ,Var),
-    (is_fvc   ,Const),
+    (is_const   ,Const),
     (is_comb    ,Comb),
     (is_abs     ,Abs)
     ]
@@ -75,7 +75,7 @@ fun connective term =
     ]
     App
 
-datatype VARCAT = Number | Free | Bound | Tffconst | Undefconst
+datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar
 
 end
 

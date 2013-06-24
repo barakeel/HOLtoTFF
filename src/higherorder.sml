@@ -21,7 +21,7 @@ fun firstorderbvl bv_narg =
 fun firstorderfvcdcl2 fvcdc_narg defined =
   case fvcdc_narg of
     [] => true
-  | (fvcdc,narg) :: m => if ismember fvcdc (fstcomponent defined)
+  | (fvcdc,narg) :: m => if is_member fvcdc (fstcomponent defined)
                          then 
                            let val n = lookup fvcdc defined in
                              if narg = n 

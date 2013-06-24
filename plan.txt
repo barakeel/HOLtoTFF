@@ -1,12 +1,13 @@
 Plan:
 
 preparation: (use mkdict)
-  make a dictionary with the constant there definition and names
+  make a chart with the constant there definition and names
   test ?!
  
    main:
   
-  create axioms (list of axioms needed) (from the list of hol constants)
+  use user input axioms 
+  create axioms (list of axioms needed) 
   
   instantiate types (monomorphism)
     free variables are instantiate so that they match

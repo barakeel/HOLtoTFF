@@ -1,5 +1,6 @@
 RULES
-  separate different objects by an underscore
+  separate different objects by an underscore in functions.
+  write couple and record like this (a, b) ,  {a: a, b: b}
   
 HOL CONSTANT
   filename: constant
@@ -22,3 +23,8 @@ LIST
 TERM
   value: t | term
   free variable or constant : fvc
+  
+ axiom : axiom
+ conjecture : conjecture
+ type : ty
+ element : el 

@@ -9,25 +9,30 @@ fun LISTTOOLS_ERR function message =
           message = message}
 
 
-fun ismember elem list =
+fun is_member elem list =
   case list of
     [] => false
   | a :: m => if elem = a 
               then true 
-              else ismember elem m     
+              else is_member elem m     
 
-fun isempty list =
+fun is_empty list =
   case list of
     [] => true
   | _ => false
 
-fun erasedouble list = 
+fun erase_double list = 
   case list of
     [] => []
-  | a :: m => if ismember a m 
-              then erasedouble m 
-              else a :: erasedouble m
+  | a :: m => if is_member a m 
+              then erase_double m 
+              else a :: erase_double m
 
+fun add_once elem list =
+  if is_member elem list 
+  then list
+  else elem :: list
+   
 (* dictionnary *)
 fun fstcomponent couplel = 
   case couplel of
@@ -44,8 +49,8 @@ fun erase2ndcomponent triplel =
     [] => []  
   | (a,_,c) :: m => (a,c) :: erase2ndcomponent m
 
-fun addentry entry dict = 
-  if ismember (fst entry) (fstcomponent dict)
+fun add_entry entry dict = 
+  if is_member (fst entry) (fstcomponent dict)
   then dict
   else entry :: dict
 

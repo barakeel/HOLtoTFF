@@ -10,7 +10,7 @@ sig
   datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
   datatype CONNECTIVE = Conj | Disj | Neg | Imp_only | Forall | Exists | App
   
-  datatype VARCAT = Number | Free | Bound | Tffconst | Undefconst
+  datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar 
 
   val typecat : hol_type -> TYPECAT
   val termstructure : term -> TERMSTRUCTURE  

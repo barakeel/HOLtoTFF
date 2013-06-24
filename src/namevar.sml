@@ -8,13 +8,6 @@ fun NAMEVAR_ERR function message =
           origin_function = function,
           message = message}
 
-fun holname term =
-  case termstructure term of
-    Numeral => Int.toString (int_of_term term)
-  | Var => fst (dest_var term)
-  | Const => fst (dest_fvc term)
-  | Comb => raise NAMEVAR_ERR "holname" "comb"
-  | Abs => raise NAMEVAR_ERR "holname" "abs"
 
 (* numeral *)
 fun namenumeral term =  
@@ -60,7 +53,7 @@ fun namefvcl2 fvc_narg used =
       val n = ref 0 
     in
       (
-      while ismember (!nameref) used do 
+      while is_member (!nameref) used do 
         (
         nameref := name ^ (Int.toString (!n));
         n := (!n) + 1

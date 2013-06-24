@@ -14,7 +14,7 @@ fun alltypel2 var_narg =
     [] => []
   | (var,narg) :: m => (type_of var,narg) :: alltypel2 m
 
-fun alltypel var_narg = erasedouble (alltypel2 var_narg)
+fun alltypel var_narg = erase_double (alltypel2 var_narg)
 
 (* on the result of alltypel *)
 fun alphatypel ty_narg = 
