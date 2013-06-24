@@ -20,7 +20,7 @@ fun typecat holtype =
                  (_,[]) => Leaftype
                | ("fun",_) => Funtype
                | ("prod",_) => Prodtype
-               | _ => raise DATATYPE_ERR "typecat" "unknown typeconstructor"
+               | _ => raise DATATYPE_ERR "typecat" "unknown typefvcructor"
 
 datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
 
@@ -29,15 +29,15 @@ fun termstructure term =
     [
     (is_numeral ,Numeral),
     (is_var     ,Var),
-    (is_const   ,Const),
+    (is_fvc   ,Const),
     (is_comb    ,Comb),
     (is_abs     ,Abs)
     ]
     (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
-datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
+datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodefvc
 
-fun nodeconst term =  
+fun nodefvc term =  
   switcharg term
     [
     (is_eq       ,Eq), 
@@ -49,17 +49,17 @@ fun nodeconst term =
     (is_geq      ,Geq),
     (is_leq      ,Leq)
     ]   
-    Newnodeconst
+    Newnodefvc
 
-datatype LEAFCONST = True | False | Newleafconst
+datatype LEAFCONST = True | False | Newleaffvc
 
-fun leafconst term =
+fun leaffvc term =
   switcharg term
     [
     (equal T ,True),
     (equal F ,False)
     ]
-    Newleafconst
+    Newleaffvc
 
 datatype CONNECTIVE = Conj | Disj | Neg | Imp_only | Forall | Exists | App
 

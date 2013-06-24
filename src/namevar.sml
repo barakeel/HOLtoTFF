@@ -12,7 +12,7 @@ fun holname term =
   case termstructure term of
     Numeral => Int.toString (int_of_term term)
   | Var => fst (dest_var term)
-  | Const => fst (dest_const term)
+  | Const => fst (dest_fvc term)
   | Comb => raise NAMEVAR_ERR "holname" "comb"
   | Abs => raise NAMEVAR_ERR "holname" "abs"
 
@@ -28,7 +28,7 @@ fun namebvn bv n =
   then "X" ^ (Int.toString n)  ^ (holname bv)
   else "X" ^ (Int.toString n)
 
-(* fvc : free variable or constant*)
+(* fvc : free variable or fvcant*)
 fun namefvc2 startstr term =
   let val str = holname term in
      switch 
@@ -45,7 +45,7 @@ fun namefvc term =
     case termstructure term of
       Var => namefvc2 "x" term
     | Const => namefvc2 "c" term
-    | _ => raise NAMEVAR_ERR "namefvc" "not a variable or a constant"
+    | _ => raise NAMEVAR_ERR "namefvc" "not a variable or a fvcant"
   end
 
 (* try different name untill it finds one which is not already used

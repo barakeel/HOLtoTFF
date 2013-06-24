@@ -21,4 +21,4 @@ LIST
   
 TERM
   value: t | term
-  
+  free variable or constant : fvc

@@ -63,7 +63,7 @@ fun printbvl pps bvl bvnm tynm =
   add_string pps "]"
   )
 
-(* #1 state : list of (free variable or undefined constant, its name) *)
+(* #1 state : list of (free variable or undefined fvcant, its name) *)
 (* #2 state : list of (bound variable, its name)  *)
 (* #3 state : list of (alphatype, its name) *)
 (* #4 state : appdict *)
@@ -77,10 +77,10 @@ fun printterm pps term state =
            then add_string pps (lookup term (#2 state)) (*boundvar*)
            else add_string pps (lookup term (#1 state)) (*freevar*)
   | Const => (
-             case leafconst term of
+             case leaffvc term of
                True => add_string pps "$true"
              | False => add_string pps "$false"
-             | Newleafconst => add_string pps (lookup term (#1 state))
+             | Newleaffvc => add_string pps (lookup term (#1 state))
              )
   | Comb => (
             case connective term of
@@ -99,7 +99,7 @@ fun printterm pps term state =
                          Numeral => raise PRINTTFF_ERR "printterm" "operator is numeral"
                        | Var => application pps (lookup operator (#1 state)) argl state  (* don't need to test if it's bound because operator can't be bound *)
                        | Const => (
-                                  case nodeconst term of
+                                  case nodefvc term of
                                     Eq => binop pps "=" term state
                                   | Add => application pps "$sum" argl state
                                   | Minus => application pps "$difference" argl state  
@@ -108,7 +108,7 @@ fun printterm pps term state =
                                   | Greater => application pps "$greater" argl state  
                                   | Geq => application pps "$greatereq" argl state  
                                   | Leq => application pps "$lesseq" argl state
-                                  | Newnodeconst => application pps (lookup operator (#1 state)) argl state      
+                                  | Newnodefvc => application pps (lookup operator (#1 state)) argl state      
                                   )
                        | Comb => raise PRINTTFF_ERR "printterm" "operator is comb"
                        | Abs => raise PRINTTFF_ERR "printterm" "abstraction"
@@ -212,7 +212,7 @@ fun printtypel pps tydict =
                     printtypel pps m
                     )         
 
-(* free variables or undefined constant *)
+(* free variables or undefined fvcant *)
 fun printfvcl pps fvc_narg_nm tydict =
   case fvc_narg_nm of
     [] => () 

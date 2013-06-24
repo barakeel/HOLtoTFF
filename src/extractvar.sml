@@ -12,19 +12,13 @@ fun EXTRACTVAR_ERR function message =
 (* extract a list of triple (variable,nombre d'arguments,category) *)
 (* detect second order clash with bound variables *)
 
-
 fun extractvar2 term bvl =
   case termstructure term of
-    Numeral => [(term,0,Number)]
+    Numeral => [((term,0),Numeralvar)]
   | Var => if ismember term bvl
-           then [(term,0,Bound)] 
-           else [(term,0,Free)]
-  | Const => (
-             case leafconst term of
-               True => [(term,0,Tffconst)] 
-             | False => [(term,0,Tffconst)] 
-             | Newleafconst => [(term,0,Undefconst)] 
-             )
+           then [((term,0),Boundvar)] 
+           else [((term,0),Freevar)]
+  | Const => [(term,0),Constvar)]
   | Comb => (
             case connective term of
               Conj => extractvar2binop term bvl
@@ -45,13 +39,9 @@ fun extractvar2 term bvl =
                        case termstructure operator of
                          Numeral => raise EXTRACTVAR_ERR "extractvar2" "operator is numeral"
                        | Var =>  if ismember operator bvl
-                                 then (operator,n,Bound) :: l
-                                 else (operator,n,Free) :: l
-                       | Const => (
-                                  case nodeconst term of
-                                    Newnodeconst => (operator,n,Undefconst) :: l
-                                  | _ => (operator,n,Tffconst) :: l
-                                  )
+                                 then ((operator,n),Boundvar) :: l
+                                 else ((operator,n),Freevar) :: l
+                       | Const => ((operator,n),Constvar) :: l
                        | Comb => raise EXTRACTVAR_ERR "extractvar2" "operator is a combination"
                        | Abs => raise EXTRACTVAR_ERR "extractvar2" "abstraction"
                      end end
@@ -81,7 +71,7 @@ and extractvar2quantifier qbvl term bvl =
 fun erasenumber l =
   case l of 
     [] => []
-  | (_,_,Number) :: m => erasenumber m 
+  | (_,_,Numeralvar) :: m => erasenumber m 
   | a :: m =>  a :: erasenumber m
 
 
@@ -102,7 +92,7 @@ fun getbvnargl l =
   | (bv,narg,Bound) :: m => (bv,narg) :: getbvnargl m
   | a :: m => getbvnargl m
 
-fun getfvcnargl l =   
+fun getfvcl l =   
   case l of 
     [] => []
   | (fv,narg,Free) :: m => (fv,narg) :: getfvcnargl m
