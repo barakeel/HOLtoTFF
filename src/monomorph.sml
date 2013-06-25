@@ -24,12 +24,10 @@ type elsubst = {redex: hol_type, residue: hol_type}
 type multisubst = {redex: hol_type, residuel: hol_type list} list
 type elmultisubst = {redex: hol_type, residuel: hol_type list}
 
-
 fun MONOMORPH_ERR function message =
     HOL_ERR{origin_structure = "monomorph",
             origin_function = function,
             message = message}
-
 
 
 (* free variables or constant : instantiate f:alpha to f:type if f:type is in thm *)              
@@ -38,8 +36,9 @@ fun MONOMORPH_ERR function message =
    because it's already of type bool -> bool -> bool *)
 
 (* return a theorem list *)
-fun monomorph2_fvc fvc axiom conjecture =
-  let val fvcl = get_fvcl conjecture in
+(* fun monomorph2_fvc fvc axiom conjecture =
+  let val fvcl = get_fvcl conjecture in *)
+  
   
 fun name_of term = 
   case termstructure term of
@@ -49,33 +48,38 @@ fun name_of term =
   | Comb => raise MONOMORPH_ERR "name_of" "comb"
   | Abs => raise MONOMORPH_ERR "name_of" "abs"
 
-(* extract a substitution from an axiom and a conjecture *)
-fun make_subst_2 fvc fvcl =
-  case fvcl of
+(* extract a pre-substitution *)
+fun make_presubst_2 fvc1 fvcl2 =
+  case fvcl2 of
     [] => [] 
   | fvc2 :: m => 
-    if name_of fvc = name_of fvc2
+    if name_of fvc1 = name_of fvc2
     then
-      let val subst = match_type (type_of fvc) (type_of fvc2) in
-        subst @ (make_subst_2 fvc m)
+      let val subst = match_type (type_of fvc1) (type_of fvc2) in
+        subst @ (make_presubst_2 fvc1 m)
       end
       handle 
-        _ => [] @ (make_subst_2 fvc m)
+        _ => [] @ (make_presubst_2 fvc1 m)
     else 
-      make_subst_2 fvc m
+      make_presubst_2 fvc1 m
 
-fun make_subst fvc fvcl = erase_double (make_subst_2 fvc fvcl) 
+fun make_presubst fvc1 fvcl2 = erase_double (make_presubst_2 fvc1 fvcl2) 
 
-fun make_subst_l_2 fvcl2 fvcl =
-  case fvcl2 of  
+fun make_presubst_l_2 fvcl1 fvcl2 =
+  case fvcl1 of  
     [] => []
-  | fvc2 :: m => make_subst fvc2 fvcl @ make_subst_l_2 m fvcl
+  | fvc1 :: m => make_presubst fvc1 fvcl2 @ make_presubst_l_2 m fvcl2
 
-fun make_subst_l fvcl2 fvcl = erase_double (make_subst_l_2 fvcl2 fvcl)
+fun make_presubst_l fvcl1 fvcl2 = erase_double (make_presubst_l_2 fvcl1 fvcl2)
 
-fun extract_subst axiom conjecture =
- 
-
+fun extract_presubst axiom conjecture =
+  let 
+    val axiomfvcl = get_fvcl_thm axiom
+    val conjecturefvcl = get_fvcl_thm conjecture
+  in
+    make_presubst_l axiomfvcl conjecturefvcl
+  end
+(* end *)
 
 (* create a multisubst out of it *)
 fun is_redex_in redex (multisubst: multisubst) =
@@ -137,44 +141,65 @@ fun expand_subst (elmultisubst: elmultisubst) (subst: subst) =
                  expand_subst {redex = redex, residuel = m} subst
   end
 
-(* returns a list of substitution *)
+  (* returns a list of substitution *)
 fun expandl_subst multisubst subst =
   case multisubst of
     [] => [subst]
   | multi :: m => expand_subst multi subst @ expandl_subst m subst
-    
-(* returns a list of substitution *)   
-fun expand (elmultisubst: elmultisubst) (substl: subst list) =
+
+  (* returns a list of substitution *)   
+fun expandel (elmultisubst: elmultisubst) (substl: subst list) =
   case substl of
-    [] => substl
+    [] => expand_subst elmultisubst []
   | subst :: m => expand_subst elmultisubst subst @
-                  expand elmultisubst m
+                  expandel elmultisubst m
   
-(* returns a list of substitution *) 
-fun expandl2 (multisubst: multisubst) (substl: subst list)  =
+  (* returns a list of substitution *) 
+fun expandl (multisubst: multisubst) (substl: subst list)  =
   case multisubst of
     [] => substl
-  | elmultisubst :: m => expandl2 m (expand elmultisubst substl)
-
-fun expandl (multisubst: multisubst) = expandl2 (multisubst: multisubst) []
-
-(* summary function*)
-fun get_allsubst = 
+  | elmultisubst :: m => expandl m (expandel elmultisubst substl)
 
 
-match_type ``:bool`` ``:num``;
+fun expand (multisubst: multisubst) = expandl (multisubst: multisubst) []
+(* end *)
 
-       match_type
+(* summary function *)
+fun extract_fvcsubstl axiom conjecture = 
+  let val presubst = extract_presubst axiom conjecture in
+  let val multisubst = regroup presubst in
+    expand multisubst 
+  end end
+
+(* test   
+val axiom = (ASSUME ``(x = y) /\ (x = w)``);
+val conjecture = (ASSUME ``(x = 0) /\ (y)``);
+val presubst = extract_presubst axiom conjecture;
+val multisubst = regroup presubst;
+val substl = expand multisubst;
+*)  
        
-INST_TYPE [(``:'a`` |-> ``:bool``)] 
-          (ASSUME ``(f:'a->bool) (x:'a)``);
-  concl it;
-  type_of (fst(dest_comb it)); 
-(* pattern matching against the structure is better *)
-fun monomorph_fvc axiom conjecturety conjecture  =
-  let val axiomfvcl = get_fvcl axiom in  
-    case axiomfvcl of
-  
+(* each axiom should be instantiated separately *)
+(* main function *) (* returns an axioml *)  
+(* should prevent equality to monomorph maybe *)
+fun inst_type_l substl thm =
+  case substl of
+    [] => []
+  | subst :: m => INST_TYPE subst thm :: inst_type_l m thm
 
-fun monomorph_ 
+fun monomorph_fvc axiom conjecture =
+  let val substl = extract_fvcsubstl axiom conjecture in
+    inst_type_l substl axiom
+  end
+
+fun monomorph_fvc_l axioml conjecture  =
+  case axioml of 
+    [] => []
+  | axiom :: m => monomorph_fvc axiom conjecture @ monomorph_fvc_l m conjecture
+  
+(* test 
+val substl = extract_fvcsubstl axiom conjecture;
+val axiomlres = monomorph_fvc axiom conjecture;  
+ *)  
+
            

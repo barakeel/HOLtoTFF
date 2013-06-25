@@ -28,3 +28,10 @@ TERM
  conjecture : conjecture
  type : ty
  element : el 
+ 
+ FUNCTION
+   use get if it's direct
+   use extract if it's indirect
+   put the result first and then the arguments in the name of the function
+   use _2 for auxiliary function
+   use 1,2 for multiple variables of the same name
