@@ -1,7 +1,6 @@
 structure monomorph :> monomorph =
 struct
 
-(* testing *) 
 (*
 load "mydatatype"; open mydatatype;
 load "listtools"; open listtools;
@@ -39,7 +38,6 @@ fun MONOMORPH_ERR function message =
 (* fun monomorph2_fvc fvc axiom conjecture =
   let val fvcl = get_fvcl conjecture in *)
   
-  
 fun name_of term = 
   case termstructure term of
     Numeral => Int.toString (numSyntax.int_of_term term)
@@ -72,12 +70,12 @@ fun make_presubst_l_2 fvcl1 fvcl2 =
 
 fun make_presubst_l fvcl1 fvcl2 = erase_double (make_presubst_l_2 fvcl1 fvcl2)
 
-fun extract_presubst axiom conjecture =
+fun extract_presubst thm1 thm2 =
   let 
-    val axiomfvcl = get_fvcl_thm axiom
-    val conjecturefvcl = get_fvcl_thm conjecture
+    val fvcl1 = get_fvcl_thm thm1
+    val fvcl2 = get_fvcl_thm thm2
   in
-    make_presubst_l axiomfvcl conjecturefvcl
+    make_presubst_l fvcl1 fvcl2
   end
 (* end *)
 
@@ -165,8 +163,8 @@ fun expand (multisubst: multisubst) = expandl (multisubst: multisubst) []
 (* end *)
 
 (* summary function *)
-fun extract_fvcsubstl axiom conjecture = 
-  let val presubst = extract_presubst axiom conjecture in
+fun extract_fvcsubstl thm1 thm2 = 
+  let val presubst = extract_presubst thm1 thm2 in
   let val multisubst = regroup presubst in
     expand multisubst 
   end end
@@ -187,19 +185,25 @@ fun inst_type_l substl thm =
     [] => []
   | subst :: m => INST_TYPE subst thm :: inst_type_l m thm
 
-fun monomorph_fvc axiom conjecture =
-  let val substl = extract_fvcsubstl axiom conjecture in
-    inst_type_l substl axiom
+fun monomorph_fvc thm1 thm2 =
+  let val substl = extract_fvcsubstl thm1 thm2 in
+    inst_type_l substl thm1
   end
 
-fun monomorph_fvc_l axioml conjecture  =
-  case axioml of 
+fun monomorph_fvc_l thml1 thm2  =
+  case thml1 of 
     [] => []
-  | axiom :: m => monomorph_fvc axiom conjecture @ monomorph_fvc_l m conjecture
-  
+  | thm1 :: m => monomorph_fvc thm1 thm2 @ monomorph_fvc_l m thm2
+
+fun monomorph_fvc_l_l thml1 thml2 =
+  case thml2 of
+    [] => raise MONOMORPH_ERR "monomorph_fvc_l_l" "emptylist"
+  | [thm2] => monomorph_fvc_l thml1 thm2
+  | thm2 :: m => monomorph_fvc_l thml1 thm2 @ monomorph_fvc_l_l thml1 m
+
 (* test 
 val substl = extract_fvcsubstl axiom conjecture;
 val axiomlres = monomorph_fvc axiom conjecture;  
  *)  
-
+end
            

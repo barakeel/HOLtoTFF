@@ -1,7 +1,7 @@
 structure nametype :> nametype =
 struct
 
-open HolKernel extractvar extracttype stringtools listtools mydatatype numSyntax 
+open HolKernel extract_var extracttype stringtools listtools mydatatype numSyntax 
 
 fun NAMETYPE_ERR function message =
   HOL_ERR{origin_structure = "nametype",

@@ -1,8 +1,9 @@
 
 Axioms:
-  say what to do with axioms
-  chart for constant and free variables
-  example @ axiom
+  used as def
+  or used as axioms
+  build it form the user input
+
  
 Monomorph: 
   instantiate types (monomorphism)
@@ -11,12 +12,10 @@ Monomorph:
 Substitute:  
   replace some of the constant into the formula
     figure out an heuristic
-    
   replace some free variables by their definition
     in the formula   
 
 First order and normal form: 
-  
   Should negate the goal and prove false 
   (goal is not considered specially any more)
  

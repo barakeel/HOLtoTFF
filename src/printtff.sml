@@ -1,7 +1,7 @@
 structure printtff :> printtff =
 struct
 
-open HolKernel HOLPP numSyntax higherorder namevar extractvar nametype extracttype 
+open HolKernel HOLPP numSyntax higherorder namevar extract_var nametype extracttype 
 stringtools listtools mydatatype (*not all structures are necessary*)
 
 fun PRINTTFF_ERR function message =
@@ -279,7 +279,7 @@ fun printthm pps thm =
   let val hypl = hyp thm in 
   let val propl = hypl @ [concl thm] in
   (* variable extraction *)
-  let val var_narg_cat = extractvarl propl in
+  let val var_narg_cat = extract_varl propl in
   let val var_narg = erase3rdcomponent var_narg_cat in
   (* type extraction *)
   let val ty_narg = alltypel var_narg in

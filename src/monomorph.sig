@@ -3,22 +3,10 @@ sig
 
 type thm = Thm.thm
 type term = Term.term
-type fvcinfos =
-  { term : Term.term, 
-    def : thm option, 
-    axiom : bool,
-    replace : bool }
 
-type hol_type = Type.hol_type
-type subst = {redex: hol_type, residue: hol_type} list
-
-
-
-
-
-
-
-
-
-
+  val name_of : term -> string
+  val monomorph_fvc : thm -> thm -> thm list 
+  val monomorph_fvc_l : thm list -> thm -> thm list 
+  val monomorph_fvc_l_l : thm list -> thm list -> thm list
+  
 end

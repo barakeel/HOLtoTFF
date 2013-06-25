@@ -1,7 +1,8 @@
 RULES
   separate different objects by an underscore in functions.
   write couple and record like this (a, b) ,  {a: a, b: b}
-  
+  and type declaration like this a: int
+  except in signature a : b
 HOL CONSTANT
   filename: constant
   function: const

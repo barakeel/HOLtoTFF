@@ -1,7 +1,7 @@
 structure betaetared :> betaetared =
 struct
 
-open HolKernel listtools mydatatype extractvar 
+open HolKernel listtools mydatatype extract_var 
 
 
 

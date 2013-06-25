@@ -1,5 +1,7 @@
 ISSUES
 
+
+
 betaeta reduction 
   after beta-eta red use some trick to remove lambda abstraction.
   I forgot where eq alphaconv is to equate \x.x and \y.y
@@ -15,13 +17,14 @@ type
   
 
 CODE QUESTIONS
-
-   instantiation of bound variables to specific types
-   Why can't the user do it ? Because if we generate all the possible instantiation (possible but it will be big)
-   nbty      number of different types ( generally 10 to 100 ) 
-   nbalphaty number of different alpha type to be instantiate 
-   nbty ^ nbalphaty number of instantiation
-
+  Instantiation of bound variables to specific types
+    Why can't the user do it ? Because if we generate all the possible instantiation (possible but it will be big)
+    nbty      number of different types ( generally 10 to 100 ) 
+    nbalphaty number of different alpha type to be instantiate 
+    nbty ^ nbalphaty number of instantiation
+  Instantation of free variables
+    2 layer ( is it a good idea? )
+   
 TODO
 
 comments
@@ -49,10 +52,6 @@ normalized
   do boolean changed 
   f( !x. x = 5 )
  
- create a tree to represent my formula
-not necessarly first order
-
-
 
 change the tree to make it first order (construct appdict at the same time)
 higher order ( today and tomorrow )
@@ -63,7 +62,6 @@ higher order ( today and tomorrow )
 use dictionnaries to undo conflicts between variables 
 create a new tree with the name of everything
 output the tree (very easy)
-
 
 product
   verify if it's working correctly i think it 's not 

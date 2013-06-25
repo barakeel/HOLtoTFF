@@ -1,14 +1,14 @@
 structure extracttype :> extracttype =
 struct
 
-open HolKernel listtools mydatatype extractvar
+open HolKernel listtools mydatatype extract_var
 
 fun EXTRACTTYPE_ERR function message =
   HOL_ERR{origin_structure = "extracttype",
           origin_function = function,
           message = message}
 
-(* on the result of extractvar *)
+(* on the result of extract_var *)
 fun alltypel2 var_narg = 
   case var_narg of
     [] => []

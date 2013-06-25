@@ -2,7 +2,7 @@
 open stringtools;
 open listtools;
 open mydatatype;
-open extractvar;
+open extract_var;
 open extracttype;
 open namevar;
 open nametype;
@@ -26,7 +26,7 @@ outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
     val hypl = hyp thm ; 
     val propl = hypl @ [concl thm] ;
   (* variable extraction *)
-    val var_narg_cat = extractvarl propl ;
+    val var_narg_cat = extract_varl propl ;
     val var_narg = erase3rdcomponent var_narg_cat ;
   (* type extraction *)
     val ty_narg = alltypel var_narg ;

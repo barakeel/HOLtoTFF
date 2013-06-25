@@ -1,7 +1,7 @@
 structure namevar :> namevar =
 struct
 
-open HolKernel extractvar stringtools listtools mydatatype numSyntax
+open HolKernel extract_var stringtools listtools mydatatype numSyntax
 
 fun NAMEVAR_ERR function message =
   HOL_ERR{origin_structure = "namevar",
