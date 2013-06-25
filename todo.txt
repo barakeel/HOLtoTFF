@@ -1,7 +1,5 @@
 ISSUES
 
-
-
 betaeta reduction 
   after beta-eta red use some trick to remove lambda abstraction.
   I forgot where eq alphaconv is to equate \x.x and \y.y
@@ -24,8 +22,11 @@ CODE QUESTIONS
     nbty ^ nbalphaty number of instantiation
   Instantation of free variables
     2 layer ( is it a good idea? )
+  How to make my functions look better ? (list) and name
    
 TODO
+
+simplify monomorph to make it understandable
 
 comments
   add comments to be printed in the standard input when the file is generated

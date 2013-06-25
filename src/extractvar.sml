@@ -11,6 +11,7 @@ fun EXTRACTVAR_ERR function message =
 (* warning: should have the same structure as printterm in printtff.sml *)
 (* extract a list of triple (variable,nombre d'arguments,category) *)
 (* detect second order clash with bound variables *)
+(* used to get arity *)
 
 fun extract_var2 term bvl =
   case termstructure term of
@@ -26,10 +27,10 @@ fun extract_var2 term bvl =
             | Neg => extract_var2unop term bvl
             | Imp_only => extract_var2binop term bvl
             | Forall => let val (qbvl,t) = strip_forall term in
-                          extract_var2quantifier qbvl t bvl
+                          extract_var2abs qbvl t bvl
                         end       
             | Exists => let val (qbvl,t) = strip_exists term in
-                          extract_var2quantifier qbvl t bvl 
+                          extract_var2abs qbvl t bvl 
                         end
             | App => let val (operator,argl) = strip_comb term in
                      let 
@@ -37,20 +38,23 @@ fun extract_var2 term bvl =
                        val l = extract_var2l argl bvl 
                      in
                        case termstructure operator of
-                         Numeral => raise EXTRACTVAR_ERR "extract_var2" "operator is numeral"
+                         Numeral => raise EXTRACTVAR_ERR "extract_var2" "num"
                        | Var =>  if is_member operator bvl
                                  then ((operator,n),Boundvar) :: l
                                  else ((operator,n),Freevar) :: l
                        | Const => ((operator,n),Constvar) :: l
-                       | Comb => raise EXTRACTVAR_ERR "extract_var2" "operator is a combination"
-                       | Abs => raise EXTRACTVAR_ERR "extract_var2" "abstraction"
+                       | Comb => raise EXTRACTVAR_ERR "extract_var2" "comb"
+                       | Abs => let val (absbvl,t) = strip_abs operator in
+                                  extract_var2abs absbvl t bvl @ l
+                                end  
                      end end
              )
-  | Abs => raise EXTRACTVAR_ERR "extract_var2" "abstraction"
+  | Abs => let val (absbvl,t) = strip_abs term in
+             extract_var2abs absbvl t bvl 
+           end  
 and extract_var2l terml bvl = 
   case terml of
-    [] => raise EXTRACTVAR_ERR "extract_var2l" "emptylist"
-  | [t] => extract_var2 t bvl
+    [] => [] 
   | t :: m => (extract_var2 t bvl) @ (extract_var2l m bvl)
 and extract_var2unop term bvl =
   let val (operator,l) = strip_comb term in
@@ -65,8 +69,10 @@ and extract_var2binop term bvl =
   in
     (extract_var2 lhs bvl) @ (extract_var2 rhs bvl) 
   end end
-and extract_var2quantifier qbvl term bvl = 
-  (extract_var2l qbvl (qbvl @ bvl)) @ (extract_var2 term (qbvl @ bvl))
+and extract_var2abs bvl1 term bvl2 = 
+  (extract_var2l bvl1 (bvl1 @ bvl2)) @ (extract_var2 term (bvl1 @ bvl2))
+
+
 
 fun erase_number l =
   case l of 

@@ -169,21 +169,12 @@ fun extract_fvcsubstl thm1 thm2 =
     expand multisubst 
   end end
 
-(* test   
-val axiom = (ASSUME ``(x = y) /\ (x = w)``);
-val conjecture = (ASSUME ``(x = 0) /\ (y)``);
-val presubst = extract_presubst axiom conjecture;
-val multisubst = regroup presubst;
-val substl = expand multisubst;
-*)  
-       
-(* each axiom should be instantiated separately *)
-(* main function *) (* returns an axioml *)  
-(* should prevent equality to monomorph maybe *)
+
 fun inst_type_l substl thm =
   case substl of
     [] => []
   | subst :: m => INST_TYPE subst thm :: inst_type_l m thm
+(* if the empty subst occurs it's applied but it shouldn't *)
 
 fun monomorph_fvc thm1 thm2 =
   let val substl = extract_fvcsubstl thm1 thm2 in
@@ -197,13 +188,21 @@ fun monomorph_fvc_l thml1 thm2  =
 
 fun monomorph_fvc_l_l thml1 thml2 =
   case thml2 of
-    [] => raise MONOMORPH_ERR "monomorph_fvc_l_l" "emptylist"
-  | [thm2] => monomorph_fvc_l thml1 thm2
+    [] => []
   | thm2 :: m => monomorph_fvc_l thml1 thm2 @ monomorph_fvc_l_l thml1 m
 
-(* test 
-val substl = extract_fvcsubstl axiom conjecture;
+[|- $?! = (λP. $? P ∧ ∀x y. P x ∧ P y ⇒ (x = y))]
+(* test   
+val thm1 = ASSUME ``x:num = x`` ;
+val thm2 = ASSUME ``?!x. x = 0``;
+val thm3 = SELECT_AX;
+val thm4 = EXISTS_UNIQUE_DEF;
+val substl = extract_fvcsubstl thm4 thm2;
+val axioml = inst_type_l substl thm4;
 val axiomlres = monomorph_fvc axiom conjecture;  
+val mo = monomorph_fvc_l_l [thm4] [thm1,thm2];
+val a = monomorph_fvc_l [thm4] thm1; 
  *)  
 end
+
            

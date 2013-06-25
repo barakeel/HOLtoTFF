@@ -9,7 +9,7 @@ Monomorph:
   instantiate types (monomorphism)
     free variables are instantiate so that they match
   
-Substitute:  
+Replacedef:  
   replace some of the constant into the formula
     figure out an heuristic
   replace some free variables by their definition
