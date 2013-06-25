@@ -14,7 +14,7 @@ sig
 
   val typecat : hol_type -> TYPECAT
   val termstructure : term -> TERMSTRUCTURE  
-  val nodefvc : term -> NODECONST 
+  val nodefvc : term -> NODECONST
   val leaffvc : term -> LEAFCONST
   val connective : term -> CONNECTIVE
 

@@ -1,15 +1,12 @@
 
-chart for constant and free variables
+Axioms:
+  say what to do with axioms
+  chart for constant and free variables
+  example @ axiom
  
-   main:
-  
-  use user input axioms 
-  create axioms (list of axioms needed) 
- 
-Monomorph:
+Monomorph: 
   instantiate types (monomorphism)
     free variables are instantiate so that they match
-  
   
 Substitute:  
   replace some of the constant into the formula
@@ -18,17 +15,19 @@ Substitute:
   replace some free variables by their definition
     in the formula   
 
-   
- Entry is a list of theorems and one conjecture . Should negate the goal
- and prove false
+First order and normal form: 
+  
+  Should negate the goal and prove false 
+  (goal is not considered specially any more)
  
- reducing to first order clauses
+  reducing to first order clauses
     beta-reduction
     extract all lonely abstraction 
       (name them make a dict for lonely abstraction
       be careful to use alpha conversion here or an equality that take care of alpha conversion)
       )
-    extract boolean argument
+ 
+   extract boolean argument
     
     make a dict for every type used (use of arity is necessary)
     make a dict for free variables (name, and type name) 
@@ -47,7 +46,10 @@ Substitute:
  transform it to list of clauses maybe (use mlibclause and mlibclauseSet)
  
   make a dict for bound variables (can be done because there is no more nested implication)
-   
-   
-   
- print the list of clauses to tff (never went to an internal representation)
+    print the list of clauses to tff (never went to an internal representation)
+    
+Main: 
+   globally make important module function in a certain order 
+    
+    
+    
