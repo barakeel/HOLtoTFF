@@ -37,7 +37,8 @@ fun MONOMORPH_ERR function message =
 (* return a theorem list *)
 (* fun monomorph2_fvc fvc axiom conjecture =
   let val fvcl = get_fvcl conjecture in *)
-  
+
+(* move this function to another place *)
 fun name_of term = 
   case termstructure term of
     Numeral => Int.toString (numSyntax.int_of_term term)
@@ -176,23 +177,27 @@ fun inst_type_l substl thm =
   | subst :: m => INST_TYPE subst thm :: inst_type_l m thm
 (* if the empty subst occurs it's applied but it shouldn't *)
 
-fun monomorph_fvc thm1 thm2 =
+fun monomorph thm1 thm2 =
   let val substl = extract_fvcsubstl thm1 thm2 in
     inst_type_l substl thm1
   end
 
-fun monomorph_fvc_l thml1 thm2  =
+fun monomorphl2 thml1 thm2  =
   case thml1 of 
     [] => []
-  | thm1 :: m => monomorph_fvc thm1 thm2 @ monomorph_fvc_l m thm2
+  | thm1 :: m => monomorph thm1 thm2 @ monomorphl2 m thm2
 
-fun monomorph_fvc_l_l thml1 thml2 =
+fun monomorphl thml1 thm2 = erase_double (monomorphl2 thml1 thm2)
+
+fun monomorphll2 thml1 thml2 =
   case thml2 of
     [] => []
-  | thm2 :: m => monomorph_fvc_l thml1 thm2 @ monomorph_fvc_l_l thml1 m
+  | thm2 :: m => monomorphl thml1 thm2 @ monomorphll2 thml1 m
 
-[|- $?! = (λP. $? P ∧ ∀x y. P x ∧ P y ⇒ (x = y))]
+fun monomorphll thml1 thml2 = erase_double (monomorphll2 thml1 thml2)
+
 (* test   
+[|- $?! = (λP. $? P ∧ ∀x y. P x ∧ P y ⇒ (x = y))]
 val thm1 = ASSUME ``x:num = x`` ;
 val thm2 = ASSUME ``?!x. x = 0``;
 val thm3 = SELECT_AX;
@@ -200,8 +205,8 @@ val thm4 = EXISTS_UNIQUE_DEF;
 val substl = extract_fvcsubstl thm4 thm2;
 val axioml = inst_type_l substl thm4;
 val axiomlres = monomorph_fvc axiom conjecture;  
-val mo = monomorph_fvc_l_l [thm4] [thm1,thm2];
-val a = monomorph_fvc_l [thm4] thm1; 
+val mo = monomorphl_l [thm4] [thm1,thm2];
+val a = monomorphl [thm4] thm1; 
  *)  
 end
 

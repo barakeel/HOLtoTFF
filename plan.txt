@@ -19,9 +19,11 @@ First order and normal form:
   Should negate the goal and prove false 
   (goal is not considered specially any more)
  
-  reducing to first order clauses
+   make it to DNF first-order
+    
+    
     beta-reduction
-    extract all lonely abstraction 
+    extract all lonely abstraction or eta-reduce if possible 
       (name them make a dict for lonely abstraction
       be careful to use alpha conversion here or an equality that take care of alpha conversion)
       )
@@ -36,16 +38,16 @@ First order and normal form:
     make a dict for app the string will exactly be the name
     
       
- getting rid of existential quantifier
-    skolemisation (have a dictionnary for skolem constants)  
+    
+  
+  
 
- make it to normal form conjonction of clauses
-  
-  
- transform it to list of clauses maybe (use mlibclause and mlibclauseSet)
  
   make a dict for bound variables (can be done because there is no more nested implication)
     print the list of clauses to tff (never went to an internal representation)
+    
+InsideBeagle:
+  transform it to list of clauses   
     
 Main: 
    globally make important module function in a certain order 
