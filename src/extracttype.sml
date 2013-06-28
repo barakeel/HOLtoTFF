@@ -9,14 +9,17 @@ fun EXTRACTTYPE_ERR function message =
           message = message}
 
 (* on the result of extract_var *)
-fun all_type_aux varacat = 
-  case varacat of
+fun all_tya2 varal = 
+  case varal of
     [] => []
-  | ((var,arity),cat) :: m => (type_of var,arity) :: all_type_aux m
+  | (var,arity) :: m => (type_of var,arity) :: all_tya2 m
 
-fun all_type varacat = erase_double (all_type_aux varacat)
-
-(* on the result of all_ty *)
+fun all_tya term = 
+  let varal = collapse_lowestarity (extract_var term) in
+    erase_double all_tya2 varal
+  end
+  
+(* on the result of all_tya *)
 fun get_leafvtyl tyal =
   case tyal of
     [] => []

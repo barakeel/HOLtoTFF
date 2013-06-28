@@ -20,20 +20,20 @@ fun extract_var2 term bvl =
            then [((term,0),Boundvar)] 
            else [((term,0),Freevar)]
   | Const => [((term,0),Constvar)]
-  | Comb => (
-            case connective term of
-              Conj => extract_var2binop term bvl
-            | Disj => extract_var2binop term bvl
-            | Neg => extract_var2unop term bvl
-            | Imp_only => extract_var2binop term bvl
-            | Forall => let val (qbvl,t) = strip_forall term in
-          
+  | Comb => 
+    (
+    case connective term of
+      Conj => extract_var2binop term bvl
+    | Disj => extract_var2binop term bvl
+    | Neg => extract_var2unop term bvl
+    | Imp_only => extract_var2binop term bvl
+    | Forall => let val (qbvl,t) = strip_forall term in
                           extract_var2abs qbvl t bvl
                         end       
-            | Exists => let val (qbvl,t) = strip_exists term in
+    | Exists => let val (qbvl,t) = strip_exists term in
                           extract_var2abs qbvl t bvl 
                         end
-            | App => let val (operator,argl) = strip_comb term in
+    | App => let val (operator,argl) = strip_comb term in
                      let 
                        val n = length argl 
                        val l = extract_var2l argl bvl 
@@ -91,6 +91,32 @@ fun extract_var term = erase_number (erase_double (extract_var2 term []))
 fun extract_varl terml = erase_number (erase_double (extract_var2l terml []))
 (* return a list of triple (variable,number of arguments,category) *)
 
+(* lowest arity *)
+(* can be applied to any category but mostly for constant and free variables *)
+fun get_lowestarity (term,arity) termal =
+  case termal of
+    [] => arity
+  | (t,a) :: m => if term = t 
+                  then 
+                    if a < arity 
+                    then get_lowestarity (term,a) m
+                    else get_lowestarity (term,arity) m 
+                  else get_lowestarity (term,arity) m     
+
+(* quadratic *)
+(* merge free and bound variables *)
+fun collapse_lowestarity2 varacat =
+  case varacat of
+    [] => []
+  | ((var,arity),Boundvar) :: m => (var,0) :: collapse_lowestarity2 m
+  | ((var,arity),_) :: m =>  (var,get_lowestarity (var,arity) termal) :: 
+                             collapse_lowestarity2 m
+ 
+  
+fun collapse_lowestarity varacat = erase_double (collapse_lowestarity2 varacat)
+(* end lowestarity *)
+
+
 fun get_bval l =   
   case l of 
     [] => []
@@ -111,25 +137,7 @@ fun get_cal l =
 
 fun get_fvcal l = get_fval l @ get_cal l
 
-(* can be applied to any category but mostly for constant and free variables *)
-fun get_lowestarity (term,arity) termal =
-  case termal of
-    [] => arity
-  | (t,a) :: m => if term = t 
-                  then 
-                    if a < arity 
-                    then get_lowestarity (term,a) m
-                    else get_lowestarity (term,arity) m 
-                  else get_lowestarity (term,arity) m     
 
-(* quadratic *)
-fun collapse_lowestarity_aux termal =
-  case termal of
-    [] => []
-  | (t,a) :: m => (t,get_lowestarity (t,a) termal) :: 
-                  collapse_lowestarity_aux m
-  
-fun collapse_lowestarity termal = erase_double (collapse_lowestarity_aux termal)
 
 
 fun get_fvcl_thm thm = 

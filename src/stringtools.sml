@@ -24,26 +24,26 @@ fun name_strn str n = str ^ (Int.toString n)
 
 
 (* warning: include the empty string *)
-fun isalphanumor_charl charl= 
+fun is_alphanumor_charl charl= 
   case charl of
     [] => true    
   | a :: m => (Char.isAlphaNum a orelse (Char.toString a) = "_") 
-              andalso isalphanumor_charl m  
+              andalso is_alphanumor_charl m  
 
-fun isalphanumor_ str = isalphanumor_charl (explode str)
+fun is_alphanumor_ str = is_alphanumor_charl (explode str)
 
 (* name supported by the tptp for a free variable or a type *)              
 fun islowerword str =
   case String.explode str of
     [] => false
   | [a] => Char.isLower a  
-  | a :: m => (Char.isLower a) andalso (isalphanumor_charl m)
+  | a :: m => (Char.isLower a) andalso (is_alphanumor_charl m)
 
 (* name supported by the tptp for a bound variable *)
 fun isupperword str =
   case String.explode str of
     [] => false
   | [a] => Char.isUpper a  
-  | a :: m => (Char.isUpper a) andalso (isalphanumor_charl m)
+  | a :: m => (Char.isUpper a) andalso (is_alphanumor_charl m)
 
 end

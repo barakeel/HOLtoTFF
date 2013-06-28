@@ -5,7 +5,7 @@ sig
   type hol_type = Type.hol_type
   type VARCAT = mydatatype.VARCAT
 
-  val alltypel : (term * int) list -> (hol_type * int) list
+  val all_tya : term -> (hol_type * int) list
   
   val leafvtypel : (hol_type * int) list -> (hol_type * int) list 
   val alphatypel : (hol_type * int) list  -> (hol_type * int) list 
