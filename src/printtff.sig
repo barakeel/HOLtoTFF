@@ -12,7 +12,7 @@ sig
   val erasedefinedtype : ((hol_type * int) * string) list -> ((hol_type * int) * string) list 
   val nameaxioml : term list -> (term * string) list
   (* *)
-  val printthm : ppstream -> thm -> unit
-  val outputtff : string -> thm -> unit
+  val print_thm : ppstream -> thm -> unit
+  val output_tff : string -> thm -> unit
 
 end

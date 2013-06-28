@@ -35,9 +35,14 @@ fun initial_assume axioml conjecture =
   end
 
 (* BIG REWRITING *)
+(* 
+eliminate unused quantifier: normalForms.CNF_CONV ``?x. !x. p x``;
+rewrite =>, ?! and if then else
+do beta-reduction 
+*)  
 fun rewrite_cnf thm =
   let val eqthm = QCONV CNF_CONV prop in
-    SUBS [eqthm] thm 
+    EQ_MP eqthm thm 
   end 
 
 
@@ -68,6 +73,12 @@ bterm = b' |- P[b'] => P[bterm]
 |- b' = bterm => P[b'] => P[bterm] 
 |-  b' = bterm  /\ P[b'] => P[bterm]
 [b' = bterm] |- P[bterm] <=> P[b']
+|- P[bterm]
+then rewrite
+[b' = bterm] |- P[b']
+undisch
+|- (b' = bterm) => P[b']
+b' is a free variable but variables inside bterm maybe bound
 *)
 
  
@@ -135,7 +146,6 @@ fun rewrite_bool thm =
 
 fun has_numtype term = (type_of term = ``:num``)
 
-
 fun rewrite_num thm = 
   let val term = concl thm in
   let val terml = find_terms (has_numtype) term in
@@ -152,45 +162,76 @@ Then
 *) 
 
 
-fun rewrite_app1 thm =
+
 (* if some function appears with different arguments then *)  
 (* bounded function appears with lowest_arity equal to 0 *)
 (* Same definition as let *)
 
 (* input: a comb term *) 
 (* app should supports multiple arguments *)
-fun (make_appassume:conv) term =
-  let val (operator,argl) = strip_comb term in
-  let val arity = length argl in
+fun (make_appassume:conv) operator =
   let val ty = mk_type ("fun", [type_of operator,type_of operator]) in
-  let val app = mk_var ("app_" ^ (Int.toString arity), ty) in    
-  let val appdeflhs =  mk_abs (operator, mk_abs (hd argl, term)) in
+  let val app = mk_var ("app", ty) in    
+  let val appdeflhs =  mk_abs (operator, operator) in
   let val appdef = mk_eq (app, appdeflhs) in  
   let val assume = ASSUME appdef in
     assume
-  end end end end end end end
- 
+  end end end end end
  
 (* 
-app_1 = \f x. f x |- app_1 = \f x. f x
-app_1 = \f x. f x |- app_1 f x = (\f x. f x) f x 
-app_1 = \f x. f x |- app_1 f x = f x 
+app = \f. f |- app = \f. f 
+app = \f. f |- app f = (\f. f) f 
+app = \f. f |- app f = f
+app = \f. f |- f = app f
 *)
-(* need to beta_conv or cnf_conv the result *)
-fun make_appthm term =
-  let val assume = make_appassume term in
-  let val (operator,arg) = dest_comb term in
-     AP_THM (AP_THM assume operator) arg
-  end end
-  
-make_appthm ``f x``;
+(* f = g can be rewrite !x f x = g x *) FUN_CONV
 
-  is_var f
-  term, mk_var ("b", ``:bool``))) 
- f x = A_1 f x
+(* if f is a function that's not right *)
+(* need to beta_conv or cnf_conv the result *)
+(* basic conversion *)
+
+(* no dict for now but to be added later *)
+fun app_var_conv var =
+  let val assume = make_appassume var in
+  let val thm1 = AP_THM assume var in
+  let val thm2 = DEPTH_CONV BETA_CONV (concl thm1) in
+  let val thm3 = EQ_MP thm2 thm1 in 
+    SYM thm3
+  end end end end
+  handle _ => raise UNCHANGED (* maybe not neccesary *)
+  
+  
+app_var_conv ``f x``;
+(* there can be deeply nested application *)
+(* dict contains bounded variables and free variables *)
+fun app_noquant_conv term = DEPTH_CONV app_var_conv term
+
+fun app_cnf_conv term = STRIP_QUANT_CONV app_noquant_conv term
+app_cnf_conv ``!f. f (!x.x)``;
+
+(*
+show_assums := true;
+make_appassume ``f : num -> num -> num``;
+val thm = make_appthm ``f : num -> num -> num``;
+STRIP_QUANT_CONV make_appthm ``!f. f``;
+*)
+
+
+
 (* APP *)
 (* doesn't create boolean arguments *)
 (* doesn't add new type *)
+(* maybe last thing to do *)
+(* input is a first order formula with no lambda abstraction
+   in cnf form ? ! ....
+   
+fun rewrite_app1 thm =  
+  (* strip first existential and forall quantifier *)
+ 
+
+
+
+
 
 
 (*
@@ -216,8 +257,8 @@ normalForms.SKOLEMIZE_CONV ``!y. (f = \x. g x) /\ (?f. f x = (\x.x) 2)``;
 (* should also add the num_axiom for free variables and bound variables *)  
 (* |- x: num >= 0 *)
 
-
 (* TYPE DICTIONNARY *)
+
 
 
 fun 
@@ -277,8 +318,6 @@ normalForms.CNF_CONV ``(P (?!x . f x = ((\x.x) 2))) /\ (x = 2)``;
 (* does beta reduction *)
 (* does normal form first order *)
    (* does skolemisation *)
-  
-  
   
   
   

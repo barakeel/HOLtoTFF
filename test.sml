@@ -18,7 +18,7 @@ open typetest;
 
 show_assums := true;
 val thm = test_type1;
-outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
+output_tff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
 (* END TEST PROBLEM *)
 
 (* debug *)
@@ -26,30 +26,30 @@ outputtff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
     val hypl = hyp thm ; 
     val propl = hypl @ [concl thm] ;
   (* variable extraction *)
-    val var_narg_cat = extract_varl propl ;
-    val var_narg = erase3rdcomponent var_narg_cat ;
+    val var_arity_cat = extract_varl propl ;
+    val var_arity = erase3rdcomponent var_arity_cat ;
   (* type extraction *)
-    val ty_narg = alltypel var_narg ;
-    val leafvtyl = leafvtypel ty_narg ;
-    val alphatyl = alphatypel ty_narg ; 
-    val nodevtyl = nodevtypel ty_narg ;
+    val tyal = alltypel var_arity ;
+    val leafvtyl = leafvtypel tyal ;
+    val alphatyl = alphatypel tyal ; 
+    val nodevtyl = nodevtypel tyal ;
   (* type name *)
     val alphaty_nm = addalphatypel alphatyl [] ;
     val leafvty_nm = addleafvtypel leafvtyl alphaty_nm ;
     val simp y_nm = addnodevsimp ypel nodevtyl leafvty_nm ;
-    val tydict = addnodevtypel nodevtyl simp y_nm ; 
+    val tyadict = addnodevtypel nodevtyl simp y_nm ; 
   (* bound variable *)
-    val bv_narg = get_bval var_narg_cat ; 
+    val bv_arity = get_bval var_arity_cat ; 
   (* free variable *)
-    val fvcdc_narg_cat = erase_bv var_narg_cat ;
-    val fvcdc_narg = erase3rdcomponent fvcdc_narg_cat ;
-    val fvc_narg = get_fvcal var_narg_cat ; 
-    val fvc_narg_nm = namefvcl fvc_narg ;
-    val fvc_nm = erase2ndcomponent fvc_narg_nm ;
+    val fvcdc_arity_cat = erase_bv var_arity_cat ;
+    val fvcdc_arity = erase3rdcomponent fvcdc_arity_cat ;
+    val fvc_arity = get_fvcal var_arity_cat ; 
+    val fvc_arity_nm = namefvcl fvc_arity ;
+    val fvc_nm = erase2ndcomponent fvc_arity_nm ;
   (* axiom *)
     val axiomnm = nameaxioml hypl ;
   (* needed to call pr;tterm *)
-    val state = (fvc_nm,[],tydict) ;
+    val state = (fvc_nm,[],tyadict) ;
 
 (* end debug *)
 

@@ -1,7 +1,7 @@
 structure extracttype :> extracttype =
 struct
 
-open HolKernel listtools mydatatype extract_var
+open HolKernel listtools mydatatype extractvar
 
 fun EXTRACTTYPE_ERR function message =
   HOL_ERR{origin_structure = "extracttype",
@@ -9,50 +9,41 @@ fun EXTRACTTYPE_ERR function message =
           message = message}
 
 (* on the result of extract_var *)
-fun alltypel2 var_narg = 
-  case var_narg of
+fun all_type_aux varacat = 
+  case varacat of
     [] => []
-  | (var,narg) :: m => (type_of var,narg) :: alltypel2 m
+  | ((var,arity),cat) :: m => (type_of var,arity) :: all_type_aux m
 
-fun alltypel var_narg = erase_double (alltypel2 var_narg)
+fun all_type varacat = erase_double (all_type_aux varacat)
 
-(* on the result of alltypel *)
-fun alphatypel ty_narg = 
-  case ty_narg of
+(* on the result of all_ty *)
+fun get_leafvtyl tyal =
+  case tyal of
     [] => []
-  | (ty,0) :: m => (
-                   case typecat ty of
-                     Alphatype => (ty,0) :: alphatypel m 
-                   | _ => alphatypel m
-                   )
-  | a :: m => alphatypel m
-
-fun leafvtypel ty_narg =
-  case ty_narg of
-    [] => []
-  | (ty,0) :: m => (ty,0) :: leafvtypel m
+  | (ty,0) :: m => (ty,0) :: get_leafvtyl m
   | a :: m => leafvtypel m
 
-fun nodevtypel ty_narg =
-  case ty_narg of
+fun get_nodevtyl tyal =
+  case tyal of
     [] => []
   | (ty,0) :: m => nodevtypel m
-  | (ty,narg) :: m => (ty,narg) :: nodevtypel m
+  | (ty,arity) :: m => (ty,arity) :: get_nodevtyl m
 
 
 (* recursive dest_type with a bound *)
-fun desttypenb (ty,narg) = 
-  case narg of
+(* type are always considered with their arity *)
+fun dest_type_nb (ty,arity) = 
+  case arity of
     0 => ([],(ty,0))
   | n => if n < 0 
-         then raise EXTRACTTYPE_ERR "desttypenb" "negative number"
+         then raise EXTRACTTYPE_ERR "dest_type_nb" "negative number"
          else
            let val (str,list) = dest_type ty in 
            let 
              val ty1 = hd list
              val ty2 = hd (tl list) 
            in
-           let val resl = desttypenb (ty2,(n-1)) in
+           let val resl = dest_type_nb (ty2,(n-1)) in
            let
              val argl = fst resl
              val image = snd resl 

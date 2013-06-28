@@ -8,7 +8,6 @@ fun LISTTOOLS_ERR function message =
           origin_function = function,
           message = message}
 
-
 fun is_member elem list =
   case list of
     [] => false
@@ -34,23 +33,8 @@ fun add_once elem list =
   else elem :: list
    
 (* dictionnary *)
-fun fstcomponent couplel = 
-  case couplel of
-    [] => []
-  | (a,_) :: m => a :: fstcomponent m
-
-fun erase3rdcomponent triplel =
-  case triplel of
-    [] => []
-  | (a,b,_) :: m => (a,b) :: erase3rdcomponent m
-
-fun erase2ndcomponent triplel =
-  case triplel of
-    [] => []  
-  | (a,_,c) :: m => (a,c) :: erase2ndcomponent m
-
 fun add_entry entry dict = 
-  if is_member (fst entry) (fstcomponent dict)
+  if is_member (fst entry) (map fst dict)
   then dict
   else entry :: dict
 

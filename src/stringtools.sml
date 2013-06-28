@@ -17,7 +17,7 @@ fun space n =
 
 fun indent n = "\n" ^ (space n)
 
-fun namestrn str n = str ^ (Int.toString n) 
+fun name_strn str n = str ^ (Int.toString n) 
 
  
 

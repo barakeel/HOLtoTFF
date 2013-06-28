@@ -27,6 +27,7 @@ fun extract_var2 term bvl =
             | Neg => extract_var2unop term bvl
             | Imp_only => extract_var2binop term bvl
             | Forall => let val (qbvl,t) = strip_forall term in
+          
                           extract_var2abs qbvl t bvl
                         end       
             | Exists => let val (qbvl,t) = strip_exists term in
@@ -80,16 +81,15 @@ fun erase_number l =
   | (_,Numeralvar) :: m => erase_number m 
   | a :: m =>  a :: erase_number m
 
-
-fun extract_var term = erase_number (erase_double (extract_var2 term [])) 
-fun extract_varl terml = erase_number (erase_double (extract_var2l terml []))
-(* return a list of triple (variable,number of arguments,category) *)
-
 fun erase_bv l =
   case l of 
     [] => []
   | (_,Boundvar) :: m => erase_bv m 
   | a :: m =>  a :: erase_bv m
+  
+fun extract_var term = erase_number (erase_double (extract_var2 term [])) 
+fun extract_varl terml = erase_number (erase_double (extract_var2l terml []))
+(* return a list of triple (variable,number of arguments,category) *)
 
 fun get_bval l =   
   case l of 
@@ -97,11 +97,10 @@ fun get_bval l =
   | (bva,Boundvar) :: m => bva :: get_bval m
   | a :: m => get_bval m
 
-fun get_fvcal l =   
+fun get_fval l =   
   case l of 
     [] => []
   | (fva,Freevar) :: m => fva :: get_fvcal m
-  | (ca,Constvar) :: m => ca :: get_fvcal m
   | a :: m => get_fvcal m
 
 fun get_cal l =   
@@ -110,6 +109,29 @@ fun get_cal l =
   | (ca,Constvar) :: m => ca :: get_cal m
   | a :: m => get_cal m
 
+fun get_fvcal l = get_fval l @ get_cal l
+
+(* can be applied to any category but mostly for constant and free variables *)
+fun get_lowestarity (term,arity) termal =
+  case termal of
+    [] => arity
+  | (t,a) :: m => if term = t 
+                  then 
+                    if a < arity 
+                    then get_lowestarity (term,a) m
+                    else get_lowestarity (term,arity) m 
+                  else get_lowestarity (term,arity) m     
+
+(* quadratic *)
+fun collapse_lowestarity_aux termal =
+  case termal of
+    [] => []
+  | (t,a) :: m => (t,get_lowestarity (t,a) termal) :: 
+                  collapse_lowestarity_aux m
+  
+fun collapse_lowestarity termal = erase_double (collapse_lowestarity_aux termal)
+
+
 fun get_fvcl_thm thm = 
   let
     val hypl = hyp thm
@@ -117,7 +139,7 @@ fun get_fvcl_thm thm =
   in
    let val varacat = extract_varl (hypl @ [goal]) in
    let val fvcal = get_fvcal varacat in
-     fstcomponent fvcal
+     map fst fvcal
    end end
   end
 
@@ -128,7 +150,7 @@ fun get_cl_thm thm =
   in
    let val varacat = extract_varl (hypl @ [goal]) in
    let val cal = get_cal varacat in
-     fstcomponent cal
+     map fst cal
    end end
   end
 

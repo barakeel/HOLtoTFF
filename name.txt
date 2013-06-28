@@ -8,43 +8,45 @@ HOL CONSTANT
   filename: constant
   function: const
   value: const 
-  alone : c or in a non-ambiguous long name
+  alone: c or in a non-ambiguous long name
   
 NAME
-  filename : name
-  function : name
-  value : name
+  filename: name
+  function: name
+  value: name
  
 LIST
-  filename : list
-  function : l
-  value : l   
-  element : el 
-  head : a
-  tail : m
+  filename: list
+  function: l
+  value: l   
+  element: el 
+  head: a
+  tail: m
   
 TERM
   value: t | term
-  free variable or constant : fvc
+  free variable: fv 
+  constant: c
   term (type bool): prop
   
 THM  
   theorem : thm
-  equational theorem : thm
+  equational theorem : eqthm
   theorem derived from ASSUME : assume
   axiom : axiom
   conjecture : conjecture
   
 TYPE 
- type : ty
- boolean : bool
- numeral : num
+  type for variables: ty
+  type alone inside a function: type
+  boolean: bool
+  numeral: num
  
 FUNCTION
-   use get if it's direct
-   use extract if it's indirect
-   put the result first and then the arguments in the name of the function
-   use _aux for auxiliary function
-   use 1,2 for multiple variables of the same name
+  use get if it's direct
+  use extract if it's indirect
+  put the result first and then the arguments in the name of the function
+  use _aux for auxiliary function or just 2 
+  use 1,2 for multiple variables of the same name
    
    

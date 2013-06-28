@@ -11,6 +11,6 @@ sig
   val alphatypel : (hol_type * int) list  -> (hol_type * int) list 
   val nodevtypel : (hol_type * int) list -> (hol_type * int) list
   
-  val desttypenb : (hol_type * int) -> ((hol_type * int) list * (hol_type * int))  
+  val dest_type_nb : (hol_type * int) -> ((hol_type * int) list * (hol_type * int))  
 
 end

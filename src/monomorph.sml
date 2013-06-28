@@ -5,8 +5,9 @@ struct
 load "mydatatype"; open mydatatype;
 load "listtools"; open listtools;
 load "extractvar"; open extractvar;
+load "namevar"; open namevar;
  *)
-open HolKernel numSyntax mydatatype listtools extractvar
+open HolKernel numSyntax mydatatype listtools extractvar namevar
 
 
 type thm = Thm.thm
@@ -37,15 +38,6 @@ fun MONOMORPH_ERR function message =
 (* return a theorem list *)
 (* fun monomorph2_fvc fvc axiom conjecture =
   let val fvcl = get_fvcl conjecture in *)
-
-(* move this function to another place *)
-fun name_of term = 
-  case termstructure term of
-    Numeral => Int.toString (numSyntax.int_of_term term)
-  | Var => fst (dest_var term)
-  | Const => fst (dest_const term)
-  | Comb => raise MONOMORPH_ERR "name_of" "comb"
-  | Abs => raise MONOMORPH_ERR "name_of" "abs"
 
 (* extract a pre-substitution *)
 fun make_presubst_2 fvc1 fvcl2 =
