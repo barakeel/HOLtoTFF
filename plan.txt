@@ -4,7 +4,6 @@ Axioms:
   or used as axioms
   build it form the user input
 
- 
 Monomorph: 
   instantiate types (monomorphism)
     free variables are instantiate so that they match

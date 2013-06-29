@@ -21,8 +21,6 @@ fun name_strn str n = str ^ (Int.toString n)
 
  
 
-
-
 (* warning: include the empty string *)
 fun is_alphanumor_charl charl= 
   case charl of

@@ -46,6 +46,7 @@ TYPE
   type alone inside a function: type
   boolean: bool
   numeral: num
+  defined tff type: dtyname
  
 FUNCTION
   use get if it's direct

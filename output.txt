@@ -1,0 +1,8 @@
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(axiom_axiom,axiom,(
+    ( xx = 0 ) )).

@@ -166,9 +166,13 @@ fun indent4 pps = ((* to be replaced with begin block maybe *)
                     add_string pps (space 4)
 )
 
-fun is_in_simpletyadict ((ty,arity),name) = (arity = 0)
+fun has_simplety ((ty,arity),name) = (arity = 0)
+fun get_simpletyadict tyadict = filter has_simplety tyadict
 
-fun get_simpletyadict tyadict = filter is_in_simpletyadict tyadict
+fun is_dtyname name = (substring (name,0,1) = "$")
+fun is_not_dtyname name = not (is_dtyname name)
+fun has_not_dtyname ((ty,arity),name) = is_not_dtyname name  
+fun erase_dtyname tyadict = filter has_not_dtyname tyadict
 (* end useful functions *)
 
 (* type *)
@@ -220,7 +224,7 @@ fun print_pb pps term =
     val cal = collapse_lowestarity (get_cal (extract_var term)) 
     (* dict *)
     val tyadict = create_tyadict term
-    val simpletyadict = get_simpletyadict tyadict
+    val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
     val bvdict = create_bvdict term  
     val fvdict = create_fvdict term 
     val cdict = create_cdict term 

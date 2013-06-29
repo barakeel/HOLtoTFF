@@ -13,8 +13,24 @@ load "printtff"; open printtff;
 (* TEST PROBLEM  *)
 show_assums := true;
 val term = ``x = 0``;
+val beagle_call = 
+  "/home/thibault/Desktop/Scalaproject/beagleproject/beagle problem.p"
+val beagle_problem =
+  "/home/thibault/Desktop/Scalaproject/beagleproject/beagle problem.p"
+val test_location =
 output_tff "/home/thibault/Desktop/SMLproject/HOLtoTFF/output.txt" term;
-output_tff "/home/thibault/Desktop/Scalaproject/beagleproject/problem.p" term;
+output_tff problem.p" term;
+
+Process.system "cd /home/thibault/Desktop/Scalaproject/beagleproject/";
+Process.system "ls";
+Process.system "cd src"; 
+ ./beagle";
+
+FileSys.openDir "src";
+FileSys.closeDir;
+
+fun beagle term =
+/home/thibault/Desktop/Scalaproject/beagleproject/problem.p"
 (* END TEST PROBLEM *)
 
 (* need to standardize my code *)
@@ -22,7 +38,7 @@ output_tff "/home/thibault/Desktop/Scalaproject/beagleproject/problem.p" term;
 val fval = collapse_lowestarity (get_fval (extract_var term)); 
 val cal = collapse_lowestarity (get_cal (extract_var term));
   (* dict *)
-val tyadict = create_tyadict term;write couple and record like this
+val tyadict = create_tyadict term;
 val simpletyadict = get_simpletyadict tyadict;
 val bvdict = create_bvdict term;
 val fvdict = create_fvdict term;
