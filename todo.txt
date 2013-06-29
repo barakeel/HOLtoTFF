@@ -26,47 +26,36 @@ CODE QUESTIONS
    
 TODO
 
-simplify monomorph to make it understandable
+monomorph: 
+  to be extended to bound variables
 
-comments
-  add comments to be printed in the standard input when the file is generated
-  add comments to the file if the user wants to  provide some 
-  tptp comments; File Domain Problem Bersion English Refs: Source: Names Status
+testing:
+- include examples from metis_tac
+- create a call to beagle from inside the project (use shell script)
+
+output:
+- print boolean to two different type depending on the situation
+- choose what to do inside the formula and what to do outside
+- create all dict on a term list
+- add boolean axioms 
+- add numeral axioms 
+- add function axioms 
+- add app axioms
+- add comments to be printed in the standard input when the file is generated
+- add comments to the file if the user wants to  provide some 
+- tptp comments; File Domain Problem Bersion English Refs: Source: Names Status
  
-documentation
-  explanation of what each signature function does to be added easily to holdoc.
+documentation:
+- explanation of what each signature function does to be added easily to holdoc.
 
-free variable
-  Use a dictionnary to make the code more readable
-  Use the implemented dictionnary for types
-  
-
-modify hol formula
-  
-  include definition and do monomorphisme
-  replacing definition 
-  beta-eta reduction lambda-abstraction
-  skolemisation
-
-normalized
-  I don't know
-  do boolean changed 
-  f( !x. x = 5 )
+rewriting:   
+  - abstraction:
+  - boolean:
+  - higher order: add app constant
  
-
-change the tree to make it first order (construct appdict at the same time)
-higher order ( today and tomorrow )
-  only add "app" if a term of arity 0 is applied to one ore more constant
-  different "app" for different number of arguments and type
-
-
-use dictionnaries to undo conflicts between variables 
-create a new tree with the name of everything
-output the tree (very easy)
-
-product
+product:
   verify if it's working correctly i think it 's not 
 
-infer axiom
-  use dest_var dest_thy_const
-  replace the use of dest_const by dest_thy_const to add the axioms of the theory pair*)  
+infer axiom from a theory:
+  do it manually for each constant
+  
