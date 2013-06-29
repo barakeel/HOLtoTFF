@@ -1,33 +1,11 @@
-ISSUES
-
-betaeta reduction 
-  after beta-eta red use some trick to remove lambda abstraction.
-  I forgot where eq alphaconv is to equate \x.x and \y.y
-  
-pretty printing
-  just do it
-
-functionnality
-  boolTheory ( not even there )
-  
-type
-  change substring and use String.size 
-  
-
-CODE QUESTIONS
-  Instantiation of bound variables to specific types
-    Why can't the user do it ? Because if we generate all the possible instantiation (possible but it will be big)
-    nbty      number of different types ( generally 10 to 100 ) 
-    nbalphaty number of different alpha type to be instantiate 
-    nbty ^ nbalphaty number of instantiation
-  Instantation of free variables
-    2 layer ( is it a good idea? )
-  How to make my functions look better ? (list) and name
-   
 TODO
 
+pretty printing:
+- to be done
+  
 monomorph: 
-  to be extended to bound variables
+- to be extended to bound variables 
+  (don't know how without exponential cases
 
 testing:
 - include examples from metis_tac
@@ -42,20 +20,20 @@ output:
 - add function axioms 
 - add app axioms
 - add comments to be printed in the standard input when the file is generated
-- add comments to the file if the user wants to  provide some 
-- tptp comments; File Domain Problem Bersion English Refs: Source: Names Status
+- add comments to the file if the user wants to (tptp standard comment)
+
  
 documentation:
-- explanation of what each signature function does to be added easily to holdoc.
+- explanation of what each signature function does.
 
 rewriting:   
-  - abstraction:
-  - boolean:
-  - higher order: add app constant
+- abstraction:
+- boolean:
+- higher order: add app constant
  
-product:
-  verify if it's working correctly i think it 's not 
 
 infer axiom from a theory:
-  do it manually for each constant
+- do it manually for each constant
   
+product:
+- particular case of a constant
