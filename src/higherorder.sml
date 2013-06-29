@@ -1,12 +1,14 @@
 structure higherorder :> higherorder =
 struct
 
-open HolKernel listtools extract_var extracttype mydatatype
+open HolKernel 
+     listtools mydatatype
+     extractvar extracttype 
 
 fun HIGHERORDER_ERR function message =
-  HOL_ERR{origin_structure = "higherorder",
-          origin_function = function,
-          message = message}
+  HOL_ERR {origin_structure = "higherorder",
+           origin_function = function,
+           message = message}
 
 (* VARIABLE *)
 fun firstorderbvl bv_arity =

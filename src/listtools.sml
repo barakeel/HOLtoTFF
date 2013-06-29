@@ -33,6 +33,13 @@ fun add_once elem list =
   else elem :: list
    
 (* dictionnary *)
+  (* repeat tools *)
+fun repeatchange change l changing = 
+  case l of
+    [] => changing
+  | a :: m => repeatchange change m (change a changing)
+
+  (* doesn't overwrite only the first add entry can do something *)
 fun add_entry entry dict = 
   if is_member (fst entry) (map fst dict)
   then dict
@@ -43,6 +50,26 @@ fun lookup elem couplelist =
   [] => raise LISTTOOLS_ERR "lookup" ""
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
+fun rename name used =
+  let val nameref = ref name in 
+  let val nref = ref 0 in
+    (
+    while is_member (!nameref) used
+    do
+      (nameref := (!nameref) ^ (Int.toString (!nref));
+       nref := (!nref) + 1) 
+    ;
+    !nameref
+    )
+  end end
+
+(* all dict are injective dict this way *)
+fun addrename (key,name) dict =
+  let val newname = rename name (map snd dict) in
+    add_entry (key,newname) dict
+  end  
+
+fun addrenamel entry dict = repeatchange addrename entry dict
 
 (* condition *)
 fun switch condresultl defaultresult = 

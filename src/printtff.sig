@@ -6,13 +6,21 @@ sig
   type thm      = Thm.thm
   type ppstream = HOLPP.ppstream
   
-  val bvcounter : int ref
-  val printterm : ppstream -> term -> ((term * string) list * (term * string) list * ((hol_type * int) * string) list) -> unit
+  val print_term : ppstream -> term -> 
+                   ((hol_type * int) * string) list *
+                   (term * string) list *
+                   (term * string) list *
+                   (term * string) list
+                   -> unit
   (* tools *)
-  val erasedefinedtype : ((hol_type * int) * string) list -> ((hol_type * int) * string) list 
-  val nameaxioml : term list -> (term * string) list
+
   (* *)
-  val print_thm : ppstream -> thm -> unit
-  val output_tff : string -> thm -> unit
+  val print_fvctyl : ppstream -> 
+                     (term * int) list ->
+                     (term * string) list ->
+                     ((hol_type * int) * string) list ->
+                     unit  
+  val print_pb : ppstream -> term -> unit
+  val output_tff : string -> term -> unit
 
 end

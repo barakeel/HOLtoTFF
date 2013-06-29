@@ -1,8 +1,13 @@
-RULES
+FUNCTIONS
   separate different objects by an underscore in functions.
-  write couple and record like this (a, b) ,  {a: a, b: b}
-  and type declaration like this a: int
-  except in signature a : b
+  
+COUPLE  
+  couple: (a,b)
+  record: {a: a, b: b}
+  
+TYPE DECLARATION
+in functions a: int 
+outside functions a : int
 
 HOL CONSTANT
   filename: constant

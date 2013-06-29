@@ -1,56 +1,50 @@
 (* tools *)
-open stringtools;
-open listtools;
-open mydatatype;
-open extract_var;
-open extracttype;
-open namevar;
-open nametype;
-open higherorder;
-open printtff;
+load "stringtools"; open stringtools;
+load "listtools"; open listtools;
+load "mydatataype"; open mydatatype;
+load "extractvar"; open extractvar;
+load "extracttype"; open extracttype;
+load "namevar"; open namevar;
+load "nametype"; open nametype;
+load "higherorder"; open higherorder;
+load "printtff"; open printtff;
 
-(* problems *)
-open boolproblem;
-open numproblem;
-open typetest;
 
 (* TEST PROBLEM  *)
-
 show_assums := true;
-val thm = test_type1;
-output_tff "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p" thm;
+val term = ``x = 0``;
+output_tff "/home/thibault/Desktop/SMLproject/HOLtoTFF/output.txt" term;
+output_tff "/home/thibault/Desktop/Scalaproject/beagleproject/problem.p" term;
 (* END TEST PROBLEM *)
 
-(* debug *)
-    val goal = concl thm ;
-    val hypl = hyp thm ; 
-    val propl = hypl @ [concl thm] ;
-  (* variable extraction *)
-    val var_arity_cat = extract_varl propl ;
-    val var_arity = erase3rdcomponent var_arity_cat ;
-  (* type extraction *)
-    val tyal = alltypel var_arity ;
-    val leafvtyl = leafvtypel tyal ;
-    val alphatyl = alphatypel tyal ; 
-    val nodevtyl = nodevtypel tyal ;
-  (* type name *)
-    val alphaty_nm = addalphatypel alphatyl [] ;
-    val leafvty_nm = addleafvtypel leafvtyl alphaty_nm ;
-    val simp y_nm = addnodevsimp ypel nodevtyl leafvty_nm ;
-    val tyadict = addnodevtypel nodevtyl simp y_nm ; 
-  (* bound variable *)
-    val bv_arity = get_bval var_arity_cat ; 
-  (* free variable *)
-    val fvcdc_arity_cat = erase_bv var_arity_cat ;
-    val fvcdc_arity = erase3rdcomponent fvcdc_arity_cat ;
-    val fvc_arity = get_fvcal var_arity_cat ; 
-    val fvc_arity_nm = namefvcl fvc_arity ;
-    val fvc_nm = erase2ndcomponent fvc_arity_nm ;
-  (* axiom *)
-    val axiomnm = nameaxioml hypl ;
-  (* needed to call pr;tterm *)
-    val state = (fvc_nm,[],tyadict) ;
+(* need to standardize my code *)
+(* test main function *)
+val fval = collapse_lowestarity (get_fval (extract_var term)); 
+val cal = collapse_lowestarity (get_cal (extract_var term));
+  (* dict *)
+val tyadict = create_tyadict term;write couple and record like this
+val simpletyadict = get_simpletyadict tyadict;
+val bvdict = create_bvdict term;
+val fvdict = create_fvdict term;
+val cdict = create_cdict term; 
+(* end test main function *)
+    
+(* test print *)
+let val file = TextIO.openOut path in 
+let val pps = PP.mk_ppstream 
+                {
+                consumer  = fn s => TextIO.output (file,s),
+                linewidth = 80,
+                flush  = fn () => TextIO.flushOut file
+                } 
+in 
+  (
+  print_fvctyl pps fval fvdict tyadict;
+  TextIO.closeOut file
+  )  
+end end
 
+(* end test print *)  
 (* end debug *)
 
 (* TEST FUNCTIONS *)

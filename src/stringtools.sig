@@ -6,7 +6,7 @@ sig
   val name_strn : string -> int -> string
 
   val is_alphanumor_ : string -> bool
-  val islowerword : string -> bool
-  val isupperword : string -> bool 
+  val is_lowerword : string -> bool
+  val is_upperword : string -> bool 
 
 end

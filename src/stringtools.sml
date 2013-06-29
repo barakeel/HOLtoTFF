@@ -33,14 +33,14 @@ fun is_alphanumor_charl charl=
 fun is_alphanumor_ str = is_alphanumor_charl (explode str)
 
 (* name supported by the tptp for a free variable or a type *)              
-fun islowerword str =
+fun is_lowerword str =
   case String.explode str of
     [] => false
   | [a] => Char.isLower a  
   | a :: m => (Char.isLower a) andalso (is_alphanumor_charl m)
 
 (* name supported by the tptp for a bound variable *)
-fun isupperword str =
+fun is_upperword str =
   case String.explode str of
     [] => false
   | [a] => Char.isUpper a  

@@ -1,9 +1,19 @@
 structure printtff :> printtff =
 struct
+(*
+load "listtools"; open listtools;
+load "stringtools"; open stringtools;
+load "mydatatype"; open mydatatype;
+load "extractvar"; open extractvar;
+load "extracttype"; open extracttype;
+load "namevar"; open namevar;
+load "nametype"; open nametype;
+*)
 
 open HolKernel HOLPP numSyntax 
-higherorder namevar extractvar nametype extracttype 
-stringtools listtools mydatatype
+     stringtools listtools mydatatype
+     extractvar extracttype namevar nametype higherorder
+
 (* not all structures are necessary *)
 
 fun PRINTTFF_ERR function message =
@@ -12,26 +22,26 @@ fun PRINTTFF_ERR function message =
             message = message}
 
 (*PRINT_TERM*)
-fun print_bvl2 pps bvl bvdict tydict  =
+fun print_bvl2 pps bvl bvdict tyadict  =
   case bvl of
     [] => raise PRINTTFF_ERR "print_bvl2" "emptylist"
   | [bv] => ( 
             add_string pps (lookup bv bvdict); 
             add_string pps ": ";
-            add_string pps (lookup (type_of bv,0) tydict)
+            add_string pps (lookup (type_of bv,0) tyadict)
             ) 
   | bv :: m => (
                add_string pps (lookup bv bvdict); 
                add_string pps ": ";
-               add_string pps (lookup (type_of bv,0) tydict); 
+               add_string pps (lookup (type_of bv,0) tyadict); 
                add_string pps ","; 
-               print_bvl2 pps m bvdict tydict
+               print_bvl2 pps m bvdict tyadict
                )  
 
-fun print_bvl pps bvl bvdict tydict = 
+fun print_bvl pps bvl bvdict tyadict = 
   (
   add_string pps "[";
-  print_bvl2 pps bvl bvdict tydict;
+  print_bvl2 pps bvl bvdict tyadict;
   add_string pps "]"
   )
 
@@ -43,7 +53,7 @@ fun print_bvl pps bvl bvdict tydict =
 (* only for first order *)
 (* 
 #1 dict : list of ((type,arity), its name) 
-#2 dict : list of (free variable, its name) 
+#2 dict : list of (bound variable, its name) 
 #3 dict : list of (free variable, its name)  
 #4 dict : list of (constant, its name) 
 *)
@@ -55,7 +65,7 @@ fun print_term pps term dict =
   | Var => if is_member term (map fst (#2 dict))
            then add_string pps (lookup term (#2 dict)) (*boundvar*)
            else add_string pps (lookup term (#3 dict)) (*freevar*)
-  | Const => add_string pps (lookup term (#3 dict))
+  | Const => add_string pps (lookup term (#4 dict))
   | Comb => 
     (
     case connective term of  
@@ -74,8 +84,8 @@ fun print_term pps term dict =
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "print_term" "operator is numeral"
       | Var => if is_member term (map fst (#2 dict))
-               then print_app pps (lookup term (#2 dict) argl dict 
-               else print_app pps (lookup term (#2 dict) argl dict 
+               then print_app pps (lookup term (#2 dict)) argl dict 
+               else print_app pps (lookup term (#3 dict)) argl dict 
       | Const => 
         (
         case nodefvc term of
@@ -130,7 +140,7 @@ and print_binop pps str term dict =
 and print_quant pps str bvl term dict = 
   (
   add_string pps (str ^ " ");
-  print_bvl pps bvl newbvdict dict;
+  print_bvl pps bvl (#2 dict) (#1 dict);
   add_string pps " : ";  
   add_string pps "( "; 
   print_term pps term dict;
@@ -156,22 +166,19 @@ fun indent4 pps = ((* to be replaced with begin block maybe *)
                     add_string pps (space 4)
 )
 
-fun get_simpletyadict tyadict =
-  case tyadict of
-    [] => []
-  | (ty,arity) :: m => 
-    if arity = 0
-    then (ty,arity) :: get_simpletyadict m
-    else get_simpletyadict m
+fun is_in_simpletyadict ((ty,arity),name) = (arity = 0)
+
+fun get_simpletyadict tyadict = filter is_in_simpletyadict tyadict
+(* end useful functions *)
 
 (* type *)
-fun print_type pps str tystr =
+fun print_type pps name tyname =
   ( 
-  add_string pps ("tff(" ^ str ^ "_type,type,(");
+  add_string pps ("tff(" ^ name ^ "_type,type,(");
   indent4 pps;
-  add_string pps (str ^ ": " ^ tystr ^ " )).")
+  add_string pps (name ^ ": " ^ tyname ^ " )).")
   ) 
-
+  (* argument should only be the simpletyadict *)
 fun print_tyadict pps tyadict =
    case tyadict of
     [] => ()
@@ -181,30 +188,18 @@ fun print_tyadict pps tyadict =
     nl2 pps;
     print_tyadict pps m
     )
-
-fun print_fvtyl pps fval fvdict tyadict =
-  case fval of
-    [] => () 
-  | (fv,arity) :: m => 
-    let val name = lookup fv fvdict in
-    let val ty = lookup (type_of fv,arity) tyadict in 
-      (
-      print_type pps;
-      nl2 pps;
-      print_fvtyl pps m fvdict tyadict
-      )
-    end end
     
-fun print_ctyl pps cal cdict tyadict =
-  case cal of
+  (* print the type of free variables or constant *)  
+fun print_fvctyl pps fvcal fvcdict tyadict =
+  case fvcal of
     [] => () 
-  | (c,arity) :: m => 
-    let val name = lookup c cdict in
-    let val ty = lookup (type_of c,arity) tyadict in 
+  | (fvc,arity) :: m => 
+    let val name = lookup fvc fvcdict in
+    let val tyname = lookup (type_of fvc,arity) tyadict in 
       (
-      print_type pps;
+      print_type pps name tyname;
       nl2 pps;
-      print_ctyl pps m cdict tyadict
+      print_fvctyl pps m fvcdict tyadict
       )
     end end
 
@@ -213,12 +208,12 @@ fun print_axiom pps name term dict =
   ( 
   add_string pps ("tff(" ^ name ^ "_axiom,axiom,(");
   indent4 pps;
-  print_term axiom dict
+  print_term pps term dict;
   add_string pps " ))."
   ) 
 
 (* main function *)
-fun print_pb pps term dict = 
+fun print_pb pps term = 
   let 
     (* free variables or constant *)
     val fval = collapse_lowestarity (get_fval (extract_var term)) 
@@ -237,9 +232,9 @@ fun print_pb pps term dict =
     (
     begin_block pps CONSISTENT 0;
       print_tyadict pps simpletyadict;
-      print_fvtyl pps fval fvdict tyadict;
-      print_ctyl pps cal cdict tyadict;
-      print_axiom pps "axiom" dict;
+      print_fvctyl pps fval fvdict tyadict;
+      print_fvctyl pps cal cdict tyadict;
+      print_axiom pps "axiom" term dict;
     end_block pps
     )
   (* else
@@ -258,7 +253,7 @@ fun output_tff path term =
   let val pps = PP.mk_ppstream 
                   {
                   consumer  = fn s => TextIO.output (file,s),
-                  linewidth = 79,
+                  linewidth = 80,
                   flush  = fn () => TextIO.flushOut file
                   } 
   in 
@@ -268,6 +263,8 @@ fun output_tff path term =
     )  
   end end
   
+
+
 
 end
 

@@ -1,32 +1,43 @@
-Version 0.2.3
+Version 0.3
 
 Does:
+  - Doesn't work
   - Translate a HOL formula into TFF format.
+  
+Rewriting:
+  
+  - monomorphism: wip
+  - cnf : ok
+  - boolean: wip  
+  - numeral: wip
+  - abstraction: wip
+  - higher order: wip
 
-Supports:
+Printing:  
+  
   formula :
-  - first order formula without abstraction
+  - first order formula 
   - false second order formula (!f:int->int f = g)
   - raise an exception when a function is applied to a boolean 
  
   variable:
-  - use an injective mapping on free variables ( P,Q,r,s => xP,xQ,r,s )
-  - use an injective mapping on undefined constant ( P,Q,r,s => cP,cQ,r,s )
-  - use an injective mapping on bound varibles ( x,y => X0x,X1y ) 
+  - use an injective dictionary for free variables ( P,Q,r,s => x_P,x_Q,x_r,x_s )
+      if a free variables app was created then
+      instead of writing x_app it's possible to write app
+      (nicer printing)
+      same for boolean and function created out of abstraction
+  - use an injective dictionary for constant ( P,Q,r,s => c_P,c_Q,c_r,c_s )
+  - use an injective dictionary for bound variables ( x,y => X_x,X_y ) 
 
   type:
   - numeral (num => $int)
   - boolean (bool => $o)
-  - use an injective mapping ( rational,real => ty1rational,ty2real) 
+  - use an injective dictionary 
+     (rational,0) => ty_rational
+     (num -> num -> num,1)  => ty_num > ty_p_num_f_num_p 
+     (p_num_f_num_p -> num,1) => ty_num > ty_p_num_f_num_p2
     and append an indicative type
 
-  axiom:
-  - add an axiom for numeral (i.e x=y is translated to x > 0 and y > 0 and x=y)
 
-  problems library:
-  - 5 boolean problems
-  - 1 numeral problem
-  - 1 type test
+ 
 
-Remarks : 
-  - all the injective mappings joined together are injective as a global functions, so no clashes can occurs

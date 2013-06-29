@@ -1,14 +1,21 @@
 structure extractvar :> extractvar =
 struct
 
-open HolKernel listtools mydatatype Term
+(*
+load "listtools"; open listtools;
+load "mydatatype"; open mydatatype;
+*)
+
+open HolKernel 
+     listtools mydatatype
+
 
 fun EXTRACTVAR_ERR function message =
   HOL_ERR{origin_structure = "extract_var",
           origin_function = function,
           message = message}
 
-(* warning: should have the same structure as printterm in printtff.sml *)
+(* warning: should have the same structure as print_term in printtff.sml *)
 (* extract a list of triple (variable,nombre d'arguments,category) *)
 (* detect second order clash with bound variables *)
 (* used to get arity *)
@@ -28,28 +35,28 @@ fun extract_var2 term bvl =
     | Neg => extract_var2unop term bvl
     | Imp_only => extract_var2binop term bvl
     | Forall => let val (qbvl,t) = strip_forall term in
-                          extract_var2abs qbvl t bvl
-                        end       
+                  extract_var2abs qbvl t bvl
+                end       
     | Exists => let val (qbvl,t) = strip_exists term in
-                          extract_var2abs qbvl t bvl 
-                        end
+                  extract_var2abs qbvl t bvl 
+                end
     | App => let val (operator,argl) = strip_comb term in
-                     let 
-                       val n = length argl 
-                       val l = extract_var2l argl bvl 
-                     in
-                       case termstructure operator of
-                         Numeral => raise EXTRACTVAR_ERR "extract_var2" "num"
-                       | Var =>  if is_member operator bvl
-                                 then ((operator,n),Boundvar) :: l
-                                 else ((operator,n),Freevar) :: l
-                       | Const => ((operator,n),Constvar) :: l
-                       | Comb => raise EXTRACTVAR_ERR "extract_var2" "comb"
-                       | Abs => let val (absbvl,t) = strip_abs operator in
-                                  extract_var2abs absbvl t bvl @ l
-                                end  
-                     end end
-             )
+             let 
+               val n = length argl 
+               val l = extract_var2l argl bvl 
+             in
+             case termstructure operator of
+               Numeral => raise EXTRACTVAR_ERR "extract_var2" "operator is num"
+             | Var =>  if is_member operator bvl
+                       then ((operator,n),Boundvar) :: l
+                       else ((operator,n),Freevar) :: l
+             | Const => ((operator,n),Constvar) :: l
+             | Comb => raise EXTRACTVAR_ERR "extract_var2" "operator is comb"
+             | Abs => let val (absbvl,t) = strip_abs operator in
+                        extract_var2abs absbvl t bvl @ l
+                      end  
+             end end
+    )         
   | Abs => let val (absbvl,t) = strip_abs term in
              extract_var2abs absbvl t bvl 
            end  
@@ -102,20 +109,25 @@ fun get_lowestarity (term,arity) termal =
                     then get_lowestarity (term,a) m
                     else get_lowestarity (term,arity) m 
                   else get_lowestarity (term,arity) m     
-
+;
 (* quadratic *)
 (* merge free and bound variables *)
-fun collapse_lowestarity2 varacat =
+fun nullify_boundarity varacat =
   case varacat of
     [] => []
-  | ((var,arity),Boundvar) :: m => (var,0) :: collapse_lowestarity2 m
-  | ((var,arity),_) :: m =>  (var,get_lowestarity (var,arity) termal) :: 
-                             collapse_lowestarity2 m
- 
+  | ((var,arity),Boundvar) :: m => ((var,0),Boundvar) :: nullify_boundarity m
+  | a :: m => a :: nullify_boundarity m
   
-fun collapse_lowestarity varacat = erase_double (collapse_lowestarity2 varacat)
+fun collapse_lowestarity2 varal =
+  case varal of
+    [] => []
+  | (var,arity) :: m => 
+    let val lowestarity = get_lowestarity (var,arity) varal in
+      (var,lowestarity) :: collapse_lowestarity2 m
+    end
+  
+fun collapse_lowestarity varal = erase_double (collapse_lowestarity2 varal)
 (* end lowestarity *)
-
 
 fun get_bval l =   
   case l of 
@@ -126,8 +138,8 @@ fun get_bval l =
 fun get_fval l =   
   case l of 
     [] => []
-  | (fva,Freevar) :: m => fva :: get_fvcal m
-  | a :: m => get_fvcal m
+  | (fva,Freevar) :: m => fva :: get_fval m
+  | a :: m => get_fval m
 
 fun get_cal l =   
   case l of 
@@ -137,9 +149,7 @@ fun get_cal l =
 
 fun get_fvcal l = get_fval l @ get_cal l
 
-
-
-
+(* for thm easy extraction *)
 fun get_fvcl_thm thm = 
   let
     val hypl = hyp thm

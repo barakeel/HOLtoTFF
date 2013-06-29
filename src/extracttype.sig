@@ -7,10 +7,9 @@ sig
 
   val all_tya : term -> (hol_type * int) list
   
-  val leafvtypel : (hol_type * int) list -> (hol_type * int) list 
-  val alphatypel : (hol_type * int) list  -> (hol_type * int) list 
-  val nodevtypel : (hol_type * int) list -> (hol_type * int) list
-  
+  val get_simpletyal : (hol_type * int) list -> (hol_type * int) list 
+  val get_compoundtyal : (hol_type * int) list  -> (hol_type * int) list 
+
   val dest_type_nb : (hol_type * int) -> ((hol_type * int) list * (hol_type * int))  
 
 end

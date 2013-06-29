@@ -15,22 +15,22 @@ fun all_tya2 varal =
   | (var,arity) :: m => (type_of var,arity) :: all_tya2 m
 
 fun all_tya term = 
-  let varal = collapse_lowestarity (extract_var term) in
-    erase_double all_tya2 varal
+  let val varal = collapse_lowestarity (map fst (nullify_boundarity (extract_var term))) in
+    erase_double (all_tya2 varal)
   end
   
 (* on the result of all_tya *)
-fun get_leafvtyl tyal =
+fun get_simpletyal tyal =
   case tyal of
     [] => []
-  | (ty,0) :: m => (ty,0) :: get_leafvtyl m
-  | a :: m => leafvtypel m
+  | (ty,0) :: m => (ty,0) :: get_simpletyal m
+  | a :: m => get_simpletyal m
 
-fun get_nodevtyl tyal =
+fun get_compoundtyal tyal =
   case tyal of
     [] => []
-  | (ty,0) :: m => nodevtypel m
-  | (ty,arity) :: m => (ty,arity) :: get_nodevtyl m
+  | (ty,0) :: m => get_compoundtyal m
+  | (ty,arity) :: m => (ty,arity) :: get_compoundtyal m
 
 
 (* recursive dest_type with a bound *)
