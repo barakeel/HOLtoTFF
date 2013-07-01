@@ -13,7 +13,7 @@ testing:
 
 output:
 - print boolean to two different type depending on the situation
-- choose what to do inside the formula and what to do outside
+- chose what to do inside the formula and what to do outside
 - create all dict on a term list
 - add boolean axioms 
 - add numeral axioms 

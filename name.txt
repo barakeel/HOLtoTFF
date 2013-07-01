@@ -3,10 +3,10 @@ FUNCTIONS
   
 COUPLE  
   couple: (a,b)
-  record: {a: a, b: b}
+  record: {a = a, b = b}
   
 TYPE DECLARATION
-in functions a: int 
+in functions or terms or record : a:int 
 outside functions a : int
 
 HOL CONSTANT
@@ -35,10 +35,10 @@ TERM
   term (type bool): prop
   
 THM  
-  theorem : thm
+  theorem : thm | th
   equational theorem : eqthm
   theorem derived from ASSUME : assume
-  axiom : axiom
+  axiom : theorem without hypothesis
   conjecture : conjecture
   
 TYPE 
