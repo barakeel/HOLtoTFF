@@ -1,7 +1,6 @@
 signature listtools =
 sig
   
-  val is_empty : 'a list -> bool
   val is_member : ''a -> ''a list -> bool
   val erase_double : ''a list -> ''a list
   val add_once : ''a -> ''a list -> ''a list

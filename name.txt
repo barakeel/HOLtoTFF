@@ -24,7 +24,7 @@ LIST
   filename: list
   function: l
   value: l   
-  element: el 
+  element: el | elem
   head: a
   tail: m
   
@@ -32,7 +32,10 @@ TERM
   value: t | term
   free variable: fv 
   constant: c
-  term (type bool): prop
+  term (type bool): bterm
+  free term: ft
+  
+  
   
 THM  
   theorem : thm | th

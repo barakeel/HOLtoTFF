@@ -15,11 +15,6 @@ fun is_member elem list =
               then true 
               else is_member elem m     
 
-fun is_empty list =
-  case list of
-    [] => true
-  | _ => false
-
 fun erase_double list = 
   case list of
     [] => []
