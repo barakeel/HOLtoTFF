@@ -118,15 +118,17 @@ fun nullify_boundarity varacat =
   | ((var,arity),Boundvar) :: m => ((var,0),Boundvar) :: nullify_boundarity m
   | a :: m => a :: nullify_boundarity m
   
-fun collapse_lowestarity2 varal =
+fun collapse_lowestarity2 varalfix varal =
   case varal of
     [] => []
   | (var,arity) :: m => 
-    let val lowestarity = get_lowestarity (var,arity) varal in
-      (var,lowestarity) :: collapse_lowestarity2 m
+    let val lowestarity = get_lowestarity (var,arity) varalfix in
+      (var,lowestarity) :: collapse_lowestarity2 varalfix m
     end
   
-fun collapse_lowestarity varal = erase_double (collapse_lowestarity2 varal)
+fun collapse_lowestarity varal = 
+  erase_double (collapse_lowestarity2 varal varal)
+  
 (* end lowestarity *)
 
 fun get_bval l =   
