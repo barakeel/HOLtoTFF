@@ -9,19 +9,24 @@ load "extracttype"; open extracttype;
 show_assums := true; 
 *)
 
-
 (*
 Beta 
 Eta
+Cnf  - to eliminate if then else and ?! mostly 
+       should try to write my own conv for that to prevent it from 
+       eliminating => because people won't recognize the output
+              
 Bool - no boolean argument except variables
 Fun  - no lambda abstraction 
 App  - no second order
-Num  - add num axiom
-Cnf  - make it too normal form (optional)
-Intro of skolem constant
+Num  - add num axiom (suppose there is no abstraction left)
+Cnf   
+Intro of skolem constant (suppose it's already in normal form) 
 Clauses 
+
+Use different variables name to prevent Hol from renaming them
+At least , memorise them into list so that they can be printed differently
 *)
-(* Add bool axioms *)
 
 open HolKernel normalForms 
      listtools mydatatype extractvar extracttype
@@ -31,50 +36,6 @@ fun NORMALIZE_ERR function message =
 	    origin_function = function,
             message = message}
 
-
-(* INIT *)
-  (* input is an axioml and a conjecture *)
-  (* goal is not special anymore *)
-  (* output: thm *)
-fun unify axioml =
-  let val newaxioml = map DISCH_ALL axioml in
-    LIST_CONJ newaxioml
-  end
-
-  (* should maybe monomorph to itself *)
-fun initial_assume axioml conjecture =
-  let 
-    val prop1 = concl (unify axioml) 
-    val prop2 = concl (DISCH_ALL conjecture) 
-  in
-    ASSUME (mk_conj (prop1, mk_neg prop2))
-  end
-(* END INIT *)
-
-
-(* BIG REWRITING *)
-  (* choose bound variables names so that thec program don't have to rename them *)
-
-(* CNF *)
-  (* eliminate unused quantifier: 
-  normalForms.CNF_CONV ``?x. !x. p x``; *)
-  (* rewrite =>, ?! and if then else *)
-  (* do beta-reduction *)
-fun rewrite conv thm =
-  let val goal = concl thm in
-  let val eqthm = conv goal in
-    EQ_MP eqthm thm
-  end end
-  
-fun rewrite_cnf thm = rewrite (QCONV normalForms.CNF_CONV) thm
-(* END CNF *)
-
-
-(* f = g may be rewritten !x f x = g x *) 
-(* maybe not a good idea SOME_CONV 
-   depends on the arity
-*)
-
 (* tools *)
 fun is_logical term =
   is_conj term orelse
@@ -85,16 +46,19 @@ fun is_logical term =
   is_exists term orelse  
   is_exists1 term orelse
   is_cond term 
-
+  
+fun has_boolty term = (type_of term = ``:bool``)
+fun has_numty term = (type_of term = ``:num``)
+fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
+fun isnot_var term = not (is_var term)
+fun is_var_or_const term = is_var term orelse is_const term
 fun isnot_logical term = not (is_logical term)
 fun has_boolty term = (type_of term = ``:bool``)
-(* use extract var to extract interesting term *)
-fun is_firstorder_predicate term = 
+
+fun is_predicate term = (* not used *)
   has_boolty term andalso
   isnot_logical term andalso 
   is_comb term
-
-fun is_var_or_const term = is_var term orelse is_const term
 
 fun strip_quant term =
   case connective term of
@@ -107,135 +71,34 @@ fun bound_by_quant subterm term =
    free_in subterm t andalso not (free_in subterm term)
  end  
  
-(* end tools *)
+fun name_strl_aux str n = 
+  case n of
+    0 => []
+  | n => if n < 0 then raise NORMALIZE_ERR "name_strl" ""
+         else str ^ (Int.toString n) :: name_strl_aux str (n - 1)
 
-(* BOOL REWRITE *)
-(* extract *)  
+fun name_strl str n = rev (name_strl_aux str n)
 
-(* free *)
-local fun is_interesting_in term subterm =  
-  free_in subterm term andalso
-  is_logical subterm 
-in
-fun find_free_bool_aux term subterm = (* term should be a boolean *)
-  case termstructure subterm of
-    Numeral => []
-  | Var => []  
-  | Const => []
-  | Comb => 
-    (
-    case connective subterm of
-      Forall => find_free_bool_quant term subterm
-    | Exists => find_free_bool_quant term subterm   
-    | Conj => find_free_bool_binop term subterm
-    | Neg => find_free_bool_unop term subterm
-    | Imp_only => find_free_bool_binop term subterm
-    | Disj => find_free_bool_binop term subterm
-    | App => 
-      (
-      case nodefvc subterm of
-        Eq => if has_boolty (rand subterm)
-                 then find_free_bool_binop term subterm
-                 else
-                   filter (is_interesting_in term) [lhand subterm,rand subterm] 
-                   @
-                   find_free_bool_binop term subterm            
-      | _ => let val (operator,argl) = strip_comb subterm in
-               filter (is_interesting_in term) argl @
-               find_free_bool_list term (operator :: argl)
-             end
-      )
-    )             
-  | Abs => let val (bvl,t) = strip_abs subterm in
-             find_free_bool_aux term t
-           end 
-and find_free_bool_list term subterml =
-  List.concat (map (find_free_bool_aux term) subterml)
-and find_free_bool_quant term subterm =
-  let val (bvl,t) = strip_quant subtfun NORMALIZE_ERR function message =
-    HOL_ERR{origin_structure = "normalize",
-	    origin_function = function,
-            message = message}
+fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
 
-
-(* INIT *)
-  (* input is an axioml and a conjecture *)
-  (* goal is not special anymore *)
-  (* output: thm *)
-fun unify axioml =
-  let val newaxioml = map DISCH_ALL axioml in
-    LIST_CONJ newaxioml
-  end
-
-  (* should maybe monomorph to itself *)
-fun initial_assume axioml conjecture =
-  let 
-    val prop1 = concl (unify axioml) 
-    val prop2 = concl (DISCH_ALL conjecture) 
-  in
-    ASSUME (mk_conj (prop1, mk_neg prop2))
-  end
-(* END INIT *)
-
-
-(* BIG REWRITING *)
-  (* choose bound variables names so that thec program don't have to rename them *)
-
-(* CNF *)
-  (* eliminate unused quantifier: 
-  normalForms.CNF_CONV ``?x. !x. p x``; *)
-  (* rewrite =>, ?! and if then else *)
-  (* do beta-reduction *)
-fun rewrite conv thm =
+fun rewrite_conv conv thm =
   let val goal = concl thm in
   let val eqthm = conv goal in
     EQ_MP eqthm thm
-  end end
-  
-fun rewrite_cnf thm = rewrite (QCONV normalForms.CNF_CONV) thm
-(* END CNF *)
-
-
-(* f = g may be rewritten !x f x = g x *) 
-(* maybe not a good idea SOME_CONV 
-   depends on the arity
-*)
-
-(* tools *)
-fun is_logical term =
-  is_conj term orelse
-  is_disj term orelse   
-  is_neg term orelse   
-  is_imp_only term orelse
-  is_forall term orelse  
-  is_exists term orelse  
-  is_exists1 term orelse
-  is_cond term 
-
-fun isnot_logical term = not (is_logical term)
-fun has_boolty term = (type_of term = ``:bool``)
-(* use extract var to extract interesting term *)
-fun is_firstorder_predicate term = 
-  has_boolty term andalso
-  isnot_logical term andalso 
-  is_comb term
-
-fun is_var_or_const term = is_var term orelse is_const term
-
-fun strip_quant term =
-  case connective term of
-    Forall => strip_forall term
-  | Exists => strip_exists term
-  | _ => raise NORMALIZE_ERR "strip_quant" "" 
-  
-fun bound_by_quant subterm term =
- let val (bvl,t) = strip_quant term in 
-   free_in subterm t andalso not (free_in subterm term)
- end  
- 
+  end end   
 (* end tools *)
 
-(* BOOL REWRITE *)
+(* BETA CONV *)
+fun beta_conv term = (REDEPTH_CONV BETA_CONV) term;
+(* ETA CONV *)
+fun eta_conv term = (REDEPTH_CONV ETA_CONV) term;
+
+(* CNF CONV *)
+  (* eliminate unused quantifier normalForms.CNF_CONV ``?x. !x. p x``; *)
+  (* =>, ?! and if then else *)
+fun cnf_conv term = normalForms.CNF_CONV term
+
+(* BOOL CONV *)
 local fun is_interesting_in term subterm =  
   free_in subterm term andalso
   is_logical subterm 
@@ -279,11 +142,12 @@ and find_free_bool_quant term subterm =
     find_free_bool_aux term t
   end  
 and find_free_bool_binop term subterm =
-  find_free_bool_list term [lhand by_quantsubterm,rand subterm] 
+  find_free_bool_list term [lhand subterm,rand subterm] 
 and find_free_bool_unop term subterm =
   find_free_bool_aux term (rand subterm)
 end  
  
+fun find_free_bool term = find_free_bool_aux term term 
 (* bound *)     
 local fun is_interesting_in term subterm =  
   bound_by_quant subterm term andalso
@@ -334,15 +198,12 @@ and find_bound_bool_unop term subterm =
 end  
    
 fun find_bound_bool term = find_bound_bool_aux term term
-(* end extract *)
 
 (* SUBS is bad unless you really know what you are doing *)
-  (* term1 : P f x *)
-  (* term2 : f x *)
-  (* term should be of type bool *)
-(* P (f x) (g (∀f. f x)) ⇔ ∀b. ((b = true) ⇔ ∀f. f x) ⇒ P (f x) (g b) *)
+(* term should have type bool *)
 fun bool_conv_sub boolterm term =
-  (* term construction *)
+  (* term *)
+  (* b should be a fresh variables *)
   let val boolv = mk_var ("b",bool) in
   let val t1 = mk_eq (mk_eq (boolv,T),boolterm) in (* ((b = true) = f x) *)
   (* lemma *)
@@ -351,13 +212,13 @@ fun bool_conv_sub boolterm term =
   let val eqth3 = EQ_MP eqth2 eqth1 in
   (* first part  *)
   let val th11 = ASSUME term in
-  let val th12 = SUBS [eqth3] th11 in (* hate using SUBS *)
+  let val th12 = SUBS [eqth3] th11 in (* to be checked *)
   let val th13 = DISCH (hd (hyp eqth3)) th12 in
   let val th14 = GEN boolv th13 in
   let val th15 = DISCH_ALL th14 in
   (* second part *)
   let val th21 = ASSUME (concl th14) in
-  let val th22 = SPEC boolterm th21 in
+  let val th22 = SPEC boolterm th21 in (* to be checked *)
   let val t2 = lhs (lhand (concl th22)) in
   let val eqth4 = bool_EQ_CONV t2 in
   let val th23 = MP th22 eqth4 in
@@ -371,7 +232,7 @@ fun bool_conv_sub boolterm term =
 
 (* test
 val boolterm = ``!f:num -> bool . f x``;
-val term = ``P (f x) (g !f:num -> bool . f x): bool``;
+val term = ``P (!f:num -> bool . f x) (!f:num -> bool . f x): bool``;
 bool_conv_sub term boolterm;
 *)
 fun bool_conv_subl boolterml term = 
@@ -399,8 +260,8 @@ fun bool_conv_aux term =
   | Abs => raise UNCHANGED
 
 fun bool_conv term =
-  let val boolterml = find_free_bool term in
-    
+  let val terml = find_free_bool term in
+    (bool_conv_aux THENC (bool_conv_subl terml)) term
   end
 
 (* test
@@ -409,10 +270,15 @@ val term = ``!x. x + 1 = 0``;
 val boolterml = find_free_bool term;
 val boolterml2 = find_bound_bool term;
 bool_conv_quant term;
-bool_conv term; 
+val subterm = ``!x.x``;
+val term = ``P (!x.x) (!y.y): bool ``;
+bool_conv term; (* should do after find_free _bool erase_double_aconv *)
+find_free_bool term;
+bool_conv_sub subterm term;
 *)
 
-(* TRANSLATION IDEA *)
+
+(* PRINTING IDEA *)
 (* 
  = :bool -->  <=> 
  = :bool -->   =  
@@ -422,28 +288,14 @@ depend on the arguments
 true --> $true
 true --> btrue 
 *)
-(* END *)
-(* END BOOL REWRITE *)
+(* END BOOL CONV *)
 
-(* NUM REWRITE *)
-(* should look at the first boolean over a subterm *)
+(* NUM CONV *)
 (* term should be of type bool *)
-
-(* tools *)
-fun has_boolty term = (type_of term = ``:bool``)
-fun has_numty term = (type_of term = ``:num``)
-
 fun num_axiom term = 
   let val axiom = arithmeticTheory.ZERO_LESS_EQ in
     SPEC term axiom
   end
-
-
-
-fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
-fun isnot_var term = not (is_var term)
-(* end tools *)
-
 
 fun num_conv_subl fterml term =
   if has_boolty term
@@ -459,9 +311,7 @@ fun num_conv_subl fterml term =
       else   
         let val axiom1 = LIST_CONJ axioml2 in
         (* first part *)
-        let un num_conv_exists term =
-
-        val th11 = ASSUME term in
+        let val th11 = ASSUME term in
         let val th12 = CONJ axiom1 th11 in  
         let val th13 = DISCH_ALL th12 in  
         (* second part *) 
@@ -478,6 +328,8 @@ fun num_conv_subl fterml term =
  num_conv_subl [``y:num``] ``(0 ≤ y) /\ (?x:num . (y:num) = (y:num))``;
  num_conv_subl [``y:num``,``x:num``] ``(0 ≤ y) /\ (?x:num . (y:num) = (y:num))``;
 *)  
+
+(* to be rewritten *)
 fun num_conv_forall_imp term =
   let val (bvl,t) = strip_forall term in
   let val numbvl = filter has_numty bvl in
@@ -527,88 +379,7 @@ fun num_conv_forall_imp term =
       end end end end end 
       end end end end end 
       end end end end end
-      end end end end fun NORMALIZE_ERR function message =
-    HOL_ERR{origin_structure = "normalize",
-	    origin_function = function,
-            message = message}
-
-
-(* INIT *)
-  (* input is an axioml and a conjecture *)
-  (* goal is not special anymore *)
-  (* output: thm *)
-fun unify axioml =
-  let val newaxioml = map DISCH_ALL axioml in
-    LIST_CONJ newaxioml
-  end
-
-  (* should maybe monomorph to itself *)
-fun initial_assume axioml conjecture =
-  let 
-    val prop1 = concl (unify axioml) 
-    val prop2 = concl (DISCH_ALL conjecture) 
-  in
-    ASSUME (mk_conj (prop1, mk_neg prop2))
-  end
-(* END INIT *)
-
-
-(* BIG REWRITING *)
-  (* choose bound variables names so that thec program don't have to rename them *)
-
-(* CNF *)
-  (* eliminate unused quantifier: 
-  normalForms.CNF_CONV ``?x. !x. p x``; *)
-  (* rewrite =>, ?! and if then else *)
-  (* do beta-reduction *)
-fun rewrite conv thm =
-  let val goal = concl thm in
-  let val eqthm = conv goal in
-    EQ_MP eqthm thm
-  end end
-  
-fun rewrite_cnf thm = rewrite (QCONV normalForms.CNF_CONV) thm
-(* END CNF *)
-
-
-(* f = g may be rewritten !x f x = g x *) 
-(* maybe not a good idea SOME_CONV 
-   depends on the arity
-*)
-
-(* tools *)
-fun is_logical term =
-  is_conj term orelse
-  is_disj term orelse   
-  is_neg term orelse   
-  is_imp_only term orelse
-  is_forall term orelse  
-  is_exists term orelse  
-  is_exists1 term orelse
-  is_cond term 
-
-fun isnot_logical term = not (is_logical term)
-fun has_boolty term = (type_of term = ``:bool``)
-(* use extract var to extract interesting term *)
-fun is_firstorder_predicate term = 
-  has_boolty term andalso
-  isnot_logical term andalso 
-  is_comb term
-
-fun is_var_or_const term = is_var term orelse is_const term
-
-fun strip_quant term =
-  case connective term of
-    Forall => strip_forall term
-  | Exists => strip_exists term
-  | _ => raise NORMALIZE_ERR "strip_quant" "" 
-  
-fun bound_by_quant subterm term =
- let val (bvl,t) = strip_quant term in 
-   free_in subterm t andalso not (free_in subterm term)
- end  
- 
-(* end tools *)
+      end end end end 
   end end end 
   end end end
 
@@ -663,7 +434,7 @@ val term = ``!x y. (x = 0) /\ (y = 0) ``;
 num_conv_forall_bt [``x:num``] term; 
 *)
 
-(* tools *)
+(* find *)
 local fun is_interesting_in term subterm = 
   has_numty subterm andalso 
   free_in subterm term andalso 
@@ -740,11 +511,10 @@ fun num_conv term =
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!(x:num) z. x = f z) /\ (f (y:num) = 0)``;
 num_conv term; 
 *)
-(* END NUM REWRITE *)
+(* END NUM CONV *)
 
-(* FUN REWRITE *)   (* DON'T FORGET TO TRY ETA_CONV FIRST *)
-
-(* tools *)
+(* FUN CONV *)  
+(* find *)
 fun find_free_abs_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of
     Numeral => []
@@ -941,17 +711,11 @@ fun_conv term;
 fun_conv_sub abs term;
 find_free_abs term ;
 *)
+(* END FUN CONV *)
 
-
-(* END FUN REWRITE *)
-
-(* APP REWRITE *)   
-(* if some function appears with different arguments then *)  
-(* bounded function appears with lowest_arity equal to 0 *)
-(* this is not on terms but on variables only is it *)
-
+(* APP CONV *)   
 (* returns a list of (term,lowestarity) *)
-fun find_free_app_aux termal term subterm  = (* term should be a appean *)
+fun find_free_app_aux termal term subterm  = 
   case termstructure subterm of
     Numeral => []
   | Var => []  
@@ -1065,15 +829,7 @@ and find_bound_app_unop term subterm =
 
 fun find_bound_app term = find_bound_app_aux term term
 
-fun name_strl_aux str n = 
-  case n of
-    0 => []
-  | n => if n < 0 then raise NORMALIZE_ERR "name_strl" ""
-         else str ^ (Int.toString n) :: name_strl_aux str (n - 1)
 
-fun name_strl str n = rev (name_strl_aux str n)
-
-fun list_mk_var strl tyl = map mk_var (combine (strl,tyl))
 
 fun app_def term =
   let val (operator1,argl1) = strip_comb term in
@@ -1082,7 +838,7 @@ fun app_def term =
   let val argtyl = map type_of argl1 in
   let val n = length argl1 in
   let val strl = name_strl "x" n in
-  let val argl = list_mk_var strl argtyl in
+  let val argl = list_mk_var (strl,argtyl) in
   let val appty = mk_type ("fun",[opty,opty]) in  
   let val app = mk_var ("app",appty) in
   let val term = list_mk_comb (operator,argl) in 
@@ -1161,14 +917,7 @@ fun app_conv_sub (subterm,lowestarity) term =
 
  
 (* same problem *) (* need to generalize app *)
-(*
-A B C |- F
-et
-D |- B <=> (D => B')
- B' |- D => B'
-A D => B' C D |-F
-A B' C D |- F
-*)
+
 fun app_conv_subl subtermal term =
   case subtermal of
     [] => raise UNCHANGED
@@ -1183,7 +932,8 @@ fun app_conv_quant term =
 show_assums :=  true;
 val term = ``!z. (P (\x. x + z)):bool``;
 app_conv_quant_aux term;
-*)app_conv term;
+app_conv term;
+*)
 
 (* term of type bool *)
 (* don't replace nested subtermatraction yet *)
@@ -1219,92 +969,62 @@ app_conv term;
 app_cfun_conv term;onv term;
 app_conv_subl subtermal term;
 *)
+(* post thinking : two app of the same type output should have the same name
+   two app of the same type output comes from the same type and arity *)
+   
+(* END APP CONV *)
 
-(* END APP REWRITE *)
-
-
-
-
-
-  
-(* INSIDE BEAGLE *)
+(* SKOLEM REWRITE *)
 (* 
-REDEPTH_CONV  
-normalForms.SKOLEMIZE_CONV ``!y. (f = \x. g x) /\ (?f. f x = (\x.x) 2)``;
-``!y. (?f. f x = 2)``
+[?x. P x,..] |-  F
+*)
+(*
+val var = mk_var ("x",``:num``);
+val hypterm = ``?x. x = 0``;
+val thm = mk_thm ([hypterm],F);
+val hypterm = ``x = 0``;
+show_assums := true;
+val varl = [var];
 *)
 
+(* thm should have conclusion set to false *)
+(* normally it's not bad to specify with their own names 
+since they do not appear free in hypothesis maybe *)
+fun choose_hyp_list varl hypterm thm =
+  let val th1 = DISCH hypterm thm in
+  let val th2 = NOT_INTRO th1 in
+  let val th3 = NOT_EXISTS_CONV (concl th2) in
+  let val th4 = EQ_MP th3 th2 in
+  let val th5 = SPECL varl th4 in
+  let val th6 = NOT_ELIM th5 in
+  let val th7 = UNDISCH th6 in
+    th7
+  end end end end end 
+  end end
 
-(* let's try to define this conversion in hol term *)
+fun exists_hyp_list varl hypterm thm =
+  let val th1 = DISCH hypterm thm in
+  let val th2 = NOT_INTRO th1 in
+  let val th3 = GENL varl th2 in
+  let val th4 = FORALL_NOT_CONV (concl th3) in
+  let val th5 = EQ_MP th4 th3 in
+  let val th6 = NOT_ELIM th5 in
+  let val th7 = UNDISCH th6 in
+(* END SKOLEM REWRITE *)
 
-(* should also add the num_axiom for free variables and bound variables *)  
-(* |- x: num >= 0 *)
+(* CLAUSE CONV *)
+(* input: a term !x y. A[x,y] /\ B[x,y] *)   
+(*
+  forall_and conversion
 
-(* TYPE DICTIONNARY *)
+  then
+  remove useless quantifier
+   x doesn't appear free in A then !x is useless.
+ *) 
 
+(* output: [!x y. A[x,y], !x y. B[x,y]] *)
+(* set of clauses *)
 
-
-fun 
-f x y /\ f x = g
-
-(* every thing is mixed up now *)
-(* post thinking : two app of the same type output should have the same name *)
-   two app of the same type output comes from the same type and arity *)
-(* dictionnary should contain arity start from 2 )
-free variables have specific names important names
-
-app1 (f x) y /\ f x = g
-
-
-f x y = app2 (f x) y
-
-
-(* add the app function *)
-   (* create a ty dict *)
-   (* create the app dict *)
-   
-
-Need to look at beagle code internally
-
-For all 
-beagle does skolemisation but I need to understand a very simple thing about it.
-!x . x = 0 becomes x = 0
-For_all elimination
-
-
-?y . !x.
-(* difficulty there (what beagle does?)*)
-
- |-  x = 0
-
-
-  
-  
-  
-  (*
-DISCH_ALL
-|- B1  |- B2   
-LIST_CONJ
-|- B1 /\ B2
-mk_thm [
-Which prove that C |- D
-
-Prove that (( (-A1 \/ B1) /\ ......./\ C /\ -D) |- F
-(( (A1 ==> B1) /\ ......./\ C /\ -D) |- (( (-A1 \/ B1) /\ ......./\ C /\ -D) 
-C |- D holds
-
-REDEPTH_CONV BETA_CONV ``?y. (f = \x. g x) /\ (!f. f x = (\x.x) 2)``;
-REDEPTH_CONV ETA_CONV ``(\x.f x) = g``;
-
-CNF_CONV ``?y. (f = \x. g x) /\ (!f. f x = (\x.x) 2)``;
-normalForms.CNF_CONV ``(P (?!x . f x = ((\x.x) 2))) /\ (x = 2)``; 
-(* does beta reduction *)
-(* does normal form first order *)
-   (* does skolemisation *)
-  
-  
-  
-  
-  
+(* END CLAUSE CONV *)  
 
 
