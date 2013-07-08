@@ -1,8 +1,8 @@
 tff(xx_type,type,(
-    xx: $int )).
+    xx: $o )).
 
-tff(c_type,type,(
-    c: ( $int * $int ) > $o )).
+tff(xy_type,type,(
+    xy: $o )).
 
 tff(axiom_axiom,axiom,(
-    ( xx = 0 ) )).
+    ( xx & ( ~ xy ) ) )).

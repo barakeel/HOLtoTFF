@@ -55,6 +55,32 @@ fun is_var_or_const term = is_var term orelse is_const term
 fun isnot_logical term = not (is_logical term)
 fun has_boolty term = (type_of term = ``:bool``)
 
+fun is_member_aconv t l =
+  case l of
+    [] => false
+  | a :: m => aconv t a orelse is_member_aconv t m  
+
+fun erase_double_aconv l =
+ case l of
+   [] => []
+ | a :: m => if is_member_aconv a m
+             then erase_double_aconv m
+             else a :: erase_double_aconv m
+             
+
+fun is_member_aconv_arity (term,arity) termal =
+  case termal of
+     [] => false
+  | (t,a) :: m => (aconv term t andalso arity = a) 
+                  orelse is_member_aconv_arity (term,arity) m  
+
+fun erase_double_aconv_arity termal =
+ case termal of
+   [] => []
+ | (t,a) :: m => if is_member_aconv_arity (t,a) m
+                 then erase_double_aconv_arity m
+                 else (t,a) :: erase_double_aconv_arity m             
+
 fun is_predicate term = (* not used *)
   has_boolty term andalso
   isnot_logical term andalso 
@@ -272,7 +298,7 @@ val boolterml2 = find_bound_bool term;
 bool_conv_quant term;
 val subterm = ``!x.x``;
 val term = ``P (!x.x) (!y.y): bool ``;
-bool_conv term; (* should do after find_free _bool erase_double_aconv *)
+bool_conv term; 
 find_free_bool term;
 bool_conv_sub subterm term;
 *)
@@ -291,6 +317,28 @@ true --> btrue
 (* END BOOL CONV *)
 
 (* NUM CONV *)
+
+(* find *)
+local fun is_interesting_in term subterm = 
+  has_numty subterm andalso 
+  free_in subterm term andalso 
+  not (numSyntax.is_numeral term)
+in
+fun find_free_num term =  
+  erase_double_aconv (find_terms (is_interesting_in term) term) 
+end
+
+(* term should start with a quantifier *)  
+local fun is_interesting_in term subterm = 
+  bound_by_quant subterm term andalso
+  has_numty subterm 
+(* a numeral can't be bound so don't need to exclude it *)  
+in 
+fun find_bound_num term =  
+  erase_double_aconv (find_terms (is_interesting_in term) term) 
+end  
+(* end find *)
+
 (* term should be of type bool *)
 fun num_axiom term = 
   let val axiom = arithmeticTheory.ZERO_LESS_EQ in
@@ -371,9 +419,7 @@ fun num_conv_forall_imp term =
       let val th25 = DISCH term1 th24 in
       let val th26 = GENL bvl th25 in
       let val th27 = DISCH_ALL th26 in
-      (* regroupun num_conv_exists term =
-
-       *)D =>
+      (* regroup *)
         IMP_ANTISYM_RULE th16 th27
       end end end end end 
       end end end end end 
@@ -433,27 +479,10 @@ show_assums := true ;
 val term = ``!x y. (x = 0) /\ (y = 0) ``;
 num_conv_forall_bt [``x:num``] term; 
 *)
-
-(* find *)
-local fun is_interesting_in term subterm = 
-  has_numty subterm andalso 
-  free_in subterm term andalso 
-  not (numSyntax.is_numeral term)
-in
-fun find_free_num term =  
-  erase_double (find_terms (is_interesting_in term) term) 
-end
-
-(* term should start with a quantifier *)  
-local fun is_interesting_in term subterm = 
-  bound_by_quant subterm term andalso
-  has_numty subterm 
-(* a numeral can't be bound so don't need to exclude it *)  
-in 
-fun find_bound_num term =  
-  erase_double (find_terms (is_interesting_in term) term) 
-end  
-(* end tools *)
+fun num_conv_quant term =
+  let val terml = find_bound_num term in
+    STRIP_QUANT_CONV (num_conv_subl terml) term
+  end
 
 (* num conv forall *) 
 fun num_conv_forall_aux term =
@@ -468,7 +497,7 @@ fun num_conv_forall_aux term =
 fun num_conv_forall term =
   let val terml1 = find_bound_num term in
   let val terml2 = filter isnot_var terml1 in
-    ((num_conv_quant_bt terml2) THENC num_conv_forall_aux) term
+    (num_conv_quant THENC num_conv_forall_aux) term
   end end
  
 (* test
@@ -539,7 +568,7 @@ fun find_free_abs_aux term subterm = (* term should be a boolean *)
              else find_free_abs_aux term t  
            end
            
-fun find_free_abs term = find_free_abs_aux term term
+fun find_free_abs term = erase_double_aconv (find_free_abs_aux term term)
 
 fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
   case termstructure subterm of
@@ -565,7 +594,7 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
              else find_bound_abs_aux term t  
            end
 
-fun find_bound_abs term = find_bound_abs_aux term term
+fun find_bound_abs term = erase_double_aconv (find_bound_abs_aux term term)
 (* end tools *)
   
 fun ap_thml thm terml =
@@ -777,7 +806,7 @@ and find_free_app_unop termal term subterm =
 
 fun find_free_app term = 
   let val termal = collapse_lowestarity (get_fvcal (extract_var term)) in
-    find_free_app_aux termal term term
+    erase_double_aconv_arity (find_free_app_aux termal term term)
   end
   
 (* term should be a quantifier *)
@@ -827,9 +856,7 @@ and find_bound_app_binop term subterm =
 and find_bound_app_unop term subterm =
   find_bound_app_aux term (rand subterm)
 
-fun find_bound_app term = find_bound_app_aux term term
-
-
+fun find_bound_app term = erase_double_aconv_arity (find_bound_app_aux term term)
 
 fun app_def term =
   let val (operator1,argl1) = strip_comb term in
@@ -888,8 +915,6 @@ else
 else 
   raise NORMALIZE_ERR "" ""
 
-
-        
 fun get_arity term = length (snd (strip_comb term))
 
 fun app_conv_sub (subterm,lowestarity) term =
@@ -986,11 +1011,10 @@ val hypterm = ``x = 0``;
 show_assums := true;
 val varl = [var];
 *)
-
 (* thm should have conclusion set to false *)
 (* normally it's not bad to specify with their own names 
 since they do not appear free in hypothesis maybe *)
-fun choose_hyp_list varl hypterm thm =
+fun skolem_rewrite varl hypterm thm =
   let val th1 = DISCH hypterm thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = NOT_EXISTS_CONV (concl th2) in
@@ -1002,7 +1026,7 @@ fun choose_hyp_list varl hypterm thm =
   end end end end end 
   end end
 
-fun exists_hyp_list varl hypterm thm =
+fun skolem_rewrite_rev varl hypterm thm =
   let val th1 = DISCH hypterm thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = GENL varl th2 in
@@ -1010,7 +1034,10 @@ fun exists_hyp_list varl hypterm thm =
   let val th5 = EQ_MP th4 th3 in
   let val th6 = NOT_ELIM th5 in
   let val th7 = UNDISCH th6 in
-(* END SKOLEM REWRITE *)
+    th7
+  end end end end end 
+  end end
+  (* END SKOLEM REWRITE *)
 
 (* CLAUSE CONV *)
 (* input: a term !x y. A[x,y] /\ B[x,y] *)   
@@ -1027,4 +1054,4 @@ fun exists_hyp_list varl hypterm thm =
 
 (* END CLAUSE CONV *)  
 
-
+end
