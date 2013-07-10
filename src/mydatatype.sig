@@ -4,18 +4,20 @@ sig
   type term = Term.term
   type hol_type = Type.hol_type
 
-  datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype | Funtype | Prodtype
-  datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodefvc
-  datatype LEAFCONST = True | False | Newleaffvc
+  datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype |
+                     Funtype | Prodtype | Nodetype
+  datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq |
+                       Newnodeconst
+  datatype LEAFCONST = True | False | Newleafconst
   datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
-  datatype CONNECTIVE = Conj | Disj | Neg | Imp_only | Forall | Exists | App
+  datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
   
   datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar 
 
   val typecat : hol_type -> TYPECAT
   val termstructure : term -> TERMSTRUCTURE  
-  val nodefvc : term -> NODECONST
-  val leaffvc : term -> LEAFCONST
-  val connective : term -> CONNECTIVE
+  val nodeconst : term -> NODECONST
+  val leafconst : term -> LEAFCONST
+  val connector : term -> CONNECTOR
 
 end

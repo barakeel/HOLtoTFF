@@ -1,8 +1,33 @@
-tff(xx_type,type,(
-    xx: $o )).
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(p_ty_bool_fun_ty_bool_p_type,type,(
+    p_ty_bool_fun_ty_bool_p: $tType )).
+
+tff(xP_type,type,(
+    xP: p_ty_bool_fun_ty_bool_p )).
 
 tff(xy_type,type,(
     xy: $o )).
 
-tff(axiom_axiom,axiom,(
-    ( xx & ( ~ xy ) ) )).
+tff(xpredicate_type,type,(
+    xpredicate: bool > $o )).
+
+tff(xapp_type,type,(
+    xapp: p_ty_bool_fun_ty_bool_p > p_ty_bool_fun_ty_bo$o )). 
+    (* should'nt be converted *)
+
+tff(c_type,type,(
+    c: ( bool * bool ) > bool )).
+
+tff(c0_type,type,(
+    c0: ( p_ty_bool_fun_ty_bool_p * p_ty_bool_fun_ty_bool_p ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xb: bool] : ( ( xpredicate(Xb) <=> ( Xb <=> $true ) ) ) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xf: p_ty_bool_fun_ty_bool_p] : ( ( xapp(Xf) <=> Xf ) ) )).
+
+tff(axiom3_axiom,axiom,(
+    ? [Xx: p_ty_bool_fun_ty_bool_p] : ( ! [Xb: bool,X: bool] : ( ( ( ( ~ xy ) | ( xpredicate(Xb) | X ) ) & ( ( xapp(xP,Xb) | ( xpredicate(Xb) | X ) ) & ( ( xapp(xP,Xb) | ( ( ~ xpredicate(Xb) ) | ( ~ xapp(Xx,Xb) ) ) ) & ( ( ~ xy ) | ( ( ~ xpredicate(Xb) ) | ( ~ xapp(Xx,Xb) ) ) ) ) ) ) ) ) )).

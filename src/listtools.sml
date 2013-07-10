@@ -42,7 +42,7 @@ fun add_entry entry dict =
 
 fun lookup elem couplelist =
   case couplelist of 
-  [] => raise LISTTOOLS_ERR "lookup" ""
+  [] => (elem; raise LISTTOOLS_ERR "lookup" "")
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
 fun rename name used =

@@ -9,17 +9,17 @@ fun EXTRACTTYPE_ERR function message =
           message = message}
 
 (* on the result of extract_var *)
-fun all_tya2 varal = 
+fun all_typelowestarity2 varal = 
   case varal of
     [] => []
-  | (var,arity) :: m => (type_of var,arity) :: all_tya2 m
+  | (var,arity) :: m => (type_of var,arity) :: all_typelowestarity2 m
 
-fun all_tya term = 
+fun all_typelowestarity term = 
   let val varal = collapse_lowestarity (map fst (nullify_boundarity (extract_var term))) in
-    erase_double (all_tya2 varal)
+    erase_double (all_typelowestarity2 varal)
   end
   
-(* on the result of all_tya *)
+(* on the result of all_typelowestarity *)
 fun get_simpletyal tyal =
   case tyal of
     [] => []

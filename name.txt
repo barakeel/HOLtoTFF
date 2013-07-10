@@ -8,6 +8,8 @@ COUPLE
 TYPE DECLARATION
 in functions or terms or record : a:int 
 outside functions a : int
+for tff : use simple and compound
+for hol : use leaf and node
 
 HOL CONSTANT
   filename: constant

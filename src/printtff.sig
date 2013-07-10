@@ -10,17 +10,11 @@ sig
                    ((hol_type * int) * string) list *
                    (term * string) list *
                    (term * string) list *
-                   (term * string) list
-                   -> unit
-  (* tools *)
+                   (term * string) list ->
+                   bool -> 
+                   unit
 
-  (* *)
-  val print_fvctyl : ppstream -> 
-                     (term * int) list ->
-                     (term * string) list ->
-                     ((hol_type * int) * string) list ->
-                     unit  
-  val print_pb : ppstream -> term -> unit
-  val output_tff : string -> term -> unit
+  val print_thm : ppstream -> thm -> unit
+  val output_tff : string -> thm -> unit
 
 end

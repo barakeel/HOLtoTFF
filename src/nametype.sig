@@ -4,7 +4,7 @@ sig
   type term     = Term.term
   type hol_type = Type.hol_type
   
-  val name_type : hol_type -> string
+  val name_leaftype : hol_type -> string
   val add_simpletyal :(hol_type * int) list -> 
                       ((hol_type * int) * string) list -> 
                       ((hol_type * int) * string) list

@@ -9,7 +9,8 @@ fun DATATYPE_ERR function message =
             message = message}
 
 
-datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype | Funtype | Prodtype
+datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype | 
+                   Funtype | Prodtype | Nodetype
 
 fun typecat holtype =
   case (holtype = ``:bool``,holtype = ``:num``,is_vartype holtype) of
@@ -35,9 +36,9 @@ fun termstructure term =
     ]
     (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
-datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodefvc
+datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
 
-fun nodefvc term =  
+fun nodeconst term =  
   switcharg term
     [
     (is_eq       ,Eq), 
@@ -49,21 +50,21 @@ fun nodefvc term =
     (is_geq      ,Geq),
     (is_leq      ,Leq)
     ]   
-    Newnodefvc
+    Newnodeconst
 
-datatype LEAFCONST = True | False | Newleaffvc
+datatype LEAFCONST = True | False | Newleafconst
 
-fun leaffvc term =
+fun leafconst term =
   switcharg term
     [
     (equal T ,True),
     (equal F ,False)
     ]
-    Newleaffvc
+    Newleafconst
 
-datatype CONNECTIVE = Conj | Disj | Neg | Imp_only | Forall | Exists | App
+datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
 
-fun connective term =
+fun connector term =
   switcharg term
     [  
     (is_conj     ,Conj),

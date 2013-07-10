@@ -19,7 +19,7 @@ fun NAMETYPE_ERR function message =
 
 
 (* should add compound type like int list*)  
-fun name_type ty = 
+fun name_leaftype ty = 
   case typecat ty of
     Booltype => fst (dest_type ty)
   | Numtype => fst (dest_type ty)
@@ -27,39 +27,48 @@ fun name_type ty =
                  (dest_vartype ty,1,
                   String.size (dest_vartype ty) - 1 ) 
   | Leaftype => fst (dest_type ty)
-  | Funtype => raise NAMETYPE_ERR "name_type" "funtype"
-  | Prodtype => raise NAMETYPE_ERR "name_type" "prodtype"
+  | _ => raise NAMETYPE_ERR "name_leaftype" "node type"
 
-fun name_tff_type ty = 
-  let val name = name_type ty in 
+
+
+fun name_tfftype ty = 
+  let val name = name_leaftype ty in 
     if is_alphanumor_ name
     then "ty_" ^ name
-    else "ty_"
+    else "unprintable"
   end
 
 
 fun name_simplety ty = 
   case typecat ty of
-    Booltype => name_tff_type ty
-  | Numtype => name_tff_type ty
-  | Alphatype => name_tff_type ty
-  | Leaftype => name_tff_type ty
+    Booltype => name_tfftype ty
+  | Numtype => name_tfftype ty
+  | Alphatype => name_tfftype ty
+  | Leaftype => name_tfftype ty
   | Funtype => let val (str,l) = dest_type ty in
-               let 
-                 val ty1 = hd l
-                 val ty2 = hd (tl l)
-               in 
-                 "p_" ^ (name_simplety ty1) ^ 
-                 "_fun_" ^ (name_simplety ty2) ^ "_p" 
-               end end  
+               let val ty1 = hd l in
+               let val ty2 = hd (tl l) in 
+                 "p_" ^ (name_simplety ty1) ^ "_fun_" ^
+                  (name_simplety ty2) ^ "_p" 
+               end end end 
   | Prodtype => let val (str,l) = dest_type ty in         
-                let 
-                  val ty1 = hd l
-                  val ty2 = hd (tl l)
-                in 
-                  "p_" ^ (name_simplety ty1) ^ 
-                  "_prod_" ^ (name_simplety ty2) ^ "_p"
-                end end  
+                let val ty1 = hd l in
+                let val ty2 = hd (tl l) in
+                  "p_" ^ (name_simplety ty1) ^ "_prod_" ^ 
+                  (name_simplety ty2) ^ "_p"
+                end end end 
+  | Nodetype => let val (str,tyl) = dest_type ty in
+                   if is_alphanumor_ str 
+                   then str ^ "(" ^ (name_simpletyl tyl) ^ ")"       
+                   else "unprintable" ^  "(" ^ (name_simpletyl tyl) ^ ")"  
+                end
+                    
+and name_simpletyl tyl =
+  case tyl of
+    [] => ""
+  | [ty] => name_simplety ty
+  | ty :: m => (name_simplety ty) ^ "_" ^ (name_simpletyl m)
+  
 
 (* add add for a simpletype *) (* tyadict should already contain alphatydict *)
 (* Booltype is an exception *) 
@@ -82,7 +91,7 @@ fun add_simpletya (ty,arity) tyadict =
   else
     let val n = length tyadict in
       case typecat ty of
-        Booltype => let val str = "$o" in
+        Booltype => let val str = "bool" in
                       add_entry ((ty,0),str) tyadict
                     end 
       | Numtype => let val str = "$int" in
@@ -132,7 +141,7 @@ fun add_compoundtyal key dict = repeatchange add_compoundtya key dict
 
 (* lowest arity plays an important role here *)
 fun create_tyadict term =
-  let val tyal = all_tya term in 
+  let val tyal = all_typelowestarity term in (* included there *)
   let 
     val simpletyal = get_simpletyal tyal
     val compoundtyal = get_compoundtyal tyal 

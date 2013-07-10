@@ -26,10 +26,15 @@ fun extract_var2 term bvl =
   | Var => if is_member term bvl
            then [((term,0),Boundvar)] 
            else [((term,0),Freevar)]
-  | Const => [((term,0),Constvar)]
+  | Const => (
+             case leafconst term of
+               True => []
+             | False => []
+             | Newleafconst => [((term,0),Constvar)]
+             )
   | Comb => 
     (
-    case connective term of
+    case connector term of
       Conj => extract_var2binop term bvl
     | Disj => extract_var2binop term bvl
     | Neg => extract_var2unop term bvl

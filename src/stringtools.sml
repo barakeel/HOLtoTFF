@@ -8,6 +8,7 @@ fun STRINGTOOLS_ERR function message =
           origin_function = function,
           message = message}
 
+(* modify string *)
 fun space n =
   case n of
     0 => ""
@@ -17,10 +18,26 @@ fun space n =
 
 fun indent n = "\n" ^ (space n)
 
+fun last2str str = substring (str,(size str) - 2, 2);
+
+(* test
+last2str "hello";
+*)
+
+
+(* name *)
 fun name_strn str n = str ^ (Int.toString n) 
 
- 
+fun list_name_str_aux str n = 
+  case n of
+    0 => []
+  | n => if n < 0 then raise STRINGTOOLS_ERR "list_name_str" ""
+         else str ^ (Int.toString n) :: list_name_str_aux str (n - 1)
 
+fun list_name_str str n = rev (list_name_str_aux str n)
+(* end name *) 
+ 
+(* test *)
 (* warning: include the empty string *)
 fun is_alphanumor_charl charl= 
   case charl of

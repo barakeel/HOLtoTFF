@@ -3,6 +3,7 @@ struct
 
 (*
 load "listtools"; open listtools;
+load "tools"; open tools;
 load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
 load "extracttype"; open extracttype;
@@ -29,14 +30,17 @@ At least , memorise them into list so that they can be printed differently
 *)
 
 open HolKernel normalForms 
-     listtools mydatatype extractvar extracttype
+     stringtools listtools tools mydatatype 
+     extractvar extracttype
 
 fun NORMALIZE_ERR function message =
     HOL_ERR{origin_structure = "normalize",
 	    origin_function = function,
             message = message}
 
+
 (* tools *)
+  (* bool *)
 fun is_logical term =
   is_conj term orelse
   is_disj term orelse   
@@ -46,15 +50,11 @@ fun is_logical term =
   is_exists term orelse  
   is_exists1 term orelse
   is_cond term 
-  
-fun has_boolty term = (type_of term = ``:bool``)
-fun has_numty term = (type_of term = ``:num``)
+  (* num *)
 fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
 fun isnot_var term = not (is_var term)
-fun is_var_or_const term = is_var term orelse is_const term
-fun isnot_logical term = not (is_logical term)
-fun has_boolty term = (type_of term = ``:bool``)
 
+  (* aconv multiple hypothesis erasing *)
 fun is_member_aconv t l =
   case l of
     [] => false
@@ -81,37 +81,8 @@ fun erase_double_aconv_arity termal =
                  then erase_double_aconv_arity m
                  else (t,a) :: erase_double_aconv_arity m             
 
-fun is_predicate term = (* not used *)
-  has_boolty term andalso
-  isnot_logical term andalso 
-  is_comb term
 
-fun strip_quant term =
-  case connective term of
-    Forall => strip_forall term
-  | Exists => strip_exists term
-  | _ => raise NORMALIZE_ERR "strip_quant" "" 
-  
-fun bound_by_quant subterm term =
- let val (bvl,t) = strip_quant term in 
-   free_in subterm t andalso not (free_in subterm term)
- end  
- 
-fun name_strl_aux str n = 
-  case n of
-    0 => []
-  | n => if n < 0 then raise NORMALIZE_ERR "name_strl" ""
-         else str ^ (Int.toString n) :: name_strl_aux str (n - 1)
 
-fun name_strl str n = rev (name_strl_aux str n)
-
-fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
-
-fun rewrite_conv conv thm =
-  let val goal = concl thm in
-  let val eqthm = conv goal in
-    EQ_MP eqthm thm
-  end end   
 (* end tools *)
 
 (* BETA CONV *)
@@ -136,7 +107,7 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => find_free_bool_quant term subterm
     | Exists => find_free_bool_quant term subterm   
     | Conj => find_free_bool_binop term subterm
@@ -145,8 +116,8 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
     | Disj => find_free_bool_binop term subterm
     | App => 
       (
-      case nodefvc subterm of
-        Eq => if has_boolty (rand subterm)
+      case nodeconst subterm of
+        Eq => if has_boolty (rhs subterm)
                  then find_free_bool_binop term subterm
                  else
                    filter (is_interesting_in term) [lhand subterm,rand subterm] 
@@ -173,7 +144,7 @@ and find_free_bool_unop term subterm =
   find_free_bool_aux term (rand subterm)
 end  
  
-fun find_free_bool term = find_free_bool_aux term term 
+fun find_free_bool term = erase_double_aconv (find_free_bool_aux term term) 
 (* bound *)     
 local fun is_interesting_in term subterm =  
   bound_by_quant subterm term andalso
@@ -186,7 +157,7 @@ fun find_bound_bool_aux term subterm = (* term should be a boolean *)
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => find_bound_bool_quant term subterm
     | Exists => find_bound_bool_quant term subterm   
     | Conj => find_bound_bool_binop term subterm
@@ -195,8 +166,8 @@ fun find_bound_bool_aux term subterm = (* term should be a boolean *)
     | Disj => find_bound_bool_binop term subterm
     | App => 
       (
-      case nodefvc subterm of
-        Eq => if has_boolty (rand subterm)
+      case nodeconst subterm of
+        Eq => if has_boolty (rhs subterm)
                  then find_bound_bool_binop term subterm
                  else
                    filter (is_interesting_in term) [lhand subterm,rand subterm] 
@@ -223,7 +194,7 @@ and find_bound_bool_unop term subterm =
   find_bound_bool_aux term (rand subterm)
 end  
    
-fun find_bound_bool term = find_bound_bool_aux term term
+fun find_bound_bool term = erase_double_aconv (find_bound_bool_aux term term)
 
 (* SUBS is bad unless you really know what you are doing *)
 (* term should have type bool *)
@@ -278,7 +249,7 @@ fun bool_conv_aux term =
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connective term of
+    case connector term of
       Forall => ((STRIP_QUANT_CONV bool_conv_aux) THENC bool_conv_quant) term
     | Exists => ((STRIP_QUANT_CONV bool_conv_aux) THENC bool_conv_quant) term        
     | _ => COMB_CONV bool_conv_aux term
@@ -315,6 +286,8 @@ true --> $true
 true --> btrue 
 *)
 (* END BOOL CONV *)
+
+
 
 (* NUM CONV *)
 
@@ -524,7 +497,7 @@ fun num_conv_aux term =
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connective term of
+    case connector term of
       Forall => ((STRIP_QUANT_CONV num_conv_aux) THENC num_conv_forall) term
     | Exists => ((STRIP_QUANT_CONV num_conv_aux) THENC num_conv_exists) term        
     | _ => COMB_CONV num_conv_aux term
@@ -551,7 +524,7 @@ fun find_free_abs_aux term subterm = (* term should be a boolean *)
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => let val (bvl,t) = strip_forall subterm in
                   find_free_abs_aux term t
                 end  
@@ -577,7 +550,7 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => let val (bvl,t) = strip_forall subterm in
                   find_bound_abs_aux term t
                 end  
@@ -719,7 +692,7 @@ fun fun_conv_aux term =
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connective term of
+    case connector term of
       Forall => ((STRIP_QUANT_CONV fun_conv_aux) THENC fun_conv_quant) term
     | Exists => ((STRIP_QUANT_CONV fun_conv_aux) THENC fun_conv_quant) term        
     | _ => COMB_CONV fun_conv_aux term
@@ -751,7 +724,7 @@ fun find_free_app_aux termal term subterm  =
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => find_free_app_quant termal term subterm
     | Exists => find_free_app_quant termal term subterm   
     | Conj => find_free_app_binop termal term subterm
@@ -817,7 +790,7 @@ fun find_bound_app_aux term subterm =
   | Const => []
   | Comb => 
     (
-    case connective subterm of
+    case connector subterm of
       Forall => find_bound_app_quant term subterm
     | Exists => find_bound_app_quant term subterm   
     | Conj => find_bound_app_binop term subterm
@@ -864,7 +837,7 @@ fun app_def term =
   let val operator = mk_var ("f",opty) in
   let val argtyl = map type_of argl1 in
   let val n = length argl1 in
-  let val strl = name_strl "x" n in
+  let val strl = list_name_str "x" n in
   let val argl = list_mk_var (strl,argtyl) in
   let val appty = mk_type ("fun",[opty,opty]) in  
   let val app = mk_var ("app",appty) in
@@ -969,7 +942,7 @@ fun app_conv_aux term =
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connective term of
+    case connector term of
       Forall => ((STRIP_QUANT_CONV app_conv_aux) THENC app_conv_quant) term
     | Exists => ((STRIP_QUANT_CONV app_conv_aux) THENC app_conv_quant) term        
     | _ => COMB_CONV app_conv_aux term
@@ -999,6 +972,97 @@ app_conv_subl subtermal term;
    
 (* END APP CONV *)
 
+
+
+(* PREDICATE CONV *)
+(* required every variables should have a different name *)
+
+(* find *) 
+fun find_unpredicate_aux atom tyadict =
+  let val (operator,argl) = strip_comb atom in
+    List.concat (map (find_terms is_var_or_const) argl)
+  end      
+
+fun find_unpredicate term tyadict =
+  let val atoml = find_atoml term in
+   List.concat (map find_unpredicate_aux atoml)
+  end              
+(* end find *)
+
+val predicate_def  =
+  let val predicate = mk_var ("predicate",``:bool -> bool``) in
+  let val b = mk_var ("b",``:bool``) in
+  let val t0 = mk_eq (b,T) in
+  let val t1 = mk_comb (predicate,b) in
+  let val t2 = mk_eq (t1,t0) in
+  let val t3 = mk_forall (b,t2) in
+    t3
+  end end end end end 
+  end
+
+(* term should have bool type *)  
+fun predicate_conv_atom_aux atom =
+  let val th1 = ASSUME predicate_def in
+  let val th2 = SPEC atom th1 in
+  let val eqth1 = (RAND_CONV bool_EQ_CONV) (concl th2) in
+  let val eqth2 = EQ_MP eqth1 th2 in
+    SYM eqth2
+  end end end end 
+
+fun predicate_conv_atom tyadict term atom =  
+  let val operator = fst (strip_comb atom) in
+    if is_member operator (find_unpredicate tyadict term) 
+    then predicate_conv_atom_aux atom
+    else raise UNCHANGED
+  end  
+   
+
+(* test 
+val term = ``(P x:bool) /\ Q (P x:bool)`` ;
+val atom = ``(P x:bool):bool ``;
+predicate_conv_sub atom term;
+*)
+(* term is a parameter so it should be first *)
+fun predicate_conv_aux tyadict term subterm =   
+  case termstructure subterm of
+    Comb => 
+    (
+    case connector subterm of
+      Forall => (STRIP_QUANT_CONV (predicate_conv_aux tyadict term)) subterm
+    | Exists => (STRIP_QUANT_CONV (predicate_conv_aux tyadict term)) subterm
+    | Conj => predicate_conv_binop tyadict term subterm 
+    | Neg => predicate_conv_unop tyadict term subterm 
+    | Imp_only => predicate_conv_binop tyadict term subterm
+    | Disj => predicate_conv_binop tyadict term subterm 
+    | App => 
+      (
+      case nodeconst subterm of
+        Eq => if has_boolty (rhs subterm)
+              then predicate_conv_binop tyadict term subterm 
+              else predicate_conv_atom tyadict term subterm (* atom *)  
+      | _ => predicate_conv_atom tyadict term subterm (* atom *)
+      )
+    )
+  | _ => predicate_conv_atom tyadict term subterm  (* atom *)
+and predicate_conv_binop tyadict term subterm =
+  BINOP_CONV (predicate_conv_aux tyadict term) subterm
+and predicate_conv_unop tyadict term subterm =
+  RAND_CONV (predicate_conv_aux tyadict term) subterm
+
+fun predicate_conv tyadict term = predicate_conv_aux tyadict term term;
+  
+
+(* test
+val subterm = ``(P (x:num) (y:num)) : bool``;
+val Q = mk_var ("Q",``:bool -> bool``);
+val x = mk_var ("x",``:num``);
+val term = mk_forall(x,mk_forall (Q,mk_conj (mk_comb (Q,subterm),subterm))); 
+predicate_conv term;
+predicate_conv subterm;
+*)
+
+(* END PREDICATE CONV *)
+
 (* SKOLEM REWRITE *)
 (* 
 [?x. P x,..] |-  F
@@ -1014,6 +1078,7 @@ val varl = [var];
 (* thm should have conclusion set to false *)
 (* normally it's not bad to specify with their own names 
 since they do not appear free in hypothesis maybe *)
+
 fun skolem_rewrite varl hypterm thm =
   let val th1 = DISCH hypterm thm in
   let val th2 = NOT_INTRO th1 in

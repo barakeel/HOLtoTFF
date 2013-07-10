@@ -1,8 +1,10 @@
 structure namevar :> namevar =
 struct
 
-open HolKernel extractvar stringtools listtools mydatatype numSyntax
-
+open HolKernel numSyntax
+     extractvar nametype  
+     stringtools listtools tools mydatatype
+     
 fun NAMEVAR_ERR function message =
   HOL_ERR{origin_structure = "namevar",
           origin_function = function,
@@ -56,6 +58,13 @@ fun create_fvdict term =
   end end end
 
 (* constant: c *)
+(* = has a special status because it's polymorph *)
+(* don't need to monomorph = *)
+
+               
+
+(* this constant dict should be a little more complex *)
+
 fun name_tff_c term = name_tff "c" term
 fun app_name_tff_c term = (term,name_tff_c term)
 
@@ -67,6 +76,35 @@ fun create_cdict term =
   end end end
 
 
+(* tools really ugly, but very easy *)
+fun erase_last4char str = String.substring (str,0,(String.size str)-4)
+fun change_to_predicatety str = (erase_last4char str) ^ "$o"
 
+(* small changes before printing *)
+fun give_type tyadict term (v,a) = 
+  let val tyname = lookup (type_of v,a) tyadict in
+    if is_predicate_in v term tyadict 
+    then ((v,a),change_to_predicatety tyname)
+    else ((v,a),tyname)
+  end
+
+(* free variable arity type : fv a ty *)
+
+(* link variables to their tff type *)
+fun create_fvatydict term tyadict =
+  let val varacatl = extract_var term in
+  let val fval = collapse_lowestarity (get_fval varacatl) in
+    map (give_type tyadict term) fval
+  end end
+
+fun create_catydict term tyadict =
+  let val varacatl = extract_var term in
+  let val cal = collapse_lowestarity (get_cal varacatl) in
+    map (give_type tyadict term) cal
+  end end
+
+      
+   
+  
 end
   
