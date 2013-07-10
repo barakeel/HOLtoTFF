@@ -975,15 +975,15 @@ app_conv_subl subtermal term;
 
 
 (* PREDICATE CONV *)
-(* required every variables should have a different name *)
+(* required every variables even free variables should have a different name *)
 
 (* find *) 
-fun find_unpredicate_aux atom tyadict =
+fun find_unpredicate_aux atom =
   let val (operator,argl) = strip_comb atom in
     List.concat (map (find_terms is_var_or_const) argl)
   end      
 
-fun find_unpredicate term tyadict =
+fun find_unpredicate term =
   let val atoml = find_atoml term in
    List.concat (map find_unpredicate_aux atoml)
   end              
@@ -1009,9 +1009,9 @@ fun predicate_conv_atom_aux atom =
     SYM eqth2
   end end end end 
 
-fun predicate_conv_atom tyadict term atom =  
+fun predicate_conv_atom term atom =  
   let val operator = fst (strip_comb atom) in
-    if is_member operator (find_unpredicate tyadict term) 
+    if is_member operator (find_unpredicate term) 
     then predicate_conv_atom_aux atom
     else raise UNCHANGED
   end  
@@ -1023,33 +1023,26 @@ val atom = ``(P x:bool):bool ``;
 predicate_conv_sub atom term;
 *)
 (* term is a parameter so it should be first *)
-fun predicate_conv_aux tyadict term subterm =   
+fun predicate_conv_aux term subterm =   
   case termstructure subterm of
     Comb => 
     (
     case connector subterm of
-      Forall => (STRIP_QUANT_CONV (predicate_conv_aux tyadict term)) subterm
-    | Exists => (STRIP_QUANT_CONV (predicate_conv_aux tyadict term)) subterm
-    | Conj => predicate_conv_binop tyadict term subterm 
-    | Neg => predicate_conv_unop tyadict term subterm 
-    | Imp_only => predicate_conv_binop tyadict term subterm
-    | Disj => predicate_conv_binop tyadict term subterm 
-    | App => 
-      (
-      case nodeconst subterm of
-        Eq => if has_boolty (rhs subterm)
-              then predicate_conv_binop tyadict term subterm 
-              else predicate_conv_atom tyadict term subterm (* atom *)  
-      | _ => predicate_conv_atom tyadict term subterm (* atom *)
-      )
+      Forall => (STRIP_QUANT_CONV (predicate_conv_aux term)) subterm
+    | Exists => (STRIP_QUANT_CONV (predicate_conv_aux term)) subterm
+    | Conj => predicate_conv_binop term subterm 
+    | Neg => predicate_conv_unop term subterm 
+    | Imp_only => predicate_conv_binop term subterm
+    | Disj => predicate_conv_binop term subterm 
+    | App => predicate_conv_atom term subterm (* atom *)
     )
-  | _ => predicate_conv_atom tyadict term subterm  (* atom *)
-and predicate_conv_binop tyadict term subterm =
-  BINOP_CONV (predicate_conv_aux tyadict term) subterm
-and predicate_conv_unop tyadict term subterm =
-  RAND_CONV (predicate_conv_aux tyadict term) subterm
+  | _ => predicate_conv_atom term subterm  (* atom *)
+and predicate_conv_binop term subterm =
+  BINOP_CONV (predicate_conv_aux term) subterm
+and predicate_conv_unop term subterm =
+  RAND_CONV (predicate_conv_aux term) subterm
 
-fun predicate_conv tyadict term = predicate_conv_aux tyadict term term;
+fun predicate_conv term = predicate_conv_aux term term;
   
 
 (* test
@@ -1079,7 +1072,7 @@ val varl = [var];
 (* normally it's not bad to specify with their own names 
 since they do not appear free in hypothesis maybe *)
 
-fun skolem_rewrite varl hypterm thm =
+fun skolem_rule varl hypterm thm =
   let val th1 = DISCH hypterm thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = NOT_EXISTS_CONV (concl th2) in
@@ -1091,7 +1084,7 @@ fun skolem_rewrite varl hypterm thm =
   end end end end end 
   end end
 
-fun skolem_rewrite_rev varl hypterm thm =
+fun skolem_rule_rev varl hypterm thm =
   let val th1 = DISCH hypterm thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = GENL varl th2 in

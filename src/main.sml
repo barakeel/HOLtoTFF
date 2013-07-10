@@ -48,6 +48,7 @@ fun convert term =
   fun_conv THENC
   app_conv THENC
   num_conv THENC
+  predicate_conv
   ))
   term
 
@@ -80,10 +81,7 @@ fun main thm =
    let val th2 = list_conj_hyp th1 in
    let val term = hd (hyp th2) in
    let val eqth1 = convert term in
-   let val tyadict = create_tyadict (lhs (concl eqth1)) in
-   let val eqth2 = predicate_conv tyadict in 
-   let val eqth3 = TRANS eqth1 eqth2 in
-   let val (lemma1,lemma2) = EQ_IMP_RULE eqth3 in
+   let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
    let val lemma3 = UNDISCH lemma2 in
    let val th3 = PROVE_HYP lemma3 th2 in
      output_tff testlocation th3
@@ -119,6 +117,7 @@ val bvdict = create_fvdict term;
 val cdict = create_cdict term;
 
 val term = ``!b. P b \/ b``; 
+predicate_conv term
   *)
 
 (* if you have an hypothesis in a conv it's not a problem *)
@@ -130,7 +129,7 @@ D |- B <=> (D => B')
 A D => B' C D |-F
 A B' C D |- F
 *)
-
+normalForms.CNF_CONV ``!x. (x = y) /\ !x. (x = y)``
 (* should make dictionnaries *)
 (* free_var x_str *)
 (* bound X_str *)

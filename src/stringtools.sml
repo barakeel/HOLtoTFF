@@ -1,7 +1,7 @@
 structure stringtools :> stringtools =
 struct
 
-open HolKernel
+open HolKernel 
 
 fun STRINGTOOLS_ERR function message =
   HOL_ERR{origin_structure = "stringtools",
@@ -17,11 +17,21 @@ fun space n =
          else raise STRINGTOOLS_ERR "space" ""
 
 fun indent n = "\n" ^ (space n)
+(* really ugly, but very easy *)
 
-fun last2str str = substring (str,(size str) - 2, 2);
+fun last2char str = 
+  if size str < 2
+  then ""
+  else substring (str,(size str) - 2, 2);
 
+fun erase_last4char str = 
+  if size str < 4 
+  then ""
+  else substring (str,0,(String.size str)-4)
+
+fun change_to_predicatety str = (erase_last4char str) ^ "$o"
 (* test
-last2str "hello";
+last2char "hello";
 *)
 
 

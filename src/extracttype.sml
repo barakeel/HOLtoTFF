@@ -15,7 +15,7 @@ fun all_typelowestarity2 varal =
   | (var,arity) :: m => (type_of var,arity) :: all_typelowestarity2 m
 
 fun all_typelowestarity term = 
-  let val varal = collapse_lowestarity (map fst (nullify_boundarity (extract_var term))) in
+  let val varal = collapse_lowestarity (map fst (nullify_bval (extract_var term))) in
     erase_double (all_typelowestarity2 varal)
   end
   

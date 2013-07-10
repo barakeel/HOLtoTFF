@@ -18,14 +18,14 @@ fun NAMETYPE_ERR function message =
            message = message}
 
 
-(* should add compound type like int list*)  
+fun name_alphatype ty = 
+  substring (dest_vartype ty, 1, size (dest_vartype ty) - 1) 
+
 fun name_leaftype ty = 
   case typecat ty of
     Booltype => fst (dest_type ty)
   | Numtype => fst (dest_type ty)
-  | Alphatype => String.substring 
-                 (dest_vartype ty,1,
-                  String.size (dest_vartype ty) - 1 ) 
+  | Alphatype =>  name_alphatype ty
   | Leaftype => fst (dest_type ty)
   | _ => raise NAMETYPE_ERR "name_leaftype" "node type"
 

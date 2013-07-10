@@ -117,11 +117,11 @@ fun get_lowestarity (term,arity) termal =
 ;
 (* quadratic *)
 (* merge free and bound variables *)
-fun nullify_boundarity varacat =
+fun nullify_bval varacat =
   case varacat of
     [] => []
-  | ((var,arity),Boundvar) :: m => ((var,0),Boundvar) :: nullify_boundarity m
-  | a :: m => a :: nullify_boundarity m
+  | ((var,arity),Boundvar) :: m => ((var,0),Boundvar) :: nullify_bval m
+  | a :: m => a :: nullify_bval m
   
 fun collapse_lowestarity2 varalfix varal =
   case varal of

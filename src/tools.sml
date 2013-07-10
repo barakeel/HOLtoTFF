@@ -43,8 +43,8 @@ fun rewrite_conv conv thm =
 
 (* some first order tools *)
 
-
-fun find_atoml term tyadict =
+(* consider = to be always = not <=> *)
+fun find_atoml term =
   case termstructure term of
     Comb =>
     (
@@ -55,14 +55,7 @@ fun find_atoml term tyadict =
     | Neg => find_atoml_unop term 
     | Imp_only => find_atoml_binop term
     | Disj => find_atoml_binop term 
-    | App => 
-      (
-        case nodeconst term of
-        Eq => if lookup (type_of (lhs term),0) tyadict  = "$o" tyadict andalso 
-                 lookup (type_of (rhs term),0) tyadict  = "$o" 
-              then find_atoml_binop term
-              else [term]     
-      | _ => [term]
+    | App => [term]
       )
     )             
   | _ => [term]  
@@ -81,6 +74,17 @@ fun find_predicatel term =
 fun is_predicate_in var term = 
   is_member var (find_predicatel term)
 (* end first order tools *) 
+
+(* rename bound variables *)
+
+
+
+
+
+
+
+
+
 
 
 end
