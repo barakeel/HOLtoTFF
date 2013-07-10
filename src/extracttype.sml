@@ -9,6 +9,8 @@ fun EXTRACTTYPE_ERR function message =
           message = message}
 
 (* on the result of extract_var *)
+(* shouldn't be necessary *)
+
 fun all_typelowestarity2 varal = 
   case varal of
     [] => []

@@ -8,8 +8,8 @@ sig
   val repeatchange : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
   val add_entry : (''a * 'b) -> (''a * 'b) list -> (''a * 'b) list
   val lookup : ''a -> (''a * 'b) list -> 'b
-  val rename : string -> string list -> string
-  val addrenamel : (''a * string) list -> 
+  val newname : string -> string list -> string
+  val addnewnamel : (''a * string) list -> 
                    (''a * string) list -> 
                    (''a * string) list
   

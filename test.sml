@@ -69,7 +69,7 @@ is_minus ``5:int-6:int``;
 pairSyntax
 
 open folTools;
-FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* rename bound variable *)
+FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* newname bound variable *)
 FOL_NORM ([ASSUME ``(\x.x) = (\z.w) ``]);
 set_goal([],goal3);
 e(FOL_NORM_TAC);

@@ -1,39 +1,41 @@
 TODO
 
-pretty printing:
+Question :
+- How to prove the negation of the formula from a saturated clause set?
+- (only can be done by extracting a model)
+- give the negation of the thm back to beagle?
+
+Pretty printing:
 - to be done
   
-monomorph: 
+Infer axiom from a theory:
+- do it manually for each constant
+  
+Monomorph: 
 - to be extended to bound variables 
-  (don't know how without exponential cases
+  (don't know how without exponential cases) (ask Chantal Keller)
 
-testing:
+Testing:
 - include examples from metis_tac
-- create a call to beagle from inside the project (use shell script)
+- create 
+- test product
 
-output:
+Rewriting:   
+ - outside beagle:
+    - conv
+    - add boolean axioms with btrue  
+    - skolem_rule (* get rid of existential *)
+ - inside beagle?
+   - clause set 
+
+Output:
 - print boolean to two different type depending on the situation
 - chose what to do inside the formula and what to do outside
-- create all dict on a term list
-- add boolean axioms 
-- add numeral axioms 
-- add function axioms 
-- add app axioms
+- create all dictionary on a term list
 - add comments to be printed in the standard input when the file is generated
 - add comments to the file if the user wants to (tptp standard comment)
-
+- print_thm create every dictionary should it be the case ? 
+(I think so but it should returns them for further use)
  
 documentation:
 - explanation of what each signature function does.
-
-rewriting:   
-- abstraction:
-- boolean:
-- higher order: add app constant
- 
-
-infer axiom from a theory:
-- do it manually for each constant
-  
-product:
-- particular case of a constant

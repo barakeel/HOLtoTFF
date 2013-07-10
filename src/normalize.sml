@@ -21,9 +21,7 @@ Bool - no boolean argument except variables
 Fun  - no lambda abstraction 
 App  - no second order
 Num  - add num axiom (suppose there is no abstraction left)
-Cnf   
-Intro of skolem constant (suppose it's already in normal form) 
-Clauses 
+Predicate -
 
 Use different variables name to prevent Hol from renaming them
 At least , memorise them into list so that they can be printed differently
@@ -831,6 +829,7 @@ and find_bound_app_unop term subterm =
 
 fun find_bound_app term = erase_double_aconv_arity (find_bound_app_aux term term)
 
+(* should use newname on "app" before using "app" *)
 fun app_def term =
   let val (operator1,argl1) = strip_comb term in
   let val opty = type_of operator1 in
@@ -972,26 +971,22 @@ app_conv_subl subtermal term;
    
 (* END APP CONV *)
 
-
-
 (* PREDICATE CONV *)
-(* required every variables even free variables should have a different name *)
+  (* 
+  required every variables to have a different name 
+   and every bound variables to be used 
+   cnf conv provide that 
+   *)
 
-(* find *) 
-fun find_unpredicate_aux atom =
-  let val (operator,argl) = strip_comb atom in
-    List.concat (map (find_terms is_var_or_const) argl)
-  end      
 
-fun find_unpredicate term =
-  let val atoml = find_atoml term in
-   List.concat (map find_unpredicate_aux atoml)
-  end              
-(* end find *)
 
-val predicate_def  =
+
+
+
+(* add two new names should be changed to use newname *)
+val predicatedef  =
   let val predicate = mk_var ("predicate",``:bool -> bool``) in
-  let val b = mk_var ("b",``:bool``) in
+  let val b = mk_var ("bpredicate",``:bool``) in
   let val t0 = mk_eq (b,T) in
   let val t1 = mk_comb (predicate,b) in
   let val t2 = mk_eq (t1,t0) in
@@ -1002,7 +997,7 @@ val predicate_def  =
 
 (* term should have bool type *)  
 fun predicate_conv_atom_aux atom =
-  let val th1 = ASSUME predicate_def in
+  let val th1 = ASSUME predicatedef in
   let val th2 = SPEC atom th1 in
   let val eqth1 = (RAND_CONV bool_EQ_CONV) (concl th2) in
   let val eqth2 = EQ_MP eqth1 th2 in
@@ -1011,7 +1006,7 @@ fun predicate_conv_atom_aux atom =
 
 fun predicate_conv_atom term atom =  
   let val operator = fst (strip_comb atom) in
-    if is_member operator (find_unpredicate term) 
+    if is_member operator (find_unpredicatel term) 
     then predicate_conv_atom_aux atom
     else raise UNCHANGED
   end  
@@ -1055,61 +1050,5 @@ predicate_conv subterm;
 *)
 
 (* END PREDICATE CONV *)
-
-(* SKOLEM REWRITE *)
-(* 
-[?x. P x,..] |-  F
-*)
-(*
-val var = mk_var ("x",``:num``);
-val hypterm = ``?x. x = 0``;
-val thm = mk_thm ([hypterm],F);
-val hypterm = ``x = 0``;
-show_assums := true;
-val varl = [var];
-*)
-(* thm should have conclusion set to false *)
-(* normally it's not bad to specify with their own names 
-since they do not appear free in hypothesis maybe *)
-
-fun skolem_rule varl hypterm thm =
-  let val th1 = DISCH hypterm thm in
-  let val th2 = NOT_INTRO th1 in
-  let val th3 = NOT_EXISTS_CONV (concl th2) in
-  let val th4 = EQ_MP th3 th2 in
-  let val th5 = SPECL varl th4 in
-  let val th6 = NOT_ELIM th5 in
-  let val th7 = UNDISCH th6 in
-    th7
-  end end end end end 
-  end end
-
-fun skolem_rule_rev varl hypterm thm =
-  let val th1 = DISCH hypterm thm in
-  let val th2 = NOT_INTRO th1 in
-  let val th3 = GENL varl th2 in
-  let val th4 = FORALL_NOT_CONV (concl th3) in
-  let val th5 = EQ_MP th4 th3 in
-  let val th6 = NOT_ELIM th5 in
-  let val th7 = UNDISCH th6 in
-    th7
-  end end end end end 
-  end end
-  (* END SKOLEM REWRITE *)
-
-(* CLAUSE CONV *)
-(* input: a term !x y. A[x,y] /\ B[x,y] *)   
-(*
-  forall_and conversion
-
-  then
-  remove useless quantifier
-   x doesn't appear free in A then !x is useless.
- *) 
-
-(* output: [!x y. A[x,y], !x y. B[x,y]] *)
-(* set of clauses *)
-
-(* END CLAUSE CONV *)  
 
 end

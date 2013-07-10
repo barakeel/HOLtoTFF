@@ -14,6 +14,9 @@ sig
   val num_conv : term -> thm
   val predicate_conv : term -> thm
   (* rewrite *)
+  val predicatedef : term
+  
+  
   (* val skolem_rewrite : terml -> term varl hypterm thm *)
 
  

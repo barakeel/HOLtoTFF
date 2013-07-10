@@ -17,7 +17,7 @@ fun space n =
          else raise STRINGTOOLS_ERR "space" ""
 
 fun indent n = "\n" ^ (space n)
-(* really ugly, but very easy *)
+
 
 fun last2char str = 
   if size str < 2

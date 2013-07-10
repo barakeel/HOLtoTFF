@@ -43,30 +43,16 @@ fun print_bvl pps bvl bvdict tyadict =
   print_bvl_aux pps bvl bvdict tyadict;
   add_string pps "]"
   )
-
-
-
-(* not sure on the result if there is nested quantification *)
-(* an injective mapping only if term is in cnf  *)
-
-(* only for first order *)
-
-
-
-(* defined operators should have the right number of arguments *)
-(* pflag : predicateflag *)
-       
-                   
-                   
+              
 (* 
 #1 dict : list of ((type,arity), its name) 
 #2 dict : list of (bound variable, its name) 
 #3 dict : list of (free variable, its name)  
 #4 dict : list of (constant, its name) 
 *)
-(* pflag only used for true or false *)
-
 (* dict isn't modified by print_term *)
+(* pflag : predicateflag *)   
+(* pflag only used for true or false *)
 fun print_term pps term dict pflag =
   case termstructure term of
     Numeral => add_string pps (name_numeral term)
@@ -275,14 +261,13 @@ fun print_thm pps thm =
     val tyadict = create_tyadict term
     val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
     val bvdict = create_bvdict term  
-    val bvatydict = create_bvatydict term tyadict 
-    (* clearly not used in printtff *)
+    val bvatydict = create_bvatydict term tyadict (* not used in printtff *)
     val fvdict = create_fvdict term 
     val fvatydict = create_fvatydict term tyadict
     val cdict = create_cdict term 
     val catydict = create_catydict term tyadict
   in
-  let val dict = (tyadict,bvdict,fvdict,cdict,bvatydict,fvatydict,catydict) in
+  let val dict = (tyadict,bvdict,fvdict,cdict) in
   (* if firstorder term
   then *)
     (
