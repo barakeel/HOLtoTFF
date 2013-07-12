@@ -10,8 +10,7 @@ load "rule"; open rule;
 load "printtff"; open printtff;
 *)
 open HolKernel 
-     listtools tools 
-     extractvar nametype
+     tools
      conv rule printtff
 
 fun MAIN_ERR function message =
@@ -29,7 +28,7 @@ val testlocation =
 
 (* CONV *)
 (* could translate to a clause set with only forall quantifier *)  
-fun convert term = 
+fun main_conv term = 
   (QCONV
   (
   beta_conv THENC
@@ -52,7 +51,6 @@ fun convert term =
 (* no monomorphisation *)
 (* no proof reconstruction *) 
 (* use of mk_thm *)
-
 (* thml is not used for now *)
 (* DISCH_ALL all of them and add them to assumptions *)
 
@@ -62,7 +60,7 @@ fun beagle_call thml goal =
   let val th2 = list_conj_hyp th1 in
   (* conversion *)
   let val term = hd (hyp th2) in
-  let val th3 = rewrite_conv_hyp convert term th2 in
+  let val th3 = rewrite_conv_hyp main_conv term th2 in
   (* remove all existential quantifiers from all hypothesis *)
   let val th4 = remove_exists_thm th3 in 
   (* add bool_axiom *)  
@@ -78,7 +76,7 @@ show_assums :=  true ;
 val goal = ([``x:bool``],``y:bool``);
 val goal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
 beagle_call [] goal;
- output_tff testlocation goal;
+output_tff testlocation goal;
 *)
 
 (* conv test

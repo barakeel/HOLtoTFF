@@ -11,6 +11,7 @@ load "nametype"; open nametype;
 open HOLPP; open numSyntax;
 *)
 open HolKernel HOLPP numSyntax 
+     tools
      stringtools listtools mydatatype
      extractvar extracttype namevar nametype higherorder
 

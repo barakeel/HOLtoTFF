@@ -1,23 +1,15 @@
 (* tools *)
+(* 
 load "main"; open main;
-
+*)
 
 (* test *)
 show_assums := true;
 val term = ``x = 0``;
-
 FileSys.openDir "src";
 FileSys.closeDir;
 
-
-
 (* TEST PROBLEM *)
-
-
-
-
-
-
 
 
 (* TEST FUNCTIONS *)
@@ -28,7 +20,7 @@ pairSyntax
 open folTools;
 FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* newname bound variable *)
 FOL_NORM ([ASSUME ``(\x.x) = (\z.w) ``]);
-set_conclt([],conclt3);
+
 e(FOL_NORM_TAC);
 drop;
 (* failure *)

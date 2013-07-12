@@ -2,8 +2,7 @@ structure higherorder :> higherorder =
 struct
 
 open HolKernel 
-     listtools mydatatype
-     extractvar extracttype 
+     listtools tools 
 
 fun HIGHERORDER_ERR function message =
   HOL_ERR {origin_structure = "higherorder",
