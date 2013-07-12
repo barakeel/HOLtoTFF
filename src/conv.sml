@@ -776,7 +776,7 @@ fun find_free_app term =
   end
   
 (* term should be a quantifier *)
-fun find_bound_app_aux term subterm = 
+fun find_bound_app_aux termal term subterm = 
   case termstructure subterm of
     Numeral => []
   | Var => []  
@@ -784,46 +784,67 @@ fun find_bound_app_aux term subterm =
   | Comb => 
     (
     case connector subterm of
-      Forall => find_bound_app_quant term subterm
-    | Exists => find_bound_app_quant term subterm   
-    | Conj => find_bound_app_binop term subterm
-    | Neg => find_bound_app_unop term subterm
-    | Imp_only => find_bound_app_binop term subterm
-    | Disj => find_bound_app_binop term subterm
+      Forall => find_bound_app_quant termal term subterm
+    | Exists => find_bound_app_quant termal term subterm   
+    | Conj => find_bound_app_binop termal term subterm
+    | Neg => find_bound_app_unop termal term subterm
+    | Imp_only => find_bound_app_binop termal term subterm
+    | Disj => find_bound_app_binop termal term subterm
     | App => 
       let val (operator,argl) = strip_comb subterm in
+      let val arity = length argl in
         case termstructure operator of
           Numeral => []
         | Var => if bound_by_quant subterm term 
                  then
-                   (subterm,0) ::  
-                   find_bound_app_list term (operator :: argl)
+                   (* free *)
+                   if free_in operator term
+                   then
+                     let val lowestarity = lookup operator termal in
+                       if arity > lowestarity
+                       then
+                       (subterm,lowestarity) ::   
+                       find_bound_app_list termal term (operator :: argl)
+                       else 
+                       find_bound_app_list termal term (operator :: argl)
+                     end
+                   (* bound *)
+                   else
+                     (subterm,0) :: 
+                     find_bound_app_list termal term (operator :: argl)
                  else 
-                   find_bound_app_list term (operator :: argl)
+                   find_bound_app_list termal term (operator :: argl)
         | Const => if bound_by_quant subterm term 
                    then
-                     (subterm,0) ::  
-                     find_bound_app_list term (operator :: argl)
-                   else 
-                     find_bound_app_list term (operator :: argl)              
+                      let val lowestarity = lookup operator termal in
+                       if arity > lowestarity
+                       then
+                       (subterm,lowestarity) ::  
+                       find_bound_app_list termal term (operator :: argl)
+                       else 
+                       find_bound_app_list termal term (operator :: argl)
+                      end  
+                   else find_bound_app_list termal term (operator :: argl)           
         | Comb => raise CONV_ERR "find_bound_app_aux" "comb"
         | Abs => raise CONV_ERR "find_bound_app_aux" "abstraction"
-      end 
+      end end
     )           
   | Abs => raise CONV_ERR "find_bound_app_aux" "abstraction"
-and find_bound_app_list term subterml =
-  List.concat (map (find_bound_app_aux term) subterml)
-and find_bound_app_quant term subterm =
+and find_bound_app_list termal term subterml =
+  List.concat (map (find_bound_app_aux termal term) subterml)
+and find_bound_app_quant termal term subterm =
   let val (bvl,t) = strip_quant subterm in
-    find_bound_app_aux term t
+    find_bound_app_aux termal term t
   end  
-and find_bound_app_binop term subterm =
-  find_bound_app_list term [lhand subterm,rand subterm] 
-and find_bound_app_unop term subterm =
-  find_bound_app_aux term (rand subterm)
+and find_bound_app_binop termal term subterm =
+  find_bound_app_list termal term [lhand subterm,rand subterm] 
+and find_bound_app_unop termal term subterm =
+  find_bound_app_aux termal term (rand subterm)
 
-fun find_bound_app term = erase_double_aconv_arity (find_bound_app_aux term term)
-
+fun find_bound_app term = 
+  let val termal = collapse_lowestarity (get_fvcal term) in
+    erase_double_aconv_arity (find_bound_app_aux termal term term)
+  end
 (* should use newname on "app" before using "app" *)
 fun app_def term =
   let val (operator1,argl1) = strip_comb term in
@@ -895,9 +916,7 @@ fun app_conv_sub (subterm,lowestarity) term =
   end end end 
   
 
- 
 (* same problem *) (* need to generalize app *)
-
 fun app_conv_subl subtermal term =
   case subtermal of
     [] => raise UNCHANGED

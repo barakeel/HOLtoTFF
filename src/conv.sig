@@ -8,11 +8,19 @@ sig
   (* conv *)
   val beta_conv : term -> thm 
   val eta_conv : term -> thm
+ 
   val bool_conv : term -> thm 
+  
   val fun_conv : term -> thm
+ 
+  val find_bound_app : term -> (term * int) list
+  val find_free_app : term -> (term * int) list
   val app_conv : term -> thm
+  
   val num_conv : term -> thm
+ 
   val predicate_conv : term -> thm
+  
   val define_conv : term -> thm
   (* def *)
   val predicatedef : term

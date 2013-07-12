@@ -10,6 +10,7 @@ sig
   val testlocation : string
 
   val main_conv : conv
-  val beagle_call : thm list -> goal -> unit
+  val beagle_prepare : thm list -> goal -> goal
+  (* doesn't call beagle now *)
 
 end

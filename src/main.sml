@@ -54,7 +54,7 @@ fun main_conv term =
 (* thml is not used for now *)
 (* DISCH_ALL all of them and add them to assumptions *)
 
-fun beagle_call thml goal =
+fun beagle_prepare thml goal =
   let val th0 = mk_thm goal in (* TO BE REMOVED *)
   let val th1 = negate_concl th0 in
   let val th2 = list_conj_hyp th1 in
@@ -64,9 +64,8 @@ fun beagle_call thml goal =
   (* remove all existential quantifiers from all hypothesis *)
   let val th4 = remove_exists_thm th3 in 
   (* add bool_axiom *)  
-  let val th5 = add_bool_axioms th4 in  
-  (* print it *)  
-    output_tff testlocation (hyp th5,concl th5)
+  let val th5 = add_bool_axioms th4 in   
+    (hyp th5,concl th5)
    end end end end end 
    end end 
 
@@ -75,22 +74,24 @@ fun beagle_call thml goal =
 show_assums :=  true ;
 val goal = ([``x:bool``],``y:bool``);
 val goal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
-beagle_call [] goal;
+val goal = ([``y: bool ``],``(!x:num . (x:num) + (x:num) = 1) ==> (x = 1)``);
+beagle_prepare [] goal;
 output_tff testlocation goal;
 *)
 
 (* conv test
-val term = ``!b. P b \/ b``; 
-bool_conv term;
-beta_conv term;
-eta_conv term;
+val term = hd (hyp (list_conj_hyp (negate_concl (mk_thm goal))));
 normalForms.CNF_CONV term;
-bool_conv term;
-(bool_conv THENC normalForms.CNF_CONV) term;
-fun_conv term;
-app_conv term;
-num_conv term;
-predicate_conv term
+bool_conv (rhs (concl it));
+fun_conv (rhs (concl it));
+val term = (rhs (concl it));
+
+find_free_app term;
+find_bound_app term;
+
+app_conv (rhs (concl it));
+num_conv (rhs (concl it));
+predicate_conv (rhs (concl it));
 *)
 
 (* dictionnary test 

@@ -1,18 +1,18 @@
 (* tools *)
 (* 
 load "main"; open main;
+load "printtff"; open printtff;
+load "conv"; open conv;
 *)
 
-(* test *)
-show_assums := true;
-val term = ``x = 0``;
+
+(* TEST PROBLEM *)
+show_assums :=  true ;
+
+(* TEST FUNCTIONS *)
 FileSys.openDir "src";
 FileSys.closeDir;
 
-(* TEST PROBLEM *)
-
-
-(* TEST FUNCTIONS *)
 open HolKernel;
 is_minus ``5:int-6:int``;
 pairSyntax
