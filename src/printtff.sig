@@ -5,6 +5,7 @@ sig
   type hol_type = Type.hol_type
   type thm      = Thm.thm
   type ppstream = HOLPP.ppstream
+  type goal = (term list * term)
   
   val print_term : ppstream -> term -> 
                    ((hol_type * int) * string) list *
@@ -14,7 +15,7 @@ sig
                    bool -> 
                    unit
 
-  val print_thm : ppstream -> thm -> unit
-  val output_tff : string -> thm -> unit
+  val print_tff : ppstream -> goal -> unit
+  val output_tff : string ->  goal -> unit
 
 end

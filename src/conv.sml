@@ -1,4 +1,4 @@
-structure normalize :> normalize =
+structure conv :> conv =
 struct
 
 (*
@@ -31,13 +31,12 @@ open HolKernel normalForms
      stringtools listtools tools mydatatype 
      extractvar extracttype
 
-fun NORMALIZE_ERR function message =
-    HOL_ERR{origin_structure = "normalize",
+fun CONV_ERR function message =
+    HOL_ERR{origin_structure = "conv",
 	    origin_function = function,
             message = message}
 
 
-(* tools *)
   (* bool *)
 fun is_logical term =
   is_conj term orelse
@@ -283,12 +282,8 @@ depend on the arguments
 true --> $true
 true --> btrue 
 *)
-(* END BOOL CONV *)
-
-
 
 (* NUM CONV *)
-
 (* find *)
 local fun is_interesting_in term subterm = 
   has_numty subterm andalso 
@@ -500,7 +495,7 @@ fun num_conv_aux term =
     | Exists => ((STRIP_QUANT_CONV num_conv_aux) THENC num_conv_exists) term        
     | _ => COMB_CONV num_conv_aux term
     )
-  | Abs => raise NORMALIZE_ERR "num_conv" "abstraction"
+  | Abs => raise CONV_ERR "num_conv" "abstraction"
 
 fun num_conv term =
   let val terml = find_free_num term in
@@ -568,10 +563,10 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
 fun find_bound_abs term = erase_double_aconv (find_bound_abs_aux term term)
 (* end tools *)
   
-fun ap_thml thm terml =
+fun ap_thm_list thm terml =
   case terml of
     [] => thm 
-  | t :: m => ap_thml (AP_THM thm t) m 
+  | t :: m => ap_thm_list (AP_THM thm t) m 
 
 fun list_fun_eq_conv vl term =
   case vl of
@@ -589,7 +584,7 @@ fun fun_axiom term =
   (* useful axiom *)
   let val axiom1 = list_fun_eq_conv bvl term in
   let val axiom2 = REFL abst in
-  let val axiom3 = ap_thml axiom2 bvl in
+  let val axiom3 = ap_thm_list axiom2 bvl in
   let val axiom4 = LAND_CONV LIST_BETA_CONV (concl axiom3) in
   let val axiom5 = EQ_MP axiom4 axiom3 in
   let val axiom6 = SYM axiom1 in
@@ -759,11 +754,11 @@ fun find_free_app_aux termal term subterm  =
                    end
                  else 
                    find_free_app_list termal term (operator :: argl)        
-        | Comb => raise NORMALIZE_ERR "find_free_app_aux" "comb"
-        | Abs => raise NORMALIZE_ERR "find_free_app_aux" "abstraction"
+        | Comb => raise CONV_ERR "find_free_app_aux" "comb"
+        | Abs => raise CONV_ERR "find_free_app_aux" "abstraction"
       end end
     )         
-  | Abs => raise NORMALIZE_ERR "find_free_app_aux" "abstraction"
+  | Abs => raise CONV_ERR "find_free_app_aux" "abstraction"
 and find_free_app_list termal term subterml =
   List.concat (map (find_free_app_aux termal term) subterml)
 and find_free_app_quant termal term subterm =
@@ -776,7 +771,7 @@ and find_free_app_unop termal term subterm =
   find_free_app_aux termal term (rand subterm)
 
 fun find_free_app term = 
-  let val termal = collapse_lowestarity (get_fvcal (extract_var term)) in
+  let val termal = collapse_lowestarity (get_fvcal term) in
     erase_double_aconv_arity (find_free_app_aux termal term term)
   end
   
@@ -811,11 +806,11 @@ fun find_bound_app_aux term subterm =
                      find_bound_app_list term (operator :: argl)
                    else 
                      find_bound_app_list term (operator :: argl)              
-        | Comb => raise NORMALIZE_ERR "find_bound_app_aux" "comb"
-        | Abs => raise NORMALIZE_ERR "find_bound_app_aux" "abstraction"
+        | Comb => raise CONV_ERR "find_bound_app_aux" "comb"
+        | Abs => raise CONV_ERR "find_bound_app_aux" "abstraction"
       end 
     )           
-  | Abs => raise NORMALIZE_ERR "find_bound_app_aux" "abstraction"
+  | Abs => raise CONV_ERR "find_bound_app_aux" "abstraction"
 and find_bound_app_list term subterml =
   List.concat (map (find_bound_app_aux term) subterml)
 and find_bound_app_quant term subterm =
@@ -877,26 +872,14 @@ SUBS multiple subs possible
 (* make a new fresh variables each time you do that *)
 
 (* app is not local *)
-fun dest_comb_nb (term,nb) =
-  if nb = 0 then (term,[])
-else 
-  if nb > 0 then let val (operator,arg) = dest_comb term in
-                 let val (rest,resnb) = dest_comb_nb (operator,nb - 1) in
-                   (rest,resnb @ [arg])
-                 end end 
-else 
-  raise NORMALIZE_ERR "" ""
-
-fun get_arity term = length (snd (strip_comb term))
-
 fun app_conv_sub (subterm,lowestarity) term =
   let val arity = get_arity subterm in
-  let val (operator,argl) = dest_comb_nb (subterm,arity - lowestarity) in  
+  let val (operator,argl) = strip_comb_n (subterm,arity - lowestarity) in  
   let val (operator1,argl1) = strip_comb operator in
   (* preparation *)
   let val lemma1 = ASSUME (app_def operator) in
   let val lemma2 = SPECL (operator1 :: argl1) lemma1 in
-  let val lemma3 = ap_thml lemma2 argl in
+  let val lemma3 = ap_thm_list lemma2 argl in
   let val lemma4 = SYM lemma3 in
   (* first part *)
   let val th11 = ASSUME term in 
@@ -969,19 +952,12 @@ app_conv_subl subtermal term;
 (* post thinking : two app of the same type output should have the same name
    two app of the same type output comes from the same type and arity *)
    
-(* END APP CONV *)
-
 (* PREDICATE CONV *)
   (* 
   required every variables to have a different name 
    and every bound variables to be used 
    cnf conv provide that 
    *)
-
-
-
-
-
 
 (* add two new names should be changed to use newname *)
 val predicatedef  =
@@ -1049,6 +1025,42 @@ predicate_conv term;
 predicate_conv subterm;
 *)
 
-(* END PREDICATE CONV *)
+(* DEFINE CONV *)
+fun define_conv def =
+  let val (bvl,t) = strip_forall def in
+  (* one way *)
+  let val th11 = ASSUME def in
+  let val th12 = SPECL bvl th11 in
+  let val th13 = repeatchange ABS (rev bvl) th12 in
+  let val th14 = rewrite_conv (LAND_CONV eta_conv) th13 in 
+  let val th15 = DISCH def th14 in
+  (* otherway *)
+  let val th21 = ASSUME (concl th14) in
+  let val th22 = ap_thm_list th21 bvl in
+  let val th23 = rewrite_conv beta_conv th22 in
+  let val th24 = GENL bvl th23 in
+  let val th25 = DISCH (concl th14) th24 in
+  (* together *)
+    IMP_ANTISYM_RULE th15 th25
+  end end end end end 
+  end end end end end
+  end
+
+(* test
+val def = ``!x y. app x y = x y``;
+val def = ``!x. app x  = x ``;
+vval th2 = MK_ABS th1;
+define_conv def;
+define_conv predicatedef;
+*)
+
+
+
+
+
+
+
+
+
 
 end

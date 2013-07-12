@@ -1,4 +1,4 @@
-signature normalize =
+signature conv =
 sig
 
   type term     = Term.term
@@ -13,11 +13,11 @@ sig
   val app_conv : term -> thm
   val num_conv : term -> thm
   val predicate_conv : term -> thm
-  (* rewrite *)
+  val define_conv : term -> thm
+  (* def *)
   val predicatedef : term
   
-  
-  (* val skolem_rewrite : terml -> term varl hypterm thm *)
+
 
  
 end

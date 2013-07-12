@@ -153,7 +153,7 @@ and print_app pps str argl dict pflag =
 
 (* END PRINT_TERM *)
 
-(* PRINT_THM *)
+(* PRINT_TFF *)
 (* useful functions *)
 fun nl2 pps = (add_newline pps; add_newline pps) 
 fun indent4 pps = ((* to be replaced with begin block maybe *)
@@ -241,55 +241,52 @@ fun print_conjecture pps name term dict =
     add_string pps " ))."
     )     
   
-
-
 (* should do something so that the user 
 knows all the transformation done to his formula *)
 
-(* PRINT_THM *)
-fun print_thm pps thm =
-  let val hypl = hyp thm in
-  let val goal = concl thm in
-  let val terml = hypl @ [goal] in
+fun print_tff pps (hyptl,conclt) =
+  let val terml = hyptl @ [conclt] in
   let val term = list_mk_conj (terml) in 
   (* this term is only there to extract variables from *)
   let 
     (* free variables or constant *)
-    val fval = collapse_lowestarity (get_fval (extract_var term)) 
-    val cal = collapse_lowestarity (get_cal (extract_var term)) 
-    (* dict *)
-    val tyadict = create_tyadict term
-    val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
-    val bvdict = create_bvdict term  
-    val bvatydict = create_bvatydict term tyadict (* not used in printtff *)
-    val fvdict = create_fvdict term 
-    val fvatydict = create_fvatydict term tyadict
-    val cdict = create_cdict term 
-    val catydict = create_catydict term tyadict
-  in
-  let val dict = (tyadict,bvdict,fvdict,cdict) in
-  (* if firstorder term
-  then *)
-    (
-    begin_block pps CONSISTENT 0;
-      print_tyadict pps simpletyadict;
-      print_fvatydict pps fvdict fvatydict;
-      print_catydict pps cdict catydict;
-      print_axioml pps hypl dict;
-      print_conjecture pps "conjecture" goal dict;
-    end_block pps
-    )
-  (* else
-    raise PRINTTFF_ERR "print_thm" "higher order" *)
-  end end end end end
-  end
-  
-(* test
-val thm = th3;
-print_thm th3; *)
-    
-(* need the full path of your file (eg /home/problem.p) *)
-fun output_tff path thm =
+    val bval = get_bval term
+    val fval = get_fval term
+    val cal = get_cal term
+    val fvcal = get_fvcal term
+  in  
+    if firstorder_bval bval andalso
+       firstorder_fvcal fvcal andalso
+       not (has_boolarg term)
+    then 
+      let 
+      (* dict *)
+        val tyadict = create_tyadict term
+        val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
+        val bvdict = create_bvdict term  
+        val bvatydict = create_bvatydict term tyadict (* not used in printterm *)
+        val fvdict = create_fvdict term 
+        val fvatydict = create_fvatydict term tyadict
+        val cdict = create_cdict term 
+        val catydict = create_catydict term tyadict
+      in
+      let val dict = (tyadict,bvdict,fvdict,cdict) in
+      (
+      begin_block pps CONSISTENT 0;
+        print_tyadict pps simpletyadict;
+        print_fvatydict pps fvdict fvatydict;
+        print_catydict pps cdict catydict;
+        print_axioml pps hyptl dict;
+        print_conjecture pps "conjecture" conclt dict;
+      end_block pps
+      )
+      end end
+    else
+      raise PRINTTFF_ERR "print_tff" "higher order"
+  end end end 
+
+(* OUTPUT TFF *)
+fun output_tff path (hyptl,conclt) =
   let val file = TextIO.openOut path in 
   let val pps = PP.mk_ppstream 
                   {
@@ -299,12 +296,15 @@ fun output_tff path thm =
                   } 
   in 
     (
-    print_thm pps thm;
+    print_tff pps (hyptl,conclt);
     TextIO.closeOut file
     )  
   end end
   
-
+(* test
+val thm = ;
+val path = ;
+*)
 
 
 end

@@ -8,47 +8,37 @@ fun EXTRACTTYPE_ERR function message =
           origin_function = function,
           message = message}
 
-(* on the result of extract_var *)
-(* shouldn't be necessary *)
+(* type are always considered with their arity *)
 
-fun all_typelowestarity2 varal = 
+fun all_tya_aux varal = 
   case varal of
     [] => []
-  | (var,arity) :: m => (type_of var,arity) :: all_typelowestarity2 m
+  | (var,arity) :: m => (type_of var,arity) :: all_tya_aux m
 
-fun all_typelowestarity term = 
-  let val varal = collapse_lowestarity (map fst (nullify_bval (extract_var term))) in
-    erase_double (all_typelowestarity2 varal)
+fun all_tya term = 
+  let val varal = (map fst (extract_var term)) in
+    erase_double (all_tya_aux varal)
   end
   
-(* on the result of all_typelowestarity *)
-fun get_simpletyal tyal =
-  case tyal of
-    [] => []
-  | (ty,0) :: m => (ty,0) :: get_simpletyal m
-  | a :: m => get_simpletyal m
+(* on the result of all_tya *)
+fun is_in_simpletyal (ty,arity) = (arity = 0)
+fun get_simpletyal term = filter is_in_simpletyal (all_tya term)
 
-fun get_compoundtyal tyal =
-  case tyal of
-    [] => []
-  | (ty,0) :: m => get_compoundtyal m
-  | (ty,arity) :: m => (ty,arity) :: get_compoundtyal m
+fun is_in_compoundtyal (ty,arity) = (arity > 0)
+fun get_compoundtyal term  = filter is_in_compoundtyal (all_tya term)
 
 
-(* recursive dest_type with a bound *)
-(* type are always considered with their arity *)
-fun dest_type_nb (ty,arity) = 
+fun strip_type_n (ty,arity) = 
   case arity of
     0 => ([],(ty,0))
-  | n => if n < 0 
-         then raise EXTRACTTYPE_ERR "dest_type_nb" "negative number"
+  | n => if n < 0 then raise EXTRACTTYPE_ERR "strip_type_n" ""
          else
            let val (str,list) = dest_type ty in 
            let 
              val ty1 = hd list
              val ty2 = hd (tl list) 
            in
-           let val resl = dest_type_nb (ty2,(n-1)) in
+           let val resl = strip_type_n (ty2,(n-1)) in
            let
              val argl = fst resl
              val image = snd resl 

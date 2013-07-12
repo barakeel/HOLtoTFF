@@ -17,13 +17,12 @@ fun TOOLS_ERR function message =
  
 type conv = Term.term -> Thm.thm 
  
-(* test functions *) 
+(* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
 fun is_var_or_const term = is_var term orelse is_const term
-(* end test functions *)
- 
-(* quantifier functions *) 
+
+(* QUANTIFIER *) 
 fun strip_quant term =
   case connector term of
     Forall => strip_forall term
@@ -34,9 +33,9 @@ fun bound_by_quant subterm term =
  let val (bvl,t) = strip_quant term in 
    free_in subterm t andalso not (free_in subterm term)
  end  
-(* end quantifier *) 
+(* TYPE *)
  
-(* term function *) 
+(* TERM *) 
 fun name_of term = 
   case termstructure term of
     Numeral => Int.toString (numSyntax.int_of_term term)
@@ -74,13 +73,65 @@ fun create_newvar var used =
   
 fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
 
-(* thm *)
+fun strip_comb_n (term,n) =
+  if n = 0 then (term,[])
+else 
+  if n > 0 then let val (operator,arg) = dest_comb term in
+                 let val (operator2,argl) = strip_comb_n (operator,n - 1) in
+                   (operator2,argl @ [arg])
+                 end end 
+else 
+  raise TOOLS_ERR "" ""
+
+(* ARITY *)
+fun get_arity term = length (snd (strip_comb term))
+
+fun get_lowestarity (term,arity) termal =
+  case termal of
+    [] => arity
+  | (t,a) :: m => if term = t 
+                  then 
+                    if a < arity 
+                    then get_lowestarity (term,a) m
+                    else get_lowestarity (term,arity) m 
+                  else get_lowestarity (term,arity) m     
+;
+
+  
+fun collapse_lowestarity2 varal varalfix=
+  case varal of
+    [] => []
+  | (var,arity) :: m => 
+    let val lowestarity = get_lowestarity (var,arity) varalfix in
+      (var,lowestarity) :: collapse_lowestarity2  m varalfix
+    end
+  
+fun collapse_lowestarity varal = 
+  erase_double (collapse_lowestarity2 varal varal)
+  
+(* CONV *)
+fun repeat_n_conv n conv = 
+  case n of
+    0 => ALL_CONV
+  | n => if n < 0 then raise TOOLS_ERR "repeat_n_conv" ""  
+         else
+           conv THENC repeat_n_conv (n - 1) conv
+
+fun not_exists_list_conv term =
+  let val n = length (fst (strip_exists (dest_neg term))) in
+    (NOT_EXISTS_CONV THENC 
+    (repeat_n_conv (n - 1) (STRIP_QUANT_CONV NOT_EXISTS_CONV)))
+    term
+  end  
+
+(* RULE *)
 fun rewrite_conv conv thm =
-  let val goal = concl thm in
-  let val eqthm = conv goal in
+  let val conclt = concl thm in
+  let val eqthm = conv conclt in
     EQ_MP eqthm thm
   end end     
-
+  handle UNCHANGED => thm
+  
 fun rewrite_conv_hyp conv term thm =
   let val eqth1 = conv term in
   let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
@@ -89,10 +140,26 @@ fun rewrite_conv_hyp conv term thm =
     th3
   end end end end 
   handle UNCHANGED => thm
-   
+ 
+fun list_prove_hyp thml thm =
+  case thml of
+    [] => thm
+  | th :: m => list_prove_hyp m (PROVE_HYP th thm)  
 
-(* some first order tools *)
+fun list_conj_hyp thm =
+  let val hyptl = hyp thm in
+  let val t1 = list_mk_conj hyptl in
+  let val thl = CONJ_LIST (length hyptl) (ASSUME t1) in
+  let val th2 = list_prove_hyp thl thm in
+    th2
+  end end end end   
 
+fun ap_thm_list thm terml =
+  case terml of
+    [] => thm 
+  | t :: m => ap_thm_list (AP_THM thm t) m 
+
+(* FIRST ORDER *)
 (* consider = to be always = not <=> *)
 fun find_atoml term =
   case termstructure term of
@@ -132,18 +199,13 @@ fun find_unpredicatel term =
   let val atoml = find_atoml term in
    List.concat (map find_unpredicatel_aux atoml)
   end              
-(* end first order tools *) 
 
-(* newname bound variables *)
+fun has_boolarg term = not (null (filter has_boolty (find_unpredicatel term)))
 
-
-
-
-
-
-
-
-
+fun has_boolarg_thm thm =
+  let val l = (hyp thm) @ [concl thm] in
+    exists has_boolarg l
+  end  
 
 
 end

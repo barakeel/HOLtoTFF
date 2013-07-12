@@ -86,97 +86,51 @@ and extract_var2abs bvl1 term bvl2 =
   (extract_var2l bvl1 (bvl1 @ bvl2)) @ (extract_var2 term (bvl1 @ bvl2))
 
 
-
 fun erase_number l =
   case l of 
     [] => []
   | (_,Numeralvar) :: m => erase_number m 
   | a :: m =>  a :: erase_number m
 
-fun erase_bv l =
-  case l of 
-    [] => []
-  | (_,Boundvar) :: m => erase_bv m 
-  | a :: m =>  a :: erase_bv m
-  
 fun extract_var term = erase_number (erase_double (extract_var2 term [])) 
 fun extract_varl terml = erase_number (erase_double (extract_var2l terml []))
 (* return a list of triple (variable,number of arguments,category) *)
 
-(* lowest arity *)
-(* can be applied to any category but mostly for constant and free variables *)
-fun get_lowestarity (term,arity) termal =
-  case termal of
-    [] => arity
-  | (t,a) :: m => if term = t 
-                  then 
-                    if a < arity 
-                    then get_lowestarity (term,a) m
-                    else get_lowestarity (term,arity) m 
-                  else get_lowestarity (term,arity) m     
-;
-(* quadratic *)
-(* merge free and bound variables *)
-fun nullify_bval varacat =
-  case varacat of
-    [] => []
-  | ((var,arity),Boundvar) :: m => ((var,0),Boundvar) :: nullify_bval m
-  | a :: m => a :: nullify_bval m
-  
-fun collapse_lowestarity2 varalfix varal =
-  case varal of
-    [] => []
-  | (var,arity) :: m => 
-    let val lowestarity = get_lowestarity (var,arity) varalfix in
-      (var,lowestarity) :: collapse_lowestarity2 varalfix m
-    end
-  
-fun collapse_lowestarity varal = 
-  erase_double (collapse_lowestarity2 varal varal)
-  
-(* end lowestarity *)
 
-fun get_bval l =   
-  case l of 
-    [] => []
-  | (bva,Boundvar) :: m => bva :: get_bval m
-  | a :: m => get_bval m
+fun is_in_bval (a,b) = (b = Boundvar)
+fun is_in_fval (a,b) = (b = Freevar)
+fun is_in_cal (a,b) = (b = Constvar)
+fun is_in_fvcal (a,b) = (b = Freevar) orelse (b = Constvar)
 
-fun get_fval l =   
-  case l of 
-    [] => []
-  | (fva,Freevar) :: m => fva :: get_fval m
-  | a :: m => get_fval m
+fun get_bval term = map fst (filter is_in_bval (extract_var term))
+fun get_fval term = map fst (filter is_in_fval (extract_var term))
+fun get_cal term = map fst (filter is_in_cal (extract_var term))
+fun get_fvcal term = map fst (filter is_in_fvcal (extract_var term))  
 
-fun get_cal l =   
-  case l of 
-    [] => []
-  | (ca,Constvar) :: m => ca :: get_cal m
-  | a :: m => get_cal m
+fun get_bvl term = map fst (get_bval term)
+fun get_fvl term = map fst (get_fval term)
+fun get_cl term = map fst (get_cal term)
+fun get_fvcl term = map fst (get_fvcal term)
 
-fun get_fvcal l = get_fval l @ get_cal l
+fun all_var term = map fst (map fst (extract_var term))
+fun all_var_thm thm =
+  let val l = (hyp thm) @ [concl thm] in
+    List.concat (map all_var l)
+  end  
 
-(* for thm easy extraction *)
-fun get_fvcl_thm thm = 
+fun concat_thm returnalist thm =
   let
-    val hypl = hyp thm
-    val goal = concl thm
+    val hyptl = hyp thm
+    val conclt = concl thm
   in
-   let val varacat = extract_varl (hypl @ [goal]) in
-   let val fvcal = get_fvcal varacat in
-     map fst fvcal
-   end end
-  end
+  let val l = hyptl @ [conclt] in
+    erase_double (List.concat (map returnalist l))
+  end end
+  
+fun get_fvl_thm thm = concat_thm get_fvl thm
+fun get_bvl_thm thm = concat_thm get_bvl thm
+fun get_cl_thm thm = concat_thm get_cl thm
+fun get_fvcl_thm thm = concat_thm get_fvcl thm
 
-fun get_cl_thm thm = 
-  let
-    val hypl = hyp thm
-    val goal = concl thm
-  in
-   let val varacat = extract_varl (hypl @ [goal]) in
-   let val cal = get_cal varacat in
-     map fst cal
-   end end
-  end
-
+  
 end 

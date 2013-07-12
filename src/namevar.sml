@@ -11,49 +11,40 @@ fun NAMEVAR_ERR function message =
           message = message}
 
 
-    
-
-
 (* bound variable: bv *)
 fun name_tff_bv term = name_tff "X" term
 fun app_name_tff_bv term = (term,name_tff_bv term)
 
 (* give a new name if the name is already used *)     
 fun create_bvdict term =
-  let val varacatl = extract_var term in
-  let val bvl = map fst (get_bval varacatl) in 
+  let val bvl = get_bvl term in 
   let val bvnamel = map app_name_tff_bv bvl in
     addnewnamel bvnamel []
-  end end end
+  end end 
 
 (* free variable: fv *)
 fun name_tff_fv term = name_tff "x" term
 fun app_name_tff_fv term = (term,name_tff_fv term)
-
-(* give a new name if the name is already used *)     
+  
 fun create_fvdict term =
-  let val varacatl = extract_var term in
-  let val fvl = map fst (get_fval varacatl) in 
+  let val fvl = get_fvl term in 
   let val fvnamel = map app_name_tff_fv fvl in
     addnewnamel fvnamel []
-  end end end
+  end end 
 
 (* constant: c *)
-(* don't need to monomorph = *)
-(* this constant dict should be a little more complex *)
 fun name_tff_c term = name_tff "c" term
 fun app_name_tff_c term = (term,name_tff_c term)
 
 fun create_cdict term =
-  let val varacatl = extract_var term in
-  let val cl = map fst (get_cal varacatl) in 
+  let val cl = get_cl term in 
   let val cnamel = map app_name_tff_c cl in
     addnewnamel cnamel []
-  end end end
+  end end
 
 
-(* Predicate *)
-(* newname predicate variables type to "$o" *)
+(* predicate *)
+(* name (predicate variable type) to "$o" *)
 fun give_predicate_type tyadict term (v,a) = 
   let val tyname = lookup (type_of v,a) tyadict in
     if is_predicate_in v term 
@@ -66,22 +57,19 @@ fun give_predicate_type tyadict term (v,a) =
 (* link variables to their tff type *)
 (* a bound variable should never be a predicate anyway *)
 fun create_bvatydict term tyadict =
-  let val varacatl = extract_var term in
-  let val bval = get_bval (nullify_bval varacatl) in
+  let val bval = get_bval term in
     map (give_predicate_type tyadict term) bval
-  end end
+  end 
 
 fun create_fvatydict term tyadict =
-  let val varacatl = extract_var term in
-  let val fval = collapse_lowestarity (get_fval varacatl) in
+  let val fval = get_fval term in
     map (give_predicate_type tyadict term) fval
-  end end
+  end 
 
 fun create_catydict term tyadict =
-  let val varacatl = extract_var term in
-  let val cal = collapse_lowestarity (get_cal varacatl) in
+  let val cal = get_cal term in
     map (give_predicate_type tyadict term) cal
-  end end
+  end 
 (* End Predicate *)     
    
   

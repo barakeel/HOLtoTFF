@@ -3,21 +3,29 @@ sig
 
   type term   = Term.term
   type VARCAT = mydatatype.VARCAT
- 
-  val extract_var : term -> ((term * int) * VARCAT) list 
-  val extract_varl : term list -> ((term * int) * VARCAT) list 
-  val nullify_bval : ((term * int) * VARCAT) list ->  ((term * int) * VARCAT) list
-  val collapse_lowestarity : (term * int) list -> (term * int) list
-(* all this functions are to be called on the result of extract_var or varl *)  
-  val erase_bv : ((term * int) * VARCAT) list -> ((term * int) * VARCAT) list
+  type thm = Thm.thm
+  
   val erase_number : ((term * int) * VARCAT) list -> 
                      ((term * int) * VARCAT) list
-  val get_bval : ((term * int) * VARCAT) list -> (term * int) list
-  val get_fval : ((term * int) * VARCAT) list -> (term * int) list
-  val get_cal : ((term * int) * VARCAT) list -> (term * int) list
-  val get_fvcal : ((term * int) * VARCAT) list -> (term * int) list
   
-  val get_fvcl_thm : thm -> term list
+  val extract_var : term -> ((term * int) * VARCAT) list 
+  val extract_varl : term list -> ((term * int) * VARCAT) list 
+                    
+  val get_bval : term -> (term * int) list 
+  val get_fval : term -> (term * int) list 
+  val get_cal : term -> (term * int) list 
+  val get_fvcal : term -> (term * int) list 
+  
+  val get_bvl : term -> term list 
+  val get_fvl : term -> term list 
+  val get_cl : term -> term list 
+  val get_fvcl : term -> term list 
+  val all_var : term -> term list 
+    
+  val get_bvl_thm : thm -> term list
+  val get_fvl_thm : thm -> term list
   val get_cl_thm : thm -> term list
-  
+  val get_fvcl_thm : thm -> term list
+  val all_var_thm : thm -> term list
+
 end

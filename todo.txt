@@ -2,9 +2,11 @@ TODO
 
 Question :
 - How to prove the negation of the formula from a saturated clause set?
-- (only can be done by extracting a model)
-- give the negation of the thm back to beagle?
-
+  (only can be done by extracting a model)
+  (should give the negation of the thm back to beagle)
+- How to translate a rule or something that produces a theorem into a tactic?
+- How tactic works ?
+ 
 Pretty printing:
 - to be done
   
@@ -17,25 +19,23 @@ Monomorph:
 
 Testing:
 - include examples from metis_tac
-- create 
 - test product
 
 Rewriting:   
- - outside beagle:
-    - conv
-    - add boolean axioms with btrue  
-    - skolem_rule (* get rid of existential *)
- - inside beagle?
-   - clause set 
+- take care of variables names: 
+  - new variables should be used when adding variables
+  - maybe create list to remembers which variables were added
+  - maybe write my own cnf_conv but not necessary
+- outside beagle:   
+  - clause set ? 
+- inside beagle :
+  - clause set ?
 
 Output:
-- print boolean to two different type depending on the situation
-- chose what to do inside the formula and what to do outside
-- create all dictionary on a term list
 - add comments to be printed in the standard input when the file is generated
 - add comments to the file if the user wants to (tptp standard comment)
-- print_thm create every dictionary should it be the case ? 
-(I think so but it should returns them for further use)
+- print_thm 
+  - should returns every dictionary created 
  
-documentation:
+Documentation:
 - explanation of what each signature function does.

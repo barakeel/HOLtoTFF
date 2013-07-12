@@ -1,67 +1,24 @@
 (* tools *)
-load "stringtools"; open stringtools;
-load "listtools"; open listtools;
-load "mydatataype"; open mydatatype;
-load "extractvar"; open extractvar;
-load "extracttype"; open extracttype;
-load "namevar"; open namevar;
-load "nametype"; open nametype;
-load "higherorder"; open higherorder;
-load "printtff"; open printtff;
+load "main"; open main;
 
 
-(* TEST PROBLEM  *)
+(* test *)
 show_assums := true;
 val term = ``x = 0``;
-val beagle_call = 
-  "/home/thibault/Desktop/Scalaproject/beagleproject/beagle problem.p"
-val beagle_problem =
-  "/home/thibault/Desktop/Scalaproject/beagleproject/beagle problem.p"
-val test_location =
-output_tff "/home/thibault/Desktop/SMLproject/HOLtoTFF/output.txt" term;
-output_tff problem.p" term;
-
-Process.system "cd /home/thibault/Desktop/Scalaproject/beagleproject/";
-Process.system "ls";
-Process.system "cd src"; 
- ./beagle";
 
 FileSys.openDir "src";
 FileSys.closeDir;
 
-fun beagle term =
-/home/thibault/Desktop/Scalaproject/beagleproject/problem.p"
-(* END TEST PROBLEM *)
 
-(* need to standardize my code *)
-(* test main function *)
-val fval = collapse_lowestarity (get_fval (extract_var term)); 
-val cal = collapse_lowestarity (get_cal (extract_var term));
-  (* dict *)
-val tyadict = create_tyadict term;
-val simpletyadict = get_simpletyadict tyadict;
-val bvdict = create_bvdict term;
-val fvdict = create_fvdict term;
-val cdict = create_cdict term; 
-(* end test main function *)
-    
-(* test print *)
-let val file = TextIO.openOut path in 
-let val pps = PP.mk_ppstream 
-                {
-                consumer  = fn s => TextIO.output (file,s),
-                linewidth = 80,
-                flush  = fn () => TextIO.flushOut file
-                } 
-in 
-  (
-  print_fvctyl pps fval fvdict tyadict;
-  TextIO.closeOut file
-  )  
-end end
 
-(* end test print *)  
-(* end debug *)
+(* TEST PROBLEM *)
+
+
+
+
+
+
+
 
 (* TEST FUNCTIONS *)
 open HolKernel;
@@ -71,14 +28,14 @@ pairSyntax
 open folTools;
 FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* newname bound variable *)
 FOL_NORM ([ASSUME ``(\x.x) = (\z.w) ``]);
-set_goal([],goal3);
+set_conclt([],conclt3);
 e(FOL_NORM_TAC);
 drop;
 (* failure *)
 FOL_NORM ([mk_thm([],``(\z.x) = (\y.y)``)]); (* mk_thm *)
 
 open Hol_pp;
-print_term goal;
+print_term conclt;
 
 open intSyntax;
 type_of ``~1``;
@@ -105,6 +62,5 @@ val term2 = rand (concl (REDEPTH_CONV BETA_CONV term));  (* to be rewritten *)
 val term3 = rand (concl (REDEPTH_CONV ETA_CONV term2)); (* may raise QConv.UNCHANGED *)
   (* skolemisation *) 
 val term4 = rand (concl (REDEPTH_CONV SKOLEM_CONV term2));
-
 
 (* END TEST FUNCTIONS *) 
