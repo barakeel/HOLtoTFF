@@ -51,12 +51,23 @@ fun all_subst term =
   let val multisubst = mk_multisubst vartyl tyl in
     add_multisubst multisubst []  
   end end end
-        
+
+fun inst_rev term subst = inst subst term
+
+(* term should have type bool *)
+fun monomorph term =
+  let val substl = all_subst term in
+    if null substl then term
+    else list_mk_disj (map (inst_rev term) substl)          
+  end
+
+
+(* because I instantiate by its type there is at least a rule *)
+
 
 (* test   
 val term = ``x = y``;
  *)  
-type_of term;
 
 end
 
