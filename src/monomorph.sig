@@ -1,8 +1,7 @@
 signature monomorph =
 sig
 
-type thm = Thm.thm
-type term = Term.term
+  include Abbrev
 
   val name_of : term -> string
   val monomorph_fvc : thm -> thm -> thm list 

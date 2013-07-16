@@ -4,28 +4,26 @@ sig
   type term     = Term.term
   type hol_type = Type.hol_type
   type thm = Thm.thm
-(* input is a list of thm *)
-  (* conv *)
-  val beta_conv : term -> thm 
-  val eta_conv : term -> thm
+  type conv = Term.term -> Thm.thm
  
-  val bool_conv : term -> thm 
-  
-  val fun_conv : term -> thm
+  (* conv *)
+  val beta_conv : conv
+  val eta_conv : conv
+ 
+  val bool_conv : conv
+  val fun_conv : conv
  
   val find_bound_app : term -> (term * int) list
   val find_free_app : term -> (term * int) list
-  val app_conv : term -> thm
+  val app_conv : conv
   
-  val num_conv : term -> thm
- 
-  val predicate_conv : term -> thm
+  val num_conv : conv
   
-  val define_conv : term -> thm
-  (* def *)
   val predicatedef : term
+  val predicate_conv : conv
   
-
-
+  val define_conv : conv
+  
+ 
  
 end

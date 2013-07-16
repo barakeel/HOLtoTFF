@@ -1,24 +1,57 @@
 (* tools *)
 (* 
-load "main"; open main;
+load "listtools"; open listtools;
+load "tools"; open tools;
+load "extractvar"; open extractvar;
+load "nametype"; open nametype;
+load "namevar"; open namevar;
+load "conv"; open conv; 
+load "rule"; open rule; 
 load "printtff"; open printtff;
-load "conv"; open conv;
+load "printresult";open printresult;
+load "main"; open main;
 *)
 
-
 (* TEST PROBLEM *)
+type goal = Term.term list * Term.term;
 show_assums :=  true ;
 
-(* TEST FUNCTIONS *)
-FileSys.openDir "src";
-FileSys.closeDir;
+(* problem 1 *)
+val initgoal : goal = ([],``(!x. x + x = 1) ==> (y = 1)``);
+val filename = "problem1";   
+val thml = [];
+val prepareflag = false;
+main filename thml initgoal prepareflag; 
 
+(* problem 2 *)
+val initgoal : goal = ([],``(!x. x + x = 1) ==> (x = 1)``);
+val filename = "problem2";   
+val thml = [];
+val prepareflag = false;
+main filename thml initgoal prepareflag; 
+
+(* problem 3 *)
+val initgoal : goal = ([],``(x + x = 1) ==> (x = 1)``);
+val filename = "problem3";   
+val thml = [];
+val prepareflag = false;
+main filename thml initgoal prepareflag; 
+
+(* problem 4 *)
+val initgoal : goal = ([],``(x + x = 1) ==> (x = 1)``);
+val filename = "problem4";   
+val thml = [];
+val prepareflag = false;
+main filename thml initgoal prepareflag; 
+
+
+(* test functions *)
 open HolKernel;
 is_minus ``5:int-6:int``;
 pairSyntax
 
 open folTools;
-FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); (* newname bound variable *)
+FOL_NORM ([mk_thm([],``!x. (!x. x = 0) /\ (x = 0) ``)]); 
 FOL_NORM ([ASSUME ``(\x.x) = (\z.w) ``]);
 
 e(FOL_NORM_TAC);

@@ -1,0 +1,14 @@
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $int )).
+
+tff(c0_type,type,(
+    c0: ( $int * $int ) > $o )).
+
+tff(conjecture_conjecture,conjecture,(
+    ( ! [Xx: $int] : ( ( $sum(Xx,Xx) = 1 ) ) => ( xy = 1 ) ) )).

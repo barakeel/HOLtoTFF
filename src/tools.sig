@@ -1,10 +1,7 @@
 signature tools =
 sig
 
-type term = Term.term
-type hol_type = Type.hol_type
-type thm = Thm.thm
-type conv = Term.term -> Thm.thm
+  include Abbrev
 
 (* test *) 
   val has_boolty : term -> bool  
@@ -40,6 +37,9 @@ type conv = Term.term -> Thm.thm
   val list_conj_hyp : thm -> thm
   val ap_thm_list : thm -> term list -> thm 
 
+(* extraction *)
+  val all_subterm : term -> term list
+  val all_type : term -> hol_type list
 (* first order *)  
   val find_atoml : term -> term list 
   val find_predicatel : term -> term list 
@@ -47,6 +47,6 @@ type conv = Term.term -> Thm.thm
   val find_unpredicatel : term -> term list
   val has_boolarg : term -> bool
   val has_boolarg_thm : thm -> bool
- 
+
 
 end

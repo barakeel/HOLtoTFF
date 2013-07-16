@@ -8,6 +8,7 @@ load "extractvar"; open extractvar;
 load "extracttype"; open extracttype;
 load "namevar"; open namevar;
 load "nametype"; open nametype;
+load "tools"; open tools;
 open HOLPP; open numSyntax;
 *)
 open HolKernel HOLPP numSyntax 
@@ -169,6 +170,7 @@ fun is_dtyname name = (substring (name,0,1) = "$")
 fun is_not_dtyname name = not (is_dtyname name)
 fun has_not_dtyname ((ty,arity),name) = is_not_dtyname name  
 fun erase_dtyname tyadict = filter has_not_dtyname tyadict
+
 (* end useful functions *)
 
 (* type *)

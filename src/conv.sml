@@ -7,7 +7,6 @@ load "tools"; open tools;
 load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
 load "extracttype"; open extracttype;
-show_assums := true; 
 *)
 
 (*
@@ -23,13 +22,13 @@ App  - no second order
 Num  - add num axiom (suppose there is no abstraction left)
 Predicate -
 
-Use different variables name to prevent Hol from renaming them
+Use different variables name to prevent cnf_conv from renaming them
 At least , memorise them into list so that they can be printed differently
 *)
 
-open HolKernel normalForms 
+open HolKernel normalForms (* numSyntax *) (* arithmeticTheory *)
      stringtools listtools tools mydatatype 
-     extractvar extracttype
+     extractvar extracttype 
 
 fun CONV_ERR function message =
     HOL_ERR{origin_structure = "conv",
@@ -111,20 +110,12 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
     | Neg => find_free_bool_unop term subterm
     | Imp_only => find_free_bool_binop term subterm
     | Disj => find_free_bool_binop term subterm
-    | App => 
-      (
-      case nodeconst subterm of
-        Eq => if has_boolty (rhs subterm)
-                 then find_free_bool_binop term subterm
-                 else
-                   filter (is_interesting_in term) [lhand subterm,rand subterm] 
-                   @
-                   find_free_bool_binop term subterm               
-      | _ => let val (operator,argl) = strip_comb subterm in
-               filter (is_interesting_in term) argl @
-               find_free_bool_list term (operator :: argl)
-             end
-      )
+    | App =>   
+      let val (operator,argl) = strip_comb subterm in
+        filter (is_interesting_in term) argl @
+        find_free_bool_list term (operator :: argl)
+      end
+
     )             
   | Abs => let val (bvl,t) = strip_abs subterm in
              find_free_bool_aux term t
@@ -162,19 +153,10 @@ fun find_bound_bool_aux term subterm = (* term should be a boolean *)
     | Imp_only => find_bound_bool_binop term subterm
     | Disj => find_bound_bool_binop term subterm
     | App => 
-      (
-      case nodeconst subterm of
-        Eq => if has_boolty (rhs subterm)
-                 then find_bound_bool_binop term subterm
-                 else
-                   filter (is_interesting_in term) [lhand subterm,rand subterm] 
-                   @
-                   find_bound_bool_binop term subterm               
-      | _ => let val (operator,argl) = strip_comb subterm in
-               filter (is_interesting_in term) argl @
-               find_bound_bool_list term (operator :: argl)
-             end
-      )
+      let val (operator,argl) = strip_comb subterm in
+        filter (is_interesting_in term) argl @
+        find_bound_bool_list term (operator :: argl)
+      end
     )             
   | Abs => let val (bvl,t) = strip_abs subterm in
              find_bound_bool_aux term t
@@ -288,20 +270,20 @@ true --> btrue
 local fun is_interesting_in term subterm = 
   has_numty subterm andalso 
   free_in subterm term andalso 
-  not (numSyntax.is_numeral term)
+  not (numSyntax.is_numeral subterm)
 in
-fun find_free_num term =  
-  erase_double_aconv (find_terms (is_interesting_in term) term) 
-end
-
+fun find_free_num term = 
+  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
+end 
+  
 (* term should start with a quantifier *)  
 local fun is_interesting_in term subterm = 
   bound_by_quant subterm term andalso
-  has_numty subterm 
-(* a numeral can't be bound so don't need to exclude it *)  
+  has_numty subterm andalso 
+  not (numSyntax.is_numeral subterm)
 in 
 fun find_bound_num term =  
-  erase_double_aconv (find_terms (is_interesting_in term) term) 
+  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
 end  
 (* end find *)
 
@@ -1072,14 +1054,6 @@ vval th2 = MK_ABS th1;
 define_conv def;
 define_conv predicatedef;
 *)
-
-
-
-
-
-
-
-
 
 
 end

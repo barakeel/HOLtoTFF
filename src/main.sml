@@ -5,34 +5,34 @@ load "listtools"; open listtools;
 load "tools"; open tools;
 load "extractvar"; open extractvar;
 load "nametype"; open nametype;
+load "namevar"; open namevar;
 load "conv"; open conv; 
 load "rule"; open rule; 
 load "printtff"; open printtff;
+load "printresult";open printresult;
+open Abbrev;
+open OS.Process;
 *)
-open HolKernel 
-     tools
-     conv rule printtff
+open HolKernel Abbrev
+     tools listtools
+     conv rule printtff printresult
 
 fun MAIN_ERR function message =
     HOL_ERR{origin_structure = "main",
 	    origin_function = function,
             message = message}
  
-(* output address *) 
-val beagleproblemlocation =
-  "/home/thibault/Desktop/Scalaproject/beagleproject/problem.p"
-val testlocation = 
-  "/home/thibault/Desktop/SMLproject/HOLtoTFF/output.txt" 
- 
+type goal = (Term.term list * Term.term)
+  
 (* MONOMORPHISATION *)
 
 (* CONV *)
 (* could translate to a clause set with only forall quantifier *)  
 fun main_conv term = 
-  (QCONV
+  QCONV
   (
   beta_conv THENC
-  eta_conv THENC
+  (* eta_conv THENC *)
   normalForms.CNF_CONV THENC
   bool_conv THENC (* add new constants *)
   fun_conv THENC  (* add new constants *)
@@ -43,40 +43,104 @@ fun main_conv term =
                       and every bound variables to be used 
                       (cnf_conv provide that) 
                       add def should be remembered *)
-  ))
+  )
   term
 
-
-(* BEAGLE CALL *)
+(* BEAGLE PREPARE *)
 (* no monomorphisation *)
 (* no proof reconstruction *) 
 (* use of mk_thm *)
 (* thml is not used for now *)
-(* DISCH_ALL all of them and add them to assumptions *)
-
 fun beagle_prepare thml goal =
-  let val th0 = mk_thm goal in (* TO BE REMOVED *)
-  let val th1 = negate_concl th0 in
+  let val terml = map concl (map DISCH_ALL thml) in
+  let val th0 = mk_thm goal in 
+  let val th0_1 = repeatchange ADD_ASSUM terml th0 in  
+  let val th1 = negate_concl th0_1 in
   let val th2 = list_conj_hyp th1 in
-  (* conversion *)
   let val term = hd (hyp th2) in
+  (* monomorphisation of the only hypothesis *)
+  
+  (* conversion *)
+  let val eqth = main_conv term in
   let val th3 = rewrite_conv_hyp main_conv term th2 in
   (* remove all existential quantifiers from all hypothesis *)
   let val th4 = remove_exists_thm th3 in 
   (* add bool_axiom *)  
   let val th5 = add_bool_axioms th4 in   
-    (hyp th5,concl th5)
+    (eqth,(hyp th5,concl th5))
    end end end end end 
-   end end 
+   end end end end end
+
+(* path *) 
+val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+fun mk_holpath filename = directory ^  "result/"  ^ filename ^ "_hol"  
+fun mk_tffpath filename = directory ^  "result/"  ^ filename ^ "_tff" 
+fun mk_statuspath filename = directory ^ "result/" ^ filename ^ "_tff_status"
+
+fun main filename thml initgoal prepareflag =
+  let val path1 = mk_tffpath filename in
+  let val path2 = mk_holpath filename in
+  (
+  if prepareflag
+  then
+    let val (eqthm,finalgoal) = beagle_prepare thml initgoal in
+      (
+      output_tff path1 finalgoal;
+      output_result path2 thml initgoal finalgoal eqthm true;
+      output_tffpath directory path1
+      )
+    end  
+  else
+    (
+    output_tff path1 initgoal;
+    output_result path2 thml initgoal ([T],T) (ASSUME T) false;
+    output_tffpath directory path1
+    )
+  ;
+  (* call beagle on tffpath and print the result in a newfile *)
+  (* should read the name of the file to be excecuted somewhere 
+     for example currentfilepath.txt*)
+  OS.Process.system ("sh callbeagle.sh")
+  )
+  end end
+
+fun get_status filename = 
+  let val statuspath = mk_statuspath filename in
+  let val file = TextIO.openIn (statuspath) in 
+  let val status = TextIO.inputAll file in
+    (
+    TextIO.closeIn file;
+    status
+    )  
+  end end end 
+
+fun BEAGLE_TAC thml goal =
+  let val filename = "default" in
+  (
+  main filename thml goal true
+  ; 
+  let val status = get_status filename in
+  let fun validation thml = mk_thm goal in
+    case status of
+      "CounterSatisfiable" => ([],validation)
+    | "Satisfiable" => raise MAIN_ERR "BEAGLE_TAC" "Satisfiable" 
+    | _ => raise MAIN_ERR "BEAGLE_TAC" "Error"
+  end end 
+  )
+  end
 
 
 (* test 
 show_assums :=  true ;
-val goal = ([``x:bool``],``y:bool``);
-val goal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
-val goal = ([``y: bool ``],``(!x:num . (x:num) + (x:num) = 1) ==> (x = 1)``);
-beagle_prepare [] goal;
-output_tff testlocation goal;
+val initgoal = ([``x:bool``],``y:bool``);
+val initgoal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
+val initgoal : goal = 
+([],``(!x . x + x = 1) ==> (x = 1)``);
+val initgoal : goal = 
+([],``(!x. x + x = 1) ==> (y = 1)``);
+val filename = "problem1";   
+val thml = [];
+val prepareflag = false;
 *)
 
 (* conv test
@@ -85,24 +149,21 @@ normalForms.CNF_CONV term;
 bool_conv (rhs (concl it));
 fun_conv (rhs (concl it));
 val term = (rhs (concl it));
-
 find_free_app term;
 find_bound_app term;
-
 app_conv (rhs (concl it));
 num_conv (rhs (concl it));
 predicate_conv (rhs (concl it));
 *)
 
 (* dictionnary test 
-val term = list_mk_conj (hyp th3);
+val term = list_mk_conj (fst (initgoal) @ [snd initgoal]);
 val fvdict = create_fvdict term;
-val bvdict = create_fvdict term;
+val bvdict = create_bvdict term;
 val cdict = create_cdict term;
 *)  
 
-(* PROOF RECONSTRUCTION
- WIP 
+(* PROOF RECONSTRUCTION WIP 
 (* thml is user provided for now and not used *)
 fun beagle_tac
 

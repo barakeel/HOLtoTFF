@@ -4,9 +4,10 @@ struct
 (*
 load "listtools"; open listtools;
 load "stringtools"; open stringtools;
+load "mydatatype"; open mydatatype;
 *)
 
-open HolKernel 
+open HolKernel Abbrev numSyntax
      stringtools listtools mydatatype
 
 
@@ -159,6 +160,38 @@ fun ap_thm_list thm terml =
     [] => thm 
   | t :: m => ap_thm_list (AP_THM thm t) m 
 
+(* extract term *)
+fun all_subterm_aux term = 
+  case termstructure term of
+    Numeral => [term]
+  | Var => [term]  
+  | Const => [term]
+  | Comb => 
+    (
+    case connector term of
+      Forall => all_subterm_aux_quant term
+    | Exists => all_subterm_aux_quant term   
+    | Conj => all_subterm_aux_binop term
+    | Neg => all_subterm_aux_unop term
+    | Imp_only => all_subterm_aux_binop term
+    | Disj => all_subterm_aux_binop term
+    | App => let val (operator,argl) = strip_comb term in
+               term :: all_subterm_aux_list (operator :: argl)            
+             end
+    )  
+  | Abs => term :: all_subterm_aux (snd (strip_abs term))
+         
+and all_subterm_aux_list terml = List.concat (map (all_subterm_aux) terml)
+and all_subterm_aux_quant term = all_subterm_aux (snd (strip_quant term))
+and all_subterm_aux_binop term = all_subterm_aux_list [lhand term,rand term] 
+and all_subterm_aux_unop term = all_subterm_aux (rand term)
+
+fun all_subterm term = erase_double (all_subterm_aux term)
+(* end *)
+
+(* extract term type *)
+fun all_type term = erase_double (map type_of (all_subterm term))
+
 (* FIRST ORDER *)
 (* consider = to be always = not <=> *)
 fun find_atoml term =
@@ -190,9 +223,12 @@ fun find_predicatel term =
 fun is_predicate_in var term = 
   is_member var (find_predicatel term)
 
+fun find_unpredicate_arg arg =
+  filter is_var_or_const (all_subterm arg)
+
 fun find_unpredicatel_aux atom =
   let val (operator,argl) = strip_comb atom in
-    List.concat (map (find_terms is_var_or_const) argl)
+    List.concat (map (find_unpredicate_arg) argl)
   end      
 
 fun find_unpredicatel term =
@@ -206,6 +242,8 @@ fun has_boolarg_thm thm =
   let val l = (hyp thm) @ [concl thm] in
     exists has_boolarg l
   end  
+
+
 
 
 end
