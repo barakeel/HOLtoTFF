@@ -1,9 +1,7 @@
 signature extracttype =
 sig
 
-  type term     = Term.term
-  type hol_type = Type.hol_type
-  type VARCAT = mydatatype.VARCAT
+  include Abbrev
 
   val all_tya : term -> (hol_type * int) list
   val get_simpletyal : term -> (hol_type * int) list 

@@ -1,7 +1,7 @@
 structure namevar :> namevar =
 struct
 
-open HolKernel numSyntax
+open HolKernel Abbrev boolLib numSyntax
      extractvar nametype  
      stringtools listtools tools mydatatype
      

@@ -1,10 +1,9 @@
 signature extractvar =
 sig
 
-  type term   = Term.term
+  include Abbrev
   type VARCAT = mydatatype.VARCAT
-  type thm = Thm.thm
-  
+
   val erase_number : ((term * int) * VARCAT) list -> 
                      ((term * int) * VARCAT) list
   

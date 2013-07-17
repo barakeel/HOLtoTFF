@@ -1,8 +1,7 @@
 signature mydatatype =
 sig
 
-  type term = Term.term
-  type hol_type = Type.hol_type
+  include Abbrev
 
   datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype |
                      Funtype | Prodtype | Nodetype

@@ -10,7 +10,7 @@ load "extracttype"; open extracttype;
 show_assums := true; 
 *)
 
-open HolKernel normalForms 
+open HolKernel Abbrev boolLib normalForms 
      stringtools listtools tools mydatatype 
      extractvar extracttype
 

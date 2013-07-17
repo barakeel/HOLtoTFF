@@ -1,7 +1,7 @@
 structure extracttype :> extracttype =
 struct
 
-open HolKernel listtools mydatatype extractvar
+open HolKernel Abbrev boolLib listtools mydatatype extractvar
 
 fun EXTRACTTYPE_ERR function message =
   HOL_ERR{origin_structure = "extracttype",

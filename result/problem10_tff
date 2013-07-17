@@ -1,0 +1,14 @@
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(tya_type,type,(
+    tya: $tType )).
+
+tff(xx_type,type,(
+    xx: tya )).
+
+tff(c_type,type,(
+    c: ( tya * tya ) > $o )).
+
+tff(conjecture_conjecture,conjecture,(
+    ( xx = xx ) )).

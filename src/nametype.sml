@@ -7,7 +7,7 @@ load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
 load "extracttype"; open extracttype;
 *)
-open HolKernel numSyntax 
+open HolKernel Abbrev boolLib numSyntax 
      stringtools listtools mydatatype 
      extractvar extracttype 
    

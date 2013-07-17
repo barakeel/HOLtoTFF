@@ -1,7 +1,7 @@
 structure mydatatype :> mydatatype =
 struct
 
-open HolKernel numSyntax listtools
+open HolKernel Abbrev boolLib numSyntax listtools
 
 fun DATATYPE_ERR function message =
     HOL_ERR{origin_structure = "mydatatype",

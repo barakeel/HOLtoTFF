@@ -1,8 +1,7 @@
 signature nametype =
 sig
   
-  type term     = Term.term
-  type hol_type = Type.hol_type
+  include Abbrev
   
   val name_leaftype : hol_type -> string
   val add_simpletyal :(hol_type * int) list -> 

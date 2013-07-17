@@ -1,10 +1,7 @@
 signature conv =
 sig
 
-  type term     = Term.term
-  type hol_type = Type.hol_type
-  type thm = Thm.thm
-  type conv = Term.term -> Thm.thm
+  include Abbrev
  
   (* conv *)
   val beta_conv : conv

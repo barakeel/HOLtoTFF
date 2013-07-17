@@ -1,0 +1,17 @@
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $int )).
+
+tff(c0_type,type,(
+    c0: ( $int * $int ) > $o )).
+
+tff(c01_type,type,(
+    c01: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx: $int] : ( ( $lesseq(0,xy) & ( ( $lesseq(0,$sum(Xx,Xx)) | ( ~ $lesseq(0,Xx) ) ) & ( ( ( $sum(Xx,Xx) = 1 ) | ( ~ $lesseq(0,Xx) ) ) & ( ( ~ ( xy = 1 ) ) | ( ~ $lesseq(0,Xx) ) ) ) ) ) ) )).

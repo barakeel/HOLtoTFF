@@ -1,7 +1,7 @@
 structure higherorder :> higherorder =
 struct
 
-open HolKernel 
+open HolKernel Abbrev boolLib 
      listtools tools 
 
 fun HIGHERORDER_ERR function message =

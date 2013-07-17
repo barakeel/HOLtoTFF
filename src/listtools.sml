@@ -1,7 +1,7 @@
 structure listtools :> listtools =
 struct
 
-open HolKernel
+open HolKernel Abbrev boolLib
 
 fun LISTTOOLS_ERR function message =
   HOL_ERR{origin_structure = "listtools",

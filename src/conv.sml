@@ -26,7 +26,7 @@ Use different variables name to prevent cnf_conv from renaming them
 At least , memorise them into list so that they can be printed differently
 *)
 
-open HolKernel normalForms (* numSyntax *) (* arithmeticTheory *)
+open HolKernel Abbrev boolLib normalForms (* numSyntax *) (* arithmeticTheory *)
      stringtools listtools tools mydatatype 
      extractvar extracttype 
 
@@ -464,7 +464,7 @@ val term = ``?x y. (x = 0) /\ (y = 0) /\ (z = 0) /\ (f (y:num) = 0)``;
 num_conv_exists_all term; 
 *)
 
-(* main function traverses the term *)
+(* beagle function traverses the term *)
 fun num_conv_aux term =   
   case termstructure term of
     Numeral => raise UNCHANGED 

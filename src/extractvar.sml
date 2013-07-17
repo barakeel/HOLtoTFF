@@ -6,7 +6,7 @@ load "listtools"; open listtools;
 load "mydatatype"; open mydatatype;
 *)
 
-open HolKernel 
+open HolKernel Abbrev boolLib 
      listtools mydatatype
 
 

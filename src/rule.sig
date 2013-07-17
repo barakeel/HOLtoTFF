@@ -1,7 +1,7 @@
 signature rule =
 sig
 
-  type thm = Thm.thm
+include Abbrev
 
   val negate_concl : thm -> thm 
   val negate_concl_rev : term -> thm -> thm

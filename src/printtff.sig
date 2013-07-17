@@ -1,11 +1,7 @@
 signature printtff =
 sig
   
-  type term     = Term.term
-  type hol_type = Type.hol_type
-  type thm      = Thm.thm
-  type ppstream = HOLPP.ppstream
-  type goal = (term list * term)
+  include Abbrev
   
   val print_term : ppstream -> term -> 
                    ((hol_type * int) * string) list *

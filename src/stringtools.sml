@@ -1,7 +1,7 @@
 structure stringtools :> stringtools =
 struct
 
-open HolKernel 
+open HolKernel Abbrev boolLib 
 
 fun STRINGTOOLS_ERR function message =
   HOL_ERR{origin_structure = "stringtools",

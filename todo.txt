@@ -4,6 +4,8 @@ Question :
 - How to translate a rule or something that produces a theorem into a tactic?
 - How tactic works ?
 - How to make the path portable
+- How to make HOL creating beagle before calling bossLib
+ 
 - How to interact with Beagle?
 
 Test 

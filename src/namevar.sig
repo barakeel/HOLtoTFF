@@ -1,8 +1,7 @@
 signature namevar =
 sig
   
-  type term     = Term.term
-  type hol_type = Type.hol_type
+  include Abbrev
 
   val create_bvdict : term -> (term * string) list
   val create_fvdict : term -> (term * string) list

@@ -9,44 +9,51 @@ load "conv"; open conv;
 load "rule"; open rule; 
 load "printtff"; open printtff;
 load "printresult";open printresult;
-load "main"; open main;
+load "beagle"; open beagle;
 *)
 
 (* TEST PROBLEM *)
-type goal = Term.term list * Term.term;
 show_assums :=  true ;
 
-(* problem 1 *)
-val initgoal : goal = ([],``(!x. x + x = 1) ==> (y = 1)``);
-val filename = "problem1";   
+(* use of beagle tac *)
+val goal : goal = ([],``(x = 2) ==> (x + 1 = 3)``); 
 val thml = [];
-val prepareflag = false;
-main filename thml initgoal prepareflag; 
+BEAGLE_TAC thml goal; 
+metisTools.METIS_TAC thml goal;
+(snd it) [];
+
+(* problem 1 *)
+val goal : goal = ([],``(x = 1) ==> (x = 1)``);
+val filename = "problem6";   
+val thml = [];
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
 
 (* problem 2 *)
-val initgoal : goal = ([],``(!x. x + x = 1) ==> (x = 1)``);
+val goal : goal = ([],``(!x. x + x = 1) ==> (x = 1)``);
 val filename = "problem2";   
 val thml = [];
 val prepareflag = false;
-main filename thml initgoal prepareflag; 
+beagle filename thml goal prepareflag; 
 
 (* problem 3 *)
-val initgoal : goal = ([],``(x + x = 1) ==> (x = 1)``);
+val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
 val filename = "problem3";   
 val thml = [];
 val prepareflag = false;
-main filename thml initgoal prepareflag; 
+beagle filename thml goal prepareflag; 
 
 (* problem 4 *)
-val initgoal : goal = ([],``(x + x = 1) ==> (x = 1)``);
+val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
 val filename = "problem4";   
 val thml = [];
 val prepareflag = false;
-main filename thml initgoal prepareflag; 
+beagle filename thml goal prepareflag; 
 
 
 (* test functions *)
-open HolKernel;
+open HolKernel Abbrev boolLib;
 is_minus ``5:int-6:int``;
 pairSyntax
 

@@ -1,7 +1,7 @@
 structure printresult :> printresult =
 struct
 
-open HolKernel HOLPP Hol_pp
+open HolKernel Abbrev boolLib HOLPP Hol_pp
 
 type goal = (Term.term list * Term.term) 
 
@@ -29,27 +29,25 @@ fun pp_goal pps goal =
   pp_term pps (snd goal)
   )     
     
-fun print_result pps thml initgoal finalgoal eqthm prepareflag =
+fun print_result pps thml goal eqthm prepareflag =
   (
   begin_block pps CONSISTENT 0;
   add_string pps "(* User provided theorem *)";
   pp_thml pps thml;
   add_newline pps; 
-  add_string pps "(* initial goal *)";
-  pp_goal pps initgoal;
+  add_string pps "(* goal *)";
+  pp_goal pps goal;
   if prepareflag 
   then
-    (add_newline pps; 
-     add_string pps "(* final goal *)";
-     pp_goal pps initgoal;
-     add_newline pps;
+    (add_newline pps;
      add_string pps "(* conversion theorem *)";
+     add_newline pps;
      pp_thm pps eqthm)
   else ();
   end_block pps
   ) 
 
-fun output_result path thml initgoal finalgoal eqthm prepareflag =
+fun output_result path thml goal eqthm prepareflag =
   let val file = TextIO.openOut path in 
   let val pps = PP.mk_ppstream 
                   {
@@ -59,13 +57,13 @@ fun output_result path thml initgoal finalgoal eqthm prepareflag =
                   } 
   in 
     (
-    print_result pps thml initgoal finalgoal eqthm prepareflag; 
+    print_result pps thml goal eqthm prepareflag; 
     TextIO.closeOut file
     )  
   end end
 
-fun output_tffpath directory filepath =
-  let val file = TextIO.openOut (directory ^ "filepath.txt") in 
+fun output_tffpath filepath =
+  let val file = TextIO.openOut "filepath.txt" in 
     (
     TextIO.output (file, filepath); 
     TextIO.flushOut file;

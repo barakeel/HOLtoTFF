@@ -9,7 +9,7 @@ load "tools"; open tools;
 load "extractvar"; open extractvar;
 load "namevar"; open namevar;
 *)
-open HolKernel Abbrev numSyntax 
+open HolKernel Abbrev boolLib numSyntax 
      listtools mydatatype tools
      extractvar namevar
 

@@ -1,4 +1,4 @@
-structure main :> main =
+structure beagle :> beagle =
 struct
 (* 
 load "listtools"; open listtools;
@@ -11,22 +11,21 @@ load "rule"; open rule;
 load "printtff"; open printtff;
 load "printresult";open printresult;
 load "monomorph"; open monomorph;
-open Abbrev;
 open OS.Process;
 *)
-open HolKernel Abbrev
+open HolKernel Abbrev boolLib
      tools listtools
      monomorph conv rule printtff printresult
 
-fun MAIN_ERR function message =
-    HOL_ERR{origin_structure = "main",
+fun BEAGLE_ERR function message =
+    HOL_ERR{origin_structure = "beagle",
 	    origin_function = function,
             message = message}
  
 
 (* CONV *)
 (* could translate to a clause set with only forall quantifier *)  
-fun main_conv term = 
+fun beagle_conv term = 
   QCONV
   (
   beta_conv THENC
@@ -61,8 +60,8 @@ fun beagle_prepare thml goal monomorphflag =
     if monomorphflag then monomorph term1 else term1
   in
   (* conversion *)
-  let val eqth = main_conv term2 in
-  let val term3 = rhs term2 in
+  let val eqth = beagle_conv term2 in
+  let val term3 = rhs (concl eqth) in
   let val th3 = mk_thm ([term3],F) in
   (* remove all existential quantifiers from all hypothesis *)
   let val th4 = remove_exists_thm th3 in 
@@ -74,29 +73,29 @@ fun beagle_prepare thml goal monomorphflag =
    end end
 
 (* path *) 
-val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
-fun mk_holpath filename = directory ^  "result/"  ^ filename ^ "_hol"  
-fun mk_tffpath filename = directory ^  "result/"  ^ filename ^ "_tff" 
-fun mk_statuspath filename = directory ^ "result/" ^ filename ^ "_tff_status"
 
-fun main filename thml initgoal prepareflag monomorphflag =
+fun mk_holpath filename = "result/"  ^ filename ^ "_hol"  
+fun mk_tffpath filename = "result/"  ^ filename ^ "_tff" 
+fun mk_statuspath filename = "result/" ^ filename ^ "_tff_status"
+
+fun beagle filename thml goal prepareflag monomorphflag =
   let val path1 = mk_tffpath filename in
   let val path2 = mk_holpath filename in
   (
   if prepareflag
   then
-    let val (eqthm,finalgoal) = beagle_prepare thml initgoal monomorphflag in
+    let val (eqthm,finalgoal) = beagle_prepare thml goal monomorphflag in
       (
       output_tff path1 finalgoal;
-      output_result path2 thml initgoal finalgoal eqthm true;
-      output_tffpath directory path1
+      output_result path2 thml goal eqthm true;
+      output_tffpath path1
       )
     end  
   else
     (
-    output_tff path1 initgoal;
-    output_result path2 thml initgoal ([T],T) (ASSUME T) false;
-    output_tffpath directory path1
+    output_tff path1 goal;
+    output_result path2 thml goal (ASSUME T) false;
+    output_tffpath path1
     )
   ;
   (* call beagle on tffpath and print the result in a newfile *)
@@ -115,18 +114,21 @@ fun get_status filename =
     status
     )  
   end end end 
-
+(* test 
+val status = get_status "problem6";
+status = "Unsatisfiable";
+*)
 fun beagle_tac_aux thml goal monomorphflag =
   let val filename = "default" in
   (
-  main filename thml goal true monomorphflag
+  beagle filename thml goal true monomorphflag
   ; 
   let val status = get_status filename in
   let fun validation thml = mk_thm goal in
     case status of
-      "CounterSatisfiable" => ([],validation)
-    | "Satisfiable" => raise MAIN_ERR "BEAGLE_TAC" "Satisfiable" 
-    | _ => raise MAIN_ERR "BEAGLE_TAC" "Error"
+      "Unsatisfiable" => ([],validation)
+    | "Satisfiable" => raise BEAGLE_ERR "BEAGLE_TAC" "Satisfiable" 
+    | _ => raise BEAGLE_ERR "BEAGLE_TAC" "Error"
   end end 
   )
   end
@@ -140,11 +142,11 @@ fun BEAGLE_TAC thml goal =
 
 (* test 
 show_assums :=  true ;
-val initgoal = ([``x:bool``],``y:bool``);
-val initgoal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
-val initgoal : goal = 
+val goal = ([``x:bool``],``y:bool``);
+val goal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
+val goal : goal = 
 ([],``(!x . x + x = 1) ==> (x = 1)``);
-val initgoal : goal = 
+val goal : goal = 
 ([],``(!x. x + x = 1) ==> (y = 1)``);
 val filename = "problem1";   
 val thml = [];
@@ -165,7 +167,7 @@ predicate_conv (rhs (concl it));
 *)
 
 (* dictionnary test 
-val term = list_mk_conj (fst (initgoal) @ [snd initgoal]);
+val term = list_mk_conj (fst (goal) @ [snd goal]);
 val fvdict = create_fvdict term;
 val bvdict = create_bvdict term;
 val cdict = create_cdict term;

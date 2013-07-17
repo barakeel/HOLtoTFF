@@ -7,7 +7,7 @@ load "stringtools"; open stringtools;
 load "mydatatype"; open mydatatype;
 *)
 
-open HolKernel Abbrev numSyntax
+open HolKernel Abbrev boolLib numSyntax
      stringtools listtools mydatatype
 
 
