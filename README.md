@@ -29,4 +29,11 @@ Third step: Installing HOLtoTFF
 - select any instruction and then (M-h M-r) to execute it
 - open any libraries you want to test
     (main is enough to test the examples)
- - result are shown as text files in HOLtoTFF/result 
+ - result are shown as text files in HOLtoTFF/result
+   (if beagle is not install it will show you only the translation to tff in
+    result/filename_hol and result/filename_tff) 
+ 
+ Fourth step : installing beagle 
+ -
+ 
+ Fifth step : modifying the shell script to call beagle from HOL
