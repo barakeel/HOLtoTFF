@@ -42,38 +42,28 @@ val prepareflag = true;
 val monomorphflag = false;
 beagle filename thml goal prepareflag monomorphflag; 
 
-
-
-
-(* problem 1 *)
-val goal : goal = ([],``(x = 1) ==> (x = 1)``);
-val filename = "result/test1";   
+(* test funconv *) (* cnf conv reduce it before *)
+val goal : goal = ([],``(\x. x) = (\y. y)``);
+val filename = "result/funconv";   
 val thml = [];
 val prepareflag = true;
 val monomorphflag = false;
 beagle filename thml goal prepareflag monomorphflag; 
 
-(* problem 2 *)
-val goal : goal = ([],``(!x. x + x = 1) ==> (x = 1)``);
-val filename = "result/problem2";   
+(* test funconv2 *) (* to be fixed *)
+val goal : goal = ([],``((\x. x) = f) ==> (f x = x)``);
+val filename = "result/funconv2";   
 val thml = [];
-val prepareflag = false;
-beagle filename thml goal prepareflag; 
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
 
-(* problem 3 *)
-val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
-val filename = "result/problem3";   
+val goal : goal = ([],``(!x:num -> num . P x) ==> (P \x. x + 2)`` );
+val filename = "result/funconv3";   
 val thml = [];
-val prepareflag = false;
-beagle filename thml goal prepareflag; 
-
-(* problem 4 *)
-val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
-val filename = "result/problem4";   
-val thml = [];
-val prepareflag = false;
-beagle filename thml goal prepareflag; 
-
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
 
 (* test functions *)
 open HolKernel Abbrev boolLib;

@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/result/higherorder_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/result/funconv3_tff

@@ -1,0 +1,9 @@
+(* User provided theorem *)
+
+(* Goal *)
+  (* hypothesis list *) 
+  (* concl *)
+(λx. x) = (λy. y)
+
+(* Conversion theorem *)
+ [] |- (λx. x) ≠ (λy. y) ⇔ F

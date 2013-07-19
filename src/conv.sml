@@ -454,7 +454,7 @@ fun fun_axiom term =
   end end end end end
   end end end end end
   end end end end end
-  handle _ => raise CONV_ERR "fun_axiom" ""
+  handle _ => raise CONV_ERR "fun_axiom" (term_to_string term)
 
 (* test 
 show_assums := true;
@@ -466,7 +466,7 @@ fun_axiom term;
 fun fun_conv_sub abs term =
   (* term *)
   let val ty = type_of abs in
-  let val v = mk_var ("f",ty) in
+  let val v = create_newvar (mk_var ("f",ty)) (all_var term) in 
   let val t1 = mk_eq (v,abs) in   
   let val (bvl,t2) = strip_abs abs in
   (* axiom *)
@@ -499,7 +499,13 @@ fun fun_conv_sub abs term =
   end end end end end 
   end end end end end 
   end end end
-  handle _ => raise CONV_ERR "fun_conv_sub" ""
+  handle _ => raise CONV_ERR "fun_conv_sub" 
+              ("abs: " ^ (term_to_string abs) ^
+              "term: " ^ (term_to_string term) )
+(* test
+val term = ``((\x. x) = f) ==> (f x = x)``;
+val abs = ``\x.x``;
+*)
 
 fun fun_conv_subl absl term =
   case absl of
