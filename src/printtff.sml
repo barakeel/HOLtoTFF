@@ -87,9 +87,10 @@ fun print_term pps term dict pflag =
                         end
     | App => 
       let val (operator,argl) = strip_comb term in
+      let val arity = get_arity term in
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "print_term" "numeral"
-      | Var => if is_member term (map fst (#2 dict))
+      | Var => if is_member operator (map fst (#2 dict))
                then print_app pps (lookup operator (#2 dict)) argl dict false
                else print_app pps (lookup operator (#3 dict)) argl dict false 
       | Const => 
@@ -107,10 +108,11 @@ fun print_term pps term dict pflag =
                           (lookup operator (#4 dict)) argl dict false
         ) 
       | _ => raise PRINTTFF_ERR "print_term" "abs or comb"
-      end
+      end end
       
     )
   | Abs => raise PRINTTFF_ERR "print_term" "abs"
+  handle _ => raise PRINTTFF_ERR "print_term" ""
 and print_argl pps argl dict pflag = 
   case argl of
     [] => raise PRINTTFF_ERR "print_argl" "emptylist"
@@ -123,26 +125,25 @@ and print_argl pps argl dict pflag =
     ) 
 and print_unop pps str term dict pflag =
   (
-  add_string pps ("( " ^ str ^ " ");
-  print_term pps (rand term) dict pflag;
-  add_string pps " )"
+  add_string pps str;
+  print_term pps (rand term) dict pflag
   )
 and print_binop pps str term dict pflag = 
   (
-  add_string pps "( ";
+  add_string pps "(";
   print_term pps (lhand term) dict pflag;
   add_string pps (" " ^ str ^ " ");
   print_term pps (rand term) dict pflag;
-  add_string pps " )"
+  add_string pps ")"
   )
 and print_quant pps str bvl term dict pflag = 
   (
   add_string pps (str ^ " ");
   print_bvl pps bvl (#2 dict) (#1 dict);
   add_string pps " : ";  
-  add_string pps "( "; 
+  add_string pps "("; 
   print_term pps term dict pflag;
-  add_string pps " )" 
+  add_string pps ")" 
   )
 and print_app pps str argl dict pflag =
   (
@@ -154,6 +155,7 @@ and print_app pps str argl dict pflag =
 
 
 (* END PRINT_TERM *)
+
 
 (* PRINT_TFF *)
 (* useful functions *)
@@ -246,6 +248,13 @@ fun print_conjecture pps name term dict =
   
 (* should do something so that the user 
 knows all the transformation done to his formula *)
+fun print_btrue_bfalse pps =
+  (
+  print_type pps "btrue" "bool";
+  nl2 pps;
+  print_type pps "bfalse" "bool";
+  nl2 pps 
+  )
 
 fun print_tff pps (hyptl,conclt) =
   let val terml = hyptl @ [conclt] in
@@ -258,9 +267,7 @@ fun print_tff pps (hyptl,conclt) =
     val cal = get_cal term
     val fvcal = get_fvcal term
   in  
-    if firstorder_bval bval andalso
-       firstorder_fvcal fvcal andalso
-       not (has_boolarg term)
+    if firstorder term
     then 
       let 
       (* dict *)
@@ -279,13 +286,14 @@ fun print_tff pps (hyptl,conclt) =
         print_tyadict pps simpletyadict;
         print_fvatydict pps fvdict fvatydict;
         print_catydict pps cdict catydict;
+        if has_boolarg term then print_btrue_bfalse pps else ();
         print_axioml pps hyptl dict;
         print_conjecture pps "conjecture" conclt dict;
       end_block pps
       )
       end end
     else
-      raise PRINTTFF_ERR "print_tff" "higher order"
+      raise PRINTTFF_ERR "print_tff" ((term_to_string term) ^ " :higher order")
   end end end 
 
 (* OUTPUT TFF *)

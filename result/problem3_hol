@@ -1,3 +1,0 @@
-(* User provided theorem *)
-(* initial goal *)
-(x + x = 1) ⇒ (x = 1)

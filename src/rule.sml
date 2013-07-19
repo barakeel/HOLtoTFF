@@ -19,7 +19,6 @@ fun RULE_ERR function message =
 	    origin_function = function,
             message = message}
 
-
 (* NEGATE conclt *)
 (* need to memorise the conclt somewhere to be able to replay the proof back *)
 fun negate_concl thm =
@@ -42,20 +41,11 @@ negate_concl thm;
 (* BOOL AXIOM *)
 fun add_bool_axioms thm = 
   if has_boolarg_thm thm
-  then
-    let val var = mk_var ("b",``:bool``) in
-    let val newvar = create_newvar var (all_var_thm thm) in
-    let val eqth1 = RAND_CONV (ALPHA_CONV newvar) (concl BOOL_CASES_AX) in
-    let val th1 = EQ_MP eqth1 BOOL_CASES_AX in   
-    let val th2 = BOOL_EQ_DISTINCT in
-    let val th3 = ADD_ASSUM (concl th1) thm in  
-    let val th4 = ADD_ASSUM (concl th2) th3 in
-      th4
-    end end end end end end end
+  then ADD_ASSUM (concl BOOL_EQ_DISTINCT) thm
   else thm
 
 fun remove_bool_axioms thm =
-  list_prove_hyp [BOOL_EQ_DISTINCT,BOOL_CASES_AX] thm
+  list_prove_hyp [BOOL_EQ_DISTINCT] thm
 
 (* test
 show_assums := true ;
@@ -67,16 +57,12 @@ has_boolty ``A:bool``;
 has_boolarg_thm thm;
 remove_bool_axioms it;
 *)
-
 (* EXISTS RULE *)
 (* thm should have conclt set to false *)
 (* specify with their own names *)
 (* hypt should be in cnf *)
 
-(* should start with not exists *)
-
-
-
+(* hyp should start with exists and concl thm should be F*)
 fun remove_exists hypt thm =
   if is_exists hypt 
   then
@@ -127,7 +113,6 @@ val varl = map fst (filter_fval (extract_var hypt));
 *)
 
 (* REMOVE UNUSED DEFINITION *)
-
 fun remove_unused_def def thm = 
   let val th1 = DISCH def thm in
   let val th2 = GEN (lhs def) th1 in

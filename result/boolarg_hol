@@ -1,0 +1,14 @@
+(* User provided theorem *)
+
+(* Goal *)
+  (* hypothesis list *) 
+  (* concl *)
+P (∀x. x = 0) ⇒ P F
+
+(* Conversion theorem *)
+ []
+|- ¬(P (∀x. x = 0) ⇒ P F) ⇔
+   ∃x.
+     ∀x'.
+       0 ≤ x ∧ (x ≠ 0 ∨ ¬P F ∨ ¬(0 ≤ x')) ∧ (x ≠ 0 ∨ P T ∨ ¬(0 ≤ x')) ∧
+       ((x' = 0) ∨ ¬(0 ≤ x'))

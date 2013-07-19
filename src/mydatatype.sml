@@ -21,7 +21,7 @@ fun typecat holtype =
                  (_,[]) => Leaftype
                | ("fun",_) => Funtype
                | ("prod",_) => Prodtype
-               | _ => raise DATATYPE_ERR "typecat" "unknown typefvcructor"
+               | _ => Nodetype
 
 datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
 

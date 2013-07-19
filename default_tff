@@ -1,0 +1,95 @@
+tff(tyoption(tya)_type,type,(
+    tyoption(tya): $tType )).
+
+tff(tyb_fun_tybool_type,type,(
+    tyb_fun_tybool: $tType )).
+
+tff(tyb_prod_tya_fun_tybool_type,type,(
+    tyb_prod_tya_fun_tybool: $tType )).
+
+tff(tyb_prod_tya_type,type,(
+    tyb_prod_tya: $tType )).
+
+tff(tyoption(tyb)_type,type,(
+    tyoption(tyb): $tType )).
+
+tff(tya_prod_tyb_fun_tybool_type,type,(
+    tya_prod_tyb_fun_tybool: $tType )).
+
+tff(tya_prod_tyb_type,type,(
+    tya_prod_tyb: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(tya_type,type,(
+    tya: $tType )).
+
+tff(tyb_type,type,(
+    tyb: $tType )).
+
+tff(tylist(tyb_prod_tya)_type,type,(
+    tylist(tyb_prod_tya): $tType )).
+
+tff(tyfmap(tyb_tya)_type,type,(
+    tyfmap(tyb_tya): $tType )).
+
+tff(tylist(tya_prod_tyb)_type,type,(
+    tylist(tya_prod_tyb): $tType )).
+
+tff(xfm_type,type,(
+    xfm: tyfmap(tyb_tya) )).
+
+tff(xls_type,type,(
+    xls: tylist(tyb_prod_tya) )).
+
+tff(xk_type,type,(
+    xk: tyb )).
+
+tff(xv_type,type,(
+    xv: tya )).
+
+tff(cIN_type,type,(
+    cIN: ( tya_prod_tyb * tya_prod_tyb_fun_tybool ) > $o )).
+
+tff(c_type,type,(
+    c: ( tya * tyb ) > tya_prod_tyb )).
+
+tff(cLIST_TO_SET_type,type,(
+    cLIST_TO_SET: tylist(tya_prod_tyb) > tya_prod_tyb_fun_tybool )).
+
+tff(c0_type,type,(
+    c0: ( tyoption(tyb) * tyoption(tyb) ) > $o )).
+
+tff(cALOOKUP_type,type,(
+    cALOOKUP: ( tylist(tya_prod_tyb) * tya ) > tyoption(tyb) )).
+
+tff(cSOME_type,type,(
+    cSOME: tyb > tyoption(tyb) )).
+
+tff(cIN0_type,type,(
+    cIN0: ( tyb_prod_tya * tyb_prod_tya_fun_tybool ) > $o )).
+
+tff(c01_type,type,(
+    c01: ( tyb * tya ) > tyb_prod_tya )).
+
+tff(cLIST_TO_SET0_type,type,(
+    cLIST_TO_SET0: tylist(tyb_prod_tya) > tyb_prod_tya_fun_tybool )).
+
+tff(cIN01_type,type,(
+    cIN01: ( tyb * tyb_fun_tybool ) > $o )).
+
+tff(cFDOM_type,type,(
+    cFDOM: tyfmap(tyb_tya) > tyb_fun_tybool )).
+
+tff(c012_type,type,(
+    c012: ( tyoption(tya) * tyoption(tya) ) > $o )).
+
+tff(cALOOKUP0_type,type,(
+    cALOOKUP0: ( tylist(tyb_prod_tya) * tyb ) > tyoption(tya) )).
+
+tff(cSOME0_type,type,(
+    cSOME0: tya > tyoption(tya) )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xal: tylist(tya_prod_tyb),Xp_2: tya,X: tyb] : (((cIN(c(Xp_2,X),cLIST_TO_SET(Xal)) | ~(cALOOKUP(Xal,Xp_2) = cSOME(X))) & (~cIN0(c01(xk,Xp_2),cLIST_TO_SET0(xls)) & (~cIN01(xk,cFDOM(xfm)) & (cALOOKUP0(xls,xk) = cSOME0(xv)))))) )).

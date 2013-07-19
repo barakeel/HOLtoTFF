@@ -1,0 +1,17 @@
+(* User provided theorem *)
+|- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+
+(* Goal *)
+  (* hypothesis list *) 
+ALOOKUP ls k = SOME v
+¬∃p_2. MEM (k,p_2) ls
+  (* concl *)
+k ∈ FDOM fm
+
+(* Conversion theorem *)
+ []
+|- (∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al) ∧
+   ¬(∃p_2. MEM (k,p_2) ls) ∧ k ∉ FDOM fm ∧ (ALOOKUP ls k = SOME v) ⇔
+   ∀al p_2 v'.
+     (MEM (p_2,v') al ∨ ALOOKUP al p_2 ≠ SOME v') ∧ (k,p_2) ∉ set ls ∧
+     k ∉ FDOM fm ∧ (ALOOKUP ls k = SOME v)

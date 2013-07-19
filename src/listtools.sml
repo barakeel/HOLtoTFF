@@ -8,19 +8,22 @@ fun LISTTOOLS_ERR function message =
           origin_function = function,
           message = message}
 
-fun is_member elem list =
-  case list of
-    [] => false
-  | a :: m => if elem = a 
-              then true 
-              else is_member elem m     
 
-fun erase_double list = 
+fun is_member_eq equal elem list  = exists (equal elem) list
+
+fun erase_double_eq equal list  =
   case list of
-    [] => []
-  | a :: m => if is_member a m 
-              then erase_double m 
-              else a :: erase_double m
+   [] => []
+ | a :: m => if is_member_eq equal a m 
+             then erase_double_eq equal m 
+             else a :: erase_double_eq equal m
+
+local fun equal x y = (x = y) in
+  fun is_member elem list = is_member_eq equal elem list 
+  fun erase_double list = erase_double_eq equal list 
+end
+
+fun is_member_rev list elem = is_member elem list
 
 fun add_once elem list =
   if is_member elem list 

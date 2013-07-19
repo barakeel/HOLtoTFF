@@ -11,72 +11,84 @@ load "rule"; open rule;
 load "printtff"; open printtff;
 load "printresult";open printresult;
 load "monomorph"; open monomorph;
+load "higherorder"; open higherorder;
 open OS.Process;
 *)
 open HolKernel Abbrev boolLib
      tools listtools
-     monomorph conv rule printtff printresult
+     higherorder monomorph conv rule printtff printresult
 
 fun BEAGLE_ERR function message =
     HOL_ERR{origin_structure = "beagle",
 	    origin_function = function,
             message = message}
  
+(* BEAGLE PREPARE *)
+(* no proof reconstruction *) 
+(* use of mk_thm *)
+fun beagle_firststep thml goal =
+  let val terml = map concl (map DISCH_ALL thml) in
+  let val th0 = mk_thm goal in 
+  let val th1 = repeatchange ADD_ASSUM terml th0 in  
+  let val th2 = negate_concl th1 in
+  let val th3 = list_conj_hyp th2 in
+    hd (hyp th3) 
+  end end end end end 
+  
+fun beagle_monomorph term monomorphflag =
+  if monomorphflag then monomorph term else term
 
-(* CONV *)
-(* could translate to a clause set with only forall quantifier *)  
 fun beagle_conv term = 
   QCONV
   (
-  beta_conv THENC
-  (* eta_conv THENC *)
   normalForms.CNF_CONV THENC
-  bool_conv THENC (* add new constants *)
-  fun_conv THENC  (* add new constants *)
-  app_conv THENC (*  add def should be remembered *)
+  bool_conv THENC (* can create new forall *)
+  fun_conv THENC (* add new constants *)
   num_conv THENC (* add => *)
-  normalForms.CNF_CONV THENC
-  predicate_conv   (* required every variables to have a different name 
-                      and every bound variables to be used 
-                      (cnf_conv provide that) 
-                      add def should be remembered *)
+  normalForms.CNF_CONV
   )
   term
 
-(* BEAGLE PREPARE *)
-(* no monomorphisation *)
-(* no proof reconstruction *) 
-(* use of mk_thm *)
-(* thml is not used for now *)
-fun beagle_prepare thml goal monomorphflag =
-  let val terml = map concl (map DISCH_ALL thml) in
-  let val th0 = mk_thm goal in 
-  let val th0_1 = repeatchange ADD_ASSUM terml th0 in  
-  let val th1 = negate_concl th0_1 in
-  let val th2 = list_conj_hyp th1 in
-  let val term1 = hd (hyp th2) in
-  (* monomorphisation *)
-  let val term2 = 
-    if monomorphflag then monomorph term1 else term1
+
+fun beagle_laststep eqth =
+  let val term = rhs (concl eqth) in
+  let val terml = hyp eqth in
+  let val th1 = 
+    if null terml 
+    then mk_thm ([term],F) 
+    else mk_thm (terml @ [term],F) 
   in
+  (* remove all existential quantifiers from all hypothesis *)
+  let val th2 = remove_exists_thm th1 in 
+  (* add bool_axiom *)  
+  let val th3 = add_bool_axioms th2 in    
+  (* app conv only if there is higher order*)
+  (* should be a new name for app *)
+  let val th4 =
+    if firstorder_thm th3 then th3 
+    else mk_thm (
+         map rhs (map concl (map (app_conv "app") (hyp th3)))
+         ,F)
+  in    
+    (eqth,(hyp th4,concl th4)) 
+  end end end end end end
+         
+fun beagle_prepare thml goal monomorphflag =
+  (* first step *)
+  let val term1 = beagle_firststep thml goal in
+  (* monomorphisation *)
+  let val term2 = beagle_monomorph term1 monomorphflag in
   (* conversion *)
   let val eqth = beagle_conv term2 in
-  let val term3 = rhs (concl eqth) in
-  let val th3 = mk_thm ([term3],F) in
-  (* remove all existential quantifiers from all hypothesis *)
-  let val th4 = remove_exists_thm th3 in 
-  (* add bool_axiom *)  
-  let val th5 = add_bool_axioms th4 in   
-    (eqth,(hyp th5,concl th5))
-   end end end end end 
-   end end end end end
-   end end
-
-(* path *) 
-
-fun mk_holpath filename = "result/"  ^ filename ^ "_hol"  
-fun mk_tffpath filename = "result/"  ^ filename ^ "_tff" 
-fun mk_statuspath filename = "result/" ^ filename ^ "_tff_status"
+  (* last step *)
+    beagle_laststep eqth
+  end end end
+   
+(* path are absolute *) 
+val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+fun mk_holpath filename = directory ^ filename ^ "_hol"  
+fun mk_tffpath filename =  directory ^ filename ^ "_tff" 
+fun mk_statuspath filename = directory ^ filename ^ "_tff_status"
 
 fun beagle filename thml goal prepareflag monomorphflag =
   let val path1 = mk_tffpath filename in
@@ -86,22 +98,24 @@ fun beagle filename thml goal prepareflag monomorphflag =
   then
     let val (eqthm,finalgoal) = beagle_prepare thml goal monomorphflag in
       (
-      output_tff path1 finalgoal;
       output_result path2 thml goal eqthm true;
+      output_tff path1 finalgoal;
       output_tffpath path1
       )
     end  
   else
     (
-    output_tff path1 goal;
     output_result path2 thml goal (ASSUME T) false;
+    output_tff path1 goal;
     output_tffpath path1
     )
   ;
   (* call beagle on tffpath and print the result in a newfile *)
   (* should read the name of the file to be excecuted somewhere 
      for example currentfilepath.txt*)
-  OS.Process.system ("sh callbeagle.sh")
+  OS.Process.system 
+  ("cd " ^ directory ^ ";" ^
+   "sh " ^ directory ^ "callbeagle.sh")
   )
   end end
 

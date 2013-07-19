@@ -1,30 +1,53 @@
 (* tools *)
 (* 
 load "listtools"; open listtools;
+load "stringtools"; open stringtools;
 load "tools"; open tools;
+load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
+load "extracttype"; open extracttype;
 load "nametype"; open nametype;
 load "namevar"; open namevar;
 load "conv"; open conv; 
 load "rule"; open rule; 
 load "printtff"; open printtff;
 load "printresult";open printresult;
+load "higherorder"; open higherorder;
 load "beagle"; open beagle;
 *)
 
 (* TEST PROBLEM *)
 show_assums :=  true ;
 
+
 (* use of beagle tac *)
-val goal : goal = ([],``(x = 2) ==> (x + 1 = 3)``); 
 val thml = [];
 BEAGLE_TAC thml goal; 
 metisTools.METIS_TAC thml goal;
 (snd it) [];
 
+(* test higher order *)
+val goal : goal = ([],``(f a b = 2) /\ (f a = g)``);
+val filename = "result/higherorder";   
+val thml = [];
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
+
+(* test boolarg *)
+val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
+val filename = "result/boolarg";   
+val thml = [];
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
+
+
+
+
 (* problem 1 *)
 val goal : goal = ([],``(x = 1) ==> (x = 1)``);
-val filename = "problem6";   
+val filename = "result/test1";   
 val thml = [];
 val prepareflag = true;
 val monomorphflag = false;
@@ -32,21 +55,21 @@ beagle filename thml goal prepareflag monomorphflag;
 
 (* problem 2 *)
 val goal : goal = ([],``(!x. x + x = 1) ==> (x = 1)``);
-val filename = "problem2";   
+val filename = "result/problem2";   
 val thml = [];
 val prepareflag = false;
 beagle filename thml goal prepareflag; 
 
 (* problem 3 *)
 val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
-val filename = "problem3";   
+val filename = "result/problem3";   
 val thml = [];
 val prepareflag = false;
 beagle filename thml goal prepareflag; 
 
 (* problem 4 *)
 val goal : goal = ([],``(x + x = 1) ==> (x = 1)``);
-val filename = "problem4";   
+val filename = "result/problem4";   
 val thml = [];
 val prepareflag = false;
 beagle filename thml goal prepareflag; 

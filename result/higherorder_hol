@@ -1,0 +1,9 @@
+(* User provided theorem *)
+
+(* Goal *)
+  (* hypothesis list *) 
+  (* concl *)
+(f a b = 2) ∧ (f a = g)
+
+(* Conversion theorem *)
+ [] |- ¬((f a b = 2) ∧ (f a = g)) ⇔ 0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)

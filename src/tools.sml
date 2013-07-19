@@ -15,14 +15,33 @@ fun TOOLS_ERR function message =
     HOL_ERR{origin_structure = "tools",
 	    origin_function = function,
             message = message}
+
+ (* ACONV *)
+fun is_member_aconv t l = is_member_eq aconv t l 
+fun erase_double_aconv l = erase_double_eq aconv l 
  
-type conv = Term.term -> Thm.thm 
- 
+local fun is_equal (t1,a1) (t2,a2) = aconv t1 t2 andalso a1 = a2
+in
+fun is_member_aconv_arity (t,a) termal = is_member_eq is_equal (t,a) termal
+fun erase_double_aconv_arity termal = erase_double_eq is_equal termal
+end
+
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
 fun is_var_or_const term = is_var term orelse is_const term
-
+fun is_logical term =
+  is_conj term orelse
+  is_disj term orelse   
+  is_neg term orelse   
+  is_imp_only term orelse
+  is_forall term orelse  
+  is_exists term orelse  
+  is_exists1 term orelse
+  is_cond term 
+fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
+fun is_not_var term = not (is_var term)  
+  
 (* QUANTIFIER *) 
 fun strip_quant term =
   case connector term of
@@ -155,11 +174,21 @@ fun list_conj_hyp thm =
     th2
   end end end end   
 
-fun ap_thm_list thm terml =
+fun list_ap_thm thm terml =
   case terml of
     [] => thm 
-  | t :: m => ap_thm_list (AP_THM thm t) m 
+  | t :: m => list_ap_thm (AP_THM thm t) m 
 
+(* input is an equality *)
+fun list_fun_eq_conv vl term =
+  case vl of
+    [] => raise UNCHANGED
+  | [v] => X_FUN_EQ_CONV v term
+  | v :: m => ((X_FUN_EQ_CONV v) THENC 
+              (STRIP_QUANT_CONV (list_fun_eq_conv m))) 
+              term 
+   
+              
 (* extract term *)
 fun all_subterm_aux term = 
   case termstructure term of

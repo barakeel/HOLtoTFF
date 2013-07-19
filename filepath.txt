@@ -1,1 +1,1 @@
-result/default_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/result/higherorder_tff

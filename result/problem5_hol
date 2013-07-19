@@ -1,7 +1,0 @@
-(* User provided theorem *)
-(* goal *)
-(∀x. x + x = 1) ⇒ (y = 1)
-(* conversion theorem *)|- ¬((∀x. x + x = 1) ⇒ (y = 1)) ⇔
-   ∀x.
-     0 ≤ y ∧ (0 ≤ x + x ∨ ¬(0 ≤ x)) ∧ ((x + x = 1) ∨ ¬(0 ≤ x)) ∧
-     (y ≠ 1 ∨ ¬(0 ≤ x))

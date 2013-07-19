@@ -24,25 +24,28 @@ fun pp_terml pps terml =
 
 fun pp_goal pps goal =
   (
-  pp_terml pps (fst goal);
-  add_newline pps; 
-  pp_term pps (snd goal)
+  add_string pps "  (* hypothesis list *) "; add_newline pps; 
+  pp_terml pps (fst goal); 
+  add_string pps "  (* concl *)"; add_newline pps; 
+  pp_term pps (snd goal); add_newline pps
   )     
     
 fun print_result pps thml goal eqthm prepareflag =
   (
   begin_block pps CONSISTENT 0;
-  add_string pps "(* User provided theorem *)";
-  pp_thml pps thml;
-  add_newline pps; 
-  add_string pps "(* goal *)";
-  pp_goal pps goal;
+  add_string pps "(* User provided theorem *)"; add_newline pps; 
+    pp_thml pps thml;
+    add_newline pps; 
+  add_string pps "(* Goal *)"; add_newline pps; 
+    pp_goal pps goal;
+    add_newline pps;
   if prepareflag 
   then
-    (add_newline pps;
-     add_string pps "(* conversion theorem *)";
-     add_newline pps;
-     pp_thm pps eqthm)
+    (add_string pps "(* Conversion theorem *)"; add_newline pps;
+     show_assums :=  true;
+     pp_thm pps eqthm;
+     show_assums := false;
+     add_newline pps)
   else ();
   end_block pps
   ) 
