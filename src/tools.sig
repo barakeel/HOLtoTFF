@@ -25,7 +25,6 @@ sig
 (* term *)
   val strip_comb_n : (term * int) -> (term * term list)
   val list_mk_var : (string list * hol_type list) -> term list
-  val create_newvar : term -> term list -> term 
 (* arity *)
   val get_arity : term -> int
   val collapse_lowestarity : (term * int) list -> (term * int) list   
@@ -39,9 +38,11 @@ sig
   val list_conj_hyp : thm -> thm
   val list_ap_thm : thm -> term list -> thm 
   val list_fun_eq_conv : term list -> term -> thm
+  val repeat_rule : int -> rule -> rule
 (* extraction *)
   val all_subterm : term -> term list
   val all_type : term -> hol_type list
+  val all_vartype : term -> hol_type list
 (* first order *)  
   val find_atoml : term -> term list 
   val find_predicatel : term -> term list 

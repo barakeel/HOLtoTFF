@@ -42,6 +42,8 @@ fun is_logical term =
 fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
 fun is_not_var term = not (is_var term)  
   
+
+  
 (* QUANTIFIER *) 
 fun strip_quant term =
   case connector term of
@@ -77,20 +79,6 @@ fun name_numeral term =
   | _ => raise TOOLS_ERR "name_numeral" "not a numeral"
   
 (* can't be used on a constant *)  
-fun create_newvar var used = 
-  let val ty = type_of var in
-  let val name = fst (dest_var var) in
-  let val n = ref 0 in
-  let val var = ref (mk_var (name,ty)) in
-    (
-    while is_member (!var) used do
-      ( n := (!n) + 1;
-        var :=  mk_var (name ^ (Int.toString (!n)),ty) ) 
-    ;
-    (!var)
-    )    
-  end end end end  
-  
 fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
 
 fun strip_comb_n (term,n) =
@@ -188,6 +176,11 @@ fun list_fun_eq_conv vl term =
               (STRIP_QUANT_CONV (list_fun_eq_conv m))) 
               term 
    
+fun repeat_rule n rule thm =   
+  case n of
+    0 => thm
+  | _ => if n < 0 then raise TOOLS_ERR "repeat_rule" ""
+         else rule (repeat_rule (n - 1) rule thm)     
               
 (* extract term *)
 fun all_subterm_aux term = 
@@ -220,6 +213,19 @@ fun all_subterm term = erase_double (all_subterm_aux term)
 
 (* extract term type *)
 fun all_type term = erase_double (map type_of (all_subterm term))
+
+fun all_leafty ty =  
+  case typecat ty of
+    Booltype => [ty]
+  | Numtype => [ty]
+  | Alphatype => [ty]
+  | Leaftype => [ty]
+  | _ => let val (str,l) = dest_type ty in
+           all_leaftyl l
+         end  
+and all_leaftyl tyl = List.concat (map all_leafty tyl)   
+
+fun all_vartype term = filter is_vartype (all_leafty (type_of term))
 
 (* FIRST ORDER *)
 (* consider = to be always = not <=> *)

@@ -12,7 +12,7 @@ sig
   datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
   
   datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar 
-
+  
   val typecat : hol_type -> TYPECAT
   val termstructure : term -> TERMSTRUCTURE  
   val nodeconst : term -> NODECONST

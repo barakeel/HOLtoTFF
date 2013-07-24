@@ -3,13 +3,13 @@
 (* Goal *)
   (* hypothesis list *) 
   (* concl *)
-(∀x. P x) ⇒ P (λx. x + 2)
+(∀y. P y) ⇒ P (λx. x + 1)
 
 (* Conversion theorem *)
  []
-|- ¬((∀x. P x) ⇒ P (λx. x + 2)) ⇔
+|- ¬((∀y. P y) ⇒ P (λx. x + 1)) ⇔
    ∃x.
-     ∀f x'.
-       (¬P f ∨ 0 ≤ x f) ∧ (P x' ∨ 0 ≤ x f) ∧
-       (P x' ∨ ¬(0 ≤ x f + 2) ∨ ¬(0 ≤ f (x f)) ∨ f (x f) ≠ x f + 2) ∧
-       (¬P f ∨ ¬(0 ≤ x f + 2) ∨ ¬(0 ≤ f (x f)) ∨ f (x f) ≠ x f + 2)
+     ∀f y.
+       (¬P f ∨ 0 ≤ x f) ∧ (P y ∨ 0 ≤ x f) ∧
+       (P y ∨ ¬(0 ≤ x f + 1) ∨ ¬(0 ≤ f (x f)) ∨ f (x f) ≠ x f + 1) ∧
+       (¬P f ∨ ¬(0 ≤ x f + 1) ∨ ¬(0 ≤ f (x f)) ∨ f (x f) ≠ x f + 1)

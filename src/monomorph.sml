@@ -47,7 +47,7 @@ fun add_multisubst multisubst substl =
 
 fun all_subst term =
   let val tyl = all_type term in
-  let val vartyl = filter is_vartype tyl in
+  let val vartyl = all_vartype tyl in
   let val multisubst = mk_multisubst vartyl tyl in
     add_multisubst multisubst []  
   end end end

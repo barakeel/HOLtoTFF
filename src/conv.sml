@@ -37,7 +37,7 @@ fun CONV_ERR function message =
 
 
 (* BETA CONV *)
-fun beta_conv term = (REDEPTH_CONV BETA_CONV) term;
+fun redepth_beta_conv term = (REDEPTH_CONV BETA_CONV) term;
 (* ETA CONV *)
 fun eta_conv term = (REDEPTH_CONV ETA_CONV) term;
 
@@ -73,9 +73,7 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
       end
 
     )             
-  | Abs => let val (bvl,t) = strip_abs subterm in
-             find_free_bool_aux term t
-           end 
+  | Abs => []
 and find_free_bool_list term subterml =
   List.concat (map (find_free_bool_aux term) subterml)
 and find_free_bool_quant term subterm =
@@ -115,9 +113,7 @@ fun find_bound_bool_aux term subterm = (* term should be a boolean *)
         find_bound_bool_list term (operator :: argl)
       end
     )             
-  | Abs => let val (bvl,t) = strip_abs subterm in
-             find_bound_bool_aux term t
-           end 
+  | Abs => []
 and find_bound_bool_list term subterml =
   List.concat (map (find_bound_bool_aux term) subterml)
 and find_bound_bool_quant term subterm =
@@ -368,7 +364,7 @@ fun num_conv term =
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
 *)
 
-(* FUN CONV *)  
+
 (* find *)
 fun find_free_abs_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of
@@ -423,90 +419,146 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
 fun find_bound_abs term = erase_double_aconv (find_bound_abs_aux term term)
   
 
-(* input is ``f = \x y. x + y`` *)
-fun fun_axiom term =
-  let val funv = lhs term in
-  let val abst = rhs term in
-  let val (bvl,t) = strip_abs abst in
-  (* useful axiom *)
-  let val axiom1 = list_fun_eq_conv bvl term in
-  let val axiom2 = REFL abst in
-  let val axiom3 = list_ap_thm axiom2 bvl in
-  let val axiom4 = LAND_CONV LIST_BETA_CONV (concl axiom3) in
-  let val axiom5 = EQ_MP axiom4 axiom3 in
-  let val axiom6 = SYM axiom1 in
-  (* first part *)
-  let val th11 = ASSUME term in
-  let val th12 = EQ_MP axiom1 th11 in 
-  let val th13 = STRIP_QUANT_CONV (RAND_CONV LIST_BETA_CONV) (concl th12) in
-  let val th14 = EQ_MP th13 th12 in 
-  let val th15 = DISCH term th14 in
-  (* second part *)
-  let val th21 = ASSUME (concl th14) in
-  let val th22 = SPECL bvl th21 in
-  let val th23 = TRANS th22 axiom5 in
-  let val th24 = GENL bvl th23 in  
-  let val th25 = EQ_MP axiom6 th24 in
-  let val th26 = DISCH (concl th14) th25 in
-  (* together *)
-    IMP_ANTISYM_RULE th15 th26
+fun fun_axiom abs =
+  let val (bvl,t) = strip_abs abs in
+  let val th1 = REFL abs in
+  let val th2 = list_ap_thm th1 bvl in
+  let val th3 = (RAND_CONV redepth_beta_conv) (concl th2) in
+  let val th4 = EQ_MP th3 th2 in
+    th4
   end end end end end
-  end end end end end
-  end end end end end
-  end end end end end
-  handle _ => raise CONV_ERR "fun_axiom" (term_to_string term)
+  handle _ => raise CONV_ERR "fun_axiom" (term_to_string abs)
 
-(* test 
-show_assums := true;
-val term = ``f = \x y. x + y``;
-fun_axiom term;
+fun eq_conj_subs thm =
+  let val th0 = CONJUNCT1 thm in
+  let val th1 = CONJUNCT2 thm in
+  let val th2 = SUBS [th0] th1 in
+    th2
+  end end end
+
+fun and_strip_bvl_forall_mp bvl term = 
+  let val th0 = ASSUME term in
+  let val th1 = CONJUNCT1 th0 in
+  let val th2 = CONJUNCT2 th0 in
+  let val newbvl = create_newvarl_thm bvl th0 in
+  let val th3 = SPECL newbvl th1 in 
+  let val th4 = SPECL newbvl th2 in
+  let val th5 = CONJ th3 th4 in
+  let val th6 = GENL newbvl th5 in
+    DISCH term th6
+  end end end end end 
+  end end end
+
+fun extl bvl thm =
+    let val n = length bvl in
+    let val th0 = SPECL bvl thm in 
+    let val (op1,arg1) = strip_comb_n ((lhs (concl th0)),n) in
+    let val (op2,arg2) = strip_comb_n ((rhs (concl th0)),n) in
+    let val t2 = mk_eq (op1,op2) in
+    let val eqth0 = list_fun_eq_conv bvl t2 in
+    let val th1 = EQ_MP (SYM eqth0) thm in
+      th1
+    end end end end end
+    end end 
+
+
+(*    
+val newbvl = bvl;
+val (bvl,t) = strip_abs abs;
+ show_assums:= true;
 *)
 
 (* term should have type bool *)
 fun fun_conv_sub abs term =
   (* term *)
   let val ty = type_of abs in
-  let val v = create_newvar (mk_var ("f",ty)) (all_var term) in 
-  let val t1 = mk_eq (v,abs) in   
-  let val (bvl,t2) = strip_abs abs in
+  let val newname = create_newname "f" term in
+  let val v = (mk_var (newname,ty)) in (* fresh var *)
+  let val (bvl,t) = strip_abs abs in
   (* axiom *)
-  let val axiom1 = fun_axiom t1 in
-  let val (axiom2,axiom3) = EQ_IMP_RULE axiom1 in
-  let val axiom4 = REFL t2 in
-  let val axiom5 = GENL bvl axiom4 in
-  let val lemma1 = UNDISCH axiom2 in
-  let val lemma2 = UNDISCH axiom3 in
+  let val axiom1 = fun_axiom abs in
+  let val axiom2 = GENL bvl axiom1 in
   (* first part *)
   let val th11 = ASSUME term in
-  let val th12 = SYM (ASSUME t1) in  
-  let val th13 = SUBS [th12] th11 in  (* to be checked *)
-  let val th14 = PROVE_HYP lemma2 th13 in
-  let val th15 = DISCH (concl lemma1) th14 in
-  let val th16 = GEN v th15 in
-  let val th17 = DISCH term th16 in
+  let val th12 = CONJ axiom2 th11 in 
+  let val t1 = mk_conj (concl axiom2,term) in
+  let val t2 = subst [abs |-> v] t1 in (* substitution *)
+  let val t3 = mk_exists (v,t2) in
+  let val th13 = EXISTS (t3,abs) th12 in
+  let val th14 = DISCH term th13 in
   (* second part *) 
-  let val th21 = ASSUME (concl th16) in
-  let val th22 = SPEC abs th21  in (* to be checked *)
-  let val th23 = LAND_CONV (STRIP_QUANT_CONV (LAND_CONV LIST_BETA_CONV)) 
-                   (concl th22) in    
-  let val th24 = EQ_MP th23 th22 in
-  let val th25 = MP th24 axiom5 in
-  let val th26 = DISCH (concl th16) th25 in 
+  let val th21 = ASSUME (concl th13) in 
+  let val th22 = CONJ axiom2 th21 in
+    (* put the existential outside *)
+  let val t10 = mk_conj (concl axiom2,concl th13) in
+  let val eqth10 = RIGHT_AND_EXISTS_CONV t10 in
+  let val th23 = EQ_MP eqth10 th22 in
+    (* remove the existential and deduce something *)
+  let val (bv,t4) = dest_exists (concl th23) in
+  let val th31 = ASSUME t4 in
+  let val th32 = CONJUNCT1 th31 in
+  let val th33 = CONJUNCT1 (CONJUNCT2 th31) in
+  let val th34 = CONJUNCT2 (CONJUNCT2 th31) in
+  let val th35 = CONJUNCT2 th31 in
+  
+  let val th36 = CONJ th32 th33 in
+  let val th37 = and_strip_bvl_forall_mp bvl (concl th36) in
+  let val th38 = MP th37 th36 in
+  
+  let val newbvl = create_newvarl_thm bvl th38 in
+  let val th39 = SPECL newbvl th38 in 
+  let val th40 = CONJUNCT1 th39 in
+  let val th41 = SYM (CONJUNCT2 th39) in
+  let val th42 = TRANS th40 th41 in
+  let val th43 = GENL newbvl th42 in
+  let val th44 = extl bvl th43 in 
+  let val th45 = SYM th44 in
+  let val th46 = SUBS [th45] th35 in (* substitution *)
+  let val th47 = DISCH t4 th46 in
+    (* end *)
+  let val th48 = GEN v th47 in
+  let val th49 = FORALL_IMP_CONV (concl th48) in 
+  let val th50 = EQ_MP th49 th48 in
+  let val th51 = LAND_CONV EXISTS_AND_CONV (concl th50) in
+  let val th52 = EQ_MP th51 th50 in
+ 
+  let val th53 = CONJ axiom2 th21 in
+  let val th54 = MP th52 th53 in
+  let val th55 = CONJUNCT2 th54 in
+  let val th56 = DISCH (concl th13) th55 in
     (* together *)
-    IMP_ANTISYM_RULE th17 th26
+    IMP_ANTISYM_RULE th14 th56
   end end end end end 
   end end end end end 
   end end end end end 
   end end end end end 
-  end end end
+  
+  end end end end end 
+  end end end end end 
+  end end end end end 
+  end end end end end 
+  
+  end end end end end end
+  
   handle _ => raise CONV_ERR "fun_conv_sub" 
               ("abs: " ^ (term_to_string abs) ^
               "term: " ^ (term_to_string term) )
 (* test
-val term = ``((\x. x) = f) ==> (f x = x)``;
-val abs = ``\x.x``;
+val term = ``P (\x y. x + y + z) : bool``;
+val abs = ``\x y. x + y + z``;
+fun_conv_sub abs term;
 *)
 
+(* test 
+show_assums := true;
+val term = `` \x y. x + y + z``;
+fun_axiom term;
+\x y. x + y + z x y = x
+*)
+(*
+ show_assums:= true;
+ *)
+ 
 fun fun_conv_subl absl term =
   case absl of
     [] => raise UNCHANGED
@@ -532,7 +584,6 @@ fun_conv_quant_aux term;
 
 
 (* term of type bool *)
-(* don't replace nested abstraction yet *)
 fun fun_conv_aux term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
@@ -554,11 +605,10 @@ fun fun_conv term =
 
 (* test 
 val term = ``P (\x. x + 1) (\y.y) /\ !x. Q (\z. z + x)``;
-val term = ``P (\x z. x + z):bool``; (* error to be fixed *)
+val term = ``P (\x z. x + z):bool``;
 val term = ``P (\x. (x = \z.z) ):bool`` ;
-val abs = ``\x z. x + z``;
+
 fun_conv term;
-fun_conv_sub abs term;
 find_free_abs term ;
 *)
 (* END FUN CONV *)
@@ -670,7 +720,7 @@ fun define_conv def =
   (* otherway *)
   let val th21 = ASSUME (concl th14) in
   let val th22 = list_ap_thm th21 bvl in
-  let val th23 = rewrite_conv beta_conv th22 in
+  let val th23 = rewrite_conv redepth_beta_conv th22 in
   let val th24 = GENL bvl th23 in
   let val th25 = DISCH (concl th14) th24 in
   (* together *)

@@ -1,95 +1,197 @@
-tff(tyoption(tya)_type,type,(
-    tyoption(tya): $tType )).
+tff(tya_fun_tybool_type,type,(
+    tya_fun_tybool: $tType )).
 
-tff(tyb_fun_tybool_type,type,(
-    tyb_fun_tybool: $tType )).
+tff(tya_fun_tybool_fun_tybool_type,type,(
+    tya_fun_tybool_fun_tybool: $tType )).
 
-tff(tyb_prod_tya_fun_tybool_type,type,(
-    tyb_prod_tya_fun_tybool: $tType )).
+tff(tya_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tya_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
 
-tff(tyb_prod_tya_type,type,(
-    tyb_prod_tya: $tType )).
-
-tff(tyoption(tyb)_type,type,(
-    tyoption(tyb): $tType )).
-
-tff(tya_prod_tyb_fun_tybool_type,type,(
-    tya_prod_tyb_fun_tybool: $tType )).
-
-tff(tya_prod_tyb_type,type,(
-    tya_prod_tyb: $tType )).
+tff(tyfmaptree(tya_tyb)_type,type,(
+    tyfmaptree(tya_tyb): $tType )).
 
 tff(bool_type,type,(
     bool: $tType )).
 
+tff(tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_type,type,(
+    tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)): $tType )).
+
+tff(tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_type,type,(
+    tyfmap(tya_tylist(tya)_fun_tyoption(tyb)): $tType )).
+
+tff(tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tybool_type,type,(
+    tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tybool: $tType )).
+
 tff(tya_type,type,(
     tya: $tType )).
+
+tff(tya_fun_tya_fun_tybool_fun_tybool_type,type,(
+    tya_fun_tya_fun_tybool_fun_tybool: $tType )).
+
+tff(tyfmaptree(tykey_tyvalue)_type,type,(
+    tyfmaptree(tykey_tyvalue): $tType )).
+
+tff(tyfmaptree(tykey_tyvalue)_fun_tylist(tykey)_fun_tyoption(tyvalue)_type,type,(
+    tyfmaptree(tykey_tyvalue)_fun_tylist(tykey)_fun_tyoption(tyvalue): $tType )).
+
+tff(tylist(tykey)_fun_tyoption(tyvalue)_fun_tyfmaptree(tykey_tyvalue)_type,type,(
+    tylist(tykey)_fun_tyoption(tyvalue)_fun_tyfmaptree(tykey_tyvalue): $tType )).
+
+tff(tylist(tykey)_fun_tyoption(tyvalue)_type,type,(
+    tylist(tykey)_fun_tyoption(tyvalue): $tType )).
+
+tff(tylist(tykey)_fun_tyoption(tyvalue)_fun_tybool_type,type,(
+    tylist(tykey)_fun_tyoption(tyvalue)_fun_tybool: $tType )).
+
+tff(tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_type,type,(
+    tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb): $tType )).
+
+tff(tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tylist(tya)_fun_tyoption(tyb)_fun_tybool_type,type,(
+    tylist(tya)_fun_tyoption(tyb)_fun_tybool: $tType )).
+
+tff(tyfmaptree(tya_tyb)_fun_tybool_type,type,(
+    tyfmaptree(tya_tyb)_fun_tybool: $tType )).
+
+tff(tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
+
+tff(tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_type,type,(
+    tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)): $tType )).
 
 tff(tyb_type,type,(
     tyb: $tType )).
 
-tff(tylist(tyb_prod_tya)_type,type,(
-    tylist(tyb_prod_tya): $tType )).
+tff(tyb_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb)_type,type,(
+    tyb_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb): $tType )).
 
-tff(tyfmap(tyb_tya)_type,type,(
-    tyfmap(tyb_tya): $tType )).
+tff(xapp_type,type,(
+    xapp: ( tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb) * tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) ) > tylist(tya)_fun_tyoption(tyb) )).
 
-tff(tylist(tya_prod_tyb)_type,type,(
-    tylist(tya_prod_tyb): $tType )).
+tff(xapp0_type,type,(
+    xapp0: ( tyb_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb) * tyb ) > tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xa_type,type,(
+    xa: tyb )).
+
+tff(xapp01_type,type,(
+    xapp01: ( tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) * tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) ) > tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) )).
+
+tff(xapp012_type,type,(
+    xapp012: ( tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) * tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) ) > tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) )).
+
+tff(xapp0123_type,type,(
+    xapp0123: ( tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) * tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb) ) > tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xapp01234_type,type,(
+    xapp01234: ( tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) * tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb) ) > tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xapp012345_type,type,(
+    xapp012345: ( tyfmaptree(tya_tyb)_fun_tybool * tyfmaptree(tya_tyb) ) > $o )).
+
+tff(xP_type,type,(
+    xP: tyfmaptree(tya_tyb)_fun_tybool )).
+
+tff(xapp0123456_type,type,(
+    xapp0123456: ( tylist(tya)_fun_tyoption(tyb)_fun_tybool * tylist(tya)_fun_tyoption(tyb) ) > $o )).
+
+tff(xapp01234567_type,type,(
+    xapp01234567: ( tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb) * tyfmaptree(tya_tyb) ) > tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xapp012345678_type,type,(
+    xapp012345678: ( tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb) * tylist(tya)_fun_tyoption(tyb) ) > tyfmaptree(tya_tyb) )).
+
+tff(xapp0123456789_type,type,(
+    xapp0123456789: ( tya_fun_tylist(tya)_fun_tyoption(tyb) * tya ) > tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xapp012345678910_type,type,(
+    xapp012345678910: ( tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tylist(tya)_fun_tyoption(tyb) * tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) ) > tya_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(xapp01234567891011_type,type,(
+    xapp01234567891011: ( tylist(tykey)_fun_tyoption(tyvalue)_fun_tybool * tylist(tykey)_fun_tyoption(tyvalue) ) > $o )).
+
+tff(xapp0123456789101112_type,type,(
+    xapp0123456789101112: ( tylist(tykey)_fun_tyoption(tyvalue)_fun_tyfmaptree(tykey_tyvalue) * tylist(tykey)_fun_tyoption(tyvalue) ) > tyfmaptree(tykey_tyvalue) )).
+
+tff(xapp012345678910111213_type,type,(
+    xapp012345678910111213: ( tyfmaptree(tykey_tyvalue)_fun_tylist(tykey)_fun_tyoption(tyvalue) * tyfmaptree(tykey_tyvalue) ) > tylist(tykey)_fun_tyoption(tyvalue) )).
+
+tff(xapp01234567891011121314_type,type,(
+    xapp01234567891011121314: ( tya_fun_tybool_fun_tybool * tya_fun_tybool ) > $o )).
+
+tff(xapp0123456789101112131415_type,type,(
+    xapp0123456789101112131415: ( tya_fun_tya_fun_tybool_fun_tybool * tya ) > tya_fun_tybool_fun_tybool )).
+
+tff(xx_type,type,(
+    xx: tya )).
+
+tff(xapp012345678910111213141516_type,type,(
+    xapp012345678910111213141516: ( tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tybool * tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) ) > tya_fun_tybool )).
 
 tff(xfm_type,type,(
-    xfm: tyfmap(tyb_tya) )).
+    xfm: tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) )).
 
-tff(xls_type,type,(
-    xls: tylist(tyb_prod_tya) )).
+tff(cconstruct_type,type,(
+    cconstruct: tyb_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tylist(tya)_fun_tyoption(tyb) )).
 
-tff(xk_type,type,(
-    xk: tyb )).
+tff(co_f_type,type,(
+    co_f: tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tyfmap(tya_tylist(tya)_fun_tyoption(tyb)) )).
 
-tff(xv_type,type,(
-    xv: tya )).
+tff(co_type,type,(
+    co: tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb)_fun_tylist(tya)_fun_tyoption(tyb) )).
 
-tff(cIN_type,type,(
-    cIN: ( tya_prod_tyb * tya_prod_tyb_fun_tybool ) > $o )).
+tff(cwf_type,type,(
+    cwf: tylist(tya)_fun_tyoption(tyb)_fun_tybool )).
 
 tff(c_type,type,(
-    c: ( tya * tyb ) > tya_prod_tyb )).
+    c: ( tylist(tya)_fun_tyoption(tyb) * tylist(tya)_fun_tyoption(tyb) ) > $o )).
 
-tff(cLIST_TO_SET_type,type,(
-    cLIST_TO_SET: tylist(tya_prod_tyb) > tya_prod_tyb_fun_tybool )).
+tff(ctoF_type,type,(
+    ctoF: tyfmaptree(tya_tyb)_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(cfromF_type,type,(
+    cfromF: tylist(tya)_fun_tyoption(tyb)_fun_tyfmaptree(tya_tyb) )).
+
+tff(cFAPPLY_type,type,(
+    cFAPPLY: tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tylist(tya)_fun_tyoption(tyb) )).
+
+tff(cwf0_type,type,(
+    cwf0: tylist(tykey)_fun_tyoption(tyvalue)_fun_tybool )).
 
 tff(c0_type,type,(
-    c0: ( tyoption(tyb) * tyoption(tyb) ) > $o )).
-
-tff(cALOOKUP_type,type,(
-    cALOOKUP: ( tylist(tya_prod_tyb) * tya ) > tyoption(tyb) )).
-
-tff(cSOME_type,type,(
-    cSOME: tyb > tyoption(tyb) )).
-
-tff(cIN0_type,type,(
-    cIN0: ( tyb_prod_tya * tyb_prod_tya_fun_tybool ) > $o )).
+    c0: ( tylist(tykey)_fun_tyoption(tyvalue) * tylist(tykey)_fun_tyoption(tyvalue) ) > $o )).
 
 tff(c01_type,type,(
-    c01: ( tyb * tya ) > tyb_prod_tya )).
+    c01: ( tyfmaptree(tykey_tyvalue) * tyfmaptree(tykey_tyvalue) ) > $o )).
 
-tff(cLIST_TO_SET0_type,type,(
-    cLIST_TO_SET0: tylist(tyb_prod_tya) > tyb_prod_tya_fun_tybool )).
+tff(cfromF0_type,type,(
+    cfromF0: tylist(tykey)_fun_tyoption(tyvalue)_fun_tyfmaptree(tykey_tyvalue) )).
 
-tff(cIN01_type,type,(
-    cIN01: ( tyb * tyb_fun_tybool ) > $o )).
+tff(ctoF0_type,type,(
+    ctoF0: tyfmaptree(tykey_tyvalue)_fun_tylist(tykey)_fun_tyoption(tyvalue) )).
+
+tff(cIN_type,type,(
+    cIN: tya_fun_tya_fun_tybool_fun_tybool )).
 
 tff(cFDOM_type,type,(
-    cFDOM: tyfmap(tyb_tya) > tyb_fun_tybool )).
-
-tff(c012_type,type,(
-    c012: ( tyoption(tya) * tyoption(tya) ) > $o )).
-
-tff(cALOOKUP0_type,type,(
-    cALOOKUP0: ( tylist(tyb_prod_tya) * tyb ) > tyoption(tya) )).
-
-tff(cSOME0_type,type,(
-    cSOME0: tya > tyoption(tya) )).
+    cFDOM: tyfmap(tya_tylist(tya)_fun_tyoption(tyb))_fun_tya_fun_tybool )).
 
 tff(axiom1_axiom,axiom,(
-    ! [Xal: tylist(tya_prod_tyb),Xp_2: tya,X: tyb] : (((cIN(c(Xp_2,X),cLIST_TO_SET(Xal)) | ~(cALOOKUP(Xal,Xp_2) = cSOME(X))) & (~cIN0(c01(xk,Xp_2),cLIST_TO_SET0(xls)) & (~cIN01(xk,cFDOM(xfm)) & (cALOOKUP0(xls,xk) = cSOME0(xv)))))) )).
+    ! [Xk: tya,X: tyfmaptree(tykey_tyvalue),Xr: tylist(tykey)_fun_tyoption(tyvalue)] : ((xapp012345(xP,xapp012345678(cfromF,xapp(xapp0(cconstruct,xa),xapp01(xapp012(co_f,xapp0123(xapp01234(co,ctoF),cfromF)),xfm)))) & ((xapp012345(xP,xapp012345678(cfromF,xapp0123456789(xapp012345678910(cFAPPLY,xfm),Xk))) | ~xapp01234567891011121314(xapp0123456789101112131415(cIN,Xk),xapp012345678910111213141516(cFDOM,xfm))) & ((xapp0123456(cwf,xapp0123456789(xapp012345678910(cFAPPLY,xfm),Xk)) | ~xapp01234567891011121314(xapp0123456789101112131415(cIN,Xk),xapp012345678910111213141516(cFDOM,xfm))) & (~(xapp01234567(ctoF,xapp012345678(cfromF,xapp0123456789(xapp012345678910(cFAPPLY,xfm),xx))) = xapp0123456789(xapp012345678910(cFAPPLY,xfm),xx)) & ((~xapp01234567891011(cwf0,Xr) | (xapp012345678910111213(ctoF0,xapp0123456789101112(cfromF0,Xr)) = Xr)) & ((xapp01234567891011(cwf0,Xr) | ~(xapp012345678910111213(ctoF0,xapp0123456789101112(cfromF0,Xr)) = Xr)) & ((xapp0123456789101112(cfromF0,xapp012345678910111213(ctoF0,X)) = X) & xapp01234567891011121314(xapp0123456789101112131415(cIN,xx),xapp012345678910111213141516(cFDOM,xfm)))))))))) )).

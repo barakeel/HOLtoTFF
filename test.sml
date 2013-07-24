@@ -19,6 +19,9 @@ load "beagle"; open beagle;
 (* TEST PROBLEM *)
 show_assums :=  true ;
 
+(* need to put the theorems inside the goal before negating the goal *)
+(* need to quantify every variable before negating the goal *)
+
 
 (* use of beagle tac *)
 val thml = [];
@@ -29,6 +32,14 @@ metisTools.METIS_TAC thml goal;
 (* test higher order *)
 val goal : goal = ([],``(f a b = 2) /\ (f a = g)``);
 val filename = "result/higherorder";   
+val thml = [];
+val prepareflag = true;
+val monomorphflag = false;
+beagle filename thml goal prepareflag monomorphflag; 
+
+(* test higher order2 *)
+val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
+val filename = "result/higherorder2";   
 val thml = [];
 val prepareflag = true;
 val monomorphflag = false;
@@ -51,19 +62,23 @@ val monomorphflag = false;
 beagle filename thml goal prepareflag monomorphflag; 
 
 (* test funconv2 *) (* to be fixed *)
-val goal : goal = ([],``((\x. x) = f) ==> (f x = x)``);
+val goal : goal = ([],``(P f:num -> num = f) ==> (P \x.x:num -> num = \x.x)``);
 val filename = "result/funconv2";   
 val thml = [];
 val prepareflag = true;
 val monomorphflag = false;
 beagle filename thml goal prepareflag monomorphflag; 
 
-val goal : goal = ([],``(!x:num -> num . P x) ==> (P \x. x + 2)`` );
+val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 1))`` );
 val filename = "result/funconv3";   
 val thml = [];
 val prepareflag = true;
 val monomorphflag = false;
 beagle filename thml goal prepareflag monomorphflag; 
+
+val (a,b) = METIS_TAC [] goal;
+b [];
+(?f. !x. f x = x + 1) ==> ~ (!y:num ->num .
 
 (* test functions *)
 open HolKernel Abbrev boolLib;

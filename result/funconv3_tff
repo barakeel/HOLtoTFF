@@ -35,4 +35,4 @@ tff(c01_type,type,(
     c01: ( $int * $int ) > $int )).
 
 tff(axiom1_axiom,axiom,(
-    ! [Xf: tynum_fun_tynum,X: tynum_fun_tynum] : (((~xapp(xP,Xf) | $lesseq(0,xapp01(xx,Xf))) & ((xapp(xP,X) | $lesseq(0,xapp01(xx,Xf))) & ((xapp(xP,X) | (~$lesseq(0,$sum(xapp01(xx,Xf),2)) | (~$lesseq(0,xapp0(Xf,xapp01(xx,Xf))) | ~(xapp0(Xf,xapp01(xx,Xf)) = $sum(xapp01(xx,Xf),2))))) & (~xapp(xP,Xf) | (~$lesseq(0,$sum(xapp01(xx,Xf),2)) | (~$lesseq(0,xapp0(Xf,xapp01(xx,Xf))) | ~(xapp0(Xf,xapp01(xx,Xf)) = $sum(xapp01(xx,Xf),2))))))))) )).
+    ! [Xf: tynum_fun_tynum,Xy: tynum_fun_tynum] : (((~xapp(xP,Xf) | $lesseq(0,xapp01(xx,Xf))) & ((xapp(xP,Xy) | $lesseq(0,xapp01(xx,Xf))) & ((xapp(xP,Xy) | (~$lesseq(0,$sum(xapp01(xx,Xf),1)) | (~$lesseq(0,xapp0(Xf,xapp01(xx,Xf))) | ~(xapp0(Xf,xapp01(xx,Xf)) = $sum(xapp01(xx,Xf),1))))) & (~xapp(xP,Xf) | (~$lesseq(0,$sum(xapp01(xx,Xf),1)) | (~$lesseq(0,xapp0(Xf,xapp01(xx,Xf))) | ~(xapp0(Xf,xapp01(xx,Xf)) = $sum(xapp01(xx,Xf),1))))))))) )).
