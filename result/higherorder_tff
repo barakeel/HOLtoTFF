@@ -1,3 +1,5 @@
+%------------------------------------------------------------------------------
+
 tff(bool_type,type,(
     bool: $tType )).
 
@@ -19,8 +21,8 @@ tff(xapp_type,type,(
 tff(xb_type,type,(
     xb: tyb )).
 
-tff(xapp0_type,type,(
-    xapp0: ( tya_fun_tyb_fun_tynum * tya ) > tyb_fun_tynum )).
+tff(xapp1_type,type,(
+    xapp1: ( tya_fun_tyb_fun_tynum * tya ) > tyb_fun_tynum )).
 
 tff(xf_type,type,(
     xf: tya_fun_tyb_fun_tynum )).
@@ -34,11 +36,13 @@ tff(xg_type,type,(
 tff(c_type,type,(
     c: ( $int * $int ) > $o )).
 
-tff(c0_type,type,(
-    c0: ( $int * $int ) > $o )).
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
 
-tff(c01_type,type,(
-    c01: ( tyb_fun_tynum * tyb_fun_tynum ) > $o )).
+tff(c2_type,type,(
+    c2: ( tyb_fun_tynum * tyb_fun_tynum ) > $o )).
 
 tff(axiom1_axiom,axiom,(
-    ($lesseq(0,xapp(xapp0(xf,xa),xb)) & (~(xapp(xapp0(xf,xa),xb) = 2) | ~(xapp0(xf,xa) = xg))) )).
+    ($lesseq(0,xapp(xapp1(xf,xa),xb)) & (~(xapp(xapp1(xf,xa),xb) = 2) | ~(xapp1(xf,xa) = xg))) )).
+
+%------------------------------------------------------------------------------

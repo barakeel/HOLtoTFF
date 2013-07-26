@@ -1,21 +1,9 @@
 structure beagle :> beagle =
 struct
-(* 
-load "listtools"; open listtools;
-load "tools"; open tools;
-load "extractvar"; open extractvar;
-load "nametype"; open nametype;
-load "namevar"; open namevar;
-load "conv"; open conv; 
-load "rule"; open rule; 
-load "printtff"; open printtff;
-load "printresult";open printresult;
-load "monomorph"; open monomorph;
-load "higherorder"; open higherorder;
-open OS.Process;
-*)
-open HolKernel Abbrev boolLib
-     tools listtools
+
+open HolKernel Abbrev boolLib HOLPP 
+     listtools freshvar tools
+     namevar
      higherorder monomorph conv rule printtff printresult
 
 fun BEAGLE_ERR function message =
@@ -25,15 +13,15 @@ fun BEAGLE_ERR function message =
  
 (* tools *)
 fun is_polymorph term = not (null (all_vartype term)) 
-fun is_polymorph_goal =   
+fun is_polymorph_goal goal =   
   exists is_polymorph (fst goal) orelse
-  is polymorph (snd goal)
-fun is_polymorph_thm = 
+  is_polymorph (snd goal)
+fun is_polymorph_thm thm = 
   exists is_polymorph (hyp thm) orelse
-  is polymorph (concl thm)
+  is_polymorph (concl thm)
 fun is_polymorph_pb thml goal =
   exists is_polymorph_thm thml orelse
-  is polymorph_goal goal 
+  is_polymorph_goal goal 
 
 
 fun list_TRANS eqthml =
@@ -49,15 +37,8 @@ fun list_TRANS eqthml =
  
 (* BEAGLE PREPARE *)
 
-(* use of mk_thm *)
-fun beagle_firststep thml goal =
-  let val th0 = mk_thm goal in
-    rule thml th0
-  end  
-
-
-
-fun list_add_assum = repeatchange ADD_ASSUM;
+(* first step *)
+fun list_add_assum terml thm = repeatchange ADD_ASSUM terml thm;
 
 fun rule thml thm =
   let val th0 = list_add_assum (map concl (map DISCH_ALL thml)) thm in
@@ -65,208 +46,199 @@ fun rule thml thm =
   let val th2 = list_conj_hyp th1 in
     th2
   end end end
-     
-(* thm should have a false conclusion * and a negated conclusion *)
+(*
 fun validation nhyp thml goal thm = 
-  let val th0 = conj_list_hyp nhyp thm in
-  let val th1 = DISCH (mk_neg snd(goal)) th0 in
+  let val th0 = list_conj_hyp nhyp thm in
+  let val th1 = DISCH (mk_neg (snd goal)) th0 in
   let val th2 = list_prove_hyp (map DISCH_ALL thml) th1 in
   let val th3 = CCONTR goal in
   let val th4 = list_add_assum (fst goal) th3 in
     th4
   end end end end end
-    
-(* use of goal*)  
-   
-   
+*)
+fun beagle_firststep pps thml goal =
+  let val th0 = mk_thm goal in
+    rule thml th0
+  end  
 
+(* conv *)   
 fun beagle_conv pps term = 
   let val eqth1 = QCONV normalForms.CNF_CONV term in
-  let val term1 = rhs (concl eqth1) in 
-    (
+  let val term1 = rhs (concl eqth1) in (
     if not(term1 = term)
-    then (add_string pps "CNF1: "; print_thm pps eqth1; add_newline pps)
+    then (add_string pps "CNF1: "; ppres_thm pps eqth1; add_newline pps)
     else ();
   let val eqth2 = QCONV fun_conv term1 in  
-  let val term2 = rhs (concl eqth2) in
+  let val term2 = rhs (concl eqth2) in (
     if not(term2 = term1)
-    then (add_string pps "Lambda: "; print_thm pps eqth2; add_newline pps)
+    then (add_string pps "Lambda: "; ppres_thm pps eqth2; add_newline pps)
     else ();
   let val eqth3 = QCONV bool_conv term2 in
-  let val term3 = rhs (concl eqth3) in
+  let val term3 = rhs (concl eqth3) in (
     if not(term3 = term2)
-    then (add_string pps "Boolean: "; print_thm pps eqth3; add_newline pps)
+    then (add_string pps "Boolean: "; ppres_thm pps eqth3; add_newline pps)
     else ();
   let val eqth4 = QCONV num_conv term3 in
-  let val term4 = rhs (concl eqth4) in
+  let val term4 = rhs (concl eqth4) in (
     if not(term4 = term3)
-    then (add_string pps "Numeral: "; print_thm pps eqth4; add_newline pps)
+    then (add_string pps "Numeral: "; ppres_thm pps eqth4; add_newline pps)
     else ();
   let val eqth5 = QCONV normalForms.CNF_CONV term4 in
-  let val term5 = rhs (concl eqth5) in
+  let val term5 = rhs (concl eqth5) in (
     if not(term5 = term4) 
-    then (add_string pps "CNF2: " print_thm pps eqth5; add_newline pps)
+    then (add_string pps "CNF2: "; ppres_thm pps eqth5; add_newline pps)
     else ();
-  list_TRANS [eqth1,eqth2,eqth3,eqth4,eqth5]
-  )
-  end end end end end 
-  end end end end end   
+    list_TRANS [eqth1,eqth2,eqth3,eqth4,eqth5]
+  ) end end 
+  ) end end 
+  ) end end 
+  ) end end 
+  ) end end   
 
-
+(* last step *)
 fun beagle_laststep pps eqth =
   let val term = rhs (concl eqth) in
   let val terml = hyp eqth in
-  let val th1 = 
-    if null terml 
-    then mk_thm ([term],F) 
-    else mk_thm (terml @ [term],F) 
+  let val th1 = if null terml 
+                then mk_thm ([term],F) 
+                else mk_thm (terml @ [term],F) 
   in
   (* remove all existential quantifiers from all hypothesis *)
-  let val th2 = remove_exists_thm th1 in 
-    (
-    if not (th1 = th2)
-    then (add_string pps "Exists: " print_thm pps th2; add_newline pps)
-    else (); 
+  let val th2 = remove_exists_thm th1 in (
+    (add_string pps "Exists: "; ppres_thm pps th2; add_newline pps);
   (* add bool_axiom *)  
-    let val th3 = add_bool_axioms th2 in
-      if not (th2 = th3)
-      then add_string pps "Boolaxiom: " print_thm pps th2; add_newline pps)
-      else () 
-    end;  
+  let val th3 = add_bool_axioms th2 in (
+    (add_string pps "Boolaxiom: "; ppres_thm pps th2; add_newline pps); 
   (* higher order (erase some important hypothesis) *)
   let val th4 =
     if firstorder_thm th3 then th3 
     else 
       let val appname = create_newname_thm "app" th3 in
-      let val hypl = map rhs (map concl (map (app_conv appname) (hyp th3))) in
+      let val hypl = map rhs (map concl (map (QCONV (app_conv appname)) (hyp th3))) in
         mk_thm (hypl,F)
       end end
   in        
     (hyp th4,concl th4) 
-  end end end end end end
-     
-             
+  end 
+  ) end 
+  ) end 
+  end end end
+                 
 fun beagle_prepare pps thml goal mflag =
-  (* print goal and thml *)
   (
-  pp_goal pps goal;
-  pp_thml pps thml;
+  ppres_problem pps thml goal;
   (* first step *)
-  let val term1 = hyp (beagle_firststep thml goal) in 
+  let val term1 = hd (hyp (beagle_firststep pps thml goal)) in 
   (* monomorphisation *)
-  let val term2 = if mflag
-                  then (add_string pps " mono" ; monomorph term2)
-                  else term2
+  let val term2 = 
+    if mflag
+    then (add_string pps " Polymorph: " ; add_newline pps; monomorph term1)
+    else term1
   in
   (* conversion *)
-  let val eqth = beagle_conv term2 in
+  let val eqth = beagle_conv pps term2 in
   (* last step *)
-    beagle_laststep eqth 
+    beagle_laststep pps eqth 
   end end end
   ) 
    
-   
-fun get_status filename = 
-  let val statuspath = mk_statuspath filename in
-  let val file = TextIO.openIn (statuspath) in 
-  let val status = TextIO.inputAll file in
-    (
-    TextIO.closeIn file;
-    status
-    )  
-  end end end   
-   
+(* BEAGLE MAIN *)   
 (* path are absolute *) 
 val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+val SZSstatus = ref "undefined"
 fun mk_holpath filename = directory ^ filename ^ "_hol"  
 fun mk_tffpath filename =  directory ^ filename ^ "_tff" 
-fun mk_statuspath filename = directory ^ filename ^ "_tff_status"
-fun mk_bigrespath filename = direcotry ^ filename ^ "_bigres"
-fun mk_adresspath () = directory ^ "filepath.txt"
+fun mk_SZSstatuspath filename = directory ^ filename ^ "_tff_SZSstatus"
+fun mk_smallrespath filename = directory ^ filename ^ "_smallres"
+fun mk_bigrespath filename = directory ^ filename ^ "_bigres"
+fun mk_addresspath () = directory ^ "filepath.txt"
+fun mk_tffsavepath filename = directory ^ filename ^ "_tffsave"
 
+fun update_SZSstatus filename = 
+  let val SZSstatuspath = mk_SZSstatuspath filename in
+  let val file = TextIO.openIn SZSstatuspath in 
+  let val str = TextIO.inputAll file in
+    (
+    SZSstatus := str;
+    TextIO.closeIn file
+    )  
+  end end end   
+
+ 
+ 
 fun beagle filename thml goal mflag =
-  (
   let val bigrespath = mk_bigrespath filename in
   let val bigfile = TextIO.openAppend bigrespath in 
-  let val bigpps = PP.mk_ppstream in 
-  
-  let val smallrespath = mk_smallrespath filename in
-  let val smallfile = TexIO.openAppend smallrespath in
-  let val smallpps = PP.mk_ppstream in
-    
-  let val path1 = mk_tffpath filename in
-  let val path2 = mk_holpath filename in
-  let val adresspath = mk_addresspath () in
-  let val finalgoal = beagle_prepare bigpps thml goal mflag in
-    ( 
-    (* print the problem *)
-    output_tff path1 finalgoal; 
-    output_path addresspath path1; 
-    (* call beagle on tffpath*)
-    OS.Process.system 
-    ("cd " ^ directory ^ ";" ^
-     "sh " ^ directory ^ "callbeagle.sh");
-    
-    let val status = get_status filename in
-      (
-      (* short result *)
-      add_string smallpps ((substring (status,0,3)) ^ " : ")
-      pp_goal smallpps goal; 
-      add_newline smallpps;
-      (* big result *)
-      add_string bigpps ("Status : " ^ status);
-      add_newline bigpps
-      )
-    end
+  let val bigpps =
+    mk_ppstream
+    {
+    consumer  = fn s => TextIO.output (bigfile,s),
+    linewidth = 80,
+    flush     = fn () => TextIO.flushOut bigfile
+    } 
+  in 
+  (* path *)
+  let val tffpath = mk_tffpath filename in
+  let val tffsavepath = mk_tffsavepath filename in
+  let val addresspath = mk_addresspath () in
+  (* main and big results *)
+    (
+    begin_block bigpps CONSISTENT 0;
+      let val finalgoal = beagle_prepare bigpps thml goal mflag in
+        ( 
+        (* print the problem *)
+        output_tffgoal tffpath finalgoal false; 
+        output_tffgoal tffsavepath finalgoal true;
+        output_tffgoalpath addresspath tffpath; 
+        (* call beagle on tffpath*)
+        OS.Process.system 
+          ("cd " ^ directory ^ ";" ^
+           "sh " ^ directory ^ "callbeagle.sh")
+        )
+      end;
+      update_SZSstatus filename; 
+      add_string bigpps ("Status: " ^  (!SZSstatus)); 
+      add_string bigpps "\n"; add_string bigpps "\n";
+      (* output a short result *)
+      let val smallrespath = mk_smallrespath filename in
+        output_smallresult smallrespath goal (!SZSstatus) mflag
+      end;  
+    end_block bigpps;
+    TextIO.closeOut bigfile
     )
   end end end end end 
-  end end end end end
-
-
-
-
-
-(* close the files *)
-
-
-
-
-
-(* test 
-val status = get_status "problem6";
-status = "Unsatisfiable";
-*)
-
-fun beagle_tac_aux thml goal mflag =
-  let val filename = "default" in
-  (
-  beagle filename thml goal mflag
-  ; 
-  let val status = get_status filename in
-  let fun validation thml = mk_thm goal in
-    case status of
-      "Unsatisfiable" => ([],validation)
-    | "Satisfiable" => raise BEAGLE_ERR "BEAGLE_TAC" "Satisfiable" 
-    | _ => raise BEAGLE_ERR "BEAGLE_TAC" "Error"
-  end end 
-  )
   end
 
-
+(* test 
+update_SZSstatus "problem6";
+(!SZSstatus) = "Unsatisfiable";
+*)
+(* BEAGLE_TAC *)
 fun BEAGLE_TAC thml goal =
-  if is_polymorph_pb thml goal 
-  then
-    beagle_tac_aux thml goal false
-    handle _ => beagle_tac_aux thml goal true
-  else 
-    beagle_tac_aux thml goal false
-    
-  
-  
-  
-  
-   
-
+  let val filename = "beagle_tac" in
+  let fun validation thml = mk_thm goal in
+    if is_polymorph_pb thml goal 
+    then
+      (
+      beagle filename thml goal false; 
+      case (!SZSstatus) of
+        "Unsatisfiable" => ([],validation)
+      | _ => (beagle filename thml goal true; ([],validation)) 
+      )
+    else
+      (
+      beagle filename thml goal false; 
+      ([],validation)
+      )
+  handle _ =>   
+    (
+    let val path = mk_smallrespath filename in
+    let val file = TextIO.openAppend path in 
+      (TextIO.output (file, "Error in SML code: \n"); TextIO.closeOut file) 
+    end end;
+    ([],validation)
+    )
+  end end
 (* test 
 show_assums :=  true ;
 val goal = ([``x:bool``],``y:bool``);

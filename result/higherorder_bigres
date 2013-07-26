@@ -1,0 +1,24 @@
+User theorems: 
+Goal: [] ?- (f a b = 2) ∧ (f a = g)
+CNF1:  [] |- ¬((f a b = 2) ∧ (f a = g)) ⇔ f a b ≠ 2 ∨ f a ≠ g
+Numeral:  [] |- f a b ≠ 2 ∨ f a ≠ g ⇔ 0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)
+Exists:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Boolaxiom:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Status: Unknown
+
+User theorems: 
+Goal: [] ?- (f a b = 2) ∧ (f a = g)
+CNF1:  [] |- ¬((f a b = 2) ∧ (f a = g)) ⇔ f a b ≠ 2 ∨ f a ≠ g
+Numeral:  [] |- f a b ≠ 2 ∨ f a ≠ g ⇔ 0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)
+Exists:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Boolaxiom:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Status: Unknown
+
+User theorems: 
+Goal: [] ?- (f a b = 2) ∧ (f a = g)
+CNF1:  [] |- ¬((f a b = 2) ∧ (f a = g)) ⇔ f a b ≠ 2 ∨ f a ≠ g
+Numeral:  [] |- f a b ≠ 2 ∨ f a ≠ g ⇔ 0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)
+Exists:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Boolaxiom:  [0 ≤ f a b ∧ (f a b ≠ 2 ∨ f a ≠ g)] |- F
+Status: Unknown
+

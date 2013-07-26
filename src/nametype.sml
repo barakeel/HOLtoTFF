@@ -9,7 +9,7 @@ load "extracttype"; open extracttype;
 *)
 open HolKernel Abbrev boolLib numSyntax 
      stringtools listtools mydatatype 
-     extractvar extracttype 
+     extractvar freshvar extracttype 
    
 
 fun NAMETYPE_ERR function message =
@@ -56,8 +56,8 @@ fun name_simplety ty =
                 end end end 
   | Nodetype => let val (str,tyl) = dest_type ty in
                    if is_alphanumor_ str 
-                   then "ty" ^ str ^ "(" ^ (name_simpletyl tyl) ^ ")"       
-                   else "unprintabletype" ^  "(" ^ (name_simpletyl tyl) ^ ")"
+                   then "op" ^ str ^ "I" ^ (name_simpletyl tyl) ^ "I"       
+                   else "unprintabletypeop" ^  "I" ^ (name_simpletyl tyl) ^ "I"
                 end
                                     
 and name_simpletyl tyl =
@@ -94,7 +94,7 @@ fun add_simpletya (ty,arity) tyadict =
                      add_entry ((ty,0),str) tyadict
                    end
       | _ => let val str = name_simplety ty in
-               addnewnamel [((ty,0),str)] tyadict
+               add_newnamel [((ty,0),str)] tyadict
              end 
     end   
 

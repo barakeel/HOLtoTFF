@@ -15,7 +15,7 @@ fun EXTRACTVAR_ERR function message =
           origin_function = function,
           message = message}
 
-(* warning: should have the same structure as print_term in printtff.sml *)
+(* warning: should have the same structure as pptff_term in printtff.sml *)
 (* extract a list of triple (variable,nombre d'arguments,category) *)
 (* detect second order clash with bound variables *)
 (* used to get arity *)

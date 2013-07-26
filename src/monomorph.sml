@@ -47,14 +47,14 @@ fun add_multisubst multisubst substl =
 
 fun all_subst term =
   let val tyl = all_type term in
-  let val vartyl = all_vartype tyl in
+  let val vartyl = all_vartype term in
   let val multisubst = mk_multisubst vartyl tyl in
     add_multisubst multisubst []  
   end end end
 
 fun inst_rev term subst = inst subst term
 
-(* term should have type bool *)
+(* term should have type bool *) (* no proof *)
 fun monomorph term =
   let val substl = all_subst term in
     if null substl then term

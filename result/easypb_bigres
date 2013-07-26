@@ -1,0 +1,88 @@
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- FUser theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: 146635370583865Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: 146635370583865Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: 146635370583865Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Parsing failed
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [] ?- x + 1 = x + 1
+CNF1:  [] |- x + 1 ≠ x + 1 ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+

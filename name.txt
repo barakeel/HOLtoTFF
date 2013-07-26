@@ -24,27 +24,26 @@ NAME
  
 LIST
   filename: list
-  function: l
+  function: list | l
   value: l   
-  element: el | elem
+  element: elem
   head: a
   tail: m
   
 TERM
-  value: t | term
+  value: term | t
   free variable: fv 
   constant: c
   term (type bool): bterm
   free term: ft
   
   
-  
-THM  
+THM , GOAL
   theorem : thm | th
-  equational theorem : eqthm
-  theorem derived from ASSUME : assume
-  axiom : theorem without hypothesis
+  theorem from a conversion : eqthm
+  theorem without hypothesis : axiom
   conjecture : conjecture
+  theorem list , goal : problem | pb
   
 TYPE 
   type for variables: ty

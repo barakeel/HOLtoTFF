@@ -48,26 +48,7 @@ fun lookup elem couplelist =
   [] => (elem; raise LISTTOOLS_ERR "lookup" "")
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
-fun newname name used =
-  let val nameref = ref name in 
-  let val nref = ref 0 in
-    (
-    while is_member (!nameref) used
-    do
-      (nameref := (!nameref) ^ (Int.toString (!nref));
-       nref := (!nref) + 1) 
-    ;
-    !nameref
-    )
-  end end
 
-(* all dict are injective dict this way *)
-fun addnewname (key,name) dict =
-  let val newname = newname name (map snd dict) in
-    add_entry (key,newname) dict
-  end  
-
-fun addnewnamel entry dict = repeatchange addnewname entry dict
 
 (* condition *)
 fun switch condresultl defaultresult = 

@@ -3,7 +3,7 @@ sig
   
   include Abbrev
   
-  val print_term : ppstream -> term -> 
+  val pptff_term : ppstream -> term -> 
                    ((hol_type * int) * string) list *
                    (term * string) list *
                    (term * string) list *
@@ -11,7 +11,7 @@ sig
                    bool -> 
                    unit
 
-  val print_tff : ppstream -> goal -> unit
-  val output_tff : string ->  goal -> unit
+  val pptff_tff : ppstream -> goal -> unit
+  val output_tffgoal : string ->  goal -> bool -> unit
 
 end

@@ -28,7 +28,7 @@ At least , memorise them into list so that they can be printed differently
 
 open HolKernel Abbrev boolLib normalForms (* numSyntax *) (* arithmeticTheory *)
      stringtools listtools tools mydatatype 
-     extractvar extracttype 
+     extractvar freshvar extracttype namevar
 
 fun CONV_ERR function message =
     HOL_ERR{origin_structure = "conv",

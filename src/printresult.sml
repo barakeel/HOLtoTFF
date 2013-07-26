@@ -1,79 +1,80 @@
 structure printresult :> printresult =
 struct
 
-open HolKernel Abbrev boolLib HOLPP Hol_pp
+open HolKernel Abbrev boolLib HOLPP 
 
-type goal = (Term.term list * Term.term) 
+fun ppres_thm pps thm = 
+  (
+  show_assums := true;
+  add_string pps (thm_to_string thm);
+  show_assums := false
+  ) 
+fun ppres_term pps term = add_string pps (term_to_string term)
 
-fun pp_thm pps thm = add_string pps (thm_to_string thm)
-fun pp_term pps term = add_string pps (term_to_string term)
-
-fun pp_thml pps thml = 
+fun ppres_thml pps thml = 
   case thml of
     [] => ()
-  | thm :: m => (pp_thm pps thm;
+  | thm :: m => (ppres_thm pps thm;
                  add_newline pps;
-                 pp_thml pps m)
+                 ppres_thml pps m)
 
-fun pp_terml pps terml =
+fun ppres_terml pps terml =
   case terml of
     [] => ()
-  | term :: m => (pp_term pps term;
+  | [term] => ppres_term pps term
+  | term :: m => (ppres_term pps term;
                   add_string pps ",";
-                  pp_terml pps m)
+                  ppres_terml pps m)
 
-fun pp_goal pps goal =
+fun ppres_goal pps goal =
   (
-  add_string pps "["; pp_terml pps (fst goal); add_string pps "]";
+  add_string pps "["; ppres_terml pps (fst goal); add_string pps "]";
   add_string pps " ?- ";
-  pp_term pps (snd goal);
+  ppres_term pps (snd goal)
   )     
     
-fun print_pb pps thml goal =
+fun ppres_problem pps thml goal =
   (
   begin_block pps CONSISTENT 0;
-    add_string pps "(* User provided theorem *)"; add_newline pps; 
-      pp_thml pps thml;
-      add_newline pps; 
-    add_string pps "(* Goal *)"; add_newline pps; 
-      pp_goal pps goal;
-      add_newline pps;
+    add_string pps "User theorems: "; 
+    ppres_thml pps thml; add_newline pps; 
+    add_string pps "Goal: "; 
+    ppres_goal pps goal; add_newline pps;
   end_block pps
   )
  
-fun print_conv pps eqthm = 
-  begin_block pps CONSISTENT 0;
-    show_assums :=  true;
-    pp_thm pps eqthm;
-    show_assums := false;
-    add_newline pps
-  end_block pps
-  ) 
-
-fun output_result path thml goal eqthm prepareflag =
-  let val file = TextIO.openOut path in 
-  let val pps = PP.mk_ppstream 
-                  {
-                  consumer  = fn s => TextIO.output (file,s),
-                  linewidth = 80,
-                  flush  = fn () => TextIO.flushOut file
-                  } 
-  in 
+fun output_tffgoalpath addresspath filepath =
+  let val file = TextIO.openOut addresspath in 
     (
-    print_problem pps thml goal eqthm prepareflag; 
-    TextIO.closeOut file
-    )  
-  end end
-
-fun output_tffpath filepath =
-  let val file = TextIO.openOut "filepath.txt" in 
-    (
-    TextIO.output (file, filepath); 
-    TextIO.flushOut file;
+    TextIO.output (file,filepath); 
     TextIO.closeOut file
     )  
   end 
 
+fun ppres_smallresult pps goal =
+  (
+  begin_block pps CONSISTENT 0;
+    ppres_goal pps goal;
+  
+  
+  end_block pps
+  )
+  
+fun output_smallresult path goal SZSstatus mflag =  
+  let val file = TextIO.openAppend path in 
+  let val thm = mk_thm goal in
+    (
+    TextIO.output (file,SZSstatus ^ ": "); 
+    if mflag then TextIO.output (file,"(polymorph) ") else ();
+    show_assums := true;
+    TextIO.output (file,(thm_to_string thm) ^ "\n"); 
+    show_assums := false;
+    TextIO.closeOut file
+    )  
+  end end
+  
+  
+  
 
   
 end

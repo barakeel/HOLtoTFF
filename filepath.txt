@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/result/funconv3_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/beagle_tac_tff

@@ -2,6 +2,7 @@
 (* 
 load "listtools"; open listtools;
 load "stringtools"; open stringtools;
+load "freshvar"; open freshvar;
 load "tools"; open tools;
 load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
@@ -22,63 +23,59 @@ show_assums :=  true ;
 (* need to put the theorems inside the goal before negating the goal *)
 (* need to quantify every variable before negating the goal *)
 
-
+val SZSstatus = "test";
+val goal : goal = ([],``x + 1 = x + 1``);
+val path = "/home/thibault/Desktop/SMLproject/HOLtoTFF/result/test";
+output_smallresult path goal SZSstatus;
 (* use of beagle tac *)
 val thml = [];
 BEAGLE_TAC thml goal; 
 metisTools.METIS_TAC thml goal;
 (snd it) [];
+mk_neg `` ¬(x:bool)``;
+(* example *)
+
+val filename = "result/boolcases";   
+val goal : goal = ([concl BOOL_CASES_AX], F);
+val thml = [BOOL_CASES_AX];
+val mflag = false;
+beagle filename thml goal mflag; 
+
+(* easy problem *)
+val goal : goal = ([],``x + 1 = x + 1``);
+val filename = "result/easypb";   
+val thml = [];
+val mflag = false;
+beagle filename thml goal mflag; 
 
 (* test higher order *)
 val goal : goal = ([],``(f a b = 2) /\ (f a = g)``);
 val filename = "result/higherorder";   
 val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
+val mflag = false;
+beagle filename thml goal mflag; 
 
 (* test higher order2 *)
 val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 val filename = "result/higherorder2";   
 val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
+val mflag = false;
+beagle filename thml goal mflag; 
 
 (* test boolarg *)
 val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
 val filename = "result/boolarg";   
 val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
+val mflag = false;
+beagle filename thml goal mflag; 
 
-(* test funconv *) (* cnf conv reduce it before *)
-val goal : goal = ([],``(\x. x) = (\y. y)``);
-val filename = "result/funconv";   
-val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
-
-(* test funconv2 *) (* to be fixed *)
-val goal : goal = ([],``(P f:num -> num = f) ==> (P \x.x:num -> num = \x.x)``);
+(* test funconv2 *)
+val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 1))`` );
 val filename = "result/funconv2";   
 val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
+val mflag = false;
+beagle filename thml goal mflag; 
 
-val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 1))`` );
-val filename = "result/funconv3";   
-val thml = [];
-val prepareflag = true;
-val monomorphflag = false;
-beagle filename thml goal prepareflag monomorphflag; 
-
-val (a,b) = METIS_TAC [] goal;
-b [];
-(?f. !x. f x = x + 1) ==> ~ (!y:num ->num .
 
 (* test functions *)
 open HolKernel Abbrev boolLib;
@@ -95,7 +92,7 @@ drop;
 FOL_NORM ([mk_thm([],``(\z.x) = (\y.y)``)]); (* mk_thm *)
 
 open Hol_pp;
-print_term conclt;
+pptff_term conclt;
 
 open intSyntax;
 type_of ``~1``;
