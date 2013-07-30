@@ -23,17 +23,12 @@ fun is_polymorph_pb thml goal =
   exists is_polymorph_thm thml orelse
   is_polymorph_goal goal 
 
-
 fun list_TRANS eqthml =
   case eqthml of
     [] => raise BEAGLE_ERR "list_TRANS" "no argument"
   | [eqthm] => eqthm
-  | eqthm :: m => TRANS eqthm (list_TRANS m)
-  
-    
+  | eqthm :: m => TRANS eqthm (list_TRANS m) 
 (* end tools *) 
- 
- 
  
 (* BEAGLE PREPARE *)
 

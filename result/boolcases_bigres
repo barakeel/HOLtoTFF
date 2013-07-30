@@ -1,0 +1,22 @@
+User theorems: 
+Goal: [] ?- ∀t. (t ⇔ T) ∨ (t ⇔ F)
+CNF1:  [] |- ¬(∀t. (t ⇔ T) ∨ (t ⇔ F)) ⇔ F
+Exists:  [F] |- F
+Boolaxiom:  [F] |- F
+Status: Unsatisfiable
+
+User theorems: 
+Goal: [∀t. (t ⇔ T) ∨ (t ⇔ F)] ?- F
+CNF1:  [] |- (∀t. (t ⇔ T) ∨ (t ⇔ F)) ∧ ¬F ⇔ T
+Exists:  [T] |- F
+Boolaxiom:  [T] |- F
+Status: Satisfiable
+
+User theorems:  [] |- ∀t. (t ⇔ T) ∨ (t ⇔ F)
+
+Goal: [∀t. (t ⇔ T) ∨ (t ⇔ F)] ?- F
+CNF1:  [] |- (∀t. (t ⇔ T) ∨ (t ⇔ F)) ∧ ¬F ⇔ T
+Exists:  [T] |- F
+Boolaxiom:  [T] |- F
+Status: Satisfiable
+

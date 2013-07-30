@@ -1,0 +1,95 @@
+%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(tyb_fun_tynum_type,type,(
+    tyb_fun_tynum: $tType )).
+
+tff(tya_type,type,(
+    tya: $tType )).
+
+tff(tya_fun_tyb_fun_tynum_type,type,(
+    tya_fun_tyb_fun_tynum: $tType )).
+
+tff(tyb_type,type,(
+    tyb: $tType )).
+
+tff(xapp_type,type,(
+    xapp: ( tyb_fun_tynum * tyb ) > $int )).
+
+tff(xb_type,type,(
+    xb: tyb )).
+
+tff(xapp1_type,type,(
+    xapp1: ( tya_fun_tyb_fun_tynum * tya ) > tyb_fun_tynum )).
+
+tff(xf_type,type,(
+    xf: tya_fun_tyb_fun_tynum )).
+
+tff(xa_type,type,(
+    xa: tya )).
+
+tff(xg_type,type,(
+    xg: tyb_fun_tynum )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( tyb_fun_tynum * tyb_fun_tynum ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ($lesseq(0,xapp(xapp1(xf,xa),xb)) & (~(xapp(xapp1(xf,xa),xb) = 2) | ~(xapp1(xf,xa) = xg))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(tyb_fun_tynum_type,type,(
+    tyb_fun_tynum: $tType )).
+
+tff(tya_type,type,(
+    tya: $tType )).
+
+tff(tya_fun_tyb_fun_tynum_type,type,(
+    tya_fun_tyb_fun_tynum: $tType )).
+
+tff(tyb_type,type,(
+    tyb: $tType )).
+
+tff(xapp_type,type,(
+    xapp: ( tyb_fun_tynum * tyb ) > $int )).
+
+tff(xb_type,type,(
+    xb: tyb )).
+
+tff(xapp1_type,type,(
+    xapp1: ( tya_fun_tyb_fun_tynum * tya ) > tyb_fun_tynum )).
+
+tff(xf_type,type,(
+    xf: tya_fun_tyb_fun_tynum )).
+
+tff(xa_type,type,(
+    xa: tya )).
+
+tff(xg_type,type,(
+    xg: tyb_fun_tynum )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( tyb_fun_tynum * tyb_fun_tynum ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ($lesseq(0,xapp(xapp1(xf,xa),xb)) & (~(xapp(xapp1(xf,xa),xb) = 2) | ~(xapp1(xf,xa) = xg))) )).
+
+%------------------------------------------------------------------------------

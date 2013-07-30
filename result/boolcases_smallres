@@ -1,0 +1,3 @@
+Unsatisfiable:  [] |- ∀t. (t ⇔ T) ∨ (t ⇔ F)
+Satisfiable:  [∀t. (t ⇔ T) ∨ (t ⇔ F)] |- F
+Satisfiable:  [∀t. (t ⇔ T) ∨ (t ⇔ F)] |- F
