@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/beagle_tac_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/result/higherorder2_tff

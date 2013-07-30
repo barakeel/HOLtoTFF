@@ -69,7 +69,7 @@ fun remove_exists hypt thm =
     let val varl = fst (strip_exists hypt) in
     let val th1 = DISCH hypt thm in
     let val th2 = NOT_INTRO th1 in
-    let val th3 = rewrite_conv not_exists_list_conv th2 in
+    let val th3 = conv_concl not_exists_list_conv th2 in
     let val th4 = SPECL varl th3 in
     let val th5 = NOT_ELIM th4 in
     let val th6 = UNDISCH th5 in
@@ -110,6 +110,20 @@ val thm = mk_thm ([hypt],F);
 val hypt = ``x + y = 0``;
 show_assums := true;
 val varl = map fst (filter_fval (extract_var hypt));
+*)
+
+(* thm should be in cnf form with existential quantifiers removed *)
+fun stripforall_conjlist thm = 
+  let val term = concl thm in
+  let val (bvl,t) = strip_forall term in
+  let val th0 = SPECL bvl thm in
+  let val thl0 = CONJUNCTS th0 in
+  let val thl1 = map (GENL bvl) thl0 in
+  let val thl2 = map (conv_concl normalForms.CNF_CONV) thl1 in
+(* test
+val term = `` !x y z. ((x = 0) /\ (y = 0)) /\ ((x = 0) /\ (z = 0))``; 
+val thm = ASSUME term;
+show_assums := true;
 *)
 
 (* REMOVE UNUSED DEFINITION *)

@@ -715,12 +715,12 @@ fun define_conv def =
   let val th11 = ASSUME def in
   let val th12 = SPECL bvl th11 in
   let val th13 = repeatchange ABS (rev bvl) th12 in
-  let val th14 = rewrite_conv (LAND_CONV eta_conv) th13 in 
+  let val th14 = conv_concl (LAND_CONV eta_conv) th13 in 
   let val th15 = DISCH def th14 in
   (* otherway *)
   let val th21 = ASSUME (concl th14) in
   let val th22 = list_ap_thm th21 bvl in
-  let val th23 = rewrite_conv redepth_beta_conv th22 in
+  let val th23 = conv_concl redepth_beta_conv th22 in
   let val th24 = GENL bvl th23 in
   let val th25 = DISCH (concl th14) th24 in
   (* together *)

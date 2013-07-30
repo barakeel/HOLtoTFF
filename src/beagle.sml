@@ -99,11 +99,13 @@ fun beagle_laststep pps eqth =
                 else mk_thm (terml @ [term],F) 
   in
   (* remove all existential quantifiers from all hypothesis *)
-  let val th2 = remove_exists_thm th1 in (
-    (add_string pps "Exists: "; ppres_thm pps th2; add_newline pps);
+  let val th2 = remove_exists_thm th1 in 
+  (* remove the disjunctions and rename bv var to different name *)  
+  
+  let val th3 = conj_forall_thm in
+  
   (* add bool_axiom *)  
-  let val th3 = add_bool_axioms th2 in (
-    (add_string pps "Boolaxiom: "; ppres_thm pps th2; add_newline pps); 
+  let val th3 = add_bool_axioms th2 in
   (* higher order (erase some important hypothesis) *)
   let val th4 =
     if firstorder_thm th3 then th3 
@@ -114,9 +116,7 @@ fun beagle_laststep pps eqth =
       end end
   in        
     (hyp th4,concl th4) 
-  end 
-  ) end 
-  ) end 
+  end end end 
   end end end
                  
 fun beagle_prepare pps thml goal mflag =

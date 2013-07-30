@@ -133,14 +133,14 @@ fun not_exists_list_conv term =
   end  
 
 (* RULE *)
-fun rewrite_conv conv thm =
+fun conv_concl conv thm =
   let val conclt = concl thm in
   let val eqthm = conv conclt in
     EQ_MP eqthm thm
   end end     
   handle UNCHANGED => thm
   
-fun rewrite_conv_hyp conv term thm =
+fun conv_concl_hyp conv term thm =
   let val eqth1 = conv term in
   let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
   let val lemma3 = UNDISCH lemma2 in

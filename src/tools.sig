@@ -32,8 +32,8 @@ sig
   val repeat_n_conv : int -> conv -> conv 
   val not_exists_list_conv : conv
 (* rule *)
-  val rewrite_conv : conv -> thm -> thm 
-  val rewrite_conv_hyp : conv -> term -> thm -> thm
+  val conv_concl : conv -> thm -> thm 
+  val conv_concl_hyp : conv -> term -> thm -> thm
   val list_prove_hyp : thm list -> thm -> thm 
   val list_conj_hyp : thm -> thm
   val list_ap_thm : thm -> term list -> thm 
