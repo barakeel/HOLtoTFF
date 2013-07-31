@@ -22,7 +22,10 @@ fun create_newname_aux name used =
 
 fun create_newname name term = 
   create_newname_aux name (map name_of (all_var term)) 
-  
+ 
+fun list_create_newname name terml = 
+  create_newname_aux name (map name_of (all_varl terml)) 
+    
 fun create_newname_thm name thm = 
   create_newname_aux name (map name_of (all_var_thm thm))
     

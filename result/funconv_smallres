@@ -1,0 +1,1 @@
+Unsatisfiable:  [] |- (∀y. P y) ⇒ P (λx. x + 5)

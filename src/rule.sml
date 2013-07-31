@@ -113,19 +113,68 @@ val varl = map fst (filter_fval (extract_var hypt));
 *)
 
 (* thm should be in cnf form with existential quantifiers removed *)
-fun stripforall_conjlist thm = 
-  let val term = concl thm in
+
+fun forall_conjuncts_conv term = 
   let val (bvl,t) = strip_forall term in
-  let val th0 = SPECL bvl thm in
-  let val thl0 = CONJUNCTS th0 in
-  let val thl1 = map (GENL bvl) thl0 in
-  let val thl2 = map (conv_concl normalForms.CNF_CONV) thl1 in
+  (* first part *)
+  let val th10 = ASSUME term in
+  let val th11 = SPECL bvl th10 in
+  let val thl12 = CONJUNCTS th11 in
+  let val thl13 = map (GENL bvl) thl12 in
+  let val th14 = LIST_CONJ thl13 in
+  let val th15 = DISCH term th14 in
+  (* second part *)
+  let val th20 = ASSUME (concl th14) in
+  let val th21 = ASSUME t in
+  let val th22 = strip_conj_hyp th21 in
+  let val thl23 = CONJUNCTS th20 in
+  let val thl24 = map (SPECL bvl) thl23 in
+  let val th25 = list_prove_hyp thl24 th22 in
+  let val th26 = GENL bvl th25 in 
+  let val th27 = DISCH (concl th14) th26 in
+  (* together *)
+    IMP_ANTISYM_RULE th15 th27
+  end end end end end 
+  end end end end end 
+  end end end end end
 (* test
 val term = `` !x y z. ((x = 0) /\ (y = 0)) /\ ((x = 0) /\ (z = 0))``; 
+val term = ``((x = 0) /\ (y = 0)) /\ ((x = 0) /\ (z = 0))``; 
 val thm = ASSUME term;
 show_assums := true;
+f*)
+
+(* term should be an extentional definition *)
+(* i.e. forall x y z, f x y z = x + y + z *)
+(* test
+val term = ``!x y z. f x y z = x + y + z``;
 *)
 
+
+fun def_conv term =
+  let val (bvl,t) = strip_forall term in
+  let val abs = list_mk_abs (bvl,rhs t) in
+  let val term1 = list_mk_comb (abs,bvl) in
+  let val eqth = (REDEPTH_CONV BETA_CONV) term1 in
+  (* first part *)
+  let val th10 = ASSUME term in
+  let val th11 = SPECL bvl th10 in
+  let val th12 = TRANS th11 (SYM eqth) in
+  let val th13 = GENL bvl th12 in
+  let val th14 = EXTL bvl th13 in
+  let val th15 = DISCH term th14 in
+  (* second part *)
+  let val th20 = ASSUME (concl th14) in
+  let val th21 = list_ap_thm th20 bvl in
+  let val th22 = conv_concl (RAND_CONV (REDEPTH_CONV BETA_CONV)) th21 in
+  let val th23 = GENL bvl th22 in
+  let val th24 = DISCH (concl th14) th23 in
+  (* together *)
+    IMP_ANTISYM_RULE th15 th24
+  end end end end end 
+  end end end end end 
+  end end end end end 
+  
 (* REMOVE UNUSED DEFINITION *)
 fun remove_unused_def def thm = 
   let val th1 = DISCH def thm in

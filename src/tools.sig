@@ -33,12 +33,17 @@ sig
   val not_exists_list_conv : conv
 (* rule *)
   val conv_concl : conv -> thm -> thm 
-  val conv_concl_hyp : conv -> term -> thm -> thm
+  val conv_hyp : conv -> term -> thm -> thm
+  val conv_hypl : conv -> term list -> thm -> thm
   val list_prove_hyp : thm list -> thm -> thm 
   val list_conj_hyp : thm -> thm
+  val unconj_hyp : term -> thm -> thm
+  val list_unconj_hyp : term list -> thm -> thm 
+  val strip_conj_hyp : thm -> thm 
   val list_ap_thm : thm -> term list -> thm 
   val list_fun_eq_conv : term list -> term -> thm
   val repeat_rule : int -> rule -> rule
+  val EXTL : term list -> rule
 (* extraction *)
   val all_subterm : term -> term list
   val all_type : term -> hol_type list

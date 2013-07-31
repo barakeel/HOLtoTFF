@@ -2,10 +2,10 @@
 (* 
 load "listtools"; open listtools;
 load "stringtools"; open stringtools;
-load "freshvar"; open freshvar;
 load "tools"; open tools;
 load "mydatatype"; open mydatatype;
 load "extractvar"; open extractvar;
+load "freshvar"; open freshvar;
 load "extracttype"; open extracttype;
 load "nametype"; open nametype;
 load "namevar"; open namevar;
@@ -33,13 +33,9 @@ BEAGLE_TAC thml goal;
 metisTools.METIS_TAC thml goal;
 (snd it) [];
 mk_neg `` ¬(x:bool)``;
-(* example *)
+(* examples *)
+val goal = ([``x = 0``,``y = 0``], ``F``); 
 
-val filename = "result/boolcases";   
-val goal : goal = ([concl BOOL_CASES_AX], F);
-val thml = [BOOL_CASES_AX];
-val mflag = false;
-beagle filename thml goal mflag; 
 
 (* easy problem *)
 val goal : goal = ([],``x + 1 = x + 1``);
@@ -49,15 +45,8 @@ val mflag = false;
 beagle filename thml goal mflag; 
 
 (* test higher order *)
-val goal : goal = ([],``(f a b = 2) /\ (f a = g)``);
-val filename = "result/higherorder";   
-val thml = [];
-val mflag = false;
-beagle filename thml goal mflag; 
-
-(* test higher order2 *)
 val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
-val filename = "result/higherorder2";   
+val filename = "result/higherorder";   
 val thml = [];
 val mflag = false;
 beagle filename thml goal mflag; 
@@ -69,9 +58,10 @@ val thml = [];
 val mflag = false;
 beagle filename thml goal mflag; 
 
-(* test funconv2 *)
-val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 1))`` );
-val filename = "result/funconv2";   
+bool_conv ``P (!x. x = 0):bool``;
+(* test funconv *)
+val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
+val filename = "result/funconv";   
 val thml = [];
 val mflag = false;
 beagle filename thml goal mflag; 

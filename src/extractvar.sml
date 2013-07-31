@@ -113,6 +113,8 @@ fun get_cl term = map fst (get_cal term)
 fun get_fvcl term = map fst (get_fvcal term)
 
 fun all_var term = map fst (map fst (extract_var term))
+fun all_varl terml = erase_double (List.concat (map all_var terml))
+
 fun all_var_thm thm =
   let val l = (hyp thm) @ [concl thm] in
     List.concat (map all_var l)

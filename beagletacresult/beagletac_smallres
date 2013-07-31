@@ -1,0 +1,674 @@
+Unknown:  [¬P h] |- LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)
+Unsatisfiable:  [P h] |- (l ≠ "" ∨ r ≠ STRING h t) ∨ (l = "")
+Unknown:  [¬P h, SND (SPLITP P t) ≠ ""]
+|- LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)
+Satisfiable:  [] |- ∀cs. ∃s. cs = EXPLODE s
+Satisfiable:  [] |- ∀s. ∃cs. s = IMPLODE cs
+Satisfiable:  [] |- (EXPLODE s1 = EXPLODE s2) ⇔ (s1 = s2)
+Satisfiable:  [] |- (IMPLODE cs1 = IMPLODE cs2) ⇔ (cs1 = cs2)
+Unsatisfiable: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ¬(ORD h'' < ORD h'),
+ ORD h = ORD h', ORD h'' = ORD h, s1 < t, t < t'] |- s1 < t'
+Unsatisfiable: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ∀m. m < ORD h ⇒ m < ORD h',
+ ∀p. ORD h' < p ⇒ ORD h < p, ¬(ORD h'' < ORD h'), ORD h < ORD h',
+ ORD h'' = ORD h, s1 < t] |- s1 < t'
+Unsatisfiable: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ∀m. m < ORD h'' ⇒ m < ORD h,
+ ∀p. ORD h < p ⇒ ORD h'' < p, ¬(ORD h'' < ORD h'), ORD h'' < ORD h,
+ ORD h = ORD h', t < t'] |- s1 < t'
+Unsatisfiable: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256]
+|- (n = n MOD 256 + n DIV 256 * 256) ∨ n ≤ n MOD 256 ∧ (n DIV 256 = 0)
+Unsatisfiable: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256, (n − n MOD 256) DIV 256 = n DIV 256]
+|- 256 * (n DIV 256) + n MOD 256 = n
+Unsatisfiable: 
+[∀m. m < n ⇒ (s2n (n2s m) = m), Abbrev (s0 = n2s ((n − r) DIV 256)),
+ Abbrev (r = if r0 = 0 then 256 else r0), Abbrev (r0 = n MOD 256),
+ n ≠ 0, 0 < r, (n − r) DIV 256 < n, n MOD 256 < 256, r0 = 0,
+ s2n s0 = (n − r) DIV 256] |- ∃q. n = q * 256
+Unsatisfiable: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+Unsatisfiable: 
+[Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)),
+ Abbrev (r = if r0 = 0 then 256 else r0), ORD c < 256, n2s (s2n s) = s,
+ r0 = 0, r0 = (ORD c + 1) MOD 256] |- ∃q. ORD c + 1 = q * 256
+Unsatisfiable: 
+[T, Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)),
+ Abbrev (r = 256), ORD c < 256, n2s (s2n s) = s, q = 1, r0 = 0,
+ ORD c = 255, ORD c + 1 = 256] |- c = #"\255"
+Time Out: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+Unsatisfiable:  [] |- (n2s x = n2s y) ⇔ (x = y)
+Unknown:  [] |- (s2n x = s2n y) ⇔ (x = y)
+Unknown:  [] |- ∀s. ∃n. s = n2s n
+Unsatisfiable:  [] |- ∀n. ∃s. n = s2n s
+Unsatisfiable:  [(ALOOKUP l q = NONE) ⇔ ∀k v. MEM (k,v) l ⇒ k ≠ q]
+|- ∃v. (v = r) ∨ MEM (q,v) l
+Unsatisfiable:  [] |- (y = fm ' x) ∧ x ∈ FDOM fm ⇔ x ∈ FDOM fm ∧ (fm ' x = y)
+Unsatisfiable: 
+[∀l1 l2.
+   (alist_to_fmap l1 = alist_to_fmap l2) ⇒
+   (alist_to_fmap (ls ++ l1) = alist_to_fmap (ls ++ l2)),
+ alist_to_fmap l1 = alist_to_fmap l2]
+|- alist_to_fmap (ls ++ l1) |+ (q,r) = alist_to_fmap (ls ++ l2) |+ (q,r)
+Satisfiable:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- fm ' k = v
+Satisfiable:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- k ∈ FDOM fm
+Unknown: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
+|- EL m (MAP SND ls) = EL n'' (r::MAP SND ls)
+Unknown: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ h ≠ FST (EL n ls), EL n (MAP FST ls) ≠ FST (EL n ls), m < LENGTH ls,
+ n < LENGTH ls, SUC n < z, FST (EL m ls) = FST (EL n ls),
+ EL z (h::MAP FST ls) = FST (EL n ls)]
+|- SND (EL m ls) = EL z (r::MAP SND ls)
+Unknown: 
+[T,
+ ∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ ¬(n < z), h ≠ FST (EL n ls), EL m (MAP FST ls) ≠ FST (EL n ls), m < z,
+ m < LENGTH ls, n < LENGTH ls, z < LENGTH ls,
+ FST (EL m ls) = FST (EL n ls), FST (EL z ls) = FST (EL n ls)]
+|- SND (EL m ls) = SND (EL z ls)
+Unknown: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(m < z),
+ ¬(n < m), ¬(n < z), h ≠ FST (EL n ls), m < LENGTH ls, n < LENGTH ls,
+ z < m, z < LENGTH ls, FST (EL m ls) = FST (EL n ls),
+ FST (EL z ls) = FST (EL n ls)] |- SND (EL m ls) = SND (EL z ls)
+Satisfiable: 
+[∀k. k ∈ FDOM f ⇒ wf (f ' k), ∀k. k ∈ FDOM g ⇒ wf (g ' k), x ∉ FDOM f,
+ x ∈ FDOM g] |- ∃a. g ' x [] = SOME a
+Satisfiable: 
+[∀k. k ∈ FDOM f ⇒ wf (f ' k), ∀k. k ∈ FDOM g ⇒ wf (g ' k), x ∉ FDOM g,
+ x ∈ FDOM f] |- ∃a. f ' x [] = SOME a
+Satisfiable:  [] |- ∀a. ∃c. wf c ∧ (a = fromF c)
+Satisfiable:  [] |- wf x ∧ wf y ⇒ ((fromF x = fromF y) ⇔ (x = y))
+Satisfiable:  [] |- (toF f = toF g) ⇔ (f = g)
+Satisfiable:  [∀x. x ∈ FDOM f ⇒ (toF (f ' x) = (toF o_f g) ' x), FDOM f = FDOM g]
+|- ∀x. x ∈ FDOM g ⇒ (toF (f ' x) = toF (g ' x))
+Satisfiable:  [∀k. k ∈ FDOM fm ⇒ wf (fm ' k), x ∈ FDOM fm]
+|- fm ' x = toF (fromF (fm ' x))
+Satisfiable:  [] |- (∀ft. P ft) ⇔ ∀f. wf f ⇒ P (fromF f)
+Satisfiable: 
+[P (fromF (construct a (toF o fromF o_f fm))),
+ ∀k. k ∈ FDOM fm ⇒ wf (fm ' k) ∧ P (fromF (fm ' k)), x ∈ FDOM fm]
+|- toF (fromF (fm ' x)) = fm ' x
+Unsatisfiable:  [∀k. k ∈ FDOM fm ⇒ FINITE {p | ∃ft'. apply_path p (fm ' k) = SOME ft'}]
+|- (∃h t ft'.
+      (x = h::t) ∧ (apply_path t (fm ' h) = SOME ft') ∧ h ∈ FDOM fm) ⇔
+   ∃k x' ft'.
+     ((x = k::x') ∧ (apply_path x' (fm ' k) = SOME ft')) ∧ k ∈ FDOM fm
+Unsatisfiable:  [∀k. k ∈ FDOM fm ⇒ ∃r. relrec h (fm ' k) r]
+|- ∃f. ∀k. k ∈ FDOM fm ⇒ relrec h (fm ' k) (f k)
+Satisfiable: 
+[∀d. d ∈ FDOM fm ⇒ relrec h (fm ' d) (rfm ' d), FDOM rfm = FDOM fm,
+ x ∈ FDOM fm] |- rfm ' x = @r. relrec h (fm ' x) r
+Satisfiable:  [d ∈ FDOM fm]
+|- (∃x. relrec h (fm ' d) x) ∧
+   ∀x. relrec h (fm ' d) x ⇒ relrec h (fm ' d) x
+Error in SML code: 
+Error in SML code: 
+Unsatisfiable:  []
+|- ∀x'.
+     x' ∈ FDOM b ∧ (x = f x' (b ' x')) ⇔
+     (x' ∈ FDOM b ∧ (x = f x' (b ' x'))) ∧ x' ∈ FDOM b
+Unsatisfiable:  [] |- INFINITE 𝕌(:α) ⇒ (dimindex (:α) = 1)
+Unknown:  []
+|- (FINITE 𝕌(:α) ⇒ (CARD ISL = CARD 𝕌(:α))) ∧
+   (FINITE 𝕌(:β) ⇒ (CARD ISR = CARD 𝕌(:β)))
+Unknown:  []
+|- FINITE 𝕌(:α) ∧ FINITE 𝕌(:β) ⇒
+   (CARD (ISL ∪ ISR) = CARD ISL + CARD ISR)
+Unsatisfiable:  [FINITE 𝕌(:α), FINITE 𝕌(:β), ¬(FINITE ISL ∧ FINITE ISR)]
+|- 1 = CARD 𝕌(:α) + CARD 𝕌(:β)
+Unsatisfiable:  [FINITE ISL, FINITE ISR, ¬(FINITE 𝕌(:α) ∧ FINITE 𝕌(:β))]
+|- CARD (ISL ∪ ISR) = 1
+Unsatisfiable:  [] |- IS_BIT0A (BIT0B a) ∨ IS_BIT0B (BIT0B a)
+Unsatisfiable:  [] |- IS_BIT0A (BIT0A a) ∨ IS_BIT0B (BIT0A a)
+Unsatisfiable:  [T] |- ∃y. BIT0A y = BIT0A a
+Unsatisfiable:  [T] |- ∃y. BIT0B y = BIT0B a
+Unknown:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+Unknown:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+Unsatisfiable:  [FINITE 𝕌(:α), ¬(FINITE IS_BIT0A ∧ FINITE IS_BIT0B)] |- F
+Unsatisfiable:  [FINITE IS_BIT0A, FINITE IS_BIT0B, INFINITE 𝕌(:α)]
+|- CARD (IS_BIT0A ∪ IS_BIT0B) = 1
+Unsatisfiable:  [FINITE 𝕌(:α), FINITE IS_BIT0A, FINITE IS_BIT0B]
+|- CARD IS_BIT0A + CARD IS_BIT0B = 2 * CARD 𝕌(:α)
+Unsatisfiable:  [] |- IS_BIT1A BIT1C ∨ IS_BIT1B BIT1C ∨ IS_BIT1C BIT1C
+Unsatisfiable:  [] |- IS_BIT1A (BIT1B a) ∨ IS_BIT1B (BIT1B a) ∨ IS_BIT1C (BIT1B a)
+Unsatisfiable:  [] |- IS_BIT1A (BIT1A a) ∨ IS_BIT1B (BIT1A a) ∨ IS_BIT1C (BIT1A a)
+Unsatisfiable:  [] |- (IS_BIT1A x ∨ IS_BIT1B x) ∨ IS_BIT1C x
+Unsatisfiable:  [T] |- ∃y. BIT1A y = BIT1A a
+Unsatisfiable:  [T] |- ∃y. BIT1B y = BIT1B a
+Unknown:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+Unknown:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+Satisfiable:  [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
+Satisfiable:  [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
+Unsatisfiable: 
+[FINITE 𝕌(:α), ¬((FINITE IS_BIT1A ∧ FINITE IS_BIT1B) ∧ FINITE IS_BIT1C)]
+|- 1 = 2 * CARD 𝕌(:α) + 1
+Unsatisfiable:  [FINITE IS_BIT1A, FINITE IS_BIT1B, FINITE IS_BIT1C, INFINITE 𝕌(:α)]
+|- CARD (IS_BIT1A ∪ IS_BIT1B ∪ IS_BIT1C) = 1
+Unsatisfiable:  [FINITE 𝕌(:α), FINITE IS_BIT1A, FINITE IS_BIT1B, FINITE IS_BIT1C]
+|- CARD IS_BIT1A + CARD IS_BIT1B = 2 * CARD 𝕌(:α)
+Satisfiable:  [] |- 𝕌 ARB () ⇔ {()} ()
+Unknown:  [] |- dimindex (:unit) = 1
+Unsatisfiable:  [] |- 1 < dimword (:α)
+Unknown:  [∀f. SUM n (λi. SBIT (f i) i) < 2 ** n, SBIT (f n) n ≤ 2 ** n]
+|- SBIT (f n) n + SUM n (λi. SBIT (f i) i) < 2 ** SUC n
+Unknown:  [n ≤ i, BIT i (SUM n (λj. SBIT (f j) j)) ⇔ f i ∧ i < n]
+|- SUM n (λi. SBIT (f i) i) < 2 ** n
+Unsatisfiable:  [] |- ∀n. n MOD dimindex (:α) < dimword (:α)
+Unknown: 
+[P 0w, ∀n. SUC n < dimword (:α) ⇒ P (n2w n) ⇒ P (n2w (SUC n)),
+ n < dimword (:α) ⇒ P (n2w n)] |- SUC n < dimword (:α) ⇒ P (n2w (SUC n))
+Unsatisfiable:  [P 0w, ∀n. SUC n < dimword (:α) ⇒ P (n2w n) ⇒ P (n2w (SUC n))]
+|- 0 < dimword (:α) ⇒ P 0w
+Unsatisfiable:  [Abbrev (WL = dimword (:α)), 0 < WL, WL = 2 * INT_MIN (:α)]
+|- (n = n DIV WL * WL + n MOD WL) ∧ n MOD WL < WL
+Unsatisfiable: 
+[Abbrev (q = (q * (2 * INT_MIN (:α)) + r) DIV (2 * INT_MIN (:α))),
+ Abbrev (r = (q * (2 * INT_MIN (:α)) + r) MOD (2 * INT_MIN (:α))),
+ Abbrev (2 * INT_MIN (:α) = dimword (:α)), ¬(INT_MIN (:α) ≤ r),
+ r < INT_MIN (:α), r < 2 * INT_MIN (:α), 0 < 2 * INT_MIN (:α),
+ ((q * (2 * INT_MIN (:α)) + r) DIV 2 ** (dimindex (:α) − 1)) MOD 2 = 1]
+|- (q * (2 * INT_MIN (:α)) + r) DIV INT_MIN (:α) = 2 * q
+Unsatisfiable: 
+[Abbrev (WL = dimword (:α)), Abbrev (q = n DIV WL),
+ Abbrev (r = n MOD WL), ¬(INT_MIN (:α) ≤ r), r < WL, r < INT_MIN (:α),
+ 0 < WL, WL = 2 * INT_MIN (:α), n = q * WL + r,
+ n DIV INT_MIN (:α) = 2 * q,
+ ((q * (2 * INT_MIN (:α)) + r) DIV 2 ** (dimindex (:α) − 1)) MOD 2 = 1]
+|- F
+Error in SML code: 
+Unsatisfiable:  [¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ))]
+|- sw2sw (sw2sw w) = sw2sw w
+Unsatisfiable: 
+[T, i < dimindex (:α), 0 < dimindex (:α) − l, l ≤ dimindex (:α) − 1,
+ dimindex (:α) ≤ SUC h] |- ∃x. dimindex (:α) − l = SUC x
+Unsatisfiable: 
+[T, i < dimindex (:α), SUC x ≤ i, dimindex (:α) ≤ SUC h,
+ dimindex (:α) ≤ i + (l + 1), l + x = dimindex (:α) − 1,
+ dimindex (:α) − l = SUC x] |- BIT (dimindex (:α) − 1) n ⇔ BIT (l + x) n
+Unsatisfiable: 
+[T, i < SUC x, dimindex (:α) ≤ SUC h, dimindex (:α) ≤ i + (l + 1),
+ i + l = dimindex (:α) − 1, dimindex (:α) − l = SUC x]
+|- BIT (dimindex (:α) − 1) n ⇔ BIT (i + l) n
+Unsatisfiable: 
+[i < SUC (h − l), i < dimindex (:α), SUC h < dimindex (:α), h ≤ i + l,
+ l ≤ h, i + l = h] |- BIT h n ⇔ BIT (i + l) n
+Unsatisfiable:  [] |- ∀w. w2n (w2w w) < dimword (:α)
+Unsatisfiable:  [] |- 2 ≤ 2 ** dimindex (:α)
+Unsatisfiable:  [] |- w2n (w2w ((h -- l) w)) < 2 ** (SUC h − l)
+Unknown: 
+[i < dimindex (:α), i < dimindex (:γ), i + l < dimindex (:γ),
+ i + (l + n) < dimindex (:γ), dimindex (:β) ≤ i, dimindex (:β) ≤ i + l]
+|- 0 < i + l
+Unsatisfiable: 
+[i < dimindex (:α), i < dimindex (:β), i < dimindex (:γ),
+ i + l < dimindex (:β), i + l < dimindex (:γ),
+ i + (l + n) < dimindex (:γ)]
+|- i + l ≤ h ∧ i + (l + n) ≤ m ∧ w ' (i + (l + n)) ⇔
+   (i + (l + n) ≤ m ∧ i + (l + n) ≤ h + n) ∧ w ' (i + (l + n))
+Unknown: 
+[FINITE 𝕌(:β), FINITE 𝕌(:γ), i < dimindex (:α), i < dimindex (:δ),
+ dimindex (:γ) ≤ i, m + 1 ≤ l, h = m + dimindex (:β), dimindex (:γ) = 0,
+ h + 1 = l + dimindex (:δ)]
+|- i + (m + 1) ≤ dimindex (:α) − 1 ∧ w ' (i + (m + 1)) ⇔
+   i + l ≤ dimindex (:α) − 1 ∧ w ' (i + l)
+Unknown:  [Abbrev (A = dimindex (:α)), ¬(i < A), i < dimindex (:β), 0 < A]
+|- ∃x. i = x + A
+Unsatisfiable: 
+[∀m. m < n' ⇒ ¬BIT (dimindex (:α) − (m + 1)) n, n ≠ 0,
+ n MOD 2 ** dimindex (:α) ≠ 0, n < 2 ** dimindex (:α),
+ 2 ** SUC (dimindex (:α) − (n' + 1)) ≤ n,
+ BIT (dimindex (:α) − (n' + 1)) n]
+|- ∃i. SUC (dimindex (:α) − (n' + 1)) ≤ i ∧ i < dimindex (:α) ∧ BIT i n
+Unknown:  [n ≠ 0, n < 2 ** dimindex (:α)] |- ∃i. i < dimindex (:α) ∧ BIT i n
+Unsatisfiable:  [n ≠ 0, i < dimindex (:α), n < 2 ** dimindex (:α), BIT i n]
+|- ∃n'. n2w n ' n'
+Unsatisfiable: 
+[T, w ≠ UINT_MAXw, i ≠ n, ¬w ' i, i < n, i < dimindex (:α),
+ n < i + (1 + n), 0 < n, 0 < 1 + n, dimindex (:α) = SUC n, w ' n,
+ w ' (n − SUC (n − i − 1))] |- F
+Unsatisfiable: 
+[T, w ≠ 0w, i ≠ n, ¬w ' n, ¬w ' (n − SUC (n − i − 1)), i < n,
+ i < dimindex (:α), n < i + (1 + n), 0 < n, 0 < 1 + n,
+ dimindex (:α) = SUC n, w ' i] |- F
+Unsatisfiable:  [] |- ∀w. w + -w = 0w
+Unsatisfiable:  [] |- ∀v w x. (v + w = x) ⇔ (v = x − w)
+Unsatisfiable:  [] |- ∀v w x. (v + w = x + w) ⇔ (v = x)
+Unsatisfiable:  [-v + v + (-w + w) = 0w, -v + v + (-w + w) = -v + -w + (v + w)]
+|- -(v + w) = -v + -w
+Unsatisfiable:  [- -w + -w = w + -w] |- - -w = w
+Unsatisfiable:  [] |- ∀v w x. (v = w − x) ⇔ (v + x = w)
+Unsatisfiable:  [] |- ∀v w x. (v − w = x) ⇔ (v = x + w)
+Unsatisfiable:  [] |- ∀w x. (-w = -x) ⇔ (w = x)
+Unsatisfiable:  [] |- ∀a b. (a + b = 0w) ⇔ (a = -b)
+Time Out:  [] |- ∀x. x * -1w = -x
+Unsatisfiable:  [T, dimindex (:α) = SUC m] |- BIT m (2 ** m + BITS m 1 a)
+Unsatisfiable:  [n < dimindex (:α)] |- 2 ** n < dimword (:α)
+Unsatisfiable: 
+[n ≠ 0, w2n m ≠ 0, n < dimindex (:α), 0 < n, 0 < w2n m, 1 < 2 ** n,
+ 2 ** n < dimword (:α)] |- w2n m DIV 2 ** n < w2n m
+Unsatisfiable: 
+[n ≠ 0, w2n m ≠ 0, n < dimindex (:α), 0 < n, 0 < w2n m, 1 < 2 ** n,
+ w2n m DIV 2 ** n < w2n m, 2 ** n < dimword (:α)]
+|- w2n m DIV 2 ** n < dimword (:α)
+Unsatisfiable:  [a < dimword (:α), n < dimindex (:α)] |- 2 ** n < dimword (:α)
+Unsatisfiable:  [] |- n MOD dimindex (:α) < dimword (:α)
+Unsatisfiable:  [] |- n MOD dimindex (:α) < dimword (:α)
+Unknown: 
+[1 ≤ m, dimindex (:α) = SUC m, BITS m 0 n = 2 ** m + BITS (m − 1) 0 n,
+ BIT m n] |- 2 ** m − n MOD 2 ** m < 2 ** SUC m
+Unsatisfiable:  [¬BIT m n, SUC m ≤ 1, dimindex (:α) = SUC m] |- BITS m 0 n = 0
+Unsatisfiable:  [] |- ∀a. (dimindex (:α) − 1 = 0) ∧ word_msb a ⇒ (w2n a = 1)
+Unsatisfiable:  [¬word_msb a, ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))]
+|- word_msb (-a)
+Unsatisfiable: 
+[word_msb a, word_msb (-a),
+ ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))] |- F
+Unsatisfiable:  [m ≠ 0, dimindex (:α) − 1 ≠ 0, n < dimword (:α), dimindex (:α) = SUC m]
+|- SLICE m 0 n = SLICE m m n + SLICE (m − 1) 0 n
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), word_msb a,
+ word_msb b, dimindex (:α) − 1 ≠ 0, x < y, y = x + (p + 1),
+ w2n a = 2 ** (dimindex (:α) − 1) + x,
+ w2n b = 2 ** (dimindex (:α) − 1) + y,
+ w2n (-b) = 2 ** (dimindex (:α) − 1) − y]
+|- y < 2 ** (dimindex (:α) − 1)
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, ¬(w2n a < w2n b), b ≠ 0w, dimindex (:α) − 1 ≠ 0,
+ w2n a = x, w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- y ≤ 2 ** (dimindex (:α) − 1)
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, ¬(w2n a < w2n b), b ≠ 0w, dimindex (:α) − 1 ≠ 0,
+ y ≤ 2 ** (dimindex (:α) − 1), w2n a = x, w2n b = y,
+ w2n (-b) = 2 ** dimindex (:α) − y] |- y ≤ 2 ** dimindex (:α)
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, y ≤ x,
+ y ≤ 2 ** dimindex (:α), y ≤ 2 ** (dimindex (:α) − 1), w2n a = x,
+ w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- x < 2 ** (dimindex (:α) − 1)
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, w2n a < w2n b, w2n a = x,
+ w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- y ≤ 2 ** (dimindex (:α) − 1)
+Unsatisfiable: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, w2n a < w2n b,
+ y ≤ 2 ** (dimindex (:α) − 1), w2n a = x, w2n b = y,
+ w2n (-b) = 2 ** dimindex (:α) − y] |- y ≤ 2 ** dimindex (:α)
+Unsatisfiable:  [dimindex (:α) − 1 ≠ 0]
+|- a < b ⇔
+   (word_msb a ⇔ word_msb b) ∧ w2n a < w2n b ∨ word_msb a ∧ ¬word_msb b
+Unsatisfiable: 
+[m ≠ 0, ¬BIT m n, 1 ≤ m, dimindex (:α) = SUC m,
+ SLICE m m n + SLICE (m − 1) 0 n = SLICE m 0 n, SLICE m m n = 0]
+|- SLICE m 0 n ≤ 2 ** m − 1
+Unsatisfiable:  [] |- ∀a b. word_abs (a − b) = word_abs (b − a)
+Time Out:  [] |- -a + -1w + b + 1w = b + -a
+Time Out:  [] |- a + (-b + -1w) + 1w = a + -b
+Unsatisfiable:  []
+|- (word_msb x ⇔ ¬word_msb y) ∧ (word_msb x ⇎ word_msb (x + ¬y + 1w)) ⇔
+   (word_msb x ⇎ word_msb y) ∧ (word_msb (x + ¬y + 1w) ⇎ word_msb x)
+Time Out: 
+[n < dimword (:α), n < 2 ** (dimindex (:α) − 1), n' < dimword (:α),
+ n' < 2 ** (dimindex (:α) − 1)] |- n + n' < 2 ** dimindex (:α)
+Unknown: 
+[T, n < dimword (:α), UINT_MAX (:β) MOD dimword (:α) ≤ n,
+ dimindex (:β) = dimindex (:α), dimword (:β) = dimword (:α),
+ UINT_MAX (:β) ≤ n ∧ n < dimword (:α) ⇒ (n = UINT_MAX (:β))]
+|- UINT_MAX (:β) < dimword (:α)
+Unsatisfiable:  [] |- ∀n. (UINT_MAXw = n) ⇔ (n = UINT_MAXw)
+Unsatisfiable:  [] |- ∀w n. word_reverse (w ⋙ n) = word_reverse w ≪ n
+Unsatisfiable:  [FINITE {n2w n | n < k}, n < k, x = n2w n, {n2w n' | F} = ∅]
+|- ∃n'. (n2w n = n2w n') ∧ (n' < k ∨ (n' = k))
+Unsatisfiable:  [FINITE {n2w n | n < k}, x = n2w k, {n2w n | F} = ∅]
+|- ∃n. (n2w k = n2w n) ∧ (n < k ∨ (n = k))
+Unsatisfiable:  [FINITE {n2w n | n < k}, n < k, x = n2w n, {n2w n' | F} = ∅]
+|- (n2w n = n2w k) ∨ ∃n'. (n2w n = n2w n') ∧ n' < k
+Unsatisfiable:  [] |- 0 < 2 ** n
+Unsatisfiable:  [y ≠ 0w, 0 < m] |- w2n y ≠ 0
+Unsatisfiable:  [y ≠ 0w, w2n y ≠ 0, 0 < m] |- w2n y DIV 2 ** m < w2n y
+Unsatisfiable:  [n < dimword (:α), n' < dimword (:α), n' ≤ n] |- ∃k. n = k + n'
+Unsatisfiable: 
+[0w = x − y, 0w ≤ 0w ⇒ 0w ≤ y − 0w, y ≤ x, 0w ≤ y, 0w ≤ x − y, y < x,
+ 0w < y] |- 0w < x − y
+Unsatisfiable:  [0w = y, y ≤ x, 0w ≤ y, y < x] |- x − y < x ∨ (x − y = x)
+Unsatisfiable:  [y = x, y ≤ x, 0w ≤ y, 0w < y] |- 0w < x ∨ (0w = x)
+Unsatisfiable: 
+[BITS n 0 x + BITS n 0 y ≠ 0, ¬BIT (SUC n) x,
+ ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y),
+ BITS n 0 x + BITS n 0 y < 2 ** SUC (SUC n), BITS n 0 x < 2 ** SUC n,
+ BITS n 0 y < 2 ** SUC n, BIT (SUC n) y]
+|- BITS n 0 x + BITS n 0 y < 2 ** SUC n
+Unsatisfiable: 
+[BITS n 0 x + BITS n 0 y ≠ 0, ¬BIT (SUC n) y,
+ ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y),
+ BITS n 0 x + BITS n 0 y < 2 ** SUC (SUC n), BITS n 0 x < 2 ** SUC n,
+ BITS n 0 y < 2 ** SUC n, BIT (SUC n) x]
+|- BITS n 0 x + BITS n 0 y < 2 ** SUC n
+Time Out: 
+[BITS n 0 x + BITS n 0 y + 1 ≠ 0, BITS n 0 x + BITS n 0 y ≠ 0,
+ ¬BIT (SUC n) x, ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y + 1),
+ BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC (SUC n),
+ BITS n 0 x < 2 ** SUC n, BITS n 0 y < 2 ** SUC n, BIT (SUC n) y]
+|- BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC n
+Time Out: 
+[BITS n 0 x + BITS n 0 y + 1 ≠ 0, BITS n 0 x + BITS n 0 y ≠ 0,
+ ¬BIT (SUC n) y, ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y + 1),
+ BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC (SUC n),
+ BITS n 0 x < 2 ** SUC n, BITS n 0 y < 2 ** SUC n, BIT (SUC n) x]
+|- BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC n
+Time Out: 
+[∀x y c.
+   BSUM i (λi. BIT i x) (λi. BIT i y) c ⇔
+   BIT i (x + y + if c then 1 else 0)]
+|- ((BIT (SUC i) x ⇔ ¬BIT (SUC i) y) ⇔
+    ¬BIT (SUC i) (BITS i 0 x + BITS i 0 y)) ⇔ BIT (SUC i) (x + y)
+Time Out: 
+[∀x y c.
+   BSUM i (λi. BIT i x) (λi. BIT i y) c ⇔
+   BIT i (x + y + if c then 1 else 0)]
+|- ((BIT (SUC i) x ⇔ ¬BIT (SUC i) y) ⇔
+    ¬BIT (SUC i) (BITS i 0 x + BITS i 0 y + 1)) ⇔
+   BIT (SUC i) (x + y + 1)
+Error in SML code: 
+Error in SML code: 
+Error in SML code: 
+Unsatisfiable: 
+[∀i.
+   i < dimindex (:α) ⇒
+   ¬(h + (i + 1) ≤ dimindex (:α) − 1) ∨ ¬w ' (h + (i + 1)),
+ i < dimindex (:α), h + 1 ≤ dimindex (:α) − 1,
+ h + (i + 1) ≤ dimindex (:α) − 1, a ' (h + (i + 1))]
+|- ¬w ' (h + (i + 1))
+Unsatisfiable: 
+[P x, x < n, 0 < n − 1, 1 < n, n − 1 < 2 ** SUC (LOG 2 (n − 1)),
+ n ≤ dimindex (:α), x ≤ n − 1, 2 ** LOG 2 (n − 1) ≤ n − 1]
+|- x < 2 ** (LOG2 (n − 1) + 1)
+Unsatisfiable: 
+[P x, x < n, x < 2 ** (LOG2 (n − 1) + 1), 0 < n − 1, 1 < n,
+ n − 1 < 2 ** SUC (LOG 2 (n − 1)), n ≤ dimindex (:α), x ≤ n − 1,
+ 2 ** LOG 2 (n − 1) ≤ n − 1,
+ (dimindex (:α) − 1 -- LOG2 (n − 1) + 1) (n2w x) = 0w]
+|- (m = n2w x) ⇔
+   ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w) ∧
+   ((LOG2 (n − 1) -- 0) m = n2w x)
+Error in SML code: 
+Error in SML code: 
+Error in SML code: 
+Unsatisfiable:  [(n DIV 2 ** (dimindex (:α) − 1)) MOD 2 ≠ 1]
+|- ¬(2 ** (dimindex (:α) − 1) ≤ n ∧ n < 2 ** dimindex (:α)) ⇒
+   ¬(2 ** (dimindex (:α) − 1) ≤ n) ∨ ¬(n < 2 ** dimindex (:α))
+Unknown: 
+[&(2 * INT_MIN (:α)) ≠ 0, n ≠ 0, 0 < dimword (:α),
+ n MOD (2 * INT_MIN (:α)) < 2 * INT_MIN (:α), 1 ≤ INT_MIN (:α),
+ 1 ≤ dimword (:α), i = -&n, dimword (:α) = 2 * INT_MIN (:α), i < 0]
+|- (&(2 * INT_MIN (:α)) − &n) % &(2 * INT_MIN (:α)) =
+   (&(2 * INT_MIN (:α)) − &n % &(2 * INT_MIN (:α))) %
+   &(2 * INT_MIN (:α))
+Unsatisfiable:  [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) < dimword (:α)
+Unsatisfiable: 
+[Num (-i) ≤ 2 ** (dimindex (:α) − 1), dimindex (:α) ≤ dimindex (:β),
+ INT_MIN (:α) ≤ i, i < 0] |- 2 ** dimindex (:α) ≤ 2 ** dimindex (:β)
+Unknown: 
+[Num (-i) ≤ 2 ** (dimindex (:α) − 1), dimindex (:α) ≤ dimindex (:β),
+ 2 ** dimindex (:α) ≤ 2 ** dimindex (:β), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** dimindex (:α) ∧ Num (-i) < 2 ** dimindex (:β)
+Unknown: 
+[¬(i < dimindex (:β)), ¬(0 < i), ¬(j < 0), i < dimindex (:α),
+ dimindex (:β) ≤ dimindex (:α), dimindex (:β) = 0, j ≤ INT_MAX (:β),
+ INT_MIN (:β) ≤ j] |- F
+Unknown: 
+[i < dimindex (:α), 0 < i, Num j < 2 ** (dimindex (:β) − 1),
+ 2 ** (dimindex (:β) − 1) < 2 ** i, dimindex (:β) ≤ i,
+ dimindex (:β) ≤ dimindex (:α), INT_MIN (:β) ≤ j, 0 ≤ j,
+ j < &(2 ** (dimindex (:β) − 1))] |- Num j < 2 ** i
+Unknown: 
+[i < dimindex (:α), dimindex (:β) ≤ dimindex (:α), j ≤ INT_MAX (:β),
+ INT_MIN (:β) ≤ j, j < 0]
+|- ∃n.
+     INT_MIN (:β) ≤ n ∧ n < dimword (:β) ∧ (-n2w (Num (-j)) = n2w n) ∧
+     (-n2w (Num (-j)) =
+      n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n))
+Unsatisfiable: 
+[i < dimindex (:α), n < dimword (:β), INT_MIN (:β) ≤ n,
+ dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:α) = k + i
+Unsatisfiable: 
+[i < dimindex (:α), n < dimword (:β), INT_MIN (:β) ≤ n,
+ dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, 2 ** dimindex (:α) MOD 2 ** i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- 2 ** i < 2 ** dimindex (:α) ∧ 2 ** dimindex (:β) ≤ 2 ** i
+Time Out: 
+[i < dimindex (:α), n < dimword (:β), 2 ** i < 2 ** dimindex (:α),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ 2 ** dimindex (:β) ≤ 2 ** i,
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n,
+ 2 ** dimindex (:α) − 2 ** dimindex (:β) =
+ (2 ** (dimindex (:α) − i) − 1) * 2 ** i +
+ (2 ** i − 2 ** dimindex (:β)), 2 ** dimindex (:α) MOD 2 ** i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- 2 ** i − 2 ** dimindex (:β) + n < 2 ** i
+Unsatisfiable: 
+[i < dimindex (:α), 2 ** (0 − 1) + p < dimword (:β), 0 ≤ dimindex (:α),
+ dimindex (:β) = 0, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0] |- F
+Unsatisfiable: 
+[i < dimindex (:α), i < dimindex (:β), n < dimword (:β),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:α) = k + SUC i
+Unsatisfiable: 
+[i < dimindex (:α), i < dimindex (:β), n < dimword (:β),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, 2 ** dimindex (:α) MOD 2 ** SUC i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:β) = k + SUC i
+Unsatisfiable:  [¬b ' (dimindex (:α) − 1), a ' (dimindex (:α) − 1)]
+|- ∃i. i < dimindex (:α) ∧ a ' i
+Unsatisfiable: 
+[BIT (dimindex (:α)) (w2n a + w2n (-b)), a ' (dimindex (:α) − 1),
+ b ' (dimindex (:α) − 1)]
+|- ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   (∃i. i < dimindex (:α) ∧ b ' i) ⇔
+   ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   ∃i. i < dimindex (:α) ∧ a ' i
+Unsatisfiable: 
+[¬BIT (dimindex (:α)) (w2n a + w2n (-b)), a ' (dimindex (:α) − 1),
+ b ' (dimindex (:α) − 1)]
+|- ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   (∃i. i < dimindex (:α) ∧ b ' i) ⇔
+   ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   ∃i. i < dimindex (:α) ∧ a ' i
+Unsatisfiable:  [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) < dimword (:α)
+Unsatisfiable: 
+[i' < dimindex (:α), n < dimindex (:α),
+ Num i < 2 ** (dimindex (:α) − 1), dimindex (:α) − 1 < i' + n,
+ dimindex (:α) ≤ i' + n, INT_MIN (:α) ≤ i, 0 ≤ i,
+ i < &(2 ** (dimindex (:α) − 1))] |- Num i < 2 ** (i' + n)
+Unsatisfiable: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), Num (-i) < 2 ** dimindex (:α),
+ dimindex (:α) ≤ i' + n, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** (i' + n)
+Time Out: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), 1 < 2 ** n, Num (-i) < 2 ** dimindex (:α),
+ Num (-i) < 2 ** (i' + n), Num (-i) DIV 2 ** n < Num (-i),
+ dimindex (:α) ≤ i' + n, Num (-i) DIV 2 ** n + 1 ≤ Num (-i),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α)
+Time Out: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), 1 < 2 ** n, Num (-i) < 2 ** dimindex (:α),
+ Num (-i) DIV 2 ** n < Num (-i), Num (-i) ≤ 2 ** (dimindex (:α) − 1),
+ dimindex (:α) ≤ i' + n, Num (-i) DIV 2 ** n + 1 ≤ Num (-i),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α)
+Unsatisfiable: 
+[Num (-i) ≠ 0, i' < dimindex (:α), n < dimindex (:α),
+ Num (-i) < 2 ** dimindex (:α), dimindex (:α) ≤ i' + n,
+ 2 ** n ≤ Num (-i), Num (-i) DIV 2 ** n − 1 = (Num (-i) − 1) DIV 2 ** n,
+ Num (-i) MOD 2 ** n = 0, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** (i' + n)
+Unsatisfiable: 
+[Num (-i) ≠ 0, i' < dimindex (:α), n < dimindex (:α),
+ Num (-i) < 2 ** dimindex (:α), dimindex (:α) ≤ i' + n,
+ Num (-i) MOD 2 ** n = 0, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n ≠ 0
+Unknown: 
+[¬(INT_MIN (:β) ≤ i ∧ i ≤ INT_MAX (:β)), dimindex (:β) ≤ dimindex (:α),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i]
+|- (i = w2i (i2w i)) ⇔ (i = w2i (sw2sw (i2w i)))
+Unknown:  [n < dimword (:α)] |- INT_MIN (:β) < dimword (:β)
+Unknown: 
+[n ≠ 0, n ≠ UINT_MAX (:α),
+ UINT_MAX (:α) ≤ n ∧ n ≠ UINT_MAX (:α) ⇔ dimword (:α) ≤ n]
+|- (if UINT_MAX (:α) ≤ n then n2w (UINT_MAX (:α)) else n2w n) =
+   if dimword (:α) ≤ n then n2w (UINT_MAX (:α)) else n2w n
+Unknown:  [n < INT_MIN (:α), n < dimword (:α), dimindex (:β) ≤ dimindex (:α)]
+|- UINT_MAX (:β) < dimword (:β)
+Unsatisfiable: 
+[llist_rep (llist_abs r1) = r1, llist_rep (llist_abs r2) = r2,
+ llist_abs r1 = llist_abs r2] |- r1 = r2
+Unsatisfiable: 
+[P f,
+ ∀g.
+   P g ⇒
+   (g = (λn. NONE)) ∨
+   ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))]
+|- ((λn. if n = 0 then SOME h else f (n − 1)) = (λn. NONE)) ∨
+   ∃h' t.
+     (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+     ((λn. if n = 0 then SOME h else f (n − 1)) =
+      (λn. if n = 0 then SOME h' else t (n − 1)))
+Unsatisfiable: 
+[P f, P g,
+ ∀g.
+   P g ⇒
+   (g = (λn. NONE)) ∨
+   ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))]
+|- (g = (λn. NONE)) ∨
+   ∃h' t.
+     (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+     (g = (λn. if n = 0 then SOME h' else t (n − 1)))
+Time Out: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x))]
+|- (f a = NONE) ∨ ∃a' b. f a = SOME (a',b)
+Unknown: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x)), LHD (g a) = NONE,
+ LHD (g' a) = NONE, f a = NONE] |- (g a = [||]) ∧ (g' a = [||])
+Satisfiable: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x), f x = NONE] |- g x = [||]
+Satisfiable: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+Satisfiable: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+Satisfiable: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+Satisfiable: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+Satisfiable: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀g g'.
+   ((∀x. LHD (g x) = OPTION_MAP SND (f x)) ∧
+    ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)) ∧
+   (∀x. LHD (g' x) = OPTION_MAP SND (f x)) ∧
+   (∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x)) ⇒
+   (g = g'), f x = NONE] |- g x = [||]
+Satisfiable:  []
+|- ∃LUNFOLD.
+     ∀f x.
+       LUNFOLD f x =
+       case f x of NONE => [||] | SOME (v1,v2) => v2:::LUNFOLD f v1
+Error in SML code: 
+Unsatisfiable: 
+[∀ll3 ll4.
+   R ll3 ll4 ⇒
+   (ll3 = [||]) ∧ (ll4 = [||]) ∨
+   (LHD ll3 = LHD ll4) ∧ R (THE (LTL ll3)) (THE (LTL ll4)), R ll1 ll2,
+ R ll3 ll4]
+|- (ll3 = [||]) ∧ (ll4 = [||]) ∨
+   (LHD ll3 = LHD ll4) ∧ R (THE (LTL ll3)) (THE (LTL ll4))

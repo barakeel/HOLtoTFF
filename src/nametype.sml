@@ -31,14 +31,15 @@ fun name_leaftype ty =
 
 
 (* every simpletype starts with ty *)
+
 fun name_tfftype ty = 
   let val name = name_leaftype ty in 
     if is_alphanumor_ name
-    then "ty" ^ name
-    else "unprintabletype"
+    then name
+    else "unprintable"
   end
 
-fun name_simplety ty = 
+fun prename_simplety ty = 
   case typecat ty of
     Booltype => name_tfftype ty
   | Numtype => name_tfftype ty
@@ -47,25 +48,26 @@ fun name_simplety ty =
   | Funtype => let val (str,l) = dest_type ty in
                let val ty1 = hd l in
                let val ty2 = hd (tl l) in 
-                 (name_simplety ty1) ^ "_fun_" ^ (name_simplety ty2) 
+                 (prename_simplety ty1) ^ "_F_" ^ (prename_simplety ty2) 
                end end end 
   | Prodtype => let val (str,l) = dest_type ty in         
                 let val ty1 = hd l in
                 let val ty2 = hd (tl l) in
-                  (name_simplety ty1) ^ "_prod_" ^ (name_simplety ty2)
+                  (prename_simplety ty1) ^ "_P_" ^ (prename_simplety ty2)
                 end end end 
   | Nodetype => let val (str,tyl) = dest_type ty in
                    if is_alphanumor_ str 
-                   then "op" ^ str ^ "I" ^ (name_simpletyl tyl) ^ "I"       
-                   else "unprintabletypeop" ^  "I" ^ (name_simpletyl tyl) ^ "I"
+                   then str ^ "I" ^ (prename_simpletyl tyl) ^ "I"       
+                   else "unprintable" ^  "I" ^ (prename_simpletyl tyl) ^ "I"
                 end
                                     
-and name_simpletyl tyl =
+and prename_simpletyl tyl =
   case tyl of
     [] => ""
-  | [ty] => name_simplety ty
-  | ty :: m => (name_simplety ty) ^ "_" ^ (name_simpletyl m)
+  | [ty] => prename_simplety ty
+  | ty :: m => (prename_simplety ty) ^ "_" ^ (prename_simpletyl m)
   
+fun name_simplety ty = "ty_" ^ (prename_simplety ty)
 
 (* add add for a simpletype *) 
 (* tyadict should already contain alphatydict *)

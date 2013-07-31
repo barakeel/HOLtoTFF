@@ -9,6 +9,8 @@ include Abbrev
   val add_bool_axioms : thm -> thm 
   val remove_bool_axioms : thm -> thm
   
+  val forall_conjuncts_conv : conv
+  
   val remove_exists : term -> thm -> thm 
   val remove_exists_thm : thm -> thm
   val add_exists : (term * term list) -> thm -> thm 

@@ -1,0 +1,2 @@
+List(¬(0 ≤ Xxᵃ) ∨ (-5 ≤ Xxᵃ)) | selSimp | List(¬(0 ≤ Xxᵃ) ∨ (-5 ≤ Xxᵃ))
+List(□) | selSimp | List(¬xapp1(xP, xf))

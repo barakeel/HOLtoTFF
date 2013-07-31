@@ -1,0 +1,11 @@
+User theorems: 
+Goal: [] ?- (∀y. P y) ⇒ P (λx. x + 5)
+CNF1: ∀y. P y ∧ ¬P (λx. x + 5)
+Lambda: ∃f. (∀x. f x = x + 5) ∧ ∀y. P y ∧ ¬P f
+Numeral: ∃f. (∀x. 0 ≤ x ⇒ (0 ≤ f x ∧ 0 ≤ x + 5) ∧ (f x = x + 5)) ∧ ∀y. P y ∧ ¬P f
+CNF2: ∃f.
+  ∀x y.
+    ((f x = x + 5) ∨ ¬(0 ≤ x)) ∧ (0 ≤ f x ∨ ¬(0 ≤ x)) ∧
+    (0 ≤ x + 5 ∨ ¬(0 ≤ x)) ∧ P y ∧ ¬P f
+Status: Unsatisfiable
+

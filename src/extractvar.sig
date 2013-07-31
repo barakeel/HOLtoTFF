@@ -20,6 +20,8 @@ sig
   val get_cl : term -> term list 
   val get_fvcl : term -> term list 
   val all_var : term -> term list 
+   
+  val all_varl : term list -> term list
     
   val get_bvl_thm : thm -> term list
   val get_fvl_thm : thm -> term list

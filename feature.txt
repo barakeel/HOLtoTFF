@@ -1,44 +1,66 @@
+Version 0.4
+
+Does:
+  - Translate a HOL formula into TFF format.
+  - Print the formula into a TFF file
+  - Call Beagle on this TFF file
+  - Return the SZS status
+
+Rewriting:
+- monomorphism: instantiate types to all the types of the formula
+- cnf : use normalForms.CNF_CONV
+- boolean: P (x: bool) --> (x => P true) /\ (~x => P false)
+- numeral: ok
+- abstraction: P[\x y. x + y] --> ?f. P[f] /\ f x y = x + y
+- higher order: f x y --> app(app(f,x),y)
+- clauseset : ok
+- To do : make a validation
+
+Printing:   
+- formula :
+  - first order formula (Only used with a clause set)
+ 
+- variable:
+  - free variables : P,Q,r,s --> xP,xQ,xr,xs 
+  - constant : P,Q,r,s --> cP,cQ,cr,cs 
+  - bound variables : x,y --> Xx,Xy 
+
+- type:
+  - numeral: $int)
+  - boolean: $o)
+  - other types: give an indicative type
+
 Version 0.3
 
 Does:
-  - Doesn't work
   - Translate a HOL formula into TFF format.
-  
-Rewriting:
-  
-- monomorphism: - free variables: (a bit)
-                - bound variables: none 
-- cnf : ok
-- boolean: wip  
-- numeral: wip
-- abstraction: wip
-- higher order: wip
+  - Print the formula into a TFF file
+  - Call Beagle on this TFF file
+  - Return the SZS status
 
-Printing:  
-  
+Rewriting:
+- monomorphism: instantiate types to all the types of the formula
+- cnf : use normalForms.CNF_CONV
+- boolean: P (x: bool) --> (x => P true) /\ (~x => P false)
+- numeral: ok
+- abstraction: P[\x y. x + y] --> ?f. P[f] /\ f x y = x + y
+- higher order: f x y --> app(app(f,x),y)
+
+Printing:   
 - formula :
-  - first order formula 
-  - false second order formula (!f:int->int f = g)
-  - raise an exception when a function is applied to a boolean 
+  - first order formula (Only used with a clause set)
  
 - variable:
-  - use an injective dictionary for free variables ( P,Q,r,s => x_P,x_Q,x_r,x_s )
-      if a free variables app was created then
-      instead of writing x_app it's possible to write app
-      (nicer printing)
-      same for boolean and function created out of abstraction
-  - use an injective dictionary for constant ( P,Q,r,s => c_P,c_Q,c_r,c_s )
-  - use an injective dictionary for bound variables ( x,y => X_x,X_y ) 
+  - free variables : P,Q,r,s --> xP,xQ,xr,xs 
+  - constant : P,Q,r,s --> cP,cQ,cr,cs 
+  - bound variables : x,y --> Xx,Xy 
 
 - type:
-  - numeral (num => $int)
-  - boolean (bool => $o)
-  - use an injective dictionary 
-     (rational,0) => ty_rational
-     (num -> num -> num,1)  => ty_num > ty_p_num_f_num_p 
-     (p_num_f_num_p -> num,1) => ty_num > ty_p_num_f_num_p2
-    and append an indicative type
+  - numeral: $int)
+  - boolean: $o)
+  - other types: give an indicative type
 
 
- 
+
+
 

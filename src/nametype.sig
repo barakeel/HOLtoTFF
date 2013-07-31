@@ -4,6 +4,7 @@ sig
   include Abbrev
   
   val name_leaftype : hol_type -> string
+  val name_simplety : hol_type -> string
   val add_simpletyal :(hol_type * int) list -> 
                       ((hol_type * int) * string) list -> 
                       ((hol_type * int) * string) list

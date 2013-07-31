@@ -140,7 +140,7 @@ fun conv_concl conv thm =
   end end     
   handle UNCHANGED => thm
   
-fun conv_concl_hyp conv term thm =
+fun conv_hyp conv term thm =
   let val eqth1 = conv term in
   let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
   let val lemma3 = UNDISCH lemma2 in
@@ -148,6 +148,8 @@ fun conv_concl_hyp conv term thm =
     th3
   end end end end 
   handle UNCHANGED => thm
+ 
+fun conv_hypl conv terml thm = repeatchange (conv_hyp conv) terml thm 
  
 fun list_prove_hyp thml thm =
   case thml of
@@ -162,10 +164,30 @@ fun list_conj_hyp thm =
     th2
   end end end end   
 
+(* assume there is only one hypothesis *)
+fun unconj_hyp term thm =
+  if is_conj term then
+    let val th0 = ASSUME (lhand term) in
+    let val th1 = ASSUME (rand term) in
+    let val th2 = CONJ th0 th1 in
+      PROVE_HYP th2 thm
+    end end end 
+  else raise TOOLS_ERR "unconj_hyp" ""
+
+(* hypl is a list of conj *)
+fun list_unconj_hyp hypl thm = repeatchange unconj_hyp hypl thm
+  
+fun strip_conj_hyp thm =
+  case filter is_conj (hyp thm) of
+    [] => thm
+  | l => strip_conj_hyp (list_unconj_hyp l thm)
+
 fun list_ap_thm thm terml =
   case terml of
     [] => thm 
   | t :: m => list_ap_thm (AP_THM thm t) m 
+
+
 
 (* input is an equality *)
 fun list_fun_eq_conv vl term =
@@ -180,7 +202,14 @@ fun repeat_rule n rule thm =
   case n of
     0 => thm
   | _ => if n < 0 then raise TOOLS_ERR "repeat_rule" ""
-         else rule (repeat_rule (n - 1) rule thm)     
+         else rule (repeat_rule (n - 1) rule thm) 
+         
+fun EXTL bvl thm =
+  case rev bvl of
+    [] => thm
+  | bv :: m => let val th0 = SPECL bvl thm in
+                 EXTL (rev m) ( GENL(rev m) (EXT (GEN bv th0)) )  
+               end             
               
 (* extract term *)
 fun all_subterm_aux term = 
