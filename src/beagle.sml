@@ -2,233 +2,297 @@ structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib HOLPP 
-     listtools freshvar tools
-     namevar
-     higherorder monomorph conv rule printtff printresult
+     listtools tools printtools
+     freshvar namevar
+     higherorder monomorph conv rule 
+     printtff printresult
 
 fun BEAGLE_ERR function message =
     HOL_ERR{origin_structure = "beagle",
 	    origin_function = function,
             message = message}
  
-(* tools *)
-fun is_polymorph term = not (null (all_vartype term)) 
-fun is_polymorph_goal goal =   
-  exists is_polymorph (fst goal) orelse
-  is_polymorph (snd goal)
-fun is_polymorph_thm thm = 
-  exists is_polymorph (hyp thm) orelse
-  is_polymorph (concl thm)
-fun is_polymorph_pb thml goal =
-  exists is_polymorph_thm thml orelse
-  is_polymorph_goal goal 
+(* Path (absolute) *)
+val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+fun mk_holpath filename = directory ^ filename ^ "_hol"  
+fun mk_tffpath filename =  directory ^ filename ^ "_tff" 
+fun mk_SZSstatuspath filename = directory ^ filename ^ "_tff_SZSstatus"
+fun mk_resultpath filename = directory ^ filename ^ "_result"
+fun mk_convpath filename = directory ^ filename ^ "_conv"
+fun mk_addresspath () = directory ^ "filepath.txt"
+fun mk_tffsavepath filename = directory ^ filename ^ "_tffsave"
+fun mk_proofpath filename = directory ^ filename ^ "_proof"
 
-fun list_TRANS eqthml =
-  case eqthml of
-    [] => raise BEAGLE_ERR "list_TRANS" "no argument"
-  | [eqthm] => eqthm
-  | eqthm :: m => TRANS eqthm (list_TRANS m) 
-(* end tools *) 
- 
-(* BEAGLE PREPARE *)
+(* BEAGLE NF *)
 
-(* create a term which will be transformed *)
-fun thml_to_hypterm thml = 
-  concl (LIST_CONJ (map DISCH_ALL thml))
+(* problem to a term *)
+fun thml_lemma thml = LIST_CONJ (map DISCH_ALL thml)
 
-fun goal_to_hypterm goal =
+fun thml_to_hypt thml = concl (thml_lemma thml)
+
+fun goal_to_hypt goal =
   if null (fst goal) 
   then mk_neg (snd goal)
   else mk_conj (list_mk_conj (fst goal),mk_neg (snd goal))
 
-fun problem_to_hypterm thml goal =
+fun problem_to_hypt thml goal =
   if null thml 
-  then goal_to_hypterm goal
-  else mk_conj (thml_to_hypterm thml,goal_to_hypterm goal)
+  then goal_to_hypt goal
+  else mk_conj (thml_to_hypt thml,goal_to_hypt goal)
 
-(* proof 
+fun problem_goal thml goal = ([problem_to_hypt thml goal],F)
 
 
-fun goalhyp_lemma goal = 
-  let val terml = fst goal in
-  let val thml = map ASSUME terml in
-    LIST_CONJ thml
-  end end 
-  
-fun list_add_assum terml thm = repeatchange ADD_ASSUM terml thm  
+fun list_unconj_hyp goal thm =
+  let val lemma = LIST_CONJ (map ASSUME (fst goal)) in
+    PROVE_HYP lemma thm
+  end
  
- *) 
-(* PROOF  
-(* thm has form term => F term has the form created by problem *)
-fun finalrule thml goal thm = 
-  let val lemma1 = LIST_CONJ (map DISCH_ALL thml) in
-  let val th0 = map UNDISCH thm in
-  let val th3 = 
-    if null thml 
-    then th0 
+(* thm : term |- F *)
+(* goal : hypl |? concl *)  
+fun problem_to_goal_val thml goal thm =
+  let val hypt = problem_to_hypt thml goal in
+  let val th1 = 
+    if null thml then thm 
     else 
-      let val th1 = unconj_hyp (hd (hyp th0)) th0 in
-      let val th2 = PROVE_HYP lemma1 th1 in
-        if null (hyp th22) (* can happen because hyp is a set *)
-        then ADD_ASSUM (goal_to_hypterm goal) th2
-        else th2
-      end end 
+      let val lemma1 = thml_lemma thml in
+      let val th2 = unconj_hyp hypt thm in
+      let val th3 = PROVE_HYP lemma1 th2 in
+        ADD_ASSUM (goal_to_hypt goal) th2 (* if it was in the thml *)
+      end end end
   in
-    if null (fst goal) 
-    then CCONTR goal th3
+    (* at this point there is no more conj thml *)
+    if null (fst goal) then CCONTR (snd goal) th1
     else 
-      let val th4 = unconj_hyp (hd (hyp th3)) th3 in     
-      let val th5 = CCONTR goal th4 in         
-      let val th6 = PROVE_HYP (goalhyp_lemma goal) in
-      let val th7 = list_add_assum (hyp goal) in 
-        th7
-      end end end end
-  end end end        
-*)  
-    
-(* conv *)   
-fun beagle_conv pps term = 
-  let val eqth1 = QCONV normalForms.CNF_CONV term in
-  let val term1 = rhs (concl eqth1) in (
-    if not(term1 = term)
-    then (add_string pps "CNF1: "; 
-          add_string pps (term_to_string term1);
-          add_newline pps)
-    else ();
-  let val eqth2 = QCONV fun_conv term1 in  
-  let val term2 = rhs (concl eqth2) in (
-    if not(term2 = term1)
-    then (add_string pps "Lambda: ";
-          add_string pps (term_to_string term2);
-          add_newline pps)
-    else ();
-  let val eqth3 = QCONV bool_conv term2 in
-  let val term3 = rhs (concl eqth3) in (
-    if not(term3 = term2)
-    then (add_string pps "Boolean: ";
-          add_string pps (term_to_string term3);
-          add_newline pps)
-    else ();
-  let val eqth4 = QCONV num_conv term3 in
-  let val term4 = rhs (concl eqth4) in (
-    if not(term4 = term3)
-    then (add_string pps "Numeral: "; 
-          add_string pps (term_to_string term4);
-          add_newline pps)
-    else ();
-  let val eqth5 = QCONV normalForms.CNF_CONV term4 in
-  let val term5 = rhs (concl eqth5) in (
-    if not(term5 = term4) 
-    then (add_string pps "CNF2: "; 
-          add_string pps (term_to_string term5);
-          add_newline pps)
-    else ();
-    list_TRANS [eqth1,eqth2,eqth3,eqth4,eqth5]
-  ) end end 
-  ) end end 
-  ) end end 
-  ) end end 
-  ) end end   
+      let val th4 = unconj_hyp (hd (hyp th1)) th1 in     
+      let val th5 = CCONTR (snd goal) th4 in         
+      let val th6 = list_unconj_hyp goal th5 in
+        th6
+      end end end
+  end end 
+(* end proof *)
 
-(* last step *)
-fun beagle_clauseset term =
-  let val (bvl,t) = strip_exists term in 
-  let val eqth = forall_conjuncts_conv t in
-  let val term1 = rhs (concl eqth) in
-  let val terml2 = strip_conj term1 in
-  (* erase unused quantifier *)
-  let val terml3 = map (rhs o concl o (QCONV normalForms.CNF_CONV)) terml2 in 
-  (* add axioms should add suc axioms *)  
-  let val boolaxterm = concl (CONJUNCT1 BOOL_EQ_DISTINCT) in
-  let val terml4 = if exists has_boolarg terml3
-                   then boolaxterm :: terml3 
-                   else terml3 
-  in
-  (* higher order *)
-  let val terml4 =
-    if firstorder (list_mk_conj terml3)
-    then terml3 
-    else 
-      let val appname = list_create_newname "app" terml3 in
-        map rhs (map concl (map (QCONV (app_conv appname)) (terml3))) 
-      end 
-  in        
-    terml4
-  end end end 
-  end end end
+(* beagle_convert *)   
+
+fun output_beagle_conv filename term =
+  let val (file,pps) = pp_open (mk_convpath filename) true in
+  let val eqth1 = QCONV normalForms.CNF_CONV term in 
+  let val eqth2 = QCONV fun_conv term1 in 
+  let val eqth3 = QCONV bool_conv term2 in 
+  let val eqth4 = QCONV num_conv term3 in 
+  let val eqth5 = QCONV normalForms.CNF_CONV term4 in 
+    (  
+    begin_block pps CONSISTENT 0;
+    pp_conv pps "CNF1" eqth1;
+    pp_conv pps "FUN " eqth2;
+    pp_conv pps "BOOL" eqth3;
+    pp_conv pps "NUM " eqth4;
+    pp_conv pps "CNF2" eqth5;
+    end_block pps;
+    )
+  end end end end end end
+
+fun beagle_conv term = 
+    let val eqth1 = QCONV normalForms.CNF_CONV term in 
+    let val eqth2 = QCONV fun_conv term1 in 
+    let val eqth3 = QCONV bool_conv term2 in 
+    let val eqth4 = QCONV num_conv term3 in 
+    let val eqth5 = QCONV normalForms.CNF_CONV term4 in 
+      list_TRANS [eqth1,eqth2,eqth3,eqth4,eqth5]
+    end end end end end
+
+fun beagle_convert_val goal thm =
+  let val eqth = beagle_conv (only_hypg goal) in
+  let val lemma = UNDISCH (fst (EQ_IMP_RULE eqth)) in
+    PROVE_HYP lemma thm
   end end
 
-(* test 
-val term = ``x = 0 /\ y = 0``;
-*)
+fun beagle_convert goal =
+  let val eqth = beagle_conv (only_hypg goal) in
+  let val term = rhs (concl eqth) in
+    ([term],snd goal)
+  end end 
 
-(* PROOF *)
-(* thm should start with only app extensionnal definition in hypothesis *)  
-(*
+(* beagle clause set *)
+ 
+(* erase exists *)
+fun erase_exists_val goal thm =
+  (* term construction *)
+  let val (hypl,ccl) = goal in
+  let val (bvl,t) = strip_exists term in
+  (* proof *) 
+  let val th1 = DISCH (alone_hyp thm) thm in
+  let val th2 = NOT_INTRO th1 in
+  let val th3 = GENL bvl th2 in
+  let val th4 = conv_concl (QCONV strip_forall_not_conv) th3 in
+  let val th5 = NOT_ELIM th4 in
+  let val th6 = UNDISCH th5 in
+    if mk_goal th6 = goal then th6 
+    else raise BEAGLE_ERR "erase_exists_val" "" 
+  end end end end end 
+  end end end
+ 
+fun erase_exists goal =
+  let val (bvl,t) = strip_exists (alone_hypg goal) in 
+    (t,snd goal)
+  end 
+  
+(* forall conjuncts *) (* typical of conv *) 
+fun forall_conjuncts_val goal thm =
+  let val eqth = forall_conjuncts_conv (alone_hypg goal) in
+  let val (lemma1,_) = IMP_ANTISYM_RULE eqth in
+  let val lemma2 = UNDISCH lemma1 in   
+    PROVE_HYP lemma2 thm
+  end end end
+  
+fun forall_conjuncts goal =
+  let val eqth = forall_conjuncts_conv (alone_hypg goal) in
+    (rhs (concl eqth)),snd goal)
+  end
+(* erase unused quantifier *)
+
+
+(* idea: should erase aconvertible terms in fst goal 
+to make it looks like a thm *)
+
+(* strip_conj_hyp *)
+fun strip_conj_hyp_val goal thm =
+  let val terml = erase_double_aconv (strip_conj (alone_hypg goal)) in
+  let val thml = CONJUNCTS (ASSUME (alone_hypg goal)) in
+    list_PROVE_HYP thml thm
+  end end
+ 
+fun strip_conj_hyp goal =  
+  let val terml = erase_double_aconv (strip_conj (alone_hypg goal)) in
+    (terml,snd goal)
+  end
+  
+(* erase forall *)
+fun erase_forall_val goal thm =
+  let val terml = map (rhs o concl o (QCONV normalForms.CNF_CONV)) (fst goal) in
+  let val eqthl = map (QCONV normalForms.CNF_CONV) (fst goal) in  
+  let val lemmal1 = map (fst IMP_ANTISYM_RULE) eqthl in
+  let val lemmal2 = map UNDISCH lemmal1 in   
+    list_PROVE_HYP lemmal2 thm
+  end end end end
+  
+fun erase_forall goal =
+  let val terml = map (rhs o concl o (QCONV normalForms.CNF_CONV)) (fst goal) in
+    (terml,snd goal)
+  end 
+  
+(* add_axioms *)
+fun add_axioms_val goal thm =
+  list_PROVE_HYP [CONJUNCT1 BOOL_EQ_DISTINCT] thm 
+
+fun add_axioms goal =  
+  let val term = concl (CONJUNCT1 BOOL_EQ_DISTINCT) in
+    (term :: fst goal,snd goal)
+  end
+  
+(* *)  
+
+(* higher order could be optimized *)
 fun remove_unused_app thm =  
   let val th0 = conv_hypl def_conv (hyp thm) thm in
   let val th1 = remove_unused_defl (hyp th0) th0 in
     th1
   end end
-*)
-(* thm has form terml3 |- F *)
-(* should return the theorem term |- F *)
+ 
+
+(* test is first_order_goal *)
+fun add_higher_order_val goal thm =
+  let val appname = list_create_newname "app" (fst goal) in
+  let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
+  let val lemmal1 = map (fst IMP_ANTISYM_RULE) eqthl in
+    (* remove unused app too complex? *) 
+  let val lemmal2 = map remove_unused_app lemmal1 in
+  let val lemmal3 = map UNDISCH lemmal1 in   
+  let val th0 = list_PROVE_HYP lemmal3 thm in
+    if mk_goal th0 = goal then th0
+    else raise BEAGLE_ERR "higher_order_val" "" 
+  end end end end end
   
-(*
-fun beagle_clauseset_rule appname term terml2 thm =  
-  (* remove higher order *)
-  let val th0 =
-    if all firstorder terml2
-    then thm
-    else 
-      let val eqthl = map (QCONV (app_conv appname) terml2) in
-      let val thl1 = map fst (map EQ_IMP_RULE eqthl) in 
-      (* remove unused app *)
-      let val thl2 = (map remove_unused_app thl1) in
-        list_prove_hyp thl2 thm
-      end end end 
-  (* remove axioms *)
-  let val th1 = list_prove_hyp [CONJUNCT1 BOOL_EQ_DISTINCT] th0 in
-  (* regroup forall *)
-  forall_conjuncts_conv term1
-  (* add existential need to memorize this*)  
-  add_exists ebvl thm
+  
+fun add_higher_order goal = 
+  let val appname = list_create_newname "app" (fst goal) in
+  let val terml = erase_double_aconv
+    map (rhs o concl o (QCONV (app_conv appname)) (fst goal) in
+    (terml,snd goal)
+  end end        
+
+(* idea: should erase aconvertible terms in fst goal 
+         to make it looks like a thm *) 
+  
+(* beagle_clauseset main *)
+fun beagle_clauseset_val goal thm =
+  let val goal1 = erase_exists goal in
+  let val goal2 = forall_conjuncts goal1 in
+  let val goal3 = strip_conj_hyp goal2 in
+  let val goal4 = erase_forall goal3 in
+  let val goal5 = add_axioms goal4 in
+  let val goal6 = add_higher_order goal5 in
+  let val th1 = add_higher_order_val goal5 thm in
+  let val th2 = add_axioms_val goal4 th1 in
+  let val th3 = erase_forall_val goal3 th2 in
+  let val th4 = strip_conj_hyp_val goal2 th3 in
+  let val th5 = forall_conjuncts_val goal1 th4 in
+  let val th6 = erase_exists_val goal th5 in
+    th6
+  end end end end end end
+  end end end end end end  
+  
+fun beagle_clauseset goal =
+  let val goal1 = erase_exists goal in
+  let val goal2 = forall_conjuncts goal1 in
+  let val goal3 = strip_conj_hyp goal2 in
+  let val goal4 = erase_forall goal3 in
+  let val goal5 = add_axioms goal4 in
+  let val goal6 = add_higher_order goal5 in
+    goal6
+  end end end end end end
+    
+(* test 
+val term = ``x = 0 /\ y = 0``;
 *)
-   
- (* NO PROOF for now *)                         
-fun beagle_nf pps thml goal mflag =
-  (
-  ppres_problem pps thml goal;
-  (* transform the problem into a term *)
-  let val term1 = problem_to_hypterm thml goal in 
-  (* monomorphisation *)
-  let val term2 = 
-    if mflag
-    then (add_string pps "Monomorphisation: ";  
-          add_string pps (term_to_string (monomorph term1));
-          add_newline pps; 
-          monomorph term1)
-    else term1
-  in
+  
+  
+(* BEAGLE_NF *)               
+fun beagle_nf_val thml goal thm =
+  let val goal1 = problem_to_goal thml goal in 
+  let val goal2 = beagle_convert goal1 in
+  let val goal3 = beagle_clauseset goal2 in
+  let val th1 = beagle_clauseset_val goal2 thm in
+  let val th2 = beagle_convert_val goal1 thm in
+  let val th3 = problem_to_goal_val thml goal thm in
+    th3
+  end end end end end end
+
+fun beagle_nf filename thml goal =
+ (* (* monomorphisation *)
+  let val term2 = if mflag then monomorph term1 else term1
+  in *)
+  (* problem to term *)
+  let val goal1 = problem_to_goal thml goal in 
   (* conversion cnf + bool + num + abs *)
-  let val eqth = beagle_conv pps term2 in
-  let val term3 = rhs (concl eqth) in
+  let val goal2 = beagle_convert goal1 in
   (* clause set + app *)
-    beagle_clauseset term3
-  end end end end
-  ) 
-   
-(* BEAGLE MAIN *)   
-(* path are absolute *) 
-val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+  let val goal3 = beagle_clauseset goal2 in
+    (output_beagle_conv filename (alone_hypg goal1);
+     goal3)
+  end end end (* end *)
+
+(* test
+show_assums:= true; 
+val beagle_nf filename thml goal;
+val thm = mk_thm finalgoal;
+val term = term3;
+*)
+
+  
+(* BEAGLE INTERACTION *)
+(* status *)
 val SZSstatus = ref "undefined"
-fun mk_holpath filename = directory ^ filename ^ "_hol"  
-fun mk_tffpath filename =  directory ^ filename ^ "_tff" 
-fun mk_SZSstatuspath filename = directory ^ filename ^ "_tff_SZSstatus"
-fun mk_smallrespath filename = directory ^ filename ^ "_smallres"
-fun mk_bigrespath filename = directory ^ filename ^ "_bigres"
-fun mk_addresspath () = directory ^ "filepath.txt"
-fun mk_tffsavepath filename = directory ^ filename ^ "_tffsave"
 
 fun update_SZSstatus filename = 
   let val SZSstatuspath = mk_SZSstatuspath filename in
@@ -240,149 +304,70 @@ fun update_SZSstatus filename =
     )  
   end end end   
 
- 
- 
-fun beagle filename thml goal mflag =
-  let val bigrespath = mk_bigrespath filename in
-  let val bigfile = TextIO.openAppend bigrespath in 
-  let val bigpps =
-    mk_ppstream
-    {
-    consumer  = fn s => TextIO.output (bigfile,s),
-    linewidth = 80,
-    flush     = fn () => TextIO.flushOut bigfile
-    } 
-  in 
+
+fun beagle_interact filename finalgoal =
   (* path *)
   let val tffpath = mk_tffpath filename in
   let val tffsavepath = mk_tffsavepath filename in
   let val addresspath = mk_addresspath () in
-  (* main and big results *)
+    (* print the problem *)
     (
-    begin_block bigpps CONSISTENT 0;
-      let val terml = beagle_nf bigpps thml goal mflag in
-      let val finalgoal = (terml,``F``) in
-        ( 
-        (* print the problem *)
-        output_tffgoal tffpath finalgoal false; 
-        output_tffgoal tffsavepath finalgoal true;
-        output_tffgoalpath addresspath tffpath; 
-        (* call beagle on tffpath*)
-        OS.Process.system 
+    output_tffgoal tffpath finalgoal false; 
+    output_tffgoal tffsavepath finalgoal true;
+    output_tffgoalpath addresspath tffpath; 
+    (* call beagle on tffpath*)
+    OS.Process.system 
           ("cd " ^ directory ^ ";" ^
-           "sh " ^ directory ^ "callbeagle.sh")
-        )
-      end end;
-      update_SZSstatus filename; 
-      add_string bigpps ("Status: " ^  (!SZSstatus)); 
-      add_string bigpps "\n"; add_string bigpps "\n";
-      (* output a short result *)
-      let val smallrespath = mk_smallrespath filename in
-        output_smallresult smallrespath goal (!SZSstatus) mflag
-      end;  
-    end_block bigpps;
-    TextIO.closeOut bigfile
+           "sh " ^ directory ^ "callbeagle.sh");
+    (* get the status of the thm into ref SZSstatus*)
+    update_SZSstatus filename
     )
-  end end end end end 
-  end 
+  end end end
 
 (* test 
 update_SZSstatus "problem6";
 (!SZSstatus) = "Unsatisfiable";
 *)
+
+fun output_finalthm thm =
+  (show_assums := true;
+   output_info (mk_proofpath filename) ((thm_to_string thm) ^ "\n");
+   show_assums := false)
+
 (* BEAGLE_TAC *)
-fun BEAGLE_TAC thml goal =
-  let val filename = "beagletacresult/beagletac" in
-  let fun validation thml = mk_thm goal in
-    if is_polymorph_pb thml goal 
-    then
-      (
-      beagle filename thml goal false; 
-      case (!SZSstatus) of
-        "Unsatisfiable" => ([],validation)
-      | _ => (beagle filename thml goal true; ([],validation)) 
-      )
-    else
-      (
-      beagle filename thml goal false; 
-      ([],validation)
-      )
-  handle _ =>   
+fun beagle_tac_aux filename thml goal =
+  (* handle polymorphism *)
+  (* should instantiate *)
+  let val result = ([],fn x => (mk_thm goal)) in
+  let val mflag = is_polymorph_pb thml goal in
     (
-    let val path = mk_smallrespath filename in
-    let val file = TextIO.openAppend path in 
-      (TextIO.output (file, "Error in SML code: \n"); TextIO.closeOut file) 
-    end end;
-    ([],validation)
+    let val finalgoal = beagle_nf filename thml goal 
+      handle _ => raise output_error (mk_resultpath filename) "nf"
+    in
+    let val thm = beagle_nf_val thml goal (mk_thm finalgoal) 
+      handle _ => (output_info (mk_resultpath filename) "nf_val"; ASSUME T)
+    in
+      (
+      output_finalthm thm;
+      beagle_interact filename finalgoal (* update the status *)
+        handle _ => raise output_error (mk_resultpath filename) "interact"
+      )
+    end end
+    ; 
+    output_result (mk_resultpath filename) goal (!SZSstatus) mflag
+    ;
+    case (!SZSstatus) of
+        "Unsatisfiable" => result
+      | _ => result
     )
-  end end
-(* test 
-show_assums :=  true ;
-val goal = ([``x:bool``],``y:bool``);
-val goal = ([``(P : bool -> bool) (!x. x)``], ``y:bool``);
-val goal : goal = 
-([],``(!x . x + x = 1) ==> (x = 1)``);
-val goal : goal = 
-([],``(!x. x + x = 1) ==> (y = 1)``);
-val filename = "problem1";   
-val thml = [];
-val prepareflag = false;
-*)
-
-(* conv test
-val term = hd (hyp (list_conj_hyp (negate_concl (mk_thm goal))));
-normalForms.CNF_CONV term;
-bool_conv (rhs (concl it));
-fun_conv (rhs (concl it));
-val term = (rhs (concl it));
-find_free_app term;
-find_bound_app term;
-app_conv (rhs (concl it));
-num_conv (rhs (concl it));
-predicate_conv (rhs (concl it));
-*)
-
-(* dictionnary test 
-val term = list_mk_conj (fst (goal) @ [snd goal]);
-val fvdict = create_fvdict term;
-val bvdict = create_bvdict term;
-val cdict = create_cdict term;
-*)  
-
-(* PROOF RECONSTRUCTION WIP 
-(* thml is user provided for now and not used *)
-fun beagle_tac
+    handle _ => result
+  end end 
 
 
-fun beagle_prove thml goal =
+fun BEAGLE_TAC thml goal = 
+  let val filename = "beagletacresult/beagletac" in 
+    beagle_tac_aux filename thml goal
+  end
   
-(*
-val thm = mk_thm ([``app = \x.(x + 1)``],``!x. x = 0``);
-val def = hd (hyp thm);
-remove_unused_def def thm;
-*)
   
-fun prove_final_thm hyptl =
-  let val thl1 = map ASSUME hyptl in
-  let val th1 = LIST_CONJ thl1 in
-  
-(* varll is a list of list of variables 
-   which were instantiated in the first place 
-   eqthm is provided by the conversion *)  
-fun prove_initial_thm appdefl predicatedef varll eqthm finalthm =
-  let val th1 = remove_bool_axioms finalthm in
-  let val th2 = add_exists_thm varll thm in 
-  let val (lemma1,lemma2) = EQ_IMP_RULE eqthm in
-  let val lemma3 = UNDISCH lemma1 in
-  let val th3 = PROVE_HYP lemma3 th2 in
-  
-  let val convl = (map define_conv appdefl) in
-  let val th4 = remove_unused_def def thm in
-  
-  end end end end end  
-*)    
-
-
-
-
-end
+end  

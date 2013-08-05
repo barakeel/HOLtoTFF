@@ -6,8 +6,6 @@ sig
 (* aconv *)
   val is_member_aconv : term -> term list -> bool
   val erase_double_aconv : term list -> term list 
-  val is_member_aconv_arity : (term * int) -> (term * int) list -> bool 
-  val erase_double_aconv_arity : (term * int) list -> (term * int) list
 (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
@@ -25,17 +23,24 @@ sig
 (* term *)
   val strip_comb_n : (term * int) -> (term * term list)
   val list_mk_var : (string list * hol_type list) -> term list
+(* thm *)
+val alone_hyp : thm -> term
+val thm_eq : thm -> thm -> bool
+(* goal *)
+val alone_hypg : goal -> term
+val mk_goal : thm -> goal 
 (* arity *)
   val get_arity : term -> int
   val collapse_lowestarity : (term * int) list -> (term * int) list   
 (* conv *)
   val repeat_n_conv : int -> conv -> conv 
-  val not_exists_list_conv : conv
+  val not_strip_exists_conv : conv
+  val strip_forall_not_conv : conv
 (* rule *)
   val conv_concl : conv -> thm -> thm 
   val conv_hyp : conv -> term -> thm -> thm
   val conv_hypl : conv -> term list -> thm -> thm
-  val list_prove_hyp : thm list -> thm -> thm 
+  val list_PROVE_HYP : thm list -> thm -> thm 
   val list_conj_hyp : thm -> thm
   val unconj_hyp : term -> thm -> thm
   val list_unconj_hyp : term list -> thm -> thm 
@@ -44,6 +49,7 @@ sig
   val list_fun_eq_conv : term list -> term -> thm
   val repeat_rule : int -> rule -> rule
   val EXTL : term list -> rule
+  val list_TRANS : thm list -> thm
 (* extraction *)
   val all_subterm : term -> term list
   val all_type : term -> hol_type list
@@ -55,5 +61,10 @@ sig
   val find_unpredicatel : term -> term list
   val has_boolarg : term -> bool
   val has_boolarg_thm : thm -> bool
+(* polymorph *)
+  val is_polymorph : term -> bool 
+  val is_polymorph_goal : goal -> bool 
+  val is_polymorph_thm : thm -> bool
+  val is_polymorph_pb : thm list -> goal -> bool 
 
 end

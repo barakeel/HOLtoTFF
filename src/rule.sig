@@ -3,17 +3,10 @@ sig
 
 include Abbrev
 
-  val negate_concl : thm -> thm 
-  val negate_concl_rev : term -> thm -> thm
-
-  val add_bool_axioms : thm -> thm 
-  val remove_bool_axioms : thm -> thm
-  
   val forall_conjuncts_conv : conv
   
-  val remove_exists : term -> thm -> thm 
-  val remove_exists_thm : thm -> thm
-  val add_exists : (term * term list) -> thm -> thm 
-  val add_existsl : (term * term list) list -> thm -> thm 
-
+  val def_conv : conv
+  val remove_unused_def : term -> rule
+  val remove_unused_defl : term list -> rule
+  
 end

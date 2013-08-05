@@ -14,58 +14,49 @@ load "rule"; open rule;
 load "printtff"; open printtff;
 load "printresult";open printresult;
 load "higherorder"; open higherorder;
+load "monomorph"; open monomorph;
 load "beagle"; open beagle;
 *)
 
 (* TEST PROBLEM *)
 show_assums :=  true ;
 
-(* need to put the theorems inside the goal before negating the goal *)
-(* need to quantify every variable before negating the goal *)
-
-val SZSstatus = "test";
-val goal : goal = ([],``x + 1 = x + 1``);
-val path = "/home/thibault/Desktop/SMLproject/HOLtoTFF/result/test";
-output_smallresult path goal SZSstatus;
-(* use of beagle tac *)
-val thml = [];
-BEAGLE_TAC thml goal; 
 metisTools.METIS_TAC thml goal;
-(snd it) [];
-mk_neg `` ¬(x:bool)``;
-(* examples *)
-val goal = ([``x = 0``,``y = 0``], ``F``); 
-
+beagle_tac_aux filename thml goal;
 
 (* easy problem *)
-val goal : goal = ([],``x + 1 = x + 1``);
 val filename = "result/easypb";   
 val thml = [];
-val mflag = false;
-beagle filename thml goal mflag; 
+val goal : goal = ([],``x + 1 = x + 1``);
+
+(* a bit harder *)
+val filename = "result/easypb2";   
+val thml = [];
+val goal : goal = ([],``((x + 1 = y)  /\ (y + 1 = z)) ==> (x + 2 = z)``);
 
 (* test higher order *)
-val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 val filename = "result/higherorder";   
 val thml = [];
-val mflag = false;
-beagle filename thml goal mflag; 
+val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 
 (* test boolarg *)
-val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
-val filename = "result/boolarg";   
+val filename = "result/boolarg"; 
 val thml = [];
-val mflag = false;
-beagle filename thml goal mflag; 
+val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
 
-bool_conv ``P (!x. x = 0):bool``;
 (* test funconv *)
-val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
 val filename = "result/funconv";   
 val thml = [];
-val mflag = false;
-beagle filename thml goal mflag; 
+val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
 
+
+
+(* dictionnary test 
+val term = list_mk_conj (fst (goal) @ [snd goal]);
+val fvdict = create_fvdict term;
+val bvdict = create_bvdict term;
+val cdict = create_cdict term;
+*)      
 
 (* test functions *)
 open HolKernel Abbrev boolLib;
@@ -111,3 +102,20 @@ val term3 = rand (concl (REDEPTH_CONV ETA_CONV term2)); (* may raise QConv.UNCHA
 val term4 = rand (concl (REDEPTH_CONV SKOLEM_CONV term2));
 
 (* END TEST FUNCTIONS *) 
+
+
+val SZSstatus = "test";
+val goal : goal = ([],``x + 1 = x + 1``);
+val path = "/home/thibault/Desktop/SMLproject/HOLtoTFF/result/test";
+output_result path goal SZSstatus;
+(* use of beagle tac *)
+val thml = [];
+BEAGLE_TAC thml goal; 
+
+(snd it) [];
+mk_neg `` ¬(x:bool)``;
+(* examples *)
+val goal = ([``x = 0``,``y = 0``], F); 
+
+
+bool_conv ``P (!x. x = 0):bool``;

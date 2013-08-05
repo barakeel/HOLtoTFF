@@ -1,0 +1,89 @@
+%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xP_type,type,(
+    xP: bool > $o )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(c_type,type,(
+    c: ( bool * bool ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    (~xP(bfalse) | ~(xx = 0)) )).
+
+tff(axiom3_axiom,axiom,(
+    (xP(btrue) | ~(xx = 0)) )).
+
+tff(axiom4_axiom,axiom,(
+    (xP(btrue) | $lesseq(0,xx)) )).
+
+tff(axiom5_axiom,axiom,(
+    (~xP(bfalse) | $lesseq(0,xx)) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [X: $int] : (((X = 0) | ~$lesseq(0,X))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xP_type,type,(
+    xP: bool > $o )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(c_type,type,(
+    c: ( bool * bool ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    (~xP(bfalse) | ~(xx = 0)) )).
+
+tff(axiom3_axiom,axiom,(
+    (xP(btrue) | ~(xx = 0)) )).
+
+tff(axiom4_axiom,axiom,(
+    (xP(btrue) | $lesseq(0,xx)) )).
+
+tff(axiom5_axiom,axiom,(
+    (~xP(bfalse) | $lesseq(0,xx)) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [X: $int] : (((X = 0) | ~$lesseq(0,X))) )).
+
+%------------------------------------------------------------------------------

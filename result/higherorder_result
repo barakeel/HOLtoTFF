@@ -1,0 +1,2 @@
+beagle_nf_ruleclauseset Unsatisfiable:  [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
+Unsatisfiable: (polymorph)  [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)

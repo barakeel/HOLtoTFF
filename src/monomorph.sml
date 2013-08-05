@@ -13,24 +13,21 @@ open HolKernel Abbrev boolLib numSyntax
      listtools mydatatype tools
      extractvar namevar
 
-
 fun MONOMORPH_ERR function message =
     HOL_ERR{origin_structure = "monomorph",
             origin_function = function,
             message = message}
 
-
-(* If I want to monomorph a term *)
-(* should only monomorph once *)
-(* monomorph to its own type *)
-(* returns a list of substitution *)
 fun mk_multielem tyl varty = (varty,tyl)
 fun mk_multisubst vartyl tyl = map (mk_multielem tyl) vartyl
 
 fun mk_elem (red,res) = {redex = red, residue = res}
 fun add_elem elem subst = elem :: subst
 (* return a list of substitution *)
-fun add_eleml elem substl = map (add_elem elem) substl
+fun add_eleml elem substl = 
+  case substl of
+    [] => [[elem]]
+  | _ => map (add_elem elem) substl
 
 (* assuming it's a new multielem *)
 (* return a list of substitution *)
@@ -52,22 +49,47 @@ fun all_subst term =
     add_multisubst multisubst []  
   end end end
 
-fun inst_rev term subst = inst subst term
 
 (* term should have type bool *) (* no proof *)
-fun monomorph term =
-  let val substl = all_subst term in
-    if null substl then term
-    else list_mk_disj (map (inst_rev term) substl)          
-  end
+fun INST_TYPE_rev a b = INST_TYPE b a
+
+(* goal has the form ([term],F) thm has form ([CONJ term list],F) *)
 
 
-(* because I instantiate by its type there is at least a rule *)
+(*
+remove vartype when you instantiate
+but you can do pre_monomorphisation
+
+x:int = y:int |- F
+
+x:'a = y:'a |- F
+'a -> 'b
+'b -> 'a
+
+
+*)
+
+(* try with first monomorphisation *)
+(* try with second monomorphisation *)
+
+(* I should monomorph before doing anything else *)
 
 
 (* test   
-val term = ``x = y``;
- *)  
+val term = ``(z = y) /\ (x = 0)``;
+val goal = ([term],F); 
+val thm = mk_thm ([monomorph term],F); 
+all_subst term;
+monomorph term;
+all_vartype term;
+all_type term;
+ show_assums := true;
+ 
+ 
+ x = y alpha
+ <=> !type x:ty = y:ty
+ *)
+ 
 
 end
 

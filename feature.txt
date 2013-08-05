@@ -14,7 +14,7 @@ Rewriting:
 - abstraction: P[\x y. x + y] --> ?f. P[f] /\ f x y = x + y
 - higher order: f x y --> app(app(f,x),y)
 - clauseset : ok
-- To do : make a validation
+
 
 Printing:   
 - formula :
@@ -29,38 +29,3 @@ Printing:
   - numeral: $int)
   - boolean: $o)
   - other types: give an indicative type
-
-Version 0.3
-
-Does:
-  - Translate a HOL formula into TFF format.
-  - Print the formula into a TFF file
-  - Call Beagle on this TFF file
-  - Return the SZS status
-
-Rewriting:
-- monomorphism: instantiate types to all the types of the formula
-- cnf : use normalForms.CNF_CONV
-- boolean: P (x: bool) --> (x => P true) /\ (~x => P false)
-- numeral: ok
-- abstraction: P[\x y. x + y] --> ?f. P[f] /\ f x y = x + y
-- higher order: f x y --> app(app(f,x),y)
-
-Printing:   
-- formula :
-  - first order formula (Only used with a clause set)
- 
-- variable:
-  - free variables : P,Q,r,s --> xP,xQ,xr,xs 
-  - constant : P,Q,r,s --> cP,cQ,cr,cs 
-  - bound variables : x,y --> Xx,Xy 
-
-- type:
-  - numeral: $int)
-  - boolean: $o)
-  - other types: give an indicative type
-
-
-
-
-

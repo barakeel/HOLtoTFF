@@ -3,20 +3,16 @@ TODO
 Question :
 - How to translate a rule or something that produces a theorem into a tactic?
 - How tactic works ?
-- How to make the path portable
-- How to make HOL creating beagle before calling bossLib
+- How to make the path portable ?
  
-- How to interact with Beagle?
-
 Test 
-- Change in bossLib metis_tac by beagle_tac
-- try to build HOL get a fresh version
+- Debug parsing error
 
 To do:
-- output an error if there is variables of the same name.
-- constants and free variables are name c0 c01 c012
-- bvatydict is not necessary cause a bound variables has always type bool not $o
+- output an error if there is a bound and a free variables of the same name.
 - erase defined constant before printing
+- add axioms for constant present in the formula
+- make a validation
 
 Pretty printing:
 - to be done
@@ -24,29 +20,12 @@ Pretty printing:
 Infer axiom from a theory:
 - do it manually for each constant
   
-Monomorph: 
-- to be extended to bound variables 
-  (don't know how without exponential cases) (ask Chantal Keller)
-
-Testing:
-- include examples from metis_tac
-- test product
-
 Rewriting:   
-- take care of variables names: 
-  - new variables should be used when adding variables
-  - maybe create list to remembers which variables were added
-  - maybe write my own cnf_conv but not necessary
-- outside beagle:   
-  - clause set ? 
-- inside beagle :
-  - clause set ?
 
 Output:
 - add comments to be printed in the standard input when the file is generated
 - add comments to the file if the user wants to (tptp standard comment)
-- print_thm 
-  - should returns every dictionary created 
+- should returns every dictionary created to be able to follow them into the proof
  
 Documentation:
 - explanation of what each signature function does.

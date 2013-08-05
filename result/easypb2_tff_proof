@@ -1,0 +1,4 @@
+List((0 ≤ xz)) | selSimp | List((0 ≤ xz))
+List(¬((2 + xx) →_ℤ xz)) | selSimp | List(¬((2 + xx) →_ℤ xz))
+List((1 + xx) →_ℤ xy) | selSimp | List((1 + xx) →_ℤ xy)
+List((1 + xy) →_ℤ xz) | selSimp | List((1 + xy) →_ℤ xz)

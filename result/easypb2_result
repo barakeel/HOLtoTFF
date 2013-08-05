@@ -1,0 +1,3 @@
+clauseset Unsatisfiable:  [] |- (x + 1 = y) ∧ (y + 1 = z) ⇒ (x + 2 = z)
+clauseset Unsatisfiable:  [] |- (x + 1 = y) ∧ (y + 1 = z) ⇒ (x + 2 = z)
+Unsatisfiable:  [] |- (x + 1 = y) ∧ (y + 1 = z) ⇒ (x + 2 = z)

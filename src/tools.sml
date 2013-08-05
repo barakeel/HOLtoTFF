@@ -20,12 +20,6 @@ fun TOOLS_ERR function message =
 fun is_member_aconv t l = is_member_eq aconv t l 
 fun erase_double_aconv l = erase_double_eq aconv l 
  
-local fun is_equal (t1,a1) (t2,a2) = aconv t1 t2 andalso a1 = a2
-in
-fun is_member_aconv_arity (t,a) termal = is_member_eq is_equal (t,a) termal
-fun erase_double_aconv_arity termal = erase_double_eq is_equal termal
-end
-
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
@@ -91,6 +85,21 @@ else
 else 
   raise TOOLS_ERR "" ""
 
+(* THM *)
+fun alone_hyp thm = 
+  if length (hyp thm) = 1 then hd (hyp thm)
+  else raise TOOLS_ERR "alone_hyp" "" 
+
+fun thm_eq th1 th2 = (hyp th1 = hyp th2) andalso (concl th1 = concl th2) 
+ 
+(* GOAL *)
+fun alone_hypg goal =
+  if length (fst goal) = 1 then hd (fst goal)
+  else raise TOOLS_ERR "alone_hypg" "" 
+ 
+fun mk_goal thm = (hyp thm, concl thm)
+ 
+ 
 (* ARITY *)
 fun get_arity term = length (snd (strip_comb term))
 
@@ -125,12 +134,16 @@ fun repeat_n_conv n conv =
          else
            conv THENC repeat_n_conv (n - 1) conv
 
-fun not_exists_list_conv term =
+(* to be rewritten *)
+fun not_strip_exists_conv term =
   let val n = length (fst (strip_exists (dest_neg term))) in
-    (NOT_EXISTS_CONV THENC 
-    (repeat_n_conv (n - 1) (STRIP_QUANT_CONV NOT_EXISTS_CONV)))
-    term
+    repeat_n_conv n (STRIP_QUANT_CONV NOT_EXISTS_CONV) term
   end  
+
+fun strip_forall_not_conv term = 
+  if is_forall term 
+  then ((LAST_FORALL_CONV FORALL_NOT_CONV) THENC strip_forall_not_conv) term
+  else raise UNCHANGED
 
 (* RULE *)
 fun conv_concl conv thm =
@@ -151,16 +164,16 @@ fun conv_hyp conv term thm =
  
 fun conv_hypl conv terml thm = repeatchange (conv_hyp conv) terml thm 
  
-fun list_prove_hyp thml thm =
+fun list_PROVE_HYP thml thm =
   case thml of
     [] => thm
-  | th :: m => list_prove_hyp m (PROVE_HYP th thm)  
+  | th :: m => list_PROVE_HYP m (PROVE_HYP th thm)  
 
 fun list_conj_hyp thm =
   let val hyptl = hyp thm in
   let val t1 = list_mk_conj hyptl in
   let val thl = CONJ_LIST (length hyptl) (ASSUME t1) in
-  let val th2 = list_prove_hyp thl thm in
+  let val th2 = list_PROVE_HYP thl thm in
     th2
   end end end end   
 
@@ -210,8 +223,14 @@ fun EXTL bvl thm =
   | bv :: m => let val th0 = SPECL bvl thm in
                  EXTL (rev m) ( GENL(rev m) (EXT (GEN bv th0)) )  
                end             
-              
-(* extract term *)
+
+fun list_TRANS eqthml =
+  case eqthml of
+    [] => raise TOOLS_ERR "list_TRANS" "no argument"
+  | [eqthm] => eqthm
+  | eqthm :: m => TRANS eqthm (list_TRANS m) 
+    
+(* EXTRACT TERM *)
 fun all_subterm_aux term = 
   case termstructure term of
     Numeral => [term]
@@ -243,19 +262,26 @@ fun all_subterm term = erase_double (all_subterm_aux term)
 (* extract term type *)
 fun all_type term = erase_double (map type_of (all_subterm term))
 
-fun all_leafty ty =  
+fun all_leaftype_aux ty = 
   case typecat ty of
     Booltype => [ty]
   | Numtype => [ty]
   | Alphatype => [ty]
   | Leaftype => [ty]
   | _ => let val (str,l) = dest_type ty in
-           all_leaftyl l
-         end  
-and all_leaftyl tyl = List.concat (map all_leafty tyl)   
+           all_leaftypel_aux l
+         end
+and all_leaftypel_aux tyl = 
+  List.concat (map all_leaftype_aux tyl)
 
-fun all_vartype term = filter is_vartype (all_leafty (type_of term))
+fun all_leaftypel tyl = erase_double (all_leaftypel_aux tyl)
 
+fun all_vartype term = filter is_vartype (all_leaftypel (all_type term))
+
+(* test 
+all_vartype ``(f a = b) /\ (c=0)``;
+all_leaftype (type_of term);
+*)
 (* FIRST ORDER *)
 (* consider = to be always = not <=> *)
 fun find_atoml term =
@@ -307,6 +333,17 @@ fun has_boolarg_thm thm =
     exists has_boolarg l
   end  
 
+(* Polymorph *)
+fun is_polymorph term = not (null (all_vartype term)) 
+fun is_polymorph_goal goal =   
+  exists is_polymorph (fst goal) orelse
+  is_polymorph (snd goal)
+fun is_polymorph_thm thm = 
+  exists is_polymorph (hyp thm) orelse
+  is_polymorph (concl thm)
+fun is_polymorph_pb thml goal =
+  exists is_polymorph_thm thml orelse
+  is_polymorph_goal goal 
 
 
 

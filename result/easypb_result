@@ -1,0 +1,4 @@
+Unsatisfiable:  [] |- x + 1 = x + 1
+clausesetUnsatisfiable:  [] |- x + 1 = x + 1
+finalruleUnsatisfiable:  [] |- x + 1 = x + 1
+Unsatisfiable:  [] |- x + 1 = x + 1

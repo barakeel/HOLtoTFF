@@ -51,16 +51,7 @@ fun output_tffgoalpath addresspath filepath =
     )  
   end 
 
-fun ppres_smallresult pps goal =
-  (
-  begin_block pps CONSISTENT 0;
-    ppres_goal pps goal;
-  
-  
-  end_block pps
-  )
-  
-fun output_smallresult path goal SZSstatus mflag =  
+fun output_result path goal SZSstatus mflag =  
   let val file = TextIO.openAppend path in 
   let val thm = mk_thm goal in
     (
@@ -73,8 +64,5 @@ fun output_smallresult path goal SZSstatus mflag =
     )  
   end end
   
-  
-  
-
   
 end

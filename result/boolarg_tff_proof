@@ -1,0 +1,1 @@
+List(¬(0 ≤ Xᵃ) ∨ Xᵃ ≈_ℤ 0) | selSimp | List(¬(0 ≤ Xᵃ) ∨ Xᵃ ≈_ℤ 0)

@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/beagletacresult/beagletac_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/result/higherorder_tff
