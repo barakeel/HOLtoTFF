@@ -23,8 +23,6 @@ local fun equal x y = (x = y) in
   fun erase_double list = erase_double_eq equal list 
 end
 
-fun is_member_rev list elem = is_member elem list
-
 fun add_once elem list =
   if is_member elem list 
   then list

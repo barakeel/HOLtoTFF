@@ -58,7 +58,7 @@ fun pptff_bvl pps bvl bvdict tyadict =
 fun pptff_term pps term dict pflag =
   case termstructure term of
     Numeral => add_string pps (name_numeral term)
-  | Var => if is_member term (map fst (#2 dict))
+  | Var => if is_member_term term (map fst (#2 dict))
            then add_string pps (lookup term (#2 dict)) (*boundvar*)
            else add_string pps (lookup term (#3 dict)) (*freevar*)
   | Const => 
@@ -90,7 +90,7 @@ fun pptff_term pps term dict pflag =
       let val arity = get_arity term in
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "pptff_term" "numeral"
-      | Var => if is_member operator (map fst (#2 dict))
+      | Var => if is_member_term operator (map fst (#2 dict))
                then pptff_app pps (lookup operator (#2 dict)) argl dict false
                else pptff_app pps (lookup operator (#3 dict)) argl dict false 
       | Const => 
@@ -173,14 +173,21 @@ fun pptff_commentline pps =
 fun has_simplety ((ty,arity),name) = (arity = 0)
 fun get_simpletyadict tyadict = filter has_simplety tyadict
 
+(* post processing *)
 fun is_dtyname name = (substring (name,0,1) = "$")
 fun is_not_dtyname name = not (is_dtyname name)
 fun has_not_dtyname ((ty,arity),name) = is_not_dtyname name  
 fun erase_dtyname tyadict = filter has_not_dtyname tyadict
 
+
+(* test  
+name_of (rator (rator ``a <= b``));
+*)
+
 (* end useful functions *)
 
-(* type *)
+(* TYPE *)
+
 fun pptff_type pps name tyname =
   ( 
   add_string pps ("tff(" ^ name ^ "_type,type,(");
@@ -198,7 +205,7 @@ fun pptff_tyadict pps tyadict =
     pptff_tyadict pps m
     )
     
-  (* print the type of free variables or constant *)  
+(* free variables *)  
 fun pptff_fvatydict pps fvdict fvatydict =
   case fvatydict of
     [] => () 
@@ -209,18 +216,37 @@ fun pptff_fvatydict pps fvdict fvatydict =
     pptff_fvatydict pps fvdict m
     )
 
+(* constant *)
+fun is_dc c = is_member (name_of c) ["=","+","-","*","<",">",">=","<="]
+  
+fun remove_dc catydict =
+  case catydict of
+    [] => []
+  | ((c,arity),tyname) :: m => if is_dc c 
+                               then remove_dc m 
+                               else ((c,arity),tyname) :: remove_dc m   
+
 fun pptff_catydict pps cdict catydict =
   case catydict of
     [] => () 
   | ((c,arity),tyname) :: m => 
-    (
+    ( 
     pptff_type pps (lookup c cdict) tyname;
     nl2 pps;
     pptff_catydict pps cdict m
     )
 
+(* boolean *)
+fun pptff_btrue_bfalse pps =
+  (
+  pptff_type pps "btrue" "bool";
+  nl2 pps;
+  pptff_type pps "bfalse" "bool";
+  nl2 pps 
+  )
 
-(* axiom *)
+
+(* AXIOM *)
 fun pptff_axiom pps name term dict =
   ( 
   add_string pps ("tff(" ^ name ^ "_axiom,axiom,(");
@@ -250,18 +276,7 @@ fun pptff_conjecture pps name term dict =
     pptff_term pps term dict true;
     add_string pps " )).";
     nl2 pps
-    )     
-  
-(* should do something so that the user 
-knows all the transformation done to his formula *)
-fun pptff_btrue_bfalse pps =
-  (
-  pptff_type pps "btrue" "bool";
-  nl2 pps;
-  pptff_type pps "bfalse" "bool";
-  nl2 pps 
-  )
-
+    )
 
 fun pptff_tff pps goal =
   let val terml = (fst goal) @ [snd goal] in
@@ -293,7 +308,7 @@ fun pptff_tff pps goal =
         pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict catydict;
+        pptff_catydict pps cdict (remove_dc catydict);
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;

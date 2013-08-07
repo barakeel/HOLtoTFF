@@ -10,7 +10,24 @@ fun PRINTTOOLS_ERR function message =
 	    origin_function = function,
             message = message}
 
-(* standard printing *)
+
+fun open_file path appendflag =
+  let val file = 
+    if appendflag then TextIO.openAppend path else TextIO.openOut path
+  in file end
+
+fun outstream_eqth file name eqth =
+  let val lt  = lhs (concl eqth) in
+  let val rt = rhs (concl eqth) in
+    if lt = rt then ()
+    else
+      (
+      TextIO.output (file,name ^ ": ");
+      TextIO.output (file,(term_to_string rt) ^ "\n") 
+      )
+  end end 
+
+
 fun output_info path str = 
   let val file = TextIO.openAppend path in 
     (TextIO.output (file,str); TextIO.closeOut file) 
@@ -22,31 +39,7 @@ fun output_error path str =
   PRINTTOOLS_ERR "output_error" str
   )
 
-(* pretty printing *)
-fun pp_conv pps name eqth =
-  let val lt  = lhs (concl eqth) in
-  let val rt = rhs (concl eqth) in
-    if lt = rt then ()
-    else
-    (add_string pps (name ^ ": ");
-     add_string pps (term_to_string rt);
-     add_newline pps)  
-  end end 
 
-fun pp_open path appendflag =
-  let val file = 
-    if appendflag then TextIO.openAppend path else TextIO.openOut path
-  in 
-  let val pps =   
-    mk_ppstream
-    {
-    consumer  = fn s => TextIO.output (file,s),
-    linewidth = 80,
-    flush     = fn () => TextIO.flushOut file
-    } 
-  in
-   (file,pps)
-  end end
 
 
 end

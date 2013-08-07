@@ -33,15 +33,6 @@ tff(xg_type,type,(
 tff(xb_type,type,(
     xb: ty_b )).
 
-tff(c_type,type,(
-    c: ( $int * $int ) > $o )).
-
-tff(c1_type,type,(
-    c1: ( ty_b_F_num * ty_b_F_num ) > $o )).
-
-tff(c2_type,type,(
-    c2: ( $int * $int ) > $o )).
-
 tff(axiom1_axiom,axiom,(
     $lesseq(0,xapp1(xg,xb)) )).
 

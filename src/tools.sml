@@ -17,9 +17,10 @@ fun TOOLS_ERR function message =
             message = message}
 
  (* ACONV *)
-fun is_member_aconv t l = is_member_eq aconv t l 
-fun erase_double_aconv l = erase_double_eq aconv l 
+fun is_member_term t l = is_member_eq aconv t l 
+fun erase_double_term l = erase_double_eq aconv l 
  
+
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
@@ -33,10 +34,8 @@ fun is_logical term =
   is_exists term orelse  
   is_exists1 term orelse
   is_cond term 
-fun is_new_axiom terml axiom = not (is_member (concl axiom) terml)
+fun is_new_axiom terml axiom = not (is_member_term (concl axiom) terml)
 fun is_not_var term = not (is_var term)  
-  
-
   
 (* QUANTIFIER *) 
 fun strip_quant term =
@@ -86,19 +85,26 @@ else
   raise TOOLS_ERR "" ""
 
 (* THM *)
-fun alone_hyp thm = 
+fun only_hyp thm = 
   if length (hyp thm) = 1 then hd (hyp thm)
-  else raise TOOLS_ERR "alone_hyp" "" 
+  else raise TOOLS_ERR "only_hyp" "" 
 
 fun thm_eq th1 th2 = (hyp th1 = hyp th2) andalso (concl th1 = concl th2) 
  
 (* GOAL *)
-fun alone_hypg goal =
+fun only_hypg goal =
   if length (fst goal) = 1 then hd (fst goal)
-  else raise TOOLS_ERR "alone_hypg" "" 
+  else raise TOOLS_ERR "only_hypg" "" 
  
 fun mk_goal thm = (hyp thm, concl thm)
- 
+
+fun is_member_term_rev a b = is_member_term b a 
+fun is_subset l1 l2 = all (is_member_term_rev l2) l1
+
+fun goal_eq goal1 goal2 = 
+  aconv (snd goal1) (snd goal2) andalso
+  is_subset (fst goal1) (fst goal2) andalso
+  is_subset (fst goal2) (fst goal1)
  
 (* ARITY *)
 fun get_arity term = length (snd (strip_comb term))
@@ -115,7 +121,7 @@ fun get_lowestarity (term,arity) termal =
 ;
 
   
-fun collapse_lowestarity2 varal varalfix=
+fun collapse_lowestarity2 varal varalfix =
   case varal of
     [] => []
   | (var,arity) :: m => 
@@ -251,16 +257,30 @@ fun all_subterm_aux term =
     )  
   | Abs => term :: all_subterm_aux (snd (strip_abs term))
          
-and all_subterm_aux_list terml = List.concat (map (all_subterm_aux) terml)
+and all_subterm_aux_list terml = 
+  erase_double_term (List.concat (map (all_subterm_aux) terml))
 and all_subterm_aux_quant term = all_subterm_aux (snd (strip_quant term))
 and all_subterm_aux_binop term = all_subterm_aux_list [lhand term,rand term] 
 and all_subterm_aux_unop term = all_subterm_aux (rand term)
 
-fun all_subterm term = erase_double (all_subterm_aux term)
+fun all_subterm term = erase_double_term (all_subterm_aux term)
 (* end *)
 
 (* extract term type *)
 fun all_type term = erase_double (map type_of (all_subterm term))
+
+fun all_subtype_aux ty =
+  case typecat ty of
+    Booltype => [ty]
+  | Numtype => [ty]
+  | Alphatype => [ty]
+  | Leaftype => [ty]
+  | _ => let val (str,l) = dest_type ty in
+           ty :: all_subtypel_aux l
+         end
+and all_subtypel_aux tyl = 
+  erase_double (List.concat (map all_subtype_aux tyl))
+fun all_subtype term = all_subtypel_aux (all_type term)
 
 fun all_leaftype_aux ty = 
   case typecat ty of
@@ -272,11 +292,10 @@ fun all_leaftype_aux ty =
            all_leaftypel_aux l
          end
 and all_leaftypel_aux tyl = 
-  List.concat (map all_leaftype_aux tyl)
+  erase_double (List.concat (map all_leaftype_aux tyl))
+fun all_leaftype term = all_leaftypel_aux (all_type term)
 
-fun all_leaftypel tyl = erase_double (all_leaftypel_aux tyl)
-
-fun all_vartype term = filter is_vartype (all_leaftypel (all_type term))
+fun all_vartype term = filter is_vartype (all_leaftypel_aux (all_type term))
 
 (* test 
 all_vartype ``(f a = b) /\ (c=0)``;
@@ -311,19 +330,19 @@ fun find_predicatel term =
   end
   
 fun is_predicate_in var term = 
-  is_member var (find_predicatel term)
+  is_member_term var (find_predicatel term)
 
 fun find_unpredicate_arg arg =
   filter is_var_or_const (all_subterm arg)
 
 fun find_unpredicatel_aux atom =
   let val (operator,argl) = strip_comb atom in
-    List.concat (map (find_unpredicate_arg) argl)
+    erase_double_term (List.concat (map (find_unpredicate_arg) argl))
   end      
 
 fun find_unpredicatel term =
   let val atoml = find_atoml term in
-   List.concat (map find_unpredicatel_aux atoml)
+   erase_double_term (List.concat (map find_unpredicatel_aux atoml))
   end              
 
 fun has_boolarg term = not (null (filter has_boolty (find_unpredicatel term)))
@@ -332,6 +351,11 @@ fun has_boolarg_thm thm =
   let val l = (hyp thm) @ [concl thm] in
     exists has_boolarg l
   end  
+
+fun has_boolarg_goal goal =
+  let val l = (fst goal) @ [snd goal] in
+    exists has_boolarg l
+  end
 
 (* Polymorph *)
 fun is_polymorph term = not (null (all_vartype term)) 

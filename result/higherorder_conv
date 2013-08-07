@@ -8,4 +8,15 @@ CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1:
 NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
 CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
 NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2CNF1: (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+NUM : (0 ≤ f a b ∧ 0 ≤ g b) ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
 CNF2: 0 ≤ g b ∧ 0 ≤ f a b ∧ (f a = g) ∧ (f a b = 2) ∧ g b ≠ 2
+

@@ -4,6 +4,7 @@ sig
   include Abbrev
   
   val beagle_tac_aux : string -> thm list -> tactic
+  val beagle_tac_poly : string -> thm list -> tactic
   val BEAGLE_TAC : thm list -> tactic
  
   (* beagle_nf *)

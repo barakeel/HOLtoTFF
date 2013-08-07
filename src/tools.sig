@@ -4,8 +4,9 @@ sig
   include Abbrev
 
 (* aconv *)
-  val is_member_aconv : term -> term list -> bool
-  val erase_double_aconv : term list -> term list 
+  val is_member_term : term -> term list -> bool
+  val erase_double_term : term list -> term list 
+
 (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
@@ -24,11 +25,12 @@ sig
   val strip_comb_n : (term * int) -> (term * term list)
   val list_mk_var : (string list * hol_type list) -> term list
 (* thm *)
-val alone_hyp : thm -> term
+val only_hyp : thm -> term
 val thm_eq : thm -> thm -> bool
 (* goal *)
-val alone_hypg : goal -> term
+val only_hypg : goal -> term
 val mk_goal : thm -> goal 
+val goal_eq : goal -> goal -> bool
 (* arity *)
   val get_arity : term -> int
   val collapse_lowestarity : (term * int) list -> (term * int) list   
@@ -53,6 +55,8 @@ val mk_goal : thm -> goal
 (* extraction *)
   val all_subterm : term -> term list
   val all_type : term -> hol_type list
+  val all_subtype : term -> hol_type list
+  val all_leaftype : term -> hol_type list
   val all_vartype : term -> hol_type list
 (* first order *)  
   val find_atoml : term -> term list 
@@ -61,6 +65,7 @@ val mk_goal : thm -> goal
   val find_unpredicatel : term -> term list
   val has_boolarg : term -> bool
   val has_boolarg_thm : thm -> bool
+  val has_boolarg_goal : goal -> bool
 (* polymorph *)
   val is_polymorph : term -> bool 
   val is_polymorph_goal : goal -> bool 

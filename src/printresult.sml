@@ -50,15 +50,25 @@ fun output_tffgoalpath addresspath filepath =
     TextIO.closeOut file
     )  
   end 
+ 
+fun output_thml file thml = 
+  case thml of
+    [] => ()
+  | thm :: m => 
+    (TextIO.output (file,(thm_to_string thm) ^ "\n"); 
+     output_thml file m)
 
-fun output_result path goal SZSstatus mflag =  
+fun output_result path thml goal SZSstatus mflag =  
   let val file = TextIO.openAppend path in 
   let val thm = mk_thm goal in
     (
-    TextIO.output (file,SZSstatus ^ ": "); 
-    if mflag then TextIO.output (file,"(polymorph) ") else ();
+    TextIO.output (file,"Status: " ^ SZSstatus ^ "\n");
+    if mflag then TextIO.output (file,"Info: polymorph\n") else ();
     show_assums := true;
-    TextIO.output (file,(thm_to_string thm) ^ "\n"); 
+    TextIO.output (file,"Thm list: " ^ "\n"); 
+    output_thml file thml;
+    TextIO.output (file,"Goal: " ^ "\n");
+    TextIO.output (file,(thm_to_string thm) ^ "\n\n\n"); 
     show_assums := false;
     TextIO.closeOut file
     )  

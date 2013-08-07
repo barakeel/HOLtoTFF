@@ -1,0 +1,21 @@
+(interact)Status: Unsatisfiable
+Thm list: 
+ [] |- x ≤ y ⇒ x < SUC y
+Goal: 
+ [] |- a ≤ b ⇒ a < SUC b
+
+
+Status: Unsatisfiable
+Thm list: 
+ [] |- (x ≤ y ⇒ x < SUC y) ∧ f x ∧ (f = g)
+Goal: 
+ [] |- a ≤ b ⇒ a < SUC b
+
+
+Status: Unsatisfiable
+Thm list: 
+ [] |- x ≤ y ⇒ x < SUC y
+Goal: 
+ [] |- a ≤ b ⇒ a < SUC b
+
+

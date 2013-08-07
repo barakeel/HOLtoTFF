@@ -86,7 +86,7 @@ and find_free_bool_unop term subterm =
   find_free_bool_aux term (rand subterm)
 end  
  
-fun find_free_bool term = erase_double_aconv (find_free_bool_aux term term) 
+fun find_free_bool term = erase_double_term (find_free_bool_aux term term) 
 (* bound *)     
 local fun is_interesting_in term subterm =  
   bound_by_quant subterm term andalso
@@ -126,7 +126,7 @@ and find_bound_bool_unop term subterm =
   find_bound_bool_aux term (rand subterm)
 end  
    
-fun find_bound_bool term = erase_double_aconv (find_bound_bool_aux term term)
+fun find_bound_bool term = erase_double_term (find_bound_bool_aux term term)
 
 (* term should have type bool *)
 fun bool_conv_sub subterm term =
@@ -259,7 +259,7 @@ local fun is_interesting_in term subterm =
   not (numSyntax.is_numeral subterm)
 in
 fun find_free_num term = 
-  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
+  erase_double_term (filter (is_interesting_in term) (all_subterm term))
 end 
   
 (* term should start with a quantifier *)  
@@ -269,7 +269,7 @@ local fun is_interesting_in term subterm =
   not (numSyntax.is_numeral subterm)
 in 
 fun find_bound_num term =  
-  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
+  erase_double_term (filter (is_interesting_in term) (all_subterm term))
 end  
 (* end find *)
 
@@ -390,7 +390,7 @@ fun find_free_abs_aux term subterm = (* term should be a boolean *)
              else find_free_abs_aux term t  
            end
            
-fun find_free_abs term = erase_double_aconv (find_free_abs_aux term term)
+fun find_free_abs term = erase_double_term (find_free_abs_aux term term)
 
 fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
   case termstructure subterm of
@@ -416,7 +416,7 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
              else find_bound_abs_aux term t  
            end
 
-fun find_bound_abs term = erase_double_aconv (find_bound_abs_aux term term)
+fun find_bound_abs term = erase_double_term (find_bound_abs_aux term term)
   
 
 fun fun_axiom abs =

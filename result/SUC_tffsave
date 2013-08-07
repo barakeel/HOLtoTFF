@@ -1,0 +1,171 @@
+%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xa_type,type,(
+    xa: $int )).
+
+tff(xb_type,type,(
+    xb: $int )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xb) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cSUC(xb)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xa) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(0,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$lesseq(Xx,Xy) | ($less(Xx,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(xa,xb) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$less(xa,cSUC(xb)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xa_type,type,(
+    xa: $int )).
+
+tff(xb_type,type,(
+    xb: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(cSUC_type,type,(
+    cSUC: $int > $int )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xb) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cSUC(xb)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xa) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(0,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$lesseq(Xx,Xy) | ($less(Xx,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(xa,xb) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$less(xa,cSUC(xb)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(ty_num_F_bool_type,type,(
+    ty_num_F_bool: $tType )).
+
+tff(xapp_type,type,(
+    xapp: ( ty_num_F_bool * $int ) > $o )).
+
+tff(xa_type,type,(
+    xa: $int )).
+
+tff(xapp1_type,type,(
+    xapp1: ( ty_num_F_num * $int ) > $int )).
+
+tff(xb_type,type,(
+    xb: $int )).
+
+tff(c_type,type,(
+    c: ( ty_num_F_bool * ty_num_F_bool ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(cSUC_type,type,(
+    cSUC: ty_num_F_num )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xb) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xapp1(cSUC,xb)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xa) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(0,xapp1(cSUC,Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: $int,Xx: $int,Xg: ty_num_F_bool,Xf: ty_num_F_bool] : (((Xf = Xg) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xy: $int,Xx: $int,Xf: ty_num_F_bool] : ((xapp(Xf,Xx) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$lesseq(Xx,Xy) | ($less(Xx,xapp1(cSUC,Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(xa,xb) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$less(xa,xapp1(cSUC,xb)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xa_type,type,(
+    xa: $int )).
+
+tff(xb_type,type,(
+    xb: $int )).
+
+tff(cSUC_type,type,(
+    cSUC: $int > $int )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xb) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cSUC(xb)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xa) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(0,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$lesseq(Xx,Xy) | ($less(Xx,cSUC(Xy)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : (($lesseq(xa,xb) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xy: $int,Xx: $int] : ((~$less(xa,cSUC(xb)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xy)))) )).
+
+%------------------------------------------------------------------------------

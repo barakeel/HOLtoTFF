@@ -10,7 +10,6 @@ sig
   val ppres_goal : ppstream -> goal -> unit
   val ppres_problem : ppstream -> thm list -> goal -> unit
   val output_tffgoalpath : string -> string -> unit
-  val output_result : string -> goal -> string -> bool -> unit
+  val output_result : string -> thm list -> goal -> string -> bool -> unit
   
-
 end

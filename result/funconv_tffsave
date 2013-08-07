@@ -45,4 +45,63 @@ tff(axiom4_axiom,axiom,(
 tff(axiom5_axiom,axiom,(
     ~xapp1(xP,xf) )).
 
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(ty_num_F_num_F_bool_type,type,(
+    ty_num_F_num_F_bool: $tType )).
+
+tff(xapp_type,type,(
+    xapp: ( ty_num_F_num * $int ) > $int )).
+
+tff(xapp1_type,type,(
+    xapp1: ( ty_num_F_num_F_bool * ty_num_F_num ) > $o )).
+
+tff(xP_type,type,(
+    xP: ty_num_F_num_F_bool )).
+
+tff(xf_type,type,(
+    xf: ty_num_F_num )).
+
+tff(c_type,type,(
+    c: ( bool * bool ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $int )).
+
+tff(c3_type,type,(
+    c3: ( $int * $int ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx: $int] : (((xapp(xf,Xx) = $sum(Xx,5)) | ~$lesseq(0,Xx))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx: $int] : (($lesseq(0,xapp(xf,Xx)) | ~$lesseq(0,Xx))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx: $int] : (($lesseq(0,$sum(Xx,5)) | ~$lesseq(0,Xx))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: ty_num_F_num] : (xapp1(xP,Xy)) )).
+
+tff(axiom6_axiom,axiom,(
+    ~xapp1(xP,xf) )).
+
 %------------------------------------------------------------------------------

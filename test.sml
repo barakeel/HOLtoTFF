@@ -19,15 +19,23 @@ load "beagle"; open beagle;
 *)
 
 (* TEST PROBLEM *)
-show_assums :=  true ;
+show_assums :=  true;
 
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 
 (* easy problem *)
-val filename = "result/easypb";   
+val filename = "result/easypb";
 val thml = [];
 val goal : goal = ([],``x + 1 = x + 1``);
+
+(* with SUC *)
+val filename = "result/SUC";
+val thml = [mk_thm ([],``(x <= y) ==> (x < SUC y)``)];
+val goal : goal = ([], ``(a <= b) ==> (a < SUC b)``);
+
+
+(* *)
 
 (* a bit harder *)
 val filename = "result/easypb2";   
@@ -48,7 +56,6 @@ val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
 val filename = "result/funconv";   
 val thml = [];
 val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
-
 
 
 (* dictionnary test 
@@ -90,7 +97,6 @@ val formula = False;
 write {filename = "/home/thibault/Desktop/eclipsefile/beagleproject/problem.p"} formula;
 
 (* betared *)
-
 val term = `` ((\x.x) 0 = 0) /\ (\y.M y) x`` ;
 val term = ``(\x.x) \x. f x ``;
 

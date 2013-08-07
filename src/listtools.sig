@@ -2,8 +2,8 @@ signature listtools =
 sig
   
   val is_member : ''a -> ''a list -> bool
-  val is_member_rev : ''a list -> ''a -> bool
   val erase_double : ''a list -> ''a list
+  
   val is_member_eq : ('a -> 'a -> bool) -> 'a -> 'a list ->  bool
   val erase_double_eq : ('a -> 'a -> bool) -> 'a list -> 'a list
   val add_once : ''a -> ''a list -> ''a list

@@ -117,7 +117,7 @@ fun all_varl terml = erase_double (List.concat (map all_var terml))
 
 fun all_var_thm thm =
   let val l = (hyp thm) @ [concl thm] in
-    List.concat (map all_var l)
+    erase_double (List.concat (map all_var l))
   end  
 
 fun concat_thm returnalist thm =
