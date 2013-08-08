@@ -458,4 +458,86 @@ tff(axiom9_axiom,axiom,(
 tff(axiom10_axiom,axiom,(
     ~($sum(xx,2) = xz) )).
 
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(xz_type,type,(
+    xz: $int )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xz) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,$sum(xx,2)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,xy) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,$sum(xx,1)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,$sum(xy,1)) )).
+
+tff(axiom7_axiom,axiom,(
+    ($sum(xy,1) = xz) )).
+
+tff(axiom8_axiom,axiom,(
+    ($sum(xx,1) = xy) )).
+
+tff(axiom9_axiom,axiom,(
+    ~($sum(xx,2) = xz) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(xz_type,type,(
+    xz: $int )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xz) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,$sum(xx,2)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,xy) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,$sum(xx,1)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,$sum(xy,1)) )).
+
+tff(axiom7_axiom,axiom,(
+    ($sum(xy,1) = xz) )).
+
+tff(axiom8_axiom,axiom,(
+    ($sum(xx,1) = xy) )).
+
+tff(axiom9_axiom,axiom,(
+    ~($sum(xx,2) = xz) )).
+
 %------------------------------------------------------------------------------

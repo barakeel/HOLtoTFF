@@ -12,6 +12,6 @@ sig
                    unit
 
   val pptff_tff : ppstream -> goal -> unit
-  val output_tffgoal : string ->  goal -> bool -> unit
+  val output_tffgoal : string -> goal -> bool -> unit
 
 end

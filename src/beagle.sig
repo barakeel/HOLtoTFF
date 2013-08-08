@@ -3,37 +3,25 @@ sig
   
   include Abbrev
   
-  val beagle_tac_aux : string -> thm list -> tactic
-  val beagle_tac_poly : string -> thm list -> tactic
   val BEAGLE_TAC : thm list -> tactic
+    val beagle_tac_aux : string -> thm list -> tactic
+    val beagle_tac_poly : string -> thm list -> tactic
+    val BEAGLE_NF_TAC : thm list -> tactic
+    val beagle_interact : string -> goal -> unit
+    
+  val PROBLEM_TO_GOAL_TAC : thm list -> tactic
+    val CONJ_ALL_HYP_TAC : tactic 
+    val ASSUME_THML_TAC : thm list -> tactic
  
-  (* beagle_nf *)
-  val beagle_nf : string -> thm list -> goal -> goal
-  val beagle_nf_val : thm list -> goal -> rule
-  
-  val problem_to_goal : thm list -> goal -> goal 
-  val problem_to_goal_val : thm list -> goal -> rule
-  
-  val beagle_convert : goal -> goal 
-  val beagle_convert_val : goal -> rule
-  val beagle_conv : conv
- 
-  val beagle_clauseset : goal -> goal 
-  val beagle_clauseset_val : goal -> rule 
-  val erase_exists : goal -> goal
-  val erase_exists_val : goal -> rule
-  val forall_conjuncts : goal -> goal
-  val forall_conjuncts_val : goal -> rule
-  val strip_conj_hyp : goal -> goal
-  val strip_conj_hyp_val : goal -> rule
-  val erase_forall : goal -> goal
-  val erase_forall_val : goal -> rule
-  val add_axioms : goal -> goal
-  val add_axioms_val : goal -> rule
-  val add_higher_order : goal -> goal
-  val add_higher_order_val : goal -> rule
-
-  (* beagle_interact *)
-  val beagle_interact : string -> goal -> unit
+  val BEAGLE_CONV_TAC : tactic
+    val beagle_conv : conv
+    
+  val BEAGLE_CLAUSE_SET_TAC : tactic 
+    val ERASE_EXISTS_TAC : tactic
+    val FORALL_CONJUNCTS_TAC : tactic
+    val STRIP_CONJ_GOAL_TAC : tactic
+    val ERASE_FORALL_TAC : tactic
+    val ADD_BOOL_AXIOM_TAC : tactic
+    val ADD_HIGHER_ORDER_TAC : tactic 
 
 end

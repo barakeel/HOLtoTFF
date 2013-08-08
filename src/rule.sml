@@ -31,7 +31,7 @@ fun forall_conjuncts_conv term =
   (* second part *)
   let val th20 = ASSUME (concl th14) in
   let val th21 = ASSUME t in
-  let val th22 = strip_conj_hyp th21 in
+  let val th22 = strip_conj_hyp_rule th21 in
   let val thl23 = CONJUNCTS th20 in
   let val thl24 = map (SPECL bvl) thl23 in
   let val th25 = list_PROVE_HYP thl24 th22 in
@@ -55,6 +55,7 @@ f*)
 val term = ``!x y z. f x y z = x + y + z``;
 *)
 
+(* APP removal *)
 fun def_conv term =
   let val (bvl,t) = strip_forall term in
   let val abs = list_mk_abs (bvl,rhs t) in
@@ -79,7 +80,6 @@ fun def_conv term =
   end end end end end 
   end end end end end 
   
-(* REMOVE UNUSED DEFINITION *)
 fun remove_unused_def def thm = 
   let val th1 = DISCH def thm in
   let val th2 = GEN (lhs def) th1 in
@@ -90,6 +90,13 @@ fun remove_unused_def def thm =
   end end end end end
 
 fun remove_unused_defl defl thm = repeatchange remove_unused_def defl thm
+
+fun remove_unused_APP APPl thm =  
+  let val th0 = conv_hypl def_conv APPl thm in
+  let val th1 = remove_unused_defl (map (rhs o concl o def_conv) APPl) th0 in
+    th1
+  end end
+(* end APP removal *)
 
 
 end

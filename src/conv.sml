@@ -616,24 +616,24 @@ find_free_abs term ;
 (* APP CONV *)   
 (* can't print that *)
 (* only do this conv if it is not first order *)
-fun app_def appname subterm =
+fun APP_def APPname subterm =
   let val (operator,arg) = dest_comb subterm in  
-  (* app *)
+  (* APP *)
   let val ty = type_of operator in
-  let val appty = mk_type ("fun",[ty,ty]) in  
-  let val app = mk_var (appname,appty) in
+  let val APPty = mk_type ("fun",[ty,ty]) in  
+  let val APP = mk_var (APPname,APPty) in
   (* operator *)
   let val newoperator = mk_var ("f",type_of operator) in
   (* arg *)
   let val newarg = mk_var ("x",type_of arg) in
   (* term *)
-  let val t0 = list_mk_comb (app,newoperator :: [newarg]) in 
+  let val t0 = list_mk_comb (APP,newoperator :: [newarg]) in 
   let val t1 = mk_eq (t0,mk_comb (newoperator,newarg)) in
   let val t2 = list_mk_forall ([newoperator,newarg],t1) in
     t2
   end end end end end
   end end end end 
-  handle _ => raise CONV_ERR "app_def" ""
+  handle _ => raise CONV_ERR "APP_def" ""
 
 (* test
 show_assums :=  true;
@@ -641,14 +641,14 @@ val subterm = ``f a b c``;
 *)
 
 (* subterm is just a combination *)
-fun app_conv_sub appname subterm =
+fun APP_conv_sub APPname subterm =
   let val (operator,arg) = dest_comb subterm in  
-  let val th1 = ASSUME (app_def appname subterm) in
+  let val th1 = ASSUME (APP_def APPname subterm) in
   let val th2 = SPECL [operator,arg] th1 in
   let val th3 = SYM th2 in
     th3
   end end end end
-  handle _ => raise CONV_ERR "app_conv_sub" ""
+  handle _ => raise CONV_ERR "APP_conv_sub" ""
 
 (* test
 show_assums :=  true;
@@ -656,7 +656,7 @@ val term = ``(f a b = 2) /\ (f a = g)``;
 
 *)
 
-fun app_conv appname term = 
+fun APP_conv APPname term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
   | Var => raise UNCHANGED  
@@ -664,45 +664,45 @@ fun app_conv appname term =
   | Comb => 
     (
     case connector term of  
-      Conj => BINOP_CONV (app_conv appname) term 
-    | Disj => BINOP_CONV (app_conv appname) term 
-    | Neg => RAND_CONV (app_conv appname) term
-    | Imp_only => BINOP_CONV (app_conv appname) term 
-    | Forall => STRIP_QUANT_CONV (app_conv appname) term
-    | Exists => STRIP_QUANT_CONV (app_conv appname) term    
+      Conj => BINOP_CONV (APP_conv APPname) term 
+    | Disj => BINOP_CONV (APP_conv APPname) term 
+    | Neg => RAND_CONV (APP_conv APPname) term
+    | Imp_only => BINOP_CONV (APP_conv APPname) term 
+    | Forall => STRIP_QUANT_CONV (APP_conv APPname) term
+    | Exists => STRIP_QUANT_CONV (APP_conv APPname) term    
     | App => 
       let val (operator,argl) = strip_comb term in
       case termstructure operator of
-        Numeral => raise CONV_ERR "app_conv" "numeral"
-      | Var =>  ((RATOR_CONV (app_conv appname)) THENC
-                 (RAND_CONV (app_conv appname)) THENC
-                 app_conv_sub appname) 
+        Numeral => raise CONV_ERR "APP_conv" "numeral"
+      | Var =>  ((RATOR_CONV (APP_conv APPname)) THENC
+                 (RAND_CONV (APP_conv APPname)) THENC
+                 APP_conv_sub APPname) 
                 term
       | Const => 
         (
         case nodeconst term of
-          Eq => BINOP_CONV (app_conv appname) term 
-        | Add =>  BINOP_CONV (app_conv appname) term 
-        | Minus =>  BINOP_CONV (app_conv appname) term 
-        | Mult =>  BINOP_CONV (app_conv appname) term 
-        | Less =>  BINOP_CONV (app_conv appname) term 
-        | Greater =>  BINOP_CONV (app_conv appname) term 
-        | Geq =>  BINOP_CONV (app_conv appname) term 
-        | Leq =>  BINOP_CONV (app_conv appname) term 
+          Eq => BINOP_CONV (APP_conv APPname) term 
+        | Add =>  BINOP_CONV (APP_conv APPname) term 
+        | Minus =>  BINOP_CONV (APP_conv APPname) term 
+        | Mult =>  BINOP_CONV (APP_conv APPname) term 
+        | Less =>  BINOP_CONV (APP_conv APPname) term 
+        | Greater =>  BINOP_CONV (APP_conv APPname) term 
+        | Geq =>  BINOP_CONV (APP_conv APPname) term 
+        | Leq =>  BINOP_CONV (APP_conv APPname) term 
         | Newnodeconst => 
-          ((RATOR_CONV (app_conv appname)) THENC
-           (RAND_CONV (app_conv appname)) THENC
-           app_conv_sub appname) 
+          ((RATOR_CONV (APP_conv APPname)) THENC
+           (RAND_CONV (APP_conv APPname)) THENC
+           APP_conv_sub APPname) 
           term
         )
-      | Comb => ((RATOR_CONV (app_conv appname)) THENC
-                 (RAND_CONV (app_conv appname)) THENC
-                 app_conv_sub appname) 
+      | Comb => ((RATOR_CONV (APP_conv APPname)) THENC
+                 (RAND_CONV (APP_conv APPname)) THENC
+                 APP_conv_sub APPname) 
                 term
-      | Abs => raise CONV_ERR "app_conv" "abs" 
+      | Abs => raise CONV_ERR "APP_conv" "abs" 
       end   
     )      
-  | Abs => raise CONV_ERR "app_conv" "abs" 
+  | Abs => raise CONV_ERR "APP_conv" "abs" 
 
 (* test
 val term = ``(f a b = 2) /\ (f a = g)``;
@@ -730,8 +730,8 @@ fun define_conv def =
   end
   handle _ => raise CONV_ERR "define_conv" ""
 (* test
-val def = ``!x y. app x y = x y``;
-val def = ``!x. app x  = x ``;
+val def = ``!x y. APP x y = x y``;
+val def = ``!x. APP x  = x ``;
 vval th2 = MK_ABS th1;
 define_conv def;
 *)

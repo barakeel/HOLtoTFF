@@ -3,6 +3,7 @@ struct
 
 open HolKernel Abbrev boolLib numSyntax HOLPP
      stringtools listtools mydatatype
+     
 
 
 fun PRINTTOOLS_ERR function message =
@@ -11,9 +12,9 @@ fun PRINTTOOLS_ERR function message =
             message = message}
 
 
-fun open_file path appendflag =
+fun open_file path APPendflag =
   let val file = 
-    if appendflag then TextIO.openAppend path else TextIO.openOut path
+    if APPendflag then TextIO.openAppend path else TextIO.openOut path
   in file end
 
 fun outstream_eqth file name eqth =

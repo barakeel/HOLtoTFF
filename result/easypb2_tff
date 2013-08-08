@@ -12,52 +12,31 @@ tff(xx_type,type,(
 tff(xz_type,type,(
     xz: $int )).
 
-tff(c_type,type,(
-    c: ( bool * bool ) > $o )).
-
-tff(c1_type,type,(
-    c1: ( $int * $int ) > $o )).
-
-tff(c2_type,type,(
-    c2: ( $int * $int ) > $o )).
-
-tff(c3_type,type,(
-    c3: ( $int * $int ) > $int )).
-
-tff(btrue_type,type,(
-    btrue: bool )).
-
-tff(bfalse_type,type,(
-    bfalse: bool )).
-
 tff(axiom1_axiom,axiom,(
-    ~(btrue = bfalse) )).
-
-tff(axiom2_axiom,axiom,(
     $lesseq(0,xz) )).
 
-tff(axiom3_axiom,axiom,(
+tff(axiom2_axiom,axiom,(
     $lesseq(0,xx) )).
 
-tff(axiom4_axiom,axiom,(
+tff(axiom3_axiom,axiom,(
     $lesseq(0,$sum(xx,2)) )).
 
-tff(axiom5_axiom,axiom,(
+tff(axiom4_axiom,axiom,(
     $lesseq(0,xy) )).
 
-tff(axiom6_axiom,axiom,(
+tff(axiom5_axiom,axiom,(
     $lesseq(0,$sum(xx,1)) )).
 
-tff(axiom7_axiom,axiom,(
+tff(axiom6_axiom,axiom,(
     $lesseq(0,$sum(xy,1)) )).
 
-tff(axiom8_axiom,axiom,(
+tff(axiom7_axiom,axiom,(
     ($sum(xy,1) = xz) )).
 
-tff(axiom9_axiom,axiom,(
+tff(axiom8_axiom,axiom,(
     ($sum(xx,1) = xy) )).
 
-tff(axiom10_axiom,axiom,(
+tff(axiom9_axiom,axiom,(
     ~($sum(xx,2) = xz) )).
 
 %------------------------------------------------------------------------------

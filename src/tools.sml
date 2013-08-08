@@ -101,10 +101,13 @@ fun mk_goal thm = (hyp thm, concl thm)
 fun is_member_term_rev a b = is_member_term b a 
 fun is_subset l1 l2 = all (is_member_term_rev l2) l1
 
-fun goal_eq goal1 goal2 = 
+fun goal_subset goal1 goal2 = 
   aconv (snd goal1) (snd goal2) andalso
-  is_subset (fst goal1) (fst goal2) andalso
-  is_subset (fst goal2) (fst goal1)
+  is_subset (fst goal1) (fst goal2)
+ 
+fun thm_test thm goal msg = 
+  if goal_subset (mk_goal thm) goal then thm
+  else raise TOOLS_ERR msg ""
  
 (* ARITY *)
 fun get_arity term = length (snd (strip_comb term))
@@ -196,10 +199,10 @@ fun unconj_hyp term thm =
 (* hypl is a list of conj *)
 fun list_unconj_hyp hypl thm = repeatchange unconj_hyp hypl thm
   
-fun strip_conj_hyp thm =
+fun strip_conj_hyp_rule thm =
   case filter is_conj (hyp thm) of
     [] => thm
-  | l => strip_conj_hyp (list_unconj_hyp l thm)
+  | l => strip_conj_hyp_rule (list_unconj_hyp l thm)
 
 fun list_ap_thm thm terml =
   case terml of

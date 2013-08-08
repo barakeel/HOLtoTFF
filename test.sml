@@ -20,22 +20,30 @@ load "beagle"; open beagle;
 
 (* TEST PROBLEM *)
 show_assums :=  true;
-
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 
+(* thmlist *)
+val filename = "result/thmlist";
+val thml = [ASSUME T] ;
+val goal = ([F],F);
+
+(* EXPLODE *)
+val filename = "result/EXPLODE";
+val thml = [] ;
+val goal = 
+ ([``!cs:'a . EXPLODE (IMPLODE cs:'a) = cs``,``!s:'a. IMPLODE (EXPLODE s:'a) = s``],
+   ``!cs:'a . ?s:'a . cs = EXPLODE s``);
+ 
 (* easy problem *)
 val filename = "result/easypb";
 val thml = [];
 val goal : goal = ([],``x + 1 = x + 1``);
 
-(* with SUC *)
+(* SUC *)
 val filename = "result/SUC";
 val thml = [mk_thm ([],``(x <= y) ==> (x < SUC y)``)];
 val goal : goal = ([], ``(a <= b) ==> (a < SUC b)``);
-
-
-(* *)
 
 (* a bit harder *)
 val filename = "result/easypb2";   
@@ -57,7 +65,37 @@ val filename = "result/funconv";
 val thml = [];
 val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
 
+(* interesting error *)
+Status: Satisfiable
+Info: polymorph
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal: 
+ [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
 
+(nf)Status: Unsatisfiable
+Info: polymorph
+Thm list: 
+ []
+|- ∀w.
+     ¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ)) ⇒
+     (sw2sw (sw2sw w) = sw2sw w)
+Goal: 
+ [¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ))]
+|- sw2sw (sw2sw w) = sw2sw w
+
+Status: Satisfiable
+Info: polymorph
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- ∀s t. FINITE (s ∪ t) ⇔ FINITE s ∧ FINITE t
+Goal: 
+ [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
+ 
+ 
+ 
 (* dictionnary test 
 val term = list_mk_conj (fst (goal) @ [snd goal]);
 val fvdict = create_fvdict term;

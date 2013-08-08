@@ -30,7 +30,8 @@ val thm_eq : thm -> thm -> bool
 (* goal *)
 val only_hypg : goal -> term
 val mk_goal : thm -> goal 
-val goal_eq : goal -> goal -> bool
+val goal_subset : goal -> goal -> bool
+val thm_test : thm -> goal -> string -> thm
 (* arity *)
   val get_arity : term -> int
   val collapse_lowestarity : (term * int) list -> (term * int) list   
@@ -46,7 +47,7 @@ val goal_eq : goal -> goal -> bool
   val list_conj_hyp : thm -> thm
   val unconj_hyp : term -> thm -> thm
   val list_unconj_hyp : term list -> thm -> thm 
-  val strip_conj_hyp : thm -> thm 
+  val strip_conj_hyp_rule : thm -> thm 
   val list_ap_thm : thm -> term list -> thm 
   val list_fun_eq_conv : term list -> term -> thm
   val repeat_rule : int -> rule -> rule

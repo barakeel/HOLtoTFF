@@ -91,20 +91,20 @@ fun pptff_term pps term dict pflag =
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "pptff_term" "numeral"
       | Var => if is_member_term operator (map fst (#2 dict))
-               then pptff_app pps (lookup operator (#2 dict)) argl dict false
-               else pptff_app pps (lookup operator (#3 dict)) argl dict false 
+               then pptff_APP pps (lookup operator (#2 dict)) argl dict false
+               else pptff_APP pps (lookup operator (#3 dict)) argl dict false 
       | Const => 
         (
         case nodeconst term of
           Eq => pptff_binop pps "=" term dict false
-        | Add => pptff_app pps "$sum" argl dict false
-        | Minus => pptff_app pps "$difference" argl dict false 
-        | Mult => pptff_app pps "$product" argl dict false  
-        | Less => pptff_app pps "$less" argl dict false  
-        | Greater => pptff_app pps "$greater" argl dict false  
-        | Geq => pptff_app pps "$greatereq" argl dict false  
-        | Leq => pptff_app pps "$lesseq" argl dict false
-        | Newnodeconst => pptff_app pps 
+        | Add => pptff_APP pps "$sum" argl dict false
+        | Minus => pptff_APP pps "$difference" argl dict false 
+        | Mult => pptff_APP pps "$product" argl dict false  
+        | Less => pptff_APP pps "$less" argl dict false  
+        | Greater => pptff_APP pps "$greater" argl dict false  
+        | Geq => pptff_APP pps "$greatereq" argl dict false  
+        | Leq => pptff_APP pps "$lesseq" argl dict false
+        | Newnodeconst => pptff_APP pps 
                           (lookup operator (#4 dict)) argl dict false
         ) 
       | _ => raise PRINTTFF_ERR "pptff_term" "abs or comb"
@@ -145,7 +145,7 @@ and pptff_quant pps str bvl term dict pflag =
   pptff_term pps term dict pflag;
   add_string pps ")" 
   )
-and pptff_app pps str argl dict pflag =
+and pptff_APP pps str argl dict pflag =
   (
   add_string pps str;
   add_string pps "(";
@@ -322,9 +322,9 @@ fun pptff_tff pps goal =
   end end end 
 
 (* OUTPUT TFF *)
-fun output_tffgoal path goal appendflag =
+fun output_tffgoal path goal APPendflag =
   let val file = 
-    if appendflag then TextIO.openAppend path else TextIO.openOut path in 
+    if APPendflag then TextIO.openAppend path else TextIO.openOut path in 
   let val pps = mk_ppstream 
                   {
                   consumer  = fn s => TextIO.output (file,s),
