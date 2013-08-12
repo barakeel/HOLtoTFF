@@ -22,27 +22,27 @@ fun PRINTTFF_ERR function message =
             origin_function = function,
             message = message}
 
-(*PRINT_TERM*)
-fun pptff_bvl_aux pps bvl bvdict tyadict  =
-  case bvl of
+(*PPTFF_TERM*)
+fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
+  case qbvl of
     [] => raise PRINTTFF_ERR "pptff_bvl_aux" "emptylist"
-  | [bv] => ( 
-            add_string pps (lookup bv bvdict); 
+  | [qbv] => ( 
+            add_string pps (lookup qbv bvdict); 
             add_string pps ": ";
-            add_string pps (lookup (type_of bv,0) tyadict)
+            add_string pps (lookup (type_of qbv,0) tyadict)
             ) 
-  | bv :: m => (
-               add_string pps (lookup bv bvdict); 
+  | qbv :: m => (
+               add_string pps (lookup qbv bvdict); 
                add_string pps ": ";
-               add_string pps (lookup (type_of bv,0) tyadict); 
+               add_string pps (lookup (type_of qbv,0) tyadict); 
                add_string pps ","; 
-               pptff_bvl_aux pps m bvdict tyadict
+               pptff_qbvl_aux pps m bvdict tyadict
                )  
 
-fun pptff_bvl pps bvl bvdict tyadict = 
+fun pptff_qbvl pps qbvl bvdict tyadict = 
   (
   add_string pps "[";
-  pptff_bvl_aux pps bvl bvdict tyadict;
+  pptff_qbvl_aux pps qbvl bvdict tyadict;
   add_string pps "]"
   )
               
@@ -52,13 +52,12 @@ fun pptff_bvl pps bvl bvdict tyadict =
 #3 dict : list of (free variable, its name)  
 #4 dict : list of (constant, its name) 
 *)
-(* dict isn't modified by pptff_term *)
 (* pflag : predicateflag *)   
 (* pflag only used for true or false *)
-fun pptff_term pps term dict pflag =
+fun pptff_term_aux pps term dict pflag bvl =
   case termstructure term of
     Numeral => add_string pps (name_numeral term)
-  | Var => if is_member_term term (map fst (#2 dict))
+  | Var => if is_member_term term bvl
            then add_string pps (lookup term (#2 dict)) (*boundvar*)
            else add_string pps (lookup term (#3 dict)) (*freevar*)
   | Const => 
@@ -75,87 +74,85 @@ fun pptff_term pps term dict pflag =
   | Comb => 
     (
     case connector term of  
-      Conj => pptff_binop pps "&" term dict pflag
-    | Disj => pptff_binop pps "|" term dict pflag
-    | Neg => pptff_unop pps "~" term dict pflag 
-    | Imp_only => pptff_binop pps "=>" term dict pflag
+      Conj => pptff_binop pps "&" term dict pflag bvl
+    | Disj => pptff_binop pps "|" term dict pflag bvl
+    | Neg => pptff_unop pps "~" term dict pflag bvl 
+    | Imp_only => pptff_binop pps "=>" term dict pflag bvl
     | Forall => let val (qbvl,t) = strip_forall term in
-                          pptff_quant pps "!" qbvl t dict pflag
+                          pptff_quant pps "!" qbvl t dict pflag bvl
                         end       
     | Exists => let val (qbvl,t) = strip_exists term in
-                          pptff_quant pps "?" qbvl t dict pflag
+                          pptff_quant pps "?" qbvl t dict pflag bvl
                         end
     | App => 
       let val (operator,argl) = strip_comb term in
       let val arity = get_arity term in
       case termstructure operator of
-        Numeral => raise PRINTTFF_ERR "pptff_term" "numeral"
-      | Var => if is_member_term operator (map fst (#2 dict))
-               then pptff_APP pps (lookup operator (#2 dict)) argl dict false
-               else pptff_APP pps (lookup operator (#3 dict)) argl dict false 
+        Numeral => raise PRINTTFF_ERR "pptff_term_aux" "numeral"
+      | Var => if is_member_term operator bvl
+               then pptff_app pps (lookup operator (#2 dict)) argl dict false bvl
+               else pptff_app pps (lookup operator (#3 dict)) argl dict false bvl 
       | Const => 
         (
         case nodeconst term of
-          Eq => pptff_binop pps "=" term dict false
-        | Add => pptff_APP pps "$sum" argl dict false
-        | Minus => pptff_APP pps "$difference" argl dict false 
-        | Mult => pptff_APP pps "$product" argl dict false  
-        | Less => pptff_APP pps "$less" argl dict false  
-        | Greater => pptff_APP pps "$greater" argl dict false  
-        | Geq => pptff_APP pps "$greatereq" argl dict false  
-        | Leq => pptff_APP pps "$lesseq" argl dict false
-        | Newnodeconst => pptff_APP pps 
-                          (lookup operator (#4 dict)) argl dict false
+          Eq => pptff_binop pps "=" term dict false bvl
+        | Add => pptff_app pps "$sum" argl dict false bvl
+        | Minus => pptff_app pps "$difference" argl dict false bvl 
+        | Mult => pptff_app pps "$product" argl dict false bvl  
+        | Less => pptff_app pps "$less" argl dict false bvl  
+        | Greater => pptff_app pps "$greater" argl dict false bvl  
+        | Geq => pptff_app pps "$greatereq" argl dict false bvl  
+        | Leq => pptff_app pps "$lesseq" argl dict false bvl
+        | Newnodeconst => pptff_app pps 
+                          (lookup operator (#4 dict)) argl dict false bvl
         ) 
-      | _ => raise PRINTTFF_ERR "pptff_term" "abs or comb"
+      | _ => raise PRINTTFF_ERR "pptff_term_aux" "abs or comb"
       end end
       
     )
-  | Abs => raise PRINTTFF_ERR "pptff_term" "abs"
-  handle _ => raise PRINTTFF_ERR "pptff_term" ""
-and pptff_argl pps argl dict pflag = 
+  | Abs => raise PRINTTFF_ERR "pptff_term_aux" "abs"
+  handle _ => raise PRINTTFF_ERR "pptff_term_aux" ""
+and pptff_argl pps argl dict pflag bvl = 
   case argl of
     [] => raise PRINTTFF_ERR "pptff_argl" "emptylist"
-  | [arg] => pptff_term pps arg dict pflag
+  | [arg] => pptff_term_aux pps arg dict pflag bvl
   | arg :: m => 
     ( 
-    pptff_term pps arg dict pflag; 
+    pptff_term_aux pps arg dict pflag bvl; 
     add_string pps ",";
-    pptff_argl pps m dict pflag
+    pptff_argl pps m dict pflag bvl
     ) 
-and pptff_unop pps str term dict pflag =
+and pptff_unop pps str term dict pflag bvl =
   (
   add_string pps str;
-  pptff_term pps (rand term) dict pflag
+  pptff_term_aux pps (rand term) dict pflag bvl
   )
-and pptff_binop pps str term dict pflag = 
+and pptff_binop pps str term dict pflag bvl = 
   (
   add_string pps "(";
-  pptff_term pps (lhand term) dict pflag;
+  pptff_term_aux pps (lhand term) dict pflag bvl;
   add_string pps (" " ^ str ^ " ");
-  pptff_term pps (rand term) dict pflag;
+  pptff_term_aux pps (rand term) dict pflag bvl;
   add_string pps ")"
   )
-and pptff_quant pps str bvl term dict pflag = 
+and pptff_quant pps str qbvl term dict pflag bvl = 
   (
   add_string pps (str ^ " ");
-  pptff_bvl pps bvl (#2 dict) (#1 dict);
+  pptff_qbvl pps qbvl (#2 dict) (#1 dict);
   add_string pps " : ";  
   add_string pps "("; 
-  pptff_term pps term dict pflag;
+  pptff_term_aux pps term dict pflag (qbvl @ bvl);
   add_string pps ")" 
   )
-and pptff_APP pps str argl dict pflag =
+and pptff_app pps str argl dict pflag bvl =
   (
   add_string pps str;
   add_string pps "(";
-  pptff_argl pps argl dict pflag; 
+  pptff_argl pps argl dict pflag bvl; 
   add_string pps ")"
   )  
 
-
-(* END PRINT_TERM *)
-
+fun pptff_term pps term dict pflag = pptff_term_aux pps term dict pflag []
 
 (* PRINT_TFF *)
 (* useful functions *)
@@ -322,9 +319,9 @@ fun pptff_tff pps goal =
   end end end 
 
 (* OUTPUT TFF *)
-fun output_tffgoal path goal APPendflag =
+fun write_tff path goal appendflag =
   let val file = 
-    if APPendflag then TextIO.openAppend path else TextIO.openOut path in 
+    if appendflag then TextIO.openAppend path else TextIO.openOut path in 
   let val pps = mk_ppstream 
                   {
                   consumer  = fn s => TextIO.output (file,s),

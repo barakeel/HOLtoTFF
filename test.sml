@@ -10,11 +10,13 @@ load "extracttype"; open extracttype;
 load "nametype"; open nametype;
 load "namevar"; open namevar;
 load "conv"; open conv; 
-load "rule"; open rule; 
+load "clausesettools"; open clausesettools;
 load "printtff"; open printtff;
+load "printtools"; open printtools;
 load "printresult";open printresult;
 load "higherorder"; open higherorder;
 load "monomorph"; open monomorph;
+load "tactic"; open tactic;
 load "beagle"; open beagle;
 *)
 
@@ -28,6 +30,22 @@ val filename = "result/thmlist";
 val thml = [ASSUME T] ;
 val goal = ([F],F);
 
+(* monomorphisation problem *)
+val filename = "result/monomorph";
+val thml = [ASSUME ``! x:'a y:'a. (x = y) ==> (y = x)``];
+val goal = ([``a:num = b:num``], ``b:num = a:num``);
+val mthml = monomorph_pb_c thml goal;
+
+
+(* bool problem *)
+val filename = "result/bool"; 
+val thml = [];
+val goal : goal = ([],``P (x = x + 1) ==> P F ``);
+
+find_free_bool (snd goal);
+
+val goal1 = fst (PROBLEM_TO_GOAL_TAC mthml goal);
+val goal2 = BEAGLE_CONV_TAC (hd goal1);
 (* EXPLODE *)
 val filename = "result/EXPLODE";
 val thml = [] ;
@@ -65,35 +83,14 @@ val filename = "result/funconv";
 val thml = [];
 val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
 
-(* interesting error *)
-Status: Satisfiable
-Info: polymorph
-Thm list: 
- [] |- ∀x y. x ∈ {y} ⇔ (x = y)
- [] |- ∀P x. x ∈ P ⇔ P x
-Goal: 
- [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
 
-(nf)Status: Unsatisfiable
-Info: polymorph
-Thm list: 
- []
-|- ∀w.
-     ¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ)) ⇒
-     (sw2sw (sw2sw w) = sw2sw w)
-Goal: 
- [¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ))]
-|- sw2sw (sw2sw w) = sw2sw w
 
-Status: Satisfiable
-Info: polymorph
-Thm list: 
- [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
- [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
- [] |- ∀s t. FINITE (s ∪ t) ⇔ FINITE s ∧ FINITE t
-Goal: 
- [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
- 
+
+
+(* interesting error
+
+
+*)
  
  
 (* dictionnary test 
@@ -151,7 +148,7 @@ val term4 = rand (concl (REDEPTH_CONV SKOLEM_CONV term2));
 val SZSstatus = "test";
 val goal : goal = ([],``x + 1 = x + 1``);
 val path = "/home/thibault/Desktop/SMLproject/HOLtoTFF/result/test";
-output_result path goal SZSstatus;
+write_result path goal SZSstatus;
 (* use of beagle tac *)
 val thml = [];
 BEAGLE_TAC thml goal; 

@@ -1,2 +1,0 @@
-clauseset Unsatisfiable:  [] |- (∀y. P y) ⇒ P (λx. x + 5)
-Unsatisfiable:  [] |- (∀y. P y) ⇒ P (λx. x + 5)

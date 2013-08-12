@@ -1,8 +1,0 @@
- [T] |- T
-
-[app g b ≠ 2, 0 ≤ app g b, 0 ≤ app (app f a) b, app f a = g,
- app (app f a) b = 2] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
- [T] |- T
- [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
- [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
- [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)

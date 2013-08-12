@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/result/EXPLODE_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/beagletacresult/beagletac_tff

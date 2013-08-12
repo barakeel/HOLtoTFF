@@ -178,7 +178,7 @@ fun bool_conv_sub subterm term =
   let val th25F = PROVE_HYP lemma24 th24F in 
   (* disj cases *)
   let val th26 = DISJ_CASES disj1 th25T th25F in
-  let val th27 = list_conj_hyp th26 in
+  let val th27 = list_conj_hyp_rule th26 in
   let val th28 = DISCH (concl th15) th27 in
   
   (* together *)
@@ -422,7 +422,7 @@ fun find_bound_abs term = erase_double_term (find_bound_abs_aux term term)
 fun fun_axiom abs =
   let val (bvl,t) = strip_abs abs in
   let val th1 = REFL abs in
-  let val th2 = list_ap_thm th1 bvl in
+  let val th2 = list_AP_THM th1 bvl in
   let val th3 = (RAND_CONV redepth_beta_conv) (concl th2) in
   let val th4 = EQ_MP th3 th2 in
     th4
@@ -455,7 +455,7 @@ fun extl bvl thm =
     let val (op1,arg1) = strip_comb_n ((lhs (concl th0)),n) in
     let val (op2,arg2) = strip_comb_n ((rhs (concl th0)),n) in
     let val t2 = mk_eq (op1,op2) in
-    let val eqth0 = list_fun_eq_conv bvl t2 in
+    let val eqth0 = list_FUN_EQ_CONV bvl t2 in
     let val th1 = EQ_MP (SYM eqth0) thm in
       th1
     end end end end end
@@ -613,15 +613,15 @@ find_free_abs term ;
 *)
 (* END FUN CONV *)
 
-(* APP CONV *)   
+(* app CONV *)   
 (* can't print that *)
 (* only do this conv if it is not first order *)
-fun APP_def APPname subterm =
+fun app_def appname subterm =
   let val (operator,arg) = dest_comb subterm in  
-  (* APP *)
+  (* app *)
   let val ty = type_of operator in
-  let val APPty = mk_type ("fun",[ty,ty]) in  
-  let val APP = mk_var (APPname,APPty) in
+  let val appty = mk_type ("fun",[ty,ty]) in  
+  let val APP = mk_var (appname,appty) in
   (* operator *)
   let val newoperator = mk_var ("f",type_of operator) in
   (* arg *)
@@ -633,7 +633,7 @@ fun APP_def APPname subterm =
     t2
   end end end end end
   end end end end 
-  handle _ => raise CONV_ERR "APP_def" ""
+  handle _ => raise CONV_ERR "app_def" ""
 
 (* test
 show_assums :=  true;
@@ -641,14 +641,14 @@ val subterm = ``f a b c``;
 *)
 
 (* subterm is just a combination *)
-fun APP_conv_sub APPname subterm =
+fun app_conv_sub appname subterm =
   let val (operator,arg) = dest_comb subterm in  
-  let val th1 = ASSUME (APP_def APPname subterm) in
+  let val th1 = ASSUME (app_def appname subterm) in
   let val th2 = SPECL [operator,arg] th1 in
   let val th3 = SYM th2 in
     th3
   end end end end
-  handle _ => raise CONV_ERR "APP_conv_sub" ""
+  handle _ => raise CONV_ERR "app_conv_sub" ""
 
 (* test
 show_assums :=  true;
@@ -656,7 +656,7 @@ val term = ``(f a b = 2) /\ (f a = g)``;
 
 *)
 
-fun APP_conv APPname term = 
+fun app_conv appname term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
   | Var => raise UNCHANGED  
@@ -664,45 +664,45 @@ fun APP_conv APPname term =
   | Comb => 
     (
     case connector term of  
-      Conj => BINOP_CONV (APP_conv APPname) term 
-    | Disj => BINOP_CONV (APP_conv APPname) term 
-    | Neg => RAND_CONV (APP_conv APPname) term
-    | Imp_only => BINOP_CONV (APP_conv APPname) term 
-    | Forall => STRIP_QUANT_CONV (APP_conv APPname) term
-    | Exists => STRIP_QUANT_CONV (APP_conv APPname) term    
+      Conj => BINOP_CONV (app_conv appname) term 
+    | Disj => BINOP_CONV (app_conv appname) term 
+    | Neg => RAND_CONV (app_conv appname) term
+    | Imp_only => BINOP_CONV (app_conv appname) term 
+    | Forall => STRIP_QUANT_CONV (app_conv appname) term
+    | Exists => STRIP_QUANT_CONV (app_conv appname) term    
     | App => 
       let val (operator,argl) = strip_comb term in
       case termstructure operator of
-        Numeral => raise CONV_ERR "APP_conv" "numeral"
-      | Var =>  ((RATOR_CONV (APP_conv APPname)) THENC
-                 (RAND_CONV (APP_conv APPname)) THENC
-                 APP_conv_sub APPname) 
+        Numeral => raise CONV_ERR "app_conv" "numeral"
+      | Var =>  ((RATOR_CONV (app_conv appname)) THENC
+                 (RAND_CONV (app_conv appname)) THENC
+                 app_conv_sub appname) 
                 term
       | Const => 
         (
         case nodeconst term of
-          Eq => BINOP_CONV (APP_conv APPname) term 
-        | Add =>  BINOP_CONV (APP_conv APPname) term 
-        | Minus =>  BINOP_CONV (APP_conv APPname) term 
-        | Mult =>  BINOP_CONV (APP_conv APPname) term 
-        | Less =>  BINOP_CONV (APP_conv APPname) term 
-        | Greater =>  BINOP_CONV (APP_conv APPname) term 
-        | Geq =>  BINOP_CONV (APP_conv APPname) term 
-        | Leq =>  BINOP_CONV (APP_conv APPname) term 
+          Eq => BINOP_CONV (app_conv appname) term 
+        | Add =>  BINOP_CONV (app_conv appname) term 
+        | Minus =>  BINOP_CONV (app_conv appname) term 
+        | Mult =>  BINOP_CONV (app_conv appname) term 
+        | Less =>  BINOP_CONV (app_conv appname) term 
+        | Greater =>  BINOP_CONV (app_conv appname) term 
+        | Geq =>  BINOP_CONV (app_conv appname) term 
+        | Leq =>  BINOP_CONV (app_conv appname) term 
         | Newnodeconst => 
-          ((RATOR_CONV (APP_conv APPname)) THENC
-           (RAND_CONV (APP_conv APPname)) THENC
-           APP_conv_sub APPname) 
+          ((RATOR_CONV (app_conv appname)) THENC
+           (RAND_CONV (app_conv appname)) THENC
+           app_conv_sub appname) 
           term
         )
-      | Comb => ((RATOR_CONV (APP_conv APPname)) THENC
-                 (RAND_CONV (APP_conv APPname)) THENC
-                 APP_conv_sub APPname) 
+      | Comb => ((RATOR_CONV (app_conv appname)) THENC
+                 (RAND_CONV (app_conv appname)) THENC
+                 app_conv_sub appname) 
                 term
-      | Abs => raise CONV_ERR "APP_conv" "abs" 
+      | Abs => raise CONV_ERR "app_conv" "abs" 
       end   
     )      
-  | Abs => raise CONV_ERR "APP_conv" "abs" 
+  | Abs => raise CONV_ERR "app_conv" "abs" 
 
 (* test
 val term = ``(f a b = 2) /\ (f a = g)``;
@@ -719,7 +719,7 @@ fun define_conv def =
   let val th15 = DISCH def th14 in
   (* otherway *)
   let val th21 = ASSUME (concl th14) in
-  let val th22 = list_ap_thm th21 bvl in
+  let val th22 = list_AP_THM th21 bvl in
   let val th23 = conv_concl redepth_beta_conv th22 in
   let val th24 = GENL bvl th23 in
   let val th25 = DISCH (concl th14) th24 in

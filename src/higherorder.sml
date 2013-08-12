@@ -10,6 +10,29 @@ fun HIGHERORDER_ERR function message =
            origin_function = function,
            message = message}
 
+(* tools *)
+fun get_lowestarity (term,arity) termal =
+  case termal of
+    [] => arity
+  | (t,a) :: m => if term = t 
+                  then 
+                    if a < arity 
+                    then get_lowestarity (term,a) m
+                    else get_lowestarity (term,arity) m 
+                  else get_lowestarity (term,arity) m     
+  
+fun collapse_lowestarity2 varal varalfix =
+  case varal of
+    [] => []
+  | (var,arity) :: m => 
+    let val lowestarity = get_lowestarity (var,arity) varalfix in
+      (var,lowestarity) :: collapse_lowestarity2  m varalfix
+    end
+  
+fun collapse_lowestarity varal = 
+  erase_double (collapse_lowestarity2 varal varal)
+
+
 (* VARIABLE *)
 fun firstorder_bval bval =
   case bval of

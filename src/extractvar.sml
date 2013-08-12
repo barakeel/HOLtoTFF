@@ -111,28 +111,31 @@ fun get_bvl term = map fst (get_bval term)
 fun get_fvl term = map fst (get_fval term)
 fun get_cl term = map fst (get_cal term)
 fun get_fvcl term = map fst (get_fvcal term)
-
 fun all_var term = map fst (map fst (extract_var term))
 fun all_varl terml = erase_double (List.concat (map all_var terml))
 
-fun all_var_thm thm =
-  let val l = (hyp thm) @ [concl thm] in
-    erase_double (List.concat (map all_var l))
-  end  
 
 fun concat_thm returnalist thm =
-  let
-    val hyptl = hyp thm
-    val conclt = concl thm
-  in
-  let val l = hyptl @ [conclt] in
+  let val l = (hyp thm) @ [concl thm] in
     erase_double (List.concat (map returnalist l))
-  end end
+  end 
   
 fun get_fvl_thm thm = concat_thm get_fvl thm
 fun get_bvl_thm thm = concat_thm get_bvl thm
 fun get_cl_thm thm = concat_thm get_cl thm
 fun get_fvcl_thm thm = concat_thm get_fvcl thm
+fun all_var_thm thm = concat_thm all_var thm
 
+fun concat_goal returnalist goal =
+  let val l = fst goal @ [snd goal] in
+    erase_double (List.concat (map returnalist l))
+  end
   
+fun get_fvl_goal goal = concat_goal get_fvl goal
+fun get_bvl_goal goal = concat_goal get_bvl goal
+fun get_cl_goal goal = concat_goal get_cl goal
+fun get_fvcl_goal goal = concat_goal get_fvcl goal
+fun all_var_goal goal = concat_goal all_var goal
+
+
 end 

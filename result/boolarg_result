@@ -1,3 +1,0 @@
-Unsatisfiable:  [] |- P (∀x. x = 0) ⇒ P F
-clausesetUnsatisfiable:  [] |- P (∀x. x = 0) ⇒ P F
-Unsatisfiable:  [] |- P (∀x. x = 0) ⇒ P F

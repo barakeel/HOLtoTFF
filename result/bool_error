@@ -1,0 +1,5 @@
+Status: Parsing failed
+Info: num 
+Thm list: 
+Goal:  [] |- P (x = x + 1) ⇒ P F
+

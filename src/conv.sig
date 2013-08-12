@@ -16,7 +16,7 @@ sig
   val fun_conv_sub : term -> conv
   val fun_conv : conv
   
-  val APP_conv : string -> conv
+  val app_conv : string -> conv
 
   val find_free_num : term -> term list
   val find_bound_num : term -> term list

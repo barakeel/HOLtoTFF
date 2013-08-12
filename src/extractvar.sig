@@ -23,10 +23,16 @@ sig
    
   val all_varl : term list -> term list
     
-  val get_bvl_thm : thm -> term list
-  val get_fvl_thm : thm -> term list
-  val get_cl_thm : thm -> term list
+  val get_bvl_thm  : thm -> term list
+  val get_fvl_thm  : thm -> term list
+  val get_cl_thm   : thm -> term list
   val get_fvcl_thm : thm -> term list
-  val all_var_thm : thm -> term list
+  val all_var_thm  : thm -> term list
 
+  val get_fvl_goal  : goal -> term list
+  val get_bvl_goal  : goal -> term list
+  val get_cl_goal   : goal -> term list
+  val get_fvcl_goal : goal -> term list 
+  val all_var_goal  : goal -> term list
+  
 end

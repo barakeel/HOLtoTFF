@@ -1,0 +1,10 @@
+Status: Unsatisfiable
+Info: bool num 
+Thm list: 
+Goal:  [] |- P (∀x. x = 0) ⇒ P F
+
+Status: Unsatisfiable
+Info: bool num 
+Thm list: 
+Goal:  [] |- P (x = x + 1) ⇒ P F
+

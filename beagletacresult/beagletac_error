@@ -1,0 +1,107 @@
+Status: Time Out
+Info: bool num 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m + n = n + m
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256]
+|- (n = n MOD 256 + n DIV 256 * 256) ∨ n ≤ n MOD 256 ∧ (n DIV 256 = 0)
+
+Status: Time Out
+Info: bool num 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m * n = n * m
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256, (n − n MOD 256) DIV 256 = n DIV 256]
+|- 256 * (n DIV 256) + n MOD 256 = n
+
+Status: Time Out
+Info: bool num 
+Thm list: 
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ []
+|- (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + n = SUC (m + n)) ∧
+   (m + SUC n = SUC (m + n))
+ [] |- 0 < 256
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m), Abbrev (s0 = n2s ((n − r) DIV 256)),
+ Abbrev (r = if r0 = 0 then 256 else r0), Abbrev (r0 = n MOD 256),
+ n ≠ 0, 0 < r, (n − r) DIV 256 < n, n MOD 256 < 256, r0 = 0,
+ s2n s0 = (n − r) DIV 256] |- ∃q. n = q * 256
+
+Status: Time Out
+Info: bool num 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Status: Time Out
+Info: bool num 
+Thm list: 
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ []
+|- (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + n = SUC (m + n)) ∧
+   (m + SUC n = SUC (m + n))
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)),
+ Abbrev (r = if r0 = 0 then 256 else r0), ORD c < 256, n2s (s2n s) = s,
+ r0 = 0, r0 = (ORD c + 1) MOD 256] |- ∃q. ORD c + 1 = q * 256
+
+Status: Time Out
+Info: num 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+ [] |- 0 < 256
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Status: Unknown
+Info: num 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- ∀s. ∃n. s = n2s n
+
+
+Status: undefined
+Info: polymorph 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- fm ' k = v
+
+Status: undefined
+Info: polymorph 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- k ∈ FDOM fm
+
+Status: undefined
+Info: polymorph 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
+|- EL m (MAP SND ls) = EL n'' (r::MAP SND ls)
+

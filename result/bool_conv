@@ -1,0 +1,19 @@
+CNF1: P (∀x. x = 0) ∧ ¬P F
+BOOL: ((∀x. x = 0) ⇒ P T ∧ ¬P F) ∧ (¬(∀x. x = 0) ⇒ P F ∧ ¬P F)
+NUM : ((∀x. 0 ≤ x ⇒ (x = 0)) ⇒ P T ∧ ¬P F) ∧
+(¬(∀x. 0 ≤ x ⇒ (x = 0)) ⇒ P F ∧ ¬P F)
+CNF2: ∃x.
+  ∀x'.
+    (¬P F ∨ x ≠ 0) ∧ (P T ∨ x ≠ 0) ∧ (P T ∨ 0 ≤ x) ∧ (¬P F ∨ 0 ≤ x) ∧
+    ((x' = 0) ∨ ¬(0 ≤ x'))
+
+CNF1: P (x = x + 1) ∧ ¬P F
+NUM : (0 ≤ x + 1 ∧ 0 ≤ x) ∧ P (x = x + 1) ∧ ¬P F
+CNF2: 0 ≤ x ∧ 0 ≤ x + 1 ∧ P (x = x + 1) ∧ ¬P F
+
+CNF1: P (x = x + 1) ∧ ¬P F
+BOOL: ((x = x + 1) ⇒ P T ∧ ¬P F) ∧ (x ≠ x + 1 ⇒ P F ∧ ¬P F)
+NUM : (0 ≤ x + 1 ∧ 0 ≤ x) ∧ ((x = x + 1) ⇒ P T ∧ ¬P F) ∧
+(x ≠ x + 1 ⇒ P F ∧ ¬P F)
+CNF2: 0 ≤ x ∧ 0 ≤ x + 1 ∧ (¬P F ∨ x ≠ x + 1) ∧ (P T ∨ x ≠ x + 1) ∧ (x = x + 1)
+

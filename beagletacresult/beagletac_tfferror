@@ -1,0 +1,1824 @@
+%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cMOD_type,type,(
+    cMOD: ( $int * $int ) > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,cMOD(xn,256)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,$difference(xn,cMOD(xn,256))) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,cDIV($difference(xn,cMOD(xn,256)),256)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,cs2n(xs0)) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,cDIV(xn,256)) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,$product(cDIV(xn,256),256)) )).
+
+tff(axiom9_axiom,axiom,(
+    $lesseq(0,$sum(cMOD(xn,256),$product(cDIV(xn,256),256))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(cn2s(Xm)) = Xm) | (~$less(Xm,xn) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = 0) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (cAbbrev(btrue) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cDIV($difference(xn,cMOD(xn,256)),256),xn) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(xs0) = cDIV($difference(xn,cMOD(xn,256)),256)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,cMOD(xn,256)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(cMOD(xn,256) = 0) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = $sum(cMOD(xn,256),$product(cDIV(xn,256),256))) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~$lesseq(xn,cMOD(xn,256)) | (~(cDIV(xn,256) = 0) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,256) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cMOD(X,Xm),Xm) | (~$less(0,Xm) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$less(0,Xm) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (($sum(Xm,X) = $sum(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum(Xm,X)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cDIV(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cMOD(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cs2n(cn2s(Xm))) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cs2n(cn2s(Xm))) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cMOD(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cDIV(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum(Xm,X)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (($sum(Xm,X) = $sum(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$less(0,Xm) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cMOD(X,Xm),Xm) | (~$less(0,Xm) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,256) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~$lesseq(xn,cMOD(xn,256)) | (~(cDIV(xn,256) = 0) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = $sum(cMOD(xn,256),$product(cDIV(xn,256),256))) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(cMOD(xn,256) = 0) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,cMOD(xn,256)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(xs0) = cDIV($difference(xn,cMOD(xn,256)),256)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cDIV($difference(xn,cMOD(xn,256)),256),xn) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (cAbbrev(bfalse) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = 0) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(cn2s(Xm)) = Xm) | (~$less(Xm,xn) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cMOD_type,type,(
+    cMOD: ( $int * $int ) > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,cMOD(xn,256)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,$difference(xn,cMOD(xn,256))) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,cDIV($difference(xn,cMOD(xn,256)),256)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,cs2n(xs0)) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,cDIV(xn,256)) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,$product(256,cDIV(xn,256))) )).
+
+tff(axiom9_axiom,axiom,(
+    $lesseq(0,$sum($product(256,cDIV(xn,256)),cMOD(xn,256))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(cn2s(Xm)) = Xm) | (~$less(Xm,xn) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = 0) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (cAbbrev(btrue) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cDIV($difference(xn,cMOD(xn,256)),256),xn) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(xs0) = cDIV($difference(xn,cMOD(xn,256)),256)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,cMOD(xn,256)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(cMOD(xn,256) = 0) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cDIV($difference(xn,cMOD(xn,256)),256) = cDIV(xn,256)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~($sum($product(256,cDIV(xn,256)),cMOD(xn,256)) = xn) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,256) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cMOD(X,Xm),Xm) | (~$less(0,Xm) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$less(0,Xm) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (($product(Xm,X) = $product(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(Xm,X)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cDIV(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cMOD(X,Xm)) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cs2n(cn2s(Xm))) | ~(xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cs2n(cn2s(Xm))) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cMOD(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,cDIV(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($lesseq(0,$product(Xm,X)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (($product(Xm,X) = $product(X,Xm)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$less(0,Xm) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cMOD(X,Xm),Xm) | (~$less(0,Xm) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,256) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~($sum($product(256,cDIV(xn,256)),cMOD(xn,256)) = xn) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cDIV($difference(xn,cMOD(xn,256)),256) = cDIV(xn,256)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(cMOD(xn,256) = 0) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(0,cMOD(xn,256)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(xs0) = cDIV($difference(xn,cMOD(xn,256)),256)) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ($less(cDIV($difference(xn,cMOD(xn,256)),256),xn) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (cAbbrev(bfalse) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | (~(xn = 0) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~$lesseq(0,Xm) | (~$lesseq(0,X) | ((cs2n(cn2s(Xm)) = Xm) | (~$less(Xm,xn) | (xs0 = cn2s(cDIV($difference(xn,cMOD(xn,256)),256)))))))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xr_type,type,(
+    xr: $int )).
+
+tff(xr0_type,type,(
+    xr0: $int )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(cSUC_type,type,(
+    cSUC: $int > $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cMOD_type,type,(
+    cMOD: ( $int * $int ) > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,cMOD(xn,256)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,xr) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,$difference(xn,xr)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,cDIV($difference(xn,xr),256)) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,cs2n(xs0)) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,xr0) )).
+
+tff(axiom9_axiom,axiom,(
+    $lesseq(0,256) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = xr0) | ~(xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = xr0) | ~(xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = xr0) | ~(xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = xr0) | ~(xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom74_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom75_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom76_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom77_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom78_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom79_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom80_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom81_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom82_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom83_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom84_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom85_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom86_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom87_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom88_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom89_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom90_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom91_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom92_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom93_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom94_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom95_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom96_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom97_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom98_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom99_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom100_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom101_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom102_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom103_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom104_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom105_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom106_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom107_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom108_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom109_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom110_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom111_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom112_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom113_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom114_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom115_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom116_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom117_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom118_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom119_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom120_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom121_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom122_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom123_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom124_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom125_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom126_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom127_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom128_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom129_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom130_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom131_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom132_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | ~(xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom133_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom134_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom135_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom136_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom137_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom138_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom139_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom140_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom141_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom142_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom143_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom144_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom145_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom146_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom147_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom148_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom149_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom150_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom151_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom152_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom153_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom154_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom155_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom156_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom157_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom158_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom159_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom160_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom161_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom162_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom163_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom164_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom165_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom166_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom167_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom168_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom169_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom170_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom171_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom172_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom173_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom174_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom175_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom176_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom177_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom178_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom179_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom180_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom181_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom182_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom183_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom184_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom185_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom186_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom187_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom188_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom189_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom190_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom191_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom192_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom193_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom194_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom195_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom196_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom197_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom198_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom199_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom200_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom201_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom202_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom203_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom204_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom205_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom206_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom207_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom208_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom209_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom210_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom211_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom212_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom213_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom214_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom215_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom216_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom217_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom218_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom219_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom220_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom221_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom222_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cs2n(cn2s(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom223_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom224_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cMOD(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom225_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cDIV(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom226_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$product(cDIV(X,Xm),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom227_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom228_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom229_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom230_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom231_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,cSUC(Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom232_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,cSUC(X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom233_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(cSUC(X),Xm)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom234_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(X,0)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom235_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($lesseq(0,$sum(0,X)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom236_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom237_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(0,X) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom238_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,0) = X) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom239_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(cSUC(X),Xm) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom240_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (($sum(X,cSUC(Xm)) = cSUC($sum(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom241_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ((X = $sum($product(cDIV(X,Xm),Xm),cMOD(X,Xm))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom242_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(0,Xm) | ($less(cMOD(X,Xm),Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom243_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = $product(Xm,256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom244_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(0,xr) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom245_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ((cs2n(xs0) = cDIV($difference(xn,xr),256)) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom246_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cDIV($difference(xn,xr),256),xn) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom247_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | ($less(cMOD(xn,256),256) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom248_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(btrue) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom249_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (cAbbrev(bfalse) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom250_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~(xn = 0) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256))))))))) )).
+
+tff(axiom251_axiom,axiom,(
+    ! [Xm: $int,X: $int] : ((~(xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$less(Xm,xn) | ((cs2n(cn2s(Xm)) = Xm) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = 256) | (xr0 = cMOD(xn,256)))))))))) )).
+
+tff(axiom252_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = xr0) | (xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom253_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | (~(xr = xr0) | (xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom254_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | (~(xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = xr0) | (xr0 = cMOD(xn,256)))))))) )).
+
+tff(axiom255_axiom,axiom,(
+    ! [Xm: $int,X: $int] : (((xr0 = 0) | ((xs0 = cn2s(cDIV($difference(xn,xr),256))) | (~$lesseq(0,X) | (~$lesseq(0,Xm) | ((xr = xr0) | (xr0 = cMOD(xn,256)))))))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(xr0_type,type,(
+    xr0: $int )).
+
+tff(xc_type,type,(
+    xc: ty_char )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cORD_type,type,(
+    cORD: ty_char > $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cs2n(xs)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,cORD(xc)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,$sum(cORD(xc),1)) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,xr0) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,$product(256,cs2n(xs))) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,cDIV($product(256,cs2n(xs)),256)) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((cn2s(cs2n(xs)) = xs) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (cAbbrev(btrue) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((xr0 = $sum(cORD(xc),1)) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (~(xr0 = 0) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($less($sum(cORD(xc),1),256) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (~(xs0 = xs) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (($product(Xn,Xq) = $product(Xq,Xn)) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((cDIV($product(Xq,Xn),Xn) = Xq) | (~$less(0,Xn) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256)))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($less(0,256) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,cDIV($product(Xq,Xn),Xn)) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,$product(Xn,Xq)) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,$product(Xq,Xn)) | ~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,$product(Xq,Xn)) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,$product(Xn,Xq)) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($lesseq(0,cDIV($product(Xq,Xn),Xn)) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($less(0,256) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((cDIV($product(Xq,Xn),Xn) = Xq) | (~$less(0,Xn) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256)))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (($product(Xn,Xq) = $product(Xq,Xn)) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (~(xs0 = xs) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ($less($sum(cORD(xc),1),256) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (~(xr0 = 0) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((xr0 = $sum(cORD(xc),1)) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | (cAbbrev(bfalse) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~$lesseq(0,Xn) | (~$lesseq(0,Xq) | ((cn2s(cs2n(xs)) = xs) | (xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))))))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(xc_type,type,(
+    xc: ty_char )).
+
+tff(xr_type,type,(
+    xr: $int )).
+
+tff(xr0_type,type,(
+    xr0: $int )).
+
+tff(cSUC_type,type,(
+    cSUC: $int > $int )).
+
+tff(cMOD_type,type,(
+    cMOD: ( $int * $int ) > $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cORD_type,type,(
+    cORD: ty_char > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cs2n(xs)) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,cORD(xc)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,$sum(cORD(xc),1)) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,cMOD($sum(cORD(xc),1),256)) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,xr) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,$product(cs2n(xs),256)) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,$sum($product(cs2n(xs),256),cORD(xc))) )).
+
+tff(axiom9_axiom,axiom,(
+    $lesseq(0,$sum($sum($product(cs2n(xs),256),cORD(xc)),1)) )).
+
+tff(axiom10_axiom,axiom,(
+    $lesseq(0,$difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr)) )).
+
+tff(axiom11_axiom,axiom,(
+    $lesseq(0,cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256)) )).
+
+tff(axiom12_axiom,axiom,(
+    $lesseq(0,xr0) )).
+
+tff(axiom13_axiom,axiom,(
+    $lesseq(0,256) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((cn2s(cs2n(xs)) = xs) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(bfalse) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xr0 = cMOD($sum(cORD(xc),1),256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cORD(xc),256) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~($sum(cORD(xc),1) = $product(Xq,256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cMOD(Xm,Xq),Xq) | (~$less(0,Xq) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((Xm = $sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~$less(0,Xq) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,cSUC(Xq)) = cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(cSUC(Xm),Xq) = cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,0) = Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(0,Xm) = Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(0,256) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(0,Xm)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,0)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(cSUC(Xm),Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xm)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,cSUC(Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(cDIV(Xm,Xq),Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cDIV(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cMOD(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(Xq,256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(Xq,256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cMOD(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cDIV(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(cDIV(Xm,Xq),Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,cSUC(Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xm)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(cSUC(Xm),Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,0)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(0,Xm)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(0,256) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(0,Xm) = Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,0) = Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(cSUC(Xm),Xq) = cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,cSUC(Xq)) = cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((Xm = $sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~$less(0,Xq) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cMOD(Xm,Xq),Xq) | (~$less(0,Xq) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~($sum(cORD(xc),1) = $product(Xq,256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cORD(xc),256) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xr0 = cMOD($sum(cORD(xc),1),256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(btrue) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(bfalse) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((cn2s(cs2n(xs)) = xs) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((cn2s(cs2n(xs)) = xs) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(btrue) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xr0 = cMOD($sum(cORD(xc),1),256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cORD(xc),256) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~($sum(cORD(xc),1) = $product(Xq,256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cMOD(Xm,Xq),Xq) | (~$less(0,Xq) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((Xm = $sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~$less(0,Xq) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,cSUC(Xq)) = cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(cSUC(Xm),Xq) = cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom74_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,0) = Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom75_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(0,Xm) = Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom76_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(0,256) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom77_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(0,Xm)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom78_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,0)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom79_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(cSUC(Xm),Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom80_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xm)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom81_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,cSUC(Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom82_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom83_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC($sum(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom84_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom85_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom86_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(cDIV(Xm,Xq),Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom87_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cDIV(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom88_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cMOD(Xm,Xq)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom89_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(Xq,256)) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom90_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(Xq,256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom91_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cMOD(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom92_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cDIV(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom93_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$product(cDIV(Xm,Xq),Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom94_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom95_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom96_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom97_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom98_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,cSUC(Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom99_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,cSUC(Xm)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom100_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(cSUC(Xm),Xq)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom101_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(Xm,0)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom102_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($lesseq(0,$sum(0,Xm)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom103_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(0,256) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom104_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(0,Xm) = Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom105_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,0) = Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom106_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(cSUC(Xm),Xq) = cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom107_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (($sum(Xm,cSUC(Xq)) = cSUC($sum(Xm,Xq))) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom108_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((Xm = $sum($product(cDIV(Xm,Xq),Xq),cMOD(Xm,Xq))) | (~$less(0,Xq) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom109_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cMOD(Xm,Xq),Xq) | (~$less(0,Xq) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0)))))))) )).
+
+tff(axiom110_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~($sum(cORD(xc),1) = $product(Xq,256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom111_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ($less(cORD(xc),256) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom112_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xr0 = cMOD($sum(cORD(xc),1),256)) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom113_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(bfalse) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom114_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (cAbbrev(btrue) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom115_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = 256) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((cn2s(cs2n(xs)) = xs) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | ~(xr0 = 0))))))) )).
+
+tff(axiom116_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = xr0) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | (xr0 = 0)))))) )).
+
+tff(axiom117_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : ((~(xr = xr0) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | (xr0 = 0)))))) )).
+
+tff(axiom118_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = xr0) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | (~(xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | (xr0 = 0)))))) )).
+
+tff(axiom119_axiom,axiom,(
+    ! [Xq: $int,Xm: $int] : (((xr = xr0) | (~$lesseq(0,Xq) | (~$lesseq(0,Xm) | ((xs0 = cn2s(cDIV($difference($sum($sum($product(cs2n(xs),256),cORD(xc)),1),xr),256))) | (xr0 = 0)))))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(cORD_type,type,(
+    cORD: ty_char > $int )).
+
+tff(cCHR_type,type,(
+    cCHR: $int > ty_char )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,cs2n(xs)) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,cORD(cCHR(255))) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,$sum(cORD(cCHR(255)),1)) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,$product(256,cs2n(xs))) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,cDIV($product(256,cs2n(xs)),256)) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($lesseq(0,$product(Xn,Xm)) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($lesseq(0,cDIV($product(Xn,Xm),Xm)) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($lesseq(0,$product(Xm,Xn)) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($less(0,256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((($product(Xm,Xn) = $product(Xn,Xm)) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((~$less(0,Xm) | ((cDIV($product(Xn,Xm),Xm) = Xn) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((~(cn2s(cDIV($product(256,cs2n(xs)),256)) = xs) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (((cORD(cCHR(255)) = 255) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((($sum(cORD(cCHR(255)),1) = 256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($less(cORD(cCHR(255)),256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (((cn2s(cs2n(xs)) = xs) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+%------------------------------------------------------------------------------%------------------------------------------------------------------------------
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [X: ty_listIcharI,Xn: $int] : (($lesseq(0,cs2n(X)) | ~$lesseq(0,Xn))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [X: ty_listIcharI,Xn: $int] : (((cn2s(cs2n(X)) = X) | ~$lesseq(0,Xn))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xn: $int] : ((~(xs = cn2s(Xn)) | ~$lesseq(0,Xn))) )).
+
+%------------------------------------------------------------------------------

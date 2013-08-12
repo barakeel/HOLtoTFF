@@ -26,6 +26,7 @@ fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
 fun is_var_or_const term = is_var term orelse is_const term
 fun is_logical term =
+  is_eq term orelse
   is_conj term orelse
   is_disj term orelse   
   is_neg term orelse   
@@ -34,7 +35,6 @@ fun is_logical term =
   is_exists term orelse  
   is_exists1 term orelse
   is_cond term 
-fun is_new_axiom terml axiom = not (is_member_term (concl axiom) terml)
 fun is_not_var term = not (is_var term)  
   
 (* QUANTIFIER *) 
@@ -71,7 +71,6 @@ fun name_numeral term =
     Numeral => name_of term
   | _ => raise TOOLS_ERR "name_numeral" "not a numeral"
   
-(* can't be used on a constant *)  
 fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
 
 fun strip_comb_n (term,n) =
@@ -83,6 +82,8 @@ else
                  end end 
 else 
   raise TOOLS_ERR "" ""
+
+fun get_arity term = length (snd (strip_comb term))
 
 (* THM *)
 fun only_hyp thm = 
@@ -109,32 +110,8 @@ fun thm_test thm goal msg =
   if goal_subset (mk_goal thm) goal then thm
   else raise TOOLS_ERR msg ""
  
-(* ARITY *)
-fun get_arity term = length (snd (strip_comb term))
+fun goal_to_string goal = thm_to_string (mk_thm goal)
 
-fun get_lowestarity (term,arity) termal =
-  case termal of
-    [] => arity
-  | (t,a) :: m => if term = t 
-                  then 
-                    if a < arity 
-                    then get_lowestarity (term,a) m
-                    else get_lowestarity (term,arity) m 
-                  else get_lowestarity (term,arity) m     
-;
-
-  
-fun collapse_lowestarity2 varal varalfix =
-  case varal of
-    [] => []
-  | (var,arity) :: m => 
-    let val lowestarity = get_lowestarity (var,arity) varalfix in
-      (var,lowestarity) :: collapse_lowestarity2  m varalfix
-    end
-  
-fun collapse_lowestarity varal = 
-  erase_double (collapse_lowestarity2 varal varal)
-  
 (* CONV *)
 fun repeat_n_conv n conv = 
   case n of
@@ -143,7 +120,6 @@ fun repeat_n_conv n conv =
          else
            conv THENC repeat_n_conv (n - 1) conv
 
-(* to be rewritten *)
 fun not_strip_exists_conv term =
   let val n = length (fst (strip_exists (dest_neg term))) in
     repeat_n_conv n (STRIP_QUANT_CONV NOT_EXISTS_CONV) term
@@ -178,7 +154,7 @@ fun list_PROVE_HYP thml thm =
     [] => thm
   | th :: m => list_PROVE_HYP m (PROVE_HYP th thm)  
 
-fun list_conj_hyp thm =
+fun list_conj_hyp_rule thm =
   let val hyptl = hyp thm in
   let val t1 = list_mk_conj hyptl in
   let val thl = CONJ_LIST (length hyptl) (ASSUME t1) in
@@ -187,37 +163,36 @@ fun list_conj_hyp thm =
   end end end end   
 
 (* assume there is only one hypothesis *)
-fun unconj_hyp term thm =
+fun unconj_hyp_rule term thm =
   if is_conj term then
     let val th0 = ASSUME (lhand term) in
     let val th1 = ASSUME (rand term) in
     let val th2 = CONJ th0 th1 in
       PROVE_HYP th2 thm
     end end end 
-  else raise TOOLS_ERR "unconj_hyp" ""
+  else raise TOOLS_ERR "unconj_hyp_rule" ""
 
 (* hypl is a list of conj *)
-fun list_unconj_hyp hypl thm = repeatchange unconj_hyp hypl thm
+fun list_unconj_hyp_rule hypl thm = repeatchange unconj_hyp_rule hypl thm
   
-fun strip_conj_hyp_rule thm =
+fun strip_conj_all_hyp_rule thm =
   case filter is_conj (hyp thm) of
     [] => thm
-  | l => strip_conj_hyp_rule (list_unconj_hyp l thm)
+  | l => strip_conj_all_hyp_rule (list_unconj_hyp_rule l thm)
 
-fun list_ap_thm thm terml =
+fun list_AP_THM thm terml =
   case terml of
     [] => thm 
-  | t :: m => list_ap_thm (AP_THM thm t) m 
-
+  | t :: m => list_AP_THM (AP_THM thm t) m 
 
 
 (* input is an equality *)
-fun list_fun_eq_conv vl term =
+fun list_FUN_EQ_CONV vl term =
   case vl of
     [] => raise UNCHANGED
   | [v] => X_FUN_EQ_CONV v term
   | v :: m => ((X_FUN_EQ_CONV v) THENC 
-              (STRIP_QUANT_CONV (list_fun_eq_conv m))) 
+              (STRIP_QUANT_CONV (list_FUN_EQ_CONV m))) 
               term 
    
 fun repeat_rule n rule thm =   
@@ -371,7 +346,5 @@ fun is_polymorph_thm thm =
 fun is_polymorph_pb thml goal =
   exists is_polymorph_thm thml orelse
   is_polymorph_goal goal 
-
-
 
 end

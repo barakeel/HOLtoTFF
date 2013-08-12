@@ -1,0 +1,2070 @@
+CNF1: ∀P' l b a.
+  (a < SUC b ∨ ¬(a ≤ b)) ∧ LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∧
+  ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)) ∧ ¬P h
+NUM : (0 ≤ LENGTH (SND (SPLITP P t)) ∧ 0 ≤ SUC (LENGTH t) ∧ 0 ≤ LENGTH t) ∧
+∀P' l b a.
+  0 ≤ a ∧ 0 ≤ b ⇒
+  (0 ≤ SUC b ∧ 0 ≤ LENGTH (SND (SPLITP P' l)) ∧ 0 ≤ LENGTH l) ∧
+  (a < SUC b ∨ ¬(a ≤ b)) ∧ LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∧
+  ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)) ∧ ¬P h
+CNF2: ∀P' l b a.
+  0 ≤ LENGTH t ∧ 0 ≤ SUC (LENGTH t) ∧ 0 ≤ LENGTH (SND (SPLITP P t)) ∧
+  (0 ≤ LENGTH l ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (0 ≤ LENGTH (SND (SPLITP P' l)) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (0 ≤ SUC b ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (¬(a ≤ b) ∨ a < SUC b ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)) ∨ ¬(0 ≤ a) ∨
+   ¬(0 ≤ b)) ∧ (¬P h ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b))
+
+CNF1: ∀P' l' b a.
+  (a < SUC b ∨ ¬(a ≤ b)) ∧ LENGTH (SND (SPLITP P' l')) ≤ LENGTH l' ∧
+  l ≠ "" ∧ (l = "") ∧ (r = STRING h t) ∧ P h
+NUM : ∀P' l' b a.
+  0 ≤ a ∧ 0 ≤ b ⇒
+  (0 ≤ SUC b ∧ 0 ≤ LENGTH (SND (SPLITP P' l')) ∧ 0 ≤ LENGTH l') ∧
+  (a < SUC b ∨ ¬(a ≤ b)) ∧ LENGTH (SND (SPLITP P' l')) ≤ LENGTH l' ∧
+  l ≠ "" ∧ (l = "") ∧ (r = STRING h t) ∧ P h
+CNF2: ∀P' l' b a.
+  (0 ≤ LENGTH l' ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (0 ≤ LENGTH (SND (SPLITP P' l')) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (0 ≤ SUC b ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (¬(a ≤ b) ∨ a < SUC b ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (LENGTH (SND (SPLITP P' l')) ≤ LENGTH l' ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  (l ≠ "" ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧ ((l = "") ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧
+  ((r = STRING h t) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b)) ∧ (P h ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ b))
+
+CNF1: ∀P' l b a p.
+  (a < SUC b ∨ ¬(a ≤ b)) ∧ (b < p ∨ ¬(b < a) ∨ ¬(a < p)) ∧
+  (LENGTH (TL l) < LENGTH l ∨ (l = [])) ∧
+  LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∧
+  ¬(LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)) ∧
+  SND (SPLITP P t) ≠ "" ∧ ¬P h
+NUM : (0 ≤ LENGTH (TL (SND (SPLITP P t))) ∧ 0 ≤ SUC (LENGTH t) ∧
+ 0 ≤ LENGTH t) ∧
+∀P' l b a p.
+  0 ≤ b ∧ 0 ≤ a ∧ 0 ≤ p ⇒
+  (0 ≤ SUC b ∧ 0 ≤ LENGTH (TL l) ∧ 0 ≤ LENGTH (SND (SPLITP P' l)) ∧
+   0 ≤ LENGTH l) ∧ (a < SUC b ∨ ¬(a ≤ b)) ∧
+  (b < p ∨ ¬(b < a) ∨ ¬(a < p)) ∧
+  (LENGTH (TL l) < LENGTH l ∨ (l = [])) ∧
+  LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∧
+  ¬(LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)) ∧
+  SND (SPLITP P t) ≠ "" ∧ ¬P h
+CNF2: ∀P' l b a p.
+  0 ≤ LENGTH t ∧ 0 ≤ SUC (LENGTH t) ∧
+  0 ≤ LENGTH (TL (SND (SPLITP P t))) ∧
+  (0 ≤ LENGTH l ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (0 ≤ LENGTH (SND (SPLITP P' l)) ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (0 ≤ LENGTH (TL l) ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (0 ≤ SUC b ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (¬(a ≤ b) ∨ a < SUC b ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (¬(a < p) ∨ ¬(b < a) ∨ b < p ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  ((l = []) ∨ LENGTH (TL l) < LENGTH l ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨
+   ¬(0 ≤ p)) ∧
+  (LENGTH (SND (SPLITP P' l)) ≤ LENGTH l ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨
+   ¬(0 ≤ p)) ∧
+  (¬(LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)) ∨ ¬(0 ≤ b) ∨
+   ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (SND (SPLITP P t) ≠ "" ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p)) ∧
+  (¬P h ∨ ¬(0 ≤ b) ∨ ¬(0 ≤ a) ∨ ¬(0 ≤ p))
+
+CNF1: ∃cs.
+  ∀s.
+    (IMPLODE (EXPLODE s) = s) ∧ (EXPLODE (IMPLODE s) = s) ∧
+    cs ≠ EXPLODE s
+
+CNF1: ∃s.
+  ∀cs.
+    (IMPLODE (EXPLODE cs) = cs) ∧ (EXPLODE (IMPLODE cs) = cs) ∧
+    s ≠ IMPLODE cs
+
+CNF1: ∀s.
+  (IMPLODE (EXPLODE s) = s) ∧ (EXPLODE (IMPLODE s) = s) ∧
+  ((EXPLODE s1 = EXPLODE s2) ∨ (s1 = s2)) ∧
+  (EXPLODE s1 ≠ EXPLODE s2 ∨ s1 ≠ s2)
+
+CNF1: ∀s.
+  (IMPLODE (EXPLODE s) = s) ∧ (EXPLODE (IMPLODE s) = s) ∧
+  ((IMPLODE cs1 = IMPLODE cs2) ∨ (cs1 = cs2)) ∧
+  (IMPLODE cs1 ≠ IMPLODE cs2 ∨ cs1 ≠ cs2)
+
+CNF1: ∀s2 s3.
+  ¬(s1 < t') ∧ t < t' ∧ (ORD h = ORD h') ∧ s1 < t ∧ (ORD h'' = ORD h) ∧
+  ¬(ORD h'' < ORD h') ∧ (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+NUM : (0 ≤ ORD h ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h') ∧
+∀s2 s3.
+  ¬(s1 < t') ∧ t < t' ∧ (ORD h = ORD h') ∧ s1 < t ∧ (ORD h'' = ORD h) ∧
+  ¬(ORD h'' < ORD h') ∧ (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+CNF2: ∀s2 s3.
+  0 ≤ ORD h' ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h ∧ ¬(s1 < t') ∧ t < t' ∧
+  (ORD h = ORD h') ∧ s1 < t ∧ (ORD h'' = ORD h) ∧ ¬(ORD h'' < ORD h') ∧
+  (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+
+CNF1: ∀p s2 s3.
+  ¬(s1 < t') ∧ (p < ORD h' ∨ ¬(p < ORD h)) ∧
+  (ORD h < p ∨ ¬(ORD h' < p)) ∧ ORD h < ORD h' ∧ s1 < t ∧
+  (ORD h'' = ORD h) ∧ ¬(ORD h'' < ORD h') ∧
+  (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+NUM : (0 ≤ ORD h ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h') ∧
+∀p s2 s3.
+  0 ≤ p ⇒
+  ¬(s1 < t') ∧ (p < ORD h' ∨ ¬(p < ORD h)) ∧
+  (ORD h < p ∨ ¬(ORD h' < p)) ∧ ORD h < ORD h' ∧ s1 < t ∧
+  (ORD h'' = ORD h) ∧ ¬(ORD h'' < ORD h') ∧
+  (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+CNF2: ∀p s2 s3.
+  0 ≤ ORD h' ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h ∧ (¬(s1 < t') ∨ ¬(0 ≤ p)) ∧
+  (¬(p < ORD h) ∨ p < ORD h' ∨ ¬(0 ≤ p)) ∧
+  (¬(ORD h' < p) ∨ ORD h < p ∨ ¬(0 ≤ p)) ∧ (ORD h < ORD h' ∨ ¬(0 ≤ p)) ∧
+  (s1 < t ∨ ¬(0 ≤ p)) ∧ ((ORD h'' = ORD h) ∨ ¬(0 ≤ p)) ∧
+  (¬(ORD h'' < ORD h') ∨ ¬(0 ≤ p)) ∧
+  (¬(s2 < s3) ∨ ¬(s1 < s2) ∨ s1 < s3 ∨ ¬(0 ≤ p))
+
+CNF1: ∀p s2 s3.
+  ¬(s1 < t') ∧ (p < ORD h ∨ ¬(p < ORD h'')) ∧
+  (ORD h'' < p ∨ ¬(ORD h < p)) ∧ t < t' ∧ (ORD h = ORD h') ∧
+  ORD h'' < ORD h ∧ ¬(ORD h'' < ORD h') ∧
+  (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+NUM : (0 ≤ ORD h ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h') ∧
+∀p s2 s3.
+  0 ≤ p ⇒
+  ¬(s1 < t') ∧ (p < ORD h ∨ ¬(p < ORD h'')) ∧
+  (ORD h'' < p ∨ ¬(ORD h < p)) ∧ t < t' ∧ (ORD h = ORD h') ∧
+  ORD h'' < ORD h ∧ ¬(ORD h'' < ORD h') ∧
+  (s1 < s3 ∨ ¬(s1 < s2) ∨ ¬(s2 < s3))
+CNF2: ∀p s2 s3.
+  0 ≤ ORD h' ∧ 0 ≤ ORD h'' ∧ 0 ≤ ORD h ∧ (¬(s1 < t') ∨ ¬(0 ≤ p)) ∧
+  (¬(p < ORD h'') ∨ p < ORD h ∨ ¬(0 ≤ p)) ∧
+  (¬(ORD h < p) ∨ ORD h'' < p ∨ ¬(0 ≤ p)) ∧ (t < t' ∨ ¬(0 ≤ p)) ∧
+  ((ORD h = ORD h') ∨ ¬(0 ≤ p)) ∧ (ORD h'' < ORD h ∨ ¬(0 ≤ p)) ∧
+  (¬(ORD h'' < ORD h') ∨ ¬(0 ≤ p)) ∧
+  (¬(s2 < s3) ∨ ¬(s1 < s2) ∨ s1 < s3 ∨ ¬(0 ≤ p))
+
+CNF1: ∀m n'.
+  (m + n' = n' + m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+  (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+  (¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0) ∧ n ≠ n MOD 256 + n DIV 256 * 256 ∧
+  n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+  (n − n MOD 256) DIV 256 < n ∧
+  Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)) ∧ n ≠ 0 ∧
+  ((s2n (n2s m) = m) ∨ ¬(m < n))
+BOOL: ((s0 = n2s ((n − n MOD 256) DIV 256)) ⇒
+ ∀m n'.
+   (m + n' = n' + m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   (¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0) ∧
+   n ≠ n MOD 256 + n DIV 256 * 256 ∧ n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧
+   (s2n s0 = (n − n MOD 256) DIV 256) ∧ (n − n MOD 256) DIV 256 < n ∧
+   Abbrev T ∧ n ≠ 0 ∧ ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+(s0 ≠ n2s ((n − n MOD 256) DIV 256) ⇒
+ ∀m n'.
+   (m + n' = n' + m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   (¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0) ∧
+   n ≠ n MOD 256 + n DIV 256 * 256 ∧ n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧
+   (s2n s0 = (n − n MOD 256) DIV 256) ∧ (n − n MOD 256) DIV 256 < n ∧
+   Abbrev F ∧ n ≠ 0 ∧ ((s2n (n2s m) = m) ∨ ¬(m < n)))
+NUM : (0 ≤ n MOD 256 + n DIV 256 * 256 ∧ 0 ≤ n DIV 256 * 256 ∧ 0 ≤ n DIV 256 ∧
+ 0 ≤ s2n s0 ∧ 0 ≤ (n − n MOD 256) DIV 256 ∧ 0 ≤ n − n MOD 256 ∧
+ 0 ≤ n MOD 256 ∧ 0 ≤ n) ∧
+((s0 = n2s ((n − n MOD 256) DIV 256)) ⇒
+ ∀m n'.
+   0 ≤ n' ∧ 0 ≤ m ⇒
+   (0 ≤ m + n' ∧ 0 ≤ n' + m ∧ 0 ≤ n' DIV m * m + n' MOD m ∧
+    0 ≤ n' DIV m * m ∧ 0 ≤ n' DIV m ∧ 0 ≤ n' MOD m ∧ 0 ≤ s2n (n2s m)) ∧
+   (m + n' = n' + m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   (¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0) ∧
+   n ≠ n MOD 256 + n DIV 256 * 256 ∧ n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧
+   (s2n s0 = (n − n MOD 256) DIV 256) ∧ (n − n MOD 256) DIV 256 < n ∧
+   Abbrev T ∧ n ≠ 0 ∧ ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+(s0 ≠ n2s ((n − n MOD 256) DIV 256) ⇒
+ ∀m n'.
+   0 ≤ n' ∧ 0 ≤ m ⇒
+   (0 ≤ m + n' ∧ 0 ≤ n' + m ∧ 0 ≤ n' DIV m * m + n' MOD m ∧
+    0 ≤ n' DIV m * m ∧ 0 ≤ n' DIV m ∧ 0 ≤ n' MOD m ∧ 0 ≤ s2n (n2s m)) ∧
+   (m + n' = n' + m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   (¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0) ∧
+   n ≠ n MOD 256 + n DIV 256 * 256 ∧ n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧
+   (s2n s0 = (n − n MOD 256) DIV 256) ∧ (n − n MOD 256) DIV 256 < n ∧
+   Abbrev F ∧ n ≠ 0 ∧ ((s2n (n2s m) = m) ∨ ¬(m < n)))
+CNF2: ∀m n'.
+  0 ≤ n ∧ 0 ≤ n MOD 256 ∧ 0 ≤ n − n MOD 256 ∧
+  0 ≤ (n − n MOD 256) DIV 256 ∧ 0 ≤ s2n s0 ∧ 0 ≤ n DIV 256 ∧
+  0 ≤ n DIV 256 * 256 ∧ 0 ≤ n MOD 256 + n DIV 256 * 256 ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n (n2s m) = m) ∨ ¬(m < n) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ 0 ∨ s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ Abbrev T ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n − n MOD 256) DIV 256 < n ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n s0 = (n − n MOD 256) DIV 256) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < n MOD 256 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n MOD 256 ≠ 0 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ n MOD 256 + n DIV 256 * 256 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ ¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < 256 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n' MOD m < m ∨ ¬(0 < m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (m + n' = n' + m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ m + n' ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' + m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m + n' MOD m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' MOD m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ s2n (n2s m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ s2n (n2s m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' MOD m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m + n' MOD m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' + m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ m + n' ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (m + n' = n' + m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n' MOD m < m ∨ ¬(0 < m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < 256 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ ¬(n ≤ n MOD 256) ∨ n DIV 256 ≠ 0 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ n MOD 256 + n DIV 256 * 256 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n MOD 256 ≠ 0 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < n MOD 256 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n s0 = (n − n MOD 256) DIV 256) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n − n MOD 256) DIV 256 < n ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ Abbrev F ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ 0 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n (n2s m) = m) ∨ ¬(m < n) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256)))
+
+CNF1: ∀m n'.
+  (m * n' = n' * m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+  (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+  256 * (n DIV 256) + n MOD 256 ≠ n ∧
+  ((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+  0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+  (n − n MOD 256) DIV 256 < n ∧
+  Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)) ∧ n ≠ 0 ∧
+  ((s2n (n2s m) = m) ∨ ¬(m < n))
+BOOL: ((s0 = n2s ((n − n MOD 256) DIV 256)) ⇒
+ ∀m n'.
+   (m * n' = n' * m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   256 * (n DIV 256) + n MOD 256 ≠ n ∧
+   ((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+   0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+   (n − n MOD 256) DIV 256 < n ∧ Abbrev T ∧ n ≠ 0 ∧
+   ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+(s0 ≠ n2s ((n − n MOD 256) DIV 256) ⇒
+ ∀m n'.
+   (m * n' = n' * m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   256 * (n DIV 256) + n MOD 256 ≠ n ∧
+   ((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+   0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+   (n − n MOD 256) DIV 256 < n ∧ Abbrev F ∧ n ≠ 0 ∧
+   ((s2n (n2s m) = m) ∨ ¬(m < n)))
+NUM : (0 ≤ 256 * (n DIV 256) + n MOD 256 ∧ 0 ≤ 256 * (n DIV 256) ∧
+ 0 ≤ n DIV 256 ∧ 0 ≤ s2n s0 ∧ 0 ≤ (n − n MOD 256) DIV 256 ∧
+ 0 ≤ n − n MOD 256 ∧ 0 ≤ n MOD 256 ∧ 0 ≤ n) ∧
+((s0 = n2s ((n − n MOD 256) DIV 256)) ⇒
+ ∀m n'.
+   0 ≤ n' ∧ 0 ≤ m ⇒
+   (0 ≤ m * n' ∧ 0 ≤ n' * m ∧ 0 ≤ n' DIV m * m + n' MOD m ∧
+    0 ≤ n' DIV m * m ∧ 0 ≤ n' DIV m ∧ 0 ≤ n' MOD m ∧ 0 ≤ s2n (n2s m)) ∧
+   (m * n' = n' * m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   256 * (n DIV 256) + n MOD 256 ≠ n ∧
+   ((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+   0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+   (n − n MOD 256) DIV 256 < n ∧ Abbrev T ∧ n ≠ 0 ∧
+   ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+(s0 ≠ n2s ((n − n MOD 256) DIV 256) ⇒
+ ∀m n'.
+   0 ≤ n' ∧ 0 ≤ m ⇒
+   (0 ≤ m * n' ∧ 0 ≤ n' * m ∧ 0 ≤ n' DIV m * m + n' MOD m ∧
+    0 ≤ n' DIV m * m ∧ 0 ≤ n' DIV m ∧ 0 ≤ n' MOD m ∧ 0 ≤ s2n (n2s m)) ∧
+   (m * n' = n' * m) ∧ ((n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m)) ∧
+   (n' MOD m < m ∨ ¬(0 < m)) ∧ 0 < 256 ∧
+   256 * (n DIV 256) + n MOD 256 ≠ n ∧
+   ((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+   0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+   (n − n MOD 256) DIV 256 < n ∧ Abbrev F ∧ n ≠ 0 ∧
+   ((s2n (n2s m) = m) ∨ ¬(m < n)))
+CNF2: ∀m n'.
+  0 ≤ n ∧ 0 ≤ n MOD 256 ∧ 0 ≤ n − n MOD 256 ∧
+  0 ≤ (n − n MOD 256) DIV 256 ∧ 0 ≤ s2n s0 ∧ 0 ≤ n DIV 256 ∧
+  0 ≤ 256 * (n DIV 256) ∧ 0 ≤ 256 * (n DIV 256) + n MOD 256 ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n (n2s m) = m) ∨ ¬(m < n) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ 0 ∨ s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ Abbrev T ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n − n MOD 256) DIV 256 < n ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n s0 = (n − n MOD 256) DIV 256) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < n MOD 256 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n MOD 256 ≠ 0 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ ((n − n MOD 256) DIV 256 = n DIV 256) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 256 * (n DIV 256) + n MOD 256 ≠ n ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < 256 ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n' MOD m < m ∨ ¬(0 < m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (m * n' = n' * m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ m * n' ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' * m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m + n' MOD m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' MOD m ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ s2n (n2s m) ∨
+   s0 ≠ n2s ((n − n MOD 256) DIV 256)) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ s2n (n2s m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' MOD m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' DIV m * m + n' MOD m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ n' * m ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 ≤ m * n' ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (m * n' = n' * m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n' = n' DIV m * m + n' MOD m) ∨ ¬(0 < m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n' MOD m < m ∨ ¬(0 < m) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < 256 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 256 * (n DIV 256) + n MOD 256 ≠ n ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ ((n − n MOD 256) DIV 256 = n DIV 256) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n MOD 256 ≠ 0 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ 0 < n MOD 256 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n s0 = (n − n MOD 256) DIV 256) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (n − n MOD 256) DIV 256 < n ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ Abbrev F ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ n ≠ 0 ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256))) ∧
+  (¬(0 ≤ m) ∨ ¬(0 ≤ n') ∨ (s2n (n2s m) = m) ∨ ¬(m < n) ∨
+   (s0 = n2s ((n − n MOD 256) DIV 256)))
+
+CNF1: ∀m m'.
+  0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+  (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+  ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+  (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ (r0 = 0) ∧ 0 < r ∧
+  (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧ n MOD 256 < 256 ∧
+  Abbrev (s0 = n2s ((n − r) DIV 256)) ∧
+  Abbrev (r = if r0 = 0 then 256 else r0) ∧ Abbrev (r0 = n MOD 256) ∧
+  n ≠ 0 ∧ ((s2n (n2s m) = m) ∨ ¬(m < n))
+BOOL: ((r0 = n MOD 256) ⇒
+ ((r0 = 0) ⇒
+  ((r = if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))) ∧
+ (r0 ≠ 0 ⇒
+  ((r = if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))))) ∧
+(r0 ≠ n MOD 256 ⇒
+ ((r0 = 0) ⇒
+  ((r = if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))) ∧
+ (r0 ≠ 0 ⇒
+  ((r = if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 < 256 ∧ (0 + m' = m') ∧ (m' + 0 = m') ∧
+      (SUC m' + m = SUC (m' + m)) ∧ (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))))
+NUM : (0 ≤ (if T then 256 else r0) ∧ 0 ≤ (if F then 256 else r0) ∧ 0 ≤ r0 ∧
+ 0 ≤ s2n s0 ∧ 0 ≤ (n − r) DIV 256 ∧ 0 ≤ n − r ∧ 0 ≤ r ∧ 0 ≤ n MOD 256 ∧
+ 0 ≤ n) ∧
+((r0 = n MOD 256) ⇒
+ ((r0 = 0) ⇒
+  ((r = if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))) ∧
+ (r0 ≠ 0 ⇒
+  ((r = if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev T ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))))) ∧
+(r0 ≠ n MOD 256 ⇒
+ ((r0 = 0) ⇒
+  ((r = if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if T then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ T ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))) ∧
+ (r0 ≠ 0 ⇒
+  ((r = if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev T ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n)))) ∧
+  (r ≠ (if F then 256 else r0) ⇒
+   ((s0 = n2s ((n − r) DIV 256)) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev T ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))) ∧
+   (s0 ≠ n2s ((n − r) DIV 256) ⇒
+    ∀m m'.
+      0 ≤ m' ∧ 0 ≤ m ⇒
+      (0 ≤ 0 + m' ∧ 0 ≤ m' + 0 ∧ 0 ≤ SUC m' + m ∧ 0 ≤ SUC m' ∧
+       0 ≤ m' + SUC m ∧ 0 ≤ SUC m ∧ 0 ≤ SUC (m' + m) ∧ 0 ≤ m' + m ∧
+       0 ≤ m' DIV m * m + m' MOD m ∧ 0 ≤ m' DIV m * m ∧ 0 ≤ m' DIV m ∧
+       0 ≤ m' MOD m ∧ 0 ≤ m * 256 ∧ 0 ≤ s2n (n2s m)) ∧ 0 < 256 ∧
+      (0 + m' = m') ∧ (m' + 0 = m') ∧ (SUC m' + m = SUC (m' + m)) ∧
+      (m' + SUC m = SUC (m' + m)) ∧
+      ((m' = m' DIV m * m + m' MOD m) ∨ ¬(0 < m)) ∧
+      (m' MOD m < m ∨ ¬(0 < m)) ∧ n ≠ m * 256 ∧ F ∧ 0 < r ∧
+      (s2n s0 = (n − r) DIV 256) ∧ (n − r) DIV 256 < n ∧
+      n MOD 256 < 256 ∧ Abbrev F ∧ Abbrev F ∧ Abbrev F ∧ n ≠ 0 ∧
+      ((s2n (n2s m) = m) ∨ ¬(m < n))))))
+CNF2: ∀m m'.
+  0 ≤ n ∧ 0 ≤ n MOD 256 ∧ 0 ≤ r ∧ 0 ≤ n − r ∧ 0 ≤ (n − r) DIV 256 ∧
+  0 ≤ s2n s0 ∧ 0 ≤ r0 ∧ 0 ≤ r0 ∧ 0 ≤ 256 ∧
+  ((r0 = 0) ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = r0) ∨ r0 ≠ n MOD 256) ∧
+  ((r0 = 0) ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = r0) ∨ r0 ≠ n MOD 256) ∧
+  ((r0 = 0) ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ r0 ∨ r0 ≠ n MOD 256) ∧
+  ((r0 = 0) ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ r0 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(m < n) ∨
+   (s2n (n2s m) = m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < r ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC (m' + m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC (m' + m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < r ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(m < n) ∨ (s2n (n2s m) = m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(m < n) ∨ (s2n (n2s m) = m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < r ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC (m' + m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC (m' + m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < r ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(m < n) ∨
+   (s2n (n2s m) = m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   r0 ≠ n MOD 256) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(m < n) ∨
+   (s2n (n2s m) = m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < r ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC (m' + m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC (m' + m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨
+   (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < r ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(m < n) ∨ (s2n (n2s m) = m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ (r = 256) ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(m < n) ∨ (s2n (n2s m) = m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < r ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ SUC (m' + m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m * m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ s2n (n2s m) ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' MOD m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' DIV m * m + m' MOD m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC (m' + m) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + SUC m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ SUC m' + m ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ m' + 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 ≤ 0 + m' ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (0 + m' = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + 0 = m') ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (SUC m' + m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (m' + SUC m = SUC (m' + m)) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨
+   (m' = m' DIV m * m + m' MOD m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 < m) ∨ m' MOD m < m ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ m * 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ 0 < r ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (s2n s0 = (n − r) DIV 256) ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ (n − r) DIV 256 < n ∨
+   ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n MOD 256 < 256 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev T ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ Abbrev F ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ n ≠ 0 ∨ ¬(0 ≤ m') ∨
+   ¬(0 ≤ m) ∨ r ≠ 256 ∨ (r0 = n MOD 256)) ∧
+  (r0 ≠ 0 ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(m < n) ∨
+   (s2n (n2s m) = m) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨ r ≠ 256 ∨
+   (r0 = n MOD 256)) ∧
+  ((r0 = 0) ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ r0 ∨ (r0 = n MOD 256)) ∧
+  ((r0 = 0) ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   r ≠ r0 ∨ (r0 = n MOD 256)) ∧
+  ((r0 = 0) ∨ s0 ≠ n2s ((n − r) DIV 256) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = r0) ∨ (r0 = n MOD 256)) ∧
+  ((r0 = 0) ∨ (s0 = n2s ((n − r) DIV 256)) ∨ ¬(0 ≤ m') ∨ ¬(0 ≤ m) ∨
+   (r = r0) ∨ (r0 = n MOD 256))
+
+CNF1: ∀n q.
+  0 < 256 ∧ ((q * n DIV n = q) ∨ ¬(0 < n)) ∧ (n * q = q * n) ∧ s0 ≠ s ∧
+  ORD c + 1 < 256 ∧ r0 ≠ 0 ∧ (r0 = ORD c + 1) ∧
+  Abbrev (s0 = n2s (256 * s2n s DIV 256)) ∧ (n2s (s2n s) = s)
+BOOL: ((s0 = n2s (256 * s2n s DIV 256)) ⇒
+ ∀n q.
+   0 < 256 ∧ ((q * n DIV n = q) ∨ ¬(0 < n)) ∧ (n * q = q * n) ∧ s0 ≠ s ∧
+   ORD c + 1 < 256 ∧ r0 ≠ 0 ∧ (r0 = ORD c + 1) ∧ Abbrev T ∧
+   (n2s (s2n s) = s)) ∧
+(s0 ≠ n2s (256 * s2n s DIV 256) ⇒
+ ∀n q.
+   0 < 256 ∧ ((q * n DIV n = q) ∨ ¬(0 < n)) ∧ (n * q = q * n) ∧ s0 ≠ s ∧
+   ORD c + 1 < 256 ∧ r0 ≠ 0 ∧ (r0 = ORD c + 1) ∧ Abbrev F ∧
+   (n2s (s2n s) = s))
+NUM : (0 ≤ 256 * s2n s DIV 256 ∧ 0 ≤ 256 * s2n s ∧ 0 ≤ r0 ∧ 0 ≤ ORD c + 1 ∧
+ 0 ≤ ORD c ∧ 0 ≤ s2n s) ∧
+((s0 = n2s (256 * s2n s DIV 256)) ⇒
+ ∀n q.
+   0 ≤ q ∧ 0 ≤ n ⇒
+   (0 ≤ q * n DIV n ∧ 0 ≤ n * q ∧ 0 ≤ q * n) ∧ 0 < 256 ∧
+   ((q * n DIV n = q) ∨ ¬(0 < n)) ∧ (n * q = q * n) ∧ s0 ≠ s ∧
+   ORD c + 1 < 256 ∧ r0 ≠ 0 ∧ (r0 = ORD c + 1) ∧ Abbrev T ∧
+   (n2s (s2n s) = s)) ∧
+(s0 ≠ n2s (256 * s2n s DIV 256) ⇒
+ ∀n q.
+   0 ≤ q ∧ 0 ≤ n ⇒
+   (0 ≤ q * n DIV n ∧ 0 ≤ n * q ∧ 0 ≤ q * n) ∧ 0 < 256 ∧
+   ((q * n DIV n = q) ∨ ¬(0 < n)) ∧ (n * q = q * n) ∧ s0 ≠ s ∧
+   ORD c + 1 < 256 ∧ r0 ≠ 0 ∧ (r0 = ORD c + 1) ∧ Abbrev F ∧
+   (n2s (s2n s) = s))
+CNF2: ∀n q.
+  0 ≤ s2n s ∧ 0 ≤ ORD c ∧ 0 ≤ ORD c + 1 ∧ 0 ≤ r0 ∧ 0 ≤ 256 * s2n s ∧
+  0 ≤ 256 * s2n s DIV 256 ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (n2s (s2n s) = s) ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ Abbrev T ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (r0 = ORD c + 1) ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ r0 ≠ 0 ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ ORD c + 1 < 256 ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ s0 ≠ s ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (n * q = q * n) ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (q * n DIV n = q) ∨ ¬(0 < n) ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 < 256 ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ q * n DIV n ∨
+   s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ n * q ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ q * n ∨ s0 ≠ n2s (256 * s2n s DIV 256)) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ q * n ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ n * q ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 ≤ q * n DIV n ∨
+   (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ 0 < 256 ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (q * n DIV n = q) ∨ ¬(0 < n) ∨
+   (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (n * q = q * n) ∨
+   (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ s0 ≠ s ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ ORD c + 1 < 256 ∨
+   (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ r0 ≠ 0 ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (r0 = ORD c + 1) ∨
+   (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ Abbrev F ∨ (s0 = n2s (256 * s2n s DIV 256))) ∧
+  (¬(0 ≤ n) ∨ ¬(0 ≤ q) ∨ (n2s (s2n s) = s) ∨
+   (s0 = n2s (256 * s2n s DIV 256)))
+
+CNF1: ∀q m.
+  0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+  (m + SUC q = SUC (m + q)) ∧ ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+  (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧
+  (r0 = 0) ∧ (r0 = (ORD c + 1) MOD 256) ∧
+  Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∧
+  Abbrev (r = if r0 = 0 then 256 else r0) ∧ (n2s (s2n s) = s)
+BOOL: ((r0 = 0) ⇒
+ ((r = if T then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev T ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev T ∧
+     (n2s (s2n s) = s))) ∧
+ (r ≠ (if T then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev F ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev F ∧
+     (n2s (s2n s) = s)))) ∧
+(r0 ≠ 0 ⇒
+ ((r = if F then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev T ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev T ∧
+     (n2s (s2n s) = s))) ∧
+ (r ≠ (if F then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev F ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + q = SUC (m + q)) ∧
+     (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev F ∧
+     (n2s (s2n s) = s))))
+NUM : (0 ≤ (if T then 256 else r0) ∧ 0 ≤ (if F then 256 else r0) ∧
+ 0 ≤ (s2n s * 256 + ORD c + 1 − r) DIV 256 ∧
+ 0 ≤ s2n s * 256 + ORD c + 1 − r ∧ 0 ≤ s2n s * 256 + ORD c + 1 ∧
+ 0 ≤ s2n s * 256 + ORD c ∧ 0 ≤ s2n s * 256 ∧ 0 ≤ r ∧ 0 ≤ r0 ∧
+ 0 ≤ (ORD c + 1) MOD 256 ∧ 0 ≤ ORD c + 1 ∧ 0 ≤ ORD c ∧ 0 ≤ s2n s) ∧
+((r0 = 0) ⇒
+ ((r = if T then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev T ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev T ∧
+     (n2s (s2n s) = s))) ∧
+ (r ≠ (if T then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev F ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ T ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev F ∧
+     (n2s (s2n s) = s)))) ∧
+(r0 ≠ 0 ⇒
+ ((r = if F then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev T ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev T ∧
+     (n2s (s2n s) = s))) ∧
+ (r ≠ (if F then 256 else r0) ⇒
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev T ∧ Abbrev F ∧
+     (n2s (s2n s) = s)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+   ∀q m.
+     0 ≤ m ∧ 0 ≤ q ⇒
+     (0 ≤ 0 + m ∧ 0 ≤ m + 0 ∧ 0 ≤ SUC m + q ∧ 0 ≤ SUC m ∧
+      0 ≤ m + SUC q ∧ 0 ≤ SUC q ∧ 0 ≤ SUC (m + q) ∧ 0 ≤ m + q ∧
+      0 ≤ m DIV q * q + m MOD q ∧ 0 ≤ m DIV q * q ∧ 0 ≤ m DIV q ∧
+      0 ≤ m MOD q ∧ 0 ≤ q * 256) ∧ 0 < 256 ∧ (0 + m = m) ∧ (m + 0 = m) ∧
+     (SUC m + q = SUC (m + q)) ∧ (m + SUC q = SUC (m + q)) ∧
+     ((m = m DIV q * q + m MOD q) ∨ ¬(0 < q)) ∧
+     (m MOD q < q ∨ ¬(0 < q)) ∧ ORD c + 1 ≠ q * 256 ∧ ORD c < 256 ∧ F ∧
+     (r0 = (ORD c + 1) MOD 256) ∧ Abbrev F ∧ Abbrev F ∧
+     (n2s (s2n s) = s))))
+CNF2: ∀q m.
+  0 ≤ s2n s ∧ 0 ≤ ORD c ∧ 0 ≤ ORD c + 1 ∧ 0 ≤ (ORD c + 1) MOD 256 ∧
+  0 ≤ r0 ∧ 0 ≤ r ∧ 0 ≤ s2n s * 256 ∧ 0 ≤ s2n s * 256 + ORD c ∧
+  0 ≤ s2n s * 256 + ORD c + 1 ∧ 0 ≤ s2n s * 256 + ORD c + 1 − r ∧
+  0 ≤ (s2n s * 256 + ORD c + 1 − r) DIV 256 ∧ 0 ≤ r0 ∧ 0 ≤ 256 ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (n2s (s2n s) = s) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev F ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev F ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (r0 = (ORD c + 1) MOD 256) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c < 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c + 1 ≠ q * 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ m MOD q < q ∨ ¬(0 < q) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m = m DIV q * q + m MOD q) ∨
+   ¬(0 < q) ∨ (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + SUC q = SUC (m + q)) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (SUC m + q = SUC (m + q)) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + 0 = m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (0 + m = m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 < 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ 0 + m ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + 0 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m + q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + SUC q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC (m + q) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q + m MOD q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m MOD q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ q * 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ q * 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m MOD q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q + m MOD q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC (m + q) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + SUC q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m + q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + 0 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ 0 + m ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 < 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (0 + m = m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + 0 = m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (SUC m + q = SUC (m + q)) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + SUC q = SUC (m + q)) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m = m DIV q * q + m MOD q) ∨
+   ¬(0 < q) ∨ s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ m MOD q < q ∨ ¬(0 < q) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c + 1 ≠ q * 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c < 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (r0 = (ORD c + 1) MOD 256) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev T ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev F ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  ((r = 256) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (n2s (s2n s) = s) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (n2s (s2n s) = s) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev T ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev T ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (r0 = (ORD c + 1) MOD 256) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c < 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c + 1 ≠ q * 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ m MOD q < q ∨ ¬(0 < q) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m = m DIV q * q + m MOD q) ∨
+   ¬(0 < q) ∨ s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + SUC q = SUC (m + q)) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (SUC m + q = SUC (m + q)) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + 0 = m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (0 + m = m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 < 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ 0 + m ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + 0 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m + q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + SUC q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC (m + q) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q + m MOD q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m MOD q ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ q * 256 ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ q * 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m MOD q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m DIV q * q + m MOD q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC (m + q) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + SUC q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ SUC m + q ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ m + 0 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 ≤ 0 + m ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ 0 < 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (0 + m = m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + 0 = m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (SUC m + q = SUC (m + q)) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m + SUC q = SUC (m + q)) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (m = m DIV q * q + m MOD q) ∨
+   ¬(0 < q) ∨ (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ m MOD q < q ∨ ¬(0 < q) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c + 1 ≠ q * 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ ORD c < 256 ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (r0 = (ORD c + 1) MOD 256) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev F ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ Abbrev T ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ 256 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨ (n2s (s2n s) = s) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ r0 ≠ 0) ∧
+  (r ≠ r0 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (r0 = 0)) ∧
+  (r ≠ r0 ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (r0 = 0)) ∧
+  ((r = r0) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨
+   s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (r0 = 0)) ∧
+  ((r = r0) ∨ ¬(0 ≤ q) ∨ ¬(0 ≤ m) ∨
+   (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (r0 = 0))
+
+CNF1: ∀a.
+  (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧ (q = 1) ∧
+  (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧
+  Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∧
+  Abbrev (r = 256) ∧ (n2s (s2n s) = s)
+BOOL: ((r = 256) ⇒
+ ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+  ∀a.
+    (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧ (q = 1) ∧
+    (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev T ∧ Abbrev T ∧
+    (n2s (s2n s) = s)) ∧
+ (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+  ∀a.
+    (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧ (q = 1) ∧
+    (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev F ∧ Abbrev T ∧
+    (n2s (s2n s) = s))) ∧
+(r ≠ 256 ⇒
+ ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+  ∀a.
+    (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧ (q = 1) ∧
+    (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev T ∧ Abbrev F ∧
+    (n2s (s2n s) = s)) ∧
+ (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+  ∀a.
+    (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧ (q = 1) ∧
+    (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev F ∧ Abbrev F ∧
+    (n2s (s2n s) = s)))
+NUM : (0 ≤ (s2n s * 256 + ORD c + 1 − r) DIV 256 ∧
+ 0 ≤ s2n s * 256 + ORD c + 1 − r ∧ 0 ≤ s2n s * 256 + ORD c + 1 ∧
+ 0 ≤ s2n s * 256 + ORD c ∧ 0 ≤ s2n s * 256 ∧ 0 ≤ r ∧ 0 ≤ q ∧
+ 0 ≤ ORD c + 1 ∧ 0 ≤ ORD c ∧ 0 ≤ r0 ∧ 0 ≤ s2n s) ∧
+((r = 256) ⇒
+ ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+  ∀a.
+    0 ≤ ORD a ∧ (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧
+    (q = 1) ∧ (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev T ∧
+    Abbrev T ∧ (n2s (s2n s) = s)) ∧
+ (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+  ∀a.
+    0 ≤ ORD a ∧ (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧
+    (q = 1) ∧ (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev F ∧
+    Abbrev T ∧ (n2s (s2n s) = s))) ∧
+(r ≠ 256 ⇒
+ ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ⇒
+  ∀a.
+    0 ≤ ORD a ∧ (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧
+    (q = 1) ∧ (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev T ∧
+    Abbrev F ∧ (n2s (s2n s) = s)) ∧
+ (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ⇒
+  ∀a.
+    0 ≤ ORD a ∧ (CHR (ORD a) = a) ∧ c ≠ #"\255" ∧ (ORD c = 255) ∧
+    (q = 1) ∧ (ORD c + 1 = 256) ∧ ORD c < 256 ∧ (r0 = 0) ∧ Abbrev F ∧
+    Abbrev F ∧ (n2s (s2n s) = s)))
+CNF2: ∀a.
+  0 ≤ s2n s ∧ 0 ≤ r0 ∧ 0 ≤ ORD c ∧ 0 ≤ ORD c + 1 ∧ 0 ≤ q ∧ 0 ≤ r ∧
+  0 ≤ s2n s * 256 ∧ 0 ≤ s2n s * 256 + ORD c ∧
+  0 ≤ s2n s * 256 + ORD c + 1 ∧ 0 ≤ s2n s * 256 + ORD c + 1 − r ∧
+  0 ≤ (s2n s * 256 + ORD c + 1 − r) DIV 256 ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (n2s (s2n s) = s) ∨ r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ Abbrev T ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ Abbrev F ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (r0 = 0) ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ ORD c < 256 ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (ORD c + 1 = 256) ∨ r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (q = 1) ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (ORD c = 255) ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ c ≠ #"\255" ∨
+   r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (CHR (ORD a) = a) ∨ r ≠ 256) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ 0 ≤ ORD a ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ 0 ≤ ORD a ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (CHR (ORD a) = a) ∨ r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ c ≠ #"\255" ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (ORD c = 255) ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (q = 1) ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (ORD c + 1 = 256) ∨ r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ ORD c < 256 ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (r0 = 0) ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ Abbrev T ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ Abbrev T ∨
+   r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (n2s (s2n s) = s) ∨ r ≠ 256) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (n2s (s2n s) = s) ∨ (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ Abbrev F ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ Abbrev T ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (r0 = 0) ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ ORD c < 256 ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (ORD c + 1 = 256) ∨ (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (q = 1) ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ (ORD c = 255) ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ c ≠ #"\255" ∨
+   (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨
+   (CHR (ORD a) = a) ∨ (r = 256)) ∧
+  (s0 ≠ n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256) ∨ 0 ≤ ORD a ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ 0 ≤ ORD a ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (CHR (ORD a) = a) ∨ (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ c ≠ #"\255" ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (ORD c = 255) ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (q = 1) ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (ORD c + 1 = 256) ∨ (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ ORD c < 256 ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ (r0 = 0) ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ Abbrev F ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨ Abbrev F ∨
+   (r = 256)) ∧
+  ((s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∨
+   (n2s (s2n s) = s) ∨ (r = 256))
+
+CNF1: ∀m n.
+  0 < 256 ∧ (m * n = n * m) ∧ ((n * m DIV m = n) ∨ ¬(0 < m)) ∧
+  n2s (256 * s2n s DIV 256) ≠ s ∧ (ORD #"\255" = 255) ∧
+  (ORD #"\255" + 1 = 256) ∧ ORD #"\255" < 256 ∧ (n2s (s2n s) = s)
+NUM : (0 ≤ 256 * s2n s DIV 256 ∧ 0 ≤ 256 * s2n s ∧ 0 ≤ ORD #"\255" + 1 ∧
+ 0 ≤ ORD #"\255" ∧ 0 ≤ s2n s) ∧
+∀m n.
+  0 ≤ n ∧ 0 ≤ m ⇒
+  (0 ≤ m * n ∧ 0 ≤ n * m DIV m ∧ 0 ≤ n * m) ∧ 0 < 256 ∧
+  (m * n = n * m) ∧ ((n * m DIV m = n) ∨ ¬(0 < m)) ∧
+  n2s (256 * s2n s DIV 256) ≠ s ∧ (ORD #"\255" = 255) ∧
+  (ORD #"\255" + 1 = 256) ∧ ORD #"\255" < 256 ∧ (n2s (s2n s) = s)
+CNF2: ∀m n.
+  0 ≤ s2n s ∧ 0 ≤ ORD #"\255" ∧ 0 ≤ ORD #"\255" + 1 ∧ 0 ≤ 256 * s2n s ∧
+  0 ≤ 256 * s2n s DIV 256 ∧ (0 ≤ n * m ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  (0 ≤ n * m DIV m ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  (0 ≤ m * n ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧ (0 < 256 ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  ((m * n = n * m) ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  (¬(0 < m) ∨ (n * m DIV m = n) ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  (n2s (256 * s2n s DIV 256) ≠ s ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  ((ORD #"\255" = 255) ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  ((ORD #"\255" + 1 = 256) ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  (ORD #"\255" < 256 ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m)) ∧
+  ((n2s (s2n s) = s) ∨ ¬(0 ≤ n) ∨ ¬(0 ≤ m))
+
+CNF1: ∀n.
+  (s2n (n2s n) = n) ∧ ((n2s x = n2s y) ∨ (x = y)) ∧
+  (n2s x ≠ n2s y ∨ x ≠ y)
+NUM : (0 ≤ x ∧ 0 ≤ y) ∧
+∀n.
+  0 ≤ n ⇒
+  0 ≤ s2n (n2s n) ∧ (s2n (n2s n) = n) ∧ ((n2s x = n2s y) ∨ (x = y)) ∧
+  (n2s x ≠ n2s y ∨ x ≠ y)
+CNF2: ∀n.
+  0 ≤ y ∧ 0 ≤ x ∧ (0 ≤ s2n (n2s n) ∨ ¬(0 ≤ n)) ∧
+  ((s2n (n2s n) = n) ∨ ¬(0 ≤ n)) ∧
+  ((x = y) ∨ (n2s x = n2s y) ∨ ¬(0 ≤ n)) ∧
+  (x ≠ y ∨ n2s x ≠ n2s y ∨ ¬(0 ≤ n))
+
+CNF1: ∀s.
+  (n2s (s2n s) = s) ∧ ((s2n x = s2n y) ∨ (x = y)) ∧
+  (s2n x ≠ s2n y ∨ x ≠ y)
+NUM : (0 ≤ s2n x ∧ 0 ≤ s2n y) ∧
+∀s.
+  0 ≤ s2n s ∧ (n2s (s2n s) = s) ∧ ((s2n x = s2n y) ∨ (x = y)) ∧
+  (s2n x ≠ s2n y ∨ x ≠ y)
+CNF2: ∀s.
+  0 ≤ s2n y ∧ 0 ≤ s2n x ∧ 0 ≤ s2n s ∧ (n2s (s2n s) = s) ∧
+  ((s2n x = s2n y) ∨ (x = y)) ∧ (s2n x ≠ s2n y ∨ x ≠ y)
+
+CNF1: ∃s. ∀s' n. (n2s (s2n s') = s') ∧ s ≠ n2s n
+NUM : ∃s. ∀s' n. 0 ≤ n ⇒ 0 ≤ s2n s' ∧ (n2s (s2n s') = s') ∧ s ≠ n2s n
+CNF2: ∃s.
+  ∀s' n.
+    (0 ≤ s2n s' ∨ ¬(0 ≤ n)) ∧ ((n2s (s2n s') = s') ∨ ¬(0 ≤ n)) ∧
+    (s ≠ n2s n ∨ ¬(0 ≤ n))
+
+CNF1: ∃n. ∀n' s. (s2n (n2s n') = n') ∧ n ≠ s2n s
+NUM : ∃n.
+  0 ≤ n ∧
+  ∀n' s.
+    0 ≤ n' ⇒
+    (0 ≤ s2n (n2s n') ∧ 0 ≤ s2n s) ∧ (s2n (n2s n') = n') ∧ n ≠ s2n s
+CNF2: ∃n.
+  ∀n' s.
+    0 ≤ n ∧ (0 ≤ s2n s ∨ ¬(0 ≤ n')) ∧ (0 ≤ s2n (n2s n') ∨ ¬(0 ≤ n')) ∧
+    ((s2n (n2s n') = n') ∨ ¬(0 ≤ n')) ∧ (n ≠ s2n s ∨ ¬(0 ≤ n'))
+
+CNF1: ∃k v.
+  ∀v' k' v''.
+    (q,v') ∉ set l ∧ v' ≠ r ∧ ((ALOOKUP l q = NONE) ∨ (k = q)) ∧
+    ((ALOOKUP l q = NONE) ∨ MEM (k,v) l) ∧
+    (ALOOKUP l q ≠ NONE ∨ k' ≠ q ∨ (k',v'') ∉ set l)
+
+CNF1: (x ∈ FDOM fm ∨ (fm ' x = y)) ∧ ((y = fm ' x) ∨ (fm ' x = y)) ∧
+((y = fm ' x) ∨ x ∈ FDOM fm) ∧ x ∈ FDOM fm ∧
+(x ∉ FDOM fm ∨ y ≠ fm ' x ∨ fm ' x ≠ y)
+
+CNF1: ∀l1' l2'.
+  alist_to_fmap (ls ++ l1) |+ (q,r) ≠
+  alist_to_fmap (ls ++ l2) |+ (q,r) ∧
+  (alist_to_fmap l1 = alist_to_fmap l2) ∧
+  ((alist_to_fmap (ls ++ l1') = alist_to_fmap (ls ++ l2')) ∨
+   alist_to_fmap l1' ≠ alist_to_fmap l2')
+
+CNF1: ∀al p_2 v'.
+  (MEM (p_2,v') al ∨ ALOOKUP al p_2 ≠ SOME v') ∧ fm ' k ≠ v ∧
+  (ALOOKUP ls k = SOME v) ∧ (k,p_2) ∉ set ls
+
+CNF1: ∀al p_2 v'.
+  (MEM (p_2,v') al ∨ ALOOKUP al p_2 ≠ SOME v') ∧ k ∉ FDOM fm ∧
+  (ALOOKUP ls k = SOME v) ∧ (k,p_2) ∉ set ls
+
