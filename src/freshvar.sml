@@ -5,6 +5,27 @@ open HolKernel Abbrev boolLib
      stringtools listtools tools
      extractvar
 
+fun FRESHVAR_ERR function message =
+    HOL_ERR{origin_structure = "freshvar",
+            origin_function = function,
+            message = message}
+
+fun create_intl_aux size = 
+  case size of
+    0 => []
+  | _ => if size < 0 then raise FRESHVAR_ERR "create_intl_aux" "negative number"
+         else size :: create_intl_aux (size - 1)
+fun create_intl size = rev (create_intl_aux size)
+
+fun prepend str1 str2 = str1 ^ str2
+
+fun create_namel str size =
+  let val intstrl = map Int.toString (create_intl size) in
+    map (prepend str) intstrl
+  end
+
+fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
+
 (* create a fresh name *)
 fun create_newname_aux name used =    
   let val newname = ref name in

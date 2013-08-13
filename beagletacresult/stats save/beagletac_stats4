@@ -1,17 +1,17 @@
-Problems    : 26
+Problems    : 12
 
 Polymorph   : 3
 Lambda-lift : 0
-Bool Conv   : 6
-Num Conv    : 17
+Bool Conv   : 2
+Num Conv    : 8
 Higher Order: 2
 
-Unsat       : 17
-Unkown      : 1
+Unsat       : 10
+Unkown      : 0
 Sat         : 0
-Time Out    : 6
+Time Out    : 2
 Parsing Err : 0
-Code Err    : 2
+Code Err    : 0
 Beagle Err  : 0
 Metis fail  : 0
 

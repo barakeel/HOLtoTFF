@@ -12,11 +12,35 @@ open HolKernel Abbrev boolLib numSyntax
 
 
 fun TOOLS_ERR function message =
-    HOL_ERR{origin_structure = "tools",
-	    origin_function = function,
-            message = message}
+    HOL_ERR {origin_structure = "tools",
+	           origin_function = function,
+             message = message}
 
- (* ACONV *)
+(* BASIC *)  
+fun repeat_n_fun n f x = 
+  case n of
+    0 => x
+  | _ => if n < 0 
+         then raise TOOLS_ERR "repeat_n_fun" ""  
+         else f (repeat_n_fun (n - 1) f x)
+         
+(* ERROR HANDLING *)
+fun success f x =
+  (f x; true) handle _ => false
+  
+fun wrap s f m function x =
+  function x               
+  handle  
+  HOL_ERR {origin_structure = s1, origin_function = f1, message = m1}
+      => raise HOL_ERR {origin_structure = s ^ " - " ^ s1,
+                        origin_function = f ^ " - " ^ f1,
+                        message = m ^ " - " ^ m1}           
+  | UNCHANGED => raise UNCHANGED
+  | _ => raise HOL_ERR {origin_structure = s,
+                        origin_function = f,
+                        message = m}        
+
+(* ACONV *)
 fun is_member_term t l = is_member_eq aconv t l 
 fun erase_double_term l = erase_double_eq aconv l 
  
@@ -71,8 +95,6 @@ fun name_numeral term =
     Numeral => name_of term
   | _ => raise TOOLS_ERR "name_numeral" "not a numeral"
   
-fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
-
 fun strip_comb_n (term,n) =
   if n = 0 then (term,[])
 else 
@@ -89,8 +111,8 @@ fun get_arity term = length (snd (strip_comb term))
 fun only_hyp thm = 
   if length (hyp thm) = 1 then hd (hyp thm)
   else raise TOOLS_ERR "only_hyp" "" 
-
-fun thm_eq th1 th2 = (hyp th1 = hyp th2) andalso (concl th1 = concl th2) 
+ 
+fun is_refl eqth = (rhs (concl eqth) = lhs (concl eqth))
  
 (* GOAL *)
 fun only_hypg goal =
@@ -138,7 +160,7 @@ fun conv_concl conv thm =
   end end     
   handle UNCHANGED => thm
   
-fun conv_hyp conv term thm =
+fun conv_onehyp conv term thm =
   let val eqth1 = conv term in
   let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
   let val lemma3 = UNDISCH lemma2 in
@@ -147,7 +169,7 @@ fun conv_hyp conv term thm =
   end end end end 
   handle UNCHANGED => thm
  
-fun conv_hypl conv terml thm = repeatchange (conv_hyp conv) terml thm 
+fun conv_hypl conv terml thm = repeatchange (conv_onehyp conv) terml thm 
  
 fun list_PROVE_HYP thml thm =
   case thml of
@@ -175,10 +197,10 @@ fun unconj_hyp_rule term thm =
 (* hypl is a list of conj *)
 fun list_unconj_hyp_rule hypl thm = repeatchange unconj_hyp_rule hypl thm
   
-fun strip_conj_all_hyp_rule thm =
+fun strip_conj_hyp_rule thm =
   case filter is_conj (hyp thm) of
     [] => thm
-  | l => strip_conj_all_hyp_rule (list_unconj_hyp_rule l thm)
+  | l => strip_conj_hyp_rule (list_unconj_hyp_rule l thm)
 
 fun list_AP_THM thm terml =
   case terml of
@@ -334,17 +356,5 @@ fun has_boolarg_goal goal =
   let val l = (fst goal) @ [snd goal] in
     exists has_boolarg l
   end
-
-(* Polymorph *)
-fun is_polymorph term = not (null (all_vartype term)) 
-fun is_polymorph_goal goal =   
-  exists is_polymorph (fst goal) orelse
-  is_polymorph (snd goal)
-fun is_polymorph_thm thm = 
-  exists is_polymorph (hyp thm) orelse
-  is_polymorph (concl thm)
-fun is_polymorph_pb thml goal =
-  exists is_polymorph_thm thml orelse
-  is_polymorph_goal goal 
 
 end

@@ -24,6 +24,13 @@ load "beagle"; open beagle;
 show_assums :=  true;
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
+fst (BEAGLE_NF_TAC thml goal);
+
+(* test error *)
+
+
+fst (ADD_FNUM_AXIOMS_TAC goal);
+
 
 (* thmlist *)
 val filename = "result/thmlist";
@@ -32,10 +39,17 @@ val goal = ([F],F);
 
 (* monomorphisation problem *)
 val filename = "result/monomorph";
-val thml = [ASSUME ``! x:'a y:'a. (x = y) ==> (y = x)``];
-val goal = ([``a:num = b:num``], ``b:num = a:num``);
-val mthml = monomorph_pb_c thml goal;
+val thml = [mk_thm ([],``!x:'a y:'a. (x = y)``),
+            mk_thm ([],``!x:num y:num. (x = y) ==> F``)
+           ];
+val goal = ([],F);
+val (mthml,mgoal) = monomorph_pb (thml,goal);
 
+(* num problem *)
+(* where beagle success and metis fails *)
+val filename = "result/num";
+val thml = [];
+val goal = ([``x=0``,``y=0``], ``f x = 0``);
 
 (* bool problem *)
 val filename = "result/bool"; 

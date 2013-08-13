@@ -97,6 +97,8 @@ fun extract_varl terml = erase_number (erase_double (extract_var2l terml []))
 (* return a list of triple (variable,number of arguments,category) *)
 
 
+
+
 fun is_in_bval (a,b) = (b = Boundvar)
 fun is_in_fval (a,b) = (b = Freevar)
 fun is_in_cal (a,b) = (b = Constvar)
@@ -112,8 +114,8 @@ fun get_fvl term = map fst (get_fval term)
 fun get_cl term = map fst (get_cal term)
 fun get_fvcl term = map fst (get_fvcal term)
 fun all_var term = map fst (map fst (extract_var term))
+fun all_vara term = map fst (extract_var term)
 fun all_varl terml = erase_double (List.concat (map all_var terml))
-
 
 fun concat_thm returnalist thm =
   let val l = (hyp thm) @ [concl thm] in
@@ -125,6 +127,7 @@ fun get_bvl_thm thm = concat_thm get_bvl thm
 fun get_cl_thm thm = concat_thm get_cl thm
 fun get_fvcl_thm thm = concat_thm get_fvcl thm
 fun all_var_thm thm = concat_thm all_var thm
+fun all_vara_thm thm = concat_thm all_vara thm
 
 fun concat_goal returnalist goal =
   let val l = fst goal @ [snd goal] in
@@ -136,6 +139,6 @@ fun get_bvl_goal goal = concat_goal get_bvl goal
 fun get_cl_goal goal = concat_goal get_cl goal
 fun get_fvcl_goal goal = concat_goal get_fvcl goal
 fun all_var_goal goal = concat_goal all_var goal
-
+fun all_vara_goal goal = concat_goal all_vara goal
 
 end 

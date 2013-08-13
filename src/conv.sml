@@ -26,7 +26,7 @@ Use different variables name to prevent cnf_conv from renaming them
 At least , memorise them into list so that they can be printed differently
 *)
 
-open HolKernel Abbrev boolLib normalForms (* numSyntax *) (* arithmeticTheory *)
+open HolKernel Abbrev boolLib normalForms numSyntax (* arithmeticTheory *)
      stringtools listtools tools mydatatype 
      extractvar freshvar extracttype namevar
 
@@ -34,17 +34,6 @@ fun CONV_ERR function message =
     HOL_ERR{origin_structure = "conv",
 	    origin_function = function,
             message = message}
-
-
-(* BETA CONV *)
-fun redepth_beta_conv term = (REDEPTH_CONV BETA_CONV) term;
-(* ETA CONV *)
-fun eta_conv term = (REDEPTH_CONV ETA_CONV) term;
-
-(* CNF CONV *)
-  (* eliminate unused quantifier normalForms.CNF_CONV ``?x. !x. p x``; *)
-  (* =>, ?! and if then else *)
-fun cnf_conv term = normalForms.CNF_CONV term
 
 (* BOOL CONV *)
 local fun is_interesting_in term subterm =  
@@ -221,10 +210,11 @@ fun bool_conv_aux term =
     )
   | Abs => raise UNCHANGED
 
-fun bool_conv term =
+fun bool_conv_w term =
   let val terml = find_free_bool term in
     (bool_conv_aux THENC (bool_conv_subl terml)) term
   end
+fun bool_conv term = wrap "conv" "bool_conv" "" bool_conv_w term
 
 (* test
 val term = ``!x. g (!z. z = 0) /\ g (!z. x = z)``;
@@ -238,25 +228,16 @@ bool_conv term;
 find_free_bool term;
 bool_conv_sub subterm term;
 *)
-
-
 (* PRINTING IDEA *)
-(* 
- = :bool -->  <=> 
- = :bool -->   =  
-depend on the arguments 
-*)
-(*
-true --> $true
-true --> btrue 
-*)
+
 
 (* NUM CONV *)
 (* find *)
 local fun is_interesting_in term subterm = 
   has_numty subterm andalso 
   free_in subterm term andalso 
-  not (numSyntax.is_numeral subterm)
+  not (numSyntax.is_numeral subterm) andalso
+  is_var subterm
 in
 fun find_free_num term = 
   erase_double_term (filter (is_interesting_in term) (all_subterm term))
@@ -266,13 +247,13 @@ end
 local fun is_interesting_in term subterm = 
   bound_by_quant subterm term andalso
   has_numty subterm andalso 
-  not (numSyntax.is_numeral subterm)
+  not (numSyntax.is_numeral subterm) andalso
+  is_var subterm
 in 
 fun find_bound_num term =  
   erase_double_term (filter (is_interesting_in term) (all_subterm term))
 end  
 (* end find *)
-
 
 fun num_axiom term = 
   let val axiom = arithmeticTheory.ZERO_LESS_EQ in
@@ -364,6 +345,48 @@ fun num_conv term =
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
 *)
 
+fun fnum_axiom_w (f,arity) = 
+  let val (argl,image) = strip_type_n (type_of f,arity) in
+  let val argtyl = map fst argl in
+  let val imagety = fst image in
+    if imagety = ``:num``
+    then 
+      let val namel = create_namel "x" (length argl) in   
+      let val varl = list_mk_var (namel,argtyl) in
+      let val newvarl = create_newvarl varl f in
+      let val numvarl = filter has_numty varl in
+      let val axiomvar = if null numvarl then ASSUME T
+                    else LIST_CONJ (map num_axiom numvarl) 
+      in
+      let val term = list_mk_comb (f,newvarl) in
+      let val axiom = num_axiom term in
+      let val th1 = 
+        if null numvarl then axiom
+        else DISCH (concl axiomvar) (ADD_ASSUM (concl axiomvar) axiom)
+      in 
+      let val th2 = GENL varl th1 in
+        EQ_MP (QCONV normalForms.CNF_CONV (concl th2)) th2
+      end end end end end
+      end end end end
+    else raise CONV_ERR "fnum_axiom" "not a num type"
+  end end end
+fun fnum_axiom (f,arity) = wrap "conv" "fnum_axiom" "" fnum_axiom_w (f,arity) 
+
+(* test
+load "extracttype"; open extracttype;
+load "freshvar"; open freshvar;
+load "tools"; open tools;
+val f = ``f : 'a -> num ``;  
+val arity = 1; 
+  normalForms.CNF_CONV (concl it);
+*)
+
+
+(* test 
+!x.y 
+
+*)
+
 
 (* find *)
 fun find_free_abs_aux term subterm = (* term should be a boolean *)
@@ -418,16 +441,16 @@ fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
 
 fun find_bound_abs term = erase_double_term (find_bound_abs_aux term term)
   
-
-fun fun_axiom abs =
+fun fun_axiom_w abs =
   let val (bvl,t) = strip_abs abs in
   let val th1 = REFL abs in
   let val th2 = list_AP_THM th1 bvl in
-  let val th3 = (RAND_CONV redepth_beta_conv) (concl th2) in
+  let val th3 = RAND_CONV (REDEPTH_CONV BETA_CONV) (concl th2) in
   let val th4 = EQ_MP th3 th2 in
     th4
   end end end end end
-  handle _ => raise CONV_ERR "fun_axiom" (term_to_string abs)
+fun fun_axiom abs = wrap "conv" "fun_axiom" "" fun_axiom_w abs 
+
 
 fun eq_conj_subs thm =
   let val th0 = CONJUNCT1 thm in
@@ -469,7 +492,7 @@ val (bvl,t) = strip_abs abs;
 *)
 
 (* term should have type bool *)
-fun fun_conv_sub abs term =
+fun fun_conv_sub_w abs term =
   (* term *)
   let val ty = type_of abs in
   let val newname = create_newname "f" term in
@@ -540,25 +563,18 @@ fun fun_conv_sub abs term =
   
   end end end end end end
   
-  handle _ => raise CONV_ERR "fun_conv_sub" 
-              ("abs: " ^ (term_to_string abs) ^
-              "term: " ^ (term_to_string term) )
+fun fun_conv_sub abs term =
+  wrap "conv" "fun_conv_sub" 
+   ("abs: " ^ (term_to_string abs) ^ "term: " ^ (term_to_string term))
+   (fun_conv_sub_w abs) term
+   
 (* test
 val term = ``P (\x y. x + y + z) : bool``;
 val abs = ``\x y. x + y + z``;
 fun_conv_sub abs term;
+fun_axiom term;
 *)
 
-(* test 
-show_assums := true;
-val term = `` \x y. x + y + z``;
-fun_axiom term;
-\x y. x + y + z x y = x
-*)
-(*
- show_assums:= true;
- *)
- 
 fun fun_conv_subl absl term =
   case absl of
     [] => raise UNCHANGED
@@ -575,13 +591,12 @@ fun fun_conv_quant term =
   let val absl = find_bound_abs term in
     STRIP_QUANT_CONV (fun_conv_subl absl) term
   end
+
 (* test 
 show_assums :=  true;
 val term = ``!z. (P (\x. x + z)):bool``;
 fun_conv_quant_aux term;
 *)
-
-
 
 (* term of type bool *)
 fun fun_conv_aux term = 
@@ -598,25 +613,21 @@ fun fun_conv_aux term =
     )
   | Abs => raise UNCHANGED
 
-fun fun_conv term =
+fun fun_conv_w term =
   let val absl = find_free_abs term in
     (fun_conv_aux THENC (fun_conv_subl absl)) term
   end
+fun fun_conv term = wrap "conv" "fun_conv" "" fun_conv_w term
 
 (* test 
 val term = ``P (\x. x + 1) (\y.y) /\ !x. Q (\z. z + x)``;
 val term = ``P (\x z. x + z):bool``;
 val term = ``P (\x. (x = \z.z) ):bool`` ;
-
 fun_conv term;
 find_free_abs term ;
 *)
-(* END FUN CONV *)
-
-(* app CONV *)   
-(* can't print that *)
-(* only do this conv if it is not first order *)
-fun app_def appname subterm =
+(* APP CONV *)   
+fun app_def_w appname subterm =
   let val (operator,arg) = dest_comb subterm in  
   (* app *)
   let val ty = type_of operator in
@@ -633,7 +644,8 @@ fun app_def appname subterm =
     t2
   end end end end end
   end end end end 
-  handle _ => raise CONV_ERR "app_def" ""
+fun app_def appname subterm =
+  wrap "conv" "app_def" "" (app_def_w appname) subterm 
 
 (* test
 show_assums :=  true;
@@ -641,19 +653,19 @@ val subterm = ``f a b c``;
 *)
 
 (* subterm is just a combination *)
-fun app_conv_sub appname subterm =
+fun app_conv_sub_w appname subterm =
   let val (operator,arg) = dest_comb subterm in  
   let val th1 = ASSUME (app_def appname subterm) in
   let val th2 = SPECL [operator,arg] th1 in
   let val th3 = SYM th2 in
     th3
   end end end end
-  handle _ => raise CONV_ERR "app_conv_sub" ""
+fun app_conv_sub appname subterm =
+  wrap "conv" "app_conv_sub" "" (app_conv_sub_w appname) subterm
 
 (* test
 show_assums :=  true;
 val term = ``(f a b = 2) /\ (f a = g)``;
-
 *)
 
 fun app_conv appname term = 
@@ -707,28 +719,7 @@ fun app_conv appname term =
 (* test
 val term = ``(f a b = 2) /\ (f a = g)``;
  *)
-
-(* DEFINE CONV *)
-fun define_conv def =
-  let val (bvl,t) = strip_forall def in
-  (* one way *)
-  let val th11 = ASSUME def in
-  let val th12 = SPECL bvl th11 in
-  let val th13 = repeatchange ABS (rev bvl) th12 in
-  let val th14 = conv_concl (LAND_CONV eta_conv) th13 in 
-  let val th15 = DISCH def th14 in
-  (* otherway *)
-  let val th21 = ASSUME (concl th14) in
-  let val th22 = list_AP_THM th21 bvl in
-  let val th23 = conv_concl redepth_beta_conv th22 in
-  let val th24 = GENL bvl th23 in
-  let val th25 = DISCH (concl th14) th24 in
-  (* together *)
-    IMP_ANTISYM_RULE th15 th25
-  end end end end end 
-  end end end end end
-  end
-  handle _ => raise CONV_ERR "define_conv" ""
+  
 (* test
 val def = ``!x y. APP x y = x y``;
 val def = ``!x. APP x  = x ``;

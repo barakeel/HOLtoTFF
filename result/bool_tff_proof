@@ -1,2 +1,0 @@
-List((0 ≤ xx)) | selSimp | List((0 ≤ xx))
-List((1 + xx) →_ℤ xx) | selSimp | List((1 + xx) →_ℤ xx)

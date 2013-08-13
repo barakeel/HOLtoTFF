@@ -2,7 +2,10 @@ signature freshvar =
 sig
 
   include Abbrev
-(* create a fresh name *)
+
+  val create_namel : string -> int -> string list
+  val list_mk_var : (string list * hol_type list) -> term list
+(* create a fresh name *)  
   val create_newname_aux : string -> string list -> string
   val create_newname : string -> term -> string
   val list_create_newname : string -> term list -> string

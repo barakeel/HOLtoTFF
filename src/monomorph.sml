@@ -18,60 +18,7 @@ fun MONOMORPH_ERR function message =
             origin_function = function,
             message = message}
 
-(* all variables *)
-fun mk_multielem tyl varty = (varty,tyl)
-fun mk_multisubst vartyl tyl = map (mk_multielem tyl) vartyl
 
-fun mk_elem (red,res) = {redex = red, residue = res}
-fun add_elem elem subst = elem :: subst
-
-fun add_eleml elem substl = 
-  case substl of
-    [] => [[elem]]
-  | _ => map (add_elem elem) substl
-
-fun add_multielem multielem substl = 
-  case multielem of
-    (varty,[]) => substl
-  | (varty,ty :: m) => 
-    let val elem = mk_elem (varty,ty) in  
-      (add_eleml elem substl) @ (add_multielem (varty,m) substl) 
-    end
-
-fun add_multisubst multisubst substl =
-  repeatchange add_multielem multisubst substl
-
-fun all_subst vartyl tyl =
-  let val multisubst = mk_multisubst vartyl tyl in
-    add_multisubst multisubst []  
-  end 
-
-fun all_subtype_goal goal = 
-  erase_double (List.concat (
-    all_subtype (snd goal) :: map all_subtype (fst goal)
-    ))
-
-fun all_vartype_thm thm = 
-  erase_double (List.concat (
-    all_vartype (concl thm) :: map all_vartype (hyp thm)
-    ))
-
-fun all_subst_thm thm goal =
-  let val vartyl = all_vartype_thm thm in
-  let val tyl = all_subtype_goal goal in
-  let val substl = all_subst vartyl tyl in
-    if substl = [] then [[]] else substl (* add the empty subst *)
-  end end end
-
-fun all_subst_thm_rev goal thm = all_subst_thm thm goal  
-fun list_all_subst_thm thml goal = map (all_subst_thm_rev goal) thml
-
-(*
-val substll = [[1,2,3],[4,5],[6]];
-val instl = [];
-*)
-
-(* constants *)
 (* tools *)
 fun inv f a b = f b a
 
@@ -113,49 +60,58 @@ fun list_mult_subst_aux substll =
   
 fun list_mult_subst l = list_mult_subst_aux (rev l)
 
-(* *)
+(* create a list of substitution *)
+fun is_matchable c1 c2 =
+  name_of c1 = name_of c2 andalso 
+  success (match_type (type_of c1)) (type_of c2)
+        
 fun create_substl_c const cl =
   case cl of
     [] => [[]]
-  | c :: m => if name_of const = name_of c 
-              then match_type (type_of const) (type_of c) :: 
-                   create_substl_c const m 
-              else create_substl_c const m
+  | c :: m => 
+    if is_matchable const c
+    then match_type (type_of const) (type_of c) :: 
+         create_substl_c const m 
+    else create_substl_c const m
  
-fun create_substl_c_goal c goal =
-  create_substl_c c (get_cl_goal goal)
- 
-fun create_substl_cl_goal cl goal =
-  let val substll = map (inv create_substl_c_goal goal) cl in
-    list_mult_subst substll
-  end 
+fun create_substl_cl_cl cl1 cl2 = 
+  list_mult_subst (map (inv create_substl_c cl2) cl1)
 
-fun create_substl_thm_goal_c thm goal =
-  let val cl = get_cl_thm thm in
-    create_substl_cl_goal cl goal
-  end
-
-(* monomorphisation *)
+(* INSTANTIATION *)
 fun same_ccl th1 th2 = aconv (concl th1) (concl th2)
 fun erase_double_ccl thml = erase_double_eq same_ccl thml
   
-  
-fun monomorph substl thm  = 
+fun inst_thm substl thm  = 
   let val thml = erase_double_ccl (map (inv INST_TYPE thm) substl) in
     if null thml then raise MONOMORPH_ERR "monomorph" ""
     else LIST_CONJ thml
   end
 
-(* constant monomorphisation *)
-fun monomorph_c thm goal =
-  let val substl = create_substl_thm_goal_c thm goal in
-    monomorph substl thm
-  end
+(* MONOMORPHISATION *)   
+  (* preparation *)
+fun create_substl_thm_pb thm (thml,goal) = 
+  let val cl1 = get_cl_thm thm in
+  let val cl2 = erase_double (List.concat 
+                  ((get_cl_goal goal) :: (map get_cl_thm thml)))
+  in 
+    create_substl_cl_cl cl1 cl2
+  end end
 
-fun monomorph_pb_c thml goal = map (inv monomorph_c goal) thml
-   
+fun monomorph_thm_pb thm pb =
+  let val substl = create_substl_thm_pb thm pb in
+    inst_thm substl thm
+  end  
+  (* *)
+fun monomorph_pb_w (thml,goal) =
+  (map (inv monomorph_thm_pb (thml,goal)) thml,goal)  
+fun monomorph_pb pb = wrap "monomorph" "monomorph_pb" "" monomorph_pb_w pb
 
+fun monomorph_n_pb n pb = repeat_n_fun n monomorph_pb pb
 
+(* TEST *)
+fun is_polymorph term = not (null (all_vartype term)) 
+fun is_polymorph_thm thm = exists is_polymorph (get_cl_thm thm)
+fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
 
 (* test   
  val th1 = ASSUME ``!x. x=x`` ;
