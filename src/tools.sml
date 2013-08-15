@@ -124,12 +124,12 @@ fun mk_goal thm = (hyp thm, concl thm)
 fun is_member_term_rev a b = is_member_term b a 
 fun is_subset l1 l2 = all (is_member_term_rev l2) l1
 
-fun goal_subset goal1 goal2 = 
+fun is_subset_goal goal1 goal2 = 
   aconv (snd goal1) (snd goal2) andalso
   is_subset (fst goal1) (fst goal2)
  
 fun thm_test thm goal msg = 
-  if goal_subset (mk_goal thm) goal then thm
+  if is_subset_goal (mk_goal thm) goal then thm
   else raise TOOLS_ERR msg ""
  
 fun goal_to_string goal = thm_to_string (mk_thm goal)

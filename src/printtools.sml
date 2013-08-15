@@ -16,6 +16,7 @@ val boolflag = ref (false,"bool")
 val numflag = ref (false,"num")
 val hoflag = ref (false,"higher-order")
 val metisflag = ref (false,"metis-fail") (* check when it fails *)
+val proofflag = ref (false,"proof")
 
 fun flag_on flag = flag := (true,snd (!flag))
 fun flag_off flag = flag := (false,snd (!flag))
@@ -45,6 +46,7 @@ val nb_parsing = ref (0,"Parsing Err ")
 val nb_codeerr = ref (0,"Code Err    ")
 val nb_beagerr = ref (0,"Beagle Err  ")
 val nb_metis   = ref (0,"Metis fail  ")
+val nb_proof   = ref (0,"Proof       ")
 
 fun addone_nb nb = nb := ((fst (!nb)) + 1,snd (!nb))  
 
@@ -96,28 +98,25 @@ fun reset_all_nb () = reset_nbl
 (* test    
 val str = "Higher Order: 102"
 *) 
+fun update_nbl nbl strl =
+  case (nbl,strl) of
+    ([],_) => ()
+  | (_,[]) => ()
+  | (nb :: m1,str :: m2) => (update_nb nb (extract_nb str); update_nbl m1 m2)
+    
 fun update_all_nb filename = 
   let val strl = readl filename in
     case strl of
-      pb :: "\n" :: m :: f :: bool :: num :: ho :: "\n" :: 
-      unsa :: unkn :: sat :: 
-      time :: pars :: code :: beag :: meti :: fin
+      pb :: "\n" ::
+      m :: f :: bool :: num :: ho :: proof :: meti :: "\n" :: 
+      unsa :: unkn :: sat :: time :: pars :: code :: beag :: fin
         =>
       (
-      update_nb nb_problem (extract_nb pb);
-      update_nb nb_m       (extract_nb m);
-      update_nb nb_fun     (extract_nb f);
-      update_nb nb_bool    (extract_nb bool);
-      update_nb nb_num     (extract_nb num);
-      update_nb nb_ho      (extract_nb ho);
-      update_nb nb_unsat   (extract_nb unsa);
-      update_nb nb_unknown (extract_nb unkn);
-      update_nb nb_sat     (extract_nb sat);
-      update_nb nb_timeout (extract_nb time);
-      update_nb nb_parsing (extract_nb pars);
-      update_nb nb_codeerr (extract_nb code);
-      update_nb nb_beagerr (extract_nb beag);
-      update_nb nb_metis   (extract_nb meti)
+      update_nbl
+        [nb_problem,nb_m,nb_fun,nb_bool,nb_num,nb_ho,nb_proof,nb_metis,
+         nb_unsat,nb_unknown,nb_sat,nb_timeout,nb_parsing,nb_codeerr,nb_beagerr]
+        [pb,m,f,bool,num,ho,proof,meti,
+         unsa,unkn,sat,time,pars,code,beag]
       )  
     | _ => reset_all_nb ()
   end

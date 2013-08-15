@@ -97,10 +97,14 @@ fun create_substl_thm_pb thm (thml,goal) =
     create_substl_cl_cl cl1 cl2
   end end
 
-fun monomorph_thm_pb thm pb =
+fun monomorph_thm_pb_w thm pb =
   let val substl = create_substl_thm_pb thm pb in
     inst_thm substl thm
   end  
+fun monomorph_thm_pb thm pb = 
+  wrap "monomorph" "monomorph_thm_pb" (thm_to_string thm) 
+    (monomorph_thm_pb_w thm) pb
+  
   (* *)
 fun monomorph_pb_w (thml,goal) =
   (map (inv monomorph_thm_pb (thml,goal)) thml,goal)  

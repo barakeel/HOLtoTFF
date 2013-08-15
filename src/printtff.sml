@@ -164,8 +164,15 @@ fun indent4 pps = ((* to be replaced with begin block maybe *)
 
 fun pptff_commentline pps =
   (add_string pps 
-"%------------------------------------------------------------------------------"
-  ; nl2 pps )
+"%----------------------------------------------------------------------------"
+  ; 
+  add_newline pps
+  )
+
+fun pptff_number pps nb =
+ (add_string pps ( "% Number   : " ^ (Int.toString (fst nb)) );  
+  add_newline pps)
+
 
 fun has_simplety ((ty,arity),name) = (arity = 0)
 fun get_simpletyadict tyadict = filter has_simplety tyadict
@@ -214,6 +221,8 @@ fun pptff_fvatydict pps fvdict fvatydict =
     )
 
 (* constant *)
+(* to be rewritten so that it doesn't print them 
+   if they only appears with the right type *) 
 fun is_dc c = is_member (name_of c) ["=","+","-","*","<",">",">=","<="]
   
 fun remove_dc catydict =
@@ -222,6 +231,7 @@ fun remove_dc catydict =
   | ((c,arity),tyname) :: m => if is_dc c 
                                then remove_dc m 
                                else ((c,arity),tyname) :: remove_dc m   
+(* end of to be rewritten *)
 
 fun pptff_catydict pps cdict catydict =
   case catydict of
@@ -241,7 +251,6 @@ fun pptff_btrue_bfalse pps =
   pptff_type pps "bfalse" "bool";
   nl2 pps 
   )
-
 
 (* AXIOM *)
 fun pptff_axiom pps name term dict =
@@ -275,7 +284,7 @@ fun pptff_conjecture pps name term dict =
     nl2 pps
     )
 
-fun pptff_tff pps goal =
+fun pptff_tff_w pps nb goal =
   let val terml = (fst goal) @ [snd goal] in
   let val term = list_mk_conj (terml) in 
   (* this term is only there to extract variables from *)
@@ -286,7 +295,7 @@ fun pptff_tff pps goal =
     val cal = get_cal term
     val fvcal = get_fvcal term
   in  
-    if firstorder term
+    if firstorder_err term (* raise an exception *)
     then 
       let 
       (* dict *)
@@ -303,23 +312,27 @@ fun pptff_tff pps goal =
       (
       begin_block pps CONSISTENT 0;
         pptff_commentline pps;
+        pptff_number pps nb;
+        pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict (remove_dc catydict);
+        pptff_catydict pps cdict catydict;
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;
         pptff_commentline pps;
-        nl2 pps;
+        add_string pps "\n";
       end_block pps
       )
       end end
-    else
-      raise PRINTTFF_ERR "pptff_tff" ((term_to_string term) ^ " :higher order")
+    else ()
   end end end 
+fun pptff_tff pps nb goal = 
+  wrap "printtff" "pptff_tff" "" (pptff_tff_w pps nb) goal
+
 
 (* OUTPUT TFF *)
-fun write_tff path goal appendflag =
+fun write_tff_w path nb goal appendflag =
   let val file = 
     if appendflag then TextIO.openAppend path else TextIO.openOut path in 
   let val pps = mk_ppstream 
@@ -330,10 +343,13 @@ fun write_tff path goal appendflag =
                   } 
   in 
     (
-    pptff_tff pps goal;
+    pptff_tff pps nb goal;
     TextIO.closeOut file
     )  
   end end
+fun write_tff path nb goal appendflag = 
+  wrap "printtff" "write_tff" "" (write_tff_w path nb goal) appendflag
+ 
   
 (* test
 val thm = ;

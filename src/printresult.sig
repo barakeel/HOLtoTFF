@@ -25,7 +25,7 @@ sig
   (* this path is stored in a fix location and will be read by a script *)
   val write_tffpath : string -> unit
   (* result *)
-  val write_result : string -> thm list -> goal -> 
+  val write_result : string -> thm list -> goal -> (int * string) ->
                      string -> (bool * string) list -> 
                      unit
   (* debugging *)                    

@@ -43,8 +43,7 @@ fun BEAGLE_NF_TAC thml goal =
 fun beagle_interact filename finalgoal =
   (
   (* print the problem *)
-  write_tff (mk_tffpath filename) finalgoal false
-    handle _ => raise BEAGLE_ERR "write_tff" (goal_to_string finalgoal);
+  write_tff (mk_tffpath filename) (!nb_problem) finalgoal false;
   (* call beagle on tffpath *)
   write_tffpath (mk_tffpath filename); 
   OS.Process.system 
@@ -60,7 +59,9 @@ fun update_nbl1 () =
   update_nb_flag nb_fun funflag;
   update_nb_flag nb_bool boolflag;
   update_nb_flag nb_num numflag;
-  update_nb_flag nb_ho hoflag
+  update_nb_flag nb_ho hoflag;
+  update_nb_flag nb_proof proofflag;
+  update_nb_flag nb_metis metisflag
   )
 
 fun update_nbl2 str =
@@ -79,17 +80,24 @@ fun init_beagle_tac_aux filename =
   show_assums := true;
   SZSstatus := "undefined";
   write_SZSstatus filename (!SZSstatus);
-  app flag_off [mflag,hoflag,funflag,boolflag,numflag,metisflag];
+  app flag_off [mflag,hoflag,funflag,boolflag,numflag,proofflag,metisflag];
   update_all_nb (mk_statspath filename)
   )
 
 (* BEAGLE_TAC *)
+fun write_goodresult filename thml goal =
+  write_result (mk_resultpath filename) thml goal (!nb_problem) (!SZSstatus) 
+    [!mflag,!hoflag,!funflag,!boolflag,!numflag,!proofflag]
+
+fun write_badresult filename thml goal =
+  write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
+    [!mflag,!hoflag,!funflag,!boolflag,!numflag,!proofflag]
+  
 fun beagle_tac_aux filename thml goal = 
 ( 
 init_beagle_tac_aux filename;
 addone_nb nb_problem;
 flag_update_metis thml goal; 
-update_nb_flag nb_metis metisflag;
   (
   flag_update mflag (is_polymorph_pb (thml,goal));
   let val (mthml,mgoal) = 
@@ -99,21 +107,16 @@ update_nb_flag nb_metis metisflag;
                                         (* update all flags *)
   let val finalgoal = hd (finalgoal_list) in
     (
+    flag_update proofflag
+      (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
     beagle_interact filename finalgoal;
     update_nbl1 (); 
     update_nbl2 (!SZSstatus);
     if (!SZSstatus = "Unsatisfiable")
-    then
-      (
-      write_result (mk_resultpath filename) thml goal (!SZSstatus) 
-        [!mflag,!hoflag,!funflag,!boolflag,!numflag]
-      )
+    then write_goodresult filename thml goal
     else 
-      (
-      write_result (mk_errpath filename) thml goal (!SZSstatus)
-        [!mflag,!funflag,!boolflag,!numflag,!hoflag];
-      write_tff (mk_tfferrpath filename) finalgoal true
-      )
+      (write_badresult filename thml goal;
+       write_tff (mk_tfferrpath filename) (!nb_problem) finalgoal true)
     )  
   end end end
   
@@ -123,25 +126,23 @@ update_nb_flag nb_metis metisflag;
         => (
            addone_nb nb_codeerr;
            write_err (mk_errpath filename) s f m; 
-           write_result (mk_errpath filename) thml goal (!SZSstatus)
-              [!mflag,!hoflag,!funflag,!boolflag,!numflag]
+           write_badresult filename thml goal
            ) 
     | _ => (
            addone_nb nb_codeerr;
            write_err (mk_errpath filename) "" "" "code error";
-           write_result (mk_errpath filename) thml goal (!SZSstatus)
-              [!mflag,!hoflag,!funflag,!boolflag,!numflag]
+           write_badresult filename thml goal
            ) 
 ;
 (* stats *)
 write_stats filename (!nb_problem) 
-  [!nb_m,!nb_fun,!nb_bool,!nb_num,!nb_ho] 
+  [!nb_m,!nb_fun,!nb_bool,!nb_num,!nb_ho,!nb_proof,!nb_metis] 
   [!nb_unsat,!nb_unknown,!nb_sat,!nb_timeout,
-   !nb_parsing,!nb_codeerr,!nb_beagerr,!nb_metis]  
+   !nb_parsing,!nb_codeerr,!nb_beagerr]  
 ;
 if fst (!metisflag) 
-then metisTools.METIS_TAC thml goal
-else ([],fn x => (mk_thm goal)) (* always return the good result *)
+then metisTools.METIS_TAC thml goal (* raise the same exception *)
+else ([],fn x => (mk_thm goal)) (* *)
 )
 
 fun BEAGLE_TAC thml goal = 

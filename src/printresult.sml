@@ -76,9 +76,10 @@ fun output_problem file thml goal =
   TextIO.output (file,(goal_to_string goal) ^ "\n")
   )
   
-fun write_result filename thml goal SZSstatus flagl =  
+fun write_result filename thml goal n SZSstatus flagl =  
   let val file = TextIO.openAppend filename in 
     (
+    TextIO.output (file,"Number: " ^ Int.toString (fst n) ^ "\n");
     TextIO.output (file,"Status: " ^ SZSstatus ^ "\n");
     output_flagl file flagl;
     output_problem file thml goal;

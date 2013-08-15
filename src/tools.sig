@@ -33,7 +33,7 @@ sig
 (* goal *)
   val only_hypg : goal -> term
   val mk_goal : thm -> goal 
-  val goal_subset : goal -> goal -> bool
+  val is_subset_goal : goal -> goal -> bool
   val thm_test : thm -> goal -> string -> thm
   val goal_to_string : goal -> string
 (* conv *)

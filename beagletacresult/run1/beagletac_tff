@@ -1,0 +1,62 @@
+%----------------------------------------------------------------------------
+% Number   : 235
+%----------------------------------------------------------------------------
+tff(ty_optionIllistIaII_type,type,(
+    ty_optionIllistIaII: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_llistIllistIaII_type,type,(
+    ty_llistIllistIaII: $tType )).
+
+tff(ty_llistIaI_type,type,(
+    ty_llistIaI: $tType )).
+
+tff(xh_type,type,(
+    xh: ty_llistIaI )).
+
+tff(xe_type,type,(
+    xe: ty_llistIaI )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(xt_type,type,(
+    xt: ty_llistIllistIaII )).
+
+tff(c_type,type,(
+    c: ( ty_llistIaI * ty_llistIaI ) > $o )).
+
+tff(cLNIL_type,type,(
+    cLNIL: ty_llistIaI )).
+
+tff(c1_type,type,(
+    c1: ( ty_optionIllistIaII * ty_optionIllistIaII ) > $o )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_llistIaI > ty_optionIllistIaII )).
+
+tff(cLNTH_type,type,(
+    cLNTH: ( $int * ty_llistIllistIaII ) > ty_optionIllistIaII )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [X1: $int,X: ty_llistIaI] : (((X = cLNIL) | (~(cSOME(X) = cLNTH(X1,xt)) | ~$lesseq(0,X1)))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [X1: $int] : (((xh = cLNIL) | ~$lesseq(0,X1))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [X1: $int] : ((~(cLNIL = xe) | ~$lesseq(0,X1))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [X1: $int] : (((cSOME(xe) = cLNTH(xn,xt)) | ~$lesseq(0,X1))) )).
+
+%----------------------------------------------------------------------------
+

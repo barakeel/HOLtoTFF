@@ -11,7 +11,7 @@ sig
                    bool -> 
                    unit
 
-  val pptff_tff : ppstream -> goal -> unit
-  val write_tff : string -> goal -> bool -> unit
+  val pptff_tff : ppstream -> (int * string) -> goal -> unit
+  val write_tff : string -> (int * string) -> goal -> bool -> unit
 
 end

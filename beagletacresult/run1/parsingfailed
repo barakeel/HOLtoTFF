@@ -1,0 +1,182 @@
+tff(ty_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool_type,type,(
+    ty_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool: $tType )).
+
+tff(ty_num_F_bool_F_bool_F_num_F_bool_type,type,(
+    ty_num_F_bool_F_bool_F_num_F_bool: $tType )).
+
+tff(ty_bool_F_listInumI_F_bool_type,type,(
+    ty_bool_F_listInumI_F_bool: $tType )).
+
+tff(ty_listInumI_type,type,(
+    ty_listInumI: $tType )).
+
+tff(ty_listInumI_F_bool_type,type,(
+    ty_listInumI_F_bool: $tType )).
+
+tff(ty_num_F_listInumI_type,type,(
+    ty_num_F_listInumI: $tType )).
+
+tff(ty_num_F_bool_type,type,(
+    ty_num_F_bool: $tType )).
+
+tff(ty_num_F_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool_type,type,(
+    ty_num_F_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool: $tType )).
+
+tff(ty_bool_F_num_F_bool_F_bool_F_listInumI_F_bool_type,type,(
+    ty_bool_F_num_F_bool_F_bool_F_listInumI_F_bool: $tType )).
+
+tff(ty_num_F_bool_F_num_F_bool_F_num_type,type,(
+    ty_num_F_bool_F_num_F_bool_F_num: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(ty_bool_F_num_F_bool_type,type,(
+    ty_bool_F_num_F_bool: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_num_F_bool_F_num_type,type,(
+    ty_num_F_bool_F_num: $tType )).
+
+tff(xf_type,type,(
+    xf: ty_num_F_bool )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_bool_F_num_F_bool * bool ) > ty_num_F_bool )).
+
+tff(xf2_type,type,(
+    xf2: ty_bool_F_num_F_bool )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_num_F_num * $int ) > $int )).
+
+tff(xP_type,type,(
+    xP: ty_num_F_bool )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_num_F_bool * $int ) > $o )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_num_F_bool_F_num * ty_num_F_bool ) > $int )).
+
+tff(xApp4_type,type,(
+    xApp4: ( ty_num_F_bool_F_num_F_bool_F_num * ty_num_F_bool ) > ty_num_F_bool_F_num )).
+
+tff(xj_type,type,(
+    xj: ty_num_F_bool_F_num_F_bool_F_num )).
+
+tff(xApp5_type,type,(
+    xApp5: ( ty_listInumI_F_bool * ty_listInumI ) > $o )).
+
+tff(xApp6_type,type,(
+    xApp6: ( ty_bool_F_listInumI_F_bool * bool ) > ty_listInumI_F_bool )).
+
+tff(xApp7_type,type,(
+    xApp7: ( ty_bool_F_num_F_bool_F_bool_F_listInumI_F_bool * ty_bool_F_num_F_bool ) > ty_bool_F_listInumI_F_bool )).
+
+tff(xApp8_type,type,(
+    xApp8: ( ty_num_F_bool_F_bool_F_num_F_bool * ty_num_F_bool ) > ty_bool_F_num_F_bool )).
+
+tff(xApp9_type,type,(
+    xApp9: ( ty_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool * ty_num_F_bool ) > ty_num_F_bool_F_bool_F_num_F_bool )).
+
+tff(xApp10_type,type,(
+    xApp10: ( ty_num_F_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool * $int ) > ty_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool )).
+
+tff(xf1_type,type,(
+    xf1: ty_num_F_num_F_bool_F_num_F_bool_F_bool_F_num_F_bool )).
+
+tff(xApp11_type,type,(
+    xApp11: ( ty_num_F_listInumI * $int ) > ty_listInumI )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(c_type,type,(
+    c: ( bool * bool ) > $o )).
+
+tff(cSUC_type,type,(
+    cSUC: ty_num_F_num )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(cFOLDL_type,type,(
+    cFOLDL: ty_bool_F_num_F_bool_F_bool_F_listInumI_F_bool )).
+
+tff(cCOUNT_LIST_type,type,(
+    cCOUNT_LIST: ty_num_F_listInumI )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_num_F_bool_F_num,Xx2: ty_num_F_bool] : ($lesseq(0,xApp3(Xx1,Xx2))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: ty_num_F_num,Xx21: $int] : (($lesseq(0,xApp1(Xx11,Xx21)) | ~$lesseq(0,Xx21))) )).
+
+tff(axiom3_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((xApp2(xf,X4) | (Xa | (~xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((xApp2(xP,X4) | (Xa | (~xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((~Xa | (~xApp2(xP,X4) | (xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((~Xa | (xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((~xApp2(xf,X4) | (~Xa | (xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xa: bool,X4: $int,X3: $int] : ((~xApp2(xf,X4) | (~xApp2(xP,X4) | (xApp2(xApp(xf2,Xa),X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((xApp2(X2,X3) | (X | (~xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((xApp2(X1,X3) | (X | (~xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((~X | (~xApp2(X1,X3) | (xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((~X | (xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((~xApp2(X2,X3) | (~X | (xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X: bool,X3: $int] : ((~xApp2(X2,X3) | (~xApp2(X1,X3) | (xApp2(xApp(xApp8(xApp9(xApp10(xf1,X4),X1),X2),X),X3) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X4: $int,X3: $int] : ((xApp5(xApp6(xApp7(cFOLDL,xf2),bfalse),xApp11(cCOUNT_LIST,xn)) | (~$lesseq(0,X3) | ~$lesseq(0,X4)))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X4: $int,X3: $int] : ((~$less(X4,xn) | (~xApp2(xP,X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [X4: $int,X3: $int] : ((~$less(X4,xApp1(cSUC,xn)) | (~xApp2(xP,X4) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X3: $int] : (($less(xApp3(xApp4(xj,X1),X2),xn) | (~xApp5(xApp6(xApp7(cFOLDL,xApp8(xApp9(xApp10(xf1,X4),X1),X2)),bfalse),xApp11(cCOUNT_LIST,xn)) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X4: $int,X1: ty_num_F_bool,X2: ty_num_F_bool,X3: $int] : ((xApp2(X1,xApp3(xApp4(xj,X1),X2)) | (~xApp5(xApp6(xApp7(cFOLDL,xApp8(xApp9(xApp10(xf1,X4),X1),X2)),bfalse),xApp11(cCOUNT_LIST,xn)) | (~$lesseq(0,X3) | ~$lesseq(0,X4))))) )).

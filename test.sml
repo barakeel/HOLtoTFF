@@ -27,9 +27,11 @@ beagle_tac_aux filename thml goal;
 fst (BEAGLE_NF_TAC thml goal);
 
 (* test error *)
-
-
-fst (ADD_FNUM_AXIOMS_TAC goal);
+val filename = "result/abstraction";
+val thml = [] ;
+val goal : goal = ([],
+`` P (λll. (let n = LEAST n. ∃e. (e = 0) in ll)) : bool ``
+);
 
 
 (* thmlist *)
@@ -95,7 +97,7 @@ val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
 (* test funconv *)
 val filename = "result/funconv";   
 val thml = [];
-val goal : goal = ([],``(!y:num -> num . P y) ==> (P (\x. x + 5))`` );
+val goal : goal = ([],``(!y:num -> num -> num . P y) ==> (P (\x y. x + y))`` );
 
 
 

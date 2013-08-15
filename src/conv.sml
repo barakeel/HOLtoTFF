@@ -118,12 +118,11 @@ end
 fun find_bound_bool term = erase_double_term (find_bound_bool_aux term term)
 
 (* term should have type bool *)
-fun bool_conv_sub subterm term =
+fun bool_conv_sub_w subterm term =
   (* preparation *)  
   let val disj1 = SPEC subterm BOOL_CASES_AX in
   let val eqth1 = ASSUME (lhand (concl disj1)) in
   let val eqth2 = ASSUME (rand (concl disj1)) in
-  
   (* first part  *)
   (* lemma *)
   let val lemma1 = ASSUME subterm in
@@ -166,10 +165,11 @@ fun bool_conv_sub subterm term =
   let val th24F = fnF [th23F] in
   let val th25F = PROVE_HYP lemma24 th24F in 
   (* disj cases *)
+  let val lemma25 = CONJUNCT1 (ASSUME (concl th15)) in
+  let val lemma26 = CONJUNCT2 (ASSUME (concl th15)) in
   let val th26 = DISJ_CASES disj1 th25T th25F in
-  let val th27 = list_conj_hyp_rule th26 in
+  let val th27 = list_PROVE_HYP [lemma25,lemma26] th26 in
   let val th28 = DISCH (concl th15) th27 in
-  
   (* together *)
     IMP_ANTISYM_RULE th16 th28
   end end end end end 
@@ -179,12 +179,19 @@ fun bool_conv_sub subterm term =
   end end end end end 
   end end end end end
   end end end end end 
-  end end
+  end end end end
 
+fun bool_conv_sub subterm term = 
+  wrap "conv" "bool_conv_sub" 
+    ((term_to_string term) ^ " : " ^ (term_to_string subterm))
+    (bool_conv_sub_w subterm) term
 (* test
 val subterm = ``!f:num -> bool . f x``;
 val term = ``P (!f:num -> bool . f x) (!f:num -> bool . f x): bool``;
 bool_conv_sub subterm term;
+
+val term = ``P (x = x + 1) ==> P F ``;
+val subterm = ``x = x + 1``;
 *)
 fun bool_conv_subl subterml term = 
   case subterml of
@@ -386,8 +393,6 @@ val arity = 1;
 !x.y 
 
 *)
-
-
 (* find *)
 fun find_free_abs_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of

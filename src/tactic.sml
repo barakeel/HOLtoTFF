@@ -8,9 +8,9 @@ open HolKernel Abbrev boolLib
 
 
 fun TACTIC_ERR function message =
-    HOL_ERR{origin_structure = "tactic",
-	          origin_function = function,
-            message = message}
+    HOL_ERR {origin_structure = "tactic",
+	           origin_function = function,
+             message = message}
 
 (************ TOOLS ***************)
 (* TAC BUILDER *)
@@ -22,7 +22,7 @@ fun mk_tac1 goalbuilder valbuilder goal =
      (goal_list,validation)
   end end
 
-(* CONV_HYP_TAC *) (* no hypothesis allowed in eqth *)
+(* CONV_HYP_TAC *) 
 fun conv_hyp conv goal =
   let val eqthl = map (QCONV conv) (fst goal) in
   let val terml = erase_double_term (map (rhs o concl) eqthl) in
@@ -35,9 +35,9 @@ fun conv_hyp_val conv goal thm =
     if null allhyp then 
       let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
       let val th0 = list_PROVE_HYP lemmal thm in
-        thm_test th0 goal "conv_all_hyp_val"
+        thm_test th0 goal "conv_hyp_val"
       end end
-    else raise TACTIC_ERR "conv_all_hyp_val" "no hypothesis allowed"
+    else raise TACTIC_ERR "conv_hyp_val" "no hypothesis allowed"
   end end 
    
 fun CONV_HYP_TAC conv goal =
@@ -92,7 +92,7 @@ fun CNF_CONV_TAC goal =
 fun FUN_CONV_TAC_w goal = 
   let val eqth = (QCONV fun_conv) (only_hypg goal) in
     (flag_update funflag (not (is_refl eqth));
-     CONV_HYP_TAC fun_conv goal)
+     CONV_HYP_TAC (REPEATC fun_conv) goal)
   end
 fun FUN_CONV_TAC goal = 
   wrap "tactic" "FUN_CONV_TAC" "" FUN_CONV_TAC_w goal  
@@ -126,7 +126,7 @@ fun BEAGLE_CONV_TAC_w goal =
   )
   goal
 fun BEAGLE_CONV_TAC goal = 
-  wrap "tactic" "FUN_CONV_TAC" "" BEAGLE_CONV_TAC_w goal 
+  wrap "tactic" "BEAGLE_CONV_TAC" "" BEAGLE_CONV_TAC_w goal 
 
 
 (*********** BEAGLE_CLAUSE_SET_TAC **********)
@@ -175,7 +175,7 @@ fun STRIP_CONJ_ONLY_HYP_TAC goal =
   
 (* ERASE_FORALL_TAC *)
 fun ERASE_FORALL_TAC goal = 
-  wrap "tactic" "CONV_HYP_TAC" ""
+  wrap "tactic" "ERASE_FORALL" ""
     (CONV_HYP_TAC (QCONV normalForms.CNF_CONV)) goal
 
 (* ADD_BOOL_AXIOM_TAC *)
