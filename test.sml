@@ -26,13 +26,20 @@ metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 fst (BEAGLE_NF_TAC thml goal);
 
+
+(* canonical rearrangement *)
+(**)
+
 (* test error *)
 val filename = "result/abstraction";
 val thml = [] ;
 val goal : goal = ([],
 `` P (λll. (let n = LEAST n. ∃e. (e = 0) in ll)) : bool ``
 );
-
+(* nlia *)
+val filename = "result/nlia";
+val thml = [mk_thm ([],``!x. ( (x * x) = 4) ==> (x=2)``)] ;
+val goal = ([``(x * x = 4)``],``(x=2)``);
 
 (* thmlist *)
 val filename = "result/thmlist";

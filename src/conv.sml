@@ -39,7 +39,8 @@ fun CONV_ERR function message =
 local fun is_interesting_in term subterm =  
   free_in subterm term andalso
   has_boolty subterm andalso
-  is_logical subterm 
+  not (subterm = T) andalso
+  not (subterm = F)
 in
 fun find_free_bool_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of
@@ -62,7 +63,7 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
       end
 
     )             
-  | Abs => []
+  | Abs => raise CONV_ERR "find_free_bool_aux" "abstraction"
 and find_free_bool_list term subterml =
   List.concat (map (find_free_bool_aux term) subterml)
 and find_free_bool_quant term subterm =
@@ -76,46 +77,6 @@ and find_free_bool_unop term subterm =
 end  
  
 fun find_free_bool term = erase_double_term (find_free_bool_aux term term) 
-(* bound *)     
-local fun is_interesting_in term subterm =  
-  bound_by_quant subterm term andalso
-  has_boolty subterm andalso
-  is_logical subterm 
-in
-fun find_bound_bool_aux term subterm = (* term should be a boolean *)
-  case termstructure subterm of
-    Numeral => []
-  | Var => []  
-  | Const => []
-  | Comb => 
-    (
-    case connector subterm of
-      Forall => find_bound_bool_quant term subterm
-    | Exists => find_bound_bool_quant term subterm   
-    | Conj => find_bound_bool_binop term subterm
-    | Neg => find_bound_bool_unop term subterm
-    | Imp_only => find_bound_bool_binop term subterm
-    | Disj => find_bound_bool_binop term subterm
-    | App => 
-      let val (operator,argl) = strip_comb subterm in
-        filter (is_interesting_in term) argl @
-        find_bound_bool_list term (operator :: argl)
-      end
-    )             
-  | Abs => []
-and find_bound_bool_list term subterml =
-  List.concat (map (find_bound_bool_aux term) subterml)
-and find_bound_bool_quant term subterm =
-  let val (bvl,t) = strip_quant subterm in
-    find_bound_bool_aux term t
-  end  
-and find_bound_bool_binop term subterm =
-  find_bound_bool_list term [lhand subterm,rand subterm] 
-and find_bound_bool_unop term subterm =
-  find_bound_bool_aux term (rand subterm)
-end  
-   
-fun find_bound_bool term = erase_double_term (find_bound_bool_aux term term)
 
 (* term should have type bool *)
 fun bool_conv_sub_w subterm term =
@@ -180,7 +141,6 @@ fun bool_conv_sub_w subterm term =
   end end end end end
   end end end end end 
   end end end end
-
 fun bool_conv_sub subterm term = 
   wrap "conv" "bool_conv_sub" 
     ((term_to_string term) ^ " : " ^ (term_to_string subterm))
@@ -193,15 +153,15 @@ bool_conv_sub subterm term;
 val term = ``P (x = x + 1) ==> P F ``;
 val subterm = ``x = x + 1``;
 *)
-fun bool_conv_subl subterml term = 
-  case subterml of
-    [] => raise UNCHANGED
-  | subterm :: m => ((bool_conv_sub subterm) THENC (bool_conv_subl m)) term
-  
-fun bool_conv_quant term =
-  let val terml = find_bound_bool term in
-    STRIP_QUANT_CONV (bool_conv_subl terml) term 
-  end 
+fun bool_conv_sub_one term =
+  let val l = find_free_bool term in
+    case l of
+      [] => raise UNCHANGED
+    | b :: m => bool_conv_sub b term
+  end
+
+fun bool_conv_sub_all term = 
+  REPEATC bool_conv_sub_one term
 
 fun bool_conv_aux term = 
   case termstructure term of
@@ -211,17 +171,19 @@ fun bool_conv_aux term =
   | Comb => 
     (
     case connector term of
-      Forall => ((STRIP_QUANT_CONV bool_conv_aux) THENC bool_conv_quant) term
-    | Exists => ((STRIP_QUANT_CONV bool_conv_aux) THENC bool_conv_quant) term        
+      Forall => ((STRIP_QUANT_CONV bool_conv_sub_all) THENC 
+                 (STRIP_QUANT_CONV bool_conv_aux)) 
+                   term
+    | Exists => ((STRIP_QUANT_CONV bool_conv_sub_all) THENC 
+                 (STRIP_QUANT_CONV bool_conv_aux)) 
+                   term     
     | _ => COMB_CONV bool_conv_aux term
     )
   | Abs => raise UNCHANGED
 
-fun bool_conv_w term =
-  let val terml = find_free_bool term in
-    (bool_conv_aux THENC (bool_conv_subl terml)) term
-  end
-fun bool_conv term = wrap "conv" "bool_conv" "" bool_conv_w term
+fun bool_conv term =
+  wrap "conv" "bool_conv" "" (bool_conv_sub_all THENC bool_conv_aux) term
+
 
 (* test
 val term = ``!x. g (!z. z = 0) /\ g (!z. x = z)``;
@@ -235,8 +197,6 @@ bool_conv term;
 find_free_bool term;
 bool_conv_sub subterm term;
 *)
-(* PRINTING IDEA *)
-
 
 (* NUM CONV *)
 (* find *)
@@ -312,12 +272,8 @@ fun num_conv_imp subterml term =
 
 fun num_conv_forall term =
   let val terml = find_bound_num term in
-  let val terml1 = filter is_var terml in
-  let val terml2 = filter is_not_var terml in
-    STRIP_QUANT_CONV 
-      ((num_conv_conj terml2) THENC (num_conv_imp terml1))
-      term  
-  end end end
+    STRIP_QUANT_CONV (num_conv_imp terml) term  
+  end
 
 fun num_conv_exists term =
   let val terml = find_bound_num term in
@@ -337,8 +293,8 @@ fun num_conv_aux term =
   | Comb => 
     (
     case connector term of
-      Forall => ((STRIP_QUANT_CONV num_conv_aux) THENC num_conv_forall) term
-    | Exists => ((STRIP_QUANT_CONV num_conv_aux) THENC num_conv_exists) term        
+      Forall => (num_conv_forall THENC (STRIP_QUANT_CONV num_conv_aux)) term
+    | Exists => (num_conv_exists THENC (STRIP_QUANT_CONV num_conv_aux)) term        
     | _ => COMB_CONV num_conv_aux term
     )
   | Abs => raise CONV_ERR "num_conv" "abstraction"
@@ -351,7 +307,6 @@ fun num_conv term =
 (* test
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
 *)
-
 fun fnum_axiom_w (f,arity) = 
   let val (argl,image) = strip_type_n (type_of f,arity) in
   let val argtyl = map fst argl in
@@ -383,7 +338,7 @@ fun fnum_axiom (f,arity) = wrap "conv" "fnum_axiom" "" fnum_axiom_w (f,arity)
 load "extracttype"; open extracttype;
 load "freshvar"; open freshvar;
 load "tools"; open tools;
-val f = ``f : 'a -> num ``;  
+val f = ``f : 'a -> num ``; 
 val arity = 1; 
   normalForms.CNF_CONV (concl it);
 *)
@@ -391,10 +346,10 @@ val arity = 1;
 
 (* test 
 !x.y 
-
 *)
+(* FUN_CONV *)
 (* find *)
-fun find_free_abs_aux term subterm = (* term should be a boolean *)
+fun find_free_abs_aux term subterm =
   case termstructure subterm of
     Numeral => []
   | Var => []  
@@ -420,32 +375,6 @@ fun find_free_abs_aux term subterm = (* term should be a boolean *)
            
 fun find_free_abs term = erase_double_term (find_free_abs_aux term term)
 
-fun find_bound_abs_aux term subterm = (* term should start with a quantifier *)
-  case termstructure subterm of
-    Numeral => []
-  | Var => []  
-  | Const => []
-  | Comb => 
-    (
-    case connector subterm of
-      Forall => let val (bvl,t) = strip_forall subterm in
-                  find_bound_abs_aux term t
-                end  
-    | Exists => let val (bvl,t) = strip_exists subterm in
-                  find_bound_abs_aux term t
-                end      
-    | _ => let val (operator,arg) = dest_comb subterm in
-             (find_bound_abs_aux term operator) @ (find_bound_abs_aux term arg)
-           end  
-    )
-  | Abs => let val (bvl,t) = strip_abs subterm in
-             if bound_by_quant subterm term
-             then subterm :: find_bound_abs_aux term t
-             else find_bound_abs_aux term t  
-           end
-
-fun find_bound_abs term = erase_double_term (find_bound_abs_aux term term)
-  
 fun fun_axiom_w abs =
   let val (bvl,t) = strip_abs abs in
   let val th1 = REFL abs in
@@ -565,9 +494,7 @@ fun fun_conv_sub_w abs term =
   end end end end end 
   end end end end end 
   end end end end end 
-  
-  end end end end end end
-  
+  end end end end end end 
 fun fun_conv_sub abs term =
   wrap "conv" "fun_conv_sub" 
    ("abs: " ^ (term_to_string abs) ^ "term: " ^ (term_to_string term))
@@ -579,23 +506,20 @@ val abs = ``\x y. x + y + z``;
 fun_conv_sub abs term;
 fun_axiom term;
 *)
-
-fun fun_conv_subl absl term =
-  case absl of
-    [] => raise UNCHANGED
-  | abs :: m => ((fun_conv_sub abs) THENC (fun_conv_subl m)) term
-
+fun fun_conv_sub_one term =
+  let val l = find_free_abs term in
+    case l of
+      [] => raise UNCHANGED
+    | abs :: m => fun_conv_sub abs term
+  end
+  
+fun fun_conv_sub_all term = REPEATC fun_conv_sub_one term
 (* test 
 show_assums :=  true;
 val abs = ``\x y . x + y``;
 val term = ``(P (\x y. x + y) (\y.y)):bool``;
 fun_conv_sub abs term;
 *)
-
-fun fun_conv_quant term =
-  let val absl = find_bound_abs term in
-    STRIP_QUANT_CONV (fun_conv_subl absl) term
-  end
 
 (* test 
 show_assums :=  true;
@@ -612,17 +536,19 @@ fun fun_conv_aux term =
   | Comb => 
     (
     case connector term of
-      Forall => ((STRIP_QUANT_CONV fun_conv_aux) THENC fun_conv_quant) term
-    | Exists => ((STRIP_QUANT_CONV fun_conv_aux) THENC fun_conv_quant) term        
+      Forall => ((STRIP_QUANT_CONV fun_conv_sub_all) THENC
+                 (STRIP_QUANT_CONV fun_conv_aux)) 
+                   term
+    | Exists => ((STRIP_QUANT_CONV fun_conv_sub_all) THENC
+                 (STRIP_QUANT_CONV fun_conv_aux)) 
+                   term       
     | _ => COMB_CONV fun_conv_aux term
     )
   | Abs => raise UNCHANGED
 
-fun fun_conv_w term =
-  let val absl = find_free_abs term in
-    (fun_conv_aux THENC (fun_conv_subl absl)) term
-  end
-fun fun_conv term = wrap "conv" "fun_conv" "" fun_conv_w term
+fun fun_conv term = 
+  wrap "conv" "fun_conv" "" (fun_conv_sub_all THENC fun_conv_aux) term
+
 
 (* test 
 val term = ``P (\x. x + 1) (\y.y) /\ !x. Q (\z. z + x)``;
@@ -721,10 +647,11 @@ fun app_conv appname term =
     )      
   | Abs => raise CONV_ERR "app_conv" "abs" 
 
+
+
 (* test
 val term = ``(f a b = 2) /\ (f a = g)``;
- *)
-  
+ *)  
 (* test
 val def = ``!x y. APP x y = x y``;
 val def = ``!x. APP x  = x ``;

@@ -1,1 +1,1 @@
-/home/thibault/Desktop/SMLproject/HOLtoTFF/result/abstraction_tff
+/home/thibault/Desktop/SMLproject/HOLtoTFF/result/nlia_tff

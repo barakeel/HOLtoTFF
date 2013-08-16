@@ -1,0 +1,5721 @@
+Number: 1
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h] |- LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)
+
+Number: 2
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [P h] |- (l ≠ "" ∨ r ≠ STRING h t) ∨ (l = "")
+
+Number: 3
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- ∀l. l ≠ [] ⇒ LENGTH (TL l) < LENGTH l
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h, SND (SPLITP P t) ≠ ""]
+|- LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)
+
+Number: 4
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- EXPLODE (IMPLODE cs) = cs
+ [] |- IMPLODE (EXPLODE s) = s
+Goal:  [] |- ∀cs. ∃s. cs = EXPLODE s
+
+Number: 5
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- EXPLODE (IMPLODE cs) = cs
+ [] |- IMPLODE (EXPLODE s) = s
+Goal:  [] |- ∀s. ∃cs. s = IMPLODE cs
+
+Number: 6
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- EXPLODE (IMPLODE cs) = cs
+ [] |- IMPLODE (EXPLODE s) = s
+Goal:  [] |- (EXPLODE s1 = EXPLODE s2) ⇔ (s1 = s2)
+
+Number: 7
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- EXPLODE (IMPLODE cs) = cs
+ [] |- IMPLODE (EXPLODE s) = s
+Goal:  [] |- (IMPLODE cs1 = IMPLODE cs2) ⇔ (cs1 = cs2)
+
+Number: 8
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ¬(ORD h'' < ORD h'),
+ ORD h = ORD h', ORD h'' = ORD h, s1 < t, t < t'] |- s1 < t'
+
+Number: 9
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ∀m. m < ORD h ⇒ m < ORD h',
+ ∀p. ORD h' < p ⇒ ORD h < p, ¬(ORD h'' < ORD h'), ORD h < ORD h',
+ ORD h'' = ORD h, s1 < t] |- s1 < t'
+
+Number: 10
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀s2 s3. s1 < s2 ∧ s2 < s3 ⇒ s1 < s3, ∀m. m < ORD h'' ⇒ m < ORD h,
+ ∀p. ORD h < p ⇒ ORD h'' < p, ¬(ORD h'' < ORD h'), ORD h'' < ORD h,
+ ORD h = ORD h', t < t'] |- s1 < t'
+
+Number: 11
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m + n = n + m
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256]
+|- (n = n MOD 256 + n DIV 256 * 256) ∨ n ≤ n MOD 256 ∧ (n DIV 256 = 0)
+
+Number: 12
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m * n = n * m
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m),
+ Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)), n ≠ 0, n MOD 256 ≠ 0,
+ 0 < n MOD 256, (n − n MOD 256) DIV 256 < n,
+ s2n s0 = (n − n MOD 256) DIV 256, (n − n MOD 256) DIV 256 = n DIV 256]
+|- 256 * (n DIV 256) + n MOD 256 = n
+
+Number: 13
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ []
+|- (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + n = SUC (m + n)) ∧
+   (m + SUC n = SUC (m + n))
+ [] |- 0 < 256
+Goal: 
+[∀m. m < n ⇒ (s2n (n2s m) = m), Abbrev (s0 = n2s ((n − r) DIV 256)),
+ Abbrev (r = if r0 = 0 then 256 else r0), Abbrev (r0 = n MOD 256),
+ n ≠ 0, 0 < r, (n − r) DIV 256 < n, n MOD 256 < 256, r0 = 0,
+ s2n s0 = (n − r) DIV 256] |- ∃q. n = q * 256
+
+Number: 18
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- (n2s x = n2s y) ⇔ (x = y)
+
+Number: 19
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- (s2n x = s2n y) ⇔ (x = y)
+
+Number: 21
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- ∀n. ∃s. n = s2n s
+
+Number: 22
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [(ALOOKUP l q = NONE) ⇔ ∀k v. MEM (k,v) l ⇒ k ≠ q]
+|- ∃v. (v = r) ∨ MEM (q,v) l
+
+Number: 23
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [] |- (y = fm ' x) ∧ x ∈ FDOM fm ⇔ x ∈ FDOM fm ∧ (fm ' x = y)
+
+Number: 24
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀l1 l2.
+   (alist_to_fmap l1 = alist_to_fmap l2) ⇒
+   (alist_to_fmap (ls ++ l1) = alist_to_fmap (ls ++ l2)),
+ alist_to_fmap l1 = alist_to_fmap l2]
+|- alist_to_fmap (ls ++ l1) |+ (q,r) = alist_to_fmap (ls ++ l2) |+ (q,r)
+
+Number: 25
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- fm ' k = v
+
+Number: 26
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- k ∈ FDOM fm
+
+Number: 31
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- wf f ⇒ ∃a. f [] = SOME a
+Goal: 
+[∀k. k ∈ FDOM f ⇒ wf (f ' k), ∀k. k ∈ FDOM g ⇒ wf (g ' k), x ∉ FDOM f,
+ x ∈ FDOM g] |- ∃a. g ' x [] = SOME a
+
+Number: 32
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- wf f ⇒ ∃a. f [] = SOME a
+Goal: 
+[∀k. k ∈ FDOM f ⇒ wf (f ' k), ∀k. k ∈ FDOM g ⇒ wf (g ' k), x ∉ FDOM g,
+ x ∈ FDOM f] |- ∃a. f ' x [] = SOME a
+
+Number: 33
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- ∀a. ∃c. wf c ∧ (a = fromF c)
+
+Number: 34
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- wf x ∧ wf y ⇒ ((fromF x = fromF y) ⇔ (x = y))
+
+Number: 35
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- (toF f = toF g) ⇔ (f = g)
+
+Number: 36
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀f g x. x ∈ FDOM g ⇒ ((f o_f g) ' x = f (g ' x))
+Goal:  [∀x. x ∈ FDOM f ⇒ (toF (f ' x) = (toF o_f g) ' x), FDOM f = FDOM g]
+|- ∀x. x ∈ FDOM g ⇒ (toF (f ' x) = toF (g ' x))
+
+Number: 37
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [∀k. k ∈ FDOM fm ⇒ wf (fm ' k), x ∈ FDOM fm]
+|- fm ' x = toF (fromF (fm ' x))
+
+Number: 38
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- (∀ft. P ft) ⇔ ∀f. wf f ⇒ P (fromF f)
+
+Number: 39
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal: 
+[P (fromF (construct a (toF o fromF o_f fm))),
+ ∀k. k ∈ FDOM fm ⇒ wf (fm ' k) ∧ P (fromF (fm ' k)), x ∈ FDOM fm]
+|- toF (fromF (fm ' x)) = fm ' x
+
+Number: 41
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [∀k. k ∈ FDOM fm ⇒ ∃r. relrec h (fm ' k) r]
+|- ∃f. ∀k. k ∈ FDOM fm ⇒ relrec h (fm ' k) (f k)
+
+Number: 43
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀ft. ∃r. relrec h ft r
+Goal:  [d ∈ FDOM fm]
+|- (∃x. relrec h (fm ' d) x) ∧
+   ∀x. relrec h (fm ' d) x ⇒ relrec h (fm ' d) x
+
+Number: 46
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- ∀x'.
+     x' ∈ FDOM b ∧ (x = f x' (b ' x')) ⇔
+     (x' ∈ FDOM b ∧ (x = f x' (b ' x'))) ∧ x' ∈ FDOM b
+
+Number: 48
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+ [] |- BIJ INL 𝕌(:α) ISL ∧ BIJ INR 𝕌(:β) ISR
+Goal:  []
+|- (FINITE 𝕌(:α) ⇒ (CARD ISL = CARD 𝕌(:α))) ∧
+   (FINITE 𝕌(:β) ⇒ (CARD ISR = CARD 𝕌(:β)))
+
+Number: 49
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀s.
+     FINITE s ⇒
+     ∀t. FINITE t ⇒ (CARD (s ∪ t) + CARD (s ∩ t) = CARD s + CARD t)
+ [] |- ∀m. m + 0 = m
+ [] |- CARD ∅ = 0
+ [] |- ISL ∩ ISR = ∅
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  []
+|- FINITE 𝕌(:α) ∧ FINITE 𝕌(:β) ⇒
+   (CARD (ISL ∪ ISR) = CARD ISL + CARD ISR)
+
+Number: 50
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  [FINITE 𝕌(:α), FINITE 𝕌(:β), ¬(FINITE ISL ∧ FINITE ISR)]
+|- 1 = CARD 𝕌(:α) + CARD 𝕌(:β)
+
+Number: 51
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  [FINITE ISL, FINITE ISR, ¬(FINITE 𝕌(:α) ∧ FINITE 𝕌(:β))]
+|- CARD (ISL ∪ ISR) = 1
+
+Number: 52
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀x. IS_BIT0A (BIT0A x) ⇔ T) ∧ ∀x. IS_BIT0A (BIT0B x) ⇔ F
+ [] |- (∀x. IS_BIT0B (BIT0A x) ⇔ F) ∧ ∀x. IS_BIT0B (BIT0B x) ⇔ T
+Goal:  [] |- IS_BIT0A (BIT0B a) ∨ IS_BIT0B (BIT0B a)
+
+Number: 53
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀x. IS_BIT0A (BIT0A x) ⇔ T) ∧ ∀x. IS_BIT0A (BIT0B x) ⇔ F
+ [] |- (∀x. IS_BIT0B (BIT0A x) ⇔ F) ∧ ∀x. IS_BIT0B (BIT0B x) ⇔ T
+Goal:  [] |- IS_BIT0A (BIT0A a) ∨ IS_BIT0B (BIT0A a)
+
+Number: 54
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [T] |- ∃y. BIT0A y = BIT0A a
+
+Number: 55
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [T] |- ∃y. BIT0B y = BIT0B a
+
+Number: 56
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0A 𝕌(:α) IS_BIT0A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+
+Number: 57
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0B 𝕌(:α) IS_BIT0B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+
+Number: 61
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- (∀x. IS_BIT1A (BIT1A x) ⇔ T) ∧ (∀x. IS_BIT1A (BIT1B x) ⇔ F) ∧
+   (IS_BIT1A BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1B (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1B (BIT1B x) ⇔ T) ∧
+   (IS_BIT1B BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1C (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1C (BIT1B x) ⇔ F) ∧
+   (IS_BIT1C BIT1C ⇔ T)
+Goal:  [] |- IS_BIT1A BIT1C ∨ IS_BIT1B BIT1C ∨ IS_BIT1C BIT1C
+
+Number: 62
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- (∀x. IS_BIT1A (BIT1A x) ⇔ T) ∧ (∀x. IS_BIT1A (BIT1B x) ⇔ F) ∧
+   (IS_BIT1A BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1B (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1B (BIT1B x) ⇔ T) ∧
+   (IS_BIT1B BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1C (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1C (BIT1B x) ⇔ F) ∧
+   (IS_BIT1C BIT1C ⇔ T)
+Goal:  [] |- IS_BIT1A (BIT1B a) ∨ IS_BIT1B (BIT1B a) ∨ IS_BIT1C (BIT1B a)
+
+Number: 63
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- (∀x. IS_BIT1A (BIT1A x) ⇔ T) ∧ (∀x. IS_BIT1A (BIT1B x) ⇔ F) ∧
+   (IS_BIT1A BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1B (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1B (BIT1B x) ⇔ T) ∧
+   (IS_BIT1B BIT1C ⇔ F)
+ []
+|- (∀x. IS_BIT1C (BIT1A x) ⇔ F) ∧ (∀x. IS_BIT1C (BIT1B x) ⇔ F) ∧
+   (IS_BIT1C BIT1C ⇔ T)
+Goal:  [] |- IS_BIT1A (BIT1A a) ∨ IS_BIT1B (BIT1A a) ∨ IS_BIT1C (BIT1A a)
+
+Number: 64
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀x. IS_BIT1A x ∨ IS_BIT1B x ∨ IS_BIT1C x
+Goal:  [] |- (IS_BIT1A x ∨ IS_BIT1B x) ∨ IS_BIT1C x
+
+Number: 65
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [T] |- ∃y. BIT1A y = BIT1A a
+
+Number: 66
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [T] |- ∃y. BIT1B y = BIT1B a
+
+Number: 67
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1A 𝕌(:α) IS_BIT1A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+
+Number: 68
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1B 𝕌(:α) IS_BIT1B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+
+Number: 70
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- ∀s t. FINITE (s ∪ t) ⇔ FINITE s ∧ FINITE t
+Goal:  [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
+
+Number: 79
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- ∀m n. 0 < n ⇒ m MOD n < n
+ [] |- dimindex (:α) < dimword (:α)
+ [] |- 0 < dimindex (:α)
+Goal:  [] |- ∀n. n MOD dimindex (:α) < dimword (:α)
+
+Number: 80
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- SUC n < m ⇒ n < m
+Goal: 
+[P 0w, ∀n. SUC n < dimword (:α) ⇒ P (n2w n) ⇒ P (n2w (SUC n)),
+ n < dimword (:α) ⇒ P (n2w n)] |- SUC n < dimword (:α) ⇒ P (n2w (SUC n))
+
+Number: 81
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- SUC n < m ⇒ n < m
+Goal:  [P 0w, ∀n. SUC n < dimword (:α) ⇒ P (n2w n) ⇒ P (n2w (SUC n))]
+|- 0 < dimword (:α) ⇒ P 0w
+
+Number: 88
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[T, i < dimindex (:α), SUC x ≤ i, dimindex (:α) ≤ SUC h,
+ dimindex (:α) ≤ i + (l + 1), l + x = dimindex (:α) − 1,
+ dimindex (:α) − l = SUC x] |- BIT (dimindex (:α) − 1) n ⇔ BIT (l + x) n
+
+Number: 89
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[T, i < SUC x, dimindex (:α) ≤ SUC h, dimindex (:α) ≤ i + (l + 1),
+ i + l = dimindex (:α) − 1, dimindex (:α) − l = SUC x]
+|- BIT (dimindex (:α) − 1) n ⇔ BIT (i + l) n
+
+Number: 90
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[i < SUC (h − l), i < dimindex (:α), SUC h < dimindex (:α), h ≤ i + l,
+ l ≤ h, i + l = h] |- BIT h n ⇔ BIT (i + l) n
+
+Number: 91
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀w. w2n (w2w w) ≤ w2n w
+ [] |- ∀w. w2n w < dimword (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  [] |- ∀w. w2n (w2w w) < dimword (:α)
+
+Number: 92
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀b. 1 < b ⇒ ∀n m. b ** m ≤ b ** n ⇔ m ≤ n
+ [] |- 1 < 2
+ [] |- ∀n. (1 ** n = 1) ∧ (n ** 1 = n)
+ [] |- 1 ≤ dimindex (:α)
+Goal:  [] |- 2 ≤ 2 ** dimindex (:α)
+
+Number: 93
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀w. w2n (w2w w) < dimword (:α)
+ [] |- ∀w. w2n (w2w w) ≤ w2n w
+ [] |- ∀h l w. w2n ((h -- l) w) < 2 ** (SUC h − l)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal:  [] |- w2n (w2w ((h -- l) w)) < 2 ** (SUC h − l)
+
+Number: 94
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+ [] |- 0 < dimindex (:α)
+Goal: 
+[i < dimindex (:α), i < dimindex (:γ), i + l < dimindex (:γ),
+ i + (l + n) < dimindex (:γ), dimindex (:β) ≤ i, dimindex (:β) ≤ i + l]
+|- 0 < i + l
+
+Number: 95
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- i + (l + n) ≤ h + n ⇔ i + l ≤ h
+Goal: 
+[i < dimindex (:α), i < dimindex (:β), i < dimindex (:γ),
+ i + l < dimindex (:β), i + l < dimindex (:γ),
+ i + (l + n) < dimindex (:γ)]
+|- i + l ≤ h ∧ i + (l + n) ≤ m ∧ w ' (i + (l + n)) ⇔
+   (i + (l + n) ≤ m ∧ i + (l + n) ≤ h + n) ∧ w ' (i + (l + n))
+
+Number: 96
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- ∀n. n ≠ 0 ⇔ 0 < n
+Goal: 
+[FINITE 𝕌(:β), FINITE 𝕌(:γ), i < dimindex (:α), i < dimindex (:δ),
+ dimindex (:γ) ≤ i, m + 1 ≤ l, h = m + dimindex (:β), dimindex (:γ) = 0,
+ h + 1 = l + dimindex (:δ)]
+|- i + (m + 1) ≤ dimindex (:α) − 1 ∧ w ' (i + (m + 1)) ⇔
+   i + l ≤ dimindex (:α) − 1 ∧ w ' (i + l)
+
+Number: 97
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. ¬(m < n) ⇔ n ≤ m
+ [] |- ∀m n. n ≤ m ⇒ ∃p. p + n = m
+ [] |- ∀m n. m + n = n + m
+Goal:  [Abbrev (A = dimindex (:α)), ¬(i < A), i < dimindex (:β), 0 < A]
+|- ∃x. i = x + A
+
+Number: 98
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ []
+|- ∀a b n. n ≠ 0 ∧ 2 ** a ≤ n ∧ n < 2 ** b ⇒ ∃i. a ≤ i ∧ i < b ∧ BIT i n
+Goal: 
+[∀m. m < n' ⇒ ¬BIT (dimindex (:α) − (m + 1)) n, n ≠ 0,
+ n MOD 2 ** dimindex (:α) ≠ 0, n < 2 ** dimindex (:α),
+ 2 ** SUC (dimindex (:α) − (n' + 1)) ≤ n,
+ BIT (dimindex (:α) − (n' + 1)) n]
+|- ∃i. SUC (dimindex (:α) − (n' + 1)) ≤ i ∧ i < dimindex (:α) ∧ BIT i n
+
+Number: 100
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n i. i < dimindex (:α) ⇒ (n2w n ' i ⇔ BIT i n)
+Goal:  [n ≠ 0, i < dimindex (:α), n < 2 ** dimindex (:α), BIT i n]
+|- ∃n'. n2w n ' n'
+
+Number: 101
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- 0 < n ∧ i < n ⇒ (n − SUC (n − i − 1) = i)
+Goal: 
+[T, w ≠ UINT_MAXw, i ≠ n, ¬w ' i, i < n, i < dimindex (:α),
+ n < i + (1 + n), 0 < n, 0 < 1 + n, dimindex (:α) = SUC n, w ' n,
+ w ' (n − SUC (n − i − 1))] |- F
+
+Number: 102
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- 0 < n ∧ i < n ⇒ (n − SUC (n − i − 1) = i)
+Goal: 
+[T, w ≠ 0w, i ≠ n, ¬w ' n, ¬w ' (n − SUC (n − i − 1)), i < n,
+ i < dimindex (:α), n < i + (1 + n), 0 < n, 0 < 1 + n,
+ dimindex (:α) = SUC n, w ' i] |- F
+
+Number: 103
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w. v + w = w + v
+ [] |- ∀w. -w + w = 0w
+Goal:  [] |- ∀w. w + -w = 0w
+
+Number: 104
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w. v + w − w = v
+ [] |- ∀v w. v − w + w = v
+Goal:  [] |- ∀v w x. (v + w = x) ⇔ (v = x − w)
+
+Number: 105
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w. v + w = w + v
+ [] |- ∀v w x. (v + w = v + x) ⇔ (w = x)
+Goal:  [] |- ∀v w x. (v + w = x + w) ⇔ (v = x)
+
+Number: 106
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. 0w = -w + w
+ [] |- ∀v w x. (v + w = x + w) ⇔ (v = x)
+Goal:  [-v + v + (-w + w) = 0w, -v + v + (-w + w) = -v + -w + (v + w)]
+|- -(v + w) = -v + -w
+
+Number: 107
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w x. (v + w = x + w) ⇔ (v = x)
+Goal:  [- -w + -w = w + -w] |- - -w = w
+
+Number: 108
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w. v − w = v + -w
+ [] |- ∀v w x. v + (w + x) = v + w + x
+ [] |- ∀w. -w + w = 0w
+ [] |- ∀w. w + -w = 0w
+ [] |- (∀w. w + 0w = w) ∧ ∀w. 0w + w = w
+Goal:  [] |- ∀v w x. (v = w − x) ⇔ (v + x = w)
+
+Number: 109
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀v w x. (v = w − x) ⇔ (v + x = w)
+Goal:  [] |- ∀v w x. (v − w = x) ⇔ (v = x + w)
+
+Number: 110
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. - -w = w
+Goal:  [] |- ∀w x. (-w = -x) ⇔ (w = x)
+
+Number: 111
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀w. 0w − w = -w
+ [] |- ∀v w x. (v − w = x − w) ⇔ (v = x)
+ [] |- ∀v w. v + w − w = v
+Goal:  [] |- ∀a b. (a + b = 0w) ⇔ (a = -b)
+
+Number: 112
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀w. -w = -1w * w
+ [] |- ∀v w. v * w = w * v
+ []
+|- ∀v w.
+     (0w * v = 0w) ∧ (v * 0w = 0w) ∧ (1w * v = v) ∧ (v * 1w = v) ∧
+     ((v + 1w) * w = v * w + w) ∧ (v * (w + 1w) = v + v * w)
+Goal:  [] |- ∀x. x * -1w = -x
+
+Number: 113
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀h l n. BITS h l n < 2 ** (SUC h − l)
+ [] |- ∀m. SUC m − 1 = m
+ [] |- ∀l h b. b < 2 ** l ⇒ (BITS h l (2 ** l + b) = BITS h l (2 ** l))
+ [] |- ∀b n. BIT b n ⇔ (BITS b b n = 1)
+ [] |- ∀b. BIT b (2 ** b)
+Goal:  [T, dimindex (:α) = SUC m] |- BIT m (2 ** m + BITS m 1 a)
+
+Number: 114
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+Goal:  [n < dimindex (:α)] |- 2 ** n < dimword (:α)
+
+Number: 115
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n d. 0 < n ∧ 1 < d ⇒ n DIV d < n
+Goal: 
+[n ≠ 0, w2n m ≠ 0, n < dimindex (:α), 0 < n, 0 < w2n m, 1 < 2 ** n,
+ 2 ** n < dimword (:α)] |- w2n m DIV 2 ** n < w2n m
+
+Number: 116
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- ∀w. w2n w < dimword (:α)
+Goal: 
+[n ≠ 0, w2n m ≠ 0, n < dimindex (:α), 0 < n, 0 < w2n m, 1 < 2 ** n,
+ w2n m DIV 2 ** n < w2n m, 2 ** n < dimword (:α)]
+|- w2n m DIV 2 ** n < dimword (:α)
+
+Number: 117
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+Goal:  [a < dimword (:α), n < dimindex (:α)] |- 2 ** n < dimword (:α)
+
+Number: 118
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- ∀m n. 0 < n ⇒ m MOD n < n
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- dimindex (:α) < dimword (:α)
+Goal:  [] |- n MOD dimindex (:α) < dimword (:α)
+
+Number: 119
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- ∀m n. 0 < n ⇒ m MOD n < n
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- dimindex (:α) < dimword (:α)
+Goal:  [] |- n MOD dimindex (:α) < dimword (:α)
+
+Number: 120
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- a − b ≤ a ∧ a < SUC a
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal: 
+[1 ≤ m, dimindex (:α) = SUC m, BITS m 0 n = 2 ** m + BITS (m − 1) 0 n,
+ BIT m n] |- 2 ** m − n MOD 2 ** m < 2 ** SUC m
+
+Number: 121
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- SUC m ≤ 1 ⇔ (m = 0)
+ [] |- ∀b n. BIT b n ⇔ (BITS b b n = 1)
+ [] |- ∀n a. BITS n n a ≠ 1 ⇔ (BITS n n a = 0)
+Goal:  [¬BIT m n, SUC m ≤ 1, dimindex (:α) = SUC m] |- BITS m 0 n = 0
+
+Number: 122
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀a. (dimindex (:α) − 1 = 0) ∧ word_msb a ⇒ (a = 1w)
+ [] |- (dimindex (:α) − 1 = 0) ⇒ (dimindex (:α) = 1)
+ [] |- ∀n. (1 ** n = 1) ∧ (n ** 1 = n)
+ [] |- ∀n k. k < n ⇒ (k MOD n = k)
+ [] |- 1 < 2
+ [] |- ∀n. w2n (n2w n) = n MOD dimword (:α)
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+Goal:  [] |- ∀a. (dimindex (:α) − 1 = 0) ∧ word_msb a ⇒ (w2n a = 1)
+
+Number: 123
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀a. ¬word_msb a ⇒ if a = 0w then ¬word_msb (-a) else word_msb (-a)
+Goal:  [¬word_msb a, ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))]
+|- word_msb (-a)
+
+Number: 124
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- -INT_MINw = INT_MINw
+ [] |- ∀w v. (-v = w) ⇔ (v = -w)
+ [] |- ∀w. - -w = w
+ []
+|- ∀a.
+     word_msb a ⇒
+     if (dimindex (:α) − 1 = 0) ∨ (a = INT_MINw) then word_msb (-a)
+     else ¬word_msb (-a)
+Goal: 
+[word_msb a, word_msb (-a),
+ ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))] |- F
+
+Number: 125
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀b n. b ≠ 0 ⇒ (SLICE b b n + SLICE (b − 1) 0 n = SLICE b 0 n)
+ [] |- ∀n. n ≠ 0 ⇒ (SUC n − 2 = n − 1)
+Goal:  [m ≠ 0, dimindex (:α) − 1 ≠ 0, n < dimword (:α), dimindex (:α) = SUC m]
+|- SLICE m 0 n = SLICE m m n + SLICE (m − 1) 0 n
+
+Number: 126
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a < 2 ** b
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), word_msb a,
+ word_msb b, dimindex (:α) − 1 ≠ 0, x < y, y = x + (p + 1),
+ w2n a = 2 ** (dimindex (:α) − 1) + x,
+ w2n b = 2 ** (dimindex (:α) − 1) + y,
+ w2n (-b) = 2 ** (dimindex (:α) − 1) − y]
+|- y < 2 ** (dimindex (:α) − 1)
+
+Number: 127
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a ≤ 2 ** b
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, ¬(w2n a < w2n b), b ≠ 0w, dimindex (:α) − 1 ≠ 0,
+ w2n a = x, w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- y ≤ 2 ** (dimindex (:α) − 1)
+
+Number: 128
+Status: Unsatisfiable
+Info: polymorph bool num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n. m < n ⇒ m ≤ n
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, ¬(w2n a < w2n b), b ≠ 0w, dimindex (:α) − 1 ≠ 0,
+ y ≤ 2 ** (dimindex (:α) − 1), w2n a = x, w2n b = y,
+ w2n (-b) = 2 ** dimindex (:α) − y] |- y ≤ 2 ** dimindex (:α)
+
+Number: 129
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a < 2 ** b
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, y ≤ x,
+ y ≤ 2 ** dimindex (:α), y ≤ 2 ** (dimindex (:α) − 1), w2n a = x,
+ w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- x < 2 ** (dimindex (:α) − 1)
+
+Number: 130
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a ≤ 2 ** b
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, w2n a < w2n b, w2n a = x,
+ w2n b = y, w2n (-b) = 2 ** dimindex (:α) − y]
+|- y ≤ 2 ** (dimindex (:α) − 1)
+
+Number: 131
+Status: Unsatisfiable
+Info: polymorph bool num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n. m < n ⇒ m ≤ n
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+Goal: 
+[Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)),
+ Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)), ¬word_msb a,
+ ¬word_msb b, b ≠ 0w, dimindex (:α) − 1 ≠ 0, w2n a < w2n b,
+ y ≤ 2 ** (dimindex (:α) − 1), w2n a = x, w2n b = y,
+ w2n (-b) = 2 ** dimindex (:α) − y] |- y ≤ 2 ** dimindex (:α)
+
+Number: 132
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀a b.
+     a < b ⇔
+     (word_msb (a − b) ⇎
+      (word_msb a ⇎ word_msb b) ∧ (word_msb (a − b) ⇎ word_msb a))
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ word_msb a ∧ word_msb b ∧
+     word_msb (a − b) ⇒
+     w2n a < w2n b
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ word_msb a ∧ word_msb b ∧
+     ¬word_msb (a − b) ⇒
+     ¬(w2n a < w2n b)
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ ¬word_msb a ∧ ¬word_msb b ∧
+     word_msb (a − b) ⇒
+     w2n a < w2n b
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ ¬word_msb a ∧ ¬word_msb b ∧
+     ¬word_msb (a − b) ⇒
+     ¬(w2n a < w2n b)
+Goal:  [dimindex (:α) − 1 ≠ 0]
+|- a < b ⇔
+   (word_msb a ⇔ word_msb b) ∧ w2n a < w2n b ∨ word_msb a ∧ ¬word_msb b
+
+Number: 133
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ n ≤ m − 1
+ [] |- ∀b a. b ≠ 0 ⇒ SLICE (b − 1) 0 a < 2 ** b
+ [] |- (∀n. 0 + n = n) ∧ ∀m n. SUC m + n = SUC (m + n)
+Goal: 
+[m ≠ 0, ¬BIT m n, 1 ≤ m, dimindex (:α) = SUC m,
+ SLICE m m n + SLICE (m − 1) 0 n = SLICE m 0 n, SLICE m m n = 0]
+|- SLICE m 0 n ≤ 2 ** m − 1
+
+Number: 134
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w v. -(v − w) = w − v
+ [] |- ∀w. word_abs (-w) = word_abs w
+Goal:  [] |- ∀a b. word_abs (a − b) = word_abs (b − a)
+
+Number: 136
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. -w + w = 0w
+ [] |- ∀w. w + -w = 0w
+ [] |- (∀w. w + 0w = w) ∧ ∀w. 0w + w = w
+ [] |- ∀v w x. v + (w + x) = v + w + x
+ [] |- ∀v w. v + w = w + v
+Goal:  [] |- a + (-b + -1w) + 1w = a + -b
+
+Number: 137
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (word_msb x ⇔ ¬word_msb y) ∧ (word_msb x ⇎ word_msb (x + ¬y + 1w)) ⇔
+   (word_msb x ⇎ word_msb y) ∧ (word_msb (x + ¬y + 1w) ⇎ word_msb x)
+
+Number: 138
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. a < 2 ** n ∧ b < 2 ** n ⇒ a + b < 2 ** (n + 1)
+ [] |- 0 < n ⇒ (n − 1 + 1 = n)
+ [] |- 0 < dimindex (:α)
+Goal: 
+[n < dimword (:α), n < 2 ** (dimindex (:α) − 1), n' < dimword (:α),
+ n' < 2 ** (dimindex (:α) − 1)] |- n + n' < 2 ** dimindex (:α)
+
+Number: 139
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal: 
+[T, n < dimword (:α), UINT_MAX (:β) MOD dimword (:α) ≤ n,
+ dimindex (:β) = dimindex (:α), dimword (:β) = dimword (:α),
+ UINT_MAX (:β) ≤ n ∧ n < dimword (:α) ⇒ (n = UINT_MAX (:β))]
+|- UINT_MAX (:β) < dimword (:α)
+
+Number: 140
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [] |- ∀n. (UINT_MAXw = n) ⇔ (n = UINT_MAXw)
+
+Number: 141
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀w n. word_reverse (w ≪ n) = word_reverse w ⋙ n
+ [] |- ∀w. word_reverse (word_reverse w) = w
+Goal:  [] |- ∀w n. word_reverse (w ⋙ n) = word_reverse w ≪ n
+
+Number: 145
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m. 0 < 2 ** m
+Goal:  [] |- 0 < 2 ** n
+
+Number: 146
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀w. n2w (w2n w) = w
+Goal:  [y ≠ 0w, 0 < m] |- w2n y ≠ 0
+
+Number: 147
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n d. 0 < n ∧ 1 < d ⇒ n DIV d < n
+ [] |- ∀m. 0 < m ⇒ 1 < 2 ** m
+ [] |- 0 < x ⇔ x ≠ 0
+Goal:  [y ≠ 0w, w2n y ≠ 0, 0 < m] |- w2n y DIV 2 ** m < w2n y
+
+Number: 148
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. m ≤ n ⇔ ∃p. n = m + p
+ [] |- ∀m n. m + n = n + m
+Goal:  [n < dimword (:α), n' < dimword (:α), n' ≤ n] |- ∃k. n = k + n'
+
+Number: 149
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w v. (v − w = 0w) ⇔ (v = w)
+ [] |- ∀a b. a < b ⇒ a ≠ b
+Goal: 
+[0w = x − y, 0w ≤ 0w ⇒ 0w ≤ y − 0w, y ≤ x, 0w ≤ y, 0w ≤ x − y, y < x,
+ 0w < y] |- 0w < x − y
+
+Number: 150
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. w − 0w = w
+Goal:  [0w = y, y ≤ x, 0w ≤ y, y < x] |- x − y < x ∨ (x − y = x)
+
+Number: 151
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. w − 0w = w
+Goal:  [y = x, y ≤ x, 0w ≤ y, 0w < y] |- 0w < x ∨ (0w = x)
+
+Number: 152
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. ¬(m < n) ⇔ n ≤ m
+ [] |- ∀n p. 2 ** p ≤ n ∧ n < 2 ** SUC p ⇒ (LOG2 n = p)
+ [] |- ∀n. n ≠ 0 ⇒ BIT (LOG2 n) n
+Goal: 
+[BITS n 0 x + BITS n 0 y ≠ 0, ¬BIT (SUC n) x,
+ ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y),
+ BITS n 0 x + BITS n 0 y < 2 ** SUC (SUC n), BITS n 0 x < 2 ** SUC n,
+ BITS n 0 y < 2 ** SUC n, BIT (SUC n) y]
+|- BITS n 0 x + BITS n 0 y < 2 ** SUC n
+
+Number: 153
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. ¬(m < n) ⇔ n ≤ m
+ [] |- ∀n p. 2 ** p ≤ n ∧ n < 2 ** SUC p ⇒ (LOG2 n = p)
+ [] |- ∀n. n ≠ 0 ⇒ BIT (LOG2 n) n
+Goal: 
+[BITS n 0 x + BITS n 0 y ≠ 0, ¬BIT (SUC n) y,
+ ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y),
+ BITS n 0 x + BITS n 0 y < 2 ** SUC (SUC n), BITS n 0 x < 2 ** SUC n,
+ BITS n 0 y < 2 ** SUC n, BIT (SUC n) x]
+|- BITS n 0 x + BITS n 0 y < 2 ** SUC n
+
+Number: 161
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀i.
+   i < dimindex (:α) ⇒
+   ¬(h + (i + 1) ≤ dimindex (:α) − 1) ∨ ¬w ' (h + (i + 1)),
+ i < dimindex (:α), h + 1 ≤ dimindex (:α) − 1,
+ h + (i + 1) ≤ dimindex (:α) − 1, a ' (h + (i + 1))]
+|- ¬w ' (h + (i + 1))
+
+Number: 162
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+ [] |- LOG2 = LOG 2
+ [] |- ∀m. SUC m = m + 1
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal: 
+[P x, x < n, 0 < n − 1, 1 < n, n − 1 < 2 ** SUC (LOG 2 (n − 1)),
+ n ≤ dimindex (:α), x ≤ n − 1, 2 ** LOG 2 (n − 1) ≤ n − 1]
+|- x < 2 ** (LOG2 (n − 1) + 1)
+
+Number: 163
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀h w P a.
+     ((dimindex (:α) − 1 -- h + 1) w = 0w) ⇒
+     (((h -- 0) a = w) ∧ ((dimindex (:α) − 1 -- h + 1) a = 0w) ⇔
+      (a = w))
+Goal: 
+[P x, x < n, x < 2 ** (LOG2 (n − 1) + 1), 0 < n − 1, 1 < n,
+ n − 1 < 2 ** SUC (LOG 2 (n − 1)), n ≤ dimindex (:α), x ≤ n − 1,
+ 2 ** LOG 2 (n − 1) ≤ n − 1,
+ (dimindex (:α) − 1 -- LOG2 (n − 1) + 1) (n2w x) = 0w]
+|- (m = n2w x) ⇔
+   ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w) ∧
+   ((LOG2 (n − 1) -- 0) m = n2w x)
+
+Number: 167
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [(n DIV 2 ** (dimindex (:α) − 1)) MOD 2 ≠ 1]
+|- ¬(2 ** (dimindex (:α) − 1) ≤ n ∧ n < 2 ** dimindex (:α)) ⇒
+   ¬(2 ** (dimindex (:α) − 1) ≤ n) ∨ ¬(n < 2 ** dimindex (:α))
+
+Number: 169
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) ≤ INT_MIN (:α)
+ [] |- INT_MIN (:α) < dimword (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) < dimword (:α)
+
+Number: 170
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+Goal: 
+[Num (-i) ≤ 2 ** (dimindex (:α) − 1), dimindex (:α) ≤ dimindex (:β),
+ INT_MIN (:α) ≤ i, i < 0] |- 2 ** dimindex (:α) ≤ 2 ** dimindex (:β)
+
+Number: 171
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+Goal: 
+[Num (-i) ≤ 2 ** (dimindex (:α) − 1), dimindex (:α) ≤ dimindex (:β),
+ 2 ** dimindex (:α) ≤ 2 ** dimindex (:β), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** dimindex (:α) ∧ Num (-i) < 2 ** dimindex (:β)
+
+Number: 172
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- 0 < i ⇔ i ≠ 0
+Goal: 
+[¬(i < dimindex (:β)), ¬(0 < i), ¬(j < 0), i < dimindex (:α),
+ dimindex (:β) ≤ dimindex (:α), dimindex (:β) = 0, j ≤ INT_MAX (:β),
+ INT_MIN (:β) ≤ j] |- F
+
+Number: 173
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal: 
+[i < dimindex (:α), 0 < i, Num j < 2 ** (dimindex (:β) − 1),
+ 2 ** (dimindex (:β) − 1) < 2 ** i, dimindex (:β) ≤ i,
+ dimindex (:β) ≤ dimindex (:α), INT_MIN (:β) ≤ j, 0 ≤ j,
+ j < &(2 ** (dimindex (:β) − 1))] |- Num j < 2 ** i
+
+Number: 175
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. p + n = m
+Goal: 
+[i < dimindex (:α), n < dimword (:β), INT_MIN (:β) ≤ n,
+ dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:α) = k + i
+
+Number: 176
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+Goal: 
+[i < dimindex (:α), n < dimword (:β), INT_MIN (:β) ≤ n,
+ dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, 2 ** dimindex (:α) MOD 2 ** i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- 2 ** i < 2 ** dimindex (:α) ∧ 2 ** dimindex (:β) ≤ 2 ** i
+
+Number: 177
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+ [] |- b ≤ a ∧ c < b ⇒ a − b + c < a
+Goal: 
+[i < dimindex (:α), n < dimword (:β), 2 ** i < 2 ** dimindex (:α),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ i, dimindex (:β) ≤ dimindex (:α),
+ 2 ** dimindex (:β) ≤ 2 ** i,
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n,
+ 2 ** dimindex (:α) − 2 ** dimindex (:β) =
+ (2 ** (dimindex (:α) − i) − 1) * 2 ** i +
+ (2 ** i − 2 ** dimindex (:β)), 2 ** dimindex (:α) MOD 2 ** i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- 2 ** i − 2 ** dimindex (:β) + n < 2 ** i
+
+Number: 178
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- 0 < n ⇒ n ≠ 0
+Goal: 
+[i < dimindex (:α), 2 ** (0 − 1) + p < dimword (:β), 0 ≤ dimindex (:α),
+ dimindex (:β) = 0, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0] |- F
+
+Number: 179
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+ [] |- ∀m n. m + n = n + m
+ [] |- ∀m n p. m + (n + p) = m + n + p
+ [] |- ∀m. SUC m = m + 1
+Goal: 
+[i < dimindex (:α), i < dimindex (:β), n < dimword (:β),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:α) = k + SUC i
+
+Number: 180
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+ [] |- ∀m n. m + n = n + m
+ [] |- ∀m n p. m + (n + p) = m + n + p
+ [] |- ∀m. SUC m = m + 1
+Goal: 
+[i < dimindex (:α), i < dimindex (:β), n < dimword (:β),
+ INT_MIN (:β) ≤ n, dimindex (:β) ≤ dimindex (:α),
+ -n2w (Num (-j)) = n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n),
+ -n2w (Num (-j)) = n2w n, 2 ** dimindex (:α) MOD 2 ** SUC i = 0,
+ j ≤ INT_MAX (:β), INT_MIN (:β) ≤ j, j < 0]
+|- ∃k. dimindex (:β) = k + SUC i
+
+Number: 181
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal:  [¬b ' (dimindex (:α) − 1), a ' (dimindex (:α) − 1)]
+|- ∃i. i < dimindex (:α) ∧ a ' i
+
+Number: 182
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal: 
+[BIT (dimindex (:α)) (w2n a + w2n (-b)), a ' (dimindex (:α) − 1),
+ b ' (dimindex (:α) − 1)]
+|- ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   (∃i. i < dimindex (:α) ∧ b ' i) ⇔
+   ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   ∃i. i < dimindex (:α) ∧ a ' i
+
+Number: 183
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal: 
+[¬BIT (dimindex (:α)) (w2n a + w2n (-b)), a ' (dimindex (:α) − 1),
+ b ' (dimindex (:α) − 1)]
+|- ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   (∃i. i < dimindex (:α) ∧ b ' i) ⇔
+   ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+   ∃i. i < dimindex (:α) ∧ a ' i
+
+Number: 184
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) ≤ INT_MIN (:α)
+ [] |- INT_MIN (:α) < dimword (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  [] |- ∀i. INT_MIN (:α) ≤ i ∧ i < 0 ⇒ Num (-i) < dimword (:α)
+
+Number: 185
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal: 
+[i' < dimindex (:α), n < dimindex (:α),
+ Num i < 2 ** (dimindex (:α) − 1), dimindex (:α) − 1 < i' + n,
+ dimindex (:α) ≤ i' + n, INT_MIN (:α) ≤ i, 0 ≤ i,
+ i < &(2 ** (dimindex (:α) − 1))] |- Num i < 2 ** (i' + n)
+
+Number: 186
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+Goal: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), Num (-i) < 2 ** dimindex (:α),
+ dimindex (:α) ≤ i' + n, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** (i' + n)
+
+Number: 187
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+Goal: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), 1 < 2 ** n, Num (-i) < 2 ** dimindex (:α),
+ Num (-i) < 2 ** (i' + n), Num (-i) DIV 2 ** n < Num (-i),
+ dimindex (:α) ≤ i' + n, Num (-i) DIV 2 ** n + 1 ≤ Num (-i),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α)
+
+Number: 188
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+Goal: 
+[Num (-i) ≠ 0, Num (-i) MOD 2 ** n ≠ 0, i' < dimindex (:α),
+ n < dimindex (:α), 1 < 2 ** n, Num (-i) < 2 ** dimindex (:α),
+ Num (-i) DIV 2 ** n < Num (-i), Num (-i) ≤ 2 ** (dimindex (:α) − 1),
+ dimindex (:α) ≤ i' + n, Num (-i) DIV 2 ** n + 1 ≤ Num (-i),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α)
+
+Number: 189
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+Goal: 
+[Num (-i) ≠ 0, i' < dimindex (:α), n < dimindex (:α),
+ Num (-i) < 2 ** dimindex (:α), dimindex (:α) ≤ i' + n,
+ 2 ** n ≤ Num (-i), Num (-i) DIV 2 ** n − 1 = (Num (-i) − 1) DIV 2 ** n,
+ Num (-i) MOD 2 ** n = 0, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) < 2 ** (i' + n)
+
+Number: 190
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n a. a ≠ 0 ∧ (a MOD 2 ** n = 0) ⇒ 2 ** n ≤ a
+ [] |- ∀a b. b ≤ a ∧ 0 < b ⇒ 0 < a DIV b
+ [] |- ∀n. 0 < 2 ** n
+ [] |- 0 < x ⇒ x ≠ 0
+Goal: 
+[Num (-i) ≠ 0, i' < dimindex (:α), n < dimindex (:α),
+ Num (-i) < 2 ** dimindex (:α), dimindex (:α) ≤ i' + n,
+ Num (-i) MOD 2 ** n = 0, i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i, i < 0]
+|- Num (-i) DIV 2 ** n ≠ 0
+
+Number: 191
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. w2i w ≤ INT_MAX (:α)
+ [] |- ∀w. INT_MIN (:α) ≤ w2i w
+ [] |- ∀w. INT_MIN (:α) ≤ w2i (sw2sw w) ∧ w2i (sw2sw w) ≤ INT_MAX (:α)
+Goal: 
+[¬(INT_MIN (:β) ≤ i ∧ i ≤ INT_MAX (:β)), dimindex (:β) ≤ dimindex (:α),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i]
+|- (i = w2i (i2w i)) ⇔ (i = w2i (sw2sw (i2w i)))
+
+Number: 192
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal:  [n < dimword (:α)] |- INT_MIN (:β) < dimword (:β)
+
+Number: 194
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal:  [n < INT_MIN (:α), n < dimword (:α), dimindex (:β) ≤ dimindex (:α)]
+|- UINT_MAX (:β) < dimword (:β)
+
+Number: 195
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[llist_rep (llist_abs r1) = r1, llist_rep (llist_abs r2) = r2,
+ llist_abs r1 = llist_abs r2] |- r1 = r2
+
+Number: 196
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P f,
+ ∀g.
+   P g ⇒
+   (g = (λn. NONE)) ∨
+   ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))]
+|- ((λn. if n = 0 then SOME h else f (n − 1)) = (λn. NONE)) ∨
+   ∃h' t.
+     (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+     ((λn. if n = 0 then SOME h else f (n − 1)) =
+      (λn. if n = 0 then SOME h' else t (n − 1)))
+
+Number: 197
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P f, P g,
+ ∀g.
+   P g ⇒
+   (g = (λn. NONE)) ∨
+   ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))]
+|- (g = (λn. NONE)) ∨
+   ∃h' t.
+     (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+     (g = (λn. if n = 0 then SOME h' else t (n − 1)))
+
+Number: 198
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x))]
+|- (f a = NONE) ∨ ∃a' b. f a = SOME (a',b)
+
+Number: 199
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+Goal: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x)), LHD (g a) = NONE,
+ LHD (g' a) = NONE, f a = NONE] |- (g a = [||]) ∧ (g' a = [||])
+
+Number: 200
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+ []
+|- (∀f x. OPTION_MAP f (SOME x) = SOME (f x)) ∧
+   ∀f. OPTION_MAP f NONE = NONE
+Goal: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x), f x = NONE] |- g x = [||]
+
+Number: 201
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 202
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 203
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 204
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 205
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+ []
+|- (∀f x. OPTION_MAP f (SOME x) = SOME (f x)) ∧
+   ∀f. OPTION_MAP f NONE = NONE
+Goal: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀g g'.
+   ((∀x. LHD (g x) = OPTION_MAP SND (f x)) ∧
+    ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)) ∧
+   (∀x. LHD (g' x) = OPTION_MAP SND (f x)) ∧
+   (∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x)) ⇒
+   (g = g'), f x = NONE] |- g x = [||]
+
+Number: 208
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀ll3 ll4.
+   R ll3 ll4 ⇒
+   (ll3 = [||]) ∧ (ll4 = [||]) ∨
+   (LHD ll3 = LHD ll4) ∧ R (THE (LTL ll3)) (THE (LTL ll4)), R ll1 ll2,
+ R ll3 ll4]
+|- (ll3 = [||]) ∧ (ll4 = [||]) ∨
+   (LHD ll3 = LHD ll4) ∧ R (THE (LTL ll3)) (THE (LTL ll4))
+
+Number: 209
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀ll3 ll4.
+   R ll3 ll4 ⇒
+   (ll3 = ll4) ∨ ∃h t1 t2. (ll3 = h:::t1) ∧ (ll4 = h:::t2) ∧ R t1 t2,
+ R ll1 ll2, R ll3 ll4]
+|- (ll3 = ll4) ∨ ∃h t1 t2. (ll3 = h:::t1) ∧ (ll4 = h:::t2) ∧ R t1 t2
+
+Number: 210
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n ll. (LTAKE n ll = NONE) ⇒ (LNTH n ll = NONE)
+Goal:  [LNTH n ll1 = NONE, LTAKE n ll1 = SOME x, LTAKE n ll2 = NONE]
+|- NONE = LNTH n ll2
+
+Number: 211
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n ll. (LTAKE n ll = NONE) ⇒ (LNTH n ll = NONE)
+Goal:  [LNTH n ll2 = NONE, LTAKE n ll1 = NONE, LTAKE n ll2 = SOME x]
+|- LNTH n ll1 = NONE
+
+Number: 212
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n ll. (LTAKE n ll = NONE) ⇒ (LNTH n ll = NONE)
+Goal:  [LTAKE n ll1 = NONE, LTAKE n ll2 = NONE] |- LNTH n ll1 = LNTH n ll2
+
+Number: 213
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- (∀n ll. (LTAKE n ll = NONE) ⇒ LFINITE ll) ⇒
+   (∃n. LTAKE n ll = NONE) ⇒
+   LFINITE ll
+
+Number: 215
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- llength_rel [||] 0 ∧
+   ∀h n t. llength_rel t n ⇒ llength_rel (h:::t) (SUC n)
+Goal:  [] |- ∃n. llength_rel [||] n
+
+Number: 216
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- (∀t n. llength_rel t n ⇒ ∀m. llength_rel t m ⇒ (m = n)) ⇒
+   ∀t m n. llength_rel t n ∧ llength_rel t m ⇒ (m = n)
+
+Number: 218
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t m n. llength_rel t n ∧ llength_rel t m ⇒ (m = n)
+Goal:  [LFINITE t, llength_rel t n] |- ∀m. llength_rel t m ⇔ (m = n)
+
+Number: 219
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀ll.
+   ¬LFINITE ll ⇒
+   (LAPPEND (fromList (THE (LTAKE n ll))) (THE (LDROP n ll)) = ll),
+ ¬LFINITE t, LTAKE n t = SOME y]
+|- (y = THE (LTAKE n t)) ⇒ (LAPPEND (fromList y) (THE (LDROP n t)) = t)
+
+Number: 220
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal:  []
+|- (∀n l e. (SOME e = LNTH n l) ∧ P e ⇒ exists P l) ⇒
+   ∀l n e. (SOME e = LNTH n l) ∧ P e ⇒ exists P l
+
+Number: 221
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal:  [P e, ∀l e. (SOME e = LNTH n l) ∧ P e ⇒ exists P l, SOME e = LNTH n t]
+|- P h ∨ exists P t
+
+Number: 222
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [P e] |- P e ∨ exists P t
+
+Number: 223
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal:  []
+|- (∀n ll a t. (LDROP n ll = SOME (a:::t)) ∧ P a ⇒ exists P ll) ⇒
+   (∃n a t. (LDROP n ll = SOME (a:::t)) ∧ P a) ⇒
+   exists P ll
+
+Number: 225
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [∀h t. Q (h:::t) ⇒ P h ∧ Q t]
+|- (∀ll. exists ($~ o P) ll ⇒ ¬Q ll) ⇒ ∀ll. Q ll ⇒ ¬exists ($~ o P) ll
+
+Number: 226
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [Q (h:::ll), ∀h t. Q (h:::t) ⇒ P h ∧ Q t] |- Q ll
+
+Number: 227
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [Q (h:::t), ∀h t. Q (h:::t) ⇒ P h ∧ Q t] |- P h
+
+Number: 229
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [P n, P n', P 0, ∀m. m < n' ⇒ ¬P m, n' ≠ 0, 0 < n'] |- F
+
+Number: 240
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀s ll.
+   R s ll ⇒
+   (f s = NONE) ∧ (ll = [||]) ∨
+   ∃s' x ll'.
+     (f s = SOME (s',x)) ∧ (LHD ll = SOME x) ∧ (LTL ll = SOME ll') ∧
+     R s' ll', R s ll] |- ∃s'. (LUNFOLD f s = LUNFOLD f s') ∧ R s' ll
+
+Number: 241
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀s ll.
+   R s ll ⇒
+   (f s = NONE) ∧ (ll = [||]) ∨
+   ∃s' x ll'.
+     (f s = SOME (s',x)) ∧ (LHD ll = SOME x) ∧ (LTL ll = SOME ll') ∧
+     R s' ll', R s ll, R s' ll4, R s'' ll', R s''' ll'',
+ LUNFOLD f s = x':::LUNFOLD f s''', LUNFOLD f s' = x:::LUNFOLD f s'',
+ LHD ll = SOME x', LHD ll4 = SOME x, LTL ll = SOME ll'',
+ LTL ll4 = SOME ll', f s = SOME (s''',x'), f s' = SOME (s'',x)]
+|- ∃s''''. (LUNFOLD f s'' = LUNFOLD f s'''') ∧ R s'''' ll'
+
+Number: 242
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀s ll.
+   R s ll ⇒
+   (f s = NONE) ∧ (ll = [||]) ∨
+   ∃s' x ll'.
+     (f s = SOME (s',x)) ∧ (LHD ll = SOME x) ∧ (LTL ll = SOME ll') ∧
+     R s' ll', R s [||], R s' ll4, R s'' ll', LUNFOLD f s = [||],
+ LUNFOLD f s' = x:::LUNFOLD f s'', LHD ll4 = SOME x, LTL ll4 = SOME ll',
+ f s = NONE, f s' = SOME (s'',x)]
+|- ∃s'''. (LUNFOLD f s'' = LUNFOLD f s''') ∧ R s''' ll'
+
+Number: 243
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀l. (l = [||]) ∨ ∃h t. l = h:::t
+Goal: 
+[∀ll l. (LTAKE n ll = SOME l) ⇒ (n = LENGTH l),
+ LTAKE (SUC n) ll = SOME l] |- (ll = [||]) ∨ ∃h t. ll = h:::t
+
+Number: 244
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀ll l. (LTAKE n ll = SOME l) ⇒ (n = LENGTH l), l = h::z,
+ LTAKE n t = SOME z] |- n = LENGTH z
+
+Number: 247
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀r s s'. linear_order r s ∧ s' ⊆ s ⇒ linear_order (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X]
+|- linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 248
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀r s s'.
+     finite_prefixes r s ∧ s' ⊆ s ⇒
+     finite_prefixes r s' ∧ finite_prefixes (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 252
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[T,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo ≠ ∅,
+ x ∉ minimal_elements X lo, domain lo ∪ range lo = X,
+ minimal_elements X lo = {x'},
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo (X DIFF minimal_elements X lo))) =
+ SOME x, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo), linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- LNTH i
+     (LUNFOLD linear_order_to_list_f (rrestrict lo (X DIFF {x'}))) =
+   SOME x
+
+Number: 259
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x'. (∃x. (x,x') ∈ lo) ⇒ x' ∈ X, ∀x'. (∃y. (x',y) ∈ lo) ⇒ x' ∈ X,
+ ∀lo' X' x'.
+   ((∀x'. (∃y. (x',y) ∈ lo') ⇒ x' ∈ X') ∧
+    (∀x'. (∃x. (x,x') ∈ lo') ⇒ x' ∈ X') ∧ transitive lo' ∧ antisym lo' ∧
+    ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x') ⇒
+   x' ∈ X', antisym lo, transitive lo,
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo]
+|- ∀x'.
+     ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+     x' ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+     x' ∈ X
+
+Number: 260
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x' y.
+   (((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+    x' ∉ minimal_elements (domain lo ∪ range lo) lo) ∧
+   ((∃y'. (y,y') ∈ lo) ∨ ∃x. (x,y) ∈ lo) ∧
+   y ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+   (x',y) ∈
+   rrestrict lo
+     (domain lo ∪ range lo DIFF
+      minimal_elements (domain lo ∪ range lo) lo) ∨
+   (y,x') ∈
+   rrestrict lo
+     (domain lo ∪ range lo DIFF
+      minimal_elements (domain lo ∪ range lo) lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x'. (∃x. (x,x') ∈ lo) ⇒ x' ∈ X,
+ ∀x'.
+   (∃x.
+      (x,x') ∈
+      rrestrict lo
+        (domain lo ∪ range lo DIFF
+         minimal_elements (domain lo ∪ range lo) lo)) ⇒
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo,
+ ∀x'. (∃y. (x',y) ∈ lo) ⇒ x' ∈ X,
+ ∀x'.
+   (∃y.
+      (x',y) ∈
+      rrestrict lo
+        (domain lo ∪ range lo DIFF
+         minimal_elements (domain lo ∪ range lo) lo)) ⇒
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo,
+ ∀x'.
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+   x' ∈ X,
+ ∀x. (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒ x ∈ X,
+ ∀lo' X' x'.
+   ((∀x'. (∃y. (x',y) ∈ lo') ⇒ x' ∈ X') ∧
+    (∀x'. (∃x. (x,x') ∈ lo') ⇒ x' ∈ X') ∧ transitive lo' ∧ antisym lo' ∧
+    ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x') ⇒
+   x' ∈ X', antisym lo,
+ antisym
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo)), transitive lo,
+ transitive
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo)),
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ x ∉ minimal_elements (domain lo ∪ range lo) lo,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo, (x',x) ∈ lo] |- x ∈ X
+
+Number: 261
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x' y.
+   (((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+    x' ∉ minimal_elements (domain lo ∪ range lo) lo) ∧
+   ((∃y'. (y,y') ∈ lo) ∨ ∃x. (x,y) ∈ lo) ∧
+   y ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+   (x',y) ∈
+   rrestrict lo
+     (domain lo ∪ range lo DIFF
+      minimal_elements (domain lo ∪ range lo) lo) ∨
+   (y,x') ∈
+   rrestrict lo
+     (domain lo ∪ range lo DIFF
+      minimal_elements (domain lo ∪ range lo) lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x'. (∃x. (x,x') ∈ lo) ⇒ x' ∈ X,
+ ∀x'.
+   (∃x.
+      (x,x') ∈
+      rrestrict lo
+        (domain lo ∪ range lo DIFF
+         minimal_elements (domain lo ∪ range lo) lo)) ⇒
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo,
+ ∀x'. (∃y. (x',y) ∈ lo) ⇒ x' ∈ X,
+ ∀x'.
+   (∃y.
+      (x',y) ∈
+      rrestrict lo
+        (domain lo ∪ range lo DIFF
+         minimal_elements (domain lo ∪ range lo) lo)) ⇒
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo,
+ ∀x'.
+   ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+   x' ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+   x' ∈ X,
+ ∀x. (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒ x ∈ X,
+ ∀lo' X' x'.
+   ((∀x'. (∃y. (x',y) ∈ lo') ⇒ x' ∈ X') ∧
+    (∀x'. (∃x. (x,x') ∈ lo') ⇒ x' ∈ X') ∧ transitive lo' ∧ antisym lo' ∧
+    ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x') ⇒
+   x' ∈ X', antisym lo,
+ antisym
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo)), transitive lo,
+ transitive
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo)),
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ x ∉ minimal_elements (domain lo ∪ range lo) lo,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo, (x,y) ∈ lo] |- x ∈ X
+
+Number: 287
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x'. (∃x. (x,x') ∈ lo) ⇒ x' ∈ X, ∀x'. (∃y. (x',y) ∈ lo) ⇒ x' ∈ X,
+ ∀j lo' X' x'.
+   ((∀x'. (∃y. (x',y) ∈ lo') ⇒ x' ∈ X') ∧
+    (∀x'. (∃x. (x,x') ∈ lo') ⇒ x' ∈ X') ∧ transitive lo' ∧ antisym lo' ∧
+    ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+   (LNTH j (LUNFOLD linear_order_to_list_f lo') = SOME x') ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x') ⇒
+   (i = j), antisym lo, transitive lo,
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ LNTH n
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo]
+|- ∀x'.
+     ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+     x' ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+     x' ∈ X
+
+Number: 288
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x. (∃x'. (x',x) ∈ lo) ⇒ x ∈ X, ∀x. (∃y. (x,y) ∈ lo) ⇒ x ∈ X,
+ ∀j lo' X' x.
+   ((∀x. (∃y. (x,y) ∈ lo') ⇒ x ∈ X') ∧
+    (∀x. (∃x'. (x',x) ∈ lo') ⇒ x ∈ X') ∧ transitive lo' ∧ antisym lo' ∧
+    ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+   (LNTH j (LUNFOLD linear_order_to_list_f lo') = SOME x) ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x) ⇒
+   (i = j), antisym lo, transitive lo,
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo]
+|- ∀x.
+     ((∃y. (x,y) ∈ lo) ∨ ∃x'. (x',x) ∈ lo) ∧
+     x ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+     x ∈ X
+
+Number: 289
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x'. (∃x. (x,x') ∈ lo) ⇒ x' ∈ X, ∀x'. (∃y. (x',y) ∈ lo) ⇒ x' ∈ X,
+ antisym lo, transitive lo,
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ LNTH n
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo]
+|- ∀x'.
+     ((∃y. (x',y) ∈ lo) ∨ ∃x. (x,x') ∈ lo) ∧
+     x' ∉ minimal_elements (domain lo ∪ range lo) lo ⇒
+     x' ∈ X
+
+Number: 290
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀i lo X x.
+     linear_order lo X ∧
+     (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒
+     x ∈ X
+Goal: 
+[∀j lo X x.
+   linear_order lo X ∧
+   (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+   (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒
+   (i = j),
+ ¬(LNTH i
+     (LUNFOLD linear_order_to_list_f
+        (rrestrict lo
+           (domain lo ∪ range lo DIFF
+            minimal_elements (domain lo ∪ range lo) lo))) ≠
+   SOME (CHOICE (minimal_elements (domain lo ∪ range lo) lo))),
+ minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo,
+ domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo ⊆
+ X, linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)]
+|- CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+   domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo
+
+Number: 291
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀i lo X x.
+     linear_order lo X ∧
+     (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒
+     x ∈ X
+Goal: 
+[minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ LNTH n
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo,
+ domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo ⊆
+ X, linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)]
+|- x ∈
+   domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo
+
+Number: 292
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ x ∉ minimal_elements (domain lo ∪ range lo) lo,
+ LNTH n
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x, x ∈ range lo,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo,
+ domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo ⊆
+ X, linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)]
+|- CHOICE (minimal_elements (domain lo ∪ range lo) lo) ≠ x
+
+Number: 293
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[minimal_elements (domain lo ∪ range lo) lo ≠ ∅,
+ x ∉ minimal_elements (domain lo ∪ range lo) lo,
+ LNTH n
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo
+         (domain lo ∪ range lo DIFF
+          minimal_elements (domain lo ∪ range lo) lo))) =
+ SOME x, x ∈ domain lo,
+ CHOICE (minimal_elements (domain lo ∪ range lo) lo) ∈
+ minimal_elements (domain lo ∪ range lo) lo,
+ domain lo ∪ range lo DIFF minimal_elements (domain lo ∪ range lo) lo ⊆
+ X, linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)]
+|- CHOICE (minimal_elements (domain lo ∪ range lo) lo) ≠ x
+
+Number: 295
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀i j lo X x.
+     linear_order lo X ∧
+     (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+     (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ⇒
+     (i = j)
+Goal: 
+[LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ finite_prefixes lo X, linear_order lo X] |- i = j
+
+Number: 296
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [(q,r) ∈ lo, finite_prefixes lo X, linear_order lo X]
+|- ∃y z. (q,r) = (y,z)
+
+Number: 297
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x. (∃y. (x,y) ∈ lo) ⇒ x ∈ X, ∀x. x ∈ range lo ⇒ x ∈ X, antisym lo,
+ transitive lo, (y,z) ∈ lo, finite_prefixes lo X] |- y ∈ X
+
+Number: 299
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[lbtree_rep (lbtree_abs f1) = f1, lbtree_rep (lbtree_abs f2) = f2,
+ lbtree_abs f1 = lbtree_abs f2] |- f1 = f2
+
+Number: 300
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[P t1, P' t2,
+ ∀t. P t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P t1 ∧ P t2 ∧ (t = Ndrep a t1 t2),
+ ∀t. P' t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P' t1 ∧ P' t2 ∧ (t = Ndrep a t1 t2)]
+|- (Ndrep a t1 t2 = Lfrep) ∨
+   ∃a' t1' t2'.
+     (P t1' ∨ P' t1' ∨ (t1' = Ndrep a t1 t2)) ∧
+     (P t2' ∨ P' t2' ∨ (t2' = Ndrep a t1 t2)) ∧
+     (Ndrep a t1 t2 = Ndrep a' t1' t2')
+
+Number: 301
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[P t1, P' t, P' t2,
+ ∀t. P t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P t1 ∧ P t2 ∧ (t = Ndrep a t1 t2),
+ ∀t. P' t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P' t1 ∧ P' t2 ∧ (t = Ndrep a t1 t2)]
+|- (t = Lfrep) ∨
+   ∃a' t1' t2'.
+     (P t1' ∨ P' t1' ∨ (t1' = Ndrep a t1 t2)) ∧
+     (P t2' ∨ P' t2' ∨ (t2' = Ndrep a t1 t2)) ∧ (t = Ndrep a' t1' t2')
+
+Number: 302
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[P t, P t1, P' t2,
+ ∀t. P t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P t1 ∧ P t2 ∧ (t = Ndrep a t1 t2),
+ ∀t. P' t ⇒ (t = Lfrep) ∨ ∃a t1 t2. P' t1 ∧ P' t2 ∧ (t = Ndrep a t1 t2)]
+|- (t = Lfrep) ∨
+   ∃a' t1' t2'.
+     (P t1' ∨ P' t1' ∨ (t1' = Ndrep a t1 t2)) ∧
+     (P t2' ∨ P' t2' ∨ (t2' = Ndrep a t1 t2)) ∧ (t = Ndrep a' t1' t2')
+
+Number: 303
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (∀f. (∃x. f = path_follow g x) ⇒ is_lbtree f) ⇒
+   is_lbtree (path_follow g x)
+
+Number: 304
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal:  [] |- (g x = NONE) ∨ ∃a b1 b2. g x = SOME (a,b1,b2)
+
+Number: 305
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [g x = SOME (a,b1,b2)] |- ∃x. path_follow g b2 = path_follow g x
+
+Number: 306
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [g x = SOME (a,b1,b2)] |- ∃x. path_follow g b1 = path_follow g x
+
+Number: 307
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- is_lbtree r ⇒ (lbtree_rep (lbtree_abs r) = r)
+Goal:  [is_lbtree t1, is_lbtree t2]
+|- (Ndrep a t1 t2 = Lfrep) ∨
+   ∃a' t1' t2'.
+     Ndrep a t1 t2 = Ndrep a' (lbtree_rep t1') (lbtree_rep t2')
+
+Number: 308
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. g x = case f x of NONE => Lf | SOME (b,y,z) => Nd b (g y) (g z),
+ ∀x. g' x = case f x of NONE => Lf | SOME (b,y,z) => Nd b (g' y) (g' z)]
+|- (f x = NONE) ∨ ∃a b1 b2. f x = SOME (a,b1,b2)
+
+Number: 309
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. g x = case f x of NONE => Lf | SOME (b,y,z) => Nd b (g y) (g z),
+ ∀x. g' x = case f x of NONE => Lf | SOME (b,y,z) => Nd b (g' y) (g' z)]
+|- (f x = NONE) ∨ ∃a b1 b2. f x = SOME (a,b1,b2)
+
+Number: 310
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal:  [] |- (f x = NONE) ∨ ∃a b1 b2. f x = SOME (a,b1,b2)
+
+Number: 312
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = Lf) ∧ (u = Lf) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R p_1 p_2,
+ R t u] |- (p_2 = Lf) ∨ ∃a u1 u2. p_2 = Nd a u1 u2
+
+Number: 314
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- Lf ≠ Nd a t1 t2
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = Lf) ∧ (u = Lf) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R p_1 p_2,
+ R t u, p_2 = Lf] |- p_1 = Lf
+
+Number: 315
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = Lf) ∧ (u = Lf) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R p_1 p_2,
+ R t u] |- (p_1 = Lf) ∨ ∃a t1 t2. p_1 = Nd a t1 t2
+
+Number: 317
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal:  [] |- (t = Lf) ∨ ∃a u1 u2. t = Nd a u1 u2
+
+Number: 318
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = u) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R t u]
+|- (t' = Lf) ∨ ∃a t1 t2. t' = Nd a t1 t2
+
+Number: 319
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = u) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R t u,
+ R t' u']
+|- (t' = u') ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t' = Nd a t1 t2) ∧ (u' = Nd a u1 u2)
+
+Number: 320
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal: 
+[∀t u.
+   R t u ⇒
+   (t = u) ∨
+   ∃a t1 u1 t2 u2.
+     R t1 u1 ∧ R t2 u2 ∧ (t = Nd a t1 t2) ∧ (u = Nd a u1 u2), R t u,
+ R t' t'] |- (t' = Lf) ∨ ∃a t1 t2. t' = Nd a t1 t2
+
+Number: 321
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [] |- (b = a) ∨ mem a t1 ∨ mem a t2 ⇔ (a = b) ∨ mem a t1 ∨ mem a t2
+
+Number: 322
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal:  [] |- (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+
+Number: 323
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal:  [] |- (t = Lf) ∨ ∃a' t1' t2'. t = Nd a' t1' t2'
+
+Number: 324
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  []
+|- (f a' = a) ∧ (map f t1' = t1) ∧ (map f t2' = t2) ⇔
+   (a = f a') ∧ (t1 = map f t1') ∧ (t2 = map f t2')
+
+Number: 325
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (∀t. finite t ⇒ finite (map f t)) ∧
+   (∀t. finite t ⇒ ∀t'. (t = map f t') ⇒ finite t') ⇒
+   (finite (map f t) ⇔ finite t)
+
+Number: 327
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (∀l.
+      exists ($= x) l ⇒
+      ∀tlist. (l = bf_flatten tlist) ⇒ EXISTS (mem x) tlist) ⇒
+   exists ($= x) (bf_flatten tlist) ⇒
+   EXISTS (mem x) tlist
+
+Number: 328
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀h t. h:::t ≠ [||] ∧ [||] ≠ h:::t
+ [] |- ∀l. (bf_flatten l = [||]) ⇔ EVERY ($= Lf) l
+Goal: 
+[∀tlist. (l = bf_flatten tlist) ⇒ EXISTS (mem x) tlist,
+ h:::l = bf_flatten tlist] |- ¬EVERY ($= Lf) tlist
+
+Number: 329
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀l.
+     EXISTS P l ⇒ ∃l1 x l2. (l = l1 ++ x::l2) ∧ EVERY ($~ o P) l1 ∧ P x
+Goal: 
+[∀tlist. (l = bf_flatten tlist) ⇒ EXISTS (mem x) tlist,
+ ¬EVERY ($= Lf) tlist, h:::l = bf_flatten tlist,
+ EXISTS ($~ o $= Lf) tlist]
+|- ∃l1 y l2.
+     EVERY ($~ o $~ o $= Lf) l1 ∧ ($~ o $= Lf) y ∧ (tlist = l1 ++ y::l2)
+
+Number: 331
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[h = a, l = bf_flatten (l2 ++ [t1; t2]),
+ bf_flatten (l1 ++ [Nd a t1 t2] ++ l2) =
+ a:::bf_flatten (l2 ++ [t1; t2]),
+ (l = bf_flatten (l2 ++ [t1; t2])) ⇒
+ EXISTS (mem x) l2 ∨ mem x t1 ∨ mem x t2, EVERY ($= Lf) l1,
+ EVERY ($~ o $~ o $= Lf) l1]
+|- (EXISTS (mem x) l1 ∨ (x = a) ∨ mem x t1 ∨ mem x t2) ∨
+   EXISTS (mem x) l2
+
+Number: 332
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀h t. h:::t ≠ [||] ∧ [||] ≠ h:::t
+ [] |- ∀l. (bf_flatten l = [||]) ⇔ EVERY ($= Lf) l
+Goal:  [h:::t = bf_flatten tlist] |- ¬EVERY ($= Lf) tlist
+
+Number: 333
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀l.
+     EXISTS P l ⇒ ∃l1 x l2. (l = l1 ++ x::l2) ∧ EVERY ($~ o P) l1 ∧ P x
+Goal: 
+[¬EVERY ($= Lf) tlist, h:::t = bf_flatten tlist,
+ EXISTS ($~ o $= Lf) tlist]
+|- ∃l1 x l2.
+     EVERY ($~ o $~ o $= Lf) l1 ∧ ($~ o $= Lf) x ∧ (tlist = l1 ++ x::l2)
+
+Number: 337
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal:  [] |- ∃n. depth x (Nd x t1 t2) n
+
+Number: 339
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀x t n. depth x t n ⇒ mem x t
+Goal: 
+[∀m. m < n ⇒ ¬depth x t2 m, ∀m. m < n' ⇒ ¬depth x (Nd a t1 t2) m, x ≠ a,
+ ¬mem x t1, mem x t2, depth x t2 n] |- ∀n. ¬depth x t1 n
+
+Number: 341
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀n. ¬depth x t1 n, ∀m. m < n ⇒ ¬depth x t2 m,
+ ∀m'. m' < SUC m ⇒ ¬depth x (Nd a t1 t2) m', x ≠ a, ¬mem x t1, m < n,
+ mem x t2, depth x t2 m, depth x t2 n] |- F
+
+Number: 343
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀x t n. depth x t n ⇒ mem x t
+Goal: 
+[∀m. m < n ⇒ ¬depth x t1 m, ∀m. m < n' ⇒ ¬depth x (Nd a t1 t2) m, x ≠ a,
+ ¬mem x t2, mem x t1, depth x t1 n] |- ∀n. ¬depth x t2 n
+
+Number: 345
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀n. ¬depth x t2 n, ∀m. m < n ⇒ ¬depth x t1 m,
+ ∀m'. m' < SUC m ⇒ ¬depth x (Nd a t1 t2) m', x ≠ a, ¬mem x t2, m < n,
+ mem x t1, depth x t1 m, depth x t1 n] |- F
+
+Number: 346
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m, x ≠ a,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 t2d]
+|- (∃m. depth x t1 m) ∨ ∃m. depth x t2 m
+
+Number: 347
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t2d, t2d < m,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 m, depth x t2 t2d] |- F
+
+Number: 348
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t2d, m < t2d,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 m, depth x t2 t2d] |- F
+
+Number: 349
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m'. m' < m ⇒ ¬depth x t2 m', ∀m. m < t1d ⇒ ¬depth x t1 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, t1d < m, mem x t1,
+ mem x t2, depth x t1 t1d, depth x t2 m] |- m = t1d
+
+Number: 350
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t1d, t1d < m,
+ mem x t1, mem x t2, depth x t1 m, depth x t1 t1d, depth x t2 t2d] |- F
+
+Number: 351
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t1d, m < t1d,
+ mem x t1, mem x t2, depth x t1 m, depth x t1 t1d, depth x t2 t2d] |- F
+
+Number: 352
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m'. m' < m ⇒ ¬depth x t1 m', ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', ¬(m < t2d), x ≠ a, m ≠ t2d,
+ t2d < m, mem x t1, mem x t2, depth x t1 m, depth x t2 t2d] |- F
+
+Number: 353
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m, x ≠ a,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 t2d]
+|- (∃m. depth x t1 m) ∨ ∃m. depth x t2 m
+
+Number: 354
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t2d, t2d < m,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 m, depth x t2 t2d] |- F
+
+Number: 355
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t2d, m < t2d,
+ mem x t1, mem x t2, depth x t1 t1d, depth x t2 m, depth x t2 t2d] |- F
+
+Number: 356
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m'. m' < m ⇒ ¬depth x t2 m', ∀m. m < t1d ⇒ ¬depth x t1 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, t1d < m, mem x t1,
+ mem x t2, depth x t1 t1d, depth x t2 m] |- m = t1d
+
+Number: 357
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t1d, t1d < m,
+ mem x t1, mem x t2, depth x t1 m, depth x t1 t1d, depth x t2 t2d] |- F
+
+Number: 358
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀m. m < t1d ⇒ ¬depth x t1 m, ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', x ≠ a, m ≠ t1d, m < t1d,
+ mem x t1, mem x t2, depth x t1 m, depth x t1 t1d, depth x t2 t2d] |- F
+
+Number: 359
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- SUC x < SUC y ⇔ x < y
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal: 
+[∀m'. m' < m ⇒ ¬depth x t1 m', ∀m. m < t2d ⇒ ¬depth x t2 m,
+ ∀m'.
+   m' < SUC m ⇒
+   (∀m''. m' ≠ SUC m'' ∨ ¬depth x t1 m'') ∧
+   ∀m''. m' ≠ SUC m'' ∨ ¬depth x t2 m'', ¬(m < t2d), x ≠ a, m ≠ t2d,
+ t2d < m, mem x t1, mem x t2, depth x t1 m, depth x t2 t2d] |- F
+
+Number: 360
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- (∀x t1 t2. depth x (Nd x t1 t2) 0) ∧
+   (∀m x a t1 t2. depth x t1 m ⇒ depth x (Nd a t1 t2) (SUC m)) ∧
+   ∀m x a t1 t2. depth x t2 m ⇒ depth x (Nd a t1 t2) (SUC m)
+Goal:  [] |- ∃n. depth a (Nd a t1 t2) n
+
+Number: 364
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME min_d,
+ Abbrev
+   (min_d = LEAST x. (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n)) x),
+ i < n, i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME min_d, EXISTS (λe. ∃n. f e = SOME n) l,
+ (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n)) d]
+|- ∃i. i < LENGTH l ∧ (f (EL i l) = SOME x)
+
+Number: 365
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P d, P x,
+ ∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME (LEAST x. P x),
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))), i < n,
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME (LEAST x. P x), EXISTS (λe. ∃n. f e = SOME n) l]
+|- ∃n. P n
+
+Number: 366
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P d, P m, P x, ∀m'. m' < m ⇒ ¬P m',
+ ∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME (LEAST x. P x),
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))), i < n,
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME (LEAST x. P x), EXISTS (λe. ∃n. f e = SOME n) l]
+|- ∃n. P n
+
+Number: 367
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+ [] |- (x = y) ⇔ ¬(x < y) ∧ ¬(y < x)
+Goal: 
+[P d, P m, P n', P x, ∀m'. m' < m ⇒ ¬P m',
+ ∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME (LEAST x. P x),
+ ∀m. m < n' ⇒ ¬P m,
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))), i < n,
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME (LEAST x. P x), EXISTS (λe. ∃n. f e = SOME n) l]
+|- n' = m
+
+Number: 368
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+ [] |- ¬(x < y) ⇔ y ≤ x
+Goal: 
+[P d, P m, P x, ∀m'. m' < m ⇒ ¬P m',
+ ∀m'. m' < n ⇒ ¬(m' < LENGTH l) ∨ f (EL m' l) ≠ SOME m,
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))), i < n,
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x, f (EL n l) = SOME m,
+ EXISTS (λe. ∃n. f e = SOME n) l] |- m ≤ x
+
+Number: 369
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P d, P m, P x, ∀m'. m' < m ⇒ ¬P m',
+ ∀m'. m' < n ⇒ ¬(m' < LENGTH l) ∨ f (EL m' l) ≠ SOME m,
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))), i < n,
+ i < LENGTH l, n < LENGTH l, m ≤ x, f (EL i l) = SOME x,
+ f (EL n l) = SOME m, EXISTS (λe. ∃n. f e = SOME n) l] |- m ≠ x
+
+Number: 370
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME min_d,
+ Abbrev
+   (min_d = LEAST x. (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n)) x),
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME min_d, EXISTS (λe. ∃n. f e = SOME n) l,
+ (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n)) d]
+|- ∃i. i < LENGTH l ∧ (f (EL i l) = SOME x)
+
+Number: 371
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P d, P x,
+ ∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME (LEAST x. P x),
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))),
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME (LEAST x. P x), EXISTS (λe. ∃n. f e = SOME n) l]
+|- ∃n. P n
+
+Number: 372
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+ [] |- x ≤ y ⇔ ¬(y < x)
+Goal: 
+[P d, P n', P x,
+ ∀m. m < n ⇒ ¬(m < LENGTH l) ∨ f (EL m l) ≠ SOME (LEAST x. P x),
+ ∀m. m < n' ⇒ ¬P m,
+ Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))),
+ i < LENGTH l, n < LENGTH l, f (EL i l) = SOME x,
+ f (EL n l) = SOME (LEAST x. P x), EXISTS (λe. ∃n. f e = SOME n) l]
+|- n' ≤ x
+
+Number: 373
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[P d, Abbrev (P = (λn. ∃i. i < LENGTH l ∧ (f (EL i l) = SOME n))),
+ EXISTS (λe. ∃n. f e = SOME n) l] |- ∃n. P n
+
+Number: 374
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀m. m < n ⇒ ∀i. ¬(i < LENGTH l) ∨ f (EL i l) ≠ SOME m, i < LENGTH l,
+ i' < LENGTH l, f (EL i l) = SOME d, f (EL i' l) = SOME n,
+ EXISTS (λe. ∃n. f e = SOME n) l]
+|- ∃n'. n' < LENGTH l ∧ (f (EL n' l) = SOME n)
+
+Number: 379
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀x t. mem x t ⇒ ∃n. mindepth x t = SOME n
+Goal: 
+[∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) <
+   (@i. ∃d. is_mmindex (mindepth x) tlist i d) ⇒
+   (THE
+      (mindepth x
+         (EL (@i. ∃d. is_mmindex (mindepth x) tlist i d) tlist)) =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   (∃e. MEM e tlist' ∧ mem x' e) ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) <
+   THE
+     (mindepth x
+        (EL (@i. ∃d. is_mmindex (mindepth x) tlist i d) tlist)) ⇒
+   (∃e. MEM e tlist' ∧ mem x' e) ⇒
+   exists ($= x') (bf_flatten tlist'), MEM e tlist, mem x e]
+|- ∃e. MEM e tlist ∧ ∃n. mindepth x e = SOME n
+
+Number: 381
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- is_mmindex f l i m ⇒ ∀j n. is_mmindex f l j n ⇔ (j = i) ∧ (n = m)
+Goal: 
+[∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) <
+   (@i. ∃d. is_mmindex (mindepth x) tlist i d) ⇒
+   (THE
+      (mindepth x
+         (EL (@i. ∃d. is_mmindex (mindepth x) tlist i d) tlist)) =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) <
+   THE
+     (mindepth x
+        (EL (@i. ∃d. is_mmindex (mindepth x) tlist i d) tlist)) ⇒
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'), EXISTS (mem x) tlist,
+ EXISTS (λe. ∃n. mindepth x e = SOME n) tlist,
+ is_mmindex (mindepth x) tlist i d]
+|- ∀j n. is_mmindex (mindepth x) tlist j n ⇔ (j = i) ∧ (n = d)
+
+Number: 382
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀f l n d.
+     is_mmindex f l n d ⇔
+     n < LENGTH l ∧ (f (EL n l) = SOME d) ∧
+     ∀i.
+       i < LENGTH l ⇒
+       (f (EL i l) = NONE) ∨
+       ∃d'. (f (EL i l) = SOME d') ∧ d ≤ d' ∧ (i < n ⇒ d < d')
+Goal: 
+[T,
+ ∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) < i ⇒
+   (THE (mindepth x (EL i tlist)) =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) <
+   THE (mindepth x (EL i tlist)) ⇒
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀j n. is_mmindex (mindepth x) tlist j n ⇔ (j = i) ∧ (n = d),
+ EXISTS (mem x) tlist, EXISTS (λe. ∃n. mindepth x e = SOME n) tlist]
+|- mindepth x (EL i tlist) = SOME d
+
+Number: 383
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀l. (l = []) ∨ ∃t h. l = h::t
+ []
+|- (∀P. EXISTS P [] ⇔ F) ∧ ∀P h t. EXISTS P (h::t) ⇔ P h ∨ EXISTS P t
+Goal: 
+[T,
+ ∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) < i ⇒
+   (d =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) < d ⇒
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀j n. is_mmindex (mindepth x) tlist j n ⇔ (j = i) ∧ (n = d),
+ mindepth x (EL i tlist) = SOME d, EXISTS (mem x) tlist,
+ EXISTS (λe. ∃n. mindepth x e = SOME n) tlist] |- ∃h t. tlist = h::t
+
+Number: 384
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀t. (t = Lf) ∨ ∃a t1 t2. t = Nd a t1 t2
+Goal: 
+[T,
+ ∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) < i ⇒
+   (d =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) < d ⇒
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀j n. is_mmindex (mindepth x) tlist j n ⇔ (j = i) ∧ (n = d),
+ tlist = h::t, mindepth x (EL i tlist) = SOME d, EXISTS (mem x) tlist,
+ EXISTS (λe. ∃n. mindepth x e = SOME n) tlist]
+|- (h = Lf) ∨ ∃a t1 t2. h = Nd a t1 t2
+
+Number: 390
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- is_mmindex f l i m ⇒ ∀j n. is_mmindex f l j n ⇔ (j = i) ∧ (n = m)
+Goal: 
+[∀tlist' x'.
+   (@i. ∃d. is_mmindex (mindepth x') tlist' i d) < i ⇒
+   (d =
+    THE
+      (mindepth x'
+         (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist'))) ∧
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀tlist' x'.
+   THE
+     (mindepth x'
+        (EL (@i. ∃d. is_mmindex (mindepth x') tlist' i d) tlist')) < d ⇒
+   EXISTS (mem x') tlist' ⇒
+   exists ($= x') (bf_flatten tlist'),
+ ∀j n. is_mmindex (mindepth x) (Lf::t) j n ⇔ (j = i) ∧ (n = d),
+ i = SUC i0, mindepth x (EL i (Lf::t)) = SOME d, EXISTS (mem x) (Lf::t),
+ EXISTS (λe. ∃n. mindepth x e = SOME n) (Lf::t),
+ is_mmindex (mindepth x) t i0 d,
+ is_mmindex (mindepth x) (Lf::t) (SUC i0) d]
+|- ∀j n. is_mmindex (mindepth x) t j n ⇔ (j = i0) ∧ (n = d)
+
+Number: 391
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- exists ($= x) (bf_flatten tlist) ⇒ EXISTS (mem x) tlist
+Goal:  [] |- exists ($= x) (bf_flatten tlist) ⇒ EXISTS (mem x) tlist
+
+Number: 392
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. EVEN n ⇔ ¬ODD n
+Goal:  [ODD a ⇎ ODD b, ¬((ODD a ⇔ EVEN b) ∨ (a = b))] |- ODD a ⇔ EVEN b
+
+Number: 393
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ (MOD_2EXP n a = MOD_2EXP n b)
+Goal:  [] |- ∀n a. MOD_2EXP_EQ n a a
+
+Number: 394
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ (MOD_2EXP n a = MOD_2EXP n b)
+Goal:  [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+
+Number: 395
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ (MOD_2EXP n a = MOD_2EXP n b)
+Goal:  []
+|- ∀n a b c. MOD_2EXP_EQ n a b ∧ MOD_2EXP_EQ n b c ⇒ MOD_2EXP_EQ n a c
+
+Number: 396
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ (MOD_2EXP n a = MOD_2EXP n b)
+Goal:  [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+
+Number: 397
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. EVEN n ⇔ ¬ODD n
+Goal: 
+[∀a b.
+   (v = BRANCHING_BIT a b) ⇒
+   a ≠ b ⇒
+   (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b), a ≠ b,
+ ODD a ⇔ EVEN b, SUC v = BRANCHING_BIT a b] |- EVEN b ⇎ ODD b
+
+Number: 398
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [T, a ≠ b, ODD a ⇔ ¬ODD b] |- ¬ODD b ⇎ ODD b
+
+Number: 400
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. DIV2 n = n DIV 2
+Goal: 
+[∀a' b'.
+   (BRANCHING_BIT (DIV2 a) (DIV2 b) = BRANCHING_BIT a' b') ⇒
+   (BRANCHING_BIT a' b' = BRANCHING_BIT b' a'), ODD a ⇎ EVEN b,
+ ODD b ⇎ EVEN a, b ≠ a, v = BRANCHING_BIT (DIV2 a) (DIV2 b)]
+|- BRANCHING_BIT (a DIV 2) (b DIV 2) = BRANCHING_BIT (b DIV 2) (a DIV 2)
+
+Number: 401
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. EVEN n ⇔ ¬ODD n
+Goal: 
+[∀a b.
+   (v = BRANCHING_BIT a b) ⇒ (BRANCHING_BIT a b = BRANCHING_BIT b a),
+ ¬((ODD a ⇔ EVEN b) ∨ (a = b)), ODD b ⇔ EVEN a,
+ SUC v = BRANCHING_BIT a b] |- F
+
+Number: 402
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀n. EVEN n ⇔ ¬ODD n
+Goal: 
+[∀a b.
+   (v = BRANCHING_BIT a b) ⇒ (BRANCHING_BIT a b = BRANCHING_BIT b a),
+ ¬((ODD b ⇔ EVEN a) ∨ (b = a)), ODD a ⇔ EVEN b,
+ SUC v = BRANCHING_BIT a b] |- F
+
+Number: 403
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀P Q. (∀k d. P k d ⇒ Q k d) ∧ EVERY_LEAF P t ⇒ EVERY_LEAF Q t,
+ ∀P Q. (∀k d. P k d ⇒ Q k d) ∧ EVERY_LEAF P t' ⇒ EVERY_LEAF Q t',
+ ∀k d. P k d ⇒ Q k d, EVERY_LEAF P t, EVERY_LEAF P t']
+|- EVERY_LEAF Q t'
+
+Number: 404
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀P Q. (∀k d. P k d ⇒ Q k d) ∧ EVERY_LEAF P t ⇒ EVERY_LEAF Q t,
+ ∀P Q. (∀k d. P k d ⇒ Q k d) ∧ EVERY_LEAF P t' ⇒ EVERY_LEAF Q t',
+ ∀k d. P k d ⇒ Q k d, EVERY_LEAF P t, EVERY_LEAF P t'] |- EVERY_LEAF Q t
+
+Number: 407
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)),
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- MOD_2EXP (BRANCHING_BIT q n0) q < 2 ** BRANCHING_BIT q n0
+
+Number: 410
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬MOD_2EXP_EQ n q n0,
+ n0 < 2 ** n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- MOD_2EXP (BRANCHING_BIT q n0) q < 2 ** BRANCHING_BIT q n0
+
+Number: 411
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬BIT n q, n0 < 2 ** n,
+ IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)),
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n q n0]
+|- t' |+ (q,r) ≠ <{}>
+
+Number: 412
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, n0 < 2 ** n,
+ IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT n q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n q n0]
+|- t |+ (q,r) ≠ <{}>
+
+Number: 413
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, ¬BIT (BRANCHING_BIT q n) q] |- BIT (BRANCHING_BIT q n) n
+
+Number: 414
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, ¬BIT (BRANCHING_BIT q n) q]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n) n q
+
+Number: 415
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, ¬BIT (BRANCHING_BIT q n) q]
+|- MOD_2EXP (BRANCHING_BIT q n) q < 2 ** BRANCHING_BIT q n
+
+Number: 416
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, BIT (BRANCHING_BIT q n) q] |- ¬BIT (BRANCHING_BIT q n) n
+
+Number: 417
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, BIT (BRANCHING_BIT q n) q]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n) n q
+
+Number: 418
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀t k d. t |+ (k,d) ≠ <{}>
+ [] |- MOD_2EXP x n < 2 ** x
+Goal:  [n ≠ q, BIT (BRANCHING_BIT q n) q]
+|- MOD_2EXP (BRANCHING_BIT q n) q < 2 ** BRANCHING_BIT q n
+
+Number: 419
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)),
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- BIT (BRANCHING_BIT q n0) n0
+
+Number: 420
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)),
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- BIT (BRANCHING_BIT q n0) n0
+
+Number: 421
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬MOD_2EXP_EQ n q n0,
+ n0 < 2 ** n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- ¬BIT (BRANCHING_BIT q n0) n0
+
+Number: 422
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬MOD_2EXP_EQ n q n0,
+ n0 < 2 ** n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t]
+|- ¬BIT (BRANCHING_BIT q n0) n0
+
+Number: 423
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬BIT n k,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) n0,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 424
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬BIT n k,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) n0,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 425
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT n k,
+ BIT (BRANCHING_BIT q n0) n0,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 426
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) q, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT n k,
+ BIT (BRANCHING_BIT q n0) n0,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 427
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬BIT n k,
+ ¬BIT (BRANCHING_BIT q n0) n0, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 428
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>, ¬BIT n k,
+ ¬BIT (BRANCHING_BIT q n0) n0, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 429
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) n0, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT n k,
+ BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 430
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀a b. MOD_2EXP_EQ (BRANCHING_BIT a b) a b
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇔ MOD_2EXP_EQ n b a
+Goal: 
+[IS_PTREE t, IS_PTREE t', t ≠ <{}>, t' ≠ <{}>,
+ ¬BIT (BRANCHING_BIT q n0) n0, ¬MOD_2EXP_EQ n q n0, n0 < 2 ** n,
+ BRANCHING_BIT q n0 < n, IS_PTREE t ⇒ IS_PTREE (t |+ (q,r)),
+ IS_PTREE t' ⇒ IS_PTREE (t' |+ (q,r)), BIT n k,
+ BIT (BRANCHING_BIT q n0) q,
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t',
+ EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t, MOD_2EXP_EQ n k n0]
+|- MOD_2EXP_EQ (BRANCHING_BIT q n0) n0 q
+
+Number: 441
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀d. ¬P k d, ∀P k. (∀d. ¬P k d) ∧ EVERY_LEAF P t ⇒ (t ' k = NONE),
+ ∀P k. (∀d. ¬P k d) ∧ EVERY_LEAF P t' ⇒ (t' ' k = NONE), ¬BIT n k,
+ EVERY_LEAF P t, EVERY_LEAF P t'] |- t' ' k = NONE
+
+Number: 442
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀d. ¬P k d, ∀P k. (∀d. ¬P k d) ∧ EVERY_LEAF P t ⇒ (t ' k = NONE),
+ ∀P k. (∀d. ¬P k d) ∧ EVERY_LEAF P t' ⇒ (t' ' k = NONE), BIT n k,
+ EVERY_LEAF P t, EVERY_LEAF P t'] |- t ' k = NONE
+
+Number: 443
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [∀d. ¬P k d, P n a] |- k ≠ n
+
+Number: 448
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ BRANCHING_BIT a b < n
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇒ ∀x. x < n ⇒ (BIT x a ⇔ BIT x b)
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀t k.
+     (∀d. ¬(λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) k d) ∧
+     EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t ⇒
+     (t ' k = NONE)
+ []
+|- ∀t k.
+     (∀d. ¬(λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) k d) ∧
+     EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t ⇒
+     (t ' k = NONE)
+Goal:  [j ≠ k, k ≠ j, ¬BIT (BRANCHING_BIT k j) j, ¬BIT (BRANCHING_BIT k j) k]
+|- F
+
+Number: 449
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ BRANCHING_BIT a b < n
+ []
+|- ∀a b. a ≠ b ⇒ (BIT (BRANCHING_BIT a b) a ⇎ BIT (BRANCHING_BIT a b) b)
+ [] |- ∀n a b. MOD_2EXP_EQ n a b ⇒ ∀x. x < n ⇒ (BIT x a ⇔ BIT x b)
+ [] |- ∀n a b. ¬MOD_2EXP_EQ n a b ⇒ a ≠ b
+ []
+|- ∀t k.
+     (∀d. ¬(λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) k d) ∧
+     EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ BIT n k) t ⇒
+     (t ' k = NONE)
+ []
+|- ∀t k.
+     (∀d. ¬(λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) k d) ∧
+     EVERY_LEAF (λk d. MOD_2EXP_EQ n k n0 ∧ ¬BIT n k) t ⇒
+     (t ' k = NONE)
+Goal:  [j ≠ k, k ≠ j, BIT (BRANCHING_BIT k j) j, BIT (BRANCHING_BIT k j) k]
+|- F
+
+Number: 466
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀n n0.
+   IS_PTREE (Branch n0 n t1 t1') ∧ IS_PTREE t2 ⇒
+   ((∀k. Branch n0 n t1 t1' ' k = t2 ' k) ⇔ (Branch n0 n t1 t1' = t2)),
+ ∀n n0.
+   IS_PTREE (Branch n0 n t1 t1') ∧ IS_PTREE t2' ⇒
+   ((∀k. Branch n0 n t1 t1' ' k = t2' ' k) ⇔
+    (Branch n0 n t1 t1' = t2')),
+ ∀t2. IS_PTREE t1 ∧ IS_PTREE t2 ⇒ ((∀k. t1 ' k = t2 ' k) ⇔ (t1 = t2)),
+ ∀t2.
+   IS_PTREE t1' ∧ IS_PTREE t2 ⇒ ((∀k. t1' ' k = t2 ' k) ⇔ (t1' = t2)),
+ IS_PTREE (Branch n0 n t2 t2'), IS_PTREE (Branch n0' n' t1 t1')]
+|- (n0' = n0) ∧ (n' = n) ∧ (t1 = t2) ∧ (t1' = t2') ⇒
+   ∀k.
+     ¬IS_SOME ((if BIT n' k then t1 else t1') ' k) ∧
+     ¬IS_SOME ((if BIT n k then t2 else t2') ' k) ∨
+     (IS_SOME ((if BIT n' k then t1 else t1') ' k) ∧
+      IS_SOME ((if BIT n k then t2 else t2') ' k)) ∧
+     (THE ((if BIT n' k then t1 else t1') ' k) =
+      THE ((if BIT n k then t2 else t2') ' k))
+
+Number: 486
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t k. IS_PTREE t ⇒ (MEM k (TRAVERSE t) ⇔ IS_SOME (t ' k))
+ []
+|- ∀p m l r k j.
+     IS_PTREE (Branch p m l r) ∧ IS_SOME (l ' k) ∧ IS_SOME (r ' j) ⇒
+     k ≠ j
+Goal: 
+[IS_PTREE t, IS_PTREE t', IS_PTREE (Branch n0 n t t'),
+ IS_PTREE t ⇒ ALL_DISTINCT (TRAVERSE t),
+ IS_PTREE t' ⇒ ALL_DISTINCT (TRAVERSE t'), MEM e (TRAVERSE t)]
+|- e ∉ LIST_TO_SET (TRAVERSE t')
+
+Number: 487
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t k. IS_PTREE t ⇒ (MEM k (TRAVERSE t) ⇔ IS_SOME (t ' k))
+ []
+|- ∀p m l r k j.
+     IS_PTREE (Branch p m l r) ∧ IS_SOME (l ' k) ∧ IS_SOME (r ' j) ⇒
+     k ≠ j
+Goal: 
+[IS_PTREE t, IS_PTREE t', IS_PTREE (Branch n0 n t t'),
+ IS_PTREE t ⇒ ALL_DISTINCT (TRAVERSE t),
+ IS_PTREE t' ⇒ ALL_DISTINCT (TRAVERSE t')] |- ALL_DISTINCT (TRAVERSE t')
+
+Number: 488
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t k. IS_PTREE t ⇒ (MEM k (TRAVERSE t) ⇔ IS_SOME (t ' k))
+ []
+|- ∀p m l r k j.
+     IS_PTREE (Branch p m l r) ∧ IS_SOME (l ' k) ∧ IS_SOME (r ' j) ⇒
+     k ≠ j
+Goal: 
+[IS_PTREE t, IS_PTREE t', IS_PTREE (Branch n0 n t t'),
+ IS_PTREE t ⇒ ALL_DISTINCT (TRAVERSE t),
+ IS_PTREE t' ⇒ ALL_DISTINCT (TRAVERSE t')] |- ALL_DISTINCT (TRAVERSE t)
+
+Number: 491
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀t x.
+   IS_PTREE t ⇒
+   (MEM x
+      (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) (h INSERT_PTREE t) l)) ⇔
+    (x = h) ∨
+    x ≠ h ∧ MEM x (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t l))),
+ IS_PTREE t]
+|- (x = h') ∨
+   x ≠ h' ∧
+   ((x = h) ∨
+    x ≠ h ∧ MEM x (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t l))) ⇔
+   (x = h) ∨
+   x ≠ h ∧
+   ((x = h') ∨
+    x ≠ h' ∧ MEM x (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t l)))
+
+Number: 492
+Status: Unsatisfiable
+Info: lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀x.
+   MEM x (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t (REVERSE l))) ⇔
+   x ∈ NUMSET_OF_PTREE t ∨ MEM x l,
+ ∀t'.
+   IS_PTREE t' ⇒
+   PERM (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t' (REVERSE l)))
+     (SET_TO_LIST (NUMSET_OF_PTREE t' ∪ LIST_TO_SET l)), ALL_DISTINCT l,
+ IS_PTREE t, h ∉ LIST_TO_SET l,
+ PERM (TRAVERSE (FOLDR (λx y. x INSERT_PTREE y) t (REVERSE l)))
+   (SET_TO_LIST (NUMSET_OF_PTREE t ∪ LIST_TO_SET l))]
+|- (x = h) ∨ x ≠ h ∧ (x ∈ NUMSET_OF_PTREE t ∨ MEM x l) ⇔
+   x ∈ NUMSET_OF_PTREE t ∨ (x = h) ∨ MEM x l
+
+Number: 493
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ []
+|- ∀t1 t2 n.
+     IS_PTREE t1 ∧ IS_PTREE t2 ⇒
+     (n IN_PTREE t1 UNION_PTREE t2 ⇔ n IN_PTREE t1 ∨ n IN_PTREE t2)
+Goal:  [IS_PTREE t1, IS_PTREE t2]
+|- x IN_PTREE t1 UNION_PTREE t2 ⇔ x IN_PTREE t2 UNION_PTREE t1
+
+Number: 494
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [IS_PTREE t1, IS_PTREE t2, IS_PTREE t3]
+|- x IN_PTREE t1 ∨ x IN_PTREE t2 ∨ x IN_PTREE t3 ⇔
+   (x IN_PTREE t1 ∨ x IN_PTREE t2) ∨ x IN_PTREE t3
+
+Number: 495
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [FINITE s1, FINITE s2, IS_PTREE t]
+|- x IN_PTREE t ∨ x ∈ s1 ∨ x ∈ s2 ⇔ (x IN_PTREE t ∨ x ∈ s1) ∨ x ∈ s2
+
+Number: 496
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [FINITE s, IS_PTREE t]
+|- x' IN_PTREE t ∨ (x' = x) ∨ x' ∈ s ⇔ (x = x') ∨ x' IN_PTREE t ∨ x' ∈ s
+
+Number: 497
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [FINITE s, IS_PTREE t, ¬(x IN_PTREE t)]
+|- x' IN_PTREE t ∨ x' ∈ s ∧ x' ≠ x ⇔ x' ≠ x ∧ (x' IN_PTREE t ∨ x' ∈ s)
+
+Number: 498
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [FINITE s, IS_PTREE t, x IN_PTREE t]
+|- x' IN_PTREE t ∨ x' ∈ s ∧ x' ≠ x ⇔ x' IN_PTREE t ∨ x' ∈ s
+
+Number: 499
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀l1 l2 l3. l1 ++ (l2 ++ l3) = l1 ++ l2 ++ l3
+Goal: 
+[∀l. TRAVERSE_AUX t l = TRAVERSE_AUX t [] ++ l,
+ ∀l. TRAVERSE_AUX t' l = TRAVERSE_AUX t' [] ++ l]
+|- ∀n n0 l.
+     TRAVERSE_AUX t (TRAVERSE_AUX t' l) =
+     TRAVERSE_AUX t (TRAVERSE_AUX t' []) ++ l
+
+Number: 500
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀t l. TRAVERSE_AUX t l = TRAVERSE_AUX t [] ++ l
+Goal:  [TRAVERSE t = TRAVERSE_AUX t [], TRAVERSE t' = TRAVERSE_AUX t' []]
+|- TRAVERSE_AUX t [] ++ TRAVERSE_AUX t' [] =
+   TRAVERSE_AUX t (TRAVERSE_AUX t' [])
+
+Number: 501
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀f t. TRAVERSE (TRANSFORM f t) = TRAVERSE t
+Goal:  [IS_PTREE t1, IS_PTREE t2]
+|- TRAVERSE t1 = TRAVERSE (TRANSFORM (K ()) t1)
+
+Number: 502
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀f t. TRAVERSE (TRANSFORM f t) = TRAVERSE t
+Goal: 
+[IS_PTREE t1, IS_PTREE t2, TRAVERSE t1 = TRAVERSE (TRANSFORM (K ()) t1)]
+|- TRAVERSE t2 = TRAVERSE (TRANSFORM (K ()) t2)
+
+Number: 504
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [IS_PTREE t, k ∉ LIST_TO_SET (TRAVERSE t)]
+|- (k = x) ∨ x IN_PTREE t ⇔ (x = k) ∨ x IN_PTREE t
+
+Number: 505
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀t k.
+     IS_PTREE t ∧ k ∉ LIST_TO_SET (TRAVERSE t) ⇒
+     PERM (SET_TO_LIST (NUMSET_OF_PTREE (k INSERT_PTREE t)))
+       (k::TRAVERSE t)
+ []
+|- IS_PTREE t ⇒
+   PERM (TRAVERSE (x INSERT_PTREE t))
+     (SET_TO_LIST (NUMSET_OF_PTREE (x INSERT_PTREE t)))
+ [] |- ∀l1 l2. PERM l1 l2 ⇔ PERM l2 l1
+ [] |- ∀x y z. PERM x y ∧ PERM y z ⇒ PERM x z
+ [] |- ∀f t. IS_PTREE t ⇒ IS_PTREE (TRANSFORM f t)
+Goal:  [IS_PTREE t, k ∉ LIST_TO_SET (TRAVERSE (TRANSFORM (K ()) t))]
+|- PERM (TRAVERSE (k INSERT_PTREE TRANSFORM (K ()) t))
+     (k::TRAVERSE (TRANSFORM (K ()) t))
+
+Number: 506
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [IS_PTREE t, MEM k (TRAVERSE t)]
+|- (k' = k) ∨ MEM k' (TRAVERSE t) ⇔ MEM k' (TRAVERSE t)
+
+Number: 507
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [IS_PTREE t, k ∉ LIST_TO_SET (TRAVERSE t)]
+|- k' ≠ k ∧ MEM k' (TRAVERSE t) ⇔ MEM k' (TRAVERSE t)
+
+Number: 508
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ [] |- 0 < n ⇒ (SUC (n − 1) = n)
+ [] |- ∀l x. MEM x l ⇒ 0 < LENGTH l
+Goal: 
+[∀k'. MEM k' l ⇒ (LENGTH (FILTER (λx. x ≠ k') l) = LENGTH l − 1),
+ ALL_DISTINCT l, h ≠ k, h ∉ LIST_TO_SET l, MEM k l]
+|- SUC (LENGTH l − 1) = LENGTH l
+
+Number: 511
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀t k.
+     IS_PTREE t ∧ MEM k (TRAVERSE t) ⇒
+     PERM (TRAVERSE (t \\ k)) (FILTER (λx. x ≠ k) (TRAVERSE t))
+ [] |- ∀l1 l2. PERM l1 l2 ⇒ (LENGTH l1 = LENGTH l2)
+ [] |- ∀t. IS_PTREE t ⇒ ALL_DISTINCT (TRAVERSE t)
+ []
+|- ∀l k.
+     ALL_DISTINCT l ∧ MEM k l ⇒
+     (LENGTH (FILTER (λx. x ≠ k) l) = LENGTH l − 1)
+Goal:  [IS_PTREE t, MEM k (TRAVERSE t)]
+|- LENGTH (TRAVERSE (t \\ k)) = LENGTH (TRAVERSE t) − 1
+
+Number: 512
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal: 
+[∀e. MEM e (TRAVERSE t) ⇒ e ≠ h ∧ e ∉ LIST_TO_SET l,
+ ∀t'.
+   IS_PTREE t' ∧ ALL_DISTINCT (TRAVERSE t') ∧
+   (∀e. MEM e (TRAVERSE t') ⇒ e ∉ LIST_TO_SET l) ⇒
+   (SIZE (FOLDL (combin$C $INSERT_PTREE) t' l) = SIZE t' + LENGTH l),
+ ALL_DISTINCT l, ALL_DISTINCT (TRAVERSE t), IS_PTREE t,
+ h ∉ LIST_TO_SET l]
+|- (∀e. (e = h) ∨ e ≠ h ∧ MEM e (TRAVERSE t) ⇒ e ∉ LIST_TO_SET l) ∧
+   h ∉ LIST_TO_SET (TRAVERSE t)
+
+Number: 513
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+ [] |- ∀t x. IS_PTREE t ⇒ IS_PTREE (x INSERT_PTREE t)
+ [] |- a + 1 + b = a + SUC b
+Goal: 
+[∀t.
+   IS_PTREE t ∧ ALL_DISTINCT (TRAVERSE t ++ l) ⇒
+   (SIZE (FOLDL (combin$C $INSERT_PTREE) t l) = SIZE t + LENGTH l),
+ ALL_DISTINCT (TRAVERSE t ++ h::l),
+ ALL_DISTINCT (TRAVERSE (h INSERT_PTREE t) ++ l), IS_PTREE t,
+ h ∉ LIST_TO_SET (TRAVERSE t), SIZE (h INSERT_PTREE t) = SIZE t + 1]
+|- SIZE (FOLDL (combin$C $INSERT_PTREE) (h INSERT_PTREE t) l) =
+   SIZE t + SUC (LENGTH l)
+
+Number: 514
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (x' ∈ s1 ∨ x' ∈ s2) ∧ x' ≠ x ⇔ x' ∈ s1 ∧ x' ≠ x ∨ x' ∈ s2 ∧ x' ≠ x
+
+Number: 515
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. p + n = m
+Goal: 
+[∀b m' x. 1 < b ∧ m' < m ∧ x < b ** m' ⇒ b ** m' + x < b ** m,
+ m < SUC m, x < b ** m, 1 < b] |- ∃p. b ** m = p + x
+
+Number: 516
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+Goal: 
+[∀b m' x. 1 < b ∧ m' < m ∧ x < b ** m' ⇒ b ** m' + x < b ** m,
+ m < SUC m, x < b ** m, 1 < b, b ** m = p + x] |- ∃q. b = 1 + (q + 1)
+
+Number: 517
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. (m = n) ∨ m < n ∨ n < m
+Goal:  [LENGTH l1 ≠ LENGTH l2, 1 < b, EVERY ($> b) l1, EVERY ($> b) l2]
+|- LENGTH l1 < LENGTH l2 ∨ LENGTH l2 < LENGTH l1
+
+Number: 518
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [] |- (h = h') ⇔ (h' = h)
+
+Number: 520
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀l. (l = []) ∨ ∃t h. l = h::t
+Goal:  [] |- (x = "") ∨ ∃c s. x = STRING c s
+
+Number: 521
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+ [] |- ∀b l. 1 < b ⇒ l2n b l < b ** LENGTH l
+ [] |- 1 < 256
+Goal:  [LENGTH (MAP ORD (REVERSE s) ++ [ORD c]) = STRLEN s + 1]
+|- l2n 256 (MAP ORD (REVERSE s) ++ [ORD c]) < 256 ** (STRLEN s + 1)
+
+Number: 522
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ []
+|- ∀n.
+     (n = 1) ∨ 256 ≤ n ∧ (n DIV 256 ** LOG 256 n = 1) ⇒
+     (string_to_num (num_to_string n) = n)
+Goal:  [256 ≤ n, n DIV 256 ** LOG 256 n = 1] |- ∃x. n = string_to_num x
+
+Number: 523
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[¬P (FST h),
+ OVERRIDE (FILTER (λy. FST h ≠ FST y) l) =
+ FILTER (λy. FST h ≠ FST y) (OVERRIDE l),
+ OVERRIDE (FILTER (λy. FST h ≠ FST y ∧ P (FST y)) l) =
+ FILTER (λy. FST h ≠ FST y ∧ P (FST y)) (OVERRIDE l),
+ MEM y (OVERRIDE l)] |- P (FST y) ⇔ P (FST y) ∧ FST h ≠ FST y
+
+Number: 524
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[P (FST h),
+ OVERRIDE (FILTER (λy. FST h ≠ FST y) l) =
+ FILTER (λy. FST h ≠ FST y) (OVERRIDE l),
+ OVERRIDE (FILTER (λy. FST h ≠ FST y ∧ P (FST y)) l) =
+ FILTER (λy. FST h ≠ FST y ∧ P (FST y)) (OVERRIDE l),
+ MEM y (OVERRIDE l)]
+|- FST h ≠ FST y ∧ P (FST y) ⇔ P (FST y) ∧ FST h ≠ FST y
+
+Number: 527
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀R L. PERM L (QSORT R L)
+ [] |- ∀f l1 l2. PERM l1 l2 ⇒ PERM (MAP f l1) (MAP f l2)
+ [] |- ∀l1 l2. PERM l1 l2 ⇒ (ALL_DISTINCT l1 ⇔ ALL_DISTINCT l2)
+Goal:  []
+|- ∀l R. ALL_DISTINCT (MAP FST l) ⇒ ALL_DISTINCT (MAP FST (QSORT R l))
+
+Number: 528
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀l. LIST_UPDATE l = LIST_UPDATE (OVERRIDE l)
+ []
+|- ∀l1 l2.
+     ALL_DISTINCT (MAP FST l2) ∧ PERM l1 l2 ⇒
+     (LIST_UPDATE l1 = LIST_UPDATE l2)
+ [] |- ∀R L. PERM L (QSORT R L)
+ [] |- ∀l. ALL_DISTINCT (MAP FST (OVERRIDE l))
+ []
+|- ∀l R. ALL_DISTINCT (MAP FST l) ⇒ ALL_DISTINCT (MAP FST (QSORT R l))
+Goal:  [] |- ∀R l. LIST_UPDATE l = LIST_UPDATE (QSORT R (OVERRIDE l))
+
+Number: 531
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- f o_f FEMPTY = FEMPTY
+ [] |- f o_f fm |+ (k,v) = (f o_f fm \\ k) |+ (k,f v)
+Goal:  []
+|- (f o_f FEMPTY = FEMPTY) ∧
+   (f o_f fm |+ (k,v) = (f o_f fm \\ k) |+ (k,f v))
+
+Number: 535
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀b1 b2. b1 ≤ b2 ⇔ b1 < b2 ∨ (b1 = b2)
+ [] |- ∀b1 b2. ¬(b1 < b2 ∧ b2 < b1)
+Goal:  [] |- ∀b1 b2. b1 < b2 ⇔ b1 ≤ b2 ∧ ¬(b2 ≤ b1)
+
+Number: 539
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀c a b. c ≠ 0 ⇒ (a * c / (b * c) = a / b)
+ [] |- ∀x y. x * y = y * x
+Goal:  [] |- ∀c a b. c ≠ 0 ⇒ (c * a / (c * b) = a / b)
+
+Number: 541
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀s. FINITE s ⇒ ∀t. t ⊆ s ⇒ FINITE t
+ [] |- ∀s. s ⊆ 𝕌(:α)
+Goal:  [FINITE 𝕌(:real)] |- FINITE (IMAGE $& 𝕌(:num))
+
+Number: 542
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀x y z. x ≠ 0 ⇒ ((y = z) ⇔ (x * y = x * z))
+Goal:  [v ≠ 0, y ≠ v, y ≠ 0, y * v ≠ 0]
+|- (x / y = u / v) ⇔ (y * v * (x / y) = y * v * (u / v))
+
+Number: 543
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀x y. y ≠ 0 ⇒ (y * (x / y) = x)
+ [] |- ∀x y z. (x * y = x * z) ⇔ (x = 0) ∨ (y = z)
+Goal:  [v ≠ 0] |- (x / v = u / v) ⇔ (x = u)
+
+Number: 544
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀x y. y ≠ 0 ⇒ (y * (x / y) = x)
+ [] |- ∀x y z. (x * y = x * z) ⇔ (x = 0) ∨ (y = z)
+Goal:  [y ≠ 0] |- (x / y = z) ⇔ (x = y * z)
+
+Number: 545
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- (x / y = z) ⇔ if y = 0 then unint (x / y) = z else x = y * z
+Goal:  [] |- (z = x / y) ⇔ if y = 0 then z = unint (x / y) else y * z = x
+
+Number: 546
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- (∀n m. (&n = -&m) ⇔ (n = 0) ∧ (m = 0)) ⇒
+   ((-&n = &m) ⇔ (n = 0) ∧ (m = 0)) ∧ ((&n = -&m) ⇔ (n = 0) ∧ (m = 0))
+
+Number: 547
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀x y. x ≤ y ∧ y ≤ x ⇔ (x = y)
+Goal:  [&n = -&m] |- &n ≤ -&m
+
+Number: 548
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀x y z. x ≤ y ∧ y ≤ z ⇒ x ≤ z
+ [] |- ∀m n. &m ≤ &n ⇔ m ≤ n
+ [] |- ∀n. 0 ≤ n
+Goal:  [&n = -&m, &n ≤ -&m] |- 0 ≤ -&m
+
+Number: 549
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. &m ≤ &n ⇔ m ≤ n
+ [] |- ∀x. 0 ≤ -x ⇔ x ≤ 0
+Goal:  [&n = -&m, &n ≤ -&m, 0 ≤ -&m] |- m ≤ 0
+
+Number: 550
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- y < &n ⇒ y < &n + 1
+Goal:  [y < &n] |- y < &n + 1
+
+Number: 551
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- y < &n ⇒ y < &n + 1
+Goal:  [y < &n] |- y < &n + 1
+
+Number: 552
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀x y z. x ≤ y ∧ y ≤ z ⇒ x ≤ z
+Goal:  [y < &n' + 1 + 1, &x ≤ &n' + 1, 0 ≤ y] |- &n' + 1 ≤ y ⇒ &x ≤ y
+
+Number: 553
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀x y z. x ≤ y ∧ y < z ⇒ x < z
+Goal:  [x < &(n' + 2), x < &(y + 1), &(n' + 1) ≤ x] |- &(n' + 1) < &(y + 1)
+
+Number: 555
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. ¬(m ≤ n) ⇔ n < m
+Goal:  [x ≤ &n]
+|- (∃n. x ≤ &n) ∧ ∀n'. (∀m. m < n' ⇒ ¬(x ≤ &m)) ∧ x ≤ &n' ⇒ n' ≤ n
+
+Number: 556
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ 0 ≤ f x,
+ ∀f.
+   (∀x. x ∈ s ⇒ 0 ≤ f x) ∧ (∃x. x ∈ s ∧ f x ≠ 0) ⇒
+   ((REAL_SUM_IMAGE f s = 0) ⇔ (s = ∅)), FINITE s, f e ≠ 0,
+ s DELETE e = s] |- FINITE s ∧ ∀x. x ∈ s ⇒ 0 ≤ f x
+
+Number: 557
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ 0 ≤ f x,
+ ∀f.
+   (∀x. x ∈ s ⇒ 0 ≤ f x) ∧ (∃x. x ∈ s ∧ f x ≠ 0) ⇒
+   ((REAL_SUM_IMAGE f s = 0) ⇔ (s = ∅)), FINITE s, f e ≠ 0,
+ s DELETE e = s, 0 ≤ f e + REAL_SUM_IMAGE f s]
+|- FINITE s ∧ ∀x. x ∈ s ⇒ 0 ≤ f x
+
+Number: 558
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x. x ∉ ∅
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ 0 ≤ f x,
+ ∀f.
+   (∀x. x ∈ s ⇒ 0 ≤ f x) ∧ (∃x. x ∈ s ∧ f x ≠ 0) ⇒
+   ((REAL_SUM_IMAGE f s = 0) ⇔ (s = ∅)), FINITE s, f x ≠ 0,
+ s DELETE e = s, f e = 0, x ∈ s] |- REAL_SUM_IMAGE f s ≠ 0
+
+Number: 559
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ 0 ≤ f x,
+ ∀f.
+   (∀x. x ∈ s ⇒ 0 ≤ f x) ∧ (∃x. x ∈ s ∧ f x ≠ 0) ⇒
+   ((REAL_SUM_IMAGE f s = 0) ⇔ (s = ∅)), FINITE s, f e ≠ 0, f x ≠ 0,
+ s DELETE e = s, x ∈ s] |- FINITE s ∧ ∀x. x ∈ s ⇒ 0 ≤ f x
+
+Number: 560
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ 0 ≤ f x,
+ ∀f.
+   (∀x. x ∈ s ⇒ 0 ≤ f x) ∧ (∃x. x ∈ s ∧ f x ≠ 0) ⇒
+   ((REAL_SUM_IMAGE f s = 0) ⇔ (s = ∅)), FINITE s, f e ≠ 0, f x ≠ 0,
+ s DELETE e = s, x ∈ s, 0 ≤ f e + REAL_SUM_IMAGE f s]
+|- FINITE s ∧ ∀x. x ∈ s ⇒ 0 ≤ f x
+
+Number: 561
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP.
+        ∀f.
+          (∀x. x ∈ P ⇒ 0 ≤ f x) ∧ (∃x. x ∈ P ∧ f x ≠ 0) ⇒
+          (REAL_SUM_IMAGE f P ≠ 0 ⇔ P ≠ ∅)) P
+Goal:  []
+|- ∀P.
+     FINITE P ⇒
+     ∀f.
+       (∀x. x ∈ P ⇒ 0 ≤ f x) ∧ (∃x. x ∈ P ∧ f x ≠ 0) ⇒
+       (REAL_SUM_IMAGE f P ≠ 0 ⇔ P ≠ ∅)
+
+Number: 564
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP.
+        ∀f.
+          REAL_SUM_IMAGE f P =
+          REAL_SUM_IMAGE (λx. if x ∈ P then f x else 0) P) P
+Goal:  []
+|- ∀P.
+     FINITE P ⇒
+     ∀f.
+       REAL_SUM_IMAGE f P =
+       REAL_SUM_IMAGE (λx. if x ∈ P then f x else 0) P
+
+Number: 566
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀f'.
+   INJ f' P (IMAGE f' P) ⇒
+   ∀f. REAL_SUM_IMAGE f (IMAGE f' P) = REAL_SUM_IMAGE (f o f') P,
+ FINITE P, e ∉ P, INJ f' (e INSERT P) (f' e INSERT IMAGE f' P)]
+|- (∃x'. (x = f' x') ∧ x' ∈ P) ∧ x ≠ f' e ⇒ ∃x'. (x = f' x') ∧ x' ∈ P
+
+Number: 567
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀f'.
+   INJ f' P (IMAGE f' P) ⇒
+   ∀f. REAL_SUM_IMAGE f (IMAGE f' P) = REAL_SUM_IMAGE (f o f') P,
+ FINITE P, e ∉ P]
+|- (∀x.
+      (x = e) ∨ x ∈ P ⇒ (f' x = f' e) ∨ ∃x'. (f' x = f' x') ∧ x' ∈ P) ∧
+   (∀x y.
+      ((x = e) ∨ x ∈ P) ∧ ((y = e) ∨ y ∈ P) ⇒ (f' x = f' y) ⇒ (x = y)) ⇒
+   (∃x'. (x = f' x') ∧ x' ∈ P) ⇒
+   x ≠ f' e
+
+Number: 568
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x s. x ∉ s ⇔ (s DELETE x = s)
+Goal: 
+[∀f'.
+   INJ f' P (IMAGE f' P) ⇒
+   ∀f. REAL_SUM_IMAGE f (IMAGE f' P) = REAL_SUM_IMAGE (f o f') P,
+ FINITE P, e ∉ P, IMAGE f' P DELETE f' e = IMAGE f' P,
+ INJ f' (e INSERT P) (f' e INSERT IMAGE f' P)] |- P DELETE e = P
+
+Number: 569
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [FINITE P, e ∉ P, P DELETE e = P, IMAGE f' P DELETE f' e = IMAGE f' P]
+|- (∀x.
+      (x = e) ∨ x ∈ P ⇒ (f' x = f' e) ∨ ∃x'. (f' x = f' x') ∧ x' ∈ P) ∧
+   (∀x y.
+      ((x = e) ∨ x ∈ P) ∧ ((y = e) ∨ y ∈ P) ⇒ (f' x = f' y) ⇒ (x = y)) ⇒
+   ∀x y. x ∈ P ∧ y ∈ P ⇒ (f' x = f' y) ⇒ (x = y)
+
+Number: 570
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP.
+        ∀P'.
+          FINITE P' ⇒
+          (λP'.
+             DISJOINT P P' ⇒
+             ∀f.
+               REAL_SUM_IMAGE f (P ∪ P') =
+               REAL_SUM_IMAGE f P + REAL_SUM_IMAGE f P') P') P
+Goal:  []
+|- ∀P P'.
+     FINITE P ∧ FINITE P' ∧ DISJOINT P P' ⇒
+     ∀f.
+       REAL_SUM_IMAGE f (P ∪ P') =
+       REAL_SUM_IMAGE f P + REAL_SUM_IMAGE f P'
+
+Number: 572
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP. REAL_SUM_IMAGE (λx. if x ∈ P then 1 else 0) P = &CARD P) P
+Goal:  []
+|- ∀P.
+     FINITE P ⇒
+     (REAL_SUM_IMAGE (λx. if x ∈ P then 1 else 0) P = &CARD P)
+
+Number: 573
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀s. FINITE s ⇒ ((CARD s = 0) ⇔ (s = ∅))
+Goal:  [FINITE P, P ≠ ∅] |- CARD P ≠ 0
+
+Number: 574
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP. ∀f. REAL_SUM_IMAGE f (P ∩ (λp. f p ≠ 0)) = REAL_SUM_IMAGE f P)
+       P
+Goal:  []
+|- ∀P.
+     FINITE P ⇒
+     ∀f. REAL_SUM_IMAGE f (P ∩ (λp. f p ≠ 0)) = REAL_SUM_IMAGE f P
+
+Number: 575
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     (λP.
+        ∀f P'.
+          (∀x. x ∉ P' ⇒ (f x = 0)) ⇒
+          (REAL_SUM_IMAGE f (P ∩ P') = REAL_SUM_IMAGE f P)) P
+Goal:  []
+|- ∀P.
+     FINITE P ⇒
+     ∀f P'.
+       (∀x. x ∉ P' ⇒ (f x = 0)) ⇒
+       (REAL_SUM_IMAGE f (P ∩ P') = REAL_SUM_IMAGE f P)
+
+Number: 577
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+ [] |- ∀n. n ≠ 0 ⇒ 0 < &n
+ [] |- ∀x y z. 0 < z ⇒ ((x * z = y) ⇔ (x = y / z))
+ [] |- ∀x. inv x = 1 / x
+ [] |- ∀n. 0 ≠ SUC n
+Goal:  [] |- (f e * &SUC (CARD s) = 1) ⇒ (f e = inv (&SUC (CARD s)))
+
+Number: 579
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x y. ((x = e) ∨ x ∈ s) ∧ ((y = e) ∨ y ∈ s) ⇒ (f x = f y),
+ ∀f.
+   (REAL_SUM_IMAGE f s = 1) ∧ (∀x y. x ∈ s ∧ y ∈ s ⇒ (f x = f y)) ⇒
+   ∀x. x ∈ s ⇒ (f x = inv (&CARD s)), FINITE s, e ∉ s, x ∈ s]
+|- f x = f e
+
+Number: 580
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+ [] |- ∀n. n ≠ 0 ⇒ 0 < &n
+ [] |- ∀x y z. 0 < z ⇒ ((x * z = y) ⇔ (x = y / z))
+ [] |- ∀x. inv x = 1 / x
+ [] |- ∀n. 0 ≠ SUC n
+Goal:  [] |- (f e * &SUC (CARD s) = 1) ⇒ (f e = inv (&SUC (CARD s)))
+
+Number: 581
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[∀s' f.
+   FINITE s' ⇒
+   (REAL_SUM_IMAGE (λx. REAL_SUM_IMAGE (f x) s') s =
+    REAL_SUM_IMAGE (λx. f (FST x) (SND x)) (s × s')), FINITE s,
+ FINITE s', e ∉ s]
+|- ((q = e) ∨ q ∈ s) ∧ r ∈ s' ⇔ (q = e) ∧ r ∈ s' ∨ q ∈ s ∧ r ∈ s'
+
+Number: 582
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[∀s' f.
+   FINITE s' ⇒
+   (REAL_SUM_IMAGE (λx. REAL_SUM_IMAGE (f x) s') s =
+    REAL_SUM_IMAGE (λx. f (FST x) (SND x)) (s × s')), FINITE s,
+ FINITE s', e ∉ s] |- (q ≠ e ∨ r ∉ s') ∨ q ∉ s ∨ r ∉ s'
+
+Number: 583
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[∀s' f.
+   FINITE s' ⇒
+   (REAL_SUM_IMAGE (λx. REAL_SUM_IMAGE (f x) s') s =
+    REAL_SUM_IMAGE (λx. f (FST x) (SND x)) (s × s')),
+ ∀f.
+   REAL_SUM_IMAGE f (IMAGE (λx. (e,x)) s') =
+   REAL_SUM_IMAGE (λx. f (e,x)) s', FINITE s, FINITE s', s DELETE e = s,
+ DISJOINT (IMAGE (λx. (e,x)) s') (s × s')]
+|- REAL_SUM_IMAGE (f e) s' +
+   REAL_SUM_IMAGE (λx. f (FST x) (SND x)) (s × s') =
+   REAL_SUM_IMAGE (λx. f e x) s' +
+   REAL_SUM_IMAGE (λx. f (FST x) (SND x)) (s × s')
+
+Number: 585
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  [FINITE s, FINITE s', FINITE (s × s'), x ∈ s × s']
+|- ∃x'. ((SND x = SND x') ∧ (FST x = FST x')) ∧ x' ∈ s × s'
+
+Number: 587
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀P.
+     FINITE P ⇒
+     ∀f'.
+       INJ f' P (IMAGE f' P) ⇒
+       ∀f. REAL_SUM_IMAGE f (IMAGE f' P) = REAL_SUM_IMAGE (f o f') P
+Goal: 
+[FINITE s, FINITE s', FINITE (s × s'),
+ INJ (λx. (SND x,FST x)) (s × s') (IMAGE (λx. (SND x,FST x)) (s × s'))]
+|- REAL_SUM_IMAGE (λx. f (SND x) (FST x))
+     (IMAGE (λx. (SND x,FST x)) (s × s')) =
+   REAL_SUM_IMAGE ((λx. f (SND x) (FST x)) o (λx. (SND x,FST x)))
+     (s × s')
+
+Number: 588
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ t ⇒ 0 ≤ f x, FINITE s, FINITE t, FINITE (t DIFF s),
+ t = s ∪ (t DIFF s), s ⊆ t] |- x ∉ s ∨ x ∉ t ∨ x ∈ s
+
+Number: 589
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀P P'.
+     FINITE P ∧ FINITE P' ∧ DISJOINT P P' ⇒
+     ∀f.
+       REAL_SUM_IMAGE f (P ∪ P') =
+       REAL_SUM_IMAGE f P + REAL_SUM_IMAGE f P'
+Goal: 
+[∀x. x ∈ t ⇒ 0 ≤ f x, FINITE s, FINITE t, FINITE (t DIFF s),
+ t = s ∪ (t DIFF s), DISJOINT s (t DIFF s), s ⊆ t]
+|- REAL_SUM_IMAGE f t = REAL_SUM_IMAGE f s + REAL_SUM_IMAGE f (t DIFF s)
+
+Number: 590
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀f s. FINITE s ∧ (∀x. x ∈ s ⇒ 0 ≤ f x) ⇒ 0 ≤ REAL_SUM_IMAGE f s
+ [] |- ∀s t x. x ∈ s DIFF t ⇔ x ∈ s ∧ x ∉ t
+Goal: 
+[∀x. x ∈ t ⇒ 0 ≤ f x, FINITE s, FINITE t, FINITE (t DIFF s),
+ t = s ∪ (t DIFF s), DISJOINT s (t DIFF s), s ⊆ t]
+|- 0 ≤ REAL_SUM_IMAGE f (t DIFF s)
+
+Number: 592
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀x y. FST (x,y) = x
+ [] |- ∀x y. SND (x,y) = y
+ [] |- ∀x. (FST x,SND x) = x
+Goal: 
+[FINITE s1, FINITE s2, FST a = FST a', SND a = SND a', FST a ∈ s1,
+ FST a' ∈ s1, SND a ∈ s2, SND a' ∈ s2] |- a = a'
+
+Number: 593
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀x y. FST (x,y) = x
+ [] |- ∀x y. SND (x,y) = y
+ [] |- ∀x. (FST x,SND x) = x
+Goal:  [FINITE s1, FINITE s2, FST a ∈ s1, SND a ∈ s2]
+|- ∃a'.
+     ((SND a = SND a') ∧ (FST a = FST a')) ∧ FST a' ∈ s1 ∧ SND a' ∈ s2
+
+Number: 594
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀v z w. v ≠ 0 ⇒ (z * v / (w * v) = z / w)
+ [] |- ∀z w. z * w = w * z
+Goal:  [] |- ∀v z w. v ≠ 0 ⇒ (v * z / (v * w) = z / w)
+
+Number: 596
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [a ' i ⇎ b ' i, i < dimindex (:α)]
+|- ∃i'. i' < dimindex (:α) ∧ (a ' i' ⇎ b ' i')
+
+Number: 597
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal:  [¬∃x. f x ≠ g x] |- (f = g) ∨ f (@i. f i ≠ g i) ≠ g (@i. f i ≠ g i)
+
+Number: 606
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ space a ⇒ f x ∈ space b,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ PREIMAGE f s ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ space b DIFF s ∈ subsets b,
+ ∀c'.
+   countable c' ∧ (∀x. x ∈ c' ⇒ x ∈ subsets a) ⇒
+   BIGUNION c' ∈ subsets a,
+ ∀c. countable c ∧ (∀x. x ∈ c ⇒ x ∈ subsets b) ⇒ BIGUNION c ∈ subsets b,
+ countable c, x ∈ PREIMAGE f x', ∅ ∈ subsets a, PREIMAGE f x' ∈ c,
+ x' ∈ subsets b, ∅ ∈ subsets b, subset_class (space a) (subsets a),
+ subset_class (space b) (subsets b)]
+|- (λx''. PREIMAGE f x' = PREIMAGE f x'')
+     (@x''. x'' ∈ subsets b ∧ (PREIMAGE f x'' = PREIMAGE f x')) ⇒
+   (PREIMAGE f x' =
+    PREIMAGE f
+      (@x''. x'' ∈ subsets b ∧ (PREIMAGE f x'' = PREIMAGE f x')))
+
+Number: 607
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+Goal: 
+[∀x. x ∈ space a ⇒ f x ∈ sp,
+ ∀s. s ∈ b ⇒ PREIMAGE f s ∩ space a ∈ subsets a,
+ ∀x.
+   x ∈ c ⇒
+   PREIMAGE f x ∩ space a ∈ subsets a ∧ ∀x''. x'' ∈ x ⇒ x'' ∈ sp,
+ ∀x. x ∈ c ⇒ x ∈ subsets (sigma sp b),
+ ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a, algebra a,
+ countable c, x ∈ PREIMAGE f x' ∩ space a, s ∈ subsets (sigma sp b),
+ x' ∈ c, subset_class sp b] |- x ∈ space a
+
+Number: 608
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+Goal: 
+[∀x. x ∈ space a ⇒ f x ∈ sp,
+ ∀s. s ∈ b ⇒ PREIMAGE f s ∩ space a ∈ subsets a,
+ ∀x.
+   x ∈ c ⇒
+   PREIMAGE f x ∩ space a ∈ subsets a ∧ ∀x''. x'' ∈ x ⇒ x'' ∈ sp,
+ ∀x. x ∈ c ⇒ x ∈ subsets (sigma sp b),
+ ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a, algebra a,
+ countable c, x ∈ PREIMAGE f x' ∩ space a, s ∈ subsets (sigma sp b),
+ x' ∈ c, subset_class sp b]
+|- ∃s. x ∈ s ∧ ∃x. (s = PREIMAGE f x) ∧ x ∈ c
+
+Number: 610
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+Goal: 
+[∀x. x ∈ m_space m1 ⇒ f x ∈ m_space m2,
+ ∀s. s ∈ a ⇒ (measure m1 (PREIMAGE f s ∩ m_space m1) = measure m2 s),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ ∀m n. m ≠ n ⇒ DISJOINT (f' m) (f' n),
+ ∀x.
+   (measure m1 (PREIMAGE f (f' x) ∩ m_space m1) = measure m2 (f' x)) ∧
+   f' x ∈ subsets (sigma (m_space m2) a), algebra (m_space m2,a),
+ measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)),
+ measurable_sets m2 = subsets (sigma (m_space m2) a),
+ x ∈ PREIMAGE f (f' x') ∩ m_space m1] |- x ∈ m_space m1
+
+Number: 611
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+Goal: 
+[∀x. x ∈ m_space m1 ⇒ f x ∈ m_space m2,
+ ∀s. s ∈ a ⇒ (measure m1 (PREIMAGE f s ∩ m_space m1) = measure m2 s),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ ∀m n. m ≠ n ⇒ DISJOINT (f' m) (f' n),
+ ∀x.
+   (measure m1 (PREIMAGE f (f' x) ∩ m_space m1) = measure m2 (f' x)) ∧
+   f' x ∈ subsets (sigma (m_space m2) a), algebra (m_space m2,a),
+ measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)),
+ measurable_sets m2 = subsets (sigma (m_space m2) a),
+ x ∈ PREIMAGE f (f' x') ∩ m_space m1]
+|- ∃s. x ∈ s ∧ ∃x. s = PREIMAGE f (f' x)
+
+Number: 612
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀s t. DISJOINT s t ⇔ ¬∃x. x ∈ s ∧ x ∈ t
+ [] |- ∀f s t. DISJOINT s t ⇒ DISJOINT (PREIMAGE f s) (PREIMAGE f t)
+Goal: 
+[∀s. s ∈ a ⇒ (measure m1 (PREIMAGE f s ∩ m_space m1) = measure m2 s),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ ∀m n. m ≠ n ⇒ DISJOINT (f' m) (f' n),
+ ∀x.
+   (measure m1 (PREIMAGE f (f' x) ∩ m_space m1) = measure m2 (f' x)) ∧
+   f' x ∈ subsets (sigma (m_space m2) a), algebra (m_space m2,a),
+ measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)), m ≠ n,
+ measurable_sets m2 = subsets (sigma (m_space m2) a),
+ f ∈ (m_space m1 -> m_space m2)]
+|- (x ∉ PREIMAGE f (f' m) ∨ x ∉ m_space m1) ∨ x ∉ PREIMAGE f (f' n) ∨
+   x ∉ m_space m1
+
+Number: 613
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+Goal: 
+[∀x. x ∈ m_space m1 ⇒ f x ∈ m_space m2,
+ ∀s. s ∈ a ⇒ (measure m1 (PREIMAGE f s ∩ m_space m1) = measure m2 s),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ ∀n x. x ∈ f' n ⇒ x ∈ f' (SUC n),
+ ∀x.
+   (measure m1 (PREIMAGE f (f' x) ∩ m_space m1) = measure m2 (f' x)) ∧
+   f' x ∈ subsets (sigma (m_space m2) a), algebra (m_space m2,a),
+ measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)), f' 0 = ∅,
+ measurable_sets m2 = subsets (sigma (m_space m2) a),
+ x ∈ PREIMAGE f (f' x') ∩ m_space m1] |- x ∈ m_space m1
+
+Number: 614
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀f s x. x ∈ PREIMAGE f s ⇔ f x ∈ s
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+Goal: 
+[∀x. x ∈ m_space m1 ⇒ f x ∈ m_space m2,
+ ∀s. s ∈ a ⇒ (measure m1 (PREIMAGE f s ∩ m_space m1) = measure m2 s),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ ∀n x. x ∈ f' n ⇒ x ∈ f' (SUC n),
+ ∀x.
+   (measure m1 (PREIMAGE f (f' x) ∩ m_space m1) = measure m2 (f' x)) ∧
+   f' x ∈ subsets (sigma (m_space m2) a), algebra (m_space m2,a),
+ measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)), f' 0 = ∅,
+ measurable_sets m2 = subsets (sigma (m_space m2) a),
+ x ∈ PREIMAGE f (f' x') ∩ m_space m1]
+|- ∃s. x ∈ s ∧ ∃x. s = PREIMAGE f (f' x)
+
+Number: 615
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ m_space m1 ⇒ f x ∈ m_space m2,
+ ∀x. x ∈ measurable_sets m2 ⇔ x ∈ subsets (sigma (m_space m2) a),
+ ∀s.
+   s ∈ subsets (sigma (m_space m2) a) ⇒
+   PREIMAGE f s ∩ m_space m1 ∈ measurable_sets m1,
+ algebra (m_space m2,a), measure_space m1, measure_space m2,
+ measure_space (m_space m2,a,measure m2),
+ sigma_algebra (m_space m1,measurable_sets m1),
+ sigma_algebra (m_space m2,subsets (sigma (m_space m2) a)),
+ s ∈ subsets (sigma (m_space m2) a), m_space m2 ∈ a]
+|- ∀x. f x ∈ m_space m2 ∧ x ∈ m_space m1 ⇔ x ∈ m_space m1
+
+Number: 616
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀s t. s ∈ subsets a ∧ t ∈ subsets a ⇒ s ∪ t ∈ subsets a,
+ ∀x. x ∈ subsets a ⇒ ∀x'. x' ∈ x ⇒ x' ∈ space a,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀c. countable c ∧ (∀x. x ∈ c ⇒ x ∈ subsets a) ⇒ BIGUNION c ∈ subsets a,
+ s ∈ subsets a, ∅ ∈ subsets a] |- ∀x. x ∈ s ∧ x ∈ space a ⇔ x ∈ s
+
+Number: 617
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ space a ⇒ f x ∈ space b, ∀x. x ∈ space b ⇒ g x ∈ space c,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ PREIMAGE f s ∩ space a ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ space b DIFF s ∈ subsets b,
+ ∀s. s ∈ subsets c ⇒ PREIMAGE g s ∩ space b ∈ subsets b,
+ ∀s. s ∈ subsets c ⇒ space c DIFF s ∈ subsets c,
+ ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a,
+ ∀c. countable c ∧ c ⊆ subsets b ⇒ BIGUNION c ∈ subsets b,
+ ∀c'. countable c' ∧ c' ⊆ subsets c ⇒ BIGUNION c' ∈ subsets c,
+ ∅ ∈ subsets a, ∅ ∈ subsets b, s ∈ subsets c, ∅ ∈ subsets c,
+ subset_class (space a) (subsets a), subset_class (space b) (subsets b),
+ subset_class (space c) (subsets c)]
+|- g (f x) ∈ s ∧ x ∈ space a ⇔
+   (g (f x) ∈ s ∧ f x ∈ space b) ∧ x ∈ space a
+
+Number: 618
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ space a ⇒ f x ∈ space b, ∀x. x ∈ space b ⇒ g x ∈ space c,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ PREIMAGE f s ∩ space a ∈ subsets a,
+ ∀s. s ∈ subsets b ⇒ space b DIFF s ∈ subsets b,
+ ∀s. s ∈ subsets c ⇒ PREIMAGE g s ∩ space b ∈ subsets b,
+ ∀s. s ∈ subsets c ⇒ space c DIFF s ∈ subsets c,
+ ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a,
+ ∀c. countable c ∧ c ⊆ subsets b ⇒ BIGUNION c ∈ subsets b,
+ ∀c'. countable c' ∧ c' ⊆ subsets c ⇒ BIGUNION c' ∈ subsets c,
+ PREIMAGE f (PREIMAGE g s) ∩ space a =
+ PREIMAGE f (PREIMAGE g s ∩ space b) ∩ space a, ∅ ∈ subsets a,
+ ∅ ∈ subsets b, s ∈ subsets c, ∅ ∈ subsets c,
+ subset_class (space a) (subsets a), subset_class (space b) (subsets b),
+ subset_class (space c) (subsets c)]
+|- PREIMAGE f (PREIMAGE g s) ∩ space a ∈ subsets a
+
+Number: 619
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ m_space m ⇒ f x ∈ s,
+ ∀s'. s' ⊆ s ⇒ PREIMAGE f s' ∩ m_space m ∈ measurable_sets m,
+ measure_space m, sigma_algebra (m_space m,measurable_sets m), s ≠ ∅,
+ x ∈ m_space m] |- ∃x'. (f x = f x') ∧ x' ∈ m_space m
+
+Number: 620
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀s t u. s ⊆ t ∧ t ⊆ u ⇒ s ⊆ u
+ [] |- ∀s. s ⊆ s
+Goal: 
+[∀s'. s' ⊆ s ⇒ 0 ≤ m s',
+ ∀f.
+   (∀x. x ∈ 𝕌(:num) ⇒ f x ⊆ s) ∧ (∀m n. m ≠ n ⇒ DISJOINT (f m) (f n)) ∧
+   BIGUNION (IMAGE f 𝕌(:num)) ⊆ s ⇒
+   m o f sums m (BIGUNION (IMAGE f 𝕌(:num))),
+ ∀m n. m ≠ n ⇒ DISJOINT (f m) (f n), ∀x. x ∈ 𝕌(:num) ⇒ f x ⊆ s',
+ m ∅ = 0, s' ⊆ s, BIGUNION (IMAGE f 𝕌(:num)) ⊆ s']
+|- m o f sums m (BIGUNION (IMAGE f 𝕌(:num)))
+
+Number: 621
+Status: Unsatisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀s t u. s ⊆ t ∧ t ⊆ u ⇒ s ⊆ u
+ [] |- ∀s. s ⊆ s
+Goal: 
+[∀s'. s' ⊆ s ⇒ 0 ≤ m s',
+ ∀f.
+   (∀x. x ∈ 𝕌(:num) ⇒ f x ⊆ s) ∧ (∀m n. m ≠ n ⇒ DISJOINT (f m) (f n)) ∧
+   BIGUNION (IMAGE f 𝕌(:num)) ⊆ s ⇒
+   m o f sums m (BIGUNION (IMAGE f 𝕌(:num))), m ∅ = 0, s' ⊆ s, s'' ⊆ s']
+|- 0 ≤ m s''
+
+Number: 623
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x s. (s DELETE x = s) ⇔ x ∉ s
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ {x} ∈ measurable_sets m, FINITE s,
+ measure_space m, s DELETE e = s,
+ s ∈ measurable_sets m ⇒ (SIGMA (λx. measure m {x}) s = measure m s),
+ e INSERT s ∈ measurable_sets m] |- x ∈ s ⇔ ((x = e) ∨ x ∈ s) ∧ x ≠ e
+
+Number: 624
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x y. space (x,y) = x
+ [] |- ∀x y. subsets (x,y) = y
+ []
+|- ∀a s t.
+     algebra a ∧ s ∈ subsets a ∧ t ∈ subsets a ⇒ s DIFF t ∈ subsets a
+Goal: 
+[∀x. (x = e) ∨ x ∈ s ⇒ {x} ∈ measurable_sets m,
+ ∀c.
+   countable c ∧ c ⊆ subsets (m_space m,measurable_sets m) ⇒
+   BIGUNION c ∈ subsets (m_space m,measurable_sets m), FINITE s,
+ algebra (m_space m,measurable_sets m), countably_additive m,
+ positive m, s DELETE e = s,
+ s ∈ measurable_sets m ⇒ (SIGMA (λx. measure m {x}) s = measure m s),
+ e INSERT s ∈ measurable_sets m]
+|- (e INSERT s) DIFF {e} ∈ measurable_sets m
+
+Number: 625
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀set e. e ∈ POW set ⇔ e ⊆ set
+ [] |- sigma_algebra (sp,POW sp)
+ [] |- ∀s. s ⊆ s
+Goal:  []
+|- ((∃s'.
+       (∀x. x ∈ POW s ⇔ x ∈ s') ∧ POW s ⊆ s' ∧ sigma_algebra (s,s')) ⇒
+    x ∈ POW s) ⇒
+   x ⊆ s
+
+Number: 626
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀x'. x' ∈ x ⇒ x' ∈ s, ∀x. x ∈ P ⇔ x ∈ s',
+ ∀x'. (∀x. x ∈ x' ⇒ x ∈ s) ⇒ x' ∈ s', sigma_algebra (s,s')] |- x ∈ P
+
+Number: 627
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀s. FINITE s ⇒ ∀t. t ⊆ s ⇒ FINITE t
+ [] |- ∀s. FINITE s ⇒ FINITE (POW s)
+Goal: 
+[∀s' t.
+   s' ∈ subsets s ∧ t ∈ subsets s ∧ DISJOINT s' t ⇒
+   (m (s' ∪ t) = m s' + m t), ∀m n. m ≠ n ⇒ DISJOINT (f m) (f n),
+ ∀x. f x ∈ subsets s, FINITE (space s), positive (space s,subsets s,m),
+ sigma_algebra s, BIGUNION (IMAGE f 𝕌(:num)) ∈ subsets s]
+|- subsets s ⊆ POW (space s) ⇒ FINITE (subsets s)
+
+Number: 628
+Status: Unsatisfiable
+Info: higher-order num proof 
+Thm list: 
+Goal: 
+[∀s' t.
+   s' ∈ subsets s ∧ t ∈ subsets s ∧ DISJOINT s' t ⇒
+   (m (s' ∪ t) = m s' + m t),
+ ∀x. x ∈ subsets s ⇒ ∀x'. x' ∈ x ⇒ x' ∈ space s,
+ ∀s'. s' ∈ subsets s ⇒ space s DIFF s' ∈ subsets s,
+ ∀c. countable c ∧ (∀x. x ∈ c ⇒ x ∈ subsets s) ⇒ BIGUNION c ∈ subsets s,
+ ∀m n. m ≠ n ⇒ DISJOINT (f m) (f n), ∀x. f x ∈ subsets s,
+ FINITE (space s), positive (space s,subsets s,m), ∅ ∈ subsets s,
+ BIGUNION (IMAGE f 𝕌(:num)) ∈ subsets s]
+|- ∀x. x ∈ subsets s ⇒ ∀x'. x' ∈ x ⇒ x' ∈ space s
+
+Number: 630
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ []
+|- ∀f N.
+     (∀n. N ≤ n ⇒ (f n = ∅)) ⇒
+     (BIGUNION (IMAGE f 𝕌(:num)) = BIGUNION (IMAGE f (count N)))
+Goal: 
+[∀s' t.
+   s' ∈ subsets s ∧ t ∈ subsets s ∧ DISJOINT s' t ⇒
+   (m (s' ∪ t) = m s' + m t), ∀m n. m ≠ n ⇒ DISJOINT (f m) (f n),
+ ∀n. N ≤ n ⇒ (f n = ∅), ∀x. f x ∈ subsets s, FINITE (space s),
+ FINITE (subsets s), positive (space s,subsets s,m), sigma_algebra s,
+ BIGUNION (IMAGE f 𝕌(:num)) ∈ subsets s]
+|- BIGUNION (IMAGE f 𝕌(:num)) = BIGUNION (IMAGE f (count N))
+
+Number: 631
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal:  []
+|- (∀x. x ∈ X ⇒ ∀P'. P' ∈ P ⇒ x ∈ P') ⇔ ∀Y. Y ∈ P ⇒ ∀x. x ∈ X ⇒ x ∈ Y
+
+Number: 632
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀x y. subsets (x,y) = y
+ []
+|- ∀s t.
+     algebra (m_space m,measurable_sets m) ∧ s ∈ measurable_sets m ∧
+     t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+Goal:  []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+
+Number: 633
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀x y. subsets (x,y) = y
+ []
+|- ∀s t.
+     algebra (m_space m,measurable_sets m) ∧ s ∈ measurable_sets m ∧
+     t ∈ measurable_sets m ⇒
+     s ∪ t ∈ measurable_sets m
+Goal:  []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∪ t ∈ measurable_sets m
+
+Number: 634
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀x y. subsets (x,y) = y
+ []
+|- ∀s t.
+     algebra (m_space m,measurable_sets m) ∧ s ∈ measurable_sets m ∧
+     t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+Goal:  []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+
+Number: 635
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m ⇒
+     additive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[∀c.
+   countable c ∧ c ⊆ subsets (m_space m,measurable_sets m) ⇒
+   BIGUNION c ∈ subsets (m_space m,measurable_sets m),
+ algebra (m_space m,measurable_sets m), countably_additive m,
+ positive m, s ∈ measurable_sets m, t ∈ measurable_sets m, t ⊆ s]
+|- x ∈ s ⇔ x ∈ t ∨ x ∈ s ∧ x ∉ t
+
+Number: 636
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m ⇒
+     additive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[∀c.
+   countable c ∧ c ⊆ subsets (m_space m,measurable_sets m) ⇒
+   BIGUNION c ∈ subsets (m_space m,measurable_sets m),
+ algebra (m_space m,measurable_sets m), countably_additive m,
+ positive m, s ∈ measurable_sets m, t ∈ measurable_sets m, t ⊆ s]
+|- x ∉ t ∨ x ∉ s ∨ x ∈ t
+
+Number: 637
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m ⇒
+     additive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[∀c.
+   countable c ∧ c ⊆ subsets (m_space m,measurable_sets m) ⇒
+   BIGUNION c ∈ subsets (m_space m,measurable_sets m),
+ algebra (m_space m,measurable_sets m), countably_additive m,
+ positive m, s ∈ measurable_sets m, t ∈ measurable_sets m, t ⊆ s]
+|- s DIFF t ∈ measurable_sets m
+
+Number: 638
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m ⇒
+     additive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s DIFF t ∈ measurable_sets m
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[∀c.
+   countable c ∧ c ⊆ subsets (m_space m,measurable_sets m) ⇒
+   BIGUNION c ∈ subsets (m_space m,measurable_sets m),
+ algebra (m_space m,measurable_sets m), countably_additive m,
+ positive m, s ∈ measurable_sets m, t ∈ measurable_sets m, t ⊆ s]
+|- additive m
+
+Number: 639
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+Goal:  [∀n. s n ∈ measurable_sets m, measure_space m]
+|- (sigma_algebra (m_space m,measurable_sets m) ⇔
+    subset_class (m_space m) (measurable_sets m) ∧
+    ∅ ∈ measurable_sets m ∧
+    (∀s. s ∈ measurable_sets m ⇒ m_space m DIFF s ∈ measurable_sets m) ∧
+    ∀f.
+      (∀x. f x ∈ measurable_sets m) ⇒
+      BIGUNION (IMAGE f 𝕌(:num)) ∈ measurable_sets m) ⇒
+   BIGUNION (IMAGE s 𝕌(:num)) ∈ measurable_sets m
+
+Number: 640
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+ []
+|- ∀a.
+     sigma_algebra a ⇔
+     algebra a ∧
+     ∀c. countable c ∧ c ⊆ subsets a ⇒ BIGUNION c ∈ subsets a
+ []
+|- ∀a.
+     algebra a ⇔
+     subset_class (space a) (subsets a) ∧ ∅ ∈ subsets a ∧
+     (∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a) ∧
+     ∀s t. s ∈ subsets a ∧ t ∈ subsets a ⇒ s ∪ t ∈ subsets a
+ [] |- ∀sp sts mu. measurable_sets (sp,sts,mu) = sts
+ [] |- ∀x y. space (x,y) = x
+ [] |- ∀sp sts. subset_class sp sts ⇔ ∀x. x ∈ sts ⇒ x ⊆ sp
+ [] |- ∀x y. subsets (x,y) = y
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal:  []
+|- ∀m A.
+     measure_space m ∧ A ∈ measurable_sets m ⇒ ∀x. x ∈ A ⇒ x ∈ m_space m
+
+Number: 641
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀s. s DIFF ∅ = s
+Goal: 
+[∀s t.
+   s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+   s ∪ t ∈ measurable_sets m,
+ ∀s. s ∈ measurable_sets m ⇒ m_space m DIFF s ∈ measurable_sets m,
+ ∀c.
+   countable c ∧ c ⊆ measurable_sets m ⇒ BIGUNION c ∈ measurable_sets m,
+ countably_additive m, positive m, ∅ ∈ measurable_sets m,
+ subset_class (m_space m) (measurable_sets m)]
+|- m_space m ∈ measurable_sets m
+
+Number: 642
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀x. x ∈ subsets a ⇒ x ⊆ space a,
+ ∀c. countable c ∧ (∀x. x ∈ c ⇒ x ∈ subsets a) ⇒ BIGUNION c ∈ subsets a,
+ ∀x. f x ∈ subsets a,
+ (∀t. (∃x. t = f x) ⇒ t ⊆ space a) ∧ IMAGE f 𝕌(:num) ≠ ∅ ⇒
+ (BIGINTER (IMAGE f 𝕌(:num)) =
+  space a DIFF BIGUNION (IMAGE (λu. space a DIFF u) (IMAGE f 𝕌(:num)))),
+ ∅ ∈ subsets a] |- f x ⊆ space a
+
+Number: 643
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀t. t ∈ IMAGE f 𝕌(:num) ⇒ t ⊆ space a,
+ ∀c. countable c ∧ (∀x. x ∈ c ⇒ x ∈ subsets a) ⇒ BIGUNION c ∈ subsets a,
+ ∀x. f x ∈ subsets a, IMAGE f 𝕌(:num) ≠ ∅,
+ BIGINTER (IMAGE f 𝕌(:num)) =
+ space a DIFF BIGUNION (IMAGE (λu. space a DIFF u) (IMAGE f 𝕌(:num))),
+ ∅ ∈ subsets a,
+ BIGUNION (IMAGE (λu. space a DIFF u) (IMAGE f 𝕌(:num))) ∈ subsets a,
+ subset_class (space a) (subsets a)]
+|- space a DIFF
+   BIGUNION (IMAGE (λu. space a DIFF u) (IMAGE f 𝕌(:num))) ∈ subsets a
+
+Number: 645
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ []
+|- ∀m s f.
+     measure_space m ∧ f ∈ (𝕌(:num) -> measurable_sets m) ∧
+     (∀n. f n ⊆ f (SUC n)) ∧ (s = BIGUNION (IMAGE f 𝕌(:num))) ⇒
+     measure m o f --> measure m s
+Goal:  []
+|- ∀m f.
+     measure_space m ∧ f ∈ (𝕌(:num) -> measurable_sets m) ∧
+     (∀n. f n ⊆ f (SUC n)) ⇒
+     measure m o f --> measure m (BIGUNION (IMAGE f 𝕌(:num)))
+
+Number: 647
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀s t u. s ⊆ t ∧ t ⊆ u ⇒ s ⊆ u
+Goal: 
+[∀x. f x ∈ measurable_sets m, ∀n. f (SUC n) ⊆ f n, measure_space m,
+ BIGINTER (IMAGE f 𝕌(:num)) ∈ measurable_sets m, f n ⊆ f 0]
+|- f (SUC n) ⊆ f 0
+
+Number: 654
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[∀n.
+   measure m (f 0) − measure m (f n) = measure m ((λn. f 0 DIFF f n) n),
+ ∀x. f x ∈ measurable_sets m, ∀n. f n ⊆ f 0, ∀n. f (SUC n) ⊆ f n,
+ measure_space m, x ∉ f n, x ∈ f 0,
+ BIGINTER (IMAGE f 𝕌(:num)) ∈ measurable_sets m,
+ BIGINTER (IMAGE f 𝕌(:num)) ⊆ f 0] |- x ∉ f (SUC n)
+
+Number: 658
+Status: Unsatisfiable
+Info: polymorph higher-order num proof 
+Thm list: 
+ []
+|- ∀m s f.
+     measure_space m ∧ f ∈ (𝕌(:num) -> measurable_sets m) ∧
+     (∀n. f (SUC n) ⊆ f n) ∧ (s = BIGINTER (IMAGE f 𝕌(:num))) ⇒
+     measure m o f --> measure m s
+Goal:  []
+|- ∀m f.
+     measure_space m ∧ f ∈ (𝕌(:num) -> measurable_sets m) ∧
+     (∀n. f (SUC n) ⊆ f n) ⇒
+     measure m o f --> measure m (BIGINTER (IMAGE f 𝕌(:num)))
+
+Number: 659
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀m. measure_space m ⇒ positive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+ []
+|- ∀m.
+     positive m ⇔
+     (measure m ∅ = 0) ∧ ∀s. s ∈ measurable_sets m ⇒ 0 ≤ measure m s
+Goal:  [measure_space m, s ∈ measurable_sets m, t ∈ measurable_sets m]
+|- 0 ≤ measure m (s ∩ t)
+
+Number: 660
+Status: Unsatisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀m. measure_space m ⇒ positive m
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+ []
+|- ∀m.
+     positive m ⇔
+     (measure m ∅ = 0) ∧ ∀s. s ∈ measurable_sets m ⇒ 0 ≤ measure m s
+Goal:  [measure_space m, s ∈ measurable_sets m] |- measure m ∅ = 0
+
+Number: 661
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+Goal: 
+[∀m n. m ≠ n ⇒ DISJOINT (f m) (f n),
+ ∀x. ∃t. (f x = s ∩ t) ∧ t ∈ measurable_sets m, measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ BIGUNION (IMAGE f 𝕌(:num)) = s ∩ t, s ∈ measurable_sets m,
+ t ∈ measurable_sets m] |- ∀x. f x ∈ measurable_sets m
+
+Number: 662
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+Goal: 
+[∀m n. m ≠ n ⇒ DISJOINT (f m) (f n),
+ ∀x. ∃t. (f x = s ∩ t) ∧ t ∈ measurable_sets m,
+ ∀x. f x ∈ measurable_sets m, measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ BIGUNION (IMAGE f 𝕌(:num)) = s ∩ t, s ∈ measurable_sets m,
+ t ∈ measurable_sets m]
+|- BIGUNION (IMAGE f 𝕌(:num)) ∈ measurable_sets m
+
+Number: 663
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift num proof 
+Thm list: 
+ []
+|- ∀m.
+     measure_space m ⇔
+     sigma_algebra (m_space m,measurable_sets m) ∧ positive m ∧
+     countably_additive m
+Goal: 
+[∀m n. m ≠ n ⇒ DISJOINT (f m) (f n),
+ ∀x. ∃t. (f x = s ∩ t) ∧ t ∈ measurable_sets m,
+ ∀x. f x ∈ measurable_sets m, measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ BIGUNION (IMAGE f 𝕌(:num)) = s ∩ t, s ∈ measurable_sets m,
+ t ∈ measurable_sets m, BIGUNION (IMAGE f 𝕌(:num)) ∈ measurable_sets m]
+|- countably_additive m
+
+Number: 664
+Status: Unsatisfiable
+Info: polymorph lambda-lift proof 
+Thm list: 
+ [] |- ∀A m. measure_space m ∧ A ∈ measurable_sets m ⇒ A ⊆ m_space m
+ [] |- ∀s t. s ⊆ t ⇔ ∀x. x ∈ s ⇒ x ∈ t
+Goal: 
+[countably_additive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ s ∈ measurable_sets m, t ∈ measurable_sets m]
+|- x ∈ s ∧ (x ∉ s ∨ x ∉ t) ⇔ x ∈ s ∧ x ∈ m_space m ∧ x ∉ t
+
+Number: 665
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- (∀s. ∅ ∩ s = ∅) ∧ ∀s. s ∩ ∅ = ∅
+ [] |- ∀m. measure_space m ⇒ ∅ ∈ measurable_sets m
+Goal: 
+[countably_additive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ s ∈ measurable_sets m] |- ∃t. (∅ = s ∩ t) ∧ t ∈ measurable_sets m
+
+Number: 666
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ c ⇒ ∃t. (x = s ∩ t) ∧ t ∈ measurable_sets m, countable c,
+ countably_additive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m), x ∈ s',
+ s ∈ measurable_sets m, s' ∈ c]
+|- ∃t. (s' = s ∩ t) ∧ t ∈ measurable_sets m
+
+Number: 667
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀s t x. x ∈ s ∩ t ⇔ x ∈ s ∧ x ∈ t
+Goal: 
+[∀x. x ∈ c ⇒ ∃t. (x = s ∩ t) ∧ t ∈ measurable_sets m, countable c,
+ countably_additive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ s' = s ∩ t, x ∈ s', s ∈ measurable_sets m, s' ∈ c,
+ t ∈ measurable_sets m] |- x ∈ s
+
+Number: 668
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀m s t.
+     measure_space m ∧ s ∈ measurable_sets m ∧ t ∈ measurable_sets m ⇒
+     s ∩ t ∈ measurable_sets m
+Goal: 
+[∀x. x ∈ BIGUNION c ⇒ x ∈ s,
+ ∀x. x ∈ c ⇒ ∃t. (x = s ∩ t) ∧ t ∈ measurable_sets m, countable c,
+ countably_additive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ measure_space m,
+ positive (s,IMAGE (λt. s ∩ t) (measurable_sets m),measure m),
+ s ∈ measurable_sets m] |- ∀x. x ∈ c ⇒ x ∈ measurable_sets m
+
+Number: 669
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+ [] |- ∀x y. 0 ≤ x ∧ 0 ≤ y ⇒ 0 ≤ x * y
+Goal: 
+[∀s. s ∈ measurable_sets m ⇒ 0 ≤ measure m s, countably_additive m,
+ sigma_algebra (m_space m,measurable_sets m), measure m ∅ = 0,
+ s ∈ measurable_sets m, 0 ≤ c] |- 0 ≤ c * measure m s
+
+Number: 671
+Status: Unsatisfiable
+Info: proof 
+Thm list: 
+Goal: 
+[∀x. x ∈ Q_set ⇒ f x ∈ subsets a,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a, x' ∈ Q_set,
+ ∅ ∈ subsets a, subset_class (space a) (subsets a)] |- f x' ∈ subsets a
+
+Number: 684
+Status: Unsatisfiable
+Info: higher-order lambda-lift proof 
+Thm list: 
+ [] |- ∀x. (x = NegInf) ∨ (x = PosInf) ∨ ∃r. x = Normal r
+Goal: 
+[∀c. {x | f x < c} ∩ space a ∈ subsets a, sigma_algebra a, c ≠ NegInf,
+ c ≠ PosInf, f ∈ (space a -> 𝕌(:extreal))] |- ∃r. c = Normal r
+
+Number: 694
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀c. {x | f x < c} ∩ space a ∈ subsets a,
+ ∀s. s ∈ subsets a ⇒ space a DIFF s ∈ subsets a,
+ ∀f.
+   f ∈ (𝕌(:num) -> subsets a) ⇒ BIGINTER (IMAGE f 𝕌(:num)) ∈ subsets a,
+ sigma_algebra a,
+ {x | f x ≤ Normal r} ∩ space a =
+ BIGINTER
+   (IMAGE (λn. {x | f x < Normal (r + (1 / 2) pow n)} ∩ space a)
+      𝕌(:num)), ∅ ∈ subsets a, f ∈ (space a -> 𝕌(:extreal)),
+ (λn. {x | f x < Normal (r + (1 / 2) pow n)} ∩ space a) ∈
+ (𝕌(:num) -> subsets a), subset_class (space a) (subsets a)]
+|- BIGINTER
+     (IMAGE (λn. {x | f x < Normal (r + (1 / 2) pow n)} ∩ space a)
+        𝕌(:num)) ∈ subsets a
+
+Number: 695
+Status: Unsatisfiable
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal: 
+[∀c. {x | f x < c} ∩ space a ∈ subsets a, sigma_algebra a,
+ {x | f x ≤ Normal r} ∩ space a =
+ BIGINTER
+   (IMAGE (λn. {x | f x < Normal (r + (1 / 2) pow n)} ∩ space a)
+      𝕌(:num)),
+ BIGINTER
+   (IMAGE (λn. {x | f x < Normal (r + (1 / 2) pow n)} ∩ space a)
+      𝕌(:num)) ∈ subsets a, f ∈ (space a -> 𝕌(:extreal))]
+|- {x | f x ≤ Normal r} ∩ space a ∈ subsets a
+
+Number: 700
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+Goal: 
+[∀c. {x | f x ≤ c} ∩ space a ∈ subsets a,
+ ∀c. {x | c < f x} ∩ space a ∈ subsets a, sigma_algebra a,
+ {x | f x = PosInf} ∩ space a =
+ BIGINTER (IMAGE (λn. {x | &n < f x} ∩ space a) 𝕌(:num)),
+ {x | f x = PosInf} ∩ space a ∈ subsets a, f ∈ (space a -> 𝕌(:extreal))]
+|- f x ≠ PosInf ∧ x ∈ space a ⇔
+   x ∈ space a ∧ (f x ≠ PosInf ∨ x ∉ space a)
+
+Number: 702
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+ [] |- ∀x. (x = NegInf) ∨ (x = PosInf) ∨ ∃r. x = Normal r
+Goal: 
+[∀c. {x | f x ≤ c} ∩ space a ∈ subsets a,
+ ∀c. {x | c < f x} ∩ space a ∈ subsets a, sigma_algebra a, c ≠ NegInf,
+ c ≠ PosInf,
+ {x | f x ≠ PosInf} ∩ space a =
+ space a DIFF {x | f x = PosInf} ∩ space a,
+ {x | f x = PosInf} ∩ space a =
+ BIGINTER (IMAGE (λn. {x | &n < f x} ∩ space a) 𝕌(:num)),
+ {x | f x = PosInf} ∩ space a ∈ subsets a, f ∈ (space a -> 𝕌(:extreal))]
+|- ∃r. c = Normal r
+
+Number: 714
+Status: Unsatisfiable
+Info: higher-order lambda-lift bool num proof 
+Thm list: 
+ [] |- ∀x y z. x ≤ y ∧ y < z ⇒ x < z
+Goal: 
+[T, ∀c. {x | f x ≤ c} ∩ space a ∈ subsets a,
+ ∀c. {x | c < f x} ∩ space a ∈ subsets a, ∀n. -((1 / 2) pow n) < 0,
+ ∀n. r − (1 / 2) pow n < r, sigma_algebra a, Normal r' ≠ NegInf,
+ Normal r' ≠ PosInf, (λn. r) --> r, (λn. (1 / 2) pow n) --> 0,
+ (λn. r − (1 / 2) pow n) --> r, f x = Normal r',
+ {x | f x ≠ PosInf} ∩ space a =
+ space a DIFF {x | f x = PosInf} ∩ space a,
+ {x | f x = PosInf} ∩ space a =
+ BIGINTER (IMAGE (λn. {x | &n < f x} ∩ space a) 𝕌(:num)), x ∈ space a,
+ {x | f x = PosInf} ∩ space a ∈ subsets a, f ∈ (space a -> 𝕌(:extreal)),
+ r' ≤ r − (1 / 2) pow n] |- r' < r
+
+Number: 724
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- sigma_algebra a
+
+Number: 725
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- f ∈ (space a -> 𝕌(:extreal))
+
+Number: 731
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- sigma_algebra a
+
+Number: 732
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- f ∈ (space a -> 𝕌(:extreal))
+
+Number: 738
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- sigma_algebra a
+
+Number: 739
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- f ∈ (space a -> 𝕌(:extreal))
+
+Number: 749
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- f ∈ (space a -> 𝕌(:extreal))
+
+Number: 750
+Status: Unsatisfiable
+Info: polymorph higher-order lambda-lift proof 
+Thm list: 
+ []
+|- ∀f a.
+     f ∈ measurable a Borel ⇔
+     sigma_algebra a ∧ f ∈ (space a -> 𝕌(:extreal)) ∧
+     ∀c. {x | f x < c} ∩ space a ∈ subsets a
+Goal:  [f ∈ measurable a Borel] |- sigma_algebra a
+
+Number: 752
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [f ∈ measurable a Borel]
+|- f x ≠ c ∧ x ∈ space a ⇔ x ∈ space a ∧ (f x ≠ c ∨ x ∉ space a)
+

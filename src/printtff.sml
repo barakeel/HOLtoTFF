@@ -16,11 +16,20 @@ open HolKernel Abbrev boolLib HOLPP numSyntax
      stringtools listtools mydatatype
      extractvar extracttype namevar nametype higherorder
 
+
 (* not all structures are necessary *)
 fun PRINTTFF_ERR function message =
     HOL_ERR{origin_structure = "printtff",
             origin_function = function,
             message = message}
+
+(* NON LINEAR INTEGER ARITHMETIC *)
+val NLIAflag = ref false;
+fun contain_numfvc term = not (null (filter has_numty (get_fvcl term)))
+fun linear term =
+  case nodeconst term of
+    Mult => not (contain_numfvc (rand term) andalso contain_numfvc (lhand term))
+  | _    => raise PRINTTFF_ERR "linear" "not a product"
 
 (*PPTFF_TERM*)
 fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
@@ -52,8 +61,9 @@ fun pptff_qbvl pps qbvl bvdict tyadict =
 #3 dict : list of (free variable, its name)  
 #4 dict : list of (constant, its name) 
 *)
+
 (* pflag : predicateflag *)   
-(* pflag only used for true or false *)
+(* modifiy NLIAflag *)
 fun pptff_term_aux pps term dict pflag bvl =
   case termstructure term of
     Numeral => add_string pps (name_numeral term)
@@ -98,7 +108,14 @@ fun pptff_term_aux pps term dict pflag bvl =
           Eq => pptff_binop pps "=" term dict false bvl
         | Add => pptff_app pps "$sum" argl dict false bvl
         | Minus => pptff_app pps "$difference" argl dict false bvl 
-        | Mult => pptff_app pps "$product" argl dict false bvl  
+        | Mult => if linear term 
+                  then pptff_app pps "$product" argl dict false bvl  
+                  else 
+                    (
+                    NLIAflag := true;
+                    pptff_app pps 
+                      (lookup operator (#4 dict)) argl dict false bvl
+                    )
         | Less => pptff_app pps "$less" argl dict false bvl  
         | Greater => pptff_app pps "$greater" argl dict false bvl  
         | Geq => pptff_app pps "$greatereq" argl dict false bvl  
@@ -152,7 +169,7 @@ and pptff_app pps str argl dict pflag bvl =
   add_string pps ")"
   )  
 
-fun pptff_term pps term dict pflag = pptff_term_aux pps term dict pflag []
+fun pptff_term pps term dict = pptff_term_aux pps term dict true []
 
 (* PRINT_TFF *)
 (* useful functions *)
@@ -220,7 +237,10 @@ fun pptff_fvatydict pps fvdict fvatydict =
     pptff_fvatydict pps fvdict m
     )
 
-(* constant *)
+
+
+
+
 (* to be rewritten so that it doesn't print them 
    if they only appears with the right type *) 
 fun is_dc c = is_member (name_of c) ["=","+","-","*","<",">",">=","<="]
@@ -257,17 +277,30 @@ fun pptff_axiom pps name term dict =
   ( 
   add_string pps ("tff(" ^ name ^ "_axiom,axiom,(");
   indent4 pps;
-  pptff_term pps term dict true;
-  add_string pps " ))."
+  pptff_term pps term dict;
+  add_string pps " )).";
+  nl2 pps
   ) 
 
+(* Non linear arithmetic *)
+fun pptff_NLIAaxiom pps dict =
+  let val multc = hd (get_cl ``0*0``) in
+  let val x1 = mk_var ("x1",``:num``) in
+  let val x2 = mk_var ("x2",``:num``) in
+  let val term1 = list_mk_comb (multc,[x1,x2]) in
+  let val term2 = list_mk_comb (multc,[x2,x1]) in
+  let val term = list_mk_forall ([x1,x2],mk_eq (term1,term2)) in
+    if !NLIAflag andalso is_member multc (map fst (#4 dict))
+    then pptff_axiom pps "nlia" term dict
+    else ()  
+  end end end end end end
+  
 fun pptff_axioml_aux pps terml dict start =
   case terml of
     [] => ()
   | t :: m =>  
     (
     pptff_axiom pps ("axiom" ^ (Int.toString start)) t dict;
-    nl2 pps;
     pptff_axioml_aux pps m dict (start + 1)
     )
 
@@ -279,7 +312,7 @@ fun pptff_conjecture pps name term dict =
     ( 
     add_string pps ("tff(" ^ name ^ "_conjecture,conjecture,(");
     indent4 pps;
-    pptff_term pps term dict true;
+    pptff_term pps term dict;
     add_string pps " )).";
     nl2 pps
     )
@@ -310,6 +343,7 @@ fun pptff_tff_w pps nb goal =
       in
       let val dict = (tyadict,bvdict,fvdict,cdict) in
       (
+      NLIAflag := false;
       begin_block pps CONSISTENT 0;
         pptff_commentline pps;
         pptff_number pps nb;
@@ -320,6 +354,7 @@ fun pptff_tff_w pps nb goal =
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;
+        pptff_NLIAaxiom pps dict;
         pptff_commentline pps;
         add_string pps "\n";
       end_block pps

@@ -1,0 +1,32 @@
+xApp1(xApp2(cIN, xx), xApp3(cspace, xa))
+********** selSimp **********
+xApp1(xApp2(cIN, xx), xApp3(cspace, xa))
+
+xApp1(xApp2(cIN, xx), xApp3(cspace, xa))
+********** Para1 **********
+$$true
+
+xApp1(xApp2(cIN, xx), xApp3(cspace, xa))
+********** Para2 **********
+$$true
+
+xApp4(xApp5(cIN1, xf), xApp6(xApp7(cmeasurable, xa), cBorel))
+********** selSimp **********
+xApp4(xApp5(cIN1, xf), xApp6(xApp7(cmeasurable, xa), cBorel))
+
+xApp4(xApp5(cIN1, xf), xApp6(xApp7(cmeasurable, xa), cBorel))
+********** Para1 **********
+$$true
+
+xApp4(xApp5(cIN1, xf), xApp6(xApp7(cmeasurable, xa), cBorel))
+********** Para2 **********
+$$true
+
+~xApp1(xApp2(cIN, xx), xApp3(cspace, xa)) | ~(xApp(xf, xx) olo_ty_extreal xc)
+********** selSimp **********
+~(xApp(xf, xx) olo_ty_extreal xc)
+
+xApp(xf, xx) olo_ty_extreal xc | ~xApp1(xApp2(cIN, xx), xApp3(cspace, xa))
+********** selSimp **********
+$false
+

@@ -1,0 +1,38 @@
+%----------------------------------------------------------------------------
+% Number   : 1
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $int )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: $int,Xx2: $int] : (($lesseq(0,c1(Xx1,Xx2)) | (~$lesseq(0,Xx1) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [X: $int] : ((~(c1(X,X) = 4) | ((X = 2) | ~$lesseq(0,X)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [X: $int] : ((~(xx = 2) | ~$lesseq(0,X))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [X: $int] : (((c1(xx,xx) = 4) | ~$lesseq(0,X))) )).
+
+tff(nlia_axiom,axiom,(
+    ! [Xx1: $int,Xx2: $int] : ((c1(Xx1,Xx2) = c1(Xx2,Xx1))) )).
+
+%----------------------------------------------------------------------------
+

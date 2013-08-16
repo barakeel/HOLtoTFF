@@ -92,7 +92,7 @@ fun CNF_CONV_TAC goal =
 fun FUN_CONV_TAC_w goal = 
   let val eqth = (QCONV fun_conv) (only_hypg goal) in
     (flag_update funflag (not (is_refl eqth));
-     CONV_HYP_TAC (REPEATC fun_conv) goal)
+     CONV_HYP_TAC fun_conv goal)
   end
 fun FUN_CONV_TAC goal = 
   wrap "tactic" "FUN_CONV_TAC" "" FUN_CONV_TAC_w goal  

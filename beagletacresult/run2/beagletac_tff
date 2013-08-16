@@ -1,0 +1,692 @@
+%----------------------------------------------------------------------------
+% Number   : 753
+%----------------------------------------------------------------------------
+tff(ty_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool_type,type,(
+    ty_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool: $tType )).
+
+tff(ty_a_F_extreal_F_bool_F_bool_type,type,(
+    ty_a_F_extreal_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_extreal_F_bool_F_a_F_extreal_F_bool_type,type,(
+    ty_extreal_F_bool_F_a_F_extreal_F_bool: $tType )).
+
+tff(ty_a_F_extreal_F_bool_type,type,(
+    ty_a_F_extreal_F_bool: $tType )).
+
+tff(ty_bool_F_a_P_bool_type,type,(
+    ty_bool_F_a_P_bool: $tType )).
+
+tff(ty_a_P_bool_type,type,(
+    ty_a_P_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_extreal: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_extreal_type,type,(
+    ty_extreal: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_a_F_extreal_type,type,(
+    ty_a_F_extreal: $tType )).
+
+tff(ty_extreal_F_bool_P_extreal_F_bool_F_bool_type,type,(
+    ty_extreal_F_bool_P_extreal_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool: $tType )).
+
+tff(ty_a_F_extreal_F_a_F_extreal_F_bool_F_bool_type,type,(
+    ty_a_F_extreal_F_a_F_extreal_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_a_P_bool_type,type,(
+    ty_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_a_P_bool_F_a_F_bool_type,type,(
+    ty_a_F_a_P_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool_type,type,(
+    ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool: $tType )).
+
+tff(ty_extreal_F_bool_type,type,(
+    ty_extreal_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_extreal_F_bool_F_a_F_extreal_F_bool_type,type,(
+    ty_a_F_bool_F_extreal_F_bool_F_a_F_extreal_F_bool: $tType )).
+
+tff(ty_a_F_bool_P_a_F_bool_F_bool_F_bool_type,type,(
+    ty_a_F_bool_P_a_F_bool_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_F_a_F_bool_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_bool_F_a_F_bool_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_P_bool: $tType )).
+
+tff(ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_type,type,(
+    ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal: $tType )).
+
+tff(ty_extreal_F_extreal_F_bool_type,type,(
+    ty_extreal_F_extreal_F_bool: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_extreal_F_bool * ty_extreal ) > bool )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_extreal_F_extreal_F_bool * ty_extreal ) > ty_extreal_F_bool )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_a_F_bool_P_a_F_bool_F_bool_F_extreal * ty_a_F_bool_P_a_F_bool_F_bool ) > ty_extreal )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal * ty_a_F_extreal ) > ty_a_F_bool_P_a_F_bool_F_bool_F_extreal )).
+
+tff(x_type,type,(
+    x: ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal )).
+
+tff(xApp4_type,type,(
+    xApp4: ( ty_a_F_a_P_bool * ty_a ) > ty_a_P_bool )).
+
+tff(xApp5_type,type,(
+    xApp5: ( ty_bool_F_a_P_bool * bool ) > ty_a_P_bool )).
+
+tff(xApp6_type,type,(
+    xApp6: ( ty_a_F_bool_F_a_P_bool * ty_a ) > ty_bool_F_a_P_bool )).
+
+tff(xt_type,type,(
+    xt: ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool )).
+
+tff(xs_type,type,(
+    xs: ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool )).
+
+tff(x1_type,type,(
+    x1: ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_F_bool )).
+
+tff(xApp7_type,type,(
+    xApp7: ( ty_a_F_bool_F_bool_F_a_F_bool_F_bool_F_bool * ty_a_F_bool_F_bool ) > ty_a_F_bool_F_bool_F_bool )).
+
+tff(xApp8_type,type,(
+    xApp8: ( ty_a_F_bool_F_bool_F_a_F_bool * ty_a_F_bool_F_bool ) > ty_a_F_bool )).
+
+tff(xf1_type,type,(
+    xf1: ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xf2_type,type,(
+    xf2: ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp9_type,type,(
+    xApp9: ( ty_a_F_bool_P_a_F_bool_F_bool_F_bool * ty_a_F_bool_P_a_F_bool_F_bool ) > $o )).
+
+tff(xApp10_type,type,(
+    xApp10: ( ty_extreal_F_bool_F_a_F_extreal_F_bool * ty_extreal_F_bool ) > ty_a_F_extreal_F_bool )).
+
+tff(xApp11_type,type,(
+    xApp11: ( ty_a_F_bool_F_extreal_F_bool_F_a_F_extreal_F_bool * ty_a_F_bool ) > ty_extreal_F_bool_F_a_F_extreal_F_bool )).
+
+tff(xApp12_type,type,(
+    xApp12: ( ty_a_F_bool_F_a_F_a_P_bool * ty_a_F_bool ) > ty_a_F_a_P_bool )).
+
+tff(xApp13_type,type,(
+    xApp13: ( ty_a_F_bool_F_a_F_bool_F_a_F_a_P_bool * ty_a_F_bool ) > ty_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp14_type,type,(
+    xApp14: ( ty_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool * ty_a_F_bool_F_bool ) > ty_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp15_type,type,(
+    xApp15: ( ty_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool * ty_extreal ) > ty_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp16_type,type,(
+    xApp16: ( ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool * ty_a_F_bool_P_a_F_bool_F_bool ) > ty_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp17_type,type,(
+    xApp17: ( ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool * ty_a_F_extreal ) > ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xf3_type,type,(
+    xf3: ty_a_F_extreal_F_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_a_F_bool_F_bool_F_a_F_bool_F_a_F_bool_F_a_F_a_P_bool )).
+
+tff(xApp18_type,type,(
+    xApp18: ( ty_a_F_bool_F_bool_F_bool * ty_a_F_bool_F_bool ) > $o )).
+
+tff(xApp19_type,type,(
+    xApp19: ( ty_a_F_bool_F_a_F_bool_F_bool_F_bool * ty_a_F_bool ) > ty_a_F_bool_F_bool_F_bool )).
+
+tff(xApp20_type,type,(
+    xApp20: ( ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_F_bool * ty_a_F_bool_P_a_F_bool_F_bool ) > ty_a_F_bool_F_bool )).
+
+tff(xf4_type,type,(
+    xf4: ty_a_F_a_P_bool )).
+
+tff(xApp21_type,type,(
+    xApp21: ( ty_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_F_bool )).
+
+tff(xApp22_type,type,(
+    xApp22: ( ty_a_F_bool_F_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_F_bool_F_a_F_bool )).
+
+tff(xApp23_type,type,(
+    xApp23: ( ty_a_F_a_P_bool_F_a_F_bool * ty_a_F_a_P_bool ) > ty_a_F_bool )).
+
+tff(xf5_type,type,(
+    xf5: ty_a_F_a_P_bool )).
+
+tff(xApp24_type,type,(
+    xApp24: ( ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool * ty_a_F_bool_P_a_F_bool_F_bool ) > ty_a_F_bool )).
+
+tff(xApp25_type,type,(
+    xApp25: ( ty_a_F_extreal_F_bool_F_bool * ty_a_F_extreal_F_bool ) > $o )).
+
+tff(xApp26_type,type,(
+    xApp26: ( ty_a_F_extreal_F_a_F_extreal_F_bool_F_bool * ty_a_F_extreal ) > ty_a_F_extreal_F_bool_F_bool )).
+
+tff(xApp27_type,type,(
+    xApp27: ( ty_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool * ty_extreal_F_bool_P_extreal_F_bool_F_bool ) > ty_a_F_extreal_F_bool )).
+
+tff(xApp28_type,type,(
+    xApp28: ( ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool * ty_a_F_bool_P_a_F_bool_F_bool ) > ty_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool )).
+
+tff(xa_type,type,(
+    xa: ty_a_F_bool_P_a_F_bool_F_bool )).
+
+tff(xf_type,type,(
+    xf: ty_a_F_extreal )).
+
+tff(xc_type,type,(
+    xc: ty_extreal )).
+
+tff(xApp29_type,type,(
+    xApp29: ( ty_a_F_extreal * ty_a ) > ty_extreal )).
+
+tff(c_type,type,(
+    c: ( bool * bool ) > $o )).
+
+tff(cextreal_lt_type,type,(
+    cextreal_lt: ty_extreal_F_extreal_F_bool )).
+
+tff(c1_type,type,(
+    c1: ( ty_a_P_bool * ty_a_P_bool ) > $o )).
+
+tff(c2_type,type,(
+    c2: ty_a_F_bool_F_a_P_bool )).
+
+tff(cUNION_type,type,(
+    cUNION: ty_a_F_bool_F_a_F_bool_F_a_F_bool )).
+
+tff(cEMPTY_type,type,(
+    cEMPTY: ty_a_F_bool )).
+
+tff(csubset_class_type,type,(
+    csubset_class: ty_a_F_bool_F_a_F_bool_F_bool_F_bool )).
+
+tff(calgebra_type,type,(
+    calgebra: ty_a_F_bool_P_a_F_bool_F_bool_F_bool )).
+
+tff(cSUBSET_type,type,(
+    cSUBSET: ty_a_F_bool_F_bool_F_a_F_bool_F_bool_F_bool )).
+
+tff(ccountable_type,type,(
+    ccountable: ty_a_F_bool_F_bool_F_bool )).
+
+tff(cBIGUNION_type,type,(
+    cBIGUNION: ty_a_F_bool_F_bool_F_a_F_bool )).
+
+tff(csigma_algebra_type,type,(
+    csigma_algebra: ty_a_F_bool_P_a_F_bool_F_bool_F_bool )).
+
+tff(cFUNSET_type,type,(
+    cFUNSET: ty_a_F_bool_F_extreal_F_bool_F_a_F_extreal_F_bool )).
+
+tff(cUNIV_type,type,(
+    cUNIV: ty_extreal_F_bool )).
+
+tff(cIN_type,type,(
+    cIN: ty_a_F_bool_F_a_F_bool_F_bool_F_bool )).
+
+tff(csubsets_type,type,(
+    csubsets: ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool_F_bool )).
+
+tff(c3_type,type,(
+    c3: ( ty_a_F_bool * ty_a_F_bool ) > $o )).
+
+tff(cDIFF_type,type,(
+    cDIFF: ty_a_F_bool_F_a_F_bool_F_a_F_bool )).
+
+tff(cINTER_type,type,(
+    cINTER: ty_a_F_bool_F_a_F_bool_F_a_F_bool )).
+
+tff(cGSPEC_type,type,(
+    cGSPEC: ty_a_F_a_P_bool_F_a_F_bool )).
+
+tff(cspace_type,type,(
+    cspace: ty_a_F_bool_P_a_F_bool_F_bool_F_a_F_bool )).
+
+tff(cIN1_type,type,(
+    cIN1: ty_a_F_extreal_F_a_F_extreal_F_bool_F_bool )).
+
+tff(cmeasurable_type,type,(
+    cmeasurable: ty_a_F_bool_P_a_F_bool_F_bool_F_extreal_F_bool_P_extreal_F_bool_F_bool_F_a_F_extreal_F_bool )).
+
+tff(cBorel_type,type,(
+    cBorel: ty_extreal_F_bool_P_extreal_F_bool_F_bool )).
+
+tff(c4_type,type,(
+    c4: ( ty_extreal * ty_extreal ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : ((xApp25(xApp26(cIN1,xf),xApp27(xApp28(cmeasurable,xa),cBorel)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa)) = xApp21(xApp22(cDIFF,xApp24(cspace,xa)),xApp21(xApp22(cINTER,xApp23(cGSPEC,xf5)),xApp24(cspace,xa)))) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa))),xApp20(csubsets,xa)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp9(csigma_algebra,X3) | (xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X5: ty_a] : ((~xApp18(xApp7(cSUBSET,X),xApp20(csubsets,X3)) | (~xApp18(ccountable,X) | (xApp18(xApp19(cIN,xApp8(cBIGUNION,X)),xApp20(csubsets,X3)) | (~xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp9(calgebra,X3) | (~xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp7(cSUBSET,xApp20(x1,X3)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(ccountable,xApp20(x1,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp8(cBIGUNION,xApp20(x1,X3))),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),X1)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,X2),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp21(xApp22(cUNION,X1),X2)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),btrue)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),xApp2(xApp3(x,X4),X3)))) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),X6))) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp4(xf4,Xx) = xApp5(xApp6(c2,Xx),bfalse)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp4(xf5,Xx) = xApp5(xApp6(c2,Xx),btrue)) | (~(xApp29(xf,Xx) = xc) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xf5,Xx) = xApp5(xApp6(c2,Xx),bfalse)) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xf4,Xx) = xApp5(xApp6(c2,Xx),btrue)) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),X6))) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),xApp2(xApp3(x,X4),X3)))) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),btrue)) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,xApp21(xApp22(cUNION,X1),X2)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X2),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),X1)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (~xApp18(xApp19(cIN,xApp8(cBIGUNION,xApp20(x1,X3))),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (xApp18(ccountable,xApp20(x1,X3)) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (xApp18(xApp7(cSUBSET,xApp20(x1,X3)),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(csigma_algebra,X3) | (xApp9(calgebra,X3) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(csigma_algebra,X3) | (xApp18(xApp19(cIN,xApp8(cBIGUNION,X)),xApp20(csubsets,X3)) | (~xApp18(ccountable,X) | (~xApp18(xApp7(cSUBSET,X),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp9(csigma_algebra,X3) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | ~(xApp29(X4,X5) = X6))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa))),xApp20(csubsets,xa)) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa)) = xApp21(xApp22(cDIFF,xApp24(cspace,xa)),xApp21(xApp22(cINTER,xApp23(cGSPEC,xf5)),xApp24(cspace,xa)))) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,xf),xApp27(xApp28(cmeasurable,xa),cBorel)) | ~(xApp29(X4,X5) = X6)))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,xf),xApp27(xApp28(cmeasurable,xa),cBorel)) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa)) = xApp21(xApp22(cDIFF,xApp24(cspace,xa)),xApp21(xApp22(cINTER,xApp23(cGSPEC,xf5)),xApp24(cspace,xa)))) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa))),xApp20(csubsets,xa)) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp9(csigma_algebra,X3) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(csigma_algebra,X3) | (xApp18(xApp19(cIN,xApp8(cBIGUNION,X)),xApp20(csubsets,X3)) | (~xApp18(ccountable,X) | (~xApp18(xApp7(cSUBSET,X),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(csigma_algebra,X3) | (xApp9(calgebra,X3) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom74_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (xApp18(xApp7(cSUBSET,xApp20(x1,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom75_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (xApp18(ccountable,xApp20(x1,X3)) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom76_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(csigma_algebra,X3) | (~xApp9(calgebra,X3) | (~xApp18(xApp19(cIN,xApp8(cBIGUNION,xApp20(x1,X3))),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom77_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom78_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom79_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom80_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom81_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom82_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (xApp9(calgebra,X3) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom83_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom84_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom85_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),X1)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom86_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | (~xApp9(calgebra,X3) | (xApp18(xApp19(cIN,xApp21(xApp22(cUNION,X1),X2)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X2),xApp20(csubsets,X3)) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom87_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),bfalse)) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom88_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),xApp2(xApp3(x,X4),X3)))) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom89_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),X6))) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom90_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xf4,Xx) = xApp5(xApp6(c2,Xx),btrue)) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom91_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp29(xf,Xx) = xc) | ((xApp4(xf5,Xx) = xApp5(xApp6(c2,Xx),bfalse)) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom92_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp4(xf5,Xx) = xApp5(xApp6(c2,Xx),btrue)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom93_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp4(xf4,Xx) = xApp5(xApp6(c2,Xx),bfalse)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom94_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),X6))) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom95_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),xApp(xApp1(cextreal_lt,xApp29(X4,X5)),xApp2(xApp3(x,X4),X3)))) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom96_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : (((xApp4(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2),X5) = xApp5(xApp6(c2,X5),bfalse)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom97_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,X2),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp21(xApp22(cUNION,X1),X2)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom98_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X1: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,X1),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),X1)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom99_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom100_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom101_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom102_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xt,X3)),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom103_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom104_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom105_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (xApp18(xApp19(cIN,xApp24(xs,X3)),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom106_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cUNION,xApp24(xs,X3)),xApp24(xt,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,xApp21(xApp22(cDIFF,xApp24(cspace,X3)),xApp24(xs,X3))),xApp20(csubsets,X3)) | (~xApp18(xApp19(cIN,cEMPTY),xApp20(csubsets,X3)) | (~xApp18(xApp19(csubset_class,xApp24(cspace,X3)),xApp20(csubsets,X3)) | (xApp9(calgebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))))) )).
+
+tff(axiom107_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp8(cBIGUNION,xApp20(x1,X3))),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom108_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(ccountable,xApp20(x1,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom109_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp18(xApp7(cSUBSET,xApp20(x1,X3)),xApp20(csubsets,X3)) | (~xApp9(calgebra,X3) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))))) )).
+
+tff(axiom110_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp9(calgebra,X3) | (~xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom111_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X5: ty_a] : ((~xApp18(xApp7(cSUBSET,X),xApp20(csubsets,X3)) | (~xApp18(ccountable,X) | (xApp18(xApp19(cIN,xApp8(cBIGUNION,X)),xApp20(csubsets,X3)) | (~xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom112_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp9(csigma_algebra,X3) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom113_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom114_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf1,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom115_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf2,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp9(csigma_algebra,X3) | (xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))))) )).
+
+tff(axiom116_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp9(csigma_algebra,X3) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom117_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X5: ty_a] : ((xApp25(xApp26(cIN1,X4),xApp10(xApp11(cFUNSET,xApp24(cspace,X3)),cUNIV)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom118_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X3: ty_a_F_bool_P_a_F_bool_F_bool,X6: ty_extreal,X: ty_a_F_bool_F_bool,X1: ty_a_F_bool,X2: ty_a_F_bool,X5: ty_a] : ((xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xf3,X4),X3),X6),X),X1),X2))),xApp24(cspace,X3))),xApp20(csubsets,X3)) | (~xApp25(xApp26(cIN1,X4),xApp27(xApp28(cmeasurable,X3),cBorel)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6))))) )).
+
+tff(axiom119_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : ((~xApp18(xApp19(cIN,xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa))),xApp20(csubsets,xa)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom120_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : (((xApp21(xApp22(cINTER,xApp23(cGSPEC,xf4)),xApp24(cspace,xa)) = xApp21(xApp22(cDIFF,xApp24(cspace,xa)),xApp21(xApp22(cINTER,xApp23(cGSPEC,xf5)),xApp24(cspace,xa)))) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+tff(axiom121_axiom,axiom,(
+    ! [Xx: ty_a,X4: ty_a_F_extreal,X6: ty_extreal,X5: ty_a] : ((xApp25(xApp26(cIN1,xf),xApp27(xApp28(cmeasurable,xa),cBorel)) | (~(xApp29(xf,Xx) = xc) | (xApp29(X4,X5) = X6)))) )).
+
+%----------------------------------------------------------------------------
+

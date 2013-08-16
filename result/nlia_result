@@ -1,0 +1,7 @@
+Number: 1
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀x. (x * x = 4) ⇒ (x = 2)
+Goal:  [x * x = 4] |- x = 2
+
