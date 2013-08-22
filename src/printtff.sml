@@ -191,10 +191,12 @@ fun get_simpletyadict tyadict = filter has_simplety tyadict
 
 (* post processing *)
 fun is_dtyname name = (substring (name,0,1) = "$")
-fun is_not_dtyname name = not (is_dtyname name)
-fun has_not_dtyname ((ty,arity),name) = is_not_dtyname name  
+fun has_not_dtyname ((ty,arity),name) = (not o is_dtyname) name  
 fun erase_dtyname tyadict = filter has_not_dtyname tyadict
 
+(* regroup this under defined tff constant and types 
+tffsyntax.sml
+*)
 
 (* test  
 name_of (rator (rator ``a <= b``));
@@ -315,7 +317,7 @@ fun pptff_tff_w pps nb goal =
         pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict (filter is_not_dcaty catydict);
+        pptff_catydict pps cdict (filter (not o is_dcaty) catydict);
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;

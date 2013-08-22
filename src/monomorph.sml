@@ -102,7 +102,7 @@ fun create_substl_cl_cl cl1 cl2 =
 
 (* SUBSTITUTION NORMALISATION *)
 fun is_identity {redex = red, residue = res} = (red = res)
-fun erase_identity subst = filter is_identity subst
+fun erase_identity subst = filter (not o is_identity) subst
 
 fun less_ty (ty1,ty2) = 
   case Type.compare (ty1,ty2) of
@@ -131,9 +131,9 @@ fun inst_thm substl thm  =
 (* MONOMORPHISATION *)   
   (* preparation *)
 fun create_substl_thm_pb thm (thml,goal) = 
-  let val cl1 = get_cl_thm thm in
-  let val cl2 = erase_double (List.concat 
-                  ((get_cl_goal goal) :: (map get_cl_thm thml)))
+  let val cl1 = filter (polymorphic o type_of) (get_cl_thm thm) in
+  let val cl2 = erase_double 
+    (List.concat ((get_cl_goal goal) :: (map get_cl_thm thml)))
   in 
     create_substl_cl_cl cl1 cl2
   end end

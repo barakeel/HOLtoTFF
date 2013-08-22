@@ -10,6 +10,7 @@ sig
   val erase_double_eq : ('a -> 'a -> bool) -> 'a list -> 'a list
   val add_once : ''a -> ''a list -> ''a list
   val inter : ''a list -> ''a list -> ''a list
+  val list_merge : ''a list list -> ''a list
   
   val quicksort : (('a * 'a) -> bool) -> 'a list -> 'a list
 (* dictionnary *)

@@ -48,7 +48,6 @@ fun erase_double_term l = erase_double_eq aconv l
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
 fun is_var_or_const term = is_var term orelse is_const term
-fun is_not_var term = not (is_var term)  
   
 (* QUANTIFIER *) 
 fun strip_quant term =
@@ -87,10 +86,8 @@ fun name_numeral term =
 (* DEFINED TFF CONSTANTS *)
 (* (* bad hack NLIA *) prevent from adding  "*" *)
 fun is_dc term = is_member (name_of term) ["=","+","-","<","<=",">",">="]
-fun is_not_dc term = not (is_dc term)
 fun is_dca (term,arity) = is_dc term andalso arity = 2
-fun is_not_dca (term,arity) = not (is_dca (term,arity))
-fun is_not_dcaty ((term,arity),str) = is_not_dca (term,arity)
+fun is_dcaty ((term,arity),str) = is_dca (term,arity)
 
 (* TERM *)   
 fun strip_comb_n (term,n) =
@@ -277,7 +274,7 @@ fun all_subtype_aux ty =
            ty :: all_subtypel_aux l
          end
 and all_subtypel_aux tyl = 
-  erase_double (List.concat (map all_subtype_aux tyl))
+  list_merge (map all_subtype_aux tyl)
 fun all_subtype term = all_subtypel_aux (all_type term)
 
 fun all_leaftype_aux ty = 
@@ -290,7 +287,7 @@ fun all_leaftype_aux ty =
            all_leaftypel_aux l
          end
 and all_leaftypel_aux tyl = 
-  erase_double (List.concat (map all_leaftype_aux tyl))
+  list_merge (map all_leaftype_aux tyl)
 fun all_leaftype term = all_leaftypel_aux (all_type term)
 
 fun all_vartype term = filter is_vartype (all_leaftypel_aux (all_type term))
@@ -332,7 +329,7 @@ fun find_pred_one atom =
   
 fun find_pred term = 
   let val atoml = find_atoml term in
-    List.concat (map find_pred_one atoml)          
+    erase_double_term (List.concat (map find_pred_one atoml))          
   end 
 
 fun is_pred_in var term = 

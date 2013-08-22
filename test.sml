@@ -21,10 +21,23 @@ load "beagle"; open beagle;
 *)
 
 (* PROBLEM TEST *)
+(* make an imporvement by not testing non polymorphic type (* is polymorphic *)
+*)
+
 show_assums :=  true;
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 fst (BEAGLE_NF_TAC thml goal);
+
+monomorph_pb ([thm],goal);
+monomorph_thm_pb thm ([thm],goal);
+
+
+val thm = mk_thm ([],``(a = b) /\ (c = d)``);
+val goal:goal = ([],``2 = 3``);
+val substl = create_substl_thm_pb thm ([thm],goal);
+val norml = normalize_substl substl;
+val norm = normalize_subst (hd substl);
 
 (* NLIA test *)
 val filename = "result/nlia";

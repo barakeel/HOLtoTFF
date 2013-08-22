@@ -30,7 +30,9 @@ fun add_once elem list =
   if is_member elem list then list else elem :: list
  
 fun inter l1 l2 = filter (inv is_member l2) l1 
- 
+
+fun list_merge ll = erase_double (List.concat ll)
+
 fun quicksort << xs = let
   fun qs [] = []
     | qs [x] = [x]

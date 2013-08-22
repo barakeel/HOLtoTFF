@@ -115,11 +115,11 @@ fun get_cl term = map fst (get_cal term)
 fun get_fvcl term = map fst (get_fvcal term)
 fun all_var term = map fst (map fst (extract_var term))
 fun all_vara term = map fst (extract_var term)
-fun all_varl terml = erase_double (List.concat (map all_var terml))
+fun all_varl terml = list_merge (map all_var terml)
 
 fun concat_thm returnalist thm =
   let val l = (hyp thm) @ [concl thm] in
-    erase_double (List.concat (map returnalist l))
+    list_merge (map returnalist l)
   end 
   
 fun get_fvl_thm thm = concat_thm get_fvl thm
@@ -131,7 +131,7 @@ fun all_vara_thm thm = concat_thm all_vara thm
 
 fun concat_goal returnalist goal =
   let val l = fst goal @ [snd goal] in
-    erase_double (List.concat (map returnalist l))
+    list_merge (map returnalist l)
   end
   
 fun get_fvl_goal goal = concat_goal get_fvl goal

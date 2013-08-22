@@ -14,7 +14,6 @@ sig
 (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
-  val is_not_var : term -> bool 
   val is_var_or_const : term -> bool 
 (* quantifier *) 
   val strip_quant : term -> (term list * term)
@@ -24,10 +23,8 @@ sig
   val name_tff : string -> term -> string
   val name_numeral : term -> string
   val is_dc : term -> bool
-  val is_not_dc : term -> bool
   val is_dca : (term * int) -> bool
-  val is_not_dca : (term * int) -> bool
-  val is_not_dcaty : ((term * int) * string) -> bool
+  val is_dcaty : ((term * int) * string) -> bool
 (* term *)
   val strip_comb_n : (term * int) -> (term * term list)
   val get_arity : term -> int
