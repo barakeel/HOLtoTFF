@@ -2,7 +2,7 @@ structure printtools :> printtools =
 struct
 
 open HolKernel Abbrev boolLib numSyntax HOLPP
-     stringtools listtools mydatatype
+     basictools stringtools listtools mydatatype
      
 fun PRINTTOOLS_ERR function message =
     HOL_ERR{origin_structure = "tools",

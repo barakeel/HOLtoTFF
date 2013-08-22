@@ -1,0 +1,8 @@
+Number: 2
+Status: Unknown
+Info: polymorph bool num higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- ∀x. (x = y) ⇔ {y} x
+

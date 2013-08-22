@@ -1,17 +1,10 @@
 structure nametype :> nametype =
 struct
-(*
-load "listtools"; open listtools;
-load "stringtools"; open stringtools;
-load "mydatatype"; open mydatatype;
-load "extractvar"; open extractvar;
-load "extracttype"; open extracttype;
-*)
+
 open HolKernel Abbrev boolLib numSyntax 
-     stringtools listtools mydatatype 
+     basictools stringtools listtools mydatatype 
      extractvar freshvar extracttype 
    
-
 fun NAMETYPE_ERR function message =
   HOL_ERR {origin_structure = "nametype",
            origin_function = function,
@@ -28,9 +21,6 @@ fun name_leaftype ty =
   | Alphatype =>  name_alphatype ty
   | Leaftype => fst (dest_type ty)
   | _ => raise NAMETYPE_ERR "name_leaftype" "node type"
-
-
-(* every simpletype starts with ty *)
 
 fun name_tfftype ty = 
   let val name = name_leaftype ty in 
@@ -106,7 +96,7 @@ fun add_simpletyal keyl dict = repeatchange add_simpletya keyl dict
    if (int -> int -> bool, 1) is a type used 
    then add (int,0) and (int -> bool,0)  *)
 fun add_innersimpletya (ty,arity) tyadict =
-  let val (argl,image) = strip_type_n (ty,arity) in
+  let val (argl,image) = strip_tya (ty,arity) in
   let val tyal = image :: argl in 
     add_simpletyal tyal tyadict
   end end
@@ -130,7 +120,7 @@ fun name_compoundty (argl,image) tyadict =
 
 (* add his own type *)
 fun add_compoundtya (ty,arity) tyadict =
-   let val (argl,image) = strip_type_n (ty,arity) in
+   let val (argl,image) = strip_tya (ty,arity) in
    let val str = name_compoundty (argl,image) tyadict in
      add_entry ((ty,arity),str) tyadict  
    end end

@@ -1,0 +1,182 @@
+Number: 14
+Status: Unknown
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Number: 17
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+ [] |- 0 < 256
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Number: 18
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- (n2s x = n2s y) ⇔ (x = y)
+
+Number: 20
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- ∀s. ∃n. s = n2s n
+
+Number: 27
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
+|- EL m (MAP SND ls) = EL n'' (r::MAP SND ls)
+
+Number: 28
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ h ≠ FST (EL n ls), EL n (MAP FST ls) ≠ FST (EL n ls), m < LENGTH ls,
+ n < LENGTH ls, SUC n < z, FST (EL m ls) = FST (EL n ls),
+ EL z (h::MAP FST ls) = FST (EL n ls)]
+|- SND (EL m ls) = EL z (r::MAP SND ls)
+
+Number: 29
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[T,
+ ∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ ¬(n < z), h ≠ FST (EL n ls), EL m (MAP FST ls) ≠ FST (EL n ls), m < z,
+ m < LENGTH ls, n < LENGTH ls, z < LENGTH ls,
+ FST (EL m ls) = FST (EL n ls), FST (EL z ls) = FST (EL n ls)]
+|- SND (EL m ls) = SND (EL z ls)
+
+Number: 30
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(m < z),
+ ¬(n < m), ¬(n < z), h ≠ FST (EL n ls), m < LENGTH ls, n < LENGTH ls,
+ z < m, z < LENGTH ls, FST (EL m ls) = FST (EL n ls),
+ FST (EL z ls) = FST (EL n ls)] |- SND (EL m ls) = SND (EL z ls)
+
+Number: 42
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀ft r1. relrec h ft r1 ⇒ ∀r2. relrec h ft r2 ⇒ (r1 = r2)
+Goal: 
+[∀d. d ∈ FDOM fm ⇒ relrec h (fm ' d) (rfm ' d), FDOM rfm = FDOM fm,
+ x ∈ FDOM fm] |- rfm ' x = @r. relrec h (fm ' x) r
+
+Number: 44
+Status: Unknown
+Info: polymorph bool num higher-order proof 
+Thm list: 
+ [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
+Goal: 
+[Abbrev (m1 = LENGTH (FILTER ($= x) l1)),
+ Abbrev (m2 = LENGTH (FILTER ($= x) l2)), x' < m1, x' < m2, m1 ≥ m2,
+ m2 ≥ m1]
+|- MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
+   MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)
+
+Number: 69
+Status: Satisfiable
+Info: polymorph bool higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
+
+Number: 74
+Status: Satisfiable
+Info: polymorph bool higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀x. x ∈ 𝕌(:α)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- 𝕌 ARB () ⇔ {()} ()
+
+Number: 77
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- (∀m. m ** 0 = 1) ∧ ∀m n. m ** SUC n = m * m ** n
+ [] |- ∀a b c. a ≤ b ∧ c < b ⇒ a + c < 2 * b
+Goal:  [∀f. SUM n (λi. SBIT (f i) i) < 2 ** n, SBIT (f n) n ≤ 2 ** n]
+|- SBIT (f n) n + SUM n (λi. SBIT (f i) i) < 2 ** SUC n
+
+Number: 78
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n f. SUM n (λi. SBIT (f i) i) < 2 ** n
+Goal:  [n ≤ i, BIT i (SUM n (λj. SBIT (f j) j)) ⇔ f i ∧ i < n]
+|- SUM n (λi. SBIT (f i) i) < 2 ** n
+
+Number: 85
+Status: Parsing failed
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ []
+|- ∀a b n.
+     ¬BIT n a ∨ ¬BIT n b ⇒
+     (SBIT (BIT n a ∨ BIT n b) n = SBIT (BIT n a) n + SBIT (BIT n b) n)
+ [] |- n < SUC n
+Goal: 
+[∀a b.
+   (∀i. i < n ⇒ ¬BIT i a ∨ ¬BIT i b) ⇒
+   (SUM n (λi. SBIT (BIT i a) i) + SUM n (λi. SBIT (BIT i b) i) =
+    BITWISE n $\/ a b), ∀i. i < SUC n ⇒ ¬BIT i a ∨ ¬BIT i b]
+|- SBIT (BIT n a) n + SBIT (BIT n b) n + BITWISE n $\/ a b =
+   SBIT (BIT n a ∨ BIT n b) n + BITWISE n $\/ a b
+
+Number: 99
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀b n. n ≠ 0 ∧ n < 2 ** b ⇒ ∃i. i < b ∧ BIT i n
+Goal:  [n ≠ 0, n < 2 ** dimindex (:α)] |- ∃i. i < dimindex (:α) ∧ BIT i n
+

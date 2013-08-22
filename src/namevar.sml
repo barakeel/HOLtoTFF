@@ -3,13 +3,13 @@ struct
 
 open HolKernel Abbrev boolLib numSyntax
      extractvar freshvar nametype  
-     stringtools listtools tools mydatatype
+     basictools stringtools listtools mydatatype
+     syntax tffsyntax predicate
      
 fun NAMEVAR_ERR function message =
   HOL_ERR{origin_structure = "namevar",
           origin_function = function,
           message = message}
-
 
 (* bound variable: bv *)
 fun name_tff_bv term = name_tff "X" term

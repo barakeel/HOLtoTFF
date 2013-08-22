@@ -2,7 +2,7 @@ structure higherorder :> higherorder =
 struct
 
 open HolKernel Abbrev boolLib 
-     listtools tools 
+     listtools syntax tffsyntax
      extractvar
 
 fun HIGHERORDER_ERR function message =
@@ -10,7 +10,7 @@ fun HIGHERORDER_ERR function message =
            origin_function = function,
            message = message}
 
-(* tools *)
+(* lowestarity *)
 fun get_lowestarity (term,arity) termal =
   case termal of
     [] => arity

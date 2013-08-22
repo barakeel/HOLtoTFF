@@ -2,7 +2,7 @@ structure printresult :> printresult =
 struct
 
 open HolKernel Abbrev boolLib
-     tools conv tactic 
+     syntax conv tactic 
      printtools
 
 (* Path (absolute) *)

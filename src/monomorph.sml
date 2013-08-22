@@ -1,16 +1,9 @@
 structure monomorph :> monomorph =
 struct
 
-(*
-load "listtools"; open listtools;
-load "mydatatype"; open mydatatype;
-load "tools"; open tools;
-
-load "extractvar"; open extractvar;
-load "namevar"; open namevar;
-*)
 open HolKernel Abbrev boolLib numSyntax 
-     listtools mydatatype tools
+     basictools listtools mydatatype
+     syntax
      extractvar namevar
 
 fun MONOMORPH_ERR function message =
@@ -19,7 +12,12 @@ fun MONOMORPH_ERR function message =
             message = message}
 
 
-(* TOOLS *)
+(* TEST *)
+fun is_polymorph term = (polymorphic o type_of) term
+fun is_polymorph_thm thm = exists is_polymorph (get_cl_thm thm)
+fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
+
+(* SUBST TOOLS *)
 fun get_redl subst =
   case subst of
     [] => [] 
@@ -131,7 +129,7 @@ fun inst_thm substl thm  =
 (* MONOMORPHISATION *)   
   (* preparation *)
 fun create_substl_thm_pb thm (thml,goal) = 
-  let val cl1 = filter (polymorphic o type_of) (get_cl_thm thm) in
+  let val cl1 = filter is_polymorph (get_cl_thm thm) in
   let val cl2 = erase_double 
     (List.concat ((get_cl_goal goal) :: (map get_cl_thm thml)))
   in 
@@ -151,10 +149,7 @@ fun monomorph_pb_w (thml,goal) =
   (map (inv monomorph_thm_pb (thml,goal)) thml,goal)  
 fun monomorph_pb pb = wrap "monomorph" "monomorph_pb" "" monomorph_pb_w pb
 
-(* TEST *)
-fun is_polymorph term = not (null (all_vartype term)) 
-fun is_polymorph_thm thm = exists is_polymorph (get_cl_thm thm)
-fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
+
 
 (* test   
  val th1 = ASSUME ``!x. x=x`` ;

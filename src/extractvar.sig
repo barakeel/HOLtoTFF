@@ -7,8 +7,8 @@ sig
   val erase_number : ((term * int) * VARCAT) list -> 
                      ((term * int) * VARCAT) list
   
-  val extract_var : term -> ((term * int) * VARCAT) list 
-  val extract_varl : term list -> ((term * int) * VARCAT) list 
+  val get_varinfol : term -> ((term * int) * VARCAT) list 
+  val list_get_varinfol : term list -> ((term * int) * VARCAT) list 
                     
   val get_bval : term -> (term * int) list 
   val get_fval : term -> (term * int) list 

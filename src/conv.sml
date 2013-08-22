@@ -1,39 +1,16 @@
 structure conv :> conv =
 struct
 
-(*
-load "listtools"; open listtools;
-load "tools"; open tools;
-load "mydatatype"; open mydatatype;
-load "extractvar"; open extractvar;
-load "extracttype"; open extracttype;
-*)
-
-(*
-Beta 
-Eta
-Cnf  - to eliminate if then else and ?! mostly 
-       should try to write my own conv for that to prevent it from 
-       eliminating => because people won't recognize the output
-              
-Bool - no boolean argument except variables
-Fun  - no lambda abstraction 
-App  - no second order
-Num  - add num axiom (suppose there is no abstraction left)
-Predicate -
-
-Use different variables name to prevent cnf_conv from renaming them
-At least , memorise them into list so that they can be printed differently
-*)
-
 open HolKernel Abbrev boolLib normalForms numSyntax (* arithmeticTheory *)
-     stringtools listtools tools mydatatype 
-     extractvar freshvar extracttype namevar
+     basictools stringtools listtools mydatatype 
+     syntax basicrule 
+     extractterm extractvar freshvar extracttype namevar
 
 fun CONV_ERR function message =
     HOL_ERR{origin_structure = "conv",
 	    origin_function = function,
             message = message}
+
 
 (* BOOL CONV *)
 local fun is_interesting_in term subterm =  
@@ -76,7 +53,7 @@ and find_free_bool_unop term subterm =
   find_free_bool_aux term (rand subterm)
 end  
  
-fun find_free_bool term = erase_double_term (find_free_bool_aux term term) 
+fun find_free_bool term = erase_double_aconv (find_free_bool_aux term term) 
 
 (* term should have type bool *)
 fun bool_conv_sub_w subterm term =
@@ -207,7 +184,7 @@ local fun is_interesting_in term subterm =
   is_var subterm
 in
 fun find_free_num term = 
-  erase_double_term (filter (is_interesting_in term) (all_subterm term))
+  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
 end 
   
 (* term should start with a quantifier *)  
@@ -218,7 +195,7 @@ local fun is_interesting_in term subterm =
   is_var subterm
 in 
 fun find_bound_num term =  
-  erase_double_term (filter (is_interesting_in term) (all_subterm term))
+  erase_double_aconv (filter (is_interesting_in term) (all_subterm term))
 end  
 (* end find *)
 
@@ -308,7 +285,7 @@ fun num_conv term =
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
 *)
 fun fnum_axiom_w (f,arity) = 
-  let val (argl,image) = strip_type_n (type_of f,arity) in
+  let val (argl,image) = strip_tya (type_of f,arity) in
   let val argtyl = map fst argl in
   let val imagety = fst image in
     if imagety = ``:num``
@@ -335,18 +312,11 @@ fun fnum_axiom_w (f,arity) =
 fun fnum_axiom (f,arity) = wrap "conv" "fnum_axiom" "" fnum_axiom_w (f,arity) 
 
 (* test
-load "extracttype"; open extracttype;
-load "freshvar"; open freshvar;
-load "tools"; open tools;
 val f = ``f : 'a -> num ``; 
 val arity = 1; 
   normalForms.CNF_CONV (concl it);
 *)
 
-
-(* test 
-!x.y 
-*)
 (* FUN_CONV *)
 (* find *)
 fun find_free_abs_aux term subterm =
@@ -373,7 +343,7 @@ fun find_free_abs_aux term subterm =
              else find_free_abs_aux term t  
            end
            
-fun find_free_abs term = erase_double_term (find_free_abs_aux term term)
+fun find_free_abs term = erase_double_aconv (find_free_abs_aux term term)
 
 fun fun_axiom_w abs =
   let val (bvl,t) = strip_abs abs in
@@ -418,11 +388,10 @@ fun extl bvl thm =
   end end end end end
   end end 
 
-
-(*    
+(* test   
 val newbvl = bvl;
 val (bvl,t) = strip_abs abs;
- show_assums:= true;
+show_assums:= true;
 *)
 
 (* term should have type bool *)

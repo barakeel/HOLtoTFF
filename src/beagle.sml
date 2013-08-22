@@ -2,7 +2,7 @@ structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib
-     listtools tools printtools
+     listtools syntax printtools
      higherorder monomorph tactic
      printtff printresult
 

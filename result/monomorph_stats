@@ -1,0 +1,19 @@
+Problems    : 2
+
+Polymorph   : 2
+Lambda-lift : 0
+Bool Conv   : 2
+Num Conv    : 1
+Higher Order: 2
+Predicate   : 0
+Proof       : 2
+Metis fail  : 0
+
+Unsat       : 1
+Unkown      : 1
+Sat         : 0
+Time Out    : 0
+Parsing Err : 0
+Code Err    : 0
+Beagle Err  : 0
+

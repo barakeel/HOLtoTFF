@@ -1,23 +1,16 @@
 structure clausesettools :> clausesettools =
 struct
 
-(*
-load "listtools"; open listtools;
-load "tools"; open tools;
-load "mydatatype"; open mydatatype;
-load "extractvar"; open extractvar;
-load "extracttype"; open extracttype;
-show_assums := true; 
-*)
-
 open HolKernel Abbrev boolLib normalForms 
-     stringtools listtools tools mydatatype 
-     extractvar extracttype
+     basictools stringtools listtools mydatatype 
+     syntax basicrule 
+     extractvar extracttype 
 
 fun RULE_ERR function message =
     HOL_ERR{origin_structure = "rule",
 	    origin_function = function,
             message = message}
+
 
 (* forall_conjuncts_conv *)
 fun forall_conjuncts_conv_w term = 

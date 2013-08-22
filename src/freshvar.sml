@@ -2,8 +2,8 @@ structure freshvar :> freshvar =
 struct
 
 open HolKernel Abbrev boolLib
-     stringtools listtools tools
-     extractvar
+     basictools stringtools listtools
+     syntax extractvar
 
 fun FRESHVAR_ERR function message =
     HOL_ERR{origin_structure = "freshvar",

@@ -1,17 +1,14 @@
 structure listtools :> listtools =
 struct
 
-open HolKernel Abbrev boolLib
+open HolKernel Abbrev boolLib basictools
 
 fun LISTTOOLS_ERR function message =
   HOL_ERR{origin_structure = "listtools",
           origin_function = function,
           message = message}
 
-(* basic tools *)
-fun inv f a b = f b a
 
-(* list tools *)
 fun is_member_eq equal elem list  = exists (equal elem) list
 
 fun erase_double_eq equal list  =
@@ -45,7 +42,6 @@ fun quicksort << xs = let
     qs xs
   end
  
-  (* repeat tools *)
 fun repeatchange change l changing = 
   case l of
     [] => changing

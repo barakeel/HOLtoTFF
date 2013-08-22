@@ -1,27 +1,17 @@
 structure printtff :> printtff =
 struct
-(*
-load "listtools"; open listtools;
-load "stringtools"; open stringtools;
-load "mydatatype"; open mydatatype;
-load "extractvar"; open extractvar;
-load "extracttype"; open extracttype;
-load "namevar"; open namevar;
-load "nametype"; open nametype;
-load "tools"; open tools;
-open HOLPP; open numSyntax;
-*)
+
 open HolKernel Abbrev boolLib HOLPP numSyntax 
-     tools printtools
-     stringtools listtools mydatatype
+     basictools stringtools listtools mydatatype 
+     syntax tffsyntax predicate
      extractvar extracttype namevar nametype higherorder
+     printtools
 
-
-(* not all structures are necessary *)
 fun PRINTTFF_ERR function message =
     HOL_ERR{origin_structure = "printtff",
             origin_function = function,
             message = message}
+
 
 (* bad hack NLIA *)
 fun contain_numfvc term = not (null (filter has_numty (get_fvcl term)))
@@ -52,20 +42,18 @@ fun pptff_qbvl pps qbvl bvdict tyadict =
   add_string pps "[";
   pptff_qbvl_aux pps qbvl bvdict tyadict;
   add_string pps "]"
-  )
-              
+  )             
 (* 
 #1 dict : list of ((type,arity), its name) 
 #2 dict : list of (bound variable, its name) 
 #3 dict : list of (free variable, its name)  
 #4 dict : list of (constant, its name) 
 *)
-
-(* pflag : predflag *)
+(* pflag : flag is turn off when going inside atom *)
 fun pptff_term_aux pps term dict pflag bvl =
   case termstructure term of
-    Numeral => add_string pps (name_numeral term)
-  | Var => if is_member_term term bvl
+    Numeral => add_string pps (name_of term)
+  | Var => if is_member_aconv term bvl
            then add_string pps (lookup term (#2 dict)) (*boundvar*)
            else add_string pps (lookup term (#3 dict)) (*freevar*)
   | Const => 
@@ -97,30 +85,24 @@ fun pptff_term_aux pps term dict pflag bvl =
       let val arity = get_arity term in
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "pptff_term_aux" "numeral"
-      | Var => if is_member_term operator bvl
+      | Var => if is_member_aconv operator bvl
                then pptff_app pps (lookup operator (#2 dict)) argl dict false bvl
                else pptff_app pps (lookup operator (#3 dict)) argl dict false bvl 
       | Const => 
         (
         case nodeconst term of
           Eq => pptff_binop pps "=" term dict false bvl
-        | Add => pptff_app pps "$sum" argl dict false bvl
-        | Minus => pptff_app pps "$difference" argl dict false bvl 
         | Mult => if linear term  (* bad hack NLIA *)
                   then pptff_app pps "$product" argl dict false bvl  
-                  else  (* bad hack NLIA *)
-                    pptff_app pps    
-                    (lookup operator (#4 dict)) argl dict false bvl 
-        | Less => pptff_app pps "$less" argl dict false bvl  
-        | Greater => pptff_app pps "$greater" argl dict false bvl  
-        | Geq => pptff_app pps "$greatereq" argl dict false bvl  
-        | Leq => pptff_app pps "$lesseq" argl dict false bvl
+                  else pptff_app pps    
+                    (lookup operator (#4 dict)) argl dict false bvl  
         | Newnodeconst => pptff_app pps 
-                          (lookup operator (#4 dict)) argl dict false bvl
+                            (lookup operator (#4 dict)) argl dict false bvl                
+        | _ => pptff_app pps 
+                 (lookup (nodeconst term) dcdict) argl dict false bvl
         ) 
       | _ => raise PRINTTFF_ERR "pptff_term_aux" "abs or comb"
-      end end
-      
+      end end  
     )
   | Abs => raise PRINTTFF_ERR "pptff_term_aux" "abs"
   handle _ => raise PRINTTFF_ERR "pptff_term_aux" ""
@@ -164,7 +146,9 @@ and pptff_app pps str argl dict pflag bvl =
   add_string pps ")"
   )  
 
-fun pptff_term pps term dict = pptff_term_aux pps term dict true []
+fun pptff_term pps term dict = 
+  wrap "printtff" "pptff_term" (term_to_string term)
+  (pptff_term_aux pps term dict true) []
 
 (* PRINT_TFF *)
 (* useful functions *)
@@ -189,14 +173,6 @@ fun pptff_number pps nb =
 fun has_simplety ((ty,arity),name) = (arity = 0)
 fun get_simpletyadict tyadict = filter has_simplety tyadict
 
-(* post processing *)
-fun is_dtyname name = (substring (name,0,1) = "$")
-fun has_not_dtyname ((ty,arity),name) = (not o is_dtyname) name  
-fun erase_dtyname tyadict = filter has_not_dtyname tyadict
-
-(* regroup this under defined tff constant and types 
-tffsyntax.sml
-*)
 
 (* test  
 name_of (rator (rator ``a <= b``));

@@ -2,7 +2,8 @@ structure tactic :> tactic =
 struct
 
 open HolKernel Abbrev boolLib
-     stringtools listtools tools mydatatype 
+     basictools stringtools listtools mydatatype 
+     syntax basicrule basicconv predicate
      extractvar extracttype freshvar higherorder
      conv clausesettools printtools
 
@@ -25,7 +26,7 @@ fun mk_tac1 goalbuilder valbuilder goal =
 (* CONV_HYP_TAC *) 
 fun conv_hyp conv goal =
   let val eqthl = map (QCONV conv) (fst goal) in
-  let val terml = erase_double_term (map (rhs o concl) eqthl) in
+  let val terml = erase_double_aconv (map (rhs o concl) eqthl) in
     (terml,snd goal)
   end end
   
@@ -159,12 +160,12 @@ fun FORALL_CONJUNCTS_TAC goal =
 
 (* STRIP_CONJ_ONLY_HYP_TAC *)
 fun strip_conj_only_hyp goal =  
-  let val terml = erase_double_term (strip_conj (only_hypg goal)) in
+  let val terml = erase_double_aconv (strip_conj (only_hypg goal)) in
     (terml,snd goal)
   end
   
 fun strip_conj_only_hyp_val goal thm =
-  let val terml = erase_double_term (strip_conj (only_hypg goal)) in
+  let val terml = erase_double_aconv (strip_conj (only_hypg goal)) in
   let val thml = CONJUNCTS (ASSUME (only_hypg goal)) in
     list_PROVE_HYP thml thm
   end end
@@ -195,7 +196,7 @@ fun add_higher_order goal =
 fun add_higher_order_val goal thm =
   let val appname = list_create_newname "App" (fst goal) in
   let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
-  let val appl = erase_double_term (List.concat (map hyp eqthl)) in
+  let val appl = erase_double_aconv (List.concat (map hyp eqthl)) in
   let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
   let val th0 = list_PROVE_HYP lemmal thm in
   let val th1 = remove_unused_extdefl appl th0 in
@@ -212,7 +213,7 @@ fun ADD_HIGHER_ORDER_TAC goal =
 
 (* ADD_FNUM_AXIOMS_TAC *)
 local fun is_interesting (var,arity) = 
-  let val (_,(imagety,_)) = strip_type_n (type_of var,arity) in
+  let val (_,(imagety,_)) = strip_tya (type_of var,arity) in
     imagety = ``:num`` andalso arity > 0
   end 
 in 
