@@ -12,21 +12,20 @@ fun BEAGLE_ERR function message =
             message = message}
 
 (* Status *)
-val SZSstatus = ref "undefined"
+val SZSstatus = ref "Undefined"
 
 fun update_SZSstatus filename = 
-  let val SZSstatuspath = mk_SZSstatuspath filename in
-  let val file = TextIO.openIn SZSstatuspath in 
-  let val str = TextIO.inputAll file in
-    (
-    SZSstatus := str;
-    TextIO.closeIn file
-    )  
-  end end end   
+  let val proofpath = mk_proofpath filename in
+  let val strl = readl proofpath in
+    case strl of
+      [] => SZSstatus := "Undefined"
+    | [a] => SZSstatus := "Undefined"
+    | a :: b :: m => SZSstatus := String.substring (b,13,(String.size b) - 14)
+  end end
 
 fun write_SZSstatus filename szsstatus =
-  let val SZSstatuspath = mk_SZSstatuspath filename in
-  let val file = TextIO.openOut SZSstatuspath in 
+  let val proofpath = mk_proofpath filename in
+  let val file = TextIO.openOut proofpath in 
     TextIO.output (file,szsstatus)
   end end
   
@@ -60,6 +59,7 @@ fun update_nbl1 () =
   update_nb_flag nb_bool boolflag;
   update_nb_flag nb_num numflag;
   update_nb_flag nb_ho hoflag;
+  update_nb_flag nb_pred predflag;
   update_nb_flag nb_proof proofflag;
   update_nb_flag nb_metis metisflag
   )
@@ -69,29 +69,29 @@ fun update_nbl2 str =
     "Unsatisfiable" => addone_nb nb_unsat
   | "Unknown" => addone_nb nb_unknown
   | "Satisfiable" => addone_nb nb_sat
-  | "Time Out" => addone_nb nb_timeout
+  | "Time out" => addone_nb nb_timeout
   | "Parsing failed" => addone_nb nb_parsing
-  | "undefined" => addone_nb nb_codeerr
+  | "Undefined" => addone_nb nb_codeerr
   | _ => addone_nb nb_beagerr
 
 
 fun init_beagle_tac_aux filename =
   (
   show_assums := true;
-  SZSstatus := "undefined";
+  SZSstatus := "Undefined";
   write_SZSstatus filename (!SZSstatus);
-  app flag_off [mflag,hoflag,funflag,boolflag,numflag,proofflag,metisflag];
+  reset_allflag ();
   update_all_nb (mk_statspath filename)
   )
 
 (* BEAGLE_TAC *)
 fun write_goodresult filename thml goal =
   write_result (mk_resultpath filename) thml goal (!nb_problem) (!SZSstatus) 
-    [!mflag,!hoflag,!funflag,!boolflag,!numflag,!proofflag]
+    (allflag_value ())
 
 fun write_badresult filename thml goal =
   write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
-    [!mflag,!hoflag,!funflag,!boolflag,!numflag,!proofflag]
+    (allflag_value ())
   
 fun beagle_tac_aux filename thml goal = 
 ( 
@@ -136,7 +136,7 @@ flag_update_metis thml goal;
 ;
 (* stats *)
 write_stats filename (!nb_problem) 
-  [!nb_m,!nb_fun,!nb_bool,!nb_num,!nb_ho,!nb_proof,!nb_metis] 
+  [!nb_m,!nb_fun,!nb_bool,!nb_num,!nb_ho,!nb_pred,!nb_proof,!nb_metis] 
   [!nb_unsat,!nb_unknown,!nb_sat,!nb_timeout,
    !nb_parsing,!nb_codeerr,!nb_beagerr]  
 ;

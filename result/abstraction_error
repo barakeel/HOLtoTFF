@@ -1,0 +1,12 @@
+Number: 1
+Status: Unknown
+Info: higher-order lambda-lift num proof 
+Thm list: 
+Goal:  [] |- P (λll. (let n = LEAST n. ∃e. e = 0 in ll))
+
+Number: 1
+Status: Unknown
+Info: lambda-lift num higher-order metis-fail proof 
+Thm list: 
+Goal:  [] |- P (λll. (let n = LEAST n. ∃e. e = 0 in ll))
+

@@ -100,17 +100,66 @@ fun remove_unused_def def thm =
 
 fun remove_unused_defl defl thm = repeatchange remove_unused_def defl thm
 
-fun remove_unused_appl_w appl thm =  
+fun remove_unused_extdefl_w appl thm =  
   let val th0 = conv_hypl def_conv appl thm in
   let val th1 = remove_unused_defl (map (rhs o concl o def_conv) appl) th0 in
     th1
   end end
   
-fun remove_unused_appl appl thm =
+fun remove_unused_extdefl appl thm =
   wrap "clausesettools" "remove_unuse_appl" "" 
-    (remove_unused_appl_w appl) thm  
-      
+    (remove_unused_extdefl_w appl) thm   
 (* end app removal *)
+
+(* term should start with !x:bool *)
+fun bool_bv_conv_sub term =
+  let val var = (hd o fst o strip_forall) term in
+  if not (has_boolty var) then raise UNCHANGED
+  else
+    (* preparation *)  
+  let val disj = SPEC var BOOL_CASES_AX in
+  let val lemma = SPEC var (ASSUME term) in
+  let val eqth1 = ASSUME (lhand (concl disj)) in
+  let val eqth2 = ASSUME (rand (concl disj)) in
+    (* first part *)
+  let val th11 = ASSUME term in
+  let val th12 = SPEC T th11 in
+  let val th13 = SPEC F th11 in
+  let val th14 = CONJ th12 th13 in
+  let val th15 = DISCH term th14 in
+    (* second part *)
+  let val goalT = ([lhand(concl disj), concl th14],concl lemma) in
+  let val (_,fnT) = SUBST_TAC [eqth1] goalT in  
+  let val th20T = ASSUME (concl th14) in
+  let val th21T = CONJUNCT1 th20T in
+  let val th22T = fnT [th21T] in
+
+  let val goalF = ([rand(concl disj), concl th14],concl lemma) in
+  let val (_,fnF) = SUBST_TAC [eqth2] goalF in  
+  let val th20F = ASSUME (concl th14) in
+  let val th21F = CONJUNCT2 th20F in
+  let val th22F = fnF [th21F] in
+    (* disj cases *)
+  let val th30 = DISJ_CASES disj th22T th22F in
+  let val th31 = GEN var th30 in
+  let val th32 = DISCH (concl th14) th31 in
+  (* together *)
+    IMP_ANTISYM_RULE th15 th32
+  end end end end end 
+  end end end end end
+  end end end end end 
+  end end end end end
+  end end end
+  
+fun bool_bv_conv term =
+  if not (is_forall term) 
+  then raise UNCHANGED
+  else 
+    (QUANT_CONV bool_bv_conv THENC bool_bv_conv_sub) term
+    
+(* test 
+val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     
+*)
 
 
 end

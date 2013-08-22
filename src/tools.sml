@@ -44,21 +44,10 @@ fun wrap s f m function x =
 fun is_member_term t l = is_member_eq aconv t l 
 fun erase_double_term l = erase_double_eq aconv l 
  
-
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
 fun is_var_or_const term = is_var term orelse is_const term
-fun is_logical term =
-  is_eq term orelse
-  is_conj term orelse
-  is_disj term orelse   
-  is_neg term orelse   
-  is_imp_only term orelse
-  is_forall term orelse  
-  is_exists term orelse  
-  is_exists1 term orelse
-  is_cond term 
 fun is_not_var term = not (is_var term)  
   
 (* QUANTIFIER *) 
@@ -73,8 +62,8 @@ fun bound_by_quant subterm term =
    free_in subterm t andalso not (free_in subterm term)
  end  
 (* TYPE *)
- 
-(* TERM *) 
+
+(* NAME *)
 fun name_of term = 
   case termstructure term of
     Numeral => Int.toString (numSyntax.int_of_term term)
@@ -94,7 +83,16 @@ fun name_numeral term =
   case termstructure term of
     Numeral => name_of term
   | _ => raise TOOLS_ERR "name_numeral" "not a numeral"
-  
+
+(* DEFINED TFF CONSTANTS *)
+(* (* bad hack NLIA *) prevent from adding  "*" *)
+fun is_dc term = is_member (name_of term) ["=","+","-","<","<=",">",">="]
+fun is_not_dc term = not (is_dc term)
+fun is_dca (term,arity) = is_dc term andalso arity = 2
+fun is_not_dca (term,arity) = not (is_dca (term,arity))
+fun is_not_dcaty ((term,arity),str) = is_not_dca (term,arity)
+
+(* TERM *)   
 fun strip_comb_n (term,n) =
   if n = 0 then (term,[])
 else 
@@ -301,8 +299,8 @@ fun all_vartype term = filter is_vartype (all_leaftypel_aux (all_type term))
 all_vartype ``(f a = b) /\ (c=0)``;
 all_leaftype (type_of term);
 *)
-(* FIRST ORDER *)
-(* consider = to be always = not <=> *)
+(* MOSTLY USED FOR BOOLEANS *)
+
 fun find_atoml term =
   case termstructure term of
     Comb =>
@@ -323,29 +321,37 @@ and find_atoml_binop term =
   find_atoml (lhand term) @ find_atoml (rand term)
 and find_atoml_unop term =
   find_atoml (rand term)
-  
-fun find_predicatel term = 
-  let val atoml = find_atoml term in
-    map fst (map strip_comb atoml)           
+
+fun find_pred_one atom =
+  let val (operator,argl) = strip_comb atom in
+    if is_dc operator andalso length argl = 2 
+    (* prevent the dc to be seen as predicates *)
+    then []
+    else [operator]
   end
   
-fun is_predicate_in var term = 
-  is_member_term var (find_predicatel term)
+fun find_pred term = 
+  let val atoml = find_atoml term in
+    List.concat (map find_pred_one atoml)          
+  end 
 
-fun find_unpredicate_arg arg =
+fun is_pred_in var term = 
+  is_member_term var (find_pred term)
+
+fun find_unpred_arg arg =
   filter is_var_or_const (all_subterm arg)
 
-fun find_unpredicatel_aux atom =
+fun find_unpred_aux atom =
   let val (operator,argl) = strip_comb atom in
-    erase_double_term (List.concat (map (find_unpredicate_arg) argl))
+    erase_double_term (List.concat (map (find_unpred_arg) argl))
   end      
 
-fun find_unpredicatel term =
+fun find_unpred term =
   let val atoml = find_atoml term in
-   erase_double_term (List.concat (map find_unpredicatel_aux atoml))
+   erase_double_term (List.concat (map find_unpred_aux atoml))
   end              
 
-fun has_boolarg term = not (null (filter has_boolty (find_unpredicatel term)))
+fun has_boolarg term = not (null (filter has_boolty (find_unpred term)))
 
 fun has_boolarg_thm thm =
   let val l = (hyp thm) @ [concl thm] in

@@ -6,7 +6,7 @@ sig
   
   val last2char : string -> string 
   val erase_last4char : string -> string
-  val change_to_predicatety : string -> string
+  val change_to_predty : string -> string
   
   val name_strn : string -> int -> string
   val list_name_str : string -> int -> string list

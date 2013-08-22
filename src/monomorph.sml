@@ -19,42 +19,65 @@ fun MONOMORPH_ERR function message =
             message = message}
 
 
-(* tools *)
-fun inv f a b = f b a
-
-fun empty_inter l1 l2 =
-  case l1 of
-    [] => true
-  | a :: m => (not (is_member a l2)) andalso empty_inter m l2 
-  
-fun get_redexl subst =
+(* TOOLS *)
+fun get_redl subst =
   case subst of
     [] => [] 
-  | {redex = red, residue = res} :: m => red :: get_redexl m 
+  | {redex = red, residue = res} :: m => red :: get_redl m 
   
-fun disjunct_redexl subst1 subst2 =
-  empty_inter (get_redexl subst1) (get_redexl subst2)
+fun red_to_res red subst =
+  case subst of
+    [] => raise MONOMORPH_ERR "image_subst" "redex not found"  
+  | {redex = red1, residue = res1} :: m => 
+    if red = red1 then res1 else red_to_res red m
+ 
+fun remove_red red subst =
+  case subst of
+    [] => []
+  | {redex = red1, residue = res1} :: m => 
+    if red = red1 
+    then remove_red red m 
+    else {redex = red1, residue = res1} :: remove_red red m 
+
+fun same_res subst1 subst2 red  = 
+  red_to_res red subst1 = red_to_res red subst2
+   
+fun compatible_subst subst1 subst2 =
+  let val l1 = get_redl subst1 in
+  let val l2 = get_redl subst2 in
+  let val l3 = inter l1 l2 in
+    all (same_res subst1 subst2) l3 
+  end end end
+
+(* ARITHMETIC FOR SUBSTITUTION *)
+fun merge_subst subst1 subst2 =
+  let val l1 = get_redl subst1 in
+  let val l2 = get_redl subst2 in
+  let val l3 = inter l1 l2 in
+  let val subst1aux = repeatchange remove_red l3 subst1 in
+    subst1aux @ subst2
+  end end end end  
     
 fun add_subst subst1 subst2 =
-  if disjunct_redexl subst1 subst2 
-  then subst1 @ subst2
-  else subst1
+  if compatible_subst subst1 subst2 
+  then [merge_subst subst1 subst2]
+  else [subst1,subst2]
   
 fun multone_subst subst substl =
   case substl of
-    [] => []
-  | [s] => [add_subst subst s] 
-  | s :: m => add_subst subst s :: multone_subst subst m
+    [] => [[]]
+  | [s] => add_subst subst s
+  | s :: m => add_subst subst s @ multone_subst subst m
    
 fun mult_subst substl1 substl2 =  
   case substl1 of
-    [] => []
+    [] => [[]]
   | [s1] => multone_subst s1 substl2
   | s1 :: m => (multone_subst s1 substl2) @ (mult_subst m substl2)
   
 fun list_mult_subst_aux substll =
   case substll of  
-    [] => []
+    [] => [[]]
   | [s] => s
   | s :: m =>  mult_subst (list_mult_subst_aux m) s
   
@@ -77,15 +100,33 @@ fun create_substl_c const cl =
 fun create_substl_cl_cl cl1 cl2 = 
   list_mult_subst (map (inv create_substl_c cl2) cl1)
 
-(* INSTANTIATION *)
-fun same_ccl th1 th2 = aconv (concl th1) (concl th2)
-fun erase_double_ccl thml = erase_double_eq same_ccl thml
+(* SUBSTITUTION NORMALISATION *)
+fun is_identity {redex = red, residue = res} = (red = res)
+fun erase_identity subst = filter is_identity subst
+
+fun less_ty (ty1,ty2) = 
+  case Type.compare (ty1,ty2) of
+    LESS => true
+  | EQUAL => false
+  | GREATER => false
   
+fun less_redres ({redex = r1, residue = _},{redex = r2, residue = _}) =
+  less_ty (r1,r2)
+    
+fun normalize_subst subst =
+  quicksort less_redres (erase_identity subst)
+  
+fun normalize_substl substl =
+  erase_double (map normalize_subst substl)
+
+(* INSTANTIATION *) 
 fun inst_thm substl thm  = 
-  let val thml = erase_double_ccl (map (inv INST_TYPE thm) substl) in
-    if null thml then raise MONOMORPH_ERR "monomorph" ""
+  let val newsubstl = normalize_substl substl in
+  let val thml = (map (inv INST_TYPE thm) newsubstl) in
+    if null thml 
+    then raise MONOMORPH_ERR "monomorph" ""
     else LIST_CONJ thml
-  end
+  end end
 
 (* MONOMORPHISATION *)   
   (* preparation *)
@@ -109,8 +150,6 @@ fun monomorph_thm_pb thm pb =
 fun monomorph_pb_w (thml,goal) =
   (map (inv monomorph_thm_pb (thml,goal)) thml,goal)  
 fun monomorph_pb pb = wrap "monomorph" "monomorph_pb" "" monomorph_pb_w pb
-
-fun monomorph_n_pb n pb = repeat_n_fun n monomorph_pb pb
 
 (* TEST *)
 fun is_polymorph term = not (null (all_vartype term)) 

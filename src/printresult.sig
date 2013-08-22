@@ -6,7 +6,7 @@ sig
   (* path are absolute *)
   val directory : string 
 
-  val mk_SZSstatuspath : string -> string 
+  val mk_proofpath : string -> string 
   val mk_addresspath : unit -> string
   
   val mk_resultpath : string -> string 

@@ -58,7 +58,7 @@ fun prename_simplety ty =
   | Nodetype => let val (str,tyl) = dest_type ty in
                    if is_alphanumor_ str 
                    then str ^ "I" ^ (prename_simpletyl tyl) ^ "I"       
-                   else "unprintable" ^  "I" ^ (prename_simpletyl tyl) ^ "I"
+                   else "op" ^  "I" ^ (prename_simpletyl tyl) ^ "I"
                 end
                                     
 and prename_simpletyl tyl =

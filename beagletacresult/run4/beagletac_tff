@@ -1,0 +1,92 @@
+%----------------------------------------------------------------------------
+% Number   : 75
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_one_F_bool_type,type,(
+    ty_one_F_bool: $tType )).
+
+tff(ty_itselfIoneI_type,type,(
+    ty_itselfIoneI: $tType )).
+
+tff(ty_itselfIaI_type,type,(
+    ty_itselfIaI: $tType )).
+
+tff(cCARD_type,type,(
+    cCARD: ty_a_F_bool > $int )).
+
+tff(cdimindex_type,type,(
+    cdimindex: ty_itselfIaI > $int )).
+
+tff(cthe_value_type,type,(
+    cthe_value: ty_itselfIaI )).
+
+tff(cdimindex1_type,type,(
+    cdimindex1: ty_itselfIoneI > $int )).
+
+tff(cthe_value1_type,type,(
+    cthe_value1: ty_itselfIoneI )).
+
+tff(cCARD1_type,type,(
+    cCARD1: ty_one_F_bool > $int )).
+
+tff(cFINITE_type,type,(
+    cFINITE: ty_one_F_bool > $o )).
+
+tff(cUNIV_type,type,(
+    cUNIV: ty_one_F_bool )).
+
+tff(cFINITE1_type,type,(
+    cFINITE1: ty_a_F_bool > $o )).
+
+tff(cUNIV1_type,type,(
+    cUNIV1: ty_a_F_bool )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_one_F_bool] : ($lesseq(0,cCARD1(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: ty_itselfIoneI] : ($lesseq(0,cdimindex1(Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx12: ty_itselfIaI] : ($lesseq(0,cdimindex(Xx12))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx13: ty_a_F_bool] : ($lesseq(0,cCARD(Xx13))) )).
+
+tff(axiom5_axiom,axiom,(
+    (cFINITE(cUNIV) | ~cFINITE1(cUNIV1)) )).
+
+tff(axiom6_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cCARD1(cUNIV) = 1) | ~cFINITE1(cUNIV1))) )).
+
+tff(axiom7_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cdimindex1(cthe_value1) = cCARD1(cUNIV)) | ~cFINITE1(cUNIV1))) )).
+
+tff(axiom8_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cdimindex(cthe_value) = cCARD(cUNIV1)) | ~cFINITE1(cUNIV1))) )).
+
+tff(axiom9_axiom,axiom,(
+    (~cFINITE(cUNIV) | (~(cdimindex1(cthe_value1) = 1) | ~cFINITE1(cUNIV1))) )).
+
+tff(axiom10_axiom,axiom,(
+    (~cFINITE(cUNIV) | (~(cdimindex1(cthe_value1) = 1) | cFINITE1(cUNIV1))) )).
+
+tff(axiom11_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cdimindex(cthe_value) = 1) | cFINITE1(cUNIV1))) )).
+
+tff(axiom12_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cdimindex1(cthe_value1) = cCARD1(cUNIV)) | cFINITE1(cUNIV1))) )).
+
+tff(axiom13_axiom,axiom,(
+    (~cFINITE(cUNIV) | ((cCARD1(cUNIV) = 1) | cFINITE1(cUNIV1))) )).
+
+tff(axiom14_axiom,axiom,(
+    (cFINITE(cUNIV) | cFINITE1(cUNIV1)) )).
+
+%----------------------------------------------------------------------------
+

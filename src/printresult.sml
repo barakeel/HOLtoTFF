@@ -8,13 +8,13 @@ open HolKernel Abbrev boolLib
 (* Path (absolute) *)
 val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
 
-fun mk_SZSstatuspath filename = directory ^ filename ^ "_tff_SZSstatus"
+fun mk_proofpath filename = directory ^ filename ^ "_tff_proof"
 fun mk_addresspath () = directory ^ "filepath.txt"
 fun mk_tffpath filename =  directory ^ filename ^ "_tff" 
 fun mk_resultpath filename = directory ^ filename ^ "_result"
 fun mk_convpath filename = directory ^ filename ^ "_conv"
 fun mk_errpath filename = directory ^ filename ^ "_error"
-fun mk_tfferrpath filename = directory ^ filename ^ "_tfferror"
+fun mk_tfferrpath filename = directory ^ filename ^ "_tff_error"
 fun mk_statspath filename = directory ^ filename ^ "_stats"
 
 (* stats *)

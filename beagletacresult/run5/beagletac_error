@@ -1,0 +1,36 @@
+Number: 14
+Status: Unknown
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Number: 17
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+ [] |- 0 < 256
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Number: 18
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- (n2s x = n2s y) ⇔ (x = y)
+
+Number: 20
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- ∀s. ∃n. s = n2s n
+

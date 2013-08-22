@@ -1,18 +1,19 @@
-Problems    : 1
+Problems    : 4
 
 Polymorph   : 0
 Lambda-lift : 0
 Bool Conv   : 0
-Num Conv    : 1
+Num Conv    : 4
 Higher Order: 0
-Proof       : 3
-Metis fail  : 0
+Predicate   : 0
+Proof       : 4
+Metis fail  : 4
 
-Unsat       : 1
-Unkown      : 0
+Unsat       : 0
+Unkown      : 3
 Sat         : 0
 Time Out    : 0
-Parsing Err : 0
+Parsing Err : 1
 Code Err    : 0
 Beagle Err  : 0
 

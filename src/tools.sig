@@ -16,7 +16,6 @@ sig
   val has_numty : term -> bool
   val is_not_var : term -> bool 
   val is_var_or_const : term -> bool 
-  val is_logical : term -> bool
 (* quantifier *) 
   val strip_quant : term -> (term list * term)
   val bound_by_quant : term -> term -> bool 
@@ -24,6 +23,11 @@ sig
   val name_of : term -> string
   val name_tff : string -> term -> string
   val name_numeral : term -> string
+  val is_dc : term -> bool
+  val is_not_dc : term -> bool
+  val is_dca : (term * int) -> bool
+  val is_not_dca : (term * int) -> bool
+  val is_not_dcaty : ((term * int) * string) -> bool
 (* term *)
   val strip_comb_n : (term * int) -> (term * term list)
   val get_arity : term -> int
@@ -62,9 +66,9 @@ sig
   val all_vartype : term -> hol_type list
 (* first order *)  
   val find_atoml : term -> term list 
-  val find_predicatel : term -> term list 
-  val is_predicate_in : term -> term -> bool
-  val find_unpredicatel : term -> term list
+  val find_pred : term -> term list 
+  val is_pred_in : term -> term -> bool
+  val find_unpred : term -> term list
   val has_boolarg : term -> bool
   val has_boolarg_thm : thm -> bool
   val has_boolarg_goal : goal -> bool

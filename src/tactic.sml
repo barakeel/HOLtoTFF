@@ -198,7 +198,7 @@ fun add_higher_order_val goal thm =
   let val appl = erase_double_term (List.concat (map hyp eqthl)) in
   let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
   let val th0 = list_PROVE_HYP lemmal thm in
-  let val th1 = remove_unused_appl appl th0 in
+  let val th1 = remove_unused_extdefl appl th0 in
     thm_test th1 goal "add_higher_order_val"
   end end end end end end 
   
@@ -210,6 +210,7 @@ fun ADD_HIGHER_ORDER_TAC_w goal =
 fun ADD_HIGHER_ORDER_TAC goal = 
   wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 
 
+(* ADD_FNUM_AXIOMS_TAC *)
 local fun is_interesting (var,arity) = 
   let val (_,(imagety,_)) = strip_type_n (type_of var,arity) in
     imagety = ``:num`` andalso arity > 0
@@ -225,7 +226,12 @@ end
 fun ADD_FNUM_AXIOMS_TAC goal = 
   wrap "tactic" "ADD_FNUM_AXIOMS_TAC" "" ADD_FNUM_AXIOMS_TAC_w goal 
 
-              
+(* BOOL_BV_TAC *)
+fun BOOL_BV_TAC_w goal =
+  CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal
+fun BOOL_BV_TAC goal = 
+  wrap "tactic" "BOOL_BV_TAC" "" BOOL_BV_TAC_w goal 
+           
 fun BEAGLE_CLAUSE_SET_TAC goal =
   wrap "tactic" "BEAGLE_CLAUSE_SET_TAC" ""
   (
@@ -235,7 +241,8 @@ fun BEAGLE_CLAUSE_SET_TAC goal =
   ERASE_FORALL_TAC THEN
   ADD_BOOL_AXIOM_TAC THEN
   ADD_HIGHER_ORDER_TAC THEN
-  ADD_FNUM_AXIOMS_TAC
+  ADD_FNUM_AXIOMS_TAC THEN
+  BOOL_BV_TAC
   )
   goal
 

@@ -43,31 +43,33 @@ fun create_cdict term =
   end end
 
 
-(* predicate *)
+(* pred *)
 (* "bool" to "$o" *)
-fun give_predicate_type tyadict term (v,a) = 
+fun give_pred_type tyadict term (v,a) = 
   let val tyname = lookup (type_of v,a) tyadict in
-    if is_predicate_in v term 
-    then ((v,a),change_to_predicatety tyname)
+    if is_pred_in v term 
+    then ((v,a),change_to_predty tyname)
     else ((v,a),tyname)
   end
 
 (* link variables to their tff type *)
+fun add_bvty tyadict (bv,a) = ((bv,a),lookup (type_of bv,a) tyadict)
+
 fun create_bvatydict term tyadict =
   let val bval = get_bval term in
-    map (give_predicate_type tyadict term) bval
+    map (add_bvty tyadict) bval
   end 
 
 fun create_fvatydict term tyadict =
   let val fval = get_fval term in
-    map (give_predicate_type tyadict term) fval
+    map (give_pred_type tyadict term) fval
   end 
 
 fun create_catydict term tyadict =
   let val cal = get_cal term in
-    map (give_predicate_type tyadict term) cal
+    map (give_pred_type tyadict term) cal
   end 
-(* end predicate *)     
+(* end pred *)     
    
   
 end

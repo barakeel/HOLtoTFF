@@ -1,0 +1,107 @@
+Undefined%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SZSstatus: Unknown
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tff(c_a0_w3, axiom, (![Xnᵃ: $int, Xᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w3, axiom, (![Xnᵃ: $int, Xᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xnᵃ: $int, Xᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** Split
+tff(c_a0_w3, axiom, (![Xnᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xᵃ: $int, Xnᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w3, axiom, (![Xᵃ: $int, Xnᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xᵃ: $int, Xnᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** Split
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xnᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w3, axiom, (![Xnᵃ: $int]: (xApp(xf1, Xnᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ))) ).
+** simplification
+tff(c_a0_w3, axiom, (![Xᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w3, axiom, (![Xᵃ: $int]: (¬xApp6(xP, xf) | ¬(0 ≤ Xᵃ))) ).
+** Split
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+** simplification
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w3, axiom, (¬xApp6(xP, xf)) ).
+** simplification
+tff(c_a0_w3, axiom, (¬xApp6(xP, xf)) ).
+
+tff(c_a0_w5, axiom, (![Xx1: ty_num_F_bool_F_num, Xx2: ty_num_F_bool]: ((0 ≤ xApp3(Xx1, Xx2)))) ).
+** simplification
+tff(c_a0_w5, axiom, (![Xx1: ty_num_F_bool_F_num, Xx2: ty_num_F_bool]: ((0 ≤ xApp3(Xx1, Xx2)))) ).
+
+tff(c_a0_w6, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp5(xf2, Xll), Xᵃ) →_ty_a Xll | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w6, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp5(xf2, Xll), Xᵃ) →_ty_a Xll | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w6, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp5(xf2, Xll), Xᵃ) →_ty_a Xll | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** Split
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w6, axiom, (![Xll: ty_a, Xᵃ: $int]: (xApp4(xApp5(xf2, Xll), Xᵃ) →_ty_a Xll | ¬(0 ≤ Xᵃ))) ).
+** simplification
+tff(c_a0_w6, axiom, (![Xll: ty_a, Xᵃ: $int]: (xApp4(xApp5(xf2, Xll), Xᵃ) →_ty_a Xll | ¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w12, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), xApp3(cLEAST, xf1)) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w12, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), xApp3(cLEAST, xf1)) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w12, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), xApp3(cLEAST, xf1)) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** Define on
+tff(c_a0_w3, axiom, (xApp3(cLEAST, xf1) →_ℤ #e_1) ).tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w3, axiom, (xApp3(cLEAST, xf1) →_ℤ #e_1) ).
+** simplification
+tff(c_a0_w3, axiom, (xApp3(cLEAST, xf1) →_ℤ #e_1) ).
+
+tff(c_a1_w0, axiom, ((0 ≤ #e_1)) ).
+** simplification
+tff(c_a1_w0, axiom, ((0 ≤ #e_1)) ).
+
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int, Xnᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ) | ¬(0 ≤ Xnᵃ))) ).
+** Split
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+** simplification
+tff(c_a0_w0, axiom, (![Xnᵃ: $int]: (¬(0 ≤ Xnᵃ))) ).
+
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ))) ).
+** simplification
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w10, axiom, (![Xll: ty_a, Xᵃ: $int]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll) | ¬(0 ≤ Xᵃ))) ).
+** Split
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+** simplification
+tff(c_a0_w0, axiom, (![Xᵃ: $int]: (¬(0 ≤ Xᵃ))) ).
+
+tff(c_a0_w10, axiom, (![Xll: ty_a]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll))) ).
+** simplification
+tff(c_a0_w10, axiom, (![Xll: ty_a]: (xApp4(xApp2(cLET, xApp5(xf2, Xll)), #e_1) →_ty_a xApp1(xf, Xll))) ).
+

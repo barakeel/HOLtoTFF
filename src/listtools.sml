@@ -8,7 +8,10 @@ fun LISTTOOLS_ERR function message =
           origin_function = function,
           message = message}
 
+(* basic tools *)
+fun inv f a b = f b a
 
+(* list tools *)
 fun is_member_eq equal elem list  = exists (equal elem) list
 
 fun erase_double_eq equal list  =
@@ -24,17 +27,30 @@ local fun equal x y = (x = y) in
 end
 
 fun add_once elem list =
-  if is_member elem list 
-  then list
-  else elem :: list
-   
-(* dictionnary *)
+  if is_member elem list then list else elem :: list
+ 
+fun inter l1 l2 = filter (inv is_member l2) l1 
+ 
+fun quicksort << xs = let
+  fun qs [] = []
+    | qs [x] = [x]
+    | qs (p::xs) = let
+        val lessThanP = (fn x => << (x, p))
+        in
+          qs (filter lessThanP xs) @ p :: (qs (filter (not o lessThanP) xs))
+        end
+  in
+    qs xs
+  end
+ 
   (* repeat tools *)
 fun repeatchange change l changing = 
   case l of
     [] => changing
   | a :: m => repeatchange change m (change a changing)
 
+
+(* dictionnary *)
   (* doesn't overwrite only the first add entry can do something *)
 fun add_entry entry dict = 
   if is_member (fst entry) (map fst dict)

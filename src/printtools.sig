@@ -8,9 +8,13 @@ sig
   val boolflag : (bool * string) ref 
   val numflag  : (bool * string) ref 
   val hoflag   : (bool * string) ref 
+  val predflag : (bool * string) ref
   val proofflag : (bool * string) ref
   val metisflag : (bool * string) ref 
-  
+  val allflag  : ((bool * string) ref) list
+  val reset_allflag : unit -> unit 
+  val allflag_value : unit -> (bool * string) list  
+   
   val flag_on  : (bool * string) ref -> unit 
   val flag_off : (bool * string) ref -> unit 
   val flag_update : (bool * string) ref -> bool -> unit
@@ -23,6 +27,7 @@ sig
   val nb_bool    : (int * string) ref
   val nb_num     : (int * string) ref
   val nb_ho      : (int * string) ref
+  val nb_pred    : (int * string) ref
   val nb_proof   : (int * string) ref
   val nb_metis   : (int * string) ref
   

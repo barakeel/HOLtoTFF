@@ -1,0 +1,128 @@
+%----------------------------------------------------------------------------
+% Number   : 93
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_cartIbool_aI_type,type,(
+    ty_cartIbool_aI: $tType )).
+
+tff(ty_itselfIaI_type,type,(
+    ty_itselfIaI: $tType )).
+
+tff(ty_cartIbool_bI_type,type,(
+    ty_cartIbool_bI: $tType )).
+
+tff(xw_type,type,(
+    xw: ty_cartIbool_aI )).
+
+tff(xh_type,type,(
+    xh: $int )).
+
+tff(xl_type,type,(
+    xl: $int )).
+
+tff(cword_bits_type,type,(
+    cword_bits: ( $int * $int * ty_cartIbool_bI ) > ty_cartIbool_bI )).
+
+tff(cw2w_type,type,(
+    cw2w: ty_cartIbool_bI > ty_cartIbool_aI )).
+
+tff(cw2w1_type,type,(
+    cw2w1: ty_cartIbool_bI > ty_cartIbool_bI )).
+
+tff(cw2n_type,type,(
+    cw2n: ty_cartIbool_aI > $int )).
+
+tff(cw2w2_type,type,(
+    cw2w2: ty_cartIbool_aI > ty_cartIbool_aI )).
+
+tff(cdimword_type,type,(
+    cdimword: ty_itselfIaI > $int )).
+
+tff(cthe_value_type,type,(
+    cthe_value: ty_itselfIaI )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(cw2n1_type,type,(
+    cw2n1: ty_cartIbool_bI > $int )).
+
+tff(cw2w3_type,type,(
+    cw2w3: ty_cartIbool_aI > ty_cartIbool_bI )).
+
+tff(cword_bits1_type,type,(
+    cword_bits1: ( $int * $int * ty_cartIbool_aI ) > ty_cartIbool_aI )).
+
+tff(cEXP_type,type,(
+    cEXP: ( $int * $int ) > $int )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $int )).
+
+tff(cSUC_type,type,(
+    cSUC: $int > $int )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: $int] : (($lesseq(0,cSUC(Xx1)) | ~$lesseq(0,Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx1: $int,Xx2: $int] : (($lesseq(0,$difference(Xx1,Xx2)) | (~$lesseq(0,Xx1) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx1: $int,Xx2: $int] : (($lesseq(0,cEXP(Xx1,Xx2)) | (~$lesseq(0,Xx1) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx11: ty_cartIbool_bI] : ($lesseq(0,cw2n1(Xx11))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx12: ty_itselfIaI] : ($lesseq(0,cdimword(Xx12))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xx13: ty_cartIbool_aI] : ($lesseq(0,cw2n(Xx13))) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,xl) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,xh) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xm: $int,Xn: $int,Xp: $int] : ((~$less(Xn,Xp) | (~$less(Xm,Xn) | ($less(Xm,Xp) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,Xn: $int,Xp: $int] : ((~$less(Xn,Xp) | (~$lesseq(Xm,Xn) | ($less(Xm,Xp) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,Xn: $int,X: ty_cartIbool_bI,Xp: $int] : (($less(cw2n1(cword_bits(Xm,Xn,X)),cEXP(2,$difference(cSUC(Xm),Xn))) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,Xn: $int,X1: ty_cartIbool_aI,Xp: $int] : (($less(cw2n(cword_bits1(Xm,Xn,X1)),cEXP(2,$difference(cSUC(Xm),Xn))) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X2: ty_cartIbool_bI,Xm: $int,Xn: $int,Xp: $int] : (($lesseq(cw2n(cw2w(X2)),cw2n1(X2)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X3: ty_cartIbool_aI,Xm: $int,Xn: $int,Xp: $int] : (($lesseq(cw2n(cw2w2(X3)),cw2n(X3)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X4: ty_cartIbool_bI,Xm: $int,Xn: $int,Xp: $int] : (($lesseq(cw2n1(cw2w1(X4)),cw2n1(X4)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X5: ty_cartIbool_aI,Xm: $int,Xn: $int,Xp: $int] : (($lesseq(cw2n1(cw2w3(X5)),cw2n(X5)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X6: ty_cartIbool_aI,Xm: $int,Xn: $int,Xp: $int] : (($less(cw2n(cw2w2(X6)),cdimword(cthe_value)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X6: ty_cartIbool_aI,Xm: $int,Xn: $int,Xp: $int] : (($less(cw2n1(cw2w3(X6)),cdimword(cthe_value)) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xm: $int,Xn: $int,Xp: $int] : ((~$less(cw2n1(cw2w3(cword_bits1(xh,xl,xw))),cEXP(2,$difference(cSUC(xh),xl))) | (~$lesseq(0,Xp) | (~$lesseq(0,Xm) | ~$lesseq(0,Xn))))) )).
+
+%----------------------------------------------------------------------------
+

@@ -1,0 +1,175 @@
+Undefined%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SZSstatus: Unsatisfiable
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tff(c_a0_w4, axiom, (![Xx1: ty_one_F_bool]: ((0 ≤ cCARD1(Xx1)))) ).
+** simplification
+tff(c_a0_w4, axiom, (![Xx1: ty_one_F_bool]: ((0 ≤ cCARD1(Xx1)))) ).
+
+tff(c_a0_w4, axiom, (![Xx11: ty_itselfIoneI]: ((0 ≤ cdimindex1(Xx11)))) ).
+** simplification
+tff(c_a0_w4, axiom, (![Xx11: ty_itselfIoneI]: ((0 ≤ cdimindex1(Xx11)))) ).
+
+tff(c_a0_w4, axiom, (![Xx13: ty_a_F_bool]: ((0 ≤ cCARD(Xx13)))) ).
+** simplification
+tff(c_a0_w4, axiom, (![Xx13: ty_a_F_bool]: ((0 ≤ cCARD(Xx13)))) ).
+
+tff(c_a0_w4, axiom, (¬cFINITE1(cUNIV1) | cFINITE(cUNIV)) ).
+** simplification
+tff(c_a0_w4, axiom, (¬cFINITE1(cUNIV1) | cFINITE(cUNIV)) ).
+
+tff(c_a0_w4, axiom, (¬cFINITE1(cUNIV1) | cFINITE(cUNIV)) ).
+** Split
+tff(c_a0_w2, axiom, (cFINITE(cUNIV)) ).
+
+tff(c_a0_w2, axiom, (cFINITE(cUNIV)) ).
+** simplification
+tff(c_a0_w2, axiom, (cFINITE(cUNIV)) ).
+
+tff(c_a0_w4, axiom, (![Xx12: ty_itselfIaI]: ((0 ≤ cdimindex(Xx12)))) ).
+** simplification
+tff(c_a0_w4, axiom, (![Xx12: ty_itselfIaI]: ((0 ≤ cdimindex(Xx12)))) ).
+
+tff(c_a0_w6, axiom, (cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1 | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a1_w4, axiom, (cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1) ).
+
+tff(c_a1_w4, axiom, (cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1) ).
+** Define on
+tff(c_a0_w2, axiom, (cCARD1(cUNIV) →_ℤ #e_1) ).tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_1 →_ℤ 1) ).
+
+tff(c_a0_w2, axiom, (cCARD1(cUNIV) →_ℤ #e_1) ).
+** simplification
+tff(c_a0_w2, axiom, (cCARD1(cUNIV) →_ℤ #e_1) ).
+
+tff(c_a0_w6, axiom, (¬cFINITE1(cUNIV1) | ¬cFINITE(cUNIV) | ¬(cdimindex1(cthe_value1) →_ℤ 1)) ).
+** simplification
+tff(c_a1_w4, axiom, (¬cFINITE1(cUNIV1) | ¬(cdimindex1(cthe_value1) →_ℤ 1)) ).
+
+tff(c_a1_w4, axiom, (¬cFINITE1(cUNIV1) | ¬(cdimindex1(cthe_value1) →_ℤ 1)) ).
+** Define on
+tff(c_a0_w2, axiom, (cdimindex1(cthe_value1) →_ℤ #e_2) ).tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | ¬(#e_2 →_ℤ 1)) ).
+
+tff(c_a1_w0, axiom, ((0 ≤ #e_1)) ).
+** simplification
+tff(c_a1_w0, axiom, ((0 ≤ #e_1)) ).
+
+tff(c_a0_w2, axiom, (cdimindex1(cthe_value1) →_ℤ #e_2) ).
+** simplification
+tff(c_a0_w2, axiom, (cdimindex1(cthe_value1) →_ℤ #e_2) ).
+
+tff(c_a1_w0, axiom, ((0 ≤ #e_2)) ).
+** simplification
+tff(c_a1_w0, axiom, ((0 ≤ #e_2)) ).
+
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_1 →_ℤ 1) ).
+** simplification
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_1 →_ℤ 1) ).
+
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_1 →_ℤ 1) ).
+** Split
+tff(c_a1_w0, axiom, (#e_1 →_ℤ 1) ).
+
+tff(c_a1_w0, axiom, (#e_1 →_ℤ 1) ).
+** simplification
+tff(c_a1_w0, axiom, (#e_1 →_ℤ 1) ).
+
+tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | ¬(#e_2 →_ℤ 1)) ).
+** simplification
+tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | ¬(#e_2 →_ℤ 1)) ).
+
+tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | ¬(#e_2 →_ℤ 1)) ).
+** Split
+tff(c_a1_w0, axiom, (¬(#e_2 →_ℤ 1)) ).
+
+tff(c_a1_w0, axiom, (¬(#e_2 →_ℤ 1)) ).
+** simplification
+tff(c_a1_w0, axiom, (¬(#e_2 →_ℤ 1)) ).
+
+tff(c_a0_w6, axiom, (¬cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1 | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a1_w4, axiom, (¬cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1) ).
+
+tff(c_a1_w4, axiom, (¬cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1) ).
+** Define on
+tff(c_a0_w2, axiom, (cCARD1(cUNIV) →_ℤ #e_1) ).tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | #e_1 →_ℤ 1) ).
+
+tff(c_a0_w2, axiom, (cCARD1(cUNIV) →_ℤ #e_1) ).
+** simplification
+tff(c_a1_w2, axiom, (cCARD1(cUNIV) →_ℤ 1) ).
+
+tff(c_a0_w6, axiom, (cFINITE1(cUNIV1) | cdimindex(cthe_value) →_ℤ 1 | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a1_w4, axiom, (cFINITE1(cUNIV1) | cdimindex(cthe_value) →_ℤ 1) ).
+
+tff(c_a1_w4, axiom, (cFINITE1(cUNIV1) | cdimindex(cthe_value) →_ℤ 1) ).
+** Define on
+tff(c_a0_w2, axiom, (cdimindex(cthe_value) →_ℤ #e_3) ).tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_3 →_ℤ 1) ).
+
+tff(c_a0_w2, axiom, (cdimindex(cthe_value) →_ℤ #e_3) ).
+** simplification
+tff(c_a0_w2, axiom, (cdimindex(cthe_value) →_ℤ #e_3) ).
+
+tff(c_a1_w0, axiom, ((0 ≤ #e_3)) ).
+** simplification
+tff(c_a1_w0, axiom, ((0 ≤ #e_3)) ).
+
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_3 →_ℤ 1) ).
+** simplification
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_3 →_ℤ 1) ).
+
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1) | #e_3 →_ℤ 1) ).
+** Split
+tff(c_a1_w0, axiom, (#e_3 →_ℤ 1) ).
+
+tff(c_a1_w0, axiom, (#e_3 →_ℤ 1) ).
+** simplification
+tff(c_a1_w0, axiom, (#e_3 →_ℤ 1) ).
+
+tff(c_a0_w8, axiom, (cFINITE1(cUNIV1) | cdimindex1(cthe_value1) →_ℤ cCARD1(cUNIV) | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a2_w2, axiom, (cFINITE1(cUNIV1)) ).
+
+tff(c_a0_w8, axiom, (¬cFINITE1(cUNIV1) | cdimindex1(cthe_value1) →_ℤ cCARD1(cUNIV) | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a2_w0, axiom, $false ).
+
+tff(c_a0_w6, axiom, (cFINITE1(cUNIV1) | ¬cFINITE(cUNIV) | ¬(cdimindex1(cthe_value1) →_ℤ 1)) ).
+** simplification
+tff(c_a2_w0, axiom, $false ).
+
+tff(c_a1_w0, axiom, (¬(#e_1 →_ℤ 1)) ).
+** simplification
+tff(c_a1_w0, axiom, (¬(#e_1 →_ℤ 1)) ).
+
+tff(c_a1_w2, axiom, (¬cFINITE1(cUNIV1) | ¬(#e_2 →_ℤ 1)) ).
+** simplification
+tff(c_a2_w0, axiom, (¬(#e_2 →_ℤ 1)) ).
+
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1)) ).
+** simplification
+tff(c_a1_w2, axiom, (cFINITE1(cUNIV1)) ).
+
+tff(c_a0_w6, axiom, (¬cFINITE1(cUNIV1) | cCARD1(cUNIV) →_ℤ 1 | ¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a1_w2, axiom, (cCARD1(cUNIV) →_ℤ 1) ).
+
+tff(c_a2_w0, axiom, (#e_1 →_ℤ 1) ).
+** simplification
+tff(c_a3_w0, axiom, $false ).
+
+tff(c_a0_w2, axiom, (¬cFINITE1(cUNIV1)) ).
+** simplification
+tff(c_a0_w2, axiom, (¬cFINITE1(cUNIV1)) ).
+
+tff(c_a0_w2, axiom, (¬cFINITE(cUNIV)) ).
+** simplification
+tff(c_a0_w2, axiom, (¬cFINITE(cUNIV)) ).
+
+tff(c_a0_w4, axiom, (![Xx12: ty_itselfIaI]: ((0 ≤ cdimindex(Xx12)))) ).
+** simplification
+tff(c_a0_w4, axiom, (![Xx12: ty_itselfIaI]: ((0 ≤ cdimindex(Xx12)))) ).
+
+tff(c_a0_w4, axiom, (cFINITE1(cUNIV1) | cFINITE(cUNIV)) ).
+** simplification
+tff(c_a1_w0, axiom, $false ).
+

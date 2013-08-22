@@ -29,7 +29,7 @@ fun erase_last4char str =
   then ""
   else substring (str,0,(String.size str)-4)
 
-fun change_to_predicatety str = (erase_last4char str) ^ "$o"
+fun change_to_predty str = (erase_last4char str) ^ "$o"
 (* test
 last2char "hello";
 *)

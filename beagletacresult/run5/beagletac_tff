@@ -1,0 +1,131 @@
+%----------------------------------------------------------------------------
+% Number   : 26
+%----------------------------------------------------------------------------
+tff(ty_b_P_a_F_bool_type,type,(
+    ty_b_P_a_F_bool: $tType )).
+
+tff(ty_b_P_a_type,type,(
+    ty_b_P_a: $tType )).
+
+tff(ty_b_F_bool_type,type,(
+    ty_b_F_bool: $tType )).
+
+tff(ty_optionIaI_type,type,(
+    ty_optionIaI: $tType )).
+
+tff(ty_a_P_a_F_bool_type,type,(
+    ty_a_P_a_F_bool: $tType )).
+
+tff(ty_a_P_a_type,type,(
+    ty_a_P_a: $tType )).
+
+tff(ty_optionIbI_type,type,(
+    ty_optionIbI: $tType )).
+
+tff(ty_a_P_b_F_bool_type,type,(
+    ty_a_P_b_F_bool: $tType )).
+
+tff(ty_a_P_b_type,type,(
+    ty_a_P_b: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIb_P_aI_type,type,(
+    ty_listIb_P_aI: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_b_type,type,(
+    ty_b: $tType )).
+
+tff(ty_fmapIb_aI_type,type,(
+    ty_fmapIb_aI: $tType )).
+
+tff(ty_listIa_P_aI_type,type,(
+    ty_listIa_P_aI: $tType )).
+
+tff(ty_listIa_P_bI_type,type,(
+    ty_listIa_P_bI: $tType )).
+
+tff(xfm_type,type,(
+    xfm: ty_fmapIb_aI )).
+
+tff(xv_type,type,(
+    xv: ty_a )).
+
+tff(xk_type,type,(
+    xk: ty_b )).
+
+tff(xls_type,type,(
+    xls: ty_listIb_P_aI )).
+
+tff(cIN_type,type,(
+    cIN: ( ty_a_P_b * ty_a_P_b_F_bool ) > $o )).
+
+tff(c_type,type,(
+    c: ( ty_a * ty_b ) > ty_a_P_b )).
+
+tff(cLIST_TO_SET_type,type,(
+    cLIST_TO_SET: ty_listIa_P_bI > ty_a_P_b_F_bool )).
+
+tff(cALOOKUP_type,type,(
+    cALOOKUP: ( ty_listIa_P_bI * ty_a ) > ty_optionIbI )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_b > ty_optionIbI )).
+
+tff(cIN1_type,type,(
+    cIN1: ( ty_a_P_a * ty_a_P_a_F_bool ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( ty_a * ty_a ) > ty_a_P_a )).
+
+tff(cLIST_TO_SET1_type,type,(
+    cLIST_TO_SET1: ty_listIa_P_aI > ty_a_P_a_F_bool )).
+
+tff(cALOOKUP1_type,type,(
+    cALOOKUP1: ( ty_listIa_P_aI * ty_a ) > ty_optionIaI )).
+
+tff(cIN2_type,type,(
+    cIN2: ( ty_b * ty_b_F_bool ) > $o )).
+
+tff(cFDOM_type,type,(
+    cFDOM: ty_fmapIb_aI > ty_b_F_bool )).
+
+tff(cALOOKUP2_type,type,(
+    cALOOKUP2: ( ty_listIb_P_aI * ty_b ) > ty_optionIaI )).
+
+tff(cSOME1_type,type,(
+    cSOME1: ty_a > ty_optionIaI )).
+
+tff(cIN3_type,type,(
+    cIN3: ( ty_b_P_a * ty_b_P_a_F_bool ) > $o )).
+
+tff(c4_type,type,(
+    c4: ( ty_b * ty_a ) > ty_b_P_a )).
+
+tff(cLIST_TO_SET2_type,type,(
+    cLIST_TO_SET2: ty_listIb_P_aI > ty_b_P_a_F_bool )).
+
+tff(axiom1_axiom,axiom,(
+    ! [X: ty_listIa_P_bI,X1: ty_a,X2: ty_b] : ((cIN(c(X1,X2),cLIST_TO_SET(X)) | ~(cALOOKUP(X,X1) = cSOME(X2)))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [X3: ty_listIb_P_aI,X4: ty_b,X5: ty_a] : ((cIN3(c4(X4,X5),cLIST_TO_SET2(X3)) | ~(cALOOKUP2(X3,X4) = cSOME1(X5)))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xal: ty_listIa_P_aI,Xp_2: ty_a,X6: ty_a] : ((cIN1(c2(Xp_2,X6),cLIST_TO_SET1(Xal)) | ~(cALOOKUP1(Xal,Xp_2) = cSOME1(X6)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ~cIN2(xk,cFDOM(xfm)) )).
+
+tff(axiom5_axiom,axiom,(
+    (cALOOKUP2(xls,xk) = cSOME1(xv)) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xp_2: ty_a] : (~cIN3(c4(xk,Xp_2),cLIST_TO_SET2(xls))) )).
+
+%----------------------------------------------------------------------------
+

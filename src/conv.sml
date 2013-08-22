@@ -40,7 +40,7 @@ local fun is_interesting_in term subterm =
   free_in subterm term andalso
   has_boolty subterm andalso
   not (subterm = T) andalso
-  not (subterm = F)
+  not (subterm = F) 
 in
 fun find_free_bool_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of
@@ -407,16 +407,16 @@ fun and_strip_bvl_forall_mp bvl term =
   end end end
 
 fun extl bvl thm =
-    let val n = length bvl in
-    let val th0 = SPECL bvl thm in 
-    let val (op1,arg1) = strip_comb_n ((lhs (concl th0)),n) in
-    let val (op2,arg2) = strip_comb_n ((rhs (concl th0)),n) in
-    let val t2 = mk_eq (op1,op2) in
-    let val eqth0 = list_FUN_EQ_CONV bvl t2 in
-    let val th1 = EQ_MP (SYM eqth0) thm in
+  let val n = length bvl in
+  let val th0 = SPECL bvl thm in 
+  let val (op1,arg1) = strip_comb_n ((lhs (concl th0)),n) in
+  let val (op2,arg2) = strip_comb_n ((rhs (concl th0)),n) in
+  let val t2 = mk_eq (op1,op2) in
+  let val eqth0 = list_FUN_EQ_CONV bvl t2 in
+  let val th1 = EQ_MP (SYM eqth0) thm in
       th1
-    end end end end end
-    end end 
+  end end end end end
+  end end 
 
 
 (*    

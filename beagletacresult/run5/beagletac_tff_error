@@ -1,0 +1,269 @@
+%----------------------------------------------------------------------------
+% Number   : 14
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(xr0_type,type,(
+    xr0: $int )).
+
+tff(xc_type,type,(
+    xc: ty_char )).
+
+tff(xs0_type,type,(
+    xs0: ty_listIcharI )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cORD_type,type,(
+    cORD: ty_char > $int )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool > $o )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(c3_type,type,(
+    c3: ( $int * $int ) > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_listIcharI] : ($lesseq(0,cs2n(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,c3(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,cDIV(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx11: ty_char] : ($lesseq(0,cORD(Xx11))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,$sum(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom6_axiom,axiom,(
+    $true )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,xr0) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((cn2s(cs2n(xs)) = xs) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (cAbbrev(btrue) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((xr0 = $sum(cORD(xc),1)) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (~(xr0 = 0) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ($less($sum(cORD(xc),1),256) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (~(xs0 = xs) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((c3(Xn,Xq) = c3(Xq,Xn)) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((cDIV(c3(Xq,Xn),Xn) = Xq) | (~$less(0,Xn) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn)))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : ((~(xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ($less(0,256) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ($less(0,256) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((cDIV(c3(Xq,Xn),Xn) = Xq) | (~$less(0,Xn) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn)))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((c3(Xn,Xq) = c3(Xq,Xn)) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (~(xs0 = xs) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ($less($sum(cORD(xc),1),256) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (~(xr0 = 0) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((xr0 = $sum(cORD(xc),1)) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | (cAbbrev(bfalse) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xn: $int,Xq: $int] : (((xs0 = cn2s(cDIV($product(256,cs2n(xs)),256))) | ((cn2s(cs2n(xs)) = xs) | (~$lesseq(0,Xq) | ~$lesseq(0,Xn))))) )).
+
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+% Number   : 17
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cDIV_type,type,(
+    cDIV: ( $int * $int ) > $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $int )).
+
+tff(cORD_type,type,(
+    cORD: ty_char > $int )).
+
+tff(cCHR_type,type,(
+    cCHR: $int > ty_char )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_listIcharI] : ($lesseq(0,cs2n(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: ty_char] : ($lesseq(0,cORD(Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,$sum(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,c(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx12: $int,Xx2: $int] : (($lesseq(0,cDIV(Xx12,Xx2)) | (~$lesseq(0,Xx12) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($less(0,256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (((c(Xm,Xn) = c(Xn,Xm)) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((~$less(0,Xm) | ((cDIV(c(Xn,Xm),Xm) = Xn) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((~(cn2s(cDIV($product(256,cs2n(xs)),256)) = xs) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (((cORD(cCHR(255)) = 255) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : ((($sum(cORD(cCHR(255)),1) = 256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (($less(cORD(cCHR(255)),256) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xm: $int,Xn: $int] : (((cn2s(cs2n(xs)) = xs) | (~$lesseq(0,Xn) | ~$lesseq(0,Xm)))) )).
+
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+% Number   : 18
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_listIcharI] : ($lesseq(0,cs2n(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xy) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xn: $int] : (((cs2n(cn2s(Xn)) = Xn) | ~$lesseq(0,Xn))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xn: $int] : (((xx = xy) | ((cn2s(xx) = cn2s(xy)) | ~$lesseq(0,Xn)))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xn: $int] : ((~(xx = xy) | (~(cn2s(xx) = cn2s(xy)) | ~$lesseq(0,Xn)))) )).
+
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+% Number   : 20
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(xs_type,type,(
+    xs: ty_listIcharI )).
+
+tff(cs2n_type,type,(
+    cs2n: ty_listIcharI > $int )).
+
+tff(cn2s_type,type,(
+    cn2s: $int > ty_listIcharI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_listIcharI] : ($lesseq(0,cs2n(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [X: ty_listIcharI,Xn: $int] : (((cn2s(cs2n(X)) = X) | ~$lesseq(0,Xn))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xn: $int] : ((~(xs = cn2s(Xn)) | ~$lesseq(0,Xn))) )).
+
+%----------------------------------------------------------------------------
+

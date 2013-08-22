@@ -12,7 +12,7 @@ load "tools"; open tools;
 open HOLPP; open numSyntax;
 *)
 open HolKernel Abbrev boolLib HOLPP numSyntax 
-     tools
+     tools printtools
      stringtools listtools mydatatype
      extractvar extracttype namevar nametype higherorder
 
@@ -23,15 +23,14 @@ fun PRINTTFF_ERR function message =
             origin_function = function,
             message = message}
 
-(* NON LINEAR INTEGER ARITHMETIC *)
-val NLIAflag = ref false;
+(* bad hack NLIA *)
 fun contain_numfvc term = not (null (filter has_numty (get_fvcl term)))
 fun linear term =
   case nodeconst term of
     Mult => not (contain_numfvc (rand term) andalso contain_numfvc (lhand term))
   | _    => raise PRINTTFF_ERR "linear" "not a product"
 
-(*PPTFF_TERM*)
+(* PPTFF_TERM *)
 fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
   case qbvl of
     [] => raise PRINTTFF_ERR "pptff_bvl_aux" "emptylist"
@@ -62,8 +61,7 @@ fun pptff_qbvl pps qbvl bvdict tyadict =
 #4 dict : list of (constant, its name) 
 *)
 
-(* pflag : predicateflag *)   
-(* modifiy NLIAflag *)
+(* pflag : predflag *)
 fun pptff_term_aux pps term dict pflag bvl =
   case termstructure term of
     Numeral => add_string pps (name_numeral term)
@@ -108,14 +106,11 @@ fun pptff_term_aux pps term dict pflag bvl =
           Eq => pptff_binop pps "=" term dict false bvl
         | Add => pptff_app pps "$sum" argl dict false bvl
         | Minus => pptff_app pps "$difference" argl dict false bvl 
-        | Mult => if linear term 
+        | Mult => if linear term  (* bad hack NLIA *)
                   then pptff_app pps "$product" argl dict false bvl  
-                  else 
-                    (
-                    NLIAflag := true;
-                    pptff_app pps 
-                      (lookup operator (#4 dict)) argl dict false bvl
-                    )
+                  else  (* bad hack NLIA *)
+                    pptff_app pps    
+                    (lookup operator (#4 dict)) argl dict false bvl 
         | Less => pptff_app pps "$less" argl dict false bvl  
         | Greater => pptff_app pps "$greater" argl dict false bvl  
         | Geq => pptff_app pps "$greatereq" argl dict false bvl  
@@ -236,23 +231,7 @@ fun pptff_fvatydict pps fvdict fvatydict =
     nl2 pps;
     pptff_fvatydict pps fvdict m
     )
-
-
-
-
-
-(* to be rewritten so that it doesn't print them 
-   if they only appears with the right type *) 
-fun is_dc c = is_member (name_of c) ["=","+","-","*","<",">",">=","<="]
-  
-fun remove_dc catydict =
-  case catydict of
-    [] => []
-  | ((c,arity),tyname) :: m => if is_dc c 
-                               then remove_dc m 
-                               else ((c,arity),tyname) :: remove_dc m   
-(* end of to be rewritten *)
-
+ 
 fun pptff_catydict pps cdict catydict =
   case catydict of
     [] => () 
@@ -282,19 +261,6 @@ fun pptff_axiom pps name term dict =
   nl2 pps
   ) 
 
-(* Non linear arithmetic *)
-fun pptff_NLIAaxiom pps dict =
-  let val multc = hd (get_cl ``0*0``) in
-  let val x1 = mk_var ("x1",``:num``) in
-  let val x2 = mk_var ("x2",``:num``) in
-  let val term1 = list_mk_comb (multc,[x1,x2]) in
-  let val term2 = list_mk_comb (multc,[x2,x1]) in
-  let val term = list_mk_forall ([x1,x2],mk_eq (term1,term2)) in
-    if !NLIAflag andalso is_member multc (map fst (#4 dict))
-    then pptff_axiom pps "nlia" term dict
-    else ()  
-  end end end end end end
-  
 fun pptff_axioml_aux pps terml dict start =
   case terml of
     [] => ()
@@ -343,18 +309,16 @@ fun pptff_tff_w pps nb goal =
       in
       let val dict = (tyadict,bvdict,fvdict,cdict) in
       (
-      NLIAflag := false;
       begin_block pps CONSISTENT 0;
         pptff_commentline pps;
         pptff_number pps nb;
         pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict catydict;
+        pptff_catydict pps cdict (filter is_not_dcaty catydict);
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;
-        pptff_NLIAaxiom pps dict;
         pptff_commentline pps;
         add_string pps "\n";
       end_block pps

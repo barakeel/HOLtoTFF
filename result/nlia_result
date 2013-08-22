@@ -5,3 +5,17 @@ Thm list:
  [] |- ∀x. (x * x = 4) ⇒ (x = 2)
 Goal:  [x * x = 4] |- x = 2
 
+Number: 2
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀[0;32mx[0m. ([0;32mx[0m * [0;32mx[0m = 4) ⇒ ([0;32mx[0m = 2)
+Goal:  [[0;1;34mx[0m * [0;1;34mx[0m = 4] |- [0;1;34mx[0m = 2
+
+Number: 3
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀[0;32mx[0m. ([0;32mx[0m * [0;32mx[0m = 4) ⇒ ([0;32mx[0m = 2)
+Goal:  [[0;1;34mx[0m * [0;1;34mx[0m = 4] |- [0;1;34mx[0m = 2
+
