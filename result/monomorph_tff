@@ -1,5 +1,5 @@
 %----------------------------------------------------------------------------
-% Number   : 2
+% Number   : 3
 %----------------------------------------------------------------------------
 tff(ty_num_F_bool_F_num_F_bool_type,type,(
     ty_num_F_bool_F_num_F_bool: $tType )).
@@ -9,12 +9,6 @@ tff(ty_c_F_bool_F_c_F_bool_type,type,(
 
 tff(ty_c_F_bool_F_bool_type,type,(
     ty_c_F_bool_F_bool: $tType )).
-
-tff(ty_bool_F_bool_F_bool_F_bool1_type,type,(
-    ty_bool_F_bool_F_bool_F_bool1: $tType )).
-
-tff(ty_bool_F_bool_F_bool_type,type,(
-    ty_bool_F_bool_F_bool: $tType )).
 
 tff(ty_num_F_bool_F_bool_type,type,(
     ty_num_F_bool_F_bool: $tType )).
@@ -45,15 +39,6 @@ tff(ty_c_F_c_F_bool_F_c_F_bool_type,type,(
 
 tff(ty_c_F_c_F_bool_F_bool_type,type,(
     ty_c_F_c_F_bool_F_bool: $tType )).
-
-tff(ty_bool_F_bool_type,type,(
-    ty_bool_F_bool: $tType )).
-
-tff(ty_bool_F_bool_F_bool_F_bool_F_bool_type,type,(
-    ty_bool_F_bool_F_bool_F_bool_F_bool: $tType )).
-
-tff(ty_bool_F_bool_F_bool_F_bool_type,type,(
-    ty_bool_F_bool_F_bool_F_bool: $tType )).
 
 tff(ty_num_F_num_F_bool_F_bool_type,type,(
     ty_num_F_num_F_bool_F_bool: $tType )).
@@ -95,43 +80,31 @@ tff(xApp7_type,type,(
     xApp7: ( ty_num_F_num_F_bool_F_bool * $int ) > ty_num_F_bool_F_bool )).
 
 tff(xApp8_type,type,(
-    xApp8: ( ty_bool_F_bool_F_bool * ty_bool_F_bool ) > $o )).
+    xApp8: ( ty_c_F_bool_F_bool * ty_c_F_bool ) > $o )).
 
 tff(xApp9_type,type,(
-    xApp9: ( ty_bool_F_bool_F_bool_F_bool * bool ) > ty_bool_F_bool_F_bool )).
+    xApp9: ( ty_c_F_c_F_bool_F_bool * ty_c ) > ty_c_F_bool_F_bool )).
 
 tff(xApp10_type,type,(
-    xApp10: ( ty_bool_F_bool_F_bool_F_bool1 * ty_bool_F_bool ) > ty_bool_F_bool )).
+    xApp10: ( ty_c_F_bool_F_c_F_bool * ty_c_F_bool ) > ty_c_F_bool )).
 
 tff(xApp11_type,type,(
-    xApp11: ( ty_bool_F_bool_F_bool_F_bool_F_bool * bool ) > ty_bool_F_bool_F_bool_F_bool1 )).
+    xApp11: ( ty_c_F_c_F_bool_F_c_F_bool * ty_c ) > ty_c_F_bool_F_c_F_bool )).
 
 tff(xApp12_type,type,(
-    xApp12: ( ty_c_F_bool_F_bool * ty_c_F_bool ) > $o )).
+    xApp12: ( ty_num_F_bool * $int ) > $o )).
 
 tff(xApp13_type,type,(
-    xApp13: ( ty_c_F_c_F_bool_F_bool * ty_c ) > ty_c_F_bool_F_bool )).
+    xApp13: ( ty_num_F_bool_F_num_F_bool * ty_num_F_bool ) > ty_num_F_bool )).
 
 tff(xApp14_type,type,(
-    xApp14: ( ty_c_F_bool_F_c_F_bool * ty_c_F_bool ) > ty_c_F_bool )).
-
-tff(xApp15_type,type,(
-    xApp15: ( ty_c_F_c_F_bool_F_c_F_bool * ty_c ) > ty_c_F_bool_F_c_F_bool )).
-
-tff(xApp16_type,type,(
-    xApp16: ( ty_num_F_bool * $int ) > $o )).
-
-tff(xApp17_type,type,(
-    xApp17: ( ty_num_F_bool_F_num_F_bool * ty_num_F_bool ) > ty_num_F_bool )).
-
-tff(xApp18_type,type,(
-    xApp18: ( ty_num_F_num_F_bool_F_num_F_bool * $int ) > ty_num_F_bool_F_num_F_bool )).
+    xApp14: ( ty_num_F_num_F_bool_F_num_F_bool * $int ) > ty_num_F_bool_F_num_F_bool )).
 
 tff(xx_type,type,(
     xx: $int )).
 
-tff(xy_type,type,(
-    xy: $int )).
+tff(xz_type,type,(
+    xz: $int )).
 
 tff(cIN_type,type,(
     cIN: ty_a_F_a_F_bool_F_bool )).
@@ -146,91 +119,139 @@ tff(cIN1_type,type,(
     cIN1: ty_num_F_num_F_bool_F_bool )).
 
 tff(cIN2_type,type,(
-    cIN2: ty_bool_F_bool_F_bool_F_bool )).
+    cIN2: ty_c_F_c_F_bool_F_bool )).
 
 tff(cINSERT1_type,type,(
-    cINSERT1: ty_bool_F_bool_F_bool_F_bool_F_bool )).
+    cINSERT1: ty_c_F_c_F_bool_F_c_F_bool )).
 
 tff(cEMPTY1_type,type,(
-    cEMPTY1: ty_bool_F_bool )).
-
-tff(cIN3_type,type,(
-    cIN3: ty_c_F_c_F_bool_F_bool )).
+    cEMPTY1: ty_c_F_bool )).
 
 tff(cINSERT2_type,type,(
-    cINSERT2: ty_c_F_c_F_bool_F_c_F_bool )).
+    cINSERT2: ty_num_F_num_F_bool_F_num_F_bool )).
 
 tff(cEMPTY2_type,type,(
-    cEMPTY2: ty_c_F_bool )).
-
-tff(cINSERT3_type,type,(
-    cINSERT3: ty_num_F_num_F_bool_F_num_F_bool )).
-
-tff(cEMPTY3_type,type,(
-    cEMPTY3: ty_num_F_bool )).
-
-tff(btrue_type,type,(
-    btrue: bool )).
-
-tff(bfalse_type,type,(
-    bfalse: bool )).
+    cEMPTY2: ty_num_F_bool )).
 
 tff(axiom1_axiom,axiom,(
-    $true )).
+    $lesseq(0,xz) )).
 
 tff(axiom2_axiom,axiom,(
-    $lesseq(0,xy) )).
-
-tff(axiom3_axiom,axiom,(
     $lesseq(0,xx) )).
 
+tff(axiom3_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int,X1: ty_a_F_bool,X: ty_a] : ((xApp(X1,X) | (~xApp2(xApp3(cIN,X),X1) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
 tff(axiom4_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((~xApp8(xApp9(cIN2,bfalse),xApp10(xApp11(cINSERT1,btrue),cEMPTY1)) | (~$lesseq(0,X7) | ~$lesseq(0,X8)))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int,X1: ty_a_F_bool,X: ty_a] : ((~xApp(X1,X) | (xApp2(xApp3(cIN,X),X1) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom5_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((xApp8(xApp9(cIN2,btrue),xApp10(xApp11(cINSERT1,btrue),cEMPTY1)) | (~$lesseq(0,X7) | ~$lesseq(0,X8)))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int,X3: ty_c_F_bool,X2: ty_c] : ((~xApp1(X3,X2) | (xApp8(xApp9(cIN2,X2),X3) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom6_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((~xApp8(xApp9(cIN2,btrue),xApp10(xApp11(cINSERT1,bfalse),cEMPTY1)) | (~$lesseq(0,X7) | ~$lesseq(0,X8)))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int,X3: ty_c_F_bool,X2: ty_c] : ((xApp1(X3,X2) | (~xApp8(xApp9(cIN2,X2),X3) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom7_axiom,axiom,(
-    ! [X7: $int,X8: $int,X1: ty_a_F_bool,X: ty_a] : ((xApp(X1,X) | (~xApp2(xApp3(cIN,X),X1) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X4: ty_num_F_bool,X25: $int] : ((~xApp12(X4,X25) | (xApp6(xApp7(cIN1,X25),X4) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom8_axiom,axiom,(
-    ! [X7: $int,X8: $int,X1: ty_a_F_bool,X: ty_a] : ((~xApp(X1,X) | (xApp2(xApp3(cIN,X),X1) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X4: ty_num_F_bool,X25: $int] : ((xApp12(X4,X25) | (~xApp6(xApp7(cIN1,X25),X4) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom9_axiom,axiom,(
-    ! [X7: $int,X8: $int,XP: ty_c_F_bool,X2: ty_c] : ((~xApp1(XP,X2) | (xApp12(xApp13(cIN3,X2),XP) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X6: ty_a_F_bool,X5: ty_a,X25: $int] : ((~xApp(X6,X5) | (xApp2(xApp3(cIN,X5),X6) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom10_axiom,axiom,(
-    ! [X7: $int,X8: $int,XP: ty_c_F_bool,X2: ty_c] : ((xApp1(XP,X2) | (~xApp12(xApp13(cIN3,X2),XP) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X6: ty_a_F_bool,X5: ty_a,X25: $int] : ((xApp(X6,X5) | (~xApp2(xApp3(cIN,X5),X6) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom11_axiom,axiom,(
-    ! [X3: ty_a,X4: ty_a,X7: $int,X8: $int] : (((X3 = X4) | (~xApp2(xApp3(cIN,X3),xApp4(xApp5(cINSERT,X4),cEMPTY)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X8: ty_c_F_bool,X7: ty_c,X25: $int] : ((~xApp1(X8,X7) | (xApp8(xApp9(cIN2,X7),X8) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom12_axiom,axiom,(
-    ! [X3: ty_a,X4: ty_a,X7: $int,X8: $int] : ((~(X3 = X4) | (xApp2(xApp3(cIN,X3),xApp4(xApp5(cINSERT,X4),cEMPTY)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X8: ty_c_F_bool,X7: ty_c,X25: $int] : ((xApp1(X8,X7) | (~xApp8(xApp9(cIN2,X7),X8) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom13_axiom,axiom,(
-    ! [X7: $int,X8: $int] : (((X7 = X8) | (~xApp6(xApp7(cIN1,X7),xApp17(xApp18(cINSERT3,X8),cEMPTY3)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X9: ty_num_F_bool,X26: $int,X25: $int] : ((~xApp12(X9,X26) | (xApp6(xApp7(cIN1,X26),X9) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom14_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((~(X7 = X8) | (xApp6(xApp7(cIN1,X7),xApp17(xApp18(cINSERT3,X8),cEMPTY3)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X9: ty_num_F_bool,X26: $int,X25: $int] : ((xApp12(X9,X26) | (~xApp6(xApp7(cIN1,X26),X9) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom15_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((xApp8(xApp9(cIN2,bfalse),xApp10(xApp11(cINSERT1,bfalse),cEMPTY1)) | (~$lesseq(0,X7) | ~$lesseq(0,X8)))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X11: ty_a_F_bool,X10: ty_a,X26: $int,X25: $int] : ((~xApp(X11,X10) | (xApp2(xApp3(cIN,X10),X11) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom16_axiom,axiom,(
-    ! [X7: $int,X8: $int,X5: ty_c,X6: ty_c] : ((~(X5 = X6) | (xApp12(xApp13(cIN3,X5),xApp14(xApp15(cINSERT2,X6),cEMPTY2)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X11: ty_a_F_bool,X10: ty_a,X26: $int,X25: $int] : ((xApp(X11,X10) | (~xApp2(xApp3(cIN,X10),X11) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom17_axiom,axiom,(
-    ! [X7: $int,X8: $int,X5: ty_c,X6: ty_c] : (((X5 = X6) | (~xApp12(xApp13(cIN3,X5),xApp14(xApp15(cINSERT2,X6),cEMPTY2)) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X13: ty_c_F_bool,X12: ty_c,X26: $int,X25: $int] : ((~xApp1(X13,X12) | (xApp8(xApp9(cIN2,X12),X13) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom18_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((xApp16(xApp17(xApp18(cINSERT3,xy),cEMPTY3),xx) | ((xx = xy) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X13: ty_c_F_bool,X12: ty_c,X26: $int,X25: $int] : ((xApp1(X13,X12) | (~xApp8(xApp9(cIN2,X12),X13) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 tff(axiom19_axiom,axiom,(
-    ! [X7: $int,X8: $int] : ((~xApp16(xApp17(xApp18(cINSERT3,xy),cEMPTY3),xx) | (~(xx = xy) | (~$lesseq(0,X7) | ~$lesseq(0,X8))))) )).
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,XP: ty_num_F_bool,X27: $int,X26: $int,X25: $int] : ((~xApp12(XP,X27) | (xApp6(xApp7(cIN1,X27),XP) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,XP: ty_num_F_bool,X27: $int,X26: $int,X25: $int] : ((xApp12(XP,X27) | (~xApp6(xApp7(cIN1,X27),XP) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X14: ty_a,Xy: ty_a,X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X14 = Xy) | (~xApp2(xApp3(cIN,X14),xApp4(xApp5(cINSERT,Xy),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [X14: ty_a,Xy: ty_a,X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X14 = Xy) | (xApp2(xApp3(cIN,X14),xApp4(xApp5(cINSERT,Xy),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X28 = X29) | (~xApp6(xApp7(cIN1,X28),xApp13(xApp14(cINSERT2,X29),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X28 = X29) | (xApp6(xApp7(cIN1,X28),xApp13(xApp14(cINSERT2,X29),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [X28: $int,X29: $int,X15: ty_c,X16: ty_c,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X15 = X16) | (~xApp8(xApp9(cIN2,X15),xApp10(xApp11(cINSERT1,X16),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [X28: $int,X29: $int,X15: ty_c,X16: ty_c,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X15 = X16) | (xApp8(xApp9(cIN2,X15),xApp10(xApp11(cINSERT1,X16),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [X28: $int,X29: $int,X17: ty_a,X18: ty_a,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X17 = X18) | (~xApp2(xApp3(cIN,X17),xApp4(xApp5(cINSERT,X18),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [X28: $int,X29: $int,X17: ty_a,X18: ty_a,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X17 = X18) | (xApp2(xApp3(cIN,X17),xApp4(xApp5(cINSERT,X18),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X30 = X31) | (~xApp6(xApp7(cIN1,X30),xApp13(xApp14(cINSERT2,X31),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X30 = X31) | (xApp6(xApp7(cIN1,X30),xApp13(xApp14(cINSERT2,X31),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X19: ty_c,X20: ty_c,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X19 = X20) | (~xApp8(xApp9(cIN2,X19),xApp10(xApp11(cINSERT1,X20),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X19: ty_c,X20: ty_c,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X19 = X20) | (xApp8(xApp9(cIN2,X19),xApp10(xApp11(cINSERT1,X20),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X21: ty_a,X22: ty_a,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X21 = X22) | (~xApp2(xApp3(cIN,X21),xApp4(xApp5(cINSERT,X22),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X21: ty_a,X22: ty_a,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X21 = X22) | (xApp2(xApp3(cIN,X21),xApp4(xApp5(cINSERT,X22),cEMPTY)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : (((X32 = X33) | (~xApp6(xApp7(cIN1,X32),xApp13(xApp14(cINSERT2,X33),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~(X32 = X33) | (xApp6(xApp7(cIN1,X32),xApp13(xApp14(cINSERT2,X33),cEMPTY2)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X23: ty_c,X24: ty_c,X27: $int,X26: $int,X25: $int] : ((~(X23 = X24) | (xApp8(xApp9(cIN2,X23),xApp10(xApp11(cINSERT1,X24),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X23: ty_c,X24: ty_c,X27: $int,X26: $int,X25: $int] : (((X23 = X24) | (~xApp8(xApp9(cIN2,X23),xApp10(xApp11(cINSERT1,X24),cEMPTY1)) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((xApp12(xApp13(xApp14(cINSERT2,xz),cEMPTY2),xx) | ((xx = xz) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [X28: $int,X29: $int,X30: $int,X31: $int,X32: $int,X33: $int,X27: $int,X26: $int,X25: $int] : ((~xApp12(xApp13(xApp14(cINSERT2,xz),cEMPTY2),xx) | (~(xx = xz) | (~$lesseq(0,X25) | (~$lesseq(0,X26) | (~$lesseq(0,X27) | (~$lesseq(0,X28) | (~$lesseq(0,X29) | (~$lesseq(0,X30) | (~$lesseq(0,X31) | (~$lesseq(0,X32) | ~$lesseq(0,X33)))))))))))) )).
 
 %----------------------------------------------------------------------------
 

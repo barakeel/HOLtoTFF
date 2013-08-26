@@ -36,45 +36,7 @@ show_assums :=  true;
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 fst (BEAGLE_NF_TAC thml goal);
-
-(* good example where monomorphing once doesn't work *)
-val filename = "result/monomorph";
-val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
-val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
-val thml = [th1,th2];
-val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
-
-val term = ``{y}``;
-dest_comb term ;
-val cl = get_cl term;
-val cl1 = get_cl_thm th1;
-val type1 = map type_of cl1;
-val cl2 = get_cl_thm th2;
-val type2 = map type_of cl2;
-val clg = get_cl_goal goal;
-val typeg = map type_of clg;
-val (thml,goal) = (monomorph_pb (thml,goal));
-
-(* slow down the process quite a bit *)
-
-(* should try with 0 monomorphisation *)
-(* should try with 1 - = monomorphisation *)
-(* should try with 1 + = monomorphisation *)
-(* should try with 2 - = monomorphisation *)
-
-
-(* monomormorphisation *)
-monomorph_thm_pb th1 (thml,goal);
-val substl = normalize_substl (create_substl_thm_pb th1 (thml,goal));
-val substl = normalize_substl (create_substl_thm_pb th2 (thml,goal));
-
-
-(* dictionnary *)      
-val term = list_mk_conj (fst (goal) @ [snd goal]);
-val fvdict = create_fvdict term;
-val bvdict = create_bvdict term;
-val cdict = create_cdict term;
-val tyadict = create_tyadict term;
+val (thml,goal) = monomorph_pb (thml,goal);
 
 (* EXAMPLES *)
 (* nlia test *)
@@ -87,16 +49,11 @@ val thml = [] ;
 val goal : goal = ([],
                    `` P (λll. (let n = LEAST n. ∃e. (e = 0) in ll)) : bool ``);
 (* monomorphisation *)
-val filename = "result/monomorph1";
-val thml = [mk_thm ([],``!x:'a y:'a. (x = y)``),
-            mk_thm ([],``!x:num y:num. (x = y) ==> F``)
-           ];
-val goal = ([],F);
-val (mthml,mgoal) = monomorph_pb (thml,goal);
-val filename = "result/monomorph2";
-val thml = [mk_thm ([],``((x:num = z:num) = y:bool)``)];
-val goal = ([],F);
-val (mthml,mgoal) = monomorph_pb (thml,goal);
+val filename = "result/monomorph";
+val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
+val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
+val thml = [th1,th2];
+val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
 (* num *)
 val filename = "result/num";
 val thml = [];
@@ -129,5 +86,69 @@ val filename = "result/funconv";
 val thml = [];
 val goal : goal = ([],``(!y:num -> num -> num . P y) ==> (P (\x y. x + y))`` );
 
+(* ERROR *)
+(* bool conv *)
+bool_conv term;
+val term = `` ∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y),
+ FINITE {z | (z,x) ∈ lo}, x ∉ X DIFF minimal_elements X lo,
+ minimal_elements X lo = {x'}, x ∈ X, y ∈ X, (x,y) ∈ lo,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo), linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo) ``;
 
+bool_conv ``P (!x. P (z /\ T) /\ x):bool``;
+bool_conv ``P (b:bool) :bool``;
+bool_conv ``P (!x. P (b:bool))``;
+(* top down approach *)
+bool_conv ``P ( P ( b:bool)):bool``;
+bool_conv_sub_one ``P ( P ( b:bool)):bool``;
+bool_conv_sub_one ``P (b:bool) :bool``;
+bool_conv_sub_all ``P ( P ( b:bool)):bool``;
+
+(* good example where monomorphing once doesn't work *)
+val filename = "result/monomorph";
+val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
+val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
+val thml = [th1,th2];
+val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
+
+val cl1 = get_cl_thm th1;
+val cl2 = get_cl_thm th2;
+val clg = get_cl_goal goal;
+val clpb = ([cl1,cl2],clg);
+val (clthml,clgoal) = clpb;
+
+val substll = create_substll clpb;
+val newclthml = inst_cll substll clthml;
+val newclpb = (newclthml,clgoal);
+
+val newsubstll = create_substll newclpb;
+val instnl = map length substll;
+val newinstnl = multl (map length newsubstll) instnl;
+
+val substll = repeat_create_substll 
+                     (clthml,clgoal) 
+                     (make_list_n (length thml) [])
+                     (make_list_n (length thml) 1)        
+
+val (thml,goal) = monomorph_pb (thml,goal);
+(* slow down the process quite a bit *)
+
+(* dictionnary *)      
+val term = list_mk_conj (fst (goal) @ [snd goal]);
+val fvdict = create_fvdict term;
+val bvdict = create_bvdict term;
+val cdict = create_cdict term;
+val tyadict = create_tyadict term;
 

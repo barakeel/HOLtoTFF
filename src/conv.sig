@@ -11,6 +11,8 @@ sig
  
   val find_free_bool : term -> term list
   val bool_conv_sub : term -> conv
+  val bool_conv_sub_one : conv
+  val bool_conv_sub_all : conv
   val bool_conv : conv
   
   val app_conv : string -> conv

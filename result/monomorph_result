@@ -6,3 +6,11 @@ Thm list:
  [] |- ∀P x. x ∈ P ⇔ P x
 Goal:  [] |- ∀x. (x = y) ⇔ {y} x
 
+Number: 3
+Status: Unsatisfiable
+Info: polymorph num higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- ∀x. (x = z) ⇔ {z} x
+

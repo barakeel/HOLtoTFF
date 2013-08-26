@@ -9,6 +9,28 @@ fun LISTTOOLS_ERR function message =
           message = message}
 
 
+fun make_list_n n a =
+  case n of 
+    0 => []
+  | _ => if n < 0 then raise LISTTOOLS_ERR "make_n_emptyl" "negative number"
+         else
+           a :: make_list_n (n -1) a
+
+(* NUMBER *)
+fun suml nl =
+  case nl of
+    [] => 0
+  | n :: m => n + suml m
+  
+fun multl al bl =
+  if not (length al = length bl) 
+  then raise LISTTOOLS_ERR "multl" "different length"
+  else
+    case al of
+      [] => []
+    | _  => (hd al) * (hd bl) :: multl (tl al) (tl bl) 
+
+(* SET *)
 fun is_member_eq equal elem list  = exists (equal elem) list
 
 fun erase_double_eq equal list  =
@@ -28,6 +50,18 @@ fun add_once elem list =
  
 fun inter l1 l2 = filter (inv is_member l2) l1 
 
+fun subset l1 l2 = all (inv is_member l2) l1
+
+fun list_subset ll1 ll2 =
+  if not (length ll1 = length ll2) 
+  then 
+    raise LISTTOOLS_ERR "list_subset" "different length" 
+  else 
+    case ll1 of
+      [] => true
+    | _  => subset (hd ll1) (hd ll2) andalso
+            list_subset (tl ll1) (tl ll2)
+    
 fun list_merge ll = erase_double (List.concat ll)
 
 fun quicksort << xs = let

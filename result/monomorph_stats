@@ -1,15 +1,15 @@
-Problems    : 2
+Problems    : 3
 
-Polymorph   : 2
+Polymorph   : 3
 Lambda-lift : 0
 Bool Conv   : 2
-Num Conv    : 1
-Higher Order: 2
+Num Conv    : 2
+Higher Order: 3
 Predicate   : 0
-Proof       : 2
+Proof       : 3
 Metis fail  : 0
 
-Unsat       : 1
+Unsat       : 2
 Unkown      : 1
 Sat         : 0
 Time Out    : 0
