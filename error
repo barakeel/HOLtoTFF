@@ -1,0 +1,999 @@
+%----------------------------------------------------------------------------
+% Number   : 27
+%----------------------------------------------------------------------------
+tff(ty_a_F_optionIbI_type,type,(
+    ty_a_F_optionIbI: $tType )).
+
+tff(toolong71_type,type,(
+    toolong71: $tType )).
+
+tff(toolong70_type,type,(
+    toolong70: $tType )).
+
+tff(toolong69_type,type,(
+    toolong69: $tType )).
+
+tff(toolong68_type,type,(
+    toolong68: $tType )).
+
+tff(toolong67_type,type,(
+    toolong67: $tType )).
+
+tff(toolong66_type,type,(
+    toolong66: $tType )).
+
+tff(toolong65_type,type,(
+    toolong65: $tType )).
+
+tff(toolong64_type,type,(
+    toolong64: $tType )).
+
+tff(toolong63_type,type,(
+    toolong63: $tType )).
+
+tff(toolong62_type,type,(
+    toolong62: $tType )).
+
+tff(toolong61_type,type,(
+    toolong61: $tType )).
+
+tff(toolong60_type,type,(
+    toolong60: $tType )).
+
+tff(toolong59_type,type,(
+    toolong59: $tType )).
+
+tff(toolong58_type,type,(
+    toolong58: $tType )).
+
+tff(toolong57_type,type,(
+    toolong57: $tType )).
+
+tff(toolong56_type,type,(
+    toolong56: $tType )).
+
+tff(toolong55_type,type,(
+    toolong55: $tType )).
+
+tff(ty_a_F_num_F_num_type,type,(
+    ty_a_F_num_F_num: $tType )).
+
+tff(ty_listIa_P_bI_F_a_P_b_type,type,(
+    ty_listIa_P_bI_F_a_P_b: $tType )).
+
+tff(toolong54_type,type,(
+    toolong54: $tType )).
+
+tff(toolong53_type,type,(
+    toolong53: $tType )).
+
+tff(toolong52_type,type,(
+    toolong52: $tType )).
+
+tff(toolong51_type,type,(
+    toolong51: $tType )).
+
+tff(toolong50_type,type,(
+    toolong50: $tType )).
+
+tff(toolong49_type,type,(
+    toolong49: $tType )).
+
+tff(toolong48_type,type,(
+    toolong48: $tType )).
+
+tff(toolong47_type,type,(
+    toolong47: $tType )).
+
+tff(toolong46_type,type,(
+    toolong46: $tType )).
+
+tff(toolong45_type,type,(
+    toolong45: $tType )).
+
+tff(toolong44_type,type,(
+    toolong44: $tType )).
+
+tff(toolong43_type,type,(
+    toolong43: $tType )).
+
+tff(toolong42_type,type,(
+    toolong42: $tType )).
+
+tff(toolong41_type,type,(
+    toolong41: $tType )).
+
+tff(toolong40_type,type,(
+    toolong40: $tType )).
+
+tff(toolong39_type,type,(
+    toolong39: $tType )).
+
+tff(toolong38_type,type,(
+    toolong38: $tType )).
+
+tff(ty_a_F_num_F_a_P_b_type,type,(
+    ty_a_F_num_F_a_P_b: $tType )).
+
+tff(ty_num_F_a_P_b_type,type,(
+    ty_num_F_a_P_b: $tType )).
+
+tff(toolong37_type,type,(
+    toolong37: $tType )).
+
+tff(ty_listIaI_F_a_type,type,(
+    ty_listIaI_F_a: $tType )).
+
+tff(toolong36_type,type,(
+    toolong36: $tType )).
+
+tff(ty_listIbI_F_b_type,type,(
+    ty_listIbI_F_b: $tType )).
+
+tff(toolong35_type,type,(
+    toolong35: $tType )).
+
+tff(toolong34_type,type,(
+    toolong34: $tType )).
+
+tff(toolong33_type,type,(
+    toolong33: $tType )).
+
+tff(ty_listIbI_F_listIaI_type,type,(
+    ty_listIbI_F_listIaI: $tType )).
+
+tff(ty_listIaI_F_listIaI_type,type,(
+    ty_listIaI_F_listIaI: $tType )).
+
+tff(ty_listIbI_F_listIbI_type,type,(
+    ty_listIbI_F_listIbI: $tType )).
+
+tff(ty_listIaI_F_listIbI_type,type,(
+    ty_listIaI_F_listIbI: $tType )).
+
+tff(toolong32_type,type,(
+    toolong32: $tType )).
+
+tff(toolong31_type,type,(
+    toolong31: $tType )).
+
+tff(toolong30_type,type,(
+    toolong30: $tType )).
+
+tff(toolong29_type,type,(
+    toolong29: $tType )).
+
+tff(toolong28_type,type,(
+    toolong28: $tType )).
+
+tff(toolong27_type,type,(
+    toolong27: $tType )).
+
+tff(toolong26_type,type,(
+    toolong26: $tType )).
+
+tff(toolong25_type,type,(
+    toolong25: $tType )).
+
+tff(toolong24_type,type,(
+    toolong24: $tType )).
+
+tff(toolong23_type,type,(
+    toolong23: $tType )).
+
+tff(toolong22_type,type,(
+    toolong22: $tType )).
+
+tff(toolong21_type,type,(
+    toolong21: $tType )).
+
+tff(toolong20_type,type,(
+    toolong20: $tType )).
+
+tff(toolong19_type,type,(
+    toolong19: $tType )).
+
+tff(toolong18_type,type,(
+    toolong18: $tType )).
+
+tff(toolong17_type,type,(
+    toolong17: $tType )).
+
+tff(toolong16_type,type,(
+    toolong16: $tType )).
+
+tff(ty_a_F_num_F_bool_type,type,(
+    ty_a_F_num_F_bool: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_optionIbI_type,type,(
+    ty_optionIbI: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_listIa_P_bI_type,type,(
+    ty_listIa_P_bI: $tType )).
+
+tff(toolong15_type,type,(
+    toolong15: $tType )).
+
+tff(ty_a_F_b_type,type,(
+    ty_a_F_b: $tType )).
+
+tff(ty_listIaI_type,type,(
+    ty_listIaI: $tType )).
+
+tff(ty_b_F_b_type,type,(
+    ty_b_F_b: $tType )).
+
+tff(ty_listIbI_type,type,(
+    ty_listIbI: $tType )).
+
+tff(ty_a_P_b_F_b_type,type,(
+    ty_a_P_b_F_b: $tType )).
+
+tff(ty_a_P_b_F_a_type,type,(
+    ty_a_P_b_F_a: $tType )).
+
+tff(ty_a_F_a_type,type,(
+    ty_a_F_a: $tType )).
+
+tff(ty_b_F_a_type,type,(
+    ty_b_F_a: $tType )).
+
+tff(ty_a_F_a_P_b_type,type,(
+    ty_a_F_a_P_b: $tType )).
+
+tff(ty_b_F_a_P_b_type,type,(
+    ty_b_F_a_P_b: $tType )).
+
+tff(ty_a_P_b_F_a_P_b_type,type,(
+    ty_a_P_b_F_a_P_b: $tType )).
+
+tff(toolong14_type,type,(
+    toolong14: $tType )).
+
+tff(toolong13_type,type,(
+    toolong13: $tType )).
+
+tff(toolong12_type,type,(
+    toolong12: $tType )).
+
+tff(ty_listIa_P_bI_F_num_type,type,(
+    ty_listIa_P_bI_F_num: $tType )).
+
+tff(toolong11_type,type,(
+    toolong11: $tType )).
+
+tff(ty_num_F_listIaI_F_a_type,type,(
+    ty_num_F_listIaI_F_a: $tType )).
+
+tff(toolong10_type,type,(
+    toolong10: $tType )).
+
+tff(toolong9_type,type,(
+    toolong9: $tType )).
+
+tff(ty_b_type,type,(
+    ty_b: $tType )).
+
+tff(toolong8_type,type,(
+    toolong8: $tType )).
+
+tff(ty_num_F_listIbI_F_b_type,type,(
+    ty_num_F_listIbI_F_b: $tType )).
+
+tff(toolong7_type,type,(
+    toolong7: $tType )).
+
+tff(ty_listIbI_F_num_type,type,(
+    ty_listIbI_F_num: $tType )).
+
+tff(toolong6_type,type,(
+    toolong6: $tType )).
+
+tff(ty_listIaI_F_num_type,type,(
+    ty_listIaI_F_num: $tType )).
+
+tff(toolong5_type,type,(
+    toolong5: $tType )).
+
+tff(toolong4_type,type,(
+    toolong4: $tType )).
+
+tff(toolong3_type,type,(
+    toolong3: $tType )).
+
+tff(toolong2_type,type,(
+    toolong2: $tType )).
+
+tff(toolong1_type,type,(
+    toolong1: $tType )).
+
+tff(toolong_type,type,(
+    toolong: $tType )).
+
+tff(ty_a_P_b_type,type,(
+    ty_a_P_b: $tType )).
+
+tff(ty_num_F_bool_F_num_type,type,(
+    ty_num_F_bool_F_num: $tType )).
+
+tff(ty_b_F_optionIbI_type,type,(
+    ty_b_F_optionIbI: $tType )).
+
+tff(ty_num_F_bool_type,type,(
+    ty_num_F_bool: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_b_F_optionIbI * ty_b ) > ty_optionIbI )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_num_F_bool_F_num * ty_num_F_bool ) > $int )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_num_F_bool * $int ) > $o )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_a_F_num_F_bool * ty_a ) > ty_num_F_bool )).
+
+tff(xApp4_type,type,(
+    xApp4: ( toolong16 * ty_a_F_b ) > ty_a_F_num_F_bool )).
+
+tff(xApp5_type,type,(
+    xApp5: ( toolong17 * ty_listIaI ) > toolong16 )).
+
+tff(xApp6_type,type,(
+    xApp6: ( toolong18 * ty_b_F_b ) > toolong17 )).
+
+tff(xApp7_type,type,(
+    xApp7: ( toolong19 * ty_listIbI ) > toolong18 )).
+
+tff(xApp8_type,type,(
+    xApp8: ( toolong20 * ty_a_P_b_F_b ) > toolong19 )).
+
+tff(xApp9_type,type,(
+    xApp9: ( toolong21 * ty_a_P_b_F_a ) > toolong20 )).
+
+tff(xApp10_type,type,(
+    xApp10: ( toolong22 * ty_listIa_P_bI ) > toolong21 )).
+
+tff(xApp11_type,type,(
+    xApp11: ( toolong23 * ty_a_F_a ) > toolong22 )).
+
+tff(xApp12_type,type,(
+    xApp12: ( toolong24 * ty_listIaI ) > toolong23 )).
+
+tff(xApp13_type,type,(
+    xApp13: ( toolong25 * ty_b_F_a ) > toolong24 )).
+
+tff(xApp14_type,type,(
+    xApp14: ( toolong26 * ty_listIbI ) > toolong25 )).
+
+tff(xApp15_type,type,(
+    xApp15: ( toolong27 * ty_a_F_a_P_b ) > toolong26 )).
+
+tff(xApp16_type,type,(
+    xApp16: ( toolong28 * ty_listIaI ) > toolong27 )).
+
+tff(xApp17_type,type,(
+    xApp17: ( toolong29 * ty_b_F_a_P_b ) > toolong28 )).
+
+tff(xApp18_type,type,(
+    xApp18: ( toolong30 * ty_listIbI ) > toolong29 )).
+
+tff(xApp19_type,type,(
+    xApp19: ( toolong31 * ty_a_P_b_F_a_P_b ) > toolong30 )).
+
+tff(xApp20_type,type,(
+    xApp20: ( toolong32 * ty_listIa_P_bI ) > toolong31 )).
+
+tff(xApp21_type,type,(
+    xApp21: ( toolong * $int ) > toolong32 )).
+
+tff(xf1_type,type,(
+    xf1: toolong )).
+
+tff(xApp22_type,type,(
+    xApp22: ( ty_listIaI_F_listIbI * ty_listIaI ) > ty_listIbI )).
+
+tff(xApp23_type,type,(
+    xApp23: ( toolong1 * ty_a_F_b ) > ty_listIaI_F_listIbI )).
+
+tff(xApp24_type,type,(
+    xApp24: ( ty_a_F_b * ty_a ) > ty_b )).
+
+tff(xApp25_type,type,(
+    xApp25: ( toolong2 * ty_b_F_b ) > ty_listIbI_F_listIbI )).
+
+tff(xApp26_type,type,(
+    xApp26: ( ty_b_F_b * ty_b ) > ty_b )).
+
+tff(xApp27_type,type,(
+    xApp27: ( ty_a_P_b_F_b * ty_a_P_b ) > ty_b )).
+
+tff(xApp28_type,type,(
+    xApp28: ( toolong3 * ty_a_F_a ) > ty_listIaI_F_listIaI )).
+
+tff(xApp29_type,type,(
+    xApp29: ( ty_a_F_a * ty_a ) > ty_a )).
+
+tff(xApp30_type,type,(
+    xApp30: ( ty_listIbI_F_listIaI * ty_listIbI ) > ty_listIaI )).
+
+tff(xApp31_type,type,(
+    xApp31: ( toolong4 * ty_b_F_a ) > ty_listIbI_F_listIaI )).
+
+tff(xApp32_type,type,(
+    xApp32: ( ty_b_F_a * ty_b ) > ty_a )).
+
+tff(xApp33_type,type,(
+    xApp33: ( toolong33 * ty_listIaI ) > ty_listIa_P_bI )).
+
+tff(xApp34_type,type,(
+    xApp34: ( toolong5 * ty_a_F_a_P_b ) > toolong33 )).
+
+tff(xApp35_type,type,(
+    xApp35: ( ty_a_F_a_P_b * ty_a ) > ty_a_P_b )).
+
+tff(xApp36_type,type,(
+    xApp36: ( ty_listIaI_F_num * ty_listIaI ) > $int )).
+
+tff(xApp37_type,type,(
+    xApp37: ( toolong34 * ty_listIbI ) > ty_listIa_P_bI )).
+
+tff(xApp38_type,type,(
+    xApp38: ( toolong6 * ty_b_F_a_P_b ) > toolong34 )).
+
+tff(xApp39_type,type,(
+    xApp39: ( ty_b_F_a_P_b * ty_b ) > ty_a_P_b )).
+
+tff(xApp40_type,type,(
+    xApp40: ( ty_listIbI_F_num * ty_listIbI ) > $int )).
+
+tff(xApp41_type,type,(
+    xApp41: ( toolong35 * ty_listIa_P_bI ) > ty_listIa_P_bI )).
+
+tff(xApp42_type,type,(
+    xApp42: ( toolong7 * ty_a_P_b_F_a_P_b ) > toolong35 )).
+
+tff(xApp43_type,type,(
+    xApp43: ( ty_a_P_b_F_a_P_b * ty_a_P_b ) > ty_a_P_b )).
+
+tff(xApp44_type,type,(
+    xApp44: ( ty_listIbI_F_b * ty_listIbI ) > ty_b )).
+
+tff(xApp45_type,type,(
+    xApp45: ( ty_num_F_listIbI_F_b * $int ) > ty_listIbI_F_b )).
+
+tff(xApp46_type,type,(
+    xApp46: ( ty_listIbI_F_listIbI * ty_listIbI ) > ty_listIbI )).
+
+tff(xApp47_type,type,(
+    xApp47: ( toolong8 * ty_b ) > ty_listIbI_F_listIbI )).
+
+tff(xr_type,type,(
+    xr: ty_b )).
+
+tff(xApp48_type,type,(
+    xApp48: ( toolong36 * ty_listIa_P_bI ) > ty_listIbI )).
+
+tff(xApp49_type,type,(
+    xApp49: ( toolong9 * ty_a_P_b_F_b ) > toolong36 )).
+
+tff(xApp50_type,type,(
+    xApp50: ( ty_listIaI_F_listIaI * ty_listIaI ) > ty_listIaI )).
+
+tff(xApp51_type,type,(
+    xApp51: ( toolong10 * ty_a ) > ty_listIaI_F_listIaI )).
+
+tff(x_type,type,(
+    x: $int )).
+
+tff(xApp52_type,type,(
+    xApp52: ( ty_listIaI_F_a * ty_listIaI ) > ty_a )).
+
+tff(xApp53_type,type,(
+    xApp53: ( ty_num_F_listIaI_F_a * $int ) > ty_listIaI_F_a )).
+
+tff(xApp54_type,type,(
+    xApp54: ( toolong37 * ty_listIa_P_bI ) > ty_listIaI )).
+
+tff(xApp55_type,type,(
+    xApp55: ( toolong11 * ty_a_P_b_F_a ) > toolong37 )).
+
+tff(xm_type,type,(
+    xm: $int )).
+
+tff(xApp56_type,type,(
+    xApp56: ( ty_listIa_P_bI_F_num * ty_listIa_P_bI ) > $int )).
+
+tff(xq_type,type,(
+    xq: ty_a )).
+
+tff(xApp57_type,type,(
+    xApp57: ( ty_a_P_b_F_a * ty_a_P_b ) > ty_a )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(xApp58_type,type,(
+    xApp58: ( ty_num_F_a_P_b * $int ) > ty_a_P_b )).
+
+tff(xApp59_type,type,(
+    xApp59: ( ty_a_F_num_F_a_P_b * ty_a ) > ty_num_F_a_P_b )).
+
+tff(xApp60_type,type,(
+    xApp60: ( toolong38 * ty_a_F_b ) > ty_a_F_num_F_a_P_b )).
+
+tff(xApp61_type,type,(
+    xApp61: ( toolong39 * ty_listIaI ) > toolong38 )).
+
+tff(xApp62_type,type,(
+    xApp62: ( toolong40 * ty_b_F_b ) > toolong39 )).
+
+tff(xApp63_type,type,(
+    xApp63: ( toolong41 * ty_listIbI ) > toolong40 )).
+
+tff(xApp64_type,type,(
+    xApp64: ( toolong42 * ty_a_P_b_F_b ) > toolong41 )).
+
+tff(xApp65_type,type,(
+    xApp65: ( toolong43 * ty_a_P_b_F_a ) > toolong42 )).
+
+tff(xApp66_type,type,(
+    xApp66: ( toolong44 * ty_listIa_P_bI ) > toolong43 )).
+
+tff(xApp67_type,type,(
+    xApp67: ( toolong45 * ty_a_F_a ) > toolong44 )).
+
+tff(xApp68_type,type,(
+    xApp68: ( toolong46 * ty_listIaI ) > toolong45 )).
+
+tff(xApp69_type,type,(
+    xApp69: ( toolong47 * ty_b_F_a ) > toolong46 )).
+
+tff(xApp70_type,type,(
+    xApp70: ( toolong48 * ty_listIbI ) > toolong47 )).
+
+tff(xApp71_type,type,(
+    xApp71: ( toolong49 * ty_a_F_a_P_b ) > toolong48 )).
+
+tff(xApp72_type,type,(
+    xApp72: ( toolong50 * ty_listIaI ) > toolong49 )).
+
+tff(xApp73_type,type,(
+    xApp73: ( toolong51 * ty_b_F_a_P_b ) > toolong50 )).
+
+tff(xApp74_type,type,(
+    xApp74: ( toolong52 * ty_listIbI ) > toolong51 )).
+
+tff(xApp75_type,type,(
+    xApp75: ( toolong53 * ty_a_P_b_F_a_P_b ) > toolong52 )).
+
+tff(xApp76_type,type,(
+    xApp76: ( toolong54 * ty_listIa_P_bI ) > toolong53 )).
+
+tff(xApp77_type,type,(
+    xApp77: ( toolong12 * $int ) > toolong54 )).
+
+tff(x1_type,type,(
+    x1: toolong12 )).
+
+tff(xApp78_type,type,(
+    xApp78: ( ty_listIa_P_bI_F_a_P_b * ty_listIa_P_bI ) > ty_a_P_b )).
+
+tff(xApp79_type,type,(
+    xApp79: ( toolong13 * $int ) > ty_listIa_P_bI_F_a_P_b )).
+
+tff(xApp80_type,type,(
+    xApp80: ( ty_num_F_num * $int ) > $int )).
+
+tff(xApp81_type,type,(
+    xApp81: ( ty_a_F_num_F_num * ty_a ) > ty_num_F_num )).
+
+tff(xApp82_type,type,(
+    xApp82: ( toolong55 * ty_a_F_b ) > ty_a_F_num_F_num )).
+
+tff(xApp83_type,type,(
+    xApp83: ( toolong56 * ty_listIaI ) > toolong55 )).
+
+tff(xApp84_type,type,(
+    xApp84: ( toolong57 * ty_b_F_b ) > toolong56 )).
+
+tff(xApp85_type,type,(
+    xApp85: ( toolong58 * ty_listIbI ) > toolong57 )).
+
+tff(xApp86_type,type,(
+    xApp86: ( toolong59 * ty_a_P_b_F_b ) > toolong58 )).
+
+tff(xApp87_type,type,(
+    xApp87: ( toolong60 * ty_a_P_b_F_a ) > toolong59 )).
+
+tff(xApp88_type,type,(
+    xApp88: ( toolong61 * ty_listIa_P_bI ) > toolong60 )).
+
+tff(xApp89_type,type,(
+    xApp89: ( toolong62 * ty_a_F_a ) > toolong61 )).
+
+tff(xApp90_type,type,(
+    xApp90: ( toolong63 * ty_listIaI ) > toolong62 )).
+
+tff(xApp91_type,type,(
+    xApp91: ( toolong64 * ty_b_F_a ) > toolong63 )).
+
+tff(xApp92_type,type,(
+    xApp92: ( toolong65 * ty_listIbI ) > toolong64 )).
+
+tff(xApp93_type,type,(
+    xApp93: ( toolong66 * ty_a_F_a_P_b ) > toolong65 )).
+
+tff(xApp94_type,type,(
+    xApp94: ( toolong67 * ty_listIaI ) > toolong66 )).
+
+tff(xApp95_type,type,(
+    xApp95: ( toolong68 * ty_b_F_a_P_b ) > toolong67 )).
+
+tff(xApp96_type,type,(
+    xApp96: ( toolong69 * ty_listIbI ) > toolong68 )).
+
+tff(xApp97_type,type,(
+    xApp97: ( toolong70 * ty_a_P_b_F_a_P_b ) > toolong69 )).
+
+tff(xApp98_type,type,(
+    xApp98: ( toolong71 * ty_listIa_P_bI ) > toolong70 )).
+
+tff(xApp99_type,type,(
+    xApp99: ( toolong14 * $int ) > toolong71 )).
+
+tff(x2_type,type,(
+    x2: toolong14 )).
+
+tff(xApp100_type,type,(
+    xApp100: ( ty_a_F_optionIbI * ty_a ) > ty_optionIbI )).
+
+tff(xApp101_type,type,(
+    xApp101: ( toolong15 * ty_listIa_P_bI ) > ty_a_F_optionIbI )).
+
+tff(xls_type,type,(
+    xls: ty_listIa_P_bI )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_b_F_optionIbI )).
+
+tff(cLEAST_type,type,(
+    cLEAST: ty_num_F_bool_F_num )).
+
+tff(cMAP_type,type,(
+    cMAP: toolong1 )).
+
+tff(cMAP1_type,type,(
+    cMAP1: toolong2 )).
+
+tff(cMAP2_type,type,(
+    cMAP2: toolong3 )).
+
+tff(cMAP3_type,type,(
+    cMAP3: toolong4 )).
+
+tff(cMAP4_type,type,(
+    cMAP4: toolong5 )).
+
+tff(cLENGTH_type,type,(
+    cLENGTH: ty_listIaI_F_num )).
+
+tff(cMAP5_type,type,(
+    cMAP5: toolong6 )).
+
+tff(cLENGTH1_type,type,(
+    cLENGTH1: ty_listIbI_F_num )).
+
+tff(cMAP6_type,type,(
+    cMAP6: toolong7 )).
+
+tff(cEL_type,type,(
+    cEL: ty_num_F_listIbI_F_b )).
+
+tff(cCONS_type,type,(
+    cCONS: toolong8 )).
+
+tff(cMAP7_type,type,(
+    cMAP7: toolong9 )).
+
+tff(cSND_type,type,(
+    cSND: ty_a_P_b_F_b )).
+
+tff(cCONS1_type,type,(
+    cCONS1: toolong10 )).
+
+tff(cEL1_type,type,(
+    cEL1: ty_num_F_listIaI_F_a )).
+
+tff(cMAP8_type,type,(
+    cMAP8: toolong11 )).
+
+tff(cLENGTH2_type,type,(
+    cLENGTH2: ty_listIa_P_bI_F_num )).
+
+tff(cFST_type,type,(
+    cFST: ty_a_P_b_F_a )).
+
+tff(cEL2_type,type,(
+    cEL2: toolong13 )).
+
+tff(cALOOKUP_type,type,(
+    cALOOKUP: toolong15 )).
+
+tff(cNONE_type,type,(
+    cNONE: ty_optionIbI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_num_F_num,Xx2: $int] : (($lesseq(0,xApp80(Xx1,Xx2)) | ~$lesseq(0,Xx2))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: ty_listIa_P_bI_F_num,Xx21: ty_listIa_P_bI] : ($lesseq(0,xApp56(Xx11,Xx21))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx12: ty_listIbI_F_num,Xx22: ty_listIbI] : ($lesseq(0,xApp40(Xx12,Xx22))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx13: ty_listIaI_F_num,Xx23: ty_listIaI] : ($lesseq(0,xApp36(Xx13,Xx23))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx14: ty_num_F_bool_F_num,Xx24: ty_num_F_bool] : ($lesseq(0,xApp1(Xx14,Xx24))) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,xm) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,x) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp100(xApp101(cALOOKUP,xls),X16) = xApp(cSOME,xApp44(xApp45(cEL,xApp1(cLEAST,xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16))),xApp48(xApp49(cMAP7,cSND),xls)))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (~(xq = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ($less(xn,xApp56(cLENGTH2,xls)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (~(xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp52(xApp53(cEL1,xm),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (~(xApp52(xApp53(cEL1,X18),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,x) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp52(xApp53(cEL1,x),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ($less(xn,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X18: $int,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (~(xApp44(xApp45(cEL,xm),xApp48(xApp49(cMAP7,cSND),xls)) = xApp44(xApp45(cEL,x),xApp46(xApp47(cCONS,xr),xApp48(xApp49(cMAP7,cSND),xls)))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp78(xApp79(cEL2,X18),xApp41(xApp42(cMAP6,Xf),Xl)) = xApp43(Xf,xApp78(xApp79(cEL2,X18),Xl))) | (~$less(X18,xApp56(cLENGTH2,Xl)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [X18: $int,X1: ty_listIbI,X2: ty_b_F_a_P_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp78(xApp79(cEL2,X18),xApp37(xApp38(cMAP5,X2),X1)) = xApp39(X2,xApp44(xApp45(cEL,X18),X1))) | (~$less(X18,xApp40(cLENGTH1,X1)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X18: $int,X3: ty_listIaI,X4: ty_a_F_a_P_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp78(xApp79(cEL2,X18),xApp33(xApp34(cMAP4,X4),X3)) = xApp35(X4,xApp52(xApp53(cEL1,X18),X3))) | (~$less(X18,xApp36(cLENGTH,X3)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X18: $int,X5: ty_listIbI,X6: ty_b_F_a,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp52(xApp53(cEL1,X18),xApp30(xApp31(cMAP3,X6),X5)) = xApp32(X6,xApp44(xApp45(cEL,X18),X5))) | (~$less(X18,xApp40(cLENGTH1,X5)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [X18: $int,X7: ty_listIaI,X8: ty_a_F_a,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp52(xApp53(cEL1,X18),xApp50(xApp28(cMAP2,X8),X7)) = xApp29(X8,xApp52(xApp53(cEL1,X18),X7))) | (~$less(X18,xApp36(cLENGTH,X7)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [X18: $int,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,X10),X9)) = xApp57(X10,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [X18: $int,X9: ty_listIa_P_bI,X11: ty_a_P_b_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp44(xApp45(cEL,X18),xApp48(xApp49(cMAP7,X11),X9)) = xApp27(X11,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [X18: $int,X12: ty_listIbI,X13: ty_b_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp44(xApp45(cEL,X18),xApp46(xApp25(cMAP1,X13),X12)) = xApp26(X13,xApp44(xApp45(cEL,X18),X12))) | (~$less(X18,xApp40(cLENGTH1,X12)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [X18: $int,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | ((xApp44(xApp45(cEL,X18),xApp22(xApp23(cMAP,X15),X14)) = xApp24(X15,xApp52(xApp53(cEL1,X18),X14))) | (~$less(X18,xApp36(cLENGTH,X14)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | (~(xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X: ty_a_P_b,X17: $int] : ((~(X = xApp78(xApp79(cEL2,X17),xls)) | (~$less(X17,xApp56(cLENGTH2,xls)) | (~(X16 = xApp57(cFST,X)) | (~xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | ((xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp100(xApp101(cALOOKUP,xls),X16) = cNONE) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (~(xq = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ($less(xn,xApp56(cLENGTH2,xls)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (~(xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp52(xApp53(cEL1,xm),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (~(xApp52(xApp53(cEL1,X18),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,x) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp52(xApp53(cEL1,x),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ($less(xn,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (~(xApp44(xApp45(cEL,xm),xApp48(xApp49(cMAP7,cSND),xls)) = xApp44(xApp45(cEL,x),xApp46(xApp47(cCONS,xr),xApp48(xApp49(cMAP7,cSND),xls)))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp78(xApp79(cEL2,X18),xApp41(xApp42(cMAP6,Xf),Xl)) = xApp43(Xf,xApp78(xApp79(cEL2,X18),Xl))) | (~$less(X18,xApp56(cLENGTH2,Xl)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp78(xApp79(cEL2,X18),xApp37(xApp38(cMAP5,X2),X1)) = xApp39(X2,xApp44(xApp45(cEL,X18),X1))) | (~$less(X18,xApp40(cLENGTH1,X1)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp78(xApp79(cEL2,X18),xApp33(xApp34(cMAP4,X4),X3)) = xApp35(X4,xApp52(xApp53(cEL1,X18),X3))) | (~$less(X18,xApp36(cLENGTH,X3)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp52(xApp53(cEL1,X18),xApp30(xApp31(cMAP3,X6),X5)) = xApp32(X6,xApp44(xApp45(cEL,X18),X5))) | (~$less(X18,xApp40(cLENGTH1,X5)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp52(xApp53(cEL1,X18),xApp50(xApp28(cMAP2,X8),X7)) = xApp29(X8,xApp52(xApp53(cEL1,X18),X7))) | (~$less(X18,xApp36(cLENGTH,X7)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,X10),X9)) = xApp57(X10,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp44(xApp45(cEL,X18),xApp48(xApp49(cMAP7,X11),X9)) = xApp27(X11,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp44(xApp45(cEL,X18),xApp46(xApp25(cMAP1,X13),X12)) = xApp26(X13,xApp44(xApp45(cEL,X18),X12))) | (~$less(X18,xApp40(cLENGTH1,X12)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | ((xApp44(xApp45(cEL,X18),xApp22(xApp23(cMAP,X15),X14)) = xApp24(X15,xApp52(xApp53(cEL1,X18),X14))) | (~$less(X18,xApp36(cLENGTH,X14)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | (~(xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((X16 = xApp57(cFST,xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19))) | (~xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | ((xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp100(xApp101(cALOOKUP,xls),X16) = cNONE) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (~(xq = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ($less(xn,xApp56(cLENGTH2,xls)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (~(xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp52(xApp53(cEL1,xm),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (~(xApp52(xApp53(cEL1,X18),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,x) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp52(xApp53(cEL1,x),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ($less(xn,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (~(xApp44(xApp45(cEL,xm),xApp48(xApp49(cMAP7,cSND),xls)) = xApp44(xApp45(cEL,x),xApp46(xApp47(cCONS,xr),xApp48(xApp49(cMAP7,cSND),xls)))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp78(xApp79(cEL2,X18),xApp41(xApp42(cMAP6,Xf),Xl)) = xApp43(Xf,xApp78(xApp79(cEL2,X18),Xl))) | (~$less(X18,xApp56(cLENGTH2,Xl)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp78(xApp79(cEL2,X18),xApp37(xApp38(cMAP5,X2),X1)) = xApp39(X2,xApp44(xApp45(cEL,X18),X1))) | (~$less(X18,xApp40(cLENGTH1,X1)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp78(xApp79(cEL2,X18),xApp33(xApp34(cMAP4,X4),X3)) = xApp35(X4,xApp52(xApp53(cEL1,X18),X3))) | (~$less(X18,xApp36(cLENGTH,X3)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp52(xApp53(cEL1,X18),xApp30(xApp31(cMAP3,X6),X5)) = xApp32(X6,xApp44(xApp45(cEL,X18),X5))) | (~$less(X18,xApp40(cLENGTH1,X5)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp52(xApp53(cEL1,X18),xApp50(xApp28(cMAP2,X8),X7)) = xApp29(X8,xApp52(xApp53(cEL1,X18),X7))) | (~$less(X18,xApp36(cLENGTH,X7)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,X10),X9)) = xApp57(X10,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp44(xApp45(cEL,X18),xApp48(xApp49(cMAP7,X11),X9)) = xApp27(X11,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp44(xApp45(cEL,X18),xApp46(xApp25(cMAP1,X13),X12)) = xApp26(X13,xApp44(xApp45(cEL,X18),X12))) | (~$less(X18,xApp40(cLENGTH1,X12)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | ((xApp44(xApp45(cEL,X18),xApp22(xApp23(cMAP,X15),X14)) = xApp24(X15,xApp52(xApp53(cEL1,X18),X14))) | (~$less(X18,xApp36(cLENGTH,X14)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | (~(xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (($less(xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19),xApp56(cLENGTH2,xls)) | (~xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | ((xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (~xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | ((xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (xApp2(xApp3(xApp4(xApp5(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xApp13(xApp14(xApp15(xApp16(xApp17(xApp18(xApp19(xApp20(xApp21(xf1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) | (~(xApp52(xApp53(cEL1,X19),xApp54(xApp55(cMAP8,cFST),xls)) = X16) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp44(xApp45(cEL,X18),xApp22(xApp23(cMAP,X15),X14)) = xApp24(X15,xApp52(xApp53(cEL1,X18),X14))) | (~$less(X18,xApp36(cLENGTH,X14)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp44(xApp45(cEL,X18),xApp46(xApp25(cMAP1,X13),X12)) = xApp26(X13,xApp44(xApp45(cEL,X18),X12))) | (~$less(X18,xApp40(cLENGTH1,X12)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp44(xApp45(cEL,X18),xApp48(xApp49(cMAP7,X11),X9)) = xApp27(X11,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom74_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,X10),X9)) = xApp57(X10,xApp78(xApp79(cEL2,X18),X9))) | (~$less(X18,xApp56(cLENGTH2,X9)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom75_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp52(xApp53(cEL1,X18),xApp50(xApp28(cMAP2,X8),X7)) = xApp29(X8,xApp52(xApp53(cEL1,X18),X7))) | (~$less(X18,xApp36(cLENGTH,X7)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom76_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp52(xApp53(cEL1,X18),xApp30(xApp31(cMAP3,X6),X5)) = xApp32(X6,xApp44(xApp45(cEL,X18),X5))) | (~$less(X18,xApp40(cLENGTH1,X5)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom77_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp78(xApp79(cEL2,X18),xApp33(xApp34(cMAP4,X4),X3)) = xApp35(X4,xApp52(xApp53(cEL1,X18),X3))) | (~$less(X18,xApp36(cLENGTH,X3)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom78_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp78(xApp79(cEL2,X18),xApp37(xApp38(cMAP5,X2),X1)) = xApp39(X2,xApp44(xApp45(cEL,X18),X1))) | (~$less(X18,xApp40(cLENGTH1,X1)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom79_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp78(xApp79(cEL2,X18),xApp41(xApp42(cMAP6,Xf),Xl)) = xApp43(Xf,xApp78(xApp79(cEL2,X18),Xl))) | (~$less(X18,xApp56(cLENGTH2,Xl)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom80_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (~(xApp44(xApp45(cEL,xm),xApp48(xApp49(cMAP7,cSND),xls)) = xApp44(xApp45(cEL,x),xApp46(xApp47(cCONS,xr),xApp48(xApp49(cMAP7,cSND),xls)))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom81_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ($less(xn,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom82_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp52(xApp53(cEL1,x),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom83_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (~(xApp52(xApp53(cEL1,X18),xApp50(xApp51(cCONS1,xq),xApp54(xApp55(cMAP8,cFST),xls))) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,x) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom84_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp52(xApp53(cEL1,xm),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom85_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (~(xApp52(xApp53(cEL1,X18),xApp54(xApp55(cMAP8,cFST),xls)) = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$less(X18,xm) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19))))))) )).
+
+tff(axiom86_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ($less(xn,xApp56(cLENGTH2,xls)) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom87_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | (~(xq = xApp57(cFST,xApp78(xApp79(cEL2,xn),xls))) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
+tff(axiom88_axiom,axiom,(
+    ! [X18: $int,Xl: ty_listIa_P_bI,Xf: ty_a_P_b_F_a_P_b,X1: ty_listIbI,X2: ty_b_F_a_P_b,X3: ty_listIaI,X4: ty_a_F_a_P_b,X5: ty_listIbI,X6: ty_b_F_a,X7: ty_listIaI,X8: ty_a_F_a,X9: ty_listIa_P_bI,X10: ty_a_P_b_F_a,X11: ty_a_P_b_F_b,X12: ty_listIbI,X13: ty_b_F_b,X14: ty_listIaI,X15: ty_a_F_b,X16: ty_a,X19: $int,X17: $int] : (((xApp58(xApp59(xApp60(xApp61(xApp62(xApp63(xApp64(xApp65(xApp66(xApp67(xApp68(xApp69(xApp70(xApp71(xApp72(xApp73(xApp74(xApp75(xApp76(xApp77(x1,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19) = xApp78(xApp79(cEL2,xApp80(xApp81(xApp82(xApp83(xApp84(xApp85(xApp86(xApp87(xApp88(xApp89(xApp90(xApp91(xApp92(xApp93(xApp94(xApp95(xApp96(xApp97(xApp98(xApp99(x2,X18),Xl),Xf),X1),X2),X3),X4),X5),X6),X7),X8),X9),X10),X11),X12),X13),X14),X15),X16),X19)),xls)) | ((xApp100(xApp101(cALOOKUP,xls),X16) = cNONE) | (~$lesseq(0,X17) | (~$lesseq(0,X18) | ~$lesseq(0,X19)))))) )).
+
