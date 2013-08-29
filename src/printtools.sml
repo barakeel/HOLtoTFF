@@ -10,16 +10,16 @@ fun PRINTTOOLS_ERR function message =
             message = message}
 
 (* flags *)
-val mflag = ref (false,"polymorph")
-val funflag = ref (false,"lambda-lift")
-val boolflag = ref (false,"bool")
-val numflag = ref (false,"num")
-val hoflag = ref (false,"higher-order")
-val predflag = ref (false,"predicate")
+val mflag     = ref (false,"polymorph")
+val fixpflag  = ref (false,"fixpoint")
+val funflag   = ref (false,"lambda-lift")
+val boolflag  = ref (false,"bool")
+val numflag   = ref (false,"num")
+val hoflag    = ref (false,"higher-order")
 val metisflag = ref (false,"metis-fail") (* check when it fails *)
 val proofflag = ref (false,"proof")
-val allflag = [mflag,funflag,boolflag,numflag,hoflag,predflag,
-               metisflag,proofflag]
+val allflag   = [mflag,fixpflag,funflag,boolflag,numflag,hoflag,
+                 metisflag,proofflag]
 
 fun flag_on flag = flag := (true,snd (!flag))
 fun flag_off flag = flag := (false,snd (!flag))
@@ -38,21 +38,26 @@ fun allflag_value () = map ! allflag
 val nb_problem = ref (0,"Problems    ")
 
 val nb_m       = ref (0,"Polymorph   ") 
+val nb_fixp    = ref (0,"Fixpoint    ")
 val nb_fun     = ref (0,"Lambda-lift ")
 val nb_bool    = ref (0,"Bool Conv   ")
 val nb_num     = ref (0,"Num Conv    ")
 val nb_ho      = ref (0,"Higher Order")
-val nb_pred    = ref (0,"Predicate   ")
+val nb_proof   = ref (0,"Proof       ")
+val nb_metis   = ref (0,"Metis fail  ")
+val nb_list1   = [nb_m,nb_fixp,nb_fun,nb_bool,nb_num,nb_ho,nb_proof,nb_metis]
 
 val nb_unsat   = ref (0,"Unsat       ")
 val nb_unknown = ref (0,"Unkown      ")
 val nb_sat     = ref (0,"Sat         ")
-val nb_timeout = ref (0,"Time Out    ")
-val nb_parsing = ref (0,"Parsing Err ")
-val nb_codeerr = ref (0,"Code Err    ")
-val nb_beagerr = ref (0,"Beagle Err  ")
-val nb_metis   = ref (0,"Metis fail  ")
-val nb_proof   = ref (0,"Proof       ")
+val nb_timeout = ref (0,"Time out    ")
+val nb_parsing = ref (0,"Parsing err ")
+val nb_codeerr = ref (0,"Code err    ")
+val nb_beagerr = ref (0,"Beagle err  ")
+val nb_list2   = [nb_unsat,nb_unknown,nb_sat,nb_timeout,nb_parsing,
+                  nb_codeerr,nb_beagerr]
+
+val nb_all = nb_problem :: (nb_list1 @ nb_list2)
 
 fun addone_nb nb = nb := ((fst (!nb)) + 1,snd (!nb))  
 
@@ -60,6 +65,29 @@ fun update_nb_flag nb flag =
   if fst (!flag) then addone_nb nb else ()
 
 fun update_nb nb n = nb := (n, snd (!nb))
+ 
+fun update_nbl1 () =
+  (
+  update_nb_flag nb_m mflag;
+  update_nb_flag nb_fixp fixpflag;
+  update_nb_flag nb_fun funflag;
+  update_nb_flag nb_bool boolflag;
+  update_nb_flag nb_num numflag;
+  update_nb_flag nb_ho hoflag;
+  update_nb_flag nb_proof proofflag;
+  update_nb_flag nb_metis metisflag
+  )
+
+fun update_nbl2 str =
+  case str of
+    "Unsatisfiable" => addone_nb nb_unsat
+  | "Unknown" => addone_nb nb_unknown
+  | "Satisfiable" => addone_nb nb_sat
+  | "Time out" => addone_nb nb_timeout
+  | "Parsing failed" => addone_nb nb_parsing
+  | "Undefined" => addone_nb nb_codeerr
+  | _ => addone_nb nb_beagerr
+ 
   
 fun readl filename = 
   let
@@ -95,16 +123,8 @@ fun extract_nb str =
 
 fun reset_nb nb = nb := (0,snd (!nb))  
 fun reset_nbl nbl = app reset_nb nbl
-fun reset_all_nb () = reset_nbl 
-  [nb_problem, nb_m, nb_fun, nb_bool, nb_num, nb_ho, nb_pred, 
-   nb_proof, nb_metis,
-   nb_unsat, nb_unknown, nb_sat, 
-   nb_timeout, nb_parsing, nb_codeerr, nb_beagerr];
+fun reset_all_nb () = reset_nbl (nb_problem :: (nb_list1 @ nb_list2))
  
-
-(* test    
-val str = "Higher Order: 102"
-*) 
 fun update_nbl nbl strl =
   case (nbl,strl) of
     ([],_) => ()
@@ -115,16 +135,12 @@ fun update_all_nb filename =
   let val strl = readl filename in
     case strl of
       pb :: "\n" ::
-      m :: f :: bool :: num :: ho :: pred :: proof :: meti :: "\n" :: 
+      m :: fp :: f :: bool :: num :: ho :: proof :: meti :: "\n" :: 
       unsa :: unkn :: sat :: time :: pars :: code :: beag :: fin
         =>
-      (
-      update_nbl
-        [nb_problem,nb_m,nb_fun,nb_bool,nb_num,nb_ho,nb_pred,nb_proof,nb_metis,
-         nb_unsat,nb_unknown,nb_sat,nb_timeout,nb_parsing,nb_codeerr,nb_beagerr]
-        [pb,m,f,bool,num,ho,pred,proof,meti,
+      update_nbl nb_all
+        [pb,m,fp,f,bool,num,ho,proof,meti,
          unsa,unkn,sat,time,pars,code,beag]
-      )  
     | _ => reset_all_nb ()
   end
   handle _ => reset_all_nb ()  

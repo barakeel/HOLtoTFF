@@ -57,22 +57,12 @@ and prename_simpletyl tyl =
   | [ty] => prename_simplety ty
   | ty :: m => (prename_simplety ty) ^ "_" ^ (prename_simpletyl m)
   
-fun name_simplety ty = "ty_" ^ (prename_simplety ty)
+fun name_simplety ty = 
+  if String.size (prename_simplety ty) > 40
+  then "toolong"
+  else "ty_" ^ (prename_simplety ty)
 
-(* add add for a simpletype *) 
-(* tyadict should already contain alphatydict *)
-(* Booltype is an exception *) 
-
-
-
-(* should add the axioms for boolean before if we encounter one boolean arg *)
-(*
-btrue : bool
-bfalse : bool
-/\ !x:bool x=xtrue or x=xfalse
-*)
-
-(* tyadict *)
+(* CREATE THE TYPE ARITY DICTIONNARY *)
 fun add_simpletya (ty,arity) tyadict =
   if arity <> 0 then
     raise NAMETYPE_ERR "add_simpletya" "not a simpletype"
@@ -137,7 +127,6 @@ fun create_tyadict term =
   let val tyadict = add_compoundtyal compoundtyal newsimpletyadict in
     tyadict
   end end end end 
-
 
 
 end

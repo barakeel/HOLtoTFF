@@ -5,6 +5,7 @@ open HolKernel Abbrev boolLib numSyntax
      basictools listtools mydatatype
      syntax
      extractvar namevar
+     printtools
 
 fun MONOMORPH_ERR function message =
     HOL_ERR{origin_structure = "monomorph",
@@ -14,9 +15,13 @@ fun MONOMORPH_ERR function message =
 
 (* TEST *)
 fun is_polymorph term = (polymorphic o type_of) term
-fun is_polymorph_thm thm = exists is_polymorph (get_cl_thm thm)
+fun is_monomorphable c = is_polymorph c andalso not (name_of c = "=" )
+fun is_equal c = (name_of c = "=") 
+fun is_polymorph_thm thm = 
+  exists is_polymorph (filter (not o is_equal) (get_cl_thm thm))
 fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
 
+  
 (* SUBSTITION SET *)
 fun get_redl subst =
   case subst of
@@ -46,79 +51,81 @@ fun compatible_subst subst1 subst2 =
   let val l3 = inter l1 l2 in
     all (same_res subst1 subst2) l3 
   end end end
-
-fun merge_subst subst1 subst2 =
-  let val l1 = get_redl subst1 in
-  let val l2 = get_redl subst2 in
-  let val l3 = inter l1 l2 in
-  let val subst1aux = repeatchange remove_red l3 subst1 in
-    subst1aux @ subst2
-  end end end end  
-
-(* SUBSTITUTION ARITHMETIC *)
-fun add_subst subst1 subst2 =
-  if compatible_subst subst1 subst2 
-  then [merge_subst subst1 subst2]
-  else [subst1,subst2]
   
-fun multone_subst subst substl =
-  case substl of
-    [] => [[]]
-  | s :: m => add_subst subst s @ multone_subst subst m
-   
-fun mult_subst substl1 substl2 =  
-  case substl1 of
-    [] => [[]]
-  | s1 :: m => (multone_subst s1 substl2) @ (mult_subst m substl2)
-  
-fun list_mult_subst_aux substll =
-  case substll of  
-    [] => [[]]
-  | s :: m =>  mult_subst (list_mult_subst_aux m) s
-fun list_mult_subst l = list_mult_subst_aux (rev l)
-
 (* SUBSTITUTION NORMALISATION *)
-fun is_identity {redex = red, residue = res} = (red = res)
-fun erase_identity subst = filter (not o is_identity) subst
 fun less_ty (ty1,ty2) = (Type.compare (ty1,ty2) = LESS)
   
 fun less_redres ({redex = r1, residue = _},{redex = r2, residue = _}) =
   less_ty (r1,r2)
     
 fun normalize_subst subst =
-  quicksort less_redres (erase_identity subst)
+  quicksort less_redres (erase_double subst)
   
 fun normalize_substl substl =
   erase_double (map normalize_subst substl)
+  
+(* SUBSTITUTION ARITHMETIC *)
+(* every entry is normalized and should return normalized *)
+fun merge_subst subst1 subst2 =
+  let val l1 = get_redl subst1 in
+  let val l2 = get_redl subst2 in
+  let val l3 = inter l1 l2 in
+  let val subst1aux = repeatchange remove_red l3 subst1 in
+    normalize_subst (subst1aux @ subst2)
+  end end end end  
+
+fun add_subst subst1 subst2 =
+  if compatible_subst subst1 subst2 
+  then normalize_substl [subst1,subst2,merge_subst subst1 subst2]
+  else normalize_substl [subst1,subst2]
+  
+fun multone_subst_aux subst substl =
+  case substl of
+    [] => []
+  | s :: m => normalize_substl (add_subst subst s @ multone_subst_aux subst m)
+
+fun multone_subst subst substl = 
+  wrap "monomorph" "multone_subst" "" (multone_subst_aux subst) substl  
+   
+fun mult_subst substl1 substl2 =  
+  case substl1 of
+    [] => []
+  | s1 :: m => normalize_substl (
+               (multone_subst s1 substl2) @ (mult_subst m substl2)
+               )
+  
+fun list_mult_subst_aux substll =
+  case substll of  
+    [] => []
+  | [sl] => sl
+  | sl :: m => normalize_substl (mult_subst (list_mult_subst_aux m) sl)
+
+fun list_mult_subst l = 
+  wrap "monomorph" "list_mult_subst" "" list_mult_subst_aux (rev l)
+
+(* SUBSTL MAXIMAL ELEMENTS *)
+fun is_identity {redex = red, residue = res} = (red = res)
+
+fun remove_identity s = filter (not o is_identity) s 
+
+fun get_maxsubstl sl = 
+   erase_double (
+    map (remove_identity) 
+      (filter (inv is_maxset sl) sl)) 
 
 (* MATCH *)
 fun is_matchable c1 c2 =
   name_of c1 = name_of c2 andalso 
   success (match_type (type_of c1)) (type_of c2)
- 
-(* always add the identity to prevent multiplication by 0 *) 
-fun match_c_to_cl const cl =
-  case cl of
-    [] => [[]]
-  | c :: m => 
-    if is_matchable const c
-    then match_type (type_of const) (type_of c) :: 
-         match_c_to_cl const m 
-    else match_c_to_cl const m
- 
-(* remove = from monomorphisation *) 
-fun is_equal c = (name_of c = "=") 
 
-local fun is_interesting c =
-  is_polymorph c andalso (not o is_equal) c
-in
-fun match_cl_to_cl cl1 cl2 = 
-  normalize_substl (
-  list_mult_subst ( 
-     map (inv match_c_to_cl cl2) (filter is_interesting cl1)
-  )) 
-end
+fun match_c_c c1 c2 = match_type (type_of c1) (type_of c2)
 
+(* may return an empty list *)
+fun match_c_cl c cl =
+  let val newcl = filter (is_matchable c) cl in
+    map (match_c_c c) newcl
+  end
+ 
 (* INSTANTIATION *) 
 fun inst_c subst c = mk_const (name_of c,type_subst subst (type_of c))
 
@@ -139,12 +146,11 @@ fun inst_cll substll clthml =
         [] => []
       | _  => inst_cl (hd substll) (hd clthml) :: 
               inst_cll (tl substll) (tl clthml)
+              
 
 fun inst_thm substl thm  = 
-  let val thml = map (inv INST_TYPE thm) substl in
-    if null thml 
-    then raise MONOMORPH_ERR "inst_thm" "empty subst list"
-    else LIST_CONJ thml
+  let val newsubstl = ([] :: substl) in
+    LIST_CONJ (map (inv INST_TYPE thm) substl)
   end
 
 fun inst_thml substll thml =
@@ -157,37 +163,42 @@ fun inst_thml substll thml =
       | _  => inst_thm (hd substll) (hd thml) :: 
               inst_thml (tl substll) (tl thml)
 
-(* SUBSTITUTION CREATION *) 
-fun create_substl clthm (clthml,clgoal) = 
-  let val cl = erase_double (list_merge (clthml @ [clgoal]))
-  in
-    match_cl_to_cl clthm cl
-  end
+(* SUBSTITUTION CREATION FROM A PROBLEM *) 
+fun create_substl clthm clpb =
+  let val mclthm =  filter is_monomorphable clthm in
+  let val substll1 = map (inv match_c_cl clpb) mclthm in
+  let val substll2 = map (normalize_substl) substll1 in
+  let val substll3 = filter (not o null) substll2 in
+    list_mult_subst substll3
+  end end end end 
 
-fun create_substll (clthml,clgoal) =
-  map (inv create_substl (clthml,clgoal)) clthml
+fun create_substll clthml clpb = map (inv create_substl clpb) clthml
 
 (* repeat till finding a fix point with arbitrary parameters*)
-fun repeat_create_substll (clthml,clgoal) substll instnl =
-  let val newsubstll = create_substll (clthml,clgoal) in
-  let val newinstnl = map length newsubstll in
-  let val idsubstll = make_list_n (length clthml) [] in
-    if suml newinstnl <= suml instnl orelse
-       suml newinstnl > 15
+fun repeat_create_substll (clthml,clgoal) substll =
+  let val clpb = (list_merge (clthml @ [clgoal])) in
+  let val newsubstll = create_substll clthml clpb in
+  let val n = suml (map length substll) in
+  let val newn = suml (map length newsubstll) in
+  let val maxn = suml (map length (map get_maxsubstl newsubstll)) in
+    (
+    if newn <= n then flag_on fixpflag else ()
+    ;
+    if newn <= n orelse maxn > 15
     then 
-      if suml newinstnl < 45 then newsubstll else substll
+      map get_maxsubstl substll
     else 
-      repeat_create_substll 
-        (inst_cll newsubstll clthml,clgoal) newsubstll newinstnl
-  end end end   
+      repeat_create_substll (inst_cll newsubstll clthml,clgoal) newsubstll
+    )
+  end end end end end 
+
 (* MONOMORPHISATION *)  
 fun monomorph_pb_w (thml,goal) =
   let val clthml = map get_cl_thm thml in
   let val clgoal = get_cl_goal goal in
   let val substll = repeat_create_substll 
                      (clthml,clgoal) 
-                     (make_list_n (length thml) [])
-                     (make_list_n (length thml) 1)                     
+                     (make_list_n (length thml) [])                    
   in
     (inst_thml substll thml,goal) 
   end end end

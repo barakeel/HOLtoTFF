@@ -1,6 +1,0 @@
-Number: 1
-Status: Unsatisfiable
-Info: proof 
-Thm list: 
-Goal:  [] |- x + 1 = x + 1
-

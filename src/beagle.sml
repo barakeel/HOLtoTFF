@@ -52,27 +52,7 @@ fun beagle_interact filename finalgoal =
   update_SZSstatus filename
   )
   
-fun update_nbl1 () =
-  (
-  update_nb_flag nb_m mflag;
-  update_nb_flag nb_fun funflag;
-  update_nb_flag nb_bool boolflag;
-  update_nb_flag nb_num numflag;
-  update_nb_flag nb_ho hoflag;
-  update_nb_flag nb_pred predflag;
-  update_nb_flag nb_proof proofflag;
-  update_nb_flag nb_metis metisflag
-  )
 
-fun update_nbl2 str =
-  case str of
-    "Unsatisfiable" => addone_nb nb_unsat
-  | "Unknown" => addone_nb nb_unknown
-  | "Satisfiable" => addone_nb nb_sat
-  | "Time out" => addone_nb nb_timeout
-  | "Parsing failed" => addone_nb nb_parsing
-  | "Undefined" => addone_nb nb_codeerr
-  | _ => addone_nb nb_beagerr
 
 
 fun init_beagle_tac_aux filename =
@@ -134,12 +114,8 @@ flag_update_metis thml goal;
            write_badresult filename thml goal
            ) 
 ;
-(* stats *)
-write_stats filename (!nb_problem) 
-  [!nb_m,!nb_fun,!nb_bool,!nb_num,!nb_ho,!nb_pred,!nb_proof,!nb_metis] 
-  [!nb_unsat,!nb_unknown,!nb_sat,!nb_timeout,
-   !nb_parsing,!nb_codeerr,!nb_beagerr]  
-;
+write_stats filename (!nb_problem) (map ! nb_list1) (map ! nb_list2)
+; 
 if fst (!metisflag) 
 then metisTools.METIS_TAC thml goal (* raise the same exception *)
 else ([],fn x => (mk_thm goal)) (* *)

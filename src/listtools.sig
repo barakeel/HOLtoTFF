@@ -13,6 +13,8 @@ sig
   val add_once : ''a -> ''a list -> ''a list
   val inter : ''a list -> ''a list -> ''a list
   val subset : ''a list -> ''a list -> bool
+  val strict_subset : ''a list -> ''a list -> bool 
+  val is_maxset : ''a list -> ''a list list -> bool
   val list_subset : ''a list list -> ''a list list -> bool
   val list_merge : ''a list list -> ''a list
   (* sort *)

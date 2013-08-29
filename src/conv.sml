@@ -138,7 +138,7 @@ fun bool_conv_sub_one term =
   end
 
 fun bool_conv_sub_all term = 
-  REPEATC bool_conv_sub_one term
+  wrap "conv" "bool_conv_sub_all" "" (REPEATC bool_conv_sub_one) term
 
 fun bool_conv_aux term = 
   case termstructure term of
@@ -156,7 +156,7 @@ fun bool_conv_aux term =
                    term     
     | _ => COMB_CONV bool_conv_aux term
     )
-  | Abs => raise UNCHANGED
+  | Abs => raise CONV_ERR "bool_conv_aux" "abstraction"
 
 fun bool_conv term =
   wrap "conv" "bool_conv" "" (bool_conv_sub_all THENC bool_conv_aux) term

@@ -30,8 +30,24 @@ load "printresult";open printresult;
 load "beagle"; open beagle;
 *)
 
-(* PROBLEM TEST *)
-(* main *)
+(* PAPER EXAMPLES *)
+(* arithmetic for substitution *)
+add_subst [``:'a`` |-> ``:bool``] [``:'b`` |-> ``:bool``]; 
+
+mult_subst 
+  [[``:'a`` |-> ``:bool``], [``:'b`` |-> ``:bool``]]
+  [[``:'b`` |-> ``:num``] , [``:'c`` |-> ``:num``]];
+  
+get_maxsubstl it;
+
+(* monomorphisation *)
+val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
+val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
+val thml = [th1,th2];
+val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
+
+
+(* PROBLEM TEST *)   
 show_assums :=  true;
 metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
@@ -54,6 +70,10 @@ val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
 val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
 val thml = [th1,th2];
 val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
+val filename = "result/monomorph2";
+val th1 = mk_thm ([],``!x. x = y ``);
+val thml = [th1];
+val goal:goal = ([], ``2 = 3``);
 (* num *)
 val filename = "result/num";
 val thml = [];
@@ -86,27 +106,9 @@ val filename = "result/funconv";
 val thml = [];
 val goal : goal = ([],``(!y:num -> num -> num . P y) ==> (P (\x y. x + y))`` );
 
-(* ERROR *)
+(* DEBUGGING *)
 (* bool conv *)
 bool_conv term;
-val term = `` ∀s'.
-   s' ⊂ {z | (z,x) ∈ lo} ⇒
-   ∀lo X x y.
-     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
-     finite_prefixes lo X ⇒
-     ∃i j.
-       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
-       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y),
- FINITE {z | (z,x) ∈ lo}, x ∉ X DIFF minimal_elements X lo,
- minimal_elements X lo = {x'}, x ∈ X, y ∈ X, (x,y) ∈ lo,
- {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
- {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
- finite_prefixes lo X,
- finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
-   (X DIFF minimal_elements X lo), linear_order lo X,
- linear_order (rrestrict lo (X DIFF minimal_elements X lo))
-   (X DIFF minimal_elements X lo) ``;
-
 bool_conv ``P (!x. P (z /\ T) /\ x):bool``;
 bool_conv ``P (b:bool) :bool``;
 bool_conv ``P (!x. P (b:bool))``;
@@ -116,34 +118,20 @@ bool_conv_sub_one ``P ( P ( b:bool)):bool``;
 bool_conv_sub_one ``P (b:bool) :bool``;
 bool_conv_sub_all ``P ( P ( b:bool)):bool``;
 
-(* good example where monomorphing once doesn't work *)
-val filename = "result/monomorph";
-val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
-val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
-val thml = [th1,th2];
-val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
-
-val cl1 = get_cl_thm th1;
-val cl2 = get_cl_thm th2;
-val clg = get_cl_goal goal;
-val clpb = ([cl1,cl2],clg);
-val (clthml,clgoal) = clpb;
-
-val substll = create_substll clpb;
+(* monomorphisation *)
+val clthml = map get_cl_thm thml;
+val clgoal = get_cl_goal goal;
+val substll = create_substll(clthml,clgoal);
 val newclthml = inst_cll substll clthml;
 val newclpb = (newclthml,clgoal);
-
 val newsubstll = create_substll newclpb;
 val instnl = map length substll;
-val newinstnl = multl (map length newsubstll) instnl;
-
+val newinstnl = map length newsubstll;
 val substll = repeat_create_substll 
                      (clthml,clgoal) 
                      (make_list_n (length thml) [])
-                     (make_list_n (length thml) 1)        
-
+                     (make_list_n (length thml) 1);
 val (thml,goal) = monomorph_pb (thml,goal);
-(* slow down the process quite a bit *)
 
 (* dictionnary *)      
 val term = list_mk_conj (fst (goal) @ [snd goal]);
@@ -152,3 +140,37 @@ val bvdict = create_bvdict term;
 val cdict = create_cdict term;
 val tyadict = create_tyadict term;
 
+(* ERROR *)
+val term = ``x ∈ X = ∃i. LNTH i (LUNFOLD f lo) = SOME x``;
+val term = 
+``∀r s. finite_prefixes r s = ∀e. e ∈ s ==> FINITE {e' | (e',e) ∈ r}``;
+
+val term = 
+``∀s.
+     FINITE s ==>
+     ∀lo X x.
+       x ∈ X /\ (s = {y | (y,x) ∈ lo}) /\ linear_order lo X /\
+       finite_prefixes lo X ==>
+       ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x``;
+
+(normalForms.CNF_CONV THENC fun_conv THENC normalForms.CNF_CONV
+THENC bool_conv) term;
+
+
+
+val th1 = mk_thm ([],`` ∀x y. (SOME x = SOME y) = (x = y)``)
+val th2 = mk_thm ([],`` 
+   (∀n. LNTH n [||] = NONE) /\ 
+   (∀h t. LNTH 0 (h:::t) = SOME h) /\
+   ∀n h t. LNTH (SUC n) (h:::t) = LNTH n t ``);
+
+val thml = [th1,th2];
+val thml = [];
+
+val goal : goal = ([],``
+   ∀x.
+      let n = LEAST n. ∃e. (SOME e = LNTH n x) /\ P e
+         in
+           (THE (LDROP n x)) P a = y ``);
+ 
+ val goal : goal = ([],``SOME (THE (LDROP (SUC n) x),THE (LNTH n x))``);

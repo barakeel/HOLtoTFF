@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "Calling beagle..." 
-filepath=/home/thibault/Desktop/SMLproject/HOLtoTFF/test
+filepath=/home/thibault/Desktop/SMLproject/HOLtoTFF/error
 #assume beagle is located here
 BEAGLE=$HOME/Desktop/Scalaproject/beagleproject
 
