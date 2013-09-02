@@ -50,7 +50,7 @@ sig
   val update_nbl1 : unit -> unit 
   val update_nbl2 : string -> unit 
 
-  (* should be in an other file *)
+  (* printing *)
   val readl : string -> string list 
   val string_to_int : string -> int 
   val update_all_nb : string -> unit

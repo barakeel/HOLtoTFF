@@ -1,0 +1,113 @@
+%----------------------------------------------------------------------------
+% Number   : 293
+%----------------------------------------------------------------------------
+tff(ty_llistIaI_type,type,(
+    ty_llistIaI: $tType )).
+
+tff(ty_optionIaI_type,type,(
+    ty_optionIaI: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_P_a_F_bool_type,type,(
+    ty_a_P_a_F_bool: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI_type,type,(
+    ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI: $tType )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(xx_type,type,(
+    xx: ty_a )).
+
+tff(xlo_type,type,(
+    xlo: ty_a_P_a_F_bool )).
+
+tff(xX_type,type,(
+    xX: ty_a_F_bool )).
+
+tff(cSUBSET_type,type,(
+    cSUBSET: ( ty_a_F_bool * ty_a_F_bool ) > $o )).
+
+tff(cIN_type,type,(
+    cIN: ( ty_a * ty_a_F_bool ) > $o )).
+
+tff(cCHOICE_type,type,(
+    cCHOICE: ty_a_F_bool > ty_a )).
+
+tff(cEMPTY_type,type,(
+    cEMPTY: ty_a_F_bool )).
+
+tff(cLNTH_type,type,(
+    cLNTH: ( $int * ty_llistIaI ) > ty_optionIaI )).
+
+tff(cLUNFOLD_type,type,(
+    cLUNFOLD: ( ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI * ty_a_P_a_F_bool ) > ty_llistIaI )).
+
+tff(clinear_order_to_list_f_type,type,(
+    clinear_order_to_list_f: ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI )).
+
+tff(crrestrict_type,type,(
+    crrestrict: ( ty_a_P_a_F_bool * ty_a_F_bool ) > ty_a_P_a_F_bool )).
+
+tff(cDIFF_type,type,(
+    cDIFF: ( ty_a_F_bool * ty_a_F_bool ) > ty_a_F_bool )).
+
+tff(cminimal_elements_type,type,(
+    cminimal_elements: ( ty_a_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool )).
+
+tff(cUNION_type,type,(
+    cUNION: ( ty_a_F_bool * ty_a_F_bool ) > ty_a_F_bool )).
+
+tff(cdomain_type,type,(
+    cdomain: ty_a_P_a_F_bool > ty_a_F_bool )).
+
+tff(crange_type,type,(
+    crange: ty_a_P_a_F_bool > ty_a_F_bool )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_a > ty_optionIaI )).
+
+tff(clinear_order_type,type,(
+    clinear_order: ( ty_a_P_a_F_bool * ty_a_F_bool ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom2_axiom,axiom,(
+    (cCHOICE(cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo)) = xx) )).
+
+tff(axiom3_axiom,axiom,(
+    ~cIN(xx,cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo)) )).
+
+tff(axiom4_axiom,axiom,(
+    cIN(xx,cdomain(xlo)) )).
+
+tff(axiom5_axiom,axiom,(
+    clinear_order(crrestrict(xlo,cDIFF(cUNION(cdomain(xlo),crange(xlo)),cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo))),cDIFF(cUNION(cdomain(xlo),crange(xlo)),cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo))) )).
+
+tff(axiom6_axiom,axiom,(
+    cSUBSET(cDIFF(cUNION(cdomain(xlo),crange(xlo)),cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo)),xX) )).
+
+tff(axiom7_axiom,axiom,(
+    cIN(cCHOICE(cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo)),cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo)) )).
+
+tff(axiom8_axiom,axiom,(
+    ~(cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo) = cEMPTY) )).
+
+tff(axiom9_axiom,axiom,(
+    (cLNTH(xn,cLUNFOLD(clinear_order_to_list_f,crrestrict(xlo,cDIFF(cUNION(cdomain(xlo),crange(xlo)),cminimal_elements(cUNION(cdomain(xlo),crange(xlo)),xlo))))) = cSOME(xx)) )).
+
+tff(axiom10_axiom,axiom,(
+    clinear_order(xlo,xX) )).
+
+%----------------------------------------------------------------------------
+

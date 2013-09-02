@@ -1,0 +1,4 @@
+Segmentation fault
+/home/thibault/Desktop/HOLtest/HOL/bin/Holmake: Failed script build for prelimScript - exited with code 8B
+Build failed in directory /home/thibault/Desktop/HOLtest/HOL/src/ring/src (exited with code 1)
+

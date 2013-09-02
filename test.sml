@@ -40,11 +40,7 @@ mult_subst
   
 get_maxsubstl it;
 
-(* monomorphisation *)
-val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
-val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
-val thml = [th1,th2];
-val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
+
 
 
 (* PROBLEM TEST *)   
@@ -70,10 +66,6 @@ val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
 val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
 val thml = [th1,th2];
 val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
-val filename = "result/monomorph2";
-val th1 = mk_thm ([],``!x. x = y ``);
-val thml = [th1];
-val goal:goal = ([], ``2 = 3``);
 (* num *)
 val filename = "result/num";
 val thml = [];
@@ -81,7 +73,16 @@ val goal = ([``x=0``,``y=0``], ``f x = 0``);
 (* bool *)
 val filename = "result/bool"; 
 val thml = [];
-val goal : goal = ([],``P (x = x + 1) ==> P F ``); 
+val goal : goal = ([]val th1 = mk_thm ([],
+`` ∀s.
+     FINITE s ⇒
+     ∀lo X x.
+       x ∈ X ∧ (s = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+       finite_prefixes lo X ⇒
+       ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x ``);
+val th2 = mk_thm ([], 
+``∀r s. finite_prefixes r s ⇔ ∀e. e ∈ s ⇒ FINITE {e' | (e',e) ∈ r}``);
+val thml = [];,``P (x = x + 1) ==> P F ``); 
 (* easy problems *)
 val filename = "result/easypb";
 val thml = [];
@@ -100,7 +101,16 @@ val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 (* boolarg *)
 val filename = "result/boolarg"; 
 val thml = [];
-val goal : goal = ([],``P (!x. x = 0) ==> P F ``);
+val goal : goal = ([]val th1 = mk_thm ([],
+`` ∀s.
+     FINITE s ⇒
+     ∀lo X x.
+       x ∈ X ∧ (s = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+       finite_prefixes lo X ⇒
+       ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x ``);
+val th2 = mk_thm ([], 
+``∀r s. finite_prefixes r s ⇔ ∀e. e ∈ s ⇒ FINITE {e' | (e',e) ∈ r}``);
+val thml = [];,``P (!x. x = 0) ==> P F ``);
 (* funconv *)
 val filename = "result/funconv";   
 val thml = [];
@@ -119,14 +129,34 @@ bool_conv_sub_one ``P (b:bool) :bool``;
 bool_conv_sub_all ``P ( P ( b:bool)):bool``;
 
 (* monomorphisation *)
-val clthml = map get_cl_thm thml;
+val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
+val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
+val thml = [th1,th2];
+val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
 val clgoal = get_cl_goal goal;
-val substll = create_substll(clthml,clgoal);
-val newclthml = inst_cll substll clthml;
-val newclpb = (newclthml,clgoal);
-val newsubstll = create_substll newclpb;
-val instnl = map length substll;
-val newinstnl = map length newsubstll;
+
+val clthml1 = map get_cl_thm thml;
+map (map type_of) clthml1;
+val clpb1 = (list_merge (clthml1 @ [clgoal]));
+val substll1 = create_substll clthml1 clpb1;
+
+val clthm = hd (clthml1);
+val mclthm = filter is_monomorphable clthm;
+val substll11 = map (inv match_c_cl clpb1) mclthm;
+val substll21 = map (normalize_substl) substll11;
+val substll31 = filter (not o null) substll11;
+val substll1 = list_mult_subst substll3;
+
+val clthml2 = inst_cll substll1 clthml1;
+map (map type_of) clthml2;
+val clpb2 = (list_merge (clthml2 @ [clgoal]));
+val substll2 = create_substll clthml2 clpb2;
+
+val clthml3 = inst_cll substll2 clthml2;
+map (map type_of) clthml3;
+val clpb3 = (list_merge (clthml3 @ [clgoal]));
+val substll3 = create_substll clthml3 clpb3;
+
 val substll = repeat_create_substll 
                      (clthml,clgoal) 
                      (make_list_n (length thml) [])
@@ -141,36 +171,67 @@ val cdict = create_cdict term;
 val tyadict = create_tyadict term;
 
 (* ERROR *)
-val term = ``x ∈ X = ∃i. LNTH i (LUNFOLD f lo) = SOME x``;
-val term = 
-``∀r s. finite_prefixes r s = ∀e. e ∈ s ==> FINITE {e' | (e',e) ∈ r}``;
+val th1 = mk_thm ([],
+`` ∀s.
+     FINITE s ⇒
+     ∀lo X x.
+       x ∈ X ∧ (s = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+       finite_prefixes lo X ⇒
+       ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x ``);
+val th2 = mk_thm ([], 
+``∀r s. finite_prefixes r s ⇔ ∀e. e ∈ s ⇒ FINITE {e' | (e',e) ∈ r}``);
+val thml = [];
+val goal = ( 
+[``∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y) ``,``
+ FINITE {z | (z,x) ∈ lo} ``,`` x ∉ X DIFF minimal_elements X lo ``,``
+ minimal_elements X lo = {x'}, x ∈ X, y ∈ X, (x,y) ∈ lo ``,``
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X ``,``
+ finite_prefixes lo X ``,``
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo) ``,`` linear_order lo X ``,``
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)``]
+, ``∃j. LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y``);
+
+BEAGLE_NF_TAC
 
 val term = 
-``∀s.
-     FINITE s ==>
+``∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y)``;
+
+val term = ``∀s.
+     FINITE s ⇒
      ∀lo X x.
-       x ∈ X /\ (s = {y | (y,x) ∈ lo}) /\ linear_order lo X /\
-       finite_prefixes lo X ==>
+       x ∈ X ∧ (s = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+       finite_prefixes lo X ⇒
        ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x``;
+
+val term = ``∀r s. finite_prefixes r s ⇔ ∀e. e ∈ s ⇒ FINITE {e' | (e',e) ∈ r}``;
+
+val term = ``
+
 
 (normalForms.CNF_CONV THENC fun_conv THENC normalForms.CNF_CONV
 THENC bool_conv) term;
 
-
-
-val th1 = mk_thm ([],`` ∀x y. (SOME x = SOME y) = (x = y)``)
-val th2 = mk_thm ([],`` 
-   (∀n. LNTH n [||] = NONE) /\ 
-   (∀h t. LNTH 0 (h:::t) = SOME h) /\
-   ∀n h t. LNTH (SUC n) (h:::t) = LNTH n t ``);
-
-val thml = [th1,th2];
-val thml = [];
-
-val goal : goal = ([],``
-   ∀x.
-      let n = LEAST n. ∃e. (SOME e = LNTH n x) /\ P e
-         in
-           (THE (LDROP n x)) P a = y ``);
  
- val goal : goal = ([],``SOME (THE (LDROP (SUC n) x),THE (LNTH n x))``);
+ 
+ 
+ 
+ 
+ 
+ 

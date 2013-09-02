@@ -8,5 +8,5 @@ timeout 15s \
   $HOME/scala-2.10.1/bin/scala -Dfile.encoding=UTF-8 \
     -J-Xss200m \
     -classpath $BEAGLE/lib/'*':$BEAGLE/bin:$BEAGLE \
-    -howtorun:object "beagle.main" "-proofstatus" "$filepath"
+    -howtorun:object "beagle.main" "-proofstatus" "-genvars" "$filepath"
 #

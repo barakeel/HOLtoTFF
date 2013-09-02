@@ -51,9 +51,6 @@ fun beagle_interact filename finalgoal =
     handle _ => raise BEAGLE_ERR "beagle_call" "";
   update_SZSstatus filename
   )
-  
-
-
 
 fun init_beagle_tac_aux filename =
   (
