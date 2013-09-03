@@ -2,7 +2,8 @@ structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib
-     listtools syntax printtools
+     basictools listtools syntax printtools
+     extractvar
      higherorder monomorph tactic
      printtff printresult
 
@@ -69,34 +70,32 @@ fun write_goodresult filename thml goal =
 fun write_badresult filename thml goal =
   write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
     (allflag_value ())
-  
+ 
 fun beagle_tac_aux filename thml goal = 
-( 
-init_beagle_tac_aux filename;
-addone_nb nb_problem;
-flag_update_metis thml goal; 
   (
-  flag_update mflag (is_polymorph_pb (thml,goal));
-  let val (mthml,mgoal) = 
-    if fst (!mflag) then monomorph_pb (thml,goal) else (thml ,goal)
-  in 
-  let val (finalgoal_list,validation) = BEAGLE_NF_TAC mthml mgoal  in
-                                        (* update all flags *)
-  let val finalgoal = hd (finalgoal_list) in
+  init_beagle_tac_aux filename;
+  addone_nb nb_problem;
     (
-    flag_update proofflag
-      (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
-    beagle_interact filename finalgoal;
-    update_nbl1 (); 
-    update_nbl2 (!SZSstatus);
-    if (!SZSstatus = "Unsatisfiable")
-    then write_goodresult filename thml goal
-    else 
-      (write_badresult filename thml goal;
-       write_tff (mk_tfferrpath filename) (!nb_problem) finalgoal true)
-    )  
-  end end end
-  
+    flag_update mflag (is_polymorph_pb (thml,goal));
+    let val (mthml,mgoal) = 
+      if fst (!mflag) then monomorph_pb (thml,goal) else (thml ,goal)
+    in 
+    let val (finalgoal_list,validation) = BEAGLE_NF_TAC mthml mgoal  in
+                                        (* update all flags *)
+    let val finalgoal = hd (finalgoal_list) in
+      (
+      flag_update proofflag
+        (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
+      beagle_interact filename finalgoal;
+      update_nbl1 (); 
+      update_nbl2 (!SZSstatus);
+      if (!SZSstatus = "Unsatisfiable")
+      then write_goodresult filename thml goal
+      else 
+        (write_badresult filename thml goal;
+         write_tff (mk_tfferrpath filename) (!nb_problem) finalgoal true)
+      )  
+    end end end
   )
   handle  
     HOL_ERR {origin_structure = s, origin_function = f, message = m}
@@ -110,17 +109,15 @@ flag_update_metis thml goal;
            write_err (mk_errpath filename) "" "" "code error";
            write_badresult filename thml goal
            ) 
-;
-write_stats filename (!nb_problem) (map ! nb_list1) (map ! nb_list2)
-; 
-if fst (!metisflag) 
-then metisTools.METIS_TAC thml goal (* raise the same exception *)
-else ([],fn x => (mk_thm goal)) (* *)
-)
+  ;
+  write_stats filename (!nb_problem) (map ! nb_list1) (map ! nb_list2); 
+  ([],fn x => (mk_thm goal))
+  )
 
+(* MAIN FUNCTION *)
 fun BEAGLE_TAC thml goal = 
   let val filename = "beagletacresult/beagletac" in 
-    beagle_tac_aux filename thml goal
+    beagle_tac_aux filename thml goal (* test arithmetic *)
   end
   
 

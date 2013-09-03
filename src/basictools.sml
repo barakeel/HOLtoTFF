@@ -14,9 +14,9 @@ fun repeat_n_fun n f x =
   case n of
     0 => x
   | _ => if n < 0 
-         then raise BASICTOOLS_ERR "repeat_n_fun" ""  
+         then raise BASICTOOLS_ERR "repeat_n_fun" "negative number"  
          else f (repeat_n_fun (n - 1) f x)
-         
+    
 fun inv f a b = f b a
 
 (* ERROR HANDLING *)

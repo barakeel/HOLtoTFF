@@ -1,0 +1,35 @@
+%----------------------------------------------------------------------------
+% Number   : 1
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(xf_type,type,(
+    xf: ty_a > $int )).
+
+tff(xx1_type,type,(
+    xx1: ty_a )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_a] : ($lesseq(0,xf(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xy) )).
+
+tff(axiom4_axiom,axiom,(
+    (~(xy = 0) | (~(xx = 0) | (xf(xx1) = 0))) )).
+
+%----------------------------------------------------------------------------
+

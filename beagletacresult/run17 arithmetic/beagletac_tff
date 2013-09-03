@@ -1,0 +1,134 @@
+%----------------------------------------------------------------------------
+% Number   : 65
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIaI_type,type,(
+    ty_listIaI: $tType )).
+
+tff(ty_optionInumI_type,type,(
+    ty_optionInumI: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_optionIaI_type,type,(
+    ty_optionIaI: $tType )).
+
+tff(x_type,type,(
+    x: $int > $int )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(xj_type,type,(
+    xj: $int )).
+
+tff(x1_type,type,(
+    x1: $int > $int )).
+
+tff(xf_type,type,(
+    xf: ty_a > ty_optionInumI )).
+
+tff(xm_type,type,(
+    xm: $int )).
+
+tff(xi_type,type,(
+    xi: $int )).
+
+tff(xl_type,type,(
+    xl: ty_listIaI )).
+
+tff(cNONE_type,type,(
+    cNONE: ty_optionIaI )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_a > ty_optionIaI )).
+
+tff(cNONE1_type,type,(
+    cNONE1: ty_optionInumI )).
+
+tff(cEL_type,type,(
+    cEL: ( $int * ty_listIaI ) > ty_a )).
+
+tff(cSOME1_type,type,(
+    cSOME1: $int > ty_optionInumI )).
+
+tff(cLENGTH_type,type,(
+    cLENGTH: ty_listIaI > $int )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_listIaI] : ($lesseq(0,cLENGTH(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: $int] : (($lesseq(0,x1(Xx11)) | ~$lesseq(0,Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx11: $int] : (($lesseq(0,x(Xx11)) | ~$lesseq(0,Xx11))) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,xi) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,xm) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,xj) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~(cSOME1(X1) = cNONE1) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xx: ty_a,X1: $int,X: $int] : ((~(cSOME(Xx) = cNONE) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xx: ty_a,Xy: ty_a,X1: $int,X: $int] : (((Xx = Xy) | (~(cSOME(Xx) = cSOME(Xy)) | (~$lesseq(0,X) | ~$lesseq(0,X1))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xx: ty_a,Xy: ty_a,X1: $int,X: $int] : ((~(Xx = Xy) | ((cSOME(Xx) = cSOME(Xy)) | (~$lesseq(0,X) | ~$lesseq(0,X1))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~(X1 = X) | ((cSOME1(X1) = cSOME1(X)) | (~$lesseq(0,X) | ~$lesseq(0,X1))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X1: $int,X: $int] : (((X1 = X) | (~(cSOME1(X1) = cSOME1(X)) | (~$lesseq(0,X) | ~$lesseq(0,X1))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X1: $int,X: $int] : (($less(xj,xi) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ($less(xn,x(X1)) | (~$less(X1,xj) | (~$lesseq(0,X) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ($lesseq(xn,x(X1)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ((xf(cEL(X1,xl)) = cSOME1(x(X1))) | (~$lesseq(0,X) | ~$lesseq(0,X1)))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X1: $int,X: $int] : (((xf(cEL(xj,xl)) = cSOME1(xn)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [X1: $int,X: $int] : (($less(xj,cLENGTH(xl)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ($less(xm,x1(X1)) | (~$less(X1,xi) | (~$lesseq(0,X) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ($lesseq(xm,x1(X1)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [X1: $int,X: $int] : ((~$less(X1,cLENGTH(xl)) | ((xf(cEL(X1,xl)) = cNONE1) | ((xf(cEL(X1,xl)) = cSOME1(x1(X1))) | (~$lesseq(0,X) | ~$lesseq(0,X1)))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [X1: $int,X: $int] : (((xf(cEL(xi,xl)) = cSOME1(xm)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [X1: $int,X: $int] : (($less(xi,cLENGTH(xl)) | (~$lesseq(0,X) | ~$lesseq(0,X1)))) )).
+
+%----------------------------------------------------------------------------
+

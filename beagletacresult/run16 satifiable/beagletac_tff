@@ -1,0 +1,668 @@
+%----------------------------------------------------------------------------
+% Number   : 245
+%----------------------------------------------------------------------------
+tff(ty_a_F_a_P_a_type,type,(
+    ty_a_F_a_P_a: $tType )).
+
+tff(ty_a_P_a_F_bool_F_llistIaI_type,type,(
+    ty_a_P_a_F_bool_F_llistIaI: $tType )).
+
+tff(ty_llistIaI_type,type,(
+    ty_llistIaI: $tType )).
+
+tff(ty_llistIaI_F_optionIaI_type,type,(
+    ty_llistIaI_F_optionIaI: $tType )).
+
+tff(ty_optionIaI_type,type,(
+    ty_optionIaI: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_F_bool_F_a_P_a_F_bool_type,type,(
+    ty_a_P_a_P_a_P_a_F_bool_F_a_P_a_F_bool: $tType )).
+
+tff(toolong22_type,type,(
+    toolong22: $tType )).
+
+tff(toolong21_type,type,(
+    toolong21: $tType )).
+
+tff(toolong20_type,type,(
+    toolong20: $tType )).
+
+tff(ty_bool_F_a_P_bool_type,type,(
+    ty_bool_F_a_P_bool: $tType )).
+
+tff(ty_a_P_bool_type,type,(
+    ty_a_P_bool: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_a_P_a_F_bool_type,type,(
+    ty_a_P_a_F_bool: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_a_F_a_F_a_P_a_type,type,(
+    ty_a_F_a_F_a_P_a: $tType )).
+
+tff(ty_a_P_a_F_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_a_P_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_optionIaI_type,type,(
+    ty_a_F_optionIaI: $tType )).
+
+tff(ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI_type,type,(
+    ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI: $tType )).
+
+tff(toolong19_type,type,(
+    toolong19: $tType )).
+
+tff(ty_num_F_llistIaI_F_optionIaI_type,type,(
+    ty_num_F_llistIaI_F_optionIaI: $tType )).
+
+tff(ty_a_F_a_P_bool_type,type,(
+    ty_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_a_P_bool_F_a_F_bool_type,type,(
+    ty_a_F_a_P_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_F_a_F_bool_F_bool_type,type,(
+    ty_a_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_F_bool_type,type,(
+    ty_a_P_a_P_a_P_a_F_bool: $tType )).
+
+tff(toolong18_type,type,(
+    toolong18: $tType )).
+
+tff(ty_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_bool: $tType )).
+
+tff(toolong17_type,type,(
+    toolong17: $tType )).
+
+tff(ty_a_P_a_type,type,(
+    ty_a_P_a: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_P_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool_type,type,(
+    ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool: $tType )).
+
+tff(toolong16_type,type,(
+    toolong16: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_P_a_P_a_F_bool_F_bool: $tType )).
+
+tff(toolong15_type,type,(
+    toolong15: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_type,type,(
+    ty_a_P_a_P_a_P_a: $tType )).
+
+tff(toolong14_type,type,(
+    toolong14: $tType )).
+
+tff(toolong13_type,type,(
+    toolong13: $tType )).
+
+tff(toolong12_type,type,(
+    toolong12: $tType )).
+
+tff(toolong11_type,type,(
+    toolong11: $tType )).
+
+tff(toolong10_type,type,(
+    toolong10: $tType )).
+
+tff(toolong9_type,type,(
+    toolong9: $tType )).
+
+tff(ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_type,type,(
+    ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a: $tType )).
+
+tff(toolong8_type,type,(
+    toolong8: $tType )).
+
+tff(toolong7_type,type,(
+    toolong7: $tType )).
+
+tff(toolong6_type,type,(
+    toolong6: $tType )).
+
+tff(toolong5_type,type,(
+    toolong5: $tType )).
+
+tff(toolong4_type,type,(
+    toolong4: $tType )).
+
+tff(toolong3_type,type,(
+    toolong3: $tType )).
+
+tff(toolong2_type,type,(
+    toolong2: $tType )).
+
+tff(toolong1_type,type,(
+    toolong1: $tType )).
+
+tff(toolong_type,type,(
+    toolong: $tType )).
+
+tff(ty_a_F_bool_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_P_bool: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_a_F_a_P_bool * ty_a ) > ty_a_P_bool )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_bool_F_a_P_bool * bool ) > ty_a_P_bool )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_a_F_bool_F_a_P_bool * ty_a ) > ty_bool_F_a_P_bool )).
+
+tff(xApp3_type,type,(
+    xApp3: ( toolong * toolong12 ) > toolong4 )).
+
+tff(xApp4_type,type,(
+    xApp4: ( toolong1 * toolong2 ) > toolong4 )).
+
+tff(xApp5_type,type,(
+    xApp5: ( toolong3 * toolong6 ) > toolong4 )).
+
+tff(xApp6_type,type,(
+    xApp6: ( toolong4 * toolong12 ) > $o )).
+
+tff(xApp7_type,type,(
+    xApp7: ( toolong20 * toolong6 ) > toolong12 )).
+
+tff(xApp8_type,type,(
+    xApp8: ( toolong5 * toolong12 ) > toolong20 )).
+
+tff(xApp9_type,type,(
+    xApp9: ( toolong7 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool ) > toolong10 )).
+
+tff(xApp10_type,type,(
+    xApp10: ( toolong8 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a ) > toolong10 )).
+
+tff(xApp11_type,type,(
+    xApp11: ( toolong9 * toolong12 ) > toolong10 )).
+
+tff(xApp12_type,type,(
+    xApp12: ( toolong10 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool ) > $o )).
+
+tff(xApp13_type,type,(
+    xApp13: ( toolong21 * toolong12 ) > ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool )).
+
+tff(xApp14_type,type,(
+    xApp14: ( toolong11 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool ) > toolong21 )).
+
+tff(xApp15_type,type,(
+    xApp15: ( toolong13 * ty_a_P_a_P_a_P_a_F_bool ) > ty_a_P_a_P_a_P_a_F_bool_F_bool )).
+
+tff(xApp16_type,type,(
+    xApp16: ( toolong14 * ty_a_P_a_P_a_P_a ) > ty_a_P_a_P_a_P_a_F_bool_F_bool )).
+
+tff(xApp17_type,type,(
+    xApp17: ( toolong15 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool ) > ty_a_P_a_P_a_P_a_F_bool_F_bool )).
+
+tff(xApp18_type,type,(
+    xApp18: ( ty_a_P_a_P_a_P_a_F_bool_F_bool * ty_a_P_a_P_a_P_a_F_bool ) > $o )).
+
+tff(xApp19_type,type,(
+    xApp19: ( toolong22 * ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool ) > ty_a_P_a_P_a_P_a_F_bool )).
+
+tff(xApp20_type,type,(
+    xApp20: ( toolong16 * ty_a_P_a_P_a_P_a_F_bool ) > toolong22 )).
+
+tff(xApp21_type,type,(
+    xApp21: ( ty_a_P_a_F_bool_F_a_P_a_F_bool_F_bool * ty_a_P_a_F_bool ) > ty_a_P_a_F_bool_F_bool )).
+
+tff(xApp22_type,type,(
+    xApp22: ( toolong17 * ty_a_P_a_P_a_P_a_F_bool ) > ty_a_P_a_F_bool_F_bool )).
+
+tff(xApp23_type,type,(
+    xApp23: ( ty_a_P_a_P_a_P_a_F_bool_F_a_P_a_F_bool * ty_a_P_a_P_a_P_a_F_bool ) > ty_a_P_a_F_bool )).
+
+tff(xApp24_type,type,(
+    xApp24: ( toolong18 * ty_a_P_a_F_bool ) > ty_a_P_a_P_a_P_a_F_bool_F_a_P_a_F_bool )).
+
+tff(xApp25_type,type,(
+    xApp25: ( ty_a_F_bool_F_a_F_bool_F_bool * ty_a_F_bool ) > ty_a_F_bool_F_bool )).
+
+tff(x_type,type,(
+    x: ty_a_F_bool )).
+
+tff(xf1_type,type,(
+    xf1: ty_a_F_a_P_bool )).
+
+tff(x1_type,type,(
+    x1: ty_a_F_bool )).
+
+tff(xApp26_type,type,(
+    xApp26: ( ty_a_P_a_F_bool_F_a_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool )).
+
+tff(xApp27_type,type,(
+    xApp27: ( ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_P_a_F_bool_F_a_F_bool )).
+
+tff(xApp28_type,type,(
+    xApp28: ( ty_a_P_a_F_bool_F_a_F_bool_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool_F_bool )).
+
+tff(xApp29_type,type,(
+    xApp29: ( ty_a_F_a_F_bool_F_bool * ty_a ) > ty_a_F_bool_F_bool )).
+
+tff(xX_type,type,(
+    xX: ty_a_F_bool )).
+
+tff(xApp30_type,type,(
+    xApp30: ( ty_a_F_bool_F_bool * ty_a_F_bool ) > $o )).
+
+tff(xApp31_type,type,(
+    xApp31: ( ty_a_F_a_P_bool_F_a_F_bool * ty_a_F_a_P_bool ) > ty_a_F_bool )).
+
+tff(xf_type,type,(
+    xf: ty_a_F_a_P_bool )).
+
+tff(xApp32_type,type,(
+    xApp32: ( ty_llistIaI_F_optionIaI * ty_llistIaI ) > ty_optionIaI )).
+
+tff(xApp33_type,type,(
+    xApp33: ( ty_num_F_llistIaI_F_optionIaI * $int ) > ty_llistIaI_F_optionIaI )).
+
+tff(xApp34_type,type,(
+    xApp34: ( ty_a_P_a_F_bool_F_llistIaI * ty_a_P_a_F_bool ) > ty_llistIaI )).
+
+tff(xApp35_type,type,(
+    xApp35: ( toolong19 * ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI ) > ty_a_P_a_F_bool_F_llistIaI )).
+
+tff(x2_type,type,(
+    x2: ty_a_P_a_F_bool )).
+
+tff(xApp36_type,type,(
+    xApp36: ( ty_a_F_optionIaI * ty_a ) > ty_optionIaI )).
+
+tff(x3_type,type,(
+    x3: ty_a )).
+
+tff(xApp37_type,type,(
+    xApp37: ( ty_a_P_a_F_bool_F_bool * ty_a_P_a_F_bool ) > $o )).
+
+tff(xApp38_type,type,(
+    xApp38: ( ty_a_P_a_F_a_P_a_F_bool_F_bool * ty_a_P_a ) > ty_a_P_a_F_bool_F_bool )).
+
+tff(xApp39_type,type,(
+    xApp39: ( ty_a_F_a_P_a * ty_a ) > ty_a_P_a )).
+
+tff(xApp40_type,type,(
+    xApp40: ( ty_a_F_a_F_a_P_a * ty_a ) > ty_a_F_a_P_a )).
+
+tff(xx_type,type,(
+    xx: ty_a )).
+
+tff(xlo_type,type,(
+    xlo: ty_a_P_a_F_bool )).
+
+tff(c1_type,type,(
+    c1: ty_a_F_bool_F_a_P_bool )).
+
+tff(cSUBSET_type,type,(
+    cSUBSET: ty_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cSUBSET1_type,type,(
+    cSUBSET1: toolong )).
+
+tff(cIN_type,type,(
+    cIN: toolong1 )).
+
+tff(cfinite_prefixes_type,type,(
+    cfinite_prefixes: toolong3 )).
+
+tff(clinear_order_type,type,(
+    clinear_order: toolong3 )).
+
+tff(cSING_type,type,(
+    cSING: toolong4 )).
+
+tff(cminimal_elements_type,type,(
+    cminimal_elements: toolong5 )).
+
+tff(cSUBSET2_type,type,(
+    cSUBSET2: toolong7 )).
+
+tff(cIN1_type,type,(
+    cIN1: toolong8 )).
+
+tff(cfinite_prefixes1_type,type,(
+    cfinite_prefixes1: toolong9 )).
+
+tff(clinear_order1_type,type,(
+    clinear_order1: toolong9 )).
+
+tff(cSING1_type,type,(
+    cSING1: toolong10 )).
+
+tff(cminimal_elements1_type,type,(
+    cminimal_elements1: toolong11 )).
+
+tff(cSUBSET3_type,type,(
+    cSUBSET3: toolong13 )).
+
+tff(cIN2_type,type,(
+    cIN2: toolong14 )).
+
+tff(cfinite_prefixes2_type,type,(
+    cfinite_prefixes2: toolong15 )).
+
+tff(clinear_order2_type,type,(
+    clinear_order2: toolong15 )).
+
+tff(cSING2_type,type,(
+    cSING2: ty_a_P_a_P_a_P_a_F_bool_F_bool )).
+
+tff(cminimal_elements2_type,type,(
+    cminimal_elements2: toolong16 )).
+
+tff(cSUBSET4_type,type,(
+    cSUBSET4: ty_a_P_a_F_bool_F_a_P_a_F_bool_F_bool )).
+
+tff(cfinite_prefixes3_type,type,(
+    cfinite_prefixes3: toolong17 )).
+
+tff(clinear_order3_type,type,(
+    clinear_order3: toolong17 )).
+
+tff(cSING3_type,type,(
+    cSING3: ty_a_P_a_F_bool_F_bool )).
+
+tff(cminimal_elements3_type,type,(
+    cminimal_elements3: toolong18 )).
+
+tff(cPSUBSET_type,type,(
+    cPSUBSET: ty_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cSING4_type,type,(
+    cSING4: ty_a_F_bool_F_bool )).
+
+tff(cminimal_elements4_type,type,(
+    cminimal_elements4: ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool )).
+
+tff(cfinite_prefixes4_type,type,(
+    cfinite_prefixes4: ty_a_P_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(clinear_order4_type,type,(
+    clinear_order4: ty_a_P_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cIN3_type,type,(
+    cIN3: ty_a_F_a_F_bool_F_bool )).
+
+tff(cFINITE_type,type,(
+    cFINITE: ty_a_F_bool_F_bool )).
+
+tff(cGSPEC_type,type,(
+    cGSPEC: ty_a_F_a_P_bool_F_a_F_bool )).
+
+tff(cLNTH_type,type,(
+    cLNTH: ty_num_F_llistIaI_F_optionIaI )).
+
+tff(cLUNFOLD_type,type,(
+    cLUNFOLD: toolong19 )).
+
+tff(clinear_order_to_list_f_type,type,(
+    clinear_order_to_list_f: ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_a_F_optionIaI )).
+
+tff(cIN4_type,type,(
+    cIN4: ty_a_P_a_F_a_P_a_F_bool_F_bool )).
+
+tff(c4_type,type,(
+    c4: ty_a_F_a_F_a_P_a )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    $true )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (~(xApp32(xApp33(cLNTH,Xi),xApp34(xApp35(cLUNFOLD,clinear_order_to_list_f),x2)) = xApp36(cSOME,x3)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp29(cIN3,x3),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | ((x = xApp31(cGSPEC,xf1)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(clinear_order4,x2),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(cfinite_prefixes4,x2),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp25(cPSUBSET,x),xApp31(cGSPEC,xf)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xy: ty_a,X11: ty_a_P_a,X14: ty_a_P_a_P_a_P_a_F_bool,X12: ty_a_P_a_F_bool,X13: ty_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp37(xApp21(cSUBSET4,X13),X12) | (~xApp37(xApp38(cIN4,X11),X13) | (~xApp37(xApp22(cfinite_prefixes3,X14),X12) | (~xApp37(xApp22(clinear_order3,X14),X12) | (xApp37(cSING3,xApp23(xApp24(cminimal_elements3,X13),X14)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xy: ty_a,X8: ty_a_P_a_P_a_P_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X14: ty_a_P_a_P_a_P_a_F_bool,X9: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp18(xApp15(cSUBSET3,X9),X14) | (~xApp18(xApp16(cIN2,X8),X9) | (~xApp18(xApp17(cfinite_prefixes2,X10),X14) | (~xApp18(xApp17(clinear_order2,X10),X14) | (xApp18(cSING2,xApp19(xApp20(cminimal_elements2,X9),X10)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xy: ty_a,X5: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a,X7: toolong12,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X6: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp12(xApp9(cSUBSET2,X6),X10) | (~xApp12(xApp10(cIN1,X5),X6) | (~xApp12(xApp11(cfinite_prefixes1,X7),X10) | (~xApp12(xApp11(clinear_order1,X7),X10) | (xApp12(cSING1,xApp13(xApp14(cminimal_elements1,X6),X7)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xy: ty_a,X2: toolong2,X4: toolong6,X7: toolong12,X3: toolong12,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp6(xApp3(cSUBSET1,X3),X7) | (~xApp6(xApp4(cIN,X2),X3) | (~xApp6(xApp5(cfinite_prefixes,X4),X7) | (~xApp6(xApp5(clinear_order,X4),X7) | (xApp6(cSING,xApp7(xApp8(cminimal_elements,X3),X4)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xy: ty_a,X: ty_a,Xr: ty_a_P_a_F_bool,Xs: ty_a_F_bool,X1: ty_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp30(xApp25(cSUBSET,X1),Xs) | (~xApp30(xApp29(cIN3,X),X1) | (~xApp30(xApp28(cfinite_prefixes4,Xr),Xs) | (~xApp30(xApp28(clinear_order4,Xr),Xs) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,X1),Xr)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xy: ty_a,Xs: ty_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(xApp25(cSUBSET,Xs),Xs) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [Xy: ty_a,X7: toolong12,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp6(xApp3(cSUBSET1,X7),X7) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [Xy: ty_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp12(xApp9(cSUBSET2,X10),X10) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [Xy: ty_a,X14: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp18(xApp15(cSUBSET3,X14),X14) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [Xy: ty_a,X12: ty_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp37(xApp21(cSUBSET4,X12),X12) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf1,Xy) = xApp1(xApp2(c1,Xy),btrue)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf,Xy) = xApp1(xApp2(c1,Xy),bfalse)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf,Xy) = xApp1(xApp2(c1,Xy),btrue)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf1,Xy) = xApp1(xApp2(c1,Xy),btrue)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xy: ty_a,X12: ty_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp37(xApp21(cSUBSET4,X12),X12) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xy: ty_a,X14: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp18(xApp15(cSUBSET3,X14),X14) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xy: ty_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp12(xApp9(cSUBSET2,X10),X10) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [Xy: ty_a,X7: toolong12,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp6(xApp3(cSUBSET1,X7),X7) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [Xy: ty_a,Xs: ty_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(xApp25(cSUBSET,Xs),Xs) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [Xy: ty_a,X: ty_a,Xr: ty_a_P_a_F_bool,Xs: ty_a_F_bool,X1: ty_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp30(xApp25(cSUBSET,X1),Xs) | (~xApp30(xApp29(cIN3,X),X1) | (~xApp30(xApp28(cfinite_prefixes4,Xr),Xs) | (~xApp30(xApp28(clinear_order4,Xr),Xs) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,X1),Xr)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [Xy: ty_a,X2: toolong2,X4: toolong6,X7: toolong12,X3: toolong12,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp6(xApp3(cSUBSET1,X3),X7) | (~xApp6(xApp4(cIN,X2),X3) | (~xApp6(xApp5(cfinite_prefixes,X4),X7) | (~xApp6(xApp5(clinear_order,X4),X7) | (xApp6(cSING,xApp7(xApp8(cminimal_elements,X3),X4)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [Xy: ty_a,X5: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a,X7: toolong12,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X6: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp12(xApp9(cSUBSET2,X6),X10) | (~xApp12(xApp10(cIN1,X5),X6) | (~xApp12(xApp11(cfinite_prefixes1,X7),X10) | (~xApp12(xApp11(clinear_order1,X7),X10) | (xApp12(cSING1,xApp13(xApp14(cminimal_elements1,X6),X7)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [Xy: ty_a,X8: ty_a_P_a_P_a_P_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X14: ty_a_P_a_P_a_P_a_F_bool,X9: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp18(xApp15(cSUBSET3,X9),X14) | (~xApp18(xApp16(cIN2,X8),X9) | (~xApp18(xApp17(cfinite_prefixes2,X10),X14) | (~xApp18(xApp17(clinear_order2,X10),X14) | (xApp18(cSING2,xApp19(xApp20(cminimal_elements2,X9),X10)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [Xy: ty_a,X11: ty_a_P_a,X14: ty_a_P_a_P_a_P_a_F_bool,X12: ty_a_P_a_F_bool,X13: ty_a_P_a_F_bool,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp37(xApp21(cSUBSET4,X13),X12) | (~xApp37(xApp38(cIN4,X11),X13) | (~xApp37(xApp22(cfinite_prefixes3,X14),X12) | (~xApp37(xApp22(clinear_order3,X14),X12) | (xApp37(cSING3,xApp23(xApp24(cminimal_elements3,X13),X14)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp25(cPSUBSET,x),xApp31(cGSPEC,xf)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(cfinite_prefixes4,x2),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(clinear_order4,x2),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | ((x = xApp31(cGSPEC,xf1)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp29(cIN3,x3),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (~(xApp32(xApp33(cLNTH,Xi),xApp34(xApp35(cLUNFOLD,clinear_order_to_list_f),x2)) = xApp36(cSOME,x3)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (~(xApp32(xApp33(cLNTH,Xi),xApp34(xApp35(cLUNFOLD,clinear_order_to_list_f),x2)) = xApp36(cSOME,x3)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp29(cIN3,x3),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | ((x = xApp31(cGSPEC,xf1)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(clinear_order4,x2),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(cfinite_prefixes4,x2),x1) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp25(cPSUBSET,x),xApp31(cGSPEC,xf)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [Xy: ty_a,X11: ty_a_P_a,X14: ty_a_P_a_P_a_P_a_F_bool,X12: ty_a_P_a_F_bool,X13: ty_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp37(xApp21(cSUBSET4,X13),X12) | (~xApp37(xApp38(cIN4,X11),X13) | (~xApp37(xApp22(cfinite_prefixes3,X14),X12) | (~xApp37(xApp22(clinear_order3,X14),X12) | (xApp37(cSING3,xApp23(xApp24(cminimal_elements3,X13),X14)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [Xy: ty_a,X8: ty_a_P_a_P_a_P_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X14: ty_a_P_a_P_a_P_a_F_bool,X9: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp18(xApp15(cSUBSET3,X9),X14) | (~xApp18(xApp16(cIN2,X8),X9) | (~xApp18(xApp17(cfinite_prefixes2,X10),X14) | (~xApp18(xApp17(clinear_order2,X10),X14) | (xApp18(cSING2,xApp19(xApp20(cminimal_elements2,X9),X10)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [Xy: ty_a,X5: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a,X7: toolong12,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X6: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp12(xApp9(cSUBSET2,X6),X10) | (~xApp12(xApp10(cIN1,X5),X6) | (~xApp12(xApp11(cfinite_prefixes1,X7),X10) | (~xApp12(xApp11(clinear_order1,X7),X10) | (xApp12(cSING1,xApp13(xApp14(cminimal_elements1,X6),X7)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [Xy: ty_a,X2: toolong2,X4: toolong6,X7: toolong12,X3: toolong12,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp6(xApp3(cSUBSET1,X3),X7) | (~xApp6(xApp4(cIN,X2),X3) | (~xApp6(xApp5(cfinite_prefixes,X4),X7) | (~xApp6(xApp5(clinear_order,X4),X7) | (xApp6(cSING,xApp7(xApp8(cminimal_elements,X3),X4)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [Xy: ty_a,X: ty_a,Xr: ty_a_P_a_F_bool,Xs: ty_a_F_bool,X1: ty_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp30(xApp25(cSUBSET,X1),Xs) | (~xApp30(xApp29(cIN3,X),X1) | (~xApp30(xApp28(cfinite_prefixes4,Xr),Xs) | (~xApp30(xApp28(clinear_order4,Xr),Xs) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,X1),Xr)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [Xy: ty_a,Xs: ty_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(xApp25(cSUBSET,Xs),Xs) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [Xy: ty_a,X7: toolong12,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp6(xApp3(cSUBSET1,X7),X7) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [Xy: ty_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp12(xApp9(cSUBSET2,X10),X10) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [Xy: ty_a,X14: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp18(xApp15(cSUBSET3,X14),X14) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [Xy: ty_a,X12: ty_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp37(xApp21(cSUBSET4,X12),X12) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf1,Xy) = xApp1(xApp2(c1,Xy),bfalse)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf,Xy) = xApp1(xApp2(c1,Xy),btrue)) | (~xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf,Xy) = xApp1(xApp2(c1,Xy),bfalse)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | ((xApp(xf1,Xy) = xApp1(xApp2(c1,Xy),bfalse)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [Xy: ty_a,X12: ty_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp37(xApp21(cSUBSET4,X12),X12) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [Xy: ty_a,X14: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp18(xApp15(cSUBSET3,X14),X14) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [Xy: ty_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp12(xApp9(cSUBSET2,X10),X10) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [Xy: ty_a,X7: toolong12,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp6(xApp3(cSUBSET1,X7),X7) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [Xy: ty_a,Xs: ty_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(xApp25(cSUBSET,Xs),Xs) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [Xy: ty_a,X: ty_a,Xr: ty_a_P_a_F_bool,Xs: ty_a_F_bool,X1: ty_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp30(xApp25(cSUBSET,X1),Xs) | (~xApp30(xApp29(cIN3,X),X1) | (~xApp30(xApp28(cfinite_prefixes4,Xr),Xs) | (~xApp30(xApp28(clinear_order4,Xr),Xs) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,X1),Xr)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [Xy: ty_a,X2: toolong2,X4: toolong6,X7: toolong12,X3: toolong12,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp6(xApp3(cSUBSET1,X3),X7) | (~xApp6(xApp4(cIN,X2),X3) | (~xApp6(xApp5(cfinite_prefixes,X4),X7) | (~xApp6(xApp5(clinear_order,X4),X7) | (xApp6(cSING,xApp7(xApp8(cminimal_elements,X3),X4)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [Xy: ty_a,X5: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a,X7: toolong12,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X6: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp12(xApp9(cSUBSET2,X6),X10) | (~xApp12(xApp10(cIN1,X5),X6) | (~xApp12(xApp11(cfinite_prefixes1,X7),X10) | (~xApp12(xApp11(clinear_order1,X7),X10) | (xApp12(cSING1,xApp13(xApp14(cminimal_elements1,X6),X7)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [Xy: ty_a,X8: ty_a_P_a_P_a_P_a,X10: ty_a_P_a_P_a_P_a_P_a_P_a_P_a_P_a_F_bool,X14: ty_a_P_a_P_a_P_a_F_bool,X9: ty_a_P_a_P_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp18(xApp15(cSUBSET3,X9),X14) | (~xApp18(xApp16(cIN2,X8),X9) | (~xApp18(xApp17(cfinite_prefixes2,X10),X14) | (~xApp18(xApp17(clinear_order2,X10),X14) | (xApp18(cSING2,xApp19(xApp20(cminimal_elements2,X9),X10)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [Xy: ty_a,X11: ty_a_P_a,X14: ty_a_P_a_P_a_P_a_F_bool,X12: ty_a_P_a_F_bool,X13: ty_a_P_a_F_bool,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (~xApp37(xApp21(cSUBSET4,X13),X12) | (~xApp37(xApp38(cIN4,X11),X13) | (~xApp37(xApp22(cfinite_prefixes3,X14),X12) | (~xApp37(xApp22(clinear_order3,X14),X12) | (xApp37(cSING3,xApp23(xApp24(cminimal_elements3,X13),X14)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi))))))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp25(cPSUBSET,x),xApp31(cGSPEC,xf)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(cfinite_prefixes4,x2),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp28(clinear_order4,x2),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | ((x = xApp31(cGSPEC,xf1)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (xApp30(xApp29(cIN3,x3),x1) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [Xy: ty_a,Xi: $int] : ((xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),x3)),x2) | (xApp30(cSING4,xApp26(xApp27(cminimal_elements4,xX),xlo)) | (~xApp30(xApp28(cfinite_prefixes4,xlo),xX) | (~xApp30(xApp28(clinear_order4,xlo),xX) | (~xApp30(xApp29(cIN3,xx),xX) | (~xApp30(cFINITE,xApp31(cGSPEC,xf)) | (~(xApp32(xApp33(cLNTH,Xi),xApp34(xApp35(cLUNFOLD,clinear_order_to_list_f),x2)) = xApp36(cSOME,x3)) | (xApp37(xApp38(cIN4,xApp39(xApp40(c4,Xy),xx)),xlo) | ~$lesseq(0,Xi)))))))))) )).
+
+%----------------------------------------------------------------------------
+

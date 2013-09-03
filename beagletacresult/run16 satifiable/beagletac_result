@@ -1,0 +1,803 @@
+Number: 11
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m + n = n + m
+Goal:  []
+|- (n MOD 256 ≠ 0 ∧ 0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+    (n − n MOD 256) DIV 256 < n ∧
+    Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)) ∧ n ≠ 0 ∧
+    ∀m. m < n ⇒ (s2n (n2s m) = m)) ∧
+   ¬((n = n MOD 256 + n DIV 256 * 256) ∨
+     n ≤ n MOD 256 ∧ (n DIV 256 = 0))
+
+Number: 12
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- 0 < 256
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ [] |- ∀m n. m * n = n * m
+Goal:  []
+|- (((n − n MOD 256) DIV 256 = n DIV 256) ∧ n MOD 256 ≠ 0 ∧
+    0 < n MOD 256 ∧ (s2n s0 = (n − n MOD 256) DIV 256) ∧
+    (n − n MOD 256) DIV 256 < n ∧
+    Abbrev (s0 = n2s ((n − n MOD 256) DIV 256)) ∧ n ≠ 0 ∧
+    ∀m. m < n ⇒ (s2n (n2s m) = m)) ∧ 256 * (n DIV 256) + n MOD 256 ≠ n
+
+Number: 13
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ []
+|- (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + n = SUC (m + n)) ∧
+   (m + SUC n = SUC (m + n))
+ [] |- 0 < 256
+Goal:  []
+|- ((r0 = 0) ∧ 0 < r ∧ (s2n s0 = (n − r) DIV 256) ∧
+    (n − r) DIV 256 < n ∧ n MOD 256 < 256 ∧
+    Abbrev (s0 = n2s ((n − r) DIV 256)) ∧
+    Abbrev (r = if r0 = 0 then 256 else r0) ∧ Abbrev (r0 = n MOD 256) ∧
+    n ≠ 0 ∧ ∀m. m < n ⇒ (s2n (n2s m) = m)) ∧ ¬∃q. n = q * 256
+
+Number: 15
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀n. 0 < n ⇒ ∀k. (k = k DIV n * n + k MOD n) ∧ k MOD n < n
+ []
+|- (0 + m = m) ∧ (m + 0 = m) ∧ (SUC m + n = SUC (m + n)) ∧
+   (m + SUC n = SUC (m + n))
+ [] |- 0 < 256
+Goal:  []
+|- (ORD c < 256 ∧ (r0 = 0) ∧ (r0 = (ORD c + 1) MOD 256) ∧
+    Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∧
+    Abbrev (r = if r0 = 0 then 256 else r0) ∧ (n2s (s2n s) = s)) ∧
+   ¬∃q. ORD c + 1 = q * 256
+
+Number: 16
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀a. CHR (ORD a) = a
+Goal:  []
+|- ((ORD c = 255) ∧ (q = 1) ∧ (ORD c + 1 = 256) ∧ ORD c < 256 ∧
+    (r0 = 0) ∧ T ∧
+    Abbrev (s0 = n2s ((s2n s * 256 + ORD c + 1 − r) DIV 256)) ∧
+    Abbrev (r = 256) ∧ (n2s (s2n s) = s)) ∧ c ≠ #"\255"
+
+Number: 83
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀n r. r < n ⇒ ∀q. (q * n + r) DIV n = q
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀m n p. m * (n * p) = m * n * p
+Goal:  []
+|- (r < INT_MIN (:α) ∧ ¬(INT_MIN (:α) ≤ r) ∧
+    (((q * (2 * INT_MIN (:α)) + r) DIV 2 ** (dimindex (:α) − 1)) MOD 2 =
+     1) ∧
+    Abbrev (r = (q * (2 * INT_MIN (:α)) + r) MOD (2 * INT_MIN (:α))) ∧
+    Abbrev (q = (q * (2 * INT_MIN (:α)) + r) DIV (2 * INT_MIN (:α))) ∧
+    r < 2 * INT_MIN (:α) ∧ 0 < 2 * INT_MIN (:α) ∧
+    Abbrev (2 * INT_MIN (:α) = dimword (:α))) ∧
+   (q * (2 * INT_MIN (:α)) + r) DIV INT_MIN (:α) ≠ 2 * q
+
+Number: 84
+Status: Unsatisfiable
+Info: polymorph fixpoint bool num proof 
+Thm list: 
+ [] |- 0 ≠ 1 ∧ 0 < 2
+ [] |- ∀n. 0 < n ⇒ ∀k. (k * n) MOD n = 0
+ [] |- ∀m n. m * n = n * m
+ [] |- INT_MIN (:α) = 2 ** (dimindex (:α) − 1)
+Goal:  []
+|- ((n DIV INT_MIN (:α) = 2 * q) ∧ r < INT_MIN (:α) ∧
+    ¬(INT_MIN (:α) ≤ r) ∧
+    (((q * (2 * INT_MIN (:α)) + r) DIV 2 ** (dimindex (:α) − 1)) MOD 2 =
+     1) ∧ Abbrev (r = n MOD WL) ∧ Abbrev (q = n DIV WL) ∧ r < WL ∧
+    (n = q * WL + r) ∧ 0 < WL ∧ Abbrev (WL = dimword (:α)) ∧
+    (WL = 2 * INT_MIN (:α))) ∧ ¬F
+
+Number: 87
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+ [] |- ∀m. SUC m = m + 1
+ [] |- (∀n. 0 + n = n) ∧ ∀m n. SUC m + n = SUC (m + n)
+Goal:  []
+|- (0 < dimindex (:α) − l ∧ l ≤ dimindex (:α) − 1 ∧ i < dimindex (:α) ∧
+    dimindex (:α) ≤ SUC h ∧ T) ∧ ¬∃x. dimindex (:α) − l = SUC x
+
+Number: 88
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- ((l + x = dimindex (:α) − 1) ∧ SUC x ≤ i ∧
+    dimindex (:α) ≤ i + (l + 1) ∧ (dimindex (:α) − l = SUC x) ∧ T ∧ T ∧
+    i < dimindex (:α) ∧ dimindex (:α) ≤ SUC h) ∧
+   (BIT (dimindex (:α) − 1) n ⇎ BIT (l + x) n)
+
+Number: 89
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- ((i + l = dimindex (:α) − 1) ∧ i < SUC x ∧
+    dimindex (:α) ≤ i + (l + 1) ∧ (dimindex (:α) − l = SUC x) ∧ T ∧ T ∧
+    T ∧ dimindex (:α) ≤ SUC h) ∧
+   (BIT (dimindex (:α) − 1) n ⇎ BIT (i + l) n)
+
+Number: 90
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- ((i + l = h) ∧ i < SUC (h − l) ∧ h ≤ i + l ∧ l ≤ h ∧
+    i < dimindex (:α) ∧ SUC h < dimindex (:α)) ∧
+   (BIT h n ⇎ BIT (i + l) n)
+
+Number: 93
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀w. w2n (w2w w) < dimword (:α)
+ [] |- ∀w. w2n (w2w w) ≤ w2n w
+ [] |- ∀h l w. w2n ((h -- l) w) < 2 ** (SUC h − l)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal:  [w2n (w2w ((h -- l) w)) < 2 ** (SUC h − l)] |- F
+
+Number: 96
+Status: Unsatisfiable
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- ∀n. n ≠ 0 ⇔ 0 < n
+Goal:  []
+|- (i < dimindex (:α) ∧ dimindex (:γ) ≤ i ∧ FINITE 𝕌(:γ) ∧
+    FINITE 𝕌(:β) ∧ i < dimindex (:δ) ∧ (h + 1 = l + dimindex (:δ)) ∧
+    (dimindex (:γ) = 0) ∧ m + 1 ≤ l ∧ (h = m + dimindex (:β))) ∧
+   (i + (m + 1) ≤ dimindex (:α) − 1 ∧ w ' (i + (m + 1)) ⇎
+    i + l ≤ dimindex (:α) − 1 ∧ w ' (i + l))
+
+Number: 98
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ []
+|- ∀a b n. n ≠ 0 ∧ 2 ** a ≤ n ∧ n < 2 ** b ⇒ ∃i. a ≤ i ∧ i < b ∧ BIT i n
+Goal:  []
+|- (n ≠ 0 ∧ 2 ** SUC (dimindex (:α) − (n' + 1)) ≤ n ∧
+    BIT (dimindex (:α) − (n' + 1)) n ∧
+    (∀m. m < n' ⇒ ¬BIT (dimindex (:α) − (m + 1)) n) ∧
+    n MOD 2 ** dimindex (:α) ≠ 0 ∧ n < 2 ** dimindex (:α)) ∧
+   ¬∃i. SUC (dimindex (:α) − (n' + 1)) ≤ i ∧ i < dimindex (:α) ∧ BIT i n
+
+Number: 101
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- 0 < n ∧ i < n ⇒ (n − SUC (n − i − 1) = i)
+Goal:  []
+|- (w ' (n − SUC (n − i − 1)) ∧ 0 < n ∧ 0 < 1 + n ∧ n < i + (1 + n) ∧
+    i < n ∧ i ≠ n ∧ T ∧ ¬w ' i ∧ i < dimindex (:α) ∧ w ' n ∧
+    (dimindex (:α) = SUC n) ∧ w ≠ UINT_MAXw) ∧ ¬F
+
+Number: 102
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- 0 < n ∧ i < n ⇒ (n − SUC (n − i − 1) = i)
+Goal:  []
+|- (¬w ' (n − SUC (n − i − 1)) ∧ 0 < n ∧ 0 < 1 + n ∧ n < i + (1 + n) ∧
+    i < n ∧ i ≠ n ∧ T ∧ w ' i ∧ i < dimindex (:α) ∧ ¬w ' n ∧
+    (dimindex (:α) = SUC n) ∧ w ≠ 0w) ∧ ¬F
+
+Number: 113
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀h l n. BITS h l n < 2 ** (SUC h − l)
+ [] |- ∀m. SUC m − 1 = m
+ [] |- ∀l h b. b < 2 ** l ⇒ (BITS h l (2 ** l + b) = BITS h l (2 ** l))
+ [] |- ∀b n. BIT b n ⇔ (BITS b b n = 1)
+ [] |- ∀b. BIT b (2 ** b)
+Goal:  [] |- ((dimindex (:α) = SUC m) ∧ T) ∧ ¬BIT m (2 ** m + BITS m 1 a)
+
+Number: 120
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- a − b ≤ a ∧ a < SUC a
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  []
+|- ((dimindex (:α) = SUC m) ∧ (BITS m 0 n = 2 ** m + BITS (m − 1) 0 n) ∧
+    BIT m n ∧ 1 ≤ m) ∧ ¬(2 ** m − n MOD 2 ** m < 2 ** SUC m)
+
+Number: 122
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀a. (dimindex (:α) − 1 = 0) ∧ word_msb a ⇒ (a = 1w)
+ [] |- (dimindex (:α) − 1 = 0) ⇒ (dimindex (:α) = 1)
+ [] |- ∀n. (1 ** n = 1) ∧ (n ** 1 = n)
+ [] |- ∀n k. k < n ⇒ (k MOD n = k)
+ [] |- 1 < 2
+ [] |- ∀n. w2n (n2w n) = n MOD dimword (:α)
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+Goal:  [∀a. (dimindex (:α) − 1 = 0) ∧ word_msb a ⇒ (w2n a = 1)] |- F
+
+Number: 123
+Status: Unsatisfiable
+Info: polymorph fixpoint proof 
+Thm list: 
+ []
+|- ∀a. ¬word_msb a ⇒ if a = 0w then ¬word_msb (-a) else word_msb (-a)
+Goal:  []
+|- (¬word_msb a ∧
+    ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))) ∧
+   ¬word_msb (-a)
+
+Number: 124
+Status: Unsatisfiable
+Info: polymorph fixpoint proof 
+Thm list: 
+ [] |- -INT_MINw = INT_MINw
+ [] |- ∀w v. (-v = w) ⇔ (v = -w)
+ [] |- ∀w. - -w = w
+ []
+|- ∀a.
+     word_msb a ⇒
+     if (dimindex (:α) − 1 = 0) ∨ (a = INT_MINw) then word_msb (-a)
+     else ¬word_msb (-a)
+Goal:  []
+|- (word_msb a ∧ word_msb (-a) ∧
+    ¬((dimindex (:α) − 1 = 0) ∨ (a = 0w) ∨ (a = INT_MINw))) ∧ ¬F
+
+Number: 125
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀b n. b ≠ 0 ⇒ (SLICE b b n + SLICE (b − 1) 0 n = SLICE b 0 n)
+ [] |- ∀n. n ≠ 0 ⇒ (SUC n − 2 = n − 1)
+Goal:  []
+|- (n < dimword (:α) ∧ m ≠ 0 ∧ (dimindex (:α) = SUC m) ∧
+    dimindex (:α) − 1 ≠ 0) ∧
+   SLICE m 0 n ≠ SLICE m m n + SLICE (m − 1) 0 n
+
+Number: 126
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a < 2 ** b
+Goal:  []
+|- ((y = x + (p + 1)) ∧ x < y ∧
+    Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** (dimindex (:α) − 1) − y) ∧
+    (w2n a = 2 ** (dimindex (:α) − 1) + x) ∧
+    (w2n b = 2 ** (dimindex (:α) − 1) + y) ∧ word_msb b ∧ word_msb a ∧
+    dimindex (:α) − 1 ≠ 0) ∧ ¬(y < 2 ** (dimindex (:α) − 1))
+
+Number: 127
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a ≤ 2 ** b
+Goal:  []
+|- (Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** dimindex (:α) − y) ∧ (w2n a = x) ∧ (w2n b = y) ∧
+    ¬(w2n a < w2n b) ∧ ¬word_msb b ∧ ¬word_msb a ∧
+    dimindex (:α) − 1 ≠ 0 ∧ b ≠ 0w) ∧ ¬(y ≤ 2 ** (dimindex (:α) − 1))
+
+Number: 128
+Status: Unsatisfiable
+Info: polymorph fixpoint bool num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n. m < n ⇒ m ≤ n
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+Goal:  []
+|- (y ≤ 2 ** (dimindex (:α) − 1) ∧
+    Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** dimindex (:α) − y) ∧ (w2n a = x) ∧ (w2n b = y) ∧
+    ¬(w2n a < w2n b) ∧ ¬word_msb b ∧ ¬word_msb a ∧
+    dimindex (:α) − 1 ≠ 0 ∧ b ≠ 0w) ∧ ¬(y ≤ 2 ** dimindex (:α))
+
+Number: 129
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a < 2 ** b
+Goal:  []
+|- (y ≤ 2 ** dimindex (:α) ∧ y ≤ 2 ** (dimindex (:α) − 1) ∧
+    Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** dimindex (:α) − y) ∧ (w2n a = x) ∧ (w2n b = y) ∧
+    y ≤ x ∧ ¬word_msb b ∧ ¬word_msb a ∧ dimindex (:α) − 1 ≠ 0 ∧
+    b ≠ 0w) ∧ ¬(x < 2 ** (dimindex (:α) − 1))
+
+Number: 130
+Status: Unsatisfiable
+Info: bool num proof 
+Thm list: 
+ [] |- ∀b a. b ≠ 0 ⇒ BITS (b − 1) 0 a ≤ 2 ** b
+Goal:  []
+|- (Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** dimindex (:α) − y) ∧ (w2n a = x) ∧ (w2n b = y) ∧
+    w2n a < w2n b ∧ ¬word_msb b ∧ ¬word_msb a ∧ dimindex (:α) − 1 ≠ 0 ∧
+    b ≠ 0w) ∧ ¬(y ≤ 2 ** (dimindex (:α) − 1))
+
+Number: 131
+Status: Unsatisfiable
+Info: polymorph fixpoint bool num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n. m < n ⇒ m ≤ n
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+Goal:  []
+|- (y ≤ 2 ** (dimindex (:α) − 1) ∧
+    Abbrev (y = BITS (dimindex (:α) − 1 − 1) 0 (w2n b)) ∧
+    Abbrev (x = BITS (dimindex (:α) − 1 − 1) 0 (w2n a)) ∧
+    (w2n (-b) = 2 ** dimindex (:α) − y) ∧ (w2n a = x) ∧ (w2n b = y) ∧
+    w2n a < w2n b ∧ ¬word_msb b ∧ ¬word_msb a ∧ dimindex (:α) − 1 ≠ 0 ∧
+    b ≠ 0w) ∧ ¬(y ≤ 2 ** dimindex (:α))
+
+Number: 132
+Status: Unsatisfiable
+Info: polymorph fixpoint proof 
+Thm list: 
+ []
+|- ∀a b.
+     a < b ⇔
+     (word_msb (a − b) ⇎
+      (word_msb a ⇎ word_msb b) ∧ (word_msb (a − b) ⇎ word_msb a))
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ word_msb a ∧ word_msb b ∧
+     word_msb (a − b) ⇒
+     w2n a < w2n b
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ word_msb a ∧ word_msb b ∧
+     ¬word_msb (a − b) ⇒
+     ¬(w2n a < w2n b)
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ ¬word_msb a ∧ ¬word_msb b ∧
+     word_msb (a − b) ⇒
+     w2n a < w2n b
+ []
+|- ∀a b.
+     dimindex (:α) − 1 ≠ 0 ∧ ¬word_msb a ∧ ¬word_msb b ∧
+     ¬word_msb (a − b) ⇒
+     ¬(w2n a < w2n b)
+Goal:  []
+|- dimindex (:α) − 1 ≠ 0 ∧
+   (a < b ⇎
+    (word_msb a ⇔ word_msb b) ∧ w2n a < w2n b ∨
+    word_msb a ∧ ¬word_msb b)
+
+Number: 133
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ n ≤ m − 1
+ [] |- ∀b a. b ≠ 0 ⇒ SLICE (b − 1) 0 a < 2 ** b
+ [] |- (∀n. 0 + n = n) ∧ ∀m n. SUC m + n = SUC (m + n)
+Goal:  []
+|- (m ≠ 0 ∧ (dimindex (:α) = SUC m) ∧
+    (SLICE m m n + SLICE (m − 1) 0 n = SLICE m 0 n) ∧
+    (SLICE m m n = 0) ∧ 1 ≤ m ∧ ¬BIT m n) ∧ ¬(SLICE m 0 n ≤ 2 ** m − 1)
+
+Number: 138
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀n a b. a < 2 ** n ∧ b < 2 ** n ⇒ a + b < 2 ** (n + 1)
+ [] |- 0 < n ⇒ (n − 1 + 1 = n)
+ [] |- 0 < dimindex (:α)
+Goal:  []
+|- (n' < 2 ** (dimindex (:α) − 1) ∧ n < 2 ** (dimindex (:α) − 1) ∧
+    n' < dimword (:α) ∧ n < dimword (:α)) ∧
+   ¬(n + n' < 2 ** dimindex (:α))
+
+Number: 161
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  []
+|- (a ' (h + (i + 1)) ∧ h + (i + 1) ≤ dimindex (:α) − 1 ∧
+    i < dimindex (:α) ∧ h + 1 ≤ dimindex (:α) − 1 ∧
+    ∀i.
+      i < dimindex (:α) ⇒
+      ¬(h + (i + 1) ≤ dimindex (:α) − 1) ∨ ¬w ' (h + (i + 1))) ∧
+   ¬ ¬w ' (h + (i + 1))
+
+Number: 162
+Status: Unsatisfiable
+Info: num higher-order proof 
+Thm list: 
+ [] |- LOG2 = LOG 2
+ [] |- ∀m. SUC m = m + 1
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  []
+|- (n − 1 < 2 ** SUC (LOG 2 (n − 1)) ∧ 2 ** LOG 2 (n − 1) ≤ n − 1 ∧
+    0 < n − 1 ∧ x ≤ n − 1 ∧ P x ∧ x < n ∧ n ≤ dimindex (:α) ∧ 1 < n) ∧
+   ¬(x < 2 ** (LOG2 (n − 1) + 1))
+
+Number: 163
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ []
+|- ∀h w P a.
+     ((dimindex (:α) − 1 -- h + 1) w = 0w) ⇒
+     (((h -- 0) a = w) ∧ ((dimindex (:α) − 1 -- h + 1) a = 0w) ⇔
+      (a = w))
+Goal:  []
+|- (((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) (n2w x) = 0w) ∧
+    x < 2 ** (LOG2 (n − 1) + 1) ∧ n − 1 < 2 ** SUC (LOG 2 (n − 1)) ∧
+    2 ** LOG 2 (n − 1) ≤ n − 1 ∧ 0 < n − 1 ∧ x ≤ n − 1 ∧ P x ∧ x < n ∧
+    n ≤ dimindex (:α) ∧ 1 < n) ∧
+   ((m = n2w x) ⇎
+    ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w) ∧
+    ((LOG2 (n − 1) -- 0) m = n2w x))
+
+Number: 164
+Status: Unsatisfiable
+Info: polymorph fixpoint lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀m. m ≤ m
+ []
+|- ∀P n m.
+     1 < n ∧ n ≤ dimindex (:α) ⇒
+     (FOLDL (λa j. a ∨ (m = n2w j) ∧ P j) F (COUNT_LIST n) ⇔
+      FOLDL (λa j. a ∨ ((LOG2 (n − 1) -- 0) m = n2w j) ∧ P j) F
+        (COUNT_LIST n) ∧
+      ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w))
+Goal:  []
+|- (i < dimindex (:α) ∧ 1 < dimindex (:α) ∧ dimindex (:α) ≠ 1) ∧
+   (FOLDL (λa j. a ∨ (m = n2w j) ∧ j ≤ i ∧ w ' (i − j)) F
+      (COUNT_LIST (dimindex (:α))) ⇎
+    FOLDL
+      (λa j.
+         a ∨
+         ((LOG2 (dimindex (:α) − 1) -- 0) m = n2w j) ∧ j ≤ i ∧
+         w ' (i − j)) F (COUNT_LIST (dimindex (:α))) ∧
+    ((dimindex (:α) − 1 -- LOG2 (dimindex (:α) − 1) + 1) m = 0w))
+
+Number: 165
+Status: Unsatisfiable
+Info: polymorph fixpoint lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀m. m ≤ m
+ []
+|- ∀P n m.
+     1 < n ∧ n ≤ dimindex (:α) ⇒
+     (FOLDL (λa j. a ∨ (m = n2w j) ∧ P j) F (COUNT_LIST n) ⇔
+      FOLDL (λa j. a ∨ ((LOG2 (n − 1) -- 0) m = n2w j) ∧ P j) F
+        (COUNT_LIST n) ∧
+      ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w))
+Goal:  []
+|- (i < dimindex (:α) ∧ 1 < dimindex (:α) ∧ dimindex (:α) ≠ 1) ∧
+   (FOLDL (λa j. a ∨ (m = n2w j) ∧ i + j < dimindex (:α) ∧ w ' (i + j))
+      F (COUNT_LIST (dimindex (:α))) ⇎
+    FOLDL
+      (λa j.
+         a ∨
+         ((LOG2 (dimindex (:α) − 1) -- 0) m = n2w j) ∧
+         i + j < dimindex (:α) ∧ w ' (i + j)) F
+      (COUNT_LIST (dimindex (:α))) ∧
+    ((dimindex (:α) − 1 -- LOG2 (dimindex (:α) − 1) + 1) m = 0w))
+
+Number: 166
+Status: Unsatisfiable
+Info: polymorph fixpoint lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀m. m ≤ m
+ []
+|- ∀P n m.
+     1 < n ∧ n ≤ dimindex (:α) ⇒
+     (FOLDL (λa j. a ∨ (m = n2w j) ∧ P j) F (COUNT_LIST n) ⇔
+      FOLDL (λa j. a ∨ ((LOG2 (n − 1) -- 0) m = n2w j) ∧ P j) F
+        (COUNT_LIST n) ∧
+      ((dimindex (:α) − 1 -- LOG2 (n − 1) + 1) m = 0w))
+Goal:  []
+|- (i < dimindex (:α) ∧ 1 < dimindex (:α) ∧ dimindex (:α) ≠ 1) ∧
+   (FOLDL (λa j. a ∨ (m = n2w j) ∧ (w ≫ j) ' i) F
+      (COUNT_LIST (dimindex (:α))) ∨
+    n2w (dimindex (:α) − 1) <₊ m ∧ word_msb w ⇎
+    FOLDL
+      (λa j.
+         a ∨ ((LOG2 (dimindex (:α) − 1) -- 0) m = n2w j) ∧ (w ≫ j) ' i)
+      F (COUNT_LIST (dimindex (:α))) ∧
+    ((dimindex (:α) − 1 -- LOG2 (dimindex (:α) − 1) + 1) m = 0w) ∨
+    n2w (dimindex (:α) − 1) <₊ m ∧ word_msb w)
+
+Number: 170
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+Goal:  []
+|- (Num (-i) ≤ 2 ** (dimindex (:α) − 1) ∧
+    dimindex (:α) ≤ dimindex (:β) ∧ i < 0 ∧ INT_MIN (:α) ≤ i) ∧
+   ¬(2 ** dimindex (:α) ≤ 2 ** dimindex (:β))
+
+Number: 171
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+Goal:  []
+|- (2 ** dimindex (:α) ≤ 2 ** dimindex (:β) ∧
+    Num (-i) ≤ 2 ** (dimindex (:α) − 1) ∧
+    dimindex (:α) ≤ dimindex (:β) ∧ i < 0 ∧ INT_MIN (:α) ≤ i) ∧
+   ¬(Num (-i) < 2 ** dimindex (:α) ∧ Num (-i) < 2 ** dimindex (:β))
+
+Number: 173
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal:  []
+|- (2 ** (dimindex (:β) − 1) < 2 ** i ∧
+    Num j < 2 ** (dimindex (:β) − 1) ∧ 0 < i ∧ dimindex (:β) ≤ i ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j < &(2 ** (dimindex (:β) − 1)) ∧ INT_MIN (:β) ≤ j ∧ 0 ≤ j) ∧
+   ¬(Num j < 2 ** i)
+
+Number: 174
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ []
+|- ∀i.
+     INT_MIN (:α) ≤ i ∧ i < 0 ∧ dimindex (:α) ≤ dimindex (:β) ⇒
+     ∃n.
+       INT_MIN (:α) ≤ n ∧ n < dimword (:α) ∧ (-n2w (Num (-i)) = n2w n) ∧
+       (-n2w (Num (-i)) =
+        n2w (2 ** dimindex (:β) − 2 ** dimindex (:α) + n))
+Goal:  []
+|- (i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬∃n.
+      INT_MIN (:β) ≤ n ∧ n < dimword (:β) ∧ (-n2w (Num (-j)) = n2w n) ∧
+      (-n2w (Num (-j)) =
+       n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n))
+
+Number: 175
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. p + n = m
+Goal:  []
+|- (dimindex (:β) ≤ i ∧
+    (-n2w (Num (-j)) =
+     n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n)) ∧
+    (-n2w (Num (-j)) = n2w n) ∧ n < dimword (:β) ∧ INT_MIN (:β) ≤ n ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬∃k. dimindex (:α) = k + i
+
+Number: 176
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+Goal:  []
+|- ((2 ** dimindex (:α) MOD 2 ** i = 0) ∧ dimindex (:β) ≤ i ∧
+    (-n2w (Num (-j)) =
+     n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n)) ∧
+    (-n2w (Num (-j)) = n2w n) ∧ n < dimword (:β) ∧ INT_MIN (:β) ≤ n ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬(2 ** i < 2 ** dimindex (:α) ∧ 2 ** dimindex (:β) ≤ 2 ** i)
+
+Number: 177
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- dimword (:α) = 2 ** dimindex (:α)
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+ [] |- b ≤ a ∧ c < b ⇒ a − b + c < a
+Goal:  []
+|- ((2 ** dimindex (:α) − 2 ** dimindex (:β) =
+     (2 ** (dimindex (:α) − i) − 1) * 2 ** i +
+     (2 ** i − 2 ** dimindex (:β))) ∧ 2 ** dimindex (:β) ≤ 2 ** i ∧
+    2 ** i < 2 ** dimindex (:α) ∧ (2 ** dimindex (:α) MOD 2 ** i = 0) ∧
+    dimindex (:β) ≤ i ∧
+    (-n2w (Num (-j)) =
+     n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n)) ∧
+    (-n2w (Num (-j)) = n2w n) ∧ n < dimword (:β) ∧ INT_MIN (:β) ≤ n ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬(2 ** i − 2 ** dimindex (:β) + n < 2 ** i)
+
+Number: 178
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- 0 < n ⇒ n ≠ 0
+Goal:  []
+|- ((dimindex (:β) = 0) ∧ 2 ** (0 − 1) + p < dimword (:β) ∧
+    i < dimindex (:α) ∧ 0 ≤ dimindex (:α) ∧ j ≤ INT_MAX (:β) ∧
+    INT_MIN (:β) ≤ j ∧ j < 0) ∧ ¬F
+
+Number: 179
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+ [] |- ∀m n. m + n = n + m
+ [] |- ∀m n p. m + (n + p) = m + n + p
+ [] |- ∀m. SUC m = m + 1
+Goal:  []
+|- (i < dimindex (:β) ∧
+    (-n2w (Num (-j)) =
+     n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n)) ∧
+    (-n2w (Num (-j)) = n2w n) ∧ n < dimword (:β) ∧ INT_MIN (:β) ≤ n ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬∃k. dimindex (:α) = k + SUC i
+
+Number: 180
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀m n. n < m ⇒ ∃p. m = n + (p + 1)
+ [] |- ∀m n. m + n = n + m
+ [] |- ∀m n p. m + (n + p) = m + n + p
+ [] |- ∀m. SUC m = m + 1
+Goal:  []
+|- ((2 ** dimindex (:α) MOD 2 ** SUC i = 0) ∧ i < dimindex (:β) ∧
+    (-n2w (Num (-j)) =
+     n2w (2 ** dimindex (:α) − 2 ** dimindex (:β) + n)) ∧
+    (-n2w (Num (-j)) = n2w n) ∧ n < dimword (:β) ∧ INT_MIN (:β) ≤ n ∧
+    i < dimindex (:α) ∧ dimindex (:β) ≤ dimindex (:α) ∧
+    j ≤ INT_MAX (:β) ∧ INT_MIN (:β) ≤ j ∧ j < 0) ∧
+   ¬∃k. dimindex (:β) = k + SUC i
+
+Number: 181
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal:  []
+|- (¬b ' (dimindex (:α) − 1) ∧ a ' (dimindex (:α) − 1)) ∧
+   ¬∃i. i < dimindex (:α) ∧ a ' i
+
+Number: 182
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal:  []
+|- (BIT (dimindex (:α)) (w2n a + w2n (-b)) ∧ b ' (dimindex (:α) − 1) ∧
+    a ' (dimindex (:α) − 1)) ∧
+   (¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+    (∃i. i < dimindex (:α) ∧ b ' i) ⇎
+    ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+    ∃i. i < dimindex (:α) ∧ a ' i)
+
+Number: 183
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- 0 < n ⇒ n − 1 < n
+ [] |- 0 < dimindex (:α)
+Goal:  []
+|- (¬BIT (dimindex (:α)) (w2n a + w2n (-b)) ∧ b ' (dimindex (:α) − 1) ∧
+    a ' (dimindex (:α) − 1)) ∧
+   (¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+    (∃i. i < dimindex (:α) ∧ b ' i) ⇎
+    ¬BIT (dimindex (:α)) (w2n a + w2n (-1w * b)) ∧
+    ∃i. i < dimindex (:α) ∧ a ' i)
+
+Number: 185
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+Goal:  []
+|- (dimindex (:α) − 1 < i' + n ∧ Num i < 2 ** (dimindex (:α) − 1) ∧
+    dimindex (:α) ≤ i' + n ∧ i' < dimindex (:α) ∧
+    i < &(2 ** (dimindex (:α) − 1)) ∧ INT_MIN (:α) ≤ i ∧
+    n < dimindex (:α) ∧ 0 ≤ i) ∧ ¬(Num i < 2 ** (i' + n))
+
+Number: 187
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+Goal:  []
+|- (Num (-i) DIV 2 ** n + 1 ≤ Num (-i) ∧
+    Num (-i) DIV 2 ** n < Num (-i) ∧ 1 < 2 ** n ∧
+    Num (-i) < 2 ** (i' + n) ∧ Num (-i) MOD 2 ** n ≠ 0 ∧ Num (-i) ≠ 0 ∧
+    dimindex (:α) ≤ i' + n ∧ Num (-i) < 2 ** dimindex (:α) ∧
+    i' < dimindex (:α) ∧ i ≤ INT_MAX (:α) ∧ INT_MIN (:α) ≤ i ∧
+    n < dimindex (:α) ∧ i < 0) ∧
+   ¬(Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α))
+
+Number: 188
+Status: Unsatisfiable
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n ≤ p ⇒ m ≤ p
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ [] |- 2 ** (dimindex (:α) − 1) < 2 ** dimindex (:α)
+ [] |- ∀a b. a < b ⇒ 2 ** a < 2 ** b
+Goal:  []
+|- (Num (-i) DIV 2 ** n + 1 ≤ Num (-i) ∧
+    Num (-i) DIV 2 ** n < Num (-i) ∧ 1 < 2 ** n ∧
+    Num (-i) ≤ 2 ** (dimindex (:α) − 1) ∧ Num (-i) MOD 2 ** n ≠ 0 ∧
+    Num (-i) ≠ 0 ∧ dimindex (:α) ≤ i' + n ∧
+    Num (-i) < 2 ** dimindex (:α) ∧ i' < dimindex (:α) ∧
+    i ≤ INT_MAX (:α) ∧ INT_MIN (:α) ≤ i ∧ n < dimindex (:α) ∧ i < 0) ∧
+   ¬(Num (-i) DIV 2 ** n + 1 < 2 ** dimindex (:α))
+
+Number: 189
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+ [] |- ∀a b. a ≤ b ⇒ 2 ** a ≤ 2 ** b
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+Goal:  []
+|- ((Num (-i) DIV 2 ** n − 1 = (Num (-i) − 1) DIV 2 ** n) ∧
+    2 ** n ≤ Num (-i) ∧ (Num (-i) MOD 2 ** n = 0) ∧ Num (-i) ≠ 0 ∧
+    dimindex (:α) ≤ i' + n ∧ Num (-i) < 2 ** dimindex (:α) ∧
+    i' < dimindex (:α) ∧ i ≤ INT_MAX (:α) ∧ INT_MIN (:α) ≤ i ∧
+    n < dimindex (:α) ∧ i < 0) ∧ ¬(Num (-i) < 2 ** (i' + n))
+
+Number: 196
+Status: Unsatisfiable
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal:  []
+|- (P f ∧
+    ∀g.
+      P g ⇒
+      (g = (λn. NONE)) ∨
+      ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))) ∧
+   ¬(((λn. if n = 0 then SOME h else f (n − 1)) = (λn. NONE)) ∨
+     ∃h' t.
+       (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+       ((λn. if n = 0 then SOME h else f (n − 1)) =
+        (λn. if n = 0 then SOME h' else t (n − 1))))
+
+Number: 197
+Status: Unsatisfiable
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal:  []
+|- (P g ∧ P f ∧
+    ∀g.
+      P g ⇒
+      (g = (λn. NONE)) ∨
+      ∃h t. P t ∧ (g = (λn. if n = 0 then SOME h else t (n − 1)))) ∧
+   ¬((g = (λn. NONE)) ∨
+     ∃h' t.
+       (P t ∨ (t = (λn. if n = 0 then SOME h else f (n − 1)))) ∧
+       (g = (λn. if n = 0 then SOME h' else t (n − 1))))
+

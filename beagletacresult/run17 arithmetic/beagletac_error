@@ -1,0 +1,115 @@
+Number: 1
+Status: Time out
+Info: polymorph fixpoint num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- ∀l. l ≠ [] ⇒ LENGTH (TL l) < LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h, SND (SPLITP P t) ≠ ""]
+|- LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)
+
+Number: 5
+Status: Unknown
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Number: 7
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Number: 33
+Status: Time out
+Info: num proof 
+Thm list: 
+ [] |- ∀n p. 2 ** p ≤ n ∧ n < 2 ** SUC p ⇒ (LOG2 n = p)
+ [] |- ∀n. n ≠ 0 ⇒ BIT (LOG2 n) n
+Goal: 
+[BITS n 0 x + BITS n 0 y + 1 ≠ 0, BITS n 0 x + BITS n 0 y ≠ 0,
+ ¬BIT (SUC n) x, ¬BIT (SUC n) (BITS n 0 x + BITS n 0 y + 1),
+ BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC (SUC n),
+ BITS n 0 x < 2 ** SUC n, BITS n 0 y < 2 ** SUC n, BIT (SUC n) y]
+|- BITS n 0 x + BITS n 0 y + 1 < 2 ** SUC n
+
+Number: 62
+Status: Unknown
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀x y. (SOME x = SOME y) ⇔ (x = y)
+ [] |- ∀x. SOME x ≠ NONE
+Goal: 
+[∀i'.
+   i' < LENGTH l ⇒
+   (f (EL i' l) = NONE) ∨
+   ∃d'. (f (EL i' l) = SOME d') ∧ m ≤ d' ∧ (i' < i ⇒ m < d'),
+ ∀i.
+   i < LENGTH l ⇒
+   (f (EL i l) = NONE) ∨
+   ∃d'. (f (EL i l) = SOME d') ∧ n ≤ d' ∧ (i < j ⇒ n < d'),
+ i < LENGTH l, j < LENGTH l, m < n, f (EL i l) = SOME m,
+ f (EL j l) = SOME n] |- F
+
+Number: 63
+Status: Unknown
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀x y. (SOME x = SOME y) ⇔ (x = y)
+ [] |- ∀x. SOME x ≠ NONE
+Goal: 
+[∀i'.
+   i' < LENGTH l ⇒
+   (f (EL i' l) = NONE) ∨
+   ∃d'. (f (EL i' l) = SOME d') ∧ m ≤ d' ∧ (i' < i ⇒ m < d'),
+ ∀i.
+   i < LENGTH l ⇒
+   (f (EL i l) = NONE) ∨
+   ∃d'. (f (EL i l) = SOME d') ∧ n ≤ d' ∧ (i < j ⇒ n < d'),
+ i < LENGTH l, j < LENGTH l, n < m, f (EL i l) = SOME m,
+ f (EL j l) = SOME n] |- F
+
+Number: 64
+Status: Unknown
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀x y. (SOME x = SOME y) ⇔ (x = y)
+ [] |- ∀x. SOME x ≠ NONE
+Goal: 
+[∀i'.
+   i' < LENGTH l ⇒
+   (f (EL i' l) = NONE) ∨
+   ∃d'. (f (EL i' l) = SOME d') ∧ m ≤ d' ∧ (i' < i ⇒ m < d'),
+ ∀i.
+   i < LENGTH l ⇒
+   (f (EL i l) = NONE) ∨
+   ∃d'. (f (EL i l) = SOME d') ∧ n ≤ d' ∧ (i < j ⇒ n < d'), i < j,
+ i < LENGTH l, j < LENGTH l, f (EL i l) = SOME m, f (EL j l) = SOME n]
+|- F
+
+Number: 65
+Status: Unknown
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀x y. (SOME x = SOME y) ⇔ (x = y)
+ [] |- ∀x. SOME x ≠ NONE
+Goal: 
+[∀i'.
+   i' < LENGTH l ⇒
+   (f (EL i' l) = NONE) ∨
+   ∃d'. (f (EL i' l) = SOME d') ∧ m ≤ d' ∧ (i' < i ⇒ m < d'),
+ ∀i.
+   i < LENGTH l ⇒
+   (f (EL i l) = NONE) ∨
+   ∃d'. (f (EL i l) = SOME d') ∧ n ≤ d' ∧ (i < j ⇒ n < d'),
+ i < LENGTH l, j < i, j < LENGTH l, f (EL i l) = SOME m,
+ f (EL j l) = SOME n] |- F
+
