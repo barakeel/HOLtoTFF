@@ -112,11 +112,16 @@ fun get_maxsubstl sl =
       (filter (inv is_maxset sl) sl)) 
 
 (* MATCH *)
+fun mk_identity vty = {redex = vty, residue = vty}
+
+fun raw_subst (subst,vtyl) = normalize_subst [subst @ map mk_identity vtyl]
+
 fun is_matchable c1 c2 =
   name_of c1 = name_of c2 andalso 
   success (match_type (type_of c1)) (type_of c2)
 
-fun match_c_c c1 c2 = match_type (type_of c1) (type_of c2)
+fun match_c_c c1 c2 = raw_subst (raw_match_type (type_of c1) (type_of c2) ([],[]))
+
 
 (* may return an empty list *)
 fun match_c_cl c cl =

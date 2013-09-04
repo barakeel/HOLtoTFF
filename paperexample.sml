@@ -62,5 +62,30 @@ val substll = repeat_create_substll
                      (make_list_n (length thml) 1);
 val (thml,goal) = monomorph_pb (thml,goal);
 
-(* bool conv *)
+(* bool conversion *)
 bool_conv ``P (!x. P (z /\ T) /\ x):bool``;
+raw_match_type ``:'a`` ``:'a`` ([],[]);
+(* HOL4 basic example *);
+show_assums := true;
+
+(* forward proof *)
+val th1 = ASSUME ``A:bool``;
+val th2 = ASSUME ``B:bool``;
+val th3 = CONJ th1 th2;
+val th4 = DISCH ``B:bool`` th3;
+val th5 = DISCH ``A:bool`` th4;
+(* backward proof *)
+g(`A ==> B ==> A /\ B `);
+e(DISCH_TAC);
+e(DISCH_TAC);
+e(CONJ_TAC);
+e(ACCEPT_TAC th1);
+e(ACCEPT_TAC th2);
+
+
+
+
+
+
+
+
