@@ -114,7 +114,7 @@ fun get_maxsubstl sl =
 (* MATCH *)
 fun mk_identity vty = {redex = vty, residue = vty}
 
-fun raw_subst (subst,vtyl) = normalize_subst [subst @ map mk_identity vtyl]
+fun raw_subst (subst,vtyl) = normalize_subst (subst @ map mk_identity vtyl)
 
 fun is_matchable c1 c2 =
   name_of c1 = name_of c2 andalso 
