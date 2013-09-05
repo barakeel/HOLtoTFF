@@ -20,7 +20,51 @@ fun is_polymorph_thm thm =
 fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
 
 fun is_monomorphable c = is_polymorph c andalso not (name_of c = "=") 
- 
+
+(* VARTYPE RENAMING *)
+fun mknew_varty string used =
+  let val usedname = map dest_vartype used in
+  let val n = ref 0 in
+  let val name = ref ( "'" ^ string ^ (Int.toString (!n)) ) in
+    (
+    while is_member (!name) usedname do 
+      (
+      n := (!n) + 1;
+      name := "'" ^ string ^ (Int.toString (!n))
+      );
+    mk_vartype (!name)
+    )
+  end end end
+
+fun mknew_vartyl n string used = 
+  case n of
+  0 => []
+  | _ => if n < 0 then raise MONOMORPH_ERR "mknew_vartyl_aux" "negative number"
+    else
+      mknew_varty string used :: mknew_vartyl (n-1) string 
+                                   ((mknew_varty string used) :: used) 
+fun mk_subst_ll l1 l2 =
+  case (l1,l2) of
+    ([],[]) => []  
+  | ([],_) => raise MONOMORPH_ERR "mknew_vartyl_aux" "negative number"  
+  | (_,[]) => raise MONOMORPH_ERR "mknew_vartyl_aux" "negative number"  
+  | (a::m,b::n) => {redex = a, residue = b} :: mk_subst_ll m n
+  
+fun rename_varty_thml thml used =
+  case thml of
+    [] => []
+  | th1 :: m => 
+    let val vartyl = type_varsl (map type_of (get_cl_thm th1)) in
+    let val newtyl = mknew_vartyl (length vartyl) "a" used in
+    let val newth1 = INST_TYPE (mk_subst_ll vartyl newtyl) th1 in
+      newth1 :: rename_varty_thml m (newtyl @ used)
+    end end end
+  
+fun rename_varty_pb (thml,goal) =
+  let val used = type_varsl (map type_of (get_cl_goal goal)) in
+    (rename_varty_thml thml used,goal)
+  end
+
 (* SUBSTITION SET *)
 fun get_redl subst =
   case subst of
@@ -197,14 +241,15 @@ fun repeat_create_substll (clthml,clgoal) substll =
 
 (* MONOMORPHISATION *)  
 fun monomorph_pb_w (thml,goal) =
-  let val clthml = map get_cl_thm thml in
+  let val (newthml,_) = rename_varty_pb (thml,goal) in
+  let val clthml = map get_cl_thm newthml in
   let val clgoal = get_cl_goal goal in
   let val substll = repeat_create_substll 
                      (clthml,clgoal) 
-                     (make_list_n (length thml) [[]])                    
+                     (make_list_n (length newthml) [[]])                    
   in
-    (inst_thml substll thml,goal) 
-  end end end
+    (inst_thml substll newthml,goal) 
+  end end end end
 fun monomorph_pb pb = wrap "monomorph" "monomorph_pb" "" monomorph_pb_w pb
 
 (* test   

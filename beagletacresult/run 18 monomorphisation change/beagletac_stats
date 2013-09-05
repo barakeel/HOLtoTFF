@@ -1,0 +1,19 @@
+Problems    : 95
+
+Polymorph   : 54
+Fixpoint    : 16
+Lambda-lift : 9
+Bool Conv   : 21
+Num Conv    : 47
+Higher Order: 20
+Proof       : 95
+Metis fail  : 0
+
+Unsat       : 60
+Unkown      : 29
+Sat         : 4
+Time out    : 1
+Parsing err : 1
+Code err    : 0
+Beagle err  : 0
+

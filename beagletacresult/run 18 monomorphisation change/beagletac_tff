@@ -1,0 +1,140 @@
+%----------------------------------------------------------------------------
+% Number   : 95
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_itselfIaI_type,type,(
+    ty_itselfIaI: $tType )).
+
+tff(ty_itselfIbI_type,type,(
+    ty_itselfIbI: $tType )).
+
+tff(ty_itselfIcI_type,type,(
+    ty_itselfIcI: $tType )).
+
+tff(ty_cartIbool_cI_type,type,(
+    ty_cartIbool_cI: $tType )).
+
+tff(xh_type,type,(
+    xh: $int )).
+
+tff(xm_type,type,(
+    xm: $int )).
+
+tff(xw_type,type,(
+    xw: ty_cartIbool_cI )).
+
+tff(xn_type,type,(
+    xn: $int )).
+
+tff(xl_type,type,(
+    xl: $int )).
+
+tff(xi_type,type,(
+    xi: $int )).
+
+tff(cfcp_index_type,type,(
+    cfcp_index: ( ty_cartIbool_cI * $int ) > $o )).
+
+tff(cdimindex_type,type,(
+    cdimindex: ty_itselfIcI > $int )).
+
+tff(cthe_value_type,type,(
+    cthe_value: ty_itselfIcI )).
+
+tff(cdimindex1_type,type,(
+    cdimindex1: ty_itselfIbI > $int )).
+
+tff(cthe_value1_type,type,(
+    cthe_value1: ty_itselfIbI )).
+
+tff(cdimindex2_type,type,(
+    cdimindex2: ty_itselfIaI > $int )).
+
+tff(cthe_value2_type,type,(
+    cthe_value2: ty_itselfIaI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx1: ty_itselfIaI] : ($lesseq(0,cdimindex2(Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx11: ty_itselfIbI] : ($lesseq(0,cdimindex1(Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx12: ty_itselfIcI] : ($lesseq(0,cdimindex(Xx12))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx13: $int,Xx2: $int] : (($lesseq(0,$sum(Xx13,Xx2)) | (~$lesseq(0,Xx13) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom5_axiom,axiom,(
+    $lesseq(0,xi) )).
+
+tff(axiom6_axiom,axiom,(
+    $lesseq(0,xl) )).
+
+tff(axiom7_axiom,axiom,(
+    $lesseq(0,xn) )).
+
+tff(axiom8_axiom,axiom,(
+    $lesseq(0,xm) )).
+
+tff(axiom9_axiom,axiom,(
+    $lesseq(0,xh) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(X1,X2),X3) | (~$lesseq($sum(X1,$sum(X2,X)),$sum(X3,X)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : ((~$lesseq($sum(X1,X2),X3) | ($lesseq($sum(X1,$sum(X2,X)),$sum(X3,X)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : ((~$lesseq($sum(xi,$sum(xl,xn)),$sum(xh,xn)) | (~$lesseq($sum(xi,xl),xh) | (~$lesseq($sum(xi,$sum(xl,xn)),xm) | (~cfcp_index(xw,$sum(xi,$sum(xl,xn))) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),$sum(xh,xn)) | (cfcp_index(xw,$sum(xi,$sum(xl,xn))) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),$sum(xh,xn)) | ($lesseq($sum(xi,$sum(xl,xn)),xm) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),$sum(xh,xn)) | ($lesseq($sum(xi,xl),xh) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),xm) | ($lesseq($sum(xi,xl),xh) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),xm) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($lesseq($sum(xi,$sum(xl,xn)),xm) | (cfcp_index(xw,$sum(xi,$sum(xl,xn))) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : ((cfcp_index(xw,$sum(xi,$sum(xl,xn))) | ($lesseq($sum(xi,xl),xh) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : ((cfcp_index(xw,$sum(xi,$sum(xl,xn))) | ($lesseq($sum(xi,$sum(xl,xn)),xm) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : ((cfcp_index(xw,$sum(xi,$sum(xl,xn))) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less($sum(xi,$sum(xl,xn)),cdimindex(cthe_value)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less($sum(xi,xl),cdimindex(cthe_value)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less($sum(xi,xl),cdimindex1(cthe_value1)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less(xi,cdimindex(cthe_value)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less(xi,cdimindex1(cthe_value1)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [X: $int,X2: $int,X1: $int,X3: $int] : (($less(xi,cdimindex2(cthe_value2)) | (~$lesseq(0,X) | (~$lesseq(0,X1) | (~$lesseq(0,X2) | ~$lesseq(0,X3)))))) )).
+
+%----------------------------------------------------------------------------
+

@@ -1,0 +1,384 @@
+Number: 1
+Status: Unknown
+Info: polymorph fixpoint num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h] |- LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)
+
+Number: 14
+Status: Unknown
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Number: 17
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+ [] |- 0 < 256
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Number: 18
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- (n2s x = n2s y) ⇔ (x = y)
+
+Number: 20
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- ∀s. ∃n. s = n2s n
+
+Number: 27
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
+|- EL m (MAP SND ls) = EL n'' (r::MAP SND ls)
+
+Number: 28
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ h ≠ FST (EL n ls), EL n (MAP FST ls) ≠ FST (EL n ls), m < LENGTH ls,
+ n < LENGTH ls, SUC n < z, FST (EL m ls) = FST (EL n ls),
+ EL z (h::MAP FST ls) = FST (EL n ls)]
+|- SND (EL m ls) = EL z (r::MAP SND ls)
+
+Number: 29
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[T,
+ ∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ ¬(n < z), h ≠ FST (EL n ls), EL m (MAP FST ls) ≠ FST (EL n ls), m < z,
+ m < LENGTH ls, n < LENGTH ls, z < LENGTH ls,
+ FST (EL m ls) = FST (EL n ls), FST (EL z ls) = FST (EL n ls)]
+|- SND (EL m ls) = SND (EL z ls)
+
+Number: 30
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(m < z),
+ ¬(n < m), ¬(n < z), h ≠ FST (EL n ls), m < LENGTH ls, n < LENGTH ls,
+ z < m, z < LENGTH ls, FST (EL m ls) = FST (EL n ls),
+ FST (EL z ls) = FST (EL n ls)] |- SND (EL m ls) = SND (EL z ls)
+
+Number: 42
+Status: Satisfiable
+Info: polymorph fixpoint lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀ft r1. relrec h ft r1 ⇒ ∀r2. relrec h ft r2 ⇒ (r1 = r2)
+Goal: 
+[∀d. d ∈ FDOM fm ⇒ relrec h (fm ' d) (rfm ' d), FDOM rfm = FDOM fm,
+ x ∈ FDOM fm] |- rfm ' x = @r. relrec h (fm ' x) r
+
+Number: 44
+Status: Unknown
+Info: polymorph fixpoint bool num higher-order proof 
+Thm list: 
+ [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
+Goal: 
+[Abbrev (m1 = LENGTH (FILTER ($= x) l1)),
+ Abbrev (m2 = LENGTH (FILTER ($= x) l2)), x' < m1, x' < m2, m1 ≥ m2,
+ m2 ≥ m1]
+|- MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
+   MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)
+
+Number: 48
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+ [] |- BIJ INL 𝕌(:α) ISL ∧ BIJ INR 𝕌(:β) ISR
+Goal:  []
+|- (FINITE 𝕌(:α) ⇒ (CARD ISL = CARD 𝕌(:α))) ∧
+   (FINITE 𝕌(:β) ⇒ (CARD ISR = CARD 𝕌(:β)))
+
+Number: 49
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀s.
+     FINITE s ⇒
+     ∀t. FINITE t ⇒ (CARD (s ∪ t) + CARD (s ∩ t) = CARD s + CARD t)
+ [] |- ∀m. m + 0 = m
+ [] |- CARD ∅ = 0
+ [] |- ISL ∩ ISR = ∅
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  []
+|- FINITE 𝕌(:α) ∧ FINITE 𝕌(:β) ⇒
+   (CARD (ISL ∪ ISR) = CARD ISL + CARD ISR)
+
+Number: 50
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  [FINITE 𝕌(:α), FINITE 𝕌(:β), ¬(FINITE ISL ∧ FINITE ISR)]
+|- 1 = CARD 𝕌(:α) + CARD 𝕌(:β)
+
+Number: 51
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  [FINITE ISL, FINITE ISR, ¬(FINITE 𝕌(:α) ∧ FINITE 𝕌(:β))]
+|- CARD (ISL ∪ ISR) = 1
+
+Number: 56
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0A 𝕌(:α) IS_BIT0A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+
+Number: 57
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0B 𝕌(:α) IS_BIT0B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+
+Number: 58
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal:  [FINITE 𝕌(:α), ¬(FINITE IS_BIT0A ∧ FINITE IS_BIT0B)] |- F
+
+Number: 59
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal:  [FINITE IS_BIT0A, FINITE IS_BIT0B, INFINITE 𝕌(:α)]
+|- CARD (IS_BIT0A ∪ IS_BIT0B) = 1
+
+Number: 60
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal:  [FINITE 𝕌(:α), FINITE IS_BIT0A, FINITE IS_BIT0B]
+|- CARD IS_BIT0A + CARD IS_BIT0B = 2 * CARD 𝕌(:α)
+
+Number: 67
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1A 𝕌(:α) IS_BIT1A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+
+Number: 68
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1B 𝕌(:α) IS_BIT1B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+
+Number: 69
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
+
+Number: 70
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- ∀s t. FINITE (s ∪ t) ⇔ FINITE s ∧ FINITE t
+Goal:  [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
+
+Number: 71
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+ [] |- (CARD IS_BIT1C = 1) ∧ FINITE IS_BIT1C
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal: 
+[FINITE 𝕌(:α), ¬((FINITE IS_BIT1A ∧ FINITE IS_BIT1B) ∧ FINITE IS_BIT1C)]
+|- 1 = 2 * CARD 𝕌(:α) + 1
+
+Number: 72
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+ [] |- (CARD IS_BIT1C = 1) ∧ FINITE IS_BIT1C
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal:  [FINITE IS_BIT1A, FINITE IS_BIT1B, FINITE IS_BIT1C, INFINITE 𝕌(:α)]
+|- CARD (IS_BIT1A ∪ IS_BIT1B ∪ IS_BIT1C) = 1
+
+Number: 73
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+ [] |- (CARD IS_BIT1C = 1) ∧ FINITE IS_BIT1C
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+ [] |- ∀n. 2 * n = n + n
+Goal:  [FINITE 𝕌(:α), FINITE IS_BIT1A, FINITE IS_BIT1B, FINITE IS_BIT1C]
+|- CARD IS_BIT1A + CARD IS_BIT1B = 2 * CARD 𝕌(:α)
+
+Number: 74
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀x. x ∈ 𝕌(:α)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- 𝕌 ARB () ⇔ {()} ()
+
+Number: 75
+Status: Unknown
+Info: polymorph fixpoint bool proof 
+Thm list: 
+ [] |- dimindex (:α) = if FINITE 𝕌(:α) then CARD 𝕌(:α) else 1
+ [] |- (CARD 𝕌(:unit) = 1) ∧ FINITE 𝕌(:unit)
+Goal:  [] |- dimindex (:unit) = 1
+
+Number: 77
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- (∀m. m ** 0 = 1) ∧ ∀m n. m ** SUC n = m * m ** n
+ [] |- ∀a b c. a ≤ b ∧ c < b ⇒ a + c < 2 * b
+Goal:  [∀f. SUM n (λi. SBIT (f i) i) < 2 ** n, SBIT (f n) n ≤ 2 ** n]
+|- SBIT (f n) n + SUM n (λi. SBIT (f i) i) < 2 ** SUC n
+
+Number: 78
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n f. SUM n (λi. SBIT (f i) i) < 2 ** n
+Goal:  [n ≤ i, BIT i (SUM n (λj. SBIT (f j) j)) ⇔ f i ∧ i < n]
+|- SUM n (λi. SBIT (f i) i) < 2 ** n
+
+Number: 85
+Status: Parsing failed
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ []
+|- ∀a b n.
+     ¬BIT n a ∨ ¬BIT n b ⇒
+     (SBIT (BIT n a ∨ BIT n b) n = SBIT (BIT n a) n + SBIT (BIT n b) n)
+ [] |- n < SUC n
+Goal: 
+[∀a b.
+   (∀i. i < n ⇒ ¬BIT i a ∨ ¬BIT i b) ⇒
+   (SUM n (λi. SBIT (BIT i a) i) + SUM n (λi. SBIT (BIT i b) i) =
+    BITWISE n $\/ a b), ∀i. i < SUC n ⇒ ¬BIT i a ∨ ¬BIT i b]
+|- SBIT (BIT n a) n + SBIT (BIT n b) n + BITWISE n $\/ a b =
+   SBIT (BIT n a ∨ BIT n b) n + BITWISE n $\/ a b
+
+Number: 86
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ []
+|- ∀w.
+     ¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ)) ⇒
+     (sw2sw (sw2sw w) = sw2sw w)
+Goal:  [¬(dimindex (:β) < dimindex (:α) ∧ dimindex (:β) < dimindex (:γ))]
+|- sw2sw (sw2sw w) = sw2sw w
+
+Number: 91
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀w. w2n (w2w w) ≤ w2n w
+ [] |- ∀w. w2n w < dimword (:α)
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+Goal:  [] |- ∀w. w2n (w2w w) < dimword (:α)
+
+Number: 92
+Status: Unknown
+Info: polymorph fixpoint num proof 
+Thm list: 
+ [] |- ∀b. 1 < b ⇒ ∀n m. b ** m ≤ b ** n ⇔ m ≤ n
+ [] |- 1 < 2
+ [] |- ∀n. (1 ** n = 1) ∧ (n ** 1 = n)
+ [] |- 1 ≤ dimindex (:α)
+Goal:  [] |- 2 ≤ 2 ** dimindex (:α)
+
