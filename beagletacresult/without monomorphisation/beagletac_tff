@@ -1,0 +1,38 @@
+%----------------------------------------------------------------------------
+% Number   : 105
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_cartIbool_aI_type,type,(
+    ty_cartIbool_aI: $tType )).
+
+tff(xw_type,type,(
+    xw: ty_cartIbool_aI )).
+
+tff(xv_type,type,(
+    xv: ty_cartIbool_aI )).
+
+tff(xx_type,type,(
+    xx: ty_cartIbool_aI )).
+
+tff(cword_add_type,type,(
+    cword_add: ( ty_cartIbool_aI * ty_cartIbool_aI ) > ty_cartIbool_aI )).
+
+tff(axiom1_axiom,axiom,(
+    ! [X2: ty_cartIbool_aI,X1: ty_cartIbool_aI,X: ty_cartIbool_aI] : ((~(cword_add(X2,X1) = cword_add(X2,X)) | (X1 = X))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [X2: ty_cartIbool_aI,X1: ty_cartIbool_aI,X: ty_cartIbool_aI] : (((cword_add(X2,X1) = cword_add(X2,X)) | ~(X1 = X))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [X2: ty_cartIbool_aI,X1: ty_cartIbool_aI] : ((cword_add(X2,X1) = cword_add(X1,X2))) )).
+
+tff(axiom4_axiom,axiom,(
+    ((cword_add(xv,xw) = cword_add(xx,xw)) | (xv = xx)) )).
+
+tff(axiom5_axiom,axiom,(
+    (~(cword_add(xv,xw) = cword_add(xx,xw)) | ~(xv = xx)) )).
+
+%----------------------------------------------------------------------------
+
