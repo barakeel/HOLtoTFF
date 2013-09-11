@@ -1,8 +1,0 @@
-Dijunction cases: (infinite loop)
-  val goal = ([],``!x. x = T \/ x = F``);
-Fix : instantiation of all boolean seen as arguments
-
-Non linear integer arithmetic :
-  val thml = [mk_thm ([],``!x. ( (M x x) = 4) ==> (x=2)``)] ;
-  val goal = ([``(M (x:num) x = 4)``],``(x=2)``);
-Fix : Fake symbol function for multiplication Mult

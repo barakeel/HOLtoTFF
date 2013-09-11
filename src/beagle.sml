@@ -2,17 +2,18 @@ structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib
-     basictools listtools syntax printtools
-     extractvar
-     higherorder monomorph tactic
-     printtff printresult
+     blibBtools blibSyntax
+     blibExtractvar
+     blibHO blibMonomorph blibTactic
+     blibPrinttff 
+     beaglePrintresult beagleStats
 
 fun BEAGLE_ERR function message =
     HOL_ERR{origin_structure = "beagle",
 	    origin_function = function,
             message = message}
 
-(* Status *)
+(* STATUS *)
 val SZSstatus = ref "Undefined"
 
 fun update_SZSstatus filename = 
@@ -77,8 +78,10 @@ fun beagle_tac_aux filename thml goal =
   addone_nb nb_problem;
     (
     flag_update mflag (is_polymorph_pb (thml,goal));
-    let val (mthml,mgoal) = 
-      if fst (!mflag) then monomorph_pb (thml,goal) else (thml ,goal)
+    let val (mthml,mgoal) = (thml,goal)
+     (* if fst (is_polymorph_pb (thml,goal)) 
+        then monomorph_pb (thml,goal) 
+        else (thml ,goal) *)
     in 
     let val (finalgoal_list,validation) = BEAGLE_NF_TAC mthml mgoal  in
                                         (* update all flags *)

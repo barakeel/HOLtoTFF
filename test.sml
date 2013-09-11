@@ -1,40 +1,12 @@
 (* LIBRARIES *)
 (* 
-load "basictools"; open basictools;
-load "listtools"; open listtools;
-load "stringtools"; open stringtools;
-load "mydatatype"; open mydatatype;
-
-load "syntax"; open syntax;
-load "tffsyntax"; open tffsyntax;
-load "basicconv"; open basicconv;
-load "basicrule"; open basicrule;
-load "predicate"; open predicate;
-load "extractterm"; open extractterm;
-load "extractvar"; open extractvar;
-load "freshvar"; open freshvar;
-load "extracttype"; open extracttype;
-load "nametype"; open nametype;
-load "namevar"; open namevar;
-
-load "monomorph"; open monomorph;
-load "conv"; open conv; 
-load "clausesettools"; open clausesettools;
-load "tactic"; open tactic;
-load "printtools"; open printtools;
-load "higherorder"; open higherorder;
-load "printtff"; open printtff;
-load "printresult";open printresult;
 load "beagle"; open beagle;
 *)
 
 (* PROBLEM TEST *)   
-show_assums :=  true;
-metisTools.METIS_TAC thml goal;
 beagle_tac_aux filename thml goal;
 BEAGLE_TAC thml goal;
 fst (BEAGLE_NF_TAC thml goal);
-val (thml,goal) = monomorph_pb (thml,goal);
 
 (* EXAMPLES *)
 (* nlia test *)
