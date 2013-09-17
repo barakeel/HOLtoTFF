@@ -1,13 +1,14 @@
 signature blibBtools =
 sig
   
-  (* function *)
+(* FUNCTION *)
   val inv :('a -> 'b -> 'c) -> 'b -> 'a -> 'c
   val repeat_n_fun :  int -> ('a -> 'a) -> 'a -> 'a
   (* error handling *)
   val success : ('a -> 'b) -> 'a -> bool
   val wrap : string -> string -> string -> ('a -> 'b) -> 'a -> 'b
-  (* string *)
+
+(* STRING *)
   val space : int -> string 
   val indent : int -> string
   
@@ -22,6 +23,8 @@ sig
   val is_lowerword : string -> bool
   val is_upperword : string -> bool 
 
+  val string_to_int : string -> int
+  
 (* LIST *)
   val make_list_n : int -> 'a -> 'a list
   (* arithmetic *)
@@ -50,7 +53,9 @@ sig
   val switcherr : (bool * 'a) list -> exn -> 'a 
   val switcharg : 'a -> (('a -> bool) * 'b) list -> 'b -> 'b
   val switchargerr : 'a -> (('a -> bool) * 'b) list -> exn -> 'b
-  
+
+(* FILE MANAGEMENT *)
+  val readl : string -> string list 
   
   
   

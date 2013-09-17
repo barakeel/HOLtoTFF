@@ -88,36 +88,6 @@ fun update_nbl2 str =
   | "Undefined" => addone_nb nb_codeerr
   | _ => addone_nb nb_beagerr
  
-  
-fun readl filename = 
-  let
-    val file = TextIO.openIn filename
-    fun loop file =
-      case TextIO.inputLine file of
-        SOME line => line :: loop file
-      | NONE      => []
-  in
-    loop file before TextIO.closeIn file
-  end
-  
-fun string_to_int_aux l =
-  case l of
-    [] => 0
-  | c :: m => case Char.toString c of 
-                "0" => 0 + 10 * (string_to_int_aux m)
-              | "1" => 1 + 10 * (string_to_int_aux m)
-              | "2" => 2 + 10 * (string_to_int_aux m)
-              | "3" => 3 + 10 * (string_to_int_aux m)
-              | "4" => 4 + 10 * (string_to_int_aux m)
-              | "5" => 5 + 10 * (string_to_int_aux m)
-              | "6" => 6 + 10 * (string_to_int_aux m)
-              | "7" => 7 + 10 * (string_to_int_aux m)
-              | "8" => 8 + 10 * (string_to_int_aux m)
-              | "9" => 9 + 10 * (string_to_int_aux m)
-              | _   => raise PRINTTOOLS_ERR "string_to_int" "not a number"
-                         
-fun string_to_int str = string_to_int_aux (rev (String.explode str))
-
 fun extract_nb str = 
   string_to_int (String.substring (str,14,(String.size str) - 15)) 
 

@@ -1,0 +1,62 @@
+%----------------------------------------------------------------------------
+% Number   : 17
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_bool_F_bool_type,type,(
+    ty_bool_F_bool: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(xf1_type,type,(
+    xf1: ty_num_F_num )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_num_F_num * $int ) > $int )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_bool_F_bool * bool ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx1: ty_num_F_num,Xx2: $int] : (($lesseq(0,xApp(Xx1,Xx2)) | ~$lesseq(0,Xx2))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx11: $int,Xx2: $int] : (($lesseq(0,$sum(Xx11,Xx2)) | (~$lesseq(0,Xx11) | ~$lesseq(0,Xx2)))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xx: $int,XP: ty_bool_F_bool,Xf: ty_num_F_num] : ((~(xApp(Xf,0) = 1) | (~xApp1(XP,btrue) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xx: $int,Xf: ty_num_F_num] : ((~(xApp(Xf,0) = 1) | ((Xf = xf1) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xx: $int,XP: ty_bool_F_bool,Xf: ty_num_F_num] : ((~(xApp(Xf,0) = 1) | (xApp1(XP,btrue) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xx: $int,Xf: ty_num_F_num] : ((~(xApp(Xf,0) = 1) | ((xApp(xf1,Xx) = $sum(Xx,1)) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xx: $int,Xf: ty_num_F_num] : (((xApp(Xf,0) = 1) | ((xApp(xf1,Xx) = $sum(Xx,1)) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xx: $int,XP: ty_bool_F_bool,Xf: ty_num_F_num] : (((xApp(Xf,0) = 1) | (xApp1(XP,btrue) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xx: $int,Xf: ty_num_F_num] : (((xApp(Xf,0) = 1) | ((Xf = xf1) | ~$lesseq(0,Xx)))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xx: $int,XP: ty_bool_F_bool,Xf: ty_num_F_num] : (((xApp(Xf,0) = 1) | (~xApp1(XP,bfalse) | ~$lesseq(0,Xx)))) )).
+
+%----------------------------------------------------------------------------
+

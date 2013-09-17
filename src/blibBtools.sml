@@ -8,7 +8,7 @@ fun BTOOLS_ERR function message =
 	         origin_function = function,
            message = message}
 
-(* FUNCTION *)
+(*********** FUNCTION **********)
 fun repeat_n_fun n f x = 
   case n of
     0 => x
@@ -35,7 +35,6 @@ fun wrap s f m function x =
                         message = m}
 
 (********** STRINGTOOOLS ***********)
-
 (* modify string *)
 fun space n =
   case n of
@@ -97,7 +96,24 @@ fun is_upperword str =
   | [a] => Char.isUpper a  
   | a :: m => (Char.isUpper a) andalso (is_alphanumor_charl m)
   
-  
+fun string_to_int_aux l =
+  case l of
+    [] => 0
+  | c :: m => case Char.toString c of 
+                "0" => 0 + 10 * (string_to_int_aux m)
+              | "1" => 1 + 10 * (string_to_int_aux m)
+              | "2" => 2 + 10 * (string_to_int_aux m)
+              | "3" => 3 + 10 * (string_to_int_aux m)
+              | "4" => 4 + 10 * (string_to_int_aux m)
+              | "5" => 5 + 10 * (string_to_int_aux m)
+              | "6" => 6 + 10 * (string_to_int_aux m)
+              | "7" => 7 + 10 * (string_to_int_aux m)
+              | "8" => 8 + 10 * (string_to_int_aux m)
+              | "9" => 9 + 10 * (string_to_int_aux m)
+              | _   => raise BTOOLS_ERR "string_to_int" "not a number"
+                         
+fun string_to_int str = string_to_int_aux (rev (String.explode str))
+
 (********* LISTTOOLS **********) 
 fun make_list_n n a =
   case n of 
@@ -361,6 +377,19 @@ fun switchargerr arg condresultl error =
     | (cond,result) :: m => if cond arg
                             then result
                             else switchargerr arg m error         
-  
+(* FILE MANAGEMENT *)  
+fun readl filename = 
+  let
+    val file = TextIO.openIn filename
+    fun loop file =
+      case TextIO.inputLine file of
+        SOME line => line :: loop file
+      | NONE      => []
+  in
+    loop file before TextIO.closeIn file
+  end  
+
+
+ 
 end
   

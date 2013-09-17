@@ -1,0 +1,1291 @@
+Number: 1
+Status: Unknown
+Info: polymorph num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h] |- LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)
+
+Number: 3
+Status: Unknown
+Info: polymorph num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- ∀l. l ≠ [] ⇒ LENGTH (TL l) < LENGTH l
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h, SND (SPLITP P t) ≠ ""]
+|- LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)
+
+Number: 14
+Status: Unknown
+Info: bool num proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: 
+[Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256,
+ n2s (s2n s) = s, r0 = ORD c + 1] |- s0 = s
+
+Number: 17
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- ∀m n. m * n = n * m
+ [] |- 0 < 256
+Goal: 
+[ORD #"\255" < 256, n2s (s2n s) = s, ORD #"\255" = 255,
+ ORD #"\255" + 1 = 256] |- n2s (256 * s2n s DIV 256) = s
+
+Number: 18
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀n. s2n (n2s n) = n
+Goal:  [] |- (n2s x = n2s y) ⇔ (x = y)
+
+Number: 20
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- n2s (s2n s) = s
+Goal:  [] |- ∀s. ∃n. s = n2s n
+
+Number: 25
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- fm ' k = v
+
+Number: 26
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀al k v. (ALOOKUP al k = SOME v) ⇒ MEM (k,v) al
+Goal:  [¬∃p_2. MEM (k,p_2) ls, ALOOKUP ls k = SOME v] |- k ∈ FDOM fm
+
+Number: 27
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
+|- EL m (MAP SND ls) = EL n'' (r::MAP SND ls)
+
+Number: 28
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ h ≠ FST (EL n ls), EL n (MAP FST ls) ≠ FST (EL n ls), m < LENGTH ls,
+ n < LENGTH ls, SUC n < z, FST (EL m ls) = FST (EL n ls),
+ EL z (h::MAP FST ls) = FST (EL n ls)]
+|- SND (EL m ls) = EL z (r::MAP SND ls)
+
+Number: 29
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[T,
+ ∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(n < m),
+ ¬(n < z), h ≠ FST (EL n ls), EL m (MAP FST ls) ≠ FST (EL n ls), m < z,
+ m < LENGTH ls, n < LENGTH ls, z < LENGTH ls,
+ FST (EL m ls) = FST (EL n ls), FST (EL z ls) = FST (EL n ls)]
+|- SND (EL m ls) = SND (EL z ls)
+
+Number: 30
+Status: Unknown
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)
+Goal: 
+[∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE, ∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls),
+ ∀m. m < SUC z ⇒ EL m (h::MAP FST ls) ≠ FST (EL n ls), ¬(m < z),
+ ¬(n < m), ¬(n < z), h ≠ FST (EL n ls), m < LENGTH ls, n < LENGTH ls,
+ z < m, z < LENGTH ls, FST (EL m ls) = FST (EL n ls),
+ FST (EL z ls) = FST (EL n ls)] |- SND (EL m ls) = SND (EL z ls)
+
+Number: 33
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- ∀a. ∃c. wf c ∧ (a = fromF c)
+
+Number: 34
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- wf x ∧ wf y ⇒ ((fromF x = fromF y) ⇔ (x = y))
+
+Number: 35
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- (toF f = toF g) ⇔ (f = g)
+
+Number: 36
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀f g x. x ∈ FDOM g ⇒ ((f o_f g) ' x = f (g ' x))
+Goal:  [∀x. x ∈ FDOM f ⇒ (toF (f ' x) = (toF o_f g) ' x), FDOM f = FDOM g]
+|- ∀x. x ∈ FDOM g ⇒ (toF (f ' x) = toF (g ' x))
+
+Number: 37
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [∀k. k ∈ FDOM fm ⇒ wf (fm ' k), x ∈ FDOM fm]
+|- fm ' x = toF (fromF (fm ' x))
+
+Number: 38
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal:  [] |- (∀ft. P ft) ⇔ ∀f. wf f ⇒ P (fromF f)
+
+Number: 39
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- (∀a. fromF (toF a) = a) ∧ ∀r. wf r ⇔ (toF (fromF r) = r)
+Goal: 
+[P (fromF (construct a (toF o fromF o_f fm))),
+ ∀k. k ∈ FDOM fm ⇒ wf (fm ' k) ∧ P (fromF (fm ' k)), x ∈ FDOM fm]
+|- toF (fromF (fm ' x)) = fm ' x
+
+Number: 42
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀ft r1. relrec h ft r1 ⇒ ∀r2. relrec h ft r2 ⇒ (r1 = r2)
+Goal: 
+[∀d. d ∈ FDOM fm ⇒ relrec h (fm ' d) (rfm ' d), FDOM rfm = FDOM fm,
+ x ∈ FDOM fm] |- rfm ' x = @r. relrec h (fm ' x) r
+
+Number: 43
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀ft. ∃r. relrec h ft r
+Goal:  [d ∈ FDOM fm]
+|- (∃x. relrec h (fm ' d) x) ∧
+   ∀x. relrec h (fm ' d) x ⇒ relrec h (fm ' d) x
+
+Number: 44
+Status: Unknown
+Info: polymorph bool num higher-order proof 
+Thm list: 
+ [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
+Goal: 
+[Abbrev (m1 = LENGTH (FILTER ($= x) l1)),
+ Abbrev (m2 = LENGTH (FILTER ($= x) l2)), x' < m1, x' < m2, m1 ≥ m2,
+ m2 ≥ m1]
+|- MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
+   MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)
+
+Number: 48
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+ [] |- BIJ INL 𝕌(:α) ISL ∧ BIJ INR 𝕌(:β) ISR
+Goal:  []
+|- (FINITE 𝕌(:α) ⇒ (CARD ISL = CARD 𝕌(:α))) ∧
+   (FINITE 𝕌(:β) ⇒ (CARD ISR = CARD 𝕌(:β)))
+
+Number: 49
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ []
+|- ∀s.
+     FINITE s ⇒
+     ∀t. FINITE t ⇒ (CARD (s ∪ t) + CARD (s ∩ t) = CARD s + CARD t)
+ [] |- ∀m. m + 0 = m
+ [] |- CARD ∅ = 0
+ [] |- ISL ∩ ISR = ∅
+ [] |- (FINITE ISL ⇔ FINITE 𝕌(:α)) ∧ (FINITE ISR ⇔ FINITE 𝕌(:β))
+Goal:  []
+|- FINITE 𝕌(:α) ∧ FINITE 𝕌(:β) ⇒
+   (CARD (ISL ∪ ISR) = CARD ISL + CARD ISR)
+
+Number: 56
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0A 𝕌(:α) IS_BIT0A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0A = CARD 𝕌(:α))
+
+Number: 57
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT0B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT0B 𝕌(:α) IS_BIT0B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT0B = CARD 𝕌(:α))
+
+Number: 67
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1A 𝕌(:α) IS_BIT1A
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1A = CARD 𝕌(:α))
+
+Number: 68
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀S. FINITE S ⇒ ∀t f. BIJ f S t ∧ FINITE t ⇒ (CARD S = CARD t)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- BIJ BIT1B 𝕌(:α) IS_BIT1B
+Goal:  [] |- FINITE 𝕌(:α) ⇒ (CARD IS_BIT1B = CARD 𝕌(:α))
+
+Number: 69
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- ∀x. (x = BIT1C) ⇔ {BIT1C} x
+
+Number: 70
+Status: Satisfiable
+Info: polymorph proof 
+Thm list: 
+ [] |- FINITE IS_BIT1A ⇔ FINITE 𝕌(:α)
+ [] |- FINITE IS_BIT1B ⇔ FINITE 𝕌(:α)
+ [] |- ∀s t. FINITE (s ∪ t) ⇔ FINITE s ∧ FINITE t
+Goal:  [FINITE 𝕌(:α)] |- FINITE (IS_BIT1A ∪ IS_BIT1B)
+
+Number: 74
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+ [] |- ∀x. x ∈ 𝕌(:α)
+ [] |- ∀P x. x ∈ P ⇔ P x
+Goal:  [] |- 𝕌 ARB () ⇔ {()} ()
+
+Number: 75
+Status: Unknown
+Info: polymorph bool proof 
+Thm list: 
+ [] |- dimindex (:α) = if FINITE 𝕌(:α) then CARD 𝕌(:α) else 1
+ [] |- (CARD 𝕌(:unit) = 1) ∧ FINITE 𝕌(:unit)
+Goal:  [] |- dimindex (:unit) = 1
+
+Number: 77
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- (∀m. m ** 0 = 1) ∧ ∀m n. m ** SUC n = m * m ** n
+ [] |- ∀a b c. a ≤ b ∧ c < b ⇒ a + c < 2 * b
+Goal:  [∀f. SUM n (λi. SBIT (f i) i) < 2 ** n, SBIT (f n) n ≤ 2 ** n]
+|- SBIT (f n) n + SUM n (λi. SBIT (f i) i) < 2 ** SUC n
+
+Number: 78
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀n f. SUM n (λi. SBIT (f i) i) < 2 ** n
+Goal:  [n ≤ i, BIT i (SUM n (λj. SBIT (f j) j)) ⇔ f i ∧ i < n]
+|- SUM n (λi. SBIT (f i) i) < 2 ** n
+
+Number: 85
+Status: Parsing failed
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ []
+|- ∀a b n.
+     ¬BIT n a ∨ ¬BIT n b ⇒
+     (SBIT (BIT n a ∨ BIT n b) n = SBIT (BIT n a) n + SBIT (BIT n b) n)
+ [] |- n < SUC n
+Goal: 
+[∀a b.
+   (∀i. i < n ⇒ ¬BIT i a ∨ ¬BIT i b) ⇒
+   (SUM n (λi. SBIT (BIT i a) i) + SUM n (λi. SBIT (BIT i b) i) =
+    BITWISE n $\/ a b), ∀i. i < SUC n ⇒ ¬BIT i a ∨ ¬BIT i b]
+|- SBIT (BIT n a) n + SBIT (BIT n b) n + BITWISE n $\/ a b =
+   SBIT (BIT n a ∨ BIT n b) n + BITWISE n $\/ a b
+
+Number: 94
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m < n ∧ n ≤ p ⇒ m < p
+ [] |- 0 < dimindex (:α)
+Goal: 
+[i < dimindex (:α), i < dimindex (:γ), i + l < dimindex (:γ),
+ i + (l + n) < dimindex (:γ), dimindex (:β) ≤ i, dimindex (:β) ≤ i + l]
+|- 0 < i + l
+
+Number: 99
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀b n. n ≠ 0 ∧ n < 2 ** b ⇒ ∃i. i < b ∧ BIT i n
+Goal:  [n ≠ 0, n < 2 ** dimindex (:α)] |- ∃i. i < dimindex (:α) ∧ BIT i n
+
+Number: 112
+Status: Time out
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀w. -w = -1w * w
+ [] |- ∀v w. v * w = w * v
+ []
+|- ∀v w.
+     (0w * v = 0w) ∧ (v * 0w = 0w) ∧ (1w * v = v) ∧ (v * 1w = v) ∧
+     ((v + 1w) * w = v * w + w) ∧ (v * (w + 1w) = v + v * w)
+Goal:  [] |- ∀x. x * -1w = -x
+
+Number: 135
+Status: Time out
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. -w + w = 0w
+ [] |- ∀w. w + -w = 0w
+ [] |- (∀w. w + 0w = w) ∧ ∀w. 0w + w = w
+ [] |- ∀v w x. v + (w + x) = v + w + x
+ [] |- ∀v w. v + w = w + v
+Goal:  [] |- -a + -1w + b + 1w = b + -a
+
+Number: 136
+Status: Time out
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. -w + w = 0w
+ [] |- ∀w. w + -w = 0w
+ [] |- (∀w. w + 0w = w) ∧ ∀w. 0w + w = w
+ [] |- ∀v w x. v + (w + x) = v + w + x
+ [] |- ∀v w. v + w = w + v
+Goal:  [] |- a + (-b + -1w) + 1w = a + -b
+
+Number: 139
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal: 
+[T, n < dimword (:α), UINT_MAX (:β) MOD dimword (:α) ≤ n,
+ dimindex (:β) = dimindex (:α), dimword (:β) = dimword (:α),
+ UINT_MAX (:β) ≤ n ∧ n < dimword (:α) ⇒ (n = UINT_MAX (:β))]
+|- UINT_MAX (:β) < dimword (:α)
+
+Number: 156
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ []
+|- ∀n a b.
+     BIT (SUC n) (a + b) ⇔
+     if BIT (SUC n) (BITS n 0 a + BITS n 0 b) then
+       BIT (SUC n) a ⇔ BIT (SUC n) b
+     else BIT (SUC n) a ⇎ BIT (SUC n) b
+ []
+|- ∀n a b.
+     BIT (SUC n) (a + b + 1) ⇔
+     if BIT (SUC n) (BITS n 0 a + BITS n 0 b + 1) then
+       BIT (SUC n) a ⇔ BIT (SUC n) b
+     else BIT (SUC n) a ⇎ BIT (SUC n) b
+Goal: 
+[∀x y c.
+   BSUM i (λi. BIT i x) (λi. BIT i y) c ⇔
+   BIT i (x + y + if c then 1 else 0)]
+|- ((BIT (SUC i) x ⇔ ¬BIT (SUC i) y) ⇔
+    ¬BIT (SUC i) (BITS i 0 x + BITS i 0 y)) ⇔ BIT (SUC i) (x + y)
+
+Number: 157
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+ []
+|- ∀n a b.
+     BIT (SUC n) (a + b) ⇔
+     if BIT (SUC n) (BITS n 0 a + BITS n 0 b) then
+       BIT (SUC n) a ⇔ BIT (SUC n) b
+     else BIT (SUC n) a ⇎ BIT (SUC n) b
+ []
+|- ∀n a b.
+     BIT (SUC n) (a + b + 1) ⇔
+     if BIT (SUC n) (BITS n 0 a + BITS n 0 b + 1) then
+       BIT (SUC n) a ⇔ BIT (SUC n) b
+     else BIT (SUC n) a ⇎ BIT (SUC n) b
+Goal: 
+[∀x y c.
+   BSUM i (λi. BIT i x) (λi. BIT i y) c ⇔
+   BIT i (x + y + if c then 1 else 0)]
+|- ((BIT (SUC i) x ⇔ ¬BIT (SUC i) y) ⇔
+    ¬BIT (SUC i) (BITS i 0 x + BITS i 0 y + 1)) ⇔
+   BIT (SUC i) (x + y + 1)
+
+Number: 158
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[∀P f.
+   (∀j. j < n ⇒ ¬P j) ⇒
+   (FOLDL (λa j. a ∨ P j ∧ f j) F (COUNT_LIST n) ⇔ F), ∀j. j < n ⇒ ¬P j,
+ ∀j. j < SUC n ⇒ ¬P j] |- ¬FOLDL (λa j. a ∨ P j ∧ f j) F (COUNT_LIST n)
+
+Number: 159
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[P i,
+ ∀f P i.
+   i < n ∧ P i ∧ (∀i j. P i ∧ P j ∧ i < n ∧ j < n ⇒ (i = j)) ⇒
+   (FOLDL (λa j. a ∨ P j ∧ f j) F (COUNT_LIST n) ⇔ f i),
+ ∀i j. P i ∧ P j ∧ i < n ∧ j < n ⇒ (i = j),
+ ∀i j. P i ∧ P j ∧ i < SUC n ∧ j < SUC n ⇒ (i = j), i < n, i < SUC n]
+|- FOLDL (λa j. a ∨ P j ∧ f j) F (COUNT_LIST n) ⇔ f i
+
+Number: 168
+Status: Time out
+Info: num proof 
+Thm list: 
+ [] |- k ≠ 0 ⇒ (j % k % k = j % k)
+ [] |- k ≠ 0 ⇒ ((i % k − j % k) % k = (i − j) % k)
+Goal: 
+[&(2 * INT_MIN (:α)) ≠ 0, n ≠ 0, 0 < dimword (:α),
+ n MOD (2 * INT_MIN (:α)) < 2 * INT_MIN (:α), 1 ≤ INT_MIN (:α),
+ 1 ≤ dimword (:α), i = -&n, dimword (:α) = 2 * INT_MIN (:α), i < 0]
+|- (&(2 * INT_MIN (:α)) − &n) % &(2 * INT_MIN (:α)) =
+   (&(2 * INT_MIN (:α)) − &n % &(2 * INT_MIN (:α))) %
+   &(2 * INT_MIN (:α))
+
+Number: 172
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- 0 < dimindex (:α)
+ [] |- 0 < i ⇔ i ≠ 0
+Goal: 
+[¬(i < dimindex (:β)), ¬(0 < i), ¬(j < 0), i < dimindex (:α),
+ dimindex (:β) ≤ dimindex (:α), dimindex (:β) = 0, j ≤ INT_MAX (:β),
+ INT_MIN (:β) ≤ j] |- F
+
+Number: 191
+Status: Unknown
+Info: polymorph proof 
+Thm list: 
+ [] |- ∀w. w2i w ≤ INT_MAX (:α)
+ [] |- ∀w. INT_MIN (:α) ≤ w2i w
+ [] |- ∀w. INT_MIN (:α) ≤ w2i (sw2sw w) ∧ w2i (sw2sw w) ≤ INT_MAX (:α)
+Goal: 
+[¬(INT_MIN (:β) ≤ i ∧ i ≤ INT_MAX (:β)), dimindex (:β) ≤ dimindex (:α),
+ i ≤ INT_MAX (:α), INT_MIN (:α) ≤ i]
+|- (i = w2i (i2w i)) ⇔ (i = w2i (sw2sw (i2w i)))
+
+Number: 192
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀m n p. m ≤ n ∧ n < p ⇒ m < p
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal:  [n < dimword (:α)] |- INT_MIN (:β) < dimword (:β)
+
+Number: 194
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ []
+|- INT_MAX (:α) < INT_MIN (:α) ∧ INT_MIN (:α) ≤ UINT_MAX (:α) ∧
+   UINT_MAX (:α) < dimword (:α)
+Goal:  [n < INT_MIN (:α), n < dimword (:α), dimindex (:β) ≤ dimindex (:α)]
+|- UINT_MAX (:β) < dimword (:β)
+
+Number: 198
+Status: Unknown
+Info: polymorph lambda-lift num higher-order proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x))]
+|- (f a = NONE) ∨ ∃a' b. f a = SOME (a',b)
+
+Number: 199
+Status: Unknown
+Info: polymorph lambda-lift num higher-order proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+Goal: 
+[∀a. (llist_rep (g a) n = h f n a) ∧ (llist_rep (g' a) n = h f n a),
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LHD (g' x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x),
+ ∀f x. lrep_ok (λn. h f n x),
+ ∀f n. h f (SUC n) = (λx. OPTION_JOIN (OPTION_MAP (h f n o FST) (f x))),
+ ∀f. h f 0 = (λx. OPTION_MAP SND (f x)), LHD (g a) = NONE,
+ LHD (g' a) = NONE, f a = NONE] |- (g a = [||]) ∧ (g' a = [||])
+
+Number: 200
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+ []
+|- (∀f x. OPTION_MAP f (SOME x) = SOME (f x)) ∧
+   ∀f. OPTION_MAP f NONE = NONE
+Goal: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x), f x = NONE] |- g x = [||]
+
+Number: 201
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 202
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 203
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 204
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ [] |- ∀x. ∃q r. x = (q,r)
+ [] |- ∀opt. (∃x. opt = SOME x) ∨ (opt = NONE)
+Goal: 
+[∀x. f1 x = case f x of NONE => [||] | SOME (a,b) => b:::f1 a,
+ ∀x. f2 x = case f x of NONE => [||] | SOME (a,b) => b:::f2 a,
+ ∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)]
+|- (f x = NONE) ∨ ∃a b. f x = SOME (a,b)
+
+Number: 205
+Status: Satisfiable
+Info: polymorph higher-order proof 
+Thm list: 
+ []
+|- ∀ll.
+     ((LHD ll = NONE) ⇔ (ll = [||])) ∧ ((NONE = LHD ll) ⇔ (ll = [||]))
+ []
+|- (∀f x. OPTION_MAP f (SOME x) = SOME (f x)) ∧
+   ∀f. OPTION_MAP f NONE = NONE
+Goal: 
+[∀x. LHD (g x) = OPTION_MAP SND (f x),
+ ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x),
+ ∀g g'.
+   ((∀x. LHD (g x) = OPTION_MAP SND (f x)) ∧
+    ∀x. LTL (g x) = OPTION_MAP (g o FST) (f x)) ∧
+   (∀x. LHD (g' x) = OPTION_MAP SND (f x)) ∧
+   (∀x. LTL (g' x) = OPTION_MAP (g' o FST) (f x)) ⇒
+   (g = g'), f x = NONE] |- g x = [||]
+
+Number: 206
+Status: Satisfiable
+Info: polymorph lambda-lift higher-order proof 
+Thm list: 
+ []
+|- ∀f. ∃g. ∀x. g x = case f x of NONE => [||] | SOME (a,b) => b:::g a
+Goal:  []
+|- ∃LUNFOLD.
+     ∀f x.
+       LUNFOLD f x =
+       case f x of NONE => [||] | SOME (v1,v2) => v2:::LUNFOLD f v1
+
+Number: 214
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ []
+|- llength_rel [||] 0 ∧
+   ∀h n t. llength_rel t n ⇒ llength_rel (h:::t) (SUC n)
+Goal:  [llength_rel t n] |- ∃n. llength_rel (h:::t) n
+
+Number: 217
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t. LFINITE t ⇒ ∃n. llength_rel t n
+Goal:  [LFINITE t] |- ∃n. llength_rel t n
+
+Number: 218
+Status: Unknown
+Info: polymorph num proof 
+Thm list: 
+ [] |- ∀t m n. llength_rel t n ∧ llength_rel t m ⇒ (m = n)
+Goal:  [LFINITE t, llength_rel t n] |- ∀m. llength_rel t m ⇔ (m = n)
+
+Number: 224
+Status: Unknown
+Info: num higher-order proof 
+Thm list: 
+Goal:  []
+|- (∀ll. exists P ll ⇒ ∃n a t. (LDROP n ll = SOME (a:::t)) ∧ P a) ⇒
+   exists P ll ⇒
+   ∃n a t. (LDROP n ll = SOME (a:::t)) ∧ P a
+
+Number: 228
+Status: Unknown
+Info: num proof 
+Thm list: 
+ [] |- ∀m. (m = 0) ∨ ∃n. m = SUC n
+Goal: 
+[P n, P p, P (SUC n'), ∀m. m < n' ⇒ ¬P (SUC m), ∀m. m < p ⇒ ¬P m, ¬P 0,
+ ¬(SUC n' < p), p < SUC n'] |- ∃p0. p = SUC p0
+
+Number: 233
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀x y. (SOME x = SOME y) ⇔ (x = y)
+ []
+|- (∀n. LNTH n [||] = NONE) ∧ (∀h t. LNTH 0 (h:::t) = SOME h) ∧
+   ∀n h t. LNTH (SUC n) (h:::t) = LNTH n t
+Goal: 
+[P e, P h,
+ ∀x.
+   (case
+      if exists P x then
+        (let n = LEAST n. ∃e. (SOME e = LNTH n x) ∧ P e
+         in
+           SOME (THE (LDROP (SUC n) x),THE (LNTH n x)))
+      else NONE
+    of
+      NONE => [||]
+    | SOME (a,b) => b:::g P a) =
+   g P x, ∀m. m < n ⇒ ∀e. SOME e ≠ LNTH m (h:::t) ∨ ¬P e, n ≠ 0, 0 < n,
+ SOME e = LNTH n (h:::t)] |- F
+
+Number: 234
+Status: Time out
+Info: polymorph lambda-lift bool num higher-order proof 
+Thm list: 
+ [] |- ∀l. (l = [||]) ∨ ∃h t. l = h:::t
+ [] |- (every P [||] ⇔ T) ∧ (every P (h:::t) ⇔ P h ∧ every P t)
+Goal: 
+[∀x.
+   LHD (g x) =
+   OPTION_MAP SND
+     ((λll.
+         if every ($= [||]) ll then NONE
+         else
+           (let n = LEAST n. ∃e. (SOME e = LNTH n ll) ∧ e ≠ [||] in
+            let nlist = THE (LNTH n ll)
+            in
+              SOME
+                (THE (LTL nlist):::THE (LDROP (SUC n) ll),
+                 THE (LHD nlist)))) x),
+ ∀x.
+   LTL (g x) =
+   OPTION_MAP (g o FST)
+     ((λll.
+         if every ($= [||]) ll then NONE
+         else
+           (let n = LEAST n. ∃e. (SOME e = LNTH n ll) ∧ e ≠ [||] in
+            let nlist = THE (LNTH n ll)
+            in
+              SOME
+                (THE (LTL nlist):::THE (LDROP (SUC n) ll),
+                 THE (LHD nlist)))) x), ¬every ($= [||]) ll]
+|- ∃h t. ll = h:::t
+
+Number: 247
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ []
+|- ∀r s s'. linear_order r s ∧ s' ⊆ s ⇒ linear_order (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X]
+|- linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 248
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ []
+|- ∀r s s'.
+     finite_prefixes r s ∧ s' ⊆ s ⇒
+     finite_prefixes r s' ∧ finite_prefixes (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 249
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, ¬(x ∉ X DIFF minimal_elements X lo),
+ minimal_elements X lo = {x'}, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo), linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∃i.
+     LNTH i
+       (LUNFOLD linear_order_to_list_f
+          (rrestrict lo (X DIFF minimal_elements X lo))) =
+     SOME x
+
+Number: 250
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x' y.
+   (x' ∈ X ∧ x' ∉ minimal_elements X lo) ∧ y ∈ X ∧
+   y ∉ minimal_elements X lo ⇒
+   (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo) ∨
+   (y,x') ∈ rrestrict lo (X DIFF minimal_elements X lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x''. x'' ∈ minimal_elements X lo ⇔ (x'' = x'),
+ ∀x''. (∃x. (x,x'') ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃x. (x,x') ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀x''. (∃y. (x'',y) ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃y. (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo' X' x''.
+     x'' ∈ X' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     ((∀x''. (∃y. (x'',y) ∈ lo') ⇒ x'' ∈ X') ∧
+      (∀x''. (∃x. (x,x'') ∈ lo') ⇒ x'' ∈ X') ∧ transitive lo' ∧
+      antisym lo' ∧ ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+     finite_prefixes lo' X' ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'',
+ FINITE {y | (y,x) ∈ lo}, antisym lo,
+ antisym (rrestrict lo (X DIFF minimal_elements X lo)), transitive lo,
+ transitive (rrestrict lo (X DIFF minimal_elements X lo)),
+ x ∉ minimal_elements X lo,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo (X DIFF minimal_elements X lo))) =
+ SOME x, x ∈ X, x'' ∈ minimal_elements (domain lo ∪ range lo) lo,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∀x'''. (∃y. (x''',y) ∈ lo) ∨ (∃x. (x,x''') ∈ lo) ⇔ x''' ∈ X
+
+Number: 251
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x' y.
+   (x' ∈ X ∧ x' ∉ minimal_elements X lo) ∧ y ∈ X ∧
+   y ∉ minimal_elements X lo ⇒
+   (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo) ∨
+   (y,x') ∈ rrestrict lo (X DIFF minimal_elements X lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x. x ∉ minimal_elements (domain lo ∪ range lo) lo,
+ ∀x''. x'' ∈ minimal_elements X lo ⇔ (x'' = x'),
+ ∀x''. (∃x. (x,x'') ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃x. (x,x') ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀x''. (∃y. (x'',y) ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃y. (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo' X' x''.
+     x'' ∈ X' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     ((∀x''. (∃y. (x'',y) ∈ lo') ⇒ x'' ∈ X') ∧
+      (∀x''. (∃x. (x,x'') ∈ lo') ⇒ x'' ∈ X') ∧ transitive lo' ∧
+      antisym lo' ∧ ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+     finite_prefixes lo' X' ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'',
+ FINITE {y | (y,x) ∈ lo}, antisym lo,
+ antisym (rrestrict lo (X DIFF minimal_elements X lo)), transitive lo,
+ transitive (rrestrict lo (X DIFF minimal_elements X lo)),
+ x ∉ minimal_elements X lo,
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo (X DIFF minimal_elements X lo))) =
+ SOME x, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∀x''. (∃y. (x'',y) ∈ lo) ∨ (∃x. (x,x'') ∈ lo) ⇔ x'' ∈ X
+
+Number: 252
+Status: Time out
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo}, minimal_elements X lo ≠ ∅,
+ x ∉ minimal_elements X lo, domain lo ∪ range lo = X,
+ minimal_elements X lo = {x'},
+ LNTH i
+   (LUNFOLD linear_order_to_list_f
+      (rrestrict lo (X DIFF minimal_elements X lo))) =
+ SOME x, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo), linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- LNTH i
+     (LUNFOLD linear_order_to_list_f (rrestrict lo (X DIFF {x'}))) =
+   SOME x
+
+Number: 253
+Status: Time out
+Info: lambda-lift bool higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x' y.
+   (x' ∈ X ∧ x' ∉ minimal_elements X lo) ∧ y ∈ X ∧
+   y ∉ minimal_elements X lo ⇒
+   (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo) ∨
+   (y,x') ∈ rrestrict lo (X DIFF minimal_elements X lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x''. x'' ∈ minimal_elements X lo ⇔ (x'' = x'),
+ ∀x''. (∃x. (x,x'') ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃x. (x,x') ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀x''. (∃y. (x'',y) ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃y. (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo' X' x''.
+     x'' ∈ X' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     ((∀x''. (∃y. (x'',y) ∈ lo') ⇒ x'' ∈ X') ∧
+      (∀x''. (∃x. (x,x'') ∈ lo') ⇒ x'' ∈ X') ∧ transitive lo' ∧
+      antisym lo' ∧ ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+     finite_prefixes lo' X' ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'',
+ FINITE {y | (y,x) ∈ lo}, antisym lo,
+ antisym (rrestrict lo (X DIFF minimal_elements X lo)), transitive lo,
+ transitive (rrestrict lo (X DIFF minimal_elements X lo)), x ∈ X,
+ x ∈ minimal_elements X lo,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∀x''. (∃y. (x'',y) ∈ lo) ∨ (∃x. (x,x'') ∈ lo) ⇔ x'' ∈ X
+
+Number: 254
+Status: Time out
+Info: lambda-lift bool higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x' y.
+   (x' ∈ X ∧ x' ∉ minimal_elements X lo) ∧ y ∈ X ∧
+   y ∉ minimal_elements X lo ⇒
+   (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo) ∨
+   (y,x') ∈ rrestrict lo (X DIFF minimal_elements X lo),
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x''. x'' ∈ minimal_elements X lo ⇔ (x'' = x'),
+ ∀x''. (∃x. (x,x'') ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃x. (x,x') ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀x''. (∃y. (x'',y) ∈ lo) ⇒ x'' ∈ X,
+ ∀x'.
+   (∃y. (x',y) ∈ rrestrict lo (X DIFF minimal_elements X lo)) ⇒
+   x' ∈ X ∧ x' ∉ minimal_elements X lo,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo' X' x''.
+     x'' ∈ X' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     ((∀x''. (∃y. (x'',y) ∈ lo') ⇒ x'' ∈ X') ∧
+      (∀x''. (∃x. (x,x'') ∈ lo') ⇒ x'' ∈ X') ∧ transitive lo' ∧
+      antisym lo' ∧ ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+     finite_prefixes lo' X' ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'',
+ FINITE {y | (y,x) ∈ lo}, antisym lo,
+ antisym (rrestrict lo (X DIFF minimal_elements X lo)), transitive lo,
+ transitive (rrestrict lo (X DIFF minimal_elements X lo)), x ∉ X, x ∈ X,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∀x''. (∃y. (x'',y) ∈ lo) ∨ (∃x. (x,x'') ∈ lo) ⇔ x'' ∈ X
+
+Number: 255
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+Goal: 
+[T,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo},
+ minimal_elements (domain lo ∪ range lo) lo = {x'}, x ∈ range lo,
+ x ∈ minimal_elements (domain lo ∪ range lo) lo,
+ {y |
+  (y,x) ∈
+  rrestrict lo
+    (domain lo ∪ range lo DIFF
+     minimal_elements (domain lo ∪ range lo) lo)} ⊂ {y | (y,x) ∈ lo},
+ finite_prefixes lo (domain lo ∪ range lo),
+ finite_prefixes
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo),
+ linear_order lo (domain lo ∪ range lo),
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)] |- x' = x
+
+Number: 257
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ [] |- ∀x y. x ∈ {y} ⇔ (x = y)
+Goal: 
+[T,
+ ∀s'.
+   s' ⊂ {y | (y,x) ∈ lo} ⇒
+   ∀lo X x.
+     x ∈ X ∧ (s' = {y | (y,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i. LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x,
+ FINITE {y | (y,x) ∈ lo},
+ minimal_elements (domain lo ∪ range lo) lo = {x'}, x ∈ domain lo,
+ x ∈ minimal_elements (domain lo ∪ range lo) lo,
+ {y |
+  (y,x) ∈
+  rrestrict lo
+    (domain lo ∪ range lo DIFF
+     minimal_elements (domain lo ∪ range lo) lo)} ⊂ {y | (y,x) ∈ lo},
+ finite_prefixes lo (domain lo ∪ range lo),
+ finite_prefixes
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo),
+ linear_order lo (domain lo ∪ range lo),
+ linear_order
+   (rrestrict lo
+      (domain lo ∪ range lo DIFF
+       minimal_elements (domain lo ∪ range lo) lo))
+   (domain lo ∪ range lo DIFF
+    minimal_elements (domain lo ∪ range lo) lo)] |- x' = x
+
+Number: 266
+Status: Parsing failed
+Info: lambda-lift bool higher-order proof 
+Thm list: 
+Goal: 
+[∀x y z. (x,y) ∈ lo ∧ (y,z) ∈ lo ⇒ (x,z) ∈ lo,
+ ∀x y. x ∈ X ∧ y ∈ X ⇒ (x,y) ∈ lo ∨ (y,x) ∈ lo,
+ ∀x y. (x,y) ∈ lo ∧ (y,x) ∈ lo ⇒ (x = y),
+ ∀x. x ∈ X ∧ (∀x''. x'' ∈ X ∧ (x'',x) ∈ lo ⇒ (x = x'')) ⇔ (x = x'),
+ ∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo' X' x'' y'.
+     (x'',y') ∈ lo' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     (domain lo' ⊆ X' ∧ range lo' ⊆ X' ∧
+      (∀x y z. (x,y) ∈ lo' ∧ (y,z) ∈ lo' ⇒ (x,z) ∈ lo') ∧
+      (∀x y. (x,y) ∈ lo' ∧ (y,x) ∈ lo' ⇒ (x = y)) ∧
+      ∀x y. x ∈ X' ∧ y ∈ X' ⇒ (x,y) ∈ lo' ∨ (y,x) ∈ lo') ∧
+     finite_prefixes lo' X' ⇒
+     ∃i j.
+       i ≤ j ∧
+       (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'') ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo') = SOME y'),
+ FINITE {z | (z,x) ∈ lo}, x ∈ X, y ∈ X, (x,y) ∈ lo, domain lo ⊆ X,
+ range lo ⊆ X, finite_prefixes lo X]
+|- ∃x''. (x'',x) ∈ lo ∧ (x'' ∈ X ∧ x'' ≠ x') ∧ x ≠ x' ⇎ (x'',x) ∈ lo
+
+Number: 267
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ []
+|- ∀r s s'. linear_order r s ∧ s' ⊆ s ⇒ linear_order (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y),
+ FINITE {z | (z,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X, y ∈ X,
+ (x,y) ∈ lo,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X]
+|- linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 268
+Status: Time out
+Info: polymorph lambda-lift bool higher-order proof 
+Thm list: 
+ []
+|- ∀r s s'.
+     finite_prefixes r s ∧ s' ⊆ s ⇒
+     finite_prefixes r s' ∧ finite_prefixes (rrestrict r s') s'
+Goal: 
+[∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y),
+ FINITE {z | (z,x) ∈ lo}, minimal_elements X lo = {x'}, x ∈ X, y ∈ X,
+ (x,y) ∈ lo,
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X, linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+     (X DIFF minimal_elements X lo)
+
+Number: 269
+Status: Time out
+Info: lambda-lift bool higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x''.
+   x'' ∈ X ∧ (∀x'. x' ∈ X ∧ (x',x'') ∈ lo ⇒ (x'' = x')) ⇔ (x'' = x'),
+ ∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo' X' x'' y'.
+     (x'',y') ∈ lo' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     linear_order lo' X' ∧ finite_prefixes lo' X' ⇒
+     ∃i j.
+       i ≤ j ∧
+       (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'') ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo') = SOME y'),
+ FINITE {z | (z,x) ∈ lo}, x ≠ x'', x ∈ X, x'' ∈ X, y ∈ X, (x,y) ∈ lo,
+ (x'',x) ∈ lo,
+ {y |
+  (y,x) ∈
+  rrestrict lo
+    (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')})} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes
+   (rrestrict lo
+      (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}))
+   (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}),
+ linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}))
+   (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')})]
+|- y ≠ x'
+
+Number: 270
+Status: Time out
+Info: lambda-lift bool higher-order proof 
+Thm list: 
+Goal: 
+[T,
+ ∀x''.
+   x'' ∈ X ∧ (∀x'. x' ∈ X ∧ (x',x'') ∈ lo ⇒ (x'' = x')) ⇔ (x'' = x'),
+ ∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo' X' x'' y'.
+     (x'',y') ∈ lo' ∧ (∀x'''. x''' ∈ s' ⇔ (x''',x'') ∈ lo') ∧
+     linear_order lo' X' ∧ finite_prefixes lo' X' ⇒
+     ∃i j.
+       i ≤ j ∧
+       (LNTH i (LUNFOLD linear_order_to_list_f lo') = SOME x'') ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo') = SOME y'),
+ FINITE {z | (z,x) ∈ lo}, x ∉ X, x ∈ X, y ∈ X, (x,y) ∈ lo,
+ {y |
+  (y,x) ∈
+  rrestrict lo
+    (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')})} ⊂
+ {y | (y,x) ∈ lo}, finite_prefixes lo X,
+ finite_prefixes
+   (rrestrict lo
+      (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}))
+   (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}),
+ linear_order lo X,
+ linear_order
+   (rrestrict lo
+      (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')}))
+   (X DIFF {x | x ∈ X ∧ ∀x'. x' ∈ X ∧ (x',x) ∈ lo ⇒ (x = x')})]
+|- y ≠ x'
+
+Number: 271
+Status: Unknown
+Info: lambda-lift bool num higher-order proof 
+Thm list: 
+Goal: 
+[∀s'.
+   s' ⊂ {z | (z,x) ∈ lo} ⇒
+   ∀lo X x y.
+     (x,y) ∈ lo ∧ (s' = {z | (z,x) ∈ lo}) ∧ linear_order lo X ∧
+     finite_prefixes lo X ⇒
+     ∃i j.
+       i ≤ j ∧ (LNTH i (LUNFOLD linear_order_to_list_f lo) = SOME x) ∧
+       (LNTH j (LUNFOLD linear_order_to_list_f lo) = SOME y),
+ FINITE {z | (z,x) ∈ lo}, ¬(x ∉ X DIFF minimal_elements X lo),
+ y ∉ minimal_elements X lo, minimal_elements X lo = {x'}, x ∈ X, y ∈ X,
+ (x,y) ∈ lo, (x,y) ∈ rrestrict lo (X DIFF minimal_elements X lo),
+ {y | (y,x) ∈ rrestrict lo (X DIFF minimal_elements X lo)} ⊂
+ {y | (y,x) ∈ lo}, X DIFF minimal_elements X lo ⊆ X,
+ finite_prefixes lo X,
+ finite_prefixes (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo), linear_order lo X,
+ linear_order (rrestrict lo (X DIFF minimal_elements X lo))
+   (X DIFF minimal_elements X lo)]
+|- ∃i j.
+     i ≤ j ∧
+     (LNTH i
+        (LUNFOLD linear_order_to_list_f
+           (rrestrict lo (X DIFF minimal_elements X lo))) =
+      SOME x) ∧
+     (LNTH j
+        (LUNFOLD linear_order_to_list_f
+           (rrestrict lo (X DIFF minimal_elements X lo))) =
+      SOME y)
+

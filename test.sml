@@ -1,5 +1,11 @@
 (* LIBRARIES *)
 (* 
+load "blibBtools"; open blibBtools;
+load "blibTffsyntax"; open blibTffsyntax ;
+load "blibFreshvar"; open blibFreshvar;
+load "blibSyntax"; open blibSyntax;
+load "beaglePrintresult"; open beaglePrintresult;
+
 load "beagle"; open beagle;
 *)
 
@@ -7,6 +13,11 @@ load "beagle"; open beagle;
 beagle_tac_aux filename thml goal;
 BEAGLE_TAC thml goal;
 fst (BEAGLE_NF_TAC thml goal);
+
+load "intSyntax";
+open intSyntax;
+int_injection
+type_of ``&1``;
 
 (* EXAMPLES *)
 (* nlia test *)
@@ -42,10 +53,8 @@ val th2 = mk_thm ([],
 ``∀r s. finite_prefixes r s ⇔ ∀e. e ∈ s ⇒ FINITE {e' | (e',e) ∈ r}``);
 val thml = [];,``P (x = x + 1) ==> P F ``); 
 (* easy problems *)
-val filename = "result/easypb";
 val thml = [];
 val goal : goal = ([],``x + 1 = x + 1``);
-val filename = "result/easypb2";   
 val thml = [mk_thm ([],``1+1 = 2``)];
 val goal : goal = ([],``((x + 1 = y)  /\ (y + 1 = z)) ==> (x + 2 = z)``);
 (* suc *)
@@ -74,7 +83,6 @@ val filename = "result/funconv";
 val thml = [];
 val goal : goal = ([],``(!y:num -> num -> num . P y) ==> (P (\x y. x + y))`` );
 
-(* PAPER EXAMPLES *)
 
 
  

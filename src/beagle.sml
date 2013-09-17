@@ -51,6 +51,7 @@ fun beagle_interact filename finalgoal =
           ("cd " ^ directory ^ ";" ^
            "sh " ^ directory ^ "callbeagle.sh")
     handle _ => raise BEAGLE_ERR "beagle_call" "";
+  
   update_SZSstatus filename
   )
 
@@ -78,10 +79,9 @@ fun beagle_tac_aux filename thml goal =
   addone_nb nb_problem;
     (
     flag_update mflag (is_polymorph_pb (thml,goal));
-    let val (mthml,mgoal) = (thml,goal)
-     (* if fst (is_polymorph_pb (thml,goal)) 
-        then monomorph_pb (thml,goal) 
-        else (thml ,goal) *)
+    let val (mthml,mgoal) = if is_polymorph_pb (thml,goal)
+                            then monomorph_pb (thml,goal) 
+                            else (thml,goal)
     in 
     let val (finalgoal_list,validation) = BEAGLE_NF_TAC mthml mgoal  in
                                         (* update all flags *)

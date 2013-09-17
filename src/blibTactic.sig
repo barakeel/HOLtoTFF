@@ -25,5 +25,5 @@ include Abbrev
     val ADD_BOOL_AXIOM_TAC : tactic
     val ADD_HIGHER_ORDER_TAC : tactic 
     val ADD_FNUM_AXIOMS_TAC : tactic
-    
+    val BOOL_BV_TAC : tactic
 end
