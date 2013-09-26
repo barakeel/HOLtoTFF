@@ -47,7 +47,9 @@ val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
 val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
 val thml = [th1,th2];
 val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
+oal;
 
+(* Set theory e
 BEAGLE_TAC thml goal;
 
 

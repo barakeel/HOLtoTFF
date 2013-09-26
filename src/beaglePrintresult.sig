@@ -17,6 +17,10 @@ sig
   val mk_tfferrpath : string -> string
   val mk_statspath : string -> string
   
+  val outputl : TextIO.outstream -> string list -> unit
+  val writel : string -> string list -> unit
+  val outputll : TextIO.outstream -> string list -> string list -> unit
+  val writell : string -> string list -> string list -> unit
   val write_stats : string -> 
                    (int * string) -> 
                    (int * string) list -> 
@@ -32,5 +36,7 @@ sig
   val write_err : string -> 
                   string -> string -> string -> 
                   unit
+  
+  
   
 end

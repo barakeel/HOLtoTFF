@@ -9,7 +9,15 @@ sig
                    (term * string) list *
                    (term * string) list -> 
                    unit
-  val pptff_tff : ppstream -> (int * string) -> goal -> unit
-  val write_tff : string -> (int * string) -> goal -> bool -> unit
+  val pptff_tff : ppstream -> (int * string) -> goal -> 
+                  ((hol_type * int) * string) list *
+                  (term * string) list *
+                  (term * string) list *
+                  (term * string) list
+  val write_tff : string -> (int * string) -> goal -> bool -> 
+                  ((hol_type * int) * string) list *
+                  (term * string) list *
+                  (term * string) list *
+                  (term * string) list 
 
 end

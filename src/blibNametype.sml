@@ -86,7 +86,7 @@ fun add_simpletyal keyl dict = repeatchange add_simpletya keyl dict
    if (int -> int -> bool, 1) is a type used 
    then add (int,0) and (int -> bool,0)  *)
 fun add_innersimpletya (ty,arity) tyadict =
-  let val (argl,image) = strip_tya (ty,arity) in
+  let val (argl,image) = strip_type_n (ty,arity) in
   let val tyal = image :: argl in 
     add_simpletyal tyal tyadict
   end end
@@ -110,7 +110,7 @@ fun name_compoundty (argl,image) tyadict =
 
 (* add his own type *)
 fun add_compoundtya (ty,arity) tyadict =
-   let val (argl,image) = strip_tya (ty,arity) in
+   let val (argl,image) = strip_type_n (ty,arity) in
    let val str = name_compoundty (argl,image) tyadict in
      add_entry ((ty,arity),str) tyadict  
    end end

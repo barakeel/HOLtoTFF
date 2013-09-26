@@ -279,7 +279,7 @@ fun pptff_tff_w pps nb goal =
         val tyadict = create_tyadict term
         val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
         val bvdict = create_bvdict term  
-        val bvatydict = create_bvatydict term tyadict (* not used in printterm *)
+        val bvatydict = create_bvatydict term tyadict
         val fvdict = create_fvdict term 
         val fvatydict = create_fvatydict term tyadict
         val cdict = create_cdict term 
@@ -293,16 +293,17 @@ fun pptff_tff_w pps nb goal =
         pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict (filter (not o is_dcaty) catydict);
+        pptff_catydict pps cdict (filter (not o is_dcaty2) catydict);
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;
         pptff_commentline pps;
         add_string pps "\n";
-      end_block pps
+      end_block pps;
+      dict
       )
       end end
-    else ()
+    else raise PRINTTFF_ERR "higher_order" ""
   end end end 
 fun pptff_tff pps nb goal = 
   wrap "blibPrinttff" "pptff_tff" "" (pptff_tff_w pps nb) goal
@@ -320,8 +321,9 @@ fun write_tff_w path nb goal appendflag =
                   } 
   in 
     (
-    pptff_tff pps nb goal;
-    TextIO.closeOut file
+    let val dict = pptff_tff pps nb goal in
+      (TextIO.closeOut file; dict)
+    end
     )  
   end end
 fun write_tff path nb goal appendflag = 

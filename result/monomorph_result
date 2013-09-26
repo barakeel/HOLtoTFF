@@ -1,8 +1,0 @@
-Number: 1
-Status: Unsatisfiable
-Info: polymorph fixpoint num higher-order proof 
-Thm list: 
- [] |- ∀x y. x ∈ {y} ⇔ (x = y)
- [] |- ∀P x. x ∈ P ⇔ P x
-Goal:  [] |- ∀x. (x = z) ⇔ {z} x
-

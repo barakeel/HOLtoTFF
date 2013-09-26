@@ -106,6 +106,7 @@ fun thm_test thm goal msg =
   if is_subset_goal (mk_goal thm) goal then thm
   else raise SYNTAX_ERR msg ""
  
-fun goal_to_string goal = thm_to_string (mk_thm goal)
+fun goal_to_string goal = 
+  thm_to_string (mk_thm goal)
 
 end

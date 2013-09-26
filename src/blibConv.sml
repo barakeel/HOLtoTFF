@@ -285,7 +285,7 @@ fun num_conv term =
 val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
 *)
 fun fnum_axiom_w (f,arity) = 
-  let val (argl,image) = strip_tya (type_of f,arity) in
+  let val (argl,image) = strip_type_n (type_of f,arity) in
   let val argtyl = map fst argl in
   let val imagety = fst image in
     if imagety = ``:num``

@@ -5,6 +5,12 @@ open HolKernel Abbrev boolLib
      blibBtools blibSyntax
      beagleStats
 
+fun PRINTRESULT_ERR function message =
+  HOL_ERR {origin_structure = "beaglePrintresult",
+	         origin_function = function,
+           message = message}
+
+
 (* Path (absolute) *)
 val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
 
@@ -92,12 +98,41 @@ fun write_result filename thml goal n SZSstatus flagl =
 fun write_err filename s f m =
   let val file = TextIO.openAppend filename in 
     (
-    TextIO.output (file,"structure: " ^ s ^ 
-                        " function: " ^ f ^ 
-                        " message: " ^ m ^ "\n");
+    TextIO.output (file,"structure: " ^ s ^ "\n" ^
+                        "function : " ^ f ^ "\n" ^
+                        "message  : " ^ m ^ "\n");
     TextIO.closeOut file
     )  
   end
+
+(* write a string list *)
+fun outputl file linel =
+  case linel of
+    [] => ()
+  | line :: m => (TextIO.output (file,line ^ "\n"); outputl file m) 
   
+fun writel filename linel =
+  let val file = TextIO.openAppend filename in 
+    (outputl file linel;
+     TextIO.closeOut file)  
+  end  
+ 
+fun outputll file linel1 linel2 =
+  if not (length linel1 = length linel2)
+  then
+    raise PRINTRESULT_ERR "outputll" "lists of different length"
+  else 
+    case (linel1,linel2) of
+      ([],_) => ()
+    | (_,[]) => ()  
+    | (l1 :: m1,l2 :: m2) => (TextIO.output (file,l1 ^ " : " ^ l2 ^ "\n"); 
+                                    outputll file m1 m2)  
+
+fun writell filename linel1 linel2 =
+  let val file = TextIO.openAppend filename in 
+    (outputll file linel1 linel2;
+     TextIO.closeOut file)  
+  end  
+ 
   
 end

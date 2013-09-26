@@ -82,20 +82,6 @@ fun is_alphanumor_charl charl=
 
 fun is_alphanumor_ str = is_alphanumor_charl (explode str)
 
-(* name supported by the tptp for a free variable or a type *)              
-fun is_lowerword str =
-  case String.explode str of
-    [] => false
-  | [a] => Char.isLower a  
-  | a :: m => (Char.isLower a) andalso (is_alphanumor_charl m)
-
-(* name supported by the tptp for a bound variable *)
-fun is_upperword str =
-  case String.explode str of
-    [] => false
-  | [a] => Char.isUpper a  
-  | a :: m => (Char.isUpper a) andalso (is_alphanumor_charl m)
-  
 fun string_to_int_aux l =
   case l of
     [] => 0
@@ -110,7 +96,8 @@ fun string_to_int_aux l =
               | "7" => 7 + 10 * (string_to_int_aux m)
               | "8" => 8 + 10 * (string_to_int_aux m)
               | "9" => 9 + 10 * (string_to_int_aux m)
-              | _   => raise BTOOLS_ERR "string_to_int" "not a number"
+              | _   => raise BTOOLS_ERR "string_to_int" 
+                         ((String.implode l) ^ " not a number")
                          
 fun string_to_int str = string_to_int_aux (rev (String.explode str))
 

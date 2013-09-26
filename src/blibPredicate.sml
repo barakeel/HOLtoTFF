@@ -34,10 +34,7 @@ and find_atoml_unop term =
 
 fun find_pred_one atom =
   let val (operator,argl) = strip_comb atom in
-    if is_dca (operator,length argl) 
-    (* prevent the dc to be seen as blibPredicates *)
-    then []
-    else [operator]
+    [operator]
   end
   
 fun find_pred term = 

@@ -214,7 +214,7 @@ fun ADD_HIGHER_ORDER_TAC goal =
 
 (* ADD_FNUM_AXIOMS_TAC *)
 local fun is_interesting (var,arity) = 
-  let val (_,(imagety,_)) = strip_tya (type_of var,arity) in
+  let val (_,(imagety,_)) = strip_type_n (type_of var,arity) in
     imagety = ``:num`` andalso arity > 0
   end 
 in 

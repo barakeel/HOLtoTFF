@@ -26,17 +26,17 @@ fun get_simpletyal term = filter is_in_simpletyal (all_tya term)
 fun is_in_compoundtyal (ty,arity) = (arity > 0)
 fun get_compoundtyal term  = filter is_in_compoundtyal (all_tya term)
 
-fun strip_tya (ty,arity) = 
+fun strip_type_n (ty,arity) = 
   case arity of
     0 => ([],(ty,0))
-  | n => if n < 0 then raise EXTRACTTYPE_ERR "strip_tya" ""
+  | n => if n < 0 then raise EXTRACTTYPE_ERR "strip_type_n" ""
          else
            let val (str,list) = dest_type ty in 
            let 
              val ty1 = hd list
              val ty2 = hd (tl list) 
            in
-           let val resl = strip_tya (ty2,(n-1)) in
+           let val resl = strip_type_n (ty2,(n-1)) in
            let
              val argl = fst resl
              val image = snd resl 

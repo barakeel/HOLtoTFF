@@ -1,155 +1,303 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SZSstatus: Unsatisfiable
+% SZSstatus: Unknown
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tff(1,axiom,(
-    (btrue!=bfalse),
+    ($lesseq(0, xz)),
     file('problem.p',axiom))).
 
 tff(2,axiom,(
-    (![Xx2: $int, Xx1: ty_num_F_num]: (~$lesseq(0, Xx2) | $lesseq(0, xApp(Xx1, Xx2)))),
+    ($lesseq(0, xx)),
     file('problem.p',axiom))).
 
 tff(3,axiom,(
-    (![Xx2: $int, Xx11: $int]: (~$lesseq(0, Xx2) | ~$lesseq(0, Xx11) | $lesseq(0, $sum(Xx11, Xx2)))),
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int, X6: $int]: (~xApp2(xApp3(cIN, X), X1) | xApp(X1, X) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(4,axiom,(
-    (![XP: ty_bool_F_bool, Xx: $int, Xf: ty_num_F_num]: (~xApp1(XP, btrue) | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int, X6: $int]: (xApp2(xApp3(cIN, X), X1) | ~xApp(X1, X) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(5,axiom,(
-    (![Xf: ty_num_F_num, Xx: $int]: (xf1=Xf | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int, X6: $int]: (xApp6(xApp7(cIN1, X2), XP) | ~xApp1(XP, X2) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(6,axiom,(
-    (![XP: ty_bool_F_bool, Xx: $int, Xf: ty_num_F_num]: (xApp1(XP, btrue) | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int, X6: $int]: (~xApp6(xApp7(cIN1, X2), XP) | xApp1(XP, X2) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(7,axiom,(
-    (![Xx: $int, Xf: ty_num_F_num]: (xApp(xf1, Xx)=$sum(Xx, 1) | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+    (![X3: ty_a, Xy: ty_a, X7: $int, X6: $int]: (~xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, Xy), cEMPTY)) | Xy=X3 | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(8,axiom,(
-    (![Xx: $int, Xf: ty_num_F_num]: (xApp(xf1, Xx)=$sum(Xx, 1) | xApp(Xf, 0)=1 | ~$lesseq(0, Xx))),
+    (![X3: ty_a, X7: $int, X6: $int]: (xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, X3), cEMPTY)) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(9,axiom,(
-    (![XP: ty_bool_F_bool, Xf: ty_num_F_num, Xx: $int]: (xApp1(XP, btrue) | xApp(Xf, 0)=1 | ~$lesseq(0, Xx))),
+    (![X4: ty_c, X5: ty_c, X7: $int, X6: $int]: (~xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X5), cEMPTY1)) | X5=X4 | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(10,axiom,(
-    (![Xf: ty_num_F_num, Xx: $int]: (xf1=Xf | xApp(Xf, 0)=1 | ~$lesseq(0, Xx))),
+    (![X4: ty_c, X7: $int, X6: $int]: (xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X4), cEMPTY1)) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
 tff(11,axiom,(
-    (![XP: ty_bool_F_bool, Xf: ty_num_F_num, Xx: $int]: (~xApp1(XP, bfalse) | xApp(Xf, 0)=1 | ~$lesseq(0, Xx))),
+    (![X6: $int]: (xApp10(xApp11(cIN2, X6), xApp13(xApp14(cINSERT2, X6), cEMPTY2)) | ~$lesseq(0, X6))),
     file('problem.p',axiom))).
 
-tff(12s0,plain,(
-    (![Xf: ty_num_F_num, Xx: $int]: (xf1=Xf | xApp(Xf, 0)=1 | ~$lesseq(0, Xx))),
+tff(12,axiom,(
+    (![X6: $int, X7: $int]: (~xApp10(xApp11(cIN2, X6), xApp13(xApp14(cINSERT2, X7), cEMPTY2)) | ~$lesseq(0, X7) | ~$lesseq(0, X6) | X7=X6)),
+    file('problem.p',axiom))).
+
+tff(13,axiom,(
+    (![X7: $int, X6: $int]: (xApp12(xApp13(xApp14(cINSERT2, xz), cEMPTY2), xx) | ~$lesseq(0, X7) | ~$lesseq(0, X6) | xz=xx)),
+    file('problem.p',axiom))).
+
+tff(14,axiom,(
+    (![X7: $int, X6: $int]: (~xApp12(xApp13(xApp14(cINSERT2, xz), cEMPTY2), xx) | ~$lesseq(0, X7) | ~$lesseq(0, X6) | xz!=xx)),
+    file('problem.p',axiom))).
+
+tff(15s0,plain,(
+    (![X7: $int, X6: $int]: (xApp12(xApp13(xApp14(cINSERT2, xz), cEMPTY2), xx) | ~$lesseq(0, X7) | ~$lesseq(0, X6) | xz=xx)),
     inference(Split,[status(thm)],[])).
 
-tff(12s1,plain,(
-    (![Xx: $int]: (~$lesseq(0, Xx))),
+tff(15s1,plain,(
+    (xz=xx),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(13,plain,(
-    (![Xf: ty_num_F_num]: (xf1=Xf | xApp(Xf, 0)=1)),
+tff(15s2s0,plain,(
+    (![X7: $int, X6: $int]: (~xApp12(xApp13(xApp14(cINSERT2, xx), cEMPTY2), xx) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s2s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s3,plain,(
+    (![X7: $int]: (~xApp12(xApp13(xApp14(cINSERT2, xx), cEMPTY2), xx) | ~$lesseq(0, X7))),
     inference(Rightsplit,[status(thm)],[])).
 
-tff(14s0,plain,(
-    (![Xf: ty_num_F_num, Xx: $int]: (xf1=Xf | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+tff(15s4s0,plain,(
+    (![X7: $int]: (~xApp12(xApp13(xApp14(cINSERT2, xx), cEMPTY2), xx) | ~$lesseq(0, X7))),
     inference(Split,[status(thm)],[])).
 
-tff(14s1,plain,(
-    (![Xf: ty_num_F_num]: (xf1=Xf | xApp(Xf, 0)!=1)),
+tff(15s4s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s2,plain,(
-    (![Xf_35: ty_num_F_num]: (xf1=Xf_35)),
+tff(15s5,plain,(
+    (~xApp12(xApp13(xApp14(cINSERT2, xx), cEMPTY2), xx)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s6,plain,(
+    (~xApp12(xApp13(xApp14(cINSERT2, xx), cEMPTY2), xx)),
     inference(Unknown,[status(thm)],[])).
 
-tff(14s3s0,plain,(
-    (![Xx: $int, Xf: ty_num_F_num]: (xApp(xf1, Xx)=$sum(1, Xx) | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+tff(15s7s0,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int, X6: $int]: (xApp2(xApp3(cIN, X), X1) | ~xApp(X1, X) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     inference(Split,[status(thm)],[])).
 
-tff(14s3s1,plain,(
-    (![Xf: ty_num_F_num]: (xApp(Xf, 0)!=1)),
+tff(15s7s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s3s2,plain,(
-    (![Xf_37: ty_num_F_num, Xf_35: ty_num_F_num]: (Xf_37=Xf_35)),
-    inference(Unknown,[status(thm)],[])).
+tff(15s8,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int]: (xApp2(xApp3(cIN, X), X1) | ~xApp(X1, X) | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
 
-tff(14s3s3s0,plain,(
-    (![XP: ty_bool_F_bool, Xx: $int]: (xApp1(XP, btrue) | ~$lesseq(0, Xx))),
+tff(15s9s0,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int, X6: $int]: (~xApp6(xApp7(cIN1, X2), XP) | xApp1(XP, X2) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     inference(Split,[status(thm)],[])).
 
-tff(14s3s3s1,plain,(
-    (![Xx: $int]: (~$lesseq(0, Xx))),
+tff(15s9s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s3s4,plain,(
-    (![XP: ty_bool_F_bool]: (xApp1(XP, btrue))),
+tff(15s10,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int]: (~xApp6(xApp7(cIN1, X2), XP) | xApp1(XP, X2) | ~$lesseq(0, X7))),
     inference(Rightsplit,[status(thm)],[])).
 
-tff(14s3s5,plain,(
-    (![Xx: $int]: (xApp(xf1, Xx)=$sum(1, Xx) | ~$lesseq(0, Xx))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(14s4,plain,(
-    (![Xx: $int]: (xApp(xf1, Xx)=$sum(1, Xx) | ~$lesseq(0, Xx))),
-    inference(Rightsplit,[status(thm)],[])).
-
-tff(14s5,plain,(
-    (![Xf_37: ty_num_F_num, Xf_35: ty_num_F_num]: (Xf_37=Xf_35)),
-    inference(Unknown,[status(thm)],[])).
-
-tff(14s6,plain,(
-    (![Xx_198: $int]: (~$lesseq(0, Xx_198) | $lesseq($uminus(1), Xx_198))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(14s7,plain,(
-    (![Xf_210: ty_num_F_num, Xx_202: $int]: (xApp(Xf_210, Xx_202)=$sum(1, Xx_202) | ~$lesseq(0, Xx_202))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(14s8s0,plain,(
-    (![XP: ty_bool_F_bool, Xx: $int, Xf: ty_num_F_num]: (~xApp1(XP, btrue) | ~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+tff(15s11s0,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int, X6: $int]: (~xApp2(xApp3(cIN, X), X1) | xApp(X1, X) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
     inference(Split,[status(thm)],[])).
 
-tff(14s8s1,plain,(
-    (![Xf: ty_num_F_num]: (xApp(Xf, 0)!=1)),
+tff(15s11s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s9,plain,(
-    (![XP: ty_bool_F_bool, Xx: $int]: (~xApp1(XP, btrue) | ~$lesseq(0, Xx))),
+tff(15s12,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int]: (~xApp2(xApp3(cIN, X), X1) | xApp(X1, X) | ~$lesseq(0, X7))),
     inference(Rightsplit,[status(thm)],[])).
 
-tff(14s10s0,plain,(
-    (![XP: ty_bool_F_bool, Xx: $int]: (~xApp1(XP, btrue) | ~$lesseq(0, Xx))),
+tff(15s13s0,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int]: (~xApp6(xApp7(cIN1, X2), XP) | xApp1(XP, X2) | ~$lesseq(0, X7))),
     inference(Split,[status(thm)],[])).
 
-tff(14s10s1,plain,(
-    (![Xx: $int]: (~$lesseq(0, Xx))),
+tff(15s13s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s11,plain,(
-    (![XP: ty_bool_F_bool]: (~xApp1(XP, btrue))),
+tff(15s14,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool]: (~xApp6(xApp7(cIN1, X2), XP) | xApp1(XP, X2))),
     inference(Rightsplit,[status(thm)],[])).
 
-tff(14s12s0,plain,(
-    (![Xx: $int, Xf: ty_num_F_num]: (~$lesseq(0, Xx) | xApp(Xf, 0)!=1)),
+tff(15s15s0,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int]: (~xApp2(xApp3(cIN, X), X1) | xApp(X1, X) | ~$lesseq(0, X7))),
     inference(Split,[status(thm)],[])).
 
-tff(14s12s1,plain,(
-    (![Xf: ty_num_F_num]: (xApp(Xf, 0)!=1)),
+tff(15s15s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(14s13,plain,(
-    (![Xx: $int]: (~$lesseq(0, Xx))),
+tff(15s16,plain,(
+    (![X: ty_a, X1: ty_a_F_bool]: (~xApp2(xApp3(cIN, X), X1) | xApp(X1, X))),
     inference(Rightsplit,[status(thm)],[])).
 
-tff(15,plain,(
-    (![Xx: $int]: (~$lesseq(0, Xx))),
+tff(15s17s0,plain,(
+    (![X: ty_a, X1: ty_a_F_bool, X7: $int]: (xApp2(xApp3(cIN, X), X1) | ~xApp(X1, X) | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s17s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s18,plain,(
+    (![X: ty_a, X1: ty_a_F_bool]: (xApp2(xApp3(cIN, X), X1) | ~xApp(X1, X))),
     inference(Rightsplit,[status(thm)],[])).
+
+tff(15s19s0,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int, X6: $int]: (xApp6(xApp7(cIN1, X2), XP) | ~xApp1(XP, X2) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s19s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s20,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int]: (xApp6(xApp7(cIN1, X2), XP) | ~xApp1(XP, X2) | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s21s0,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool, X7: $int]: (xApp6(xApp7(cIN1, X2), XP) | ~xApp1(XP, X2) | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s21s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s22,plain,(
+    (![X2: ty_c, XP: ty_c_F_bool]: (xApp6(xApp7(cIN1, X2), XP) | ~xApp1(XP, X2))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s23s0,plain,(
+    (![X4: ty_c, X7: $int, X6: $int]: (xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X4), cEMPTY1)) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s23s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s24,plain,(
+    (![X4: ty_c, X7: $int]: (xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X4), cEMPTY1)) | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s25s0,plain,(
+    (![X4: ty_c, X7: $int]: (xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X4), cEMPTY1)) | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s25s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s26,plain,(
+    (![X4: ty_c]: (xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X4), cEMPTY1)))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s27s0,plain,(
+    (![X3: ty_a, X7: $int, X6: $int]: (xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, X3), cEMPTY)) | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s27s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s28,plain,(
+    (![X3: ty_a, X7: $int]: (xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, X3), cEMPTY)) | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s29,plain,(
+    (![X4_72: ty_c]: (xApp1(xApp8(xApp9(cINSERT1, X4_72), cEMPTY1), X4_72))),
+    inference(Unknown,[status(thm)],[])).
+
+tff(15s30s0,plain,(
+    (![X3: ty_a, X7: $int]: (xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, X3), cEMPTY)) | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s30s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s31,plain,(
+    (![X3: ty_a]: (xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, X3), cEMPTY)))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s32,plain,(
+    (![X3_85: ty_a]: (xApp(xApp4(xApp5(cINSERT, X3_85), cEMPTY), X3_85))),
+    inference(Unknown,[status(thm)],[])).
+
+tff(15s33s0,plain,(
+    (![X4: ty_c, X5: ty_c, X7: $int, X6: $int]: (~xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X5), cEMPTY1)) | X5=X4 | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s33s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s34,plain,(
+    (![X4: ty_c, X5: ty_c, X7: $int]: (~xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X5), cEMPTY1)) | X5=X4 | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s35s0,plain,(
+    (![X3: ty_a, Xy: ty_a, X7: $int, X6: $int]: (~xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, Xy), cEMPTY)) | Xy=X3 | ~$lesseq(0, X7) | ~$lesseq(0, X6))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s35s1,plain,(
+    (![X6: $int]: (~$lesseq(0, X6))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s36,plain,(
+    (![X3: ty_a, Xy: ty_a, X7: $int]: (~xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, Xy), cEMPTY)) | Xy=X3 | ~$lesseq(0, X7))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s37s0,plain,(
+    (![X4: ty_c, X5: ty_c, X7: $int]: (~xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X5), cEMPTY1)) | X5=X4 | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s37s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s38,plain,(
+    (![X4: ty_c, X5: ty_c]: (~xApp6(xApp7(cIN1, X4), xApp8(xApp9(cINSERT1, X5), cEMPTY1)) | X5=X4)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s39s0,plain,(
+    (![X3: ty_a, Xy: ty_a, X7: $int]: (~xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, Xy), cEMPTY)) | Xy=X3 | ~$lesseq(0, X7))),
+    inference(Split,[status(thm)],[])).
+
+tff(15s39s1,plain,(
+    (![X7: $int]: (~$lesseq(0, X7))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(15s40,plain,(
+    (![X3: ty_a, Xy: ty_a]: (~xApp2(xApp3(cIN, X3), xApp4(xApp5(cINSERT, Xy), cEMPTY)) | Xy=X3)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(15s41,plain,(
+    (![X5_97: ty_c, X2_98: ty_c]: (X5_97=X2_98 | ~xApp1(xApp8(xApp9(cINSERT1, X5_97), cEMPTY1), X2_98))),
+    inference(Unknown,[status(thm)],[])).
+
+tff(15s42,plain,(
+    (![Xy_109: ty_a, X_111: ty_a]: (Xy_109=X_111 | ~xApp(xApp4(xApp5(cINSERT, Xy_109), cEMPTY), X_111))),
+    inference(Unknown,[status(thm)],[])).
 

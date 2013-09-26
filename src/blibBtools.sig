@@ -19,10 +19,8 @@ sig
   val name_strn : string -> int -> string
   val list_name_str : string -> int -> string list
   
+  val is_alphanumor_charl : Char.char list -> bool
   val is_alphanumor_ : string -> bool
-  val is_lowerword : string -> bool
-  val is_upperword : string -> bool 
-
   val string_to_int : string -> int
   
 (* LIST *)

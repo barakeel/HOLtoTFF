@@ -1,6 +1,0 @@
-Number: 1
-Status: Unknown
-Info: num metis-fail proof 
-Thm list: 
-Goal:  [] |- ((x = 0) ∧ (y = 0)) ∧ f x ≠ 0
-
