@@ -1,0 +1,135 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SZSstatus: Unsatisfiable
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tff(1,axiom,(
+    (![Xx1: $int]: (~$lesseq(0, Xx1) | $lesseq(0, cSUC(Xx1)))),
+    file('problem.p',axiom))).
+
+tff(2,axiom,(
+    ($lesseq(0, xb)),
+    file('problem.p',axiom))).
+
+tff(3,axiom,(
+    ($lesseq(0, xa)),
+    file('problem.p',axiom))).
+
+tff(4,axiom,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx) | $less(Xx, cSUC(Xy)) | ~$lesseq(Xx, Xy))),
+    file('problem.p',axiom))).
+
+tff(5,axiom,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx) | $lesseq(xa, xb))),
+    file('problem.p',axiom))).
+
+tff(6,axiom,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx) | ~$less(xa, cSUC(xb)))),
+    file('problem.p',axiom))).
+
+tff(7s0,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx) | $lesseq(xa, xb))),
+    inference(Split,[status(thm)],[])).
+
+tff(7s1,plain,(
+    ($lesseq(xa, xb)),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s2s0,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx) | ~$less(xa, #e_1))),
+    inference(Split,[status(thm)],[])).
+
+tff(7s2s1,plain,(
+    (~$less(xa, #e_1)),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s2s2,plain,(
+    (cSUC(xb)=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(7s2s3,plain,(
+    ($lesseq(0, #e_1)),
+    inference(Unknown,[status(thm)],[])).
+
+tff(7s2s4,plain,(
+    (![Xx: $int]: (~$lesseq(0, Xx) | $less(Xx, #e_1) | ~$lesseq(Xx, xb))),
+    inference(Unknown,[status(thm)],[])).
+
+tff(7s2s5s0,plain,(
+    (~$less($uminus(1), $uminus(#e_1)) | ~$less($uminus(1), xb)),
+    inference(Split,[status(thm)],[])).
+
+tff(7s2s5s1,plain,(
+    (~$less($uminus(1), xb)),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s2s5s2s0,plain,(
+    (~$less($uminus(1), #e_1) | ~$less($uminus(1), $sum($uminus(#e_1), xb))),
+    inference(Split,[status(thm)],[])).
+
+tff(7s2s5s2s1,plain,(
+    (~$less($uminus(1), $sum($uminus(#e_1), xb))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s2s6,plain,(
+    (~$less($uminus(1), $uminus(#e_1))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s2s7,plain,(
+    ($less($uminus(1), xb)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s2s8s0,plain,(
+    (~$less($uminus(1), #e_1) | ~$less($uminus(1), $sum($uminus(#e_1), xb))),
+    inference(Split,[status(thm)],[])).
+
+tff(7s2s8s1,plain,(
+    (~$less($uminus(1), $sum($uminus(#e_1), xb))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s2s9,plain,(
+    (~$less($uminus(1), #e_1)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s2s10,plain,(
+    ($less($uminus(1), $sum($uminus(#e_1), xb))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s3,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s4,plain,(
+    ($less(xa, #e_1)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(7s5s0,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx))),
+    inference(Split,[status(thm)],[])).
+
+tff(7s5s1,plain,(
+    (![Xx: $int]: (~$lesseq(0, Xx))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(7s6,plain,(
+    (![Xy: $int]: (~$lesseq(0, Xy))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(8,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx))),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(9,plain,(
+    (~$lesseq(xa, xb)),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(10s0,plain,(
+    (![Xy: $int, Xx: $int]: (~$lesseq(0, Xy) | ~$lesseq(0, Xx))),
+    inference(Split,[status(thm)],[])).
+
+tff(10s1,plain,(
+    (![Xx: $int]: (~$lesseq(0, Xx))),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(11,plain,(
+    (![Xy: $int]: (~$lesseq(0, Xy))),
+    inference(Rightsplit,[status(thm)],[])).
+
