@@ -37,13 +37,13 @@ fun termstructure term =
     ]
     (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
-datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
+datatype NODECONST = Eq | Plus | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
 
 fun nodeconst term =  
   switcharg term
     [
     (is_eq       ,Eq), 
-    (is_plus     ,Add),
+    (is_plus     ,Plus),
     (is_minus    ,Minus),
     (is_mult     ,Mult),
     (is_less     ,Less),

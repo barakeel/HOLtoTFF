@@ -56,7 +56,7 @@ fun name_tff str var =
   
 (* DEFINED TFF CONSTANTS *)
 val dcdict = [
-   (Add,"$sum"),
+   (Plus,"$sum"),
    (Minus,"$difference"),
    (Mult,"$product"),
    (Less,"$less"),

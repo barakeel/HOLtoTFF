@@ -5,7 +5,7 @@ sig
 
   datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype |
                      Funtype | Prodtype | Nodetype
-  datatype NODECONST = Eq | Add | Minus | Mult | Less | Greater | Geq | Leq |
+  datatype NODECONST = Eq | Plus | Minus | Mult | Less | Greater | Geq | Leq |
                        Newnodeconst
   datatype LEAFCONST = True | False | Newleafconst
   datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  

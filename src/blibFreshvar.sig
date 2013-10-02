@@ -9,7 +9,9 @@ sig
   val create_newname_aux : string -> string list -> string
   val create_newname : string -> term -> string
   val list_create_newname : string -> term list -> string
-  val create_newname_thm : string -> thm -> string 
+  val create_newname_thm : string -> thm -> string
+  val create_newnamel_aux : string -> int -> string list -> string list
+  val create_newnamel : string -> int -> term -> string list
 (* create a fresh variable *)
   val create_newvar_aux : term -> term list -> term 
   val create_newvar : term -> term -> term

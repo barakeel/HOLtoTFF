@@ -49,6 +49,17 @@ fun list_create_newname name terml =
     
 fun create_newname_thm name thm = 
   create_newname_aux name (map name_of (all_var_thm thm))
+
+fun create_newnamel_aux name n used =
+  if n = 0 then []
+  else if n < 0 then raise FRESHVAR_ERR "create_newnamel" "negative number"
+  else 
+    let val newname = create_newname_aux name used in
+      newname :: create_newnamel_aux name (n-1) (newname :: used)
+    end
+  
+fun create_newnamel name n term = 
+  create_newnamel_aux name n (map name_of (all_var term))
     
 (* create a fresh variable *)
 fun create_newvar_aux var used = 
