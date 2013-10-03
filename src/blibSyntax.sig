@@ -9,6 +9,7 @@ sig
   val has_boolty : term -> bool  
   val has_numty : term -> bool
   val is_var_or_const : term -> bool 
+  val is_leaf : term -> bool
   (* quantifier *) 
   val strip_quant : term -> (term list * term)
   val bound_by_quant : term -> term -> bool 

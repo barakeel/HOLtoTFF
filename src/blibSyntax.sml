@@ -16,7 +16,10 @@ fun erase_double_aconv l = erase_double_eq aconv l
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
-fun is_var_or_const term = is_var term orelse is_const term
+fun is_var_or_const term = 
+  is_var term orelse is_const term
+fun is_leaf term = 
+  is_var term orelse is_const term orelse is_numeral term
 
 (* QUANTIFIER *) 
 fun strip_quant term =
