@@ -64,13 +64,15 @@
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
 % circular diagram
-\newcommand{\slice}[4]{
+\newcommand{\slice}[5]{
   \pgfmathparse{0.5*#1+0.5*#2}
   \let\midangle\pgfmathresult
   % slice
-  \draw[thick,fill=black!10] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+  \draw[thick,fill=#5] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
   % outer label
   \node[label=\midangle:#4] at (\midangle:1) {};
+
   % inner label
   \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
   \let\temp\pgfmathresult

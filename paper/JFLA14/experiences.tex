@@ -1,13 +1,86 @@
-\section{Expériences avec Beagle}
+\section{Expériences avec \beagle}
+\subsection{Software, hardware et tests}
+\beagle est en cours de dévellopement et nos tests ont utilisés la version 0.6 de \beagle. Le matériel utilisé lors de ces expériences est un ordinateur portable de processeur AMD Athlon(tm) II P360 Dual-Core avec 3,7 GB de mémoire vive. Les problèmes testés sont les 271 premiers problèmes que \metis résout lors de la construction de \holfour.
 
-TODO Thibaut
+\subsection{Présentation de \beagle}
 
 
-\begin{itemize}
-\item dire sur quel type de machine elles ont été faites
-\item présenter rapidement Beagle (sans détail sur le fonctionnement)
-\item avant et après monorphisation
-\item graphiques
-\item Beagle est efficace (plus vite que METIS\_TAC et combine
-  raisonnement propositionnel et arithmétique)
-\end{itemize}
+\subsection{Impact de la monomorphisation}
+
+
+
+
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+Avant monomorphisation & Après monomorphisation \\
+\hline
+\begin{tikzpicture}[scale=1.5]
+\newcounter{c}
+\newcounter{d}
+\setcounter{c}{\value{d}}
+    \addtocounter{d}{70}
+    \slice{\thec/100*360}
+          {\thed/100*360}
+          {70\%}{insatisfaisable}{green}
+\setcounter{c}{\value{d}}
+    \addtocounter{d}{14}
+    \slice{\thec/100*360}
+          {\thed/100*360}
+          {14\%}{satisfaisable}{red}      
+\setcounter{c}{\value{d}}
+    \addtocounter{d}{7}
+    \slice{\thec/100*360}
+          {\thed/100*360}
+          {7\%}{inconnu}{red}
+\setcounter{c}{\value{d}}
+    \addtocounter{d}{8}
+    \slice{\thec/100*360}
+          {\thed/100*360}
+          {8\%}{time out}{red}
+\setcounter{c}{\value{d}}
+    \addtocounter{d}{1}
+    \slice{\thec/100*360}
+          {\thed/100*360}
+          {1\%}{parsing error}{red}                            
+\end{tikzpicture}
+&
+\begin{tikzpicture}[scale=1.5]
+\newcounter{e}
+\newcounter{f}
+\setcounter{e}{\value{f}}
+    \addtocounter{f}{80}
+    \slice{\thee/100*360}
+          {\thef/100*360}
+          {80\%}{insatisfaisable}{green}
+\setcounter{e}{\value{f}}
+    \addtocounter{f}{1}
+    \slice{\thee/100*360}
+          {\thef/100*360}
+          {1\%}{satisfaisable}{red}  
+\setcounter{e}{\value{f}}
+    \addtocounter{f}{5}
+    \slice{\thee/100*360}
+          {\thef/100*360}
+          {5\%}{inconnu, yshift=6}{red}   
+\setcounter{e}{\value{f}}
+     \addtocounter{f}{12}
+     \slice{\thee/100*360}
+           {\thef/100*360}
+           {12\%}{time out}{red}     
+\setcounter{e}{\value{f}}
+     \addtocounter{f}{2}
+     \slice{\thee/100*360}
+           {\thef/100*360}
+           {2\%}{parsing error}{red}               
+\end{tikzpicture}
+\\
+\hline
+\end{tabularx}
+
+\subsection{Efficacité de \beagle}
+A travers ses exemples, il est difficile de juger de la qualité de \beagle
+face à \metis puisque \metis résout l'ensemble de ses buts 
+rapidement.
+Cependant quelques exemples nous montre que \beagle est plus efficace 
+De plus \beagle combine raisonnement du premier ordre et l'arithmétique, ce qui grâce à notre traduction permet à \beagletac de résoudre des problèmes combinant ordre supérieur et arithmétique.
+
