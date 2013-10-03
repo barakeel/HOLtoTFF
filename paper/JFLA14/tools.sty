@@ -1,0 +1,84 @@
+\ProvidesPackage{tools}
+
+\usepackage{etex} % extended commands for tex
+\usepackage{enumerate}
+\usepackage{color} % colouring text
+\usepackage{tabularx} % table
+\usepackage{alltt} %program code
+\usepackage{fancyvrb} %program code
+\usepackage{amssymb} %lettres mathématiques
+\usepackage{amsmath} %lettres mathématiques
+\usepackage{bussproofs} %derivation
+\usepackage{hyperref} %write path
+{\renewcommand{\arraystretch}{1.5}
+\usepackage[toc,page]{appendix} % appendices
+\usepackage{cite} % citations
+
+% PRESENTATION (theorem conjecture remark and example)
+\usepackage{amsthm} 
+\theoremstyle{plain}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{stat}{Statement}
+\theoremstyle{definition}
+\newtheorem*{mydef}{Definition}
+\newtheorem*{property}{Property}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+%SHORTCUTS
+\newcommand\sep{\mbox{ } | \mbox{ }}
+
+%FONCTIONS
+\newcommand{\twopartdef}[4]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{si } #2 \\
+			#3 & \mbox{si } #4
+		\end{array}
+	\right.
+}
+\newcommand{\twopartdefsinon}[3]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{si } #2 \\
+			#3 & \mbox{sinon } 
+		\end{array}
+	\right.
+}
+
+% GRAPHICS
+\usepackage{graphicx} % margin definition
+\usepackage{pgfplots} % graphics
+\usepackage{tikz} % graphics
+% graphs
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{trees,positioning,fit}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line}=[draw]
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+% circular diagram
+\newcommand{\slice}[4]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+  % slice
+  \draw[thick,fill=black!10] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+  % outer label
+  \node[label=\midangle:#4] at (\midangle:1) {};
+  % inner label
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+
+
+
+
