@@ -15,67 +15,110 @@
 Avant monomorphisation & Après monomorphisation \\
 \hline
 \begin{tikzpicture}[scale=1.5]
-\newcounter{c}
-\newcounter{d}
-\setcounter{c}{\value{d}}
-    \addtocounter{d}{70}
-    \slice{\thec/100*360}
-          {\thed/100*360}
+    \slice{0/100*360}
+          {70/100*360}
           {70\%}{insatisfaisable}{green}
-\setcounter{c}{\value{d}}
-    \addtocounter{d}{14}
-    \slice{\thec/100*360}
-          {\thed/100*360}
+    \slice{70/100*360}
+          {84/100*360}
           {14\%}{satisfaisable}{red}      
-\setcounter{c}{\value{d}}
-    \addtocounter{d}{7}
-    \slice{\thec/100*360}
-          {\thed/100*360}
+    \slice{84/100*360}
+          {91/100*360}
           {7\%}{inconnu}{red}
-\setcounter{c}{\value{d}}
-    \addtocounter{d}{8}
-    \slice{\thec/100*360}
-          {\thed/100*360}
+    \slice{91/100*360}
+          {99/100*360}
           {8\%}{time out}{red}
-\setcounter{c}{\value{d}}
-    \addtocounter{d}{1}
-    \slice{\thec/100*360}
-          {\thed/100*360}
+    \slice{99/100*360}
+          {100/100*360}
           {1\%}{parsing error}{red}                            
 \end{tikzpicture}
 &
 \begin{tikzpicture}[scale=1.5]
-\newcounter{e}
-\newcounter{f}
-\setcounter{e}{\value{f}}
-    \addtocounter{f}{80}
-    \slice{\thee/100*360}
-          {\thef/100*360}
+    \slice{0/100*360}
+          {80/100*360}
           {80\%}{insatisfaisable}{green}
-\setcounter{e}{\value{f}}
-    \addtocounter{f}{1}
-    \slice{\thee/100*360}
-          {\thef/100*360}
+    \slice{80/100*360}
+          {81/100*360}
           {1\%}{satisfaisable}{red}  
-\setcounter{e}{\value{f}}
-    \addtocounter{f}{5}
-    \slice{\thee/100*360}
-          {\thef/100*360}
+    \slice{81/100*360}
+          {86/100*360}
           {5\%}{inconnu, yshift=6}{red}   
-\setcounter{e}{\value{f}}
-     \addtocounter{f}{12}
-     \slice{\thee/100*360}
-           {\thef/100*360}
+     \slice{86/100*360}
+           {98/100*360}
            {12\%}{time out}{red}     
-\setcounter{e}{\value{f}}
-     \addtocounter{f}{2}
-     \slice{\thee/100*360}
-           {\thef/100*360}
+     \slice{98/100*360}
+           {100/100*360}
            {2\%}{parsing error}{red}               
 \end{tikzpicture}
 \\
 \hline
 \end{tabularx}
+
+% \begin{tabularx}{\textwidth}{|X|X|}
+% \hline
+% Avant monomorphisation & Après monomorphisation \\
+% \hline
+% \begin{tikzpicture}[scale=1.5]
+% \newcounter{c}
+% \newcounter{d}
+% \setcounter{c}{\value{d}}
+%     \addtocounter{d}{70}
+%     \slice{\thec/100*360}
+%           {\thed/100*360}
+%           {70\%}{insatisfaisable}{green}
+% \setcounter{c}{\value{d}}
+%     \addtocounter{d}{14}
+%     \slice{\thec/100*360}
+%           {\thed/100*360}
+%           {14\%}{satisfaisable}{red}      
+% \setcounter{c}{\value{d}}
+%     \addtocounter{d}{7}
+%     \slice{\thec/100*360}
+%           {\thed/100*360}
+%           {7\%}{inconnu}{red}
+% \setcounter{c}{\value{d}}
+%     \addtocounter{d}{8}
+%     \slice{\thec/100*360}
+%           {\thed/100*360}
+%           {8\%}{time out}{red}
+% \setcounter{c}{\value{d}}
+%     \addtocounter{d}{1}
+%     \slice{\thec/100*360}
+%           {\thed/100*360}
+%           {1\%}{parsing error}{red}                            
+% \end{tikzpicture}
+% &
+% \begin{tikzpicture}[scale=1.5]
+% \newcounter{e}
+% \newcounter{f}
+% \setcounter{e}{\value{f}}
+%     \addtocounter{f}{80}
+%     \slice{\thee/100*360}
+%           {\thef/100*360}
+%           {80\%}{insatisfaisable}{green}
+% \setcounter{e}{\value{f}}
+%     \addtocounter{f}{1}
+%     \slice{\thee/100*360}
+%           {\thef/100*360}
+%           {1\%}{satisfaisable}{red}  
+% \setcounter{e}{\value{f}}
+%     \addtocounter{f}{5}
+%     \slice{\thee/100*360}
+%           {\thef/100*360}
+%           {5\%}{inconnu, yshift=6}{red}   
+% \setcounter{e}{\value{f}}
+%      \addtocounter{f}{12}
+%      \slice{\thee/100*360}
+%            {\thef/100*360}
+%            {12\%}{time out}{red}     
+% \setcounter{e}{\value{f}}
+%      \addtocounter{f}{2}
+%      \slice{\thee/100*360}
+%            {\thef/100*360}
+%            {2\%}{parsing error}{red}               
+% \end{tikzpicture}
+% \\
+% \hline
+% \end{tabularx}
 
 \subsection{Efficacité de \beagle}
 A travers ses exemples, il est difficile de juger de la qualité de \beagle
