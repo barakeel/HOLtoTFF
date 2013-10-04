@@ -83,33 +83,3 @@
   \node at (\midangle:\innerpos) {#3};
 }
 
-\newcounter{slicebegin}
-\newcounter{sliceend}
-
-\newcommand{\simpslice}[3]{
-\setcounter{slicebegin}{\value{sliceend}}
-    \addtocounter{sliceend}{#1}
-    \slice{\theslicebegin/100*360}
-          {\thesliceend/100*360}
-          {#1\%}{#2}{#3}
-}
-
-\newcommand{\diagrammone}{
-\setcounter{slicebegin}{0}
-\setcounter{sliceend}{0}
-\simpslice{70}{insatisfaisable}{green}  
-\simpslice{14}{satisfaisable}{red}      
-\simpslice{7}{inconnu}{red}
-\simpslice{8}{time out}{red}
-\simpslice{1}{parsing error}{red}  
-}
-
-\newcommand{\diagrammtwo}{
-\setcounter{slicebegin}{0}
-\setcounter{sliceend}{0}
-\simpslice{80}{insatisfaisable}{green}  
-\simpslice{1}{satisfaisable}{red}      
-\simpslice{5}{inconnu}{red}
-\simpslice{12}{time out}{red}
-\simpslice{2}{parsing error}{red}              
-}
