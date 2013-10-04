@@ -1,20 +1,20 @@
-\section{Une première vérification des preuves TFF}
-
-TODO Thibaut
-
+\section{Une première vérification des preuves \tff}
+%Les travaux présentés dans cette partie sont en cours de développement.
 
 \subsection{Vérification des preuves}
 
-\begin{itemize}
-\item un sous-ensemble de TPTP (clauses)
-\item utilisant METIS\_TAC et le prouveur d'arithmétique (cooper ?)
-\item permet déjà une première vérification si on veut de la sûreté
-  (travail en cours)
-\end{itemize}
+\subsubsection{Le parser}
+Le parser du vérificateur peut actuellement lire des preuves dont les étapes sont des clauses au format \tff dont la numération respecte la convention \tff pour les \textit{split}. Les dictionnaires injectifs pour les variables,constantes et types produit par l'impression du problème sont utilisés pour lire le fichier preuve au format \tff. En résumé, le parser lit seulement les fichiers preuves, contenant seulement des clauses, dont le fichier problème a été créé par \holfour.
 
+\subsubsection{La reconstruction de la preuve}
+Les tactiques \metistac et \coopertac (Une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger)
+sont utilisés conjointement pour rejouer les étapes de la preuve. 
+Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grace à la numérotation des clauses.
 
-\subsection{Application à Beagle}
+\subsubsection{Objectifs}
+L'objectif principal du vérificateur de preuve est de prouver le problème intialement posé dans HOL4 de façon à ce que le théorème prouvé puisse etre réutilisé comme partie d'une preuve en HOL4. Son objectif secondaire est de vérifier la validité des preuves produites par le prouveur appelé par HOL4.
 
+\subsection{Application à \beagle}
 \begin{itemize}
 \item génération de traces par Beagle (au niveau de la boucle entre
   l'ancien ensemble de clauses et le nouveau)
@@ -22,3 +22,4 @@ TODO Thibaut
 \item nettoyage des preuves
 \item quelques expériences
 \end{itemize}
+
