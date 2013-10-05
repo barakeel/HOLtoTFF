@@ -1,12 +1,82 @@
 \section{Introduction}
 
+Pour bénéficier de l'état de l'art en matière d'automatisation, de
+nombreux assistants de preuve font appel à des prouveurs automatiques,
+qu'ils soient internes~\cite{Hurd05,Lescuyer11} ou
+externes~\cite{Paulson10,DBLP:conf/cpp/ArmandFGKTW11}, afin de résoudre
+certains de leurs buts. Si un prouveur interne confère une autonomie à
+l'assistant de preuves dans lequel il est implanté et peut donc offrir
+des garanties de complétude -- on peut établir formellement que le
+prouveur sera capable de prouver tout ce qui est prouvable --
+l'utilisation de prouveurs externes est souvent plus simple -- car il
+suffit de vérifier ses réponses \emph{a posteriori} et non de montrer la
+correction complète du prouveur -- plus efficace -- car il peut être
+très optimisé sans que cela complique la vérification de ses réponses --
+et également plus générique -- on peut définir une interface entre
+assistants de preuves et prouveurs automatiques indépendante d'un
+pouveur particulier. Les deux manières de procéder sont généralement
+complémentaires: les prouveurs internes sont utilisés afin de vérifier
+les traces générées par les prouveurs externes.
+
+Nous présentons ici une traduction de la logique de l'assistant de
+preuve \holfour vers la logique du premier ordre avec arithmétique
+(codée dans le format \tff), destinée à pouvoir décharger certains buts
+de \holfour vers des prouveurs automatiques du premier ordre. Afin de ne
+pas compromettre la cohérence de \holfour:
 \begin{itemize}
-\item ``sledgehammer pour HOL4''
-\item une des premières utilisations de Beagle
-\item de nouvelles idées pour la traduction
-\item preuve de correction de chaque étape
-\item expériences
-\item on rejoue les preuves
+\item en amont, la traduction est entièrement prouvée correcte en
+  \holfour;
+\item en aval, un premier vérificateur permet de rejouer les preuves
+  éventuellement fournies par le prouveurs automatique (au format \tff)
+  en \holfour à l'aide de ses prouveurs internes, notamment
+  \metis~\cite{Hurd05} pour la logique du premier ordre et \cooper pour
+  l'arithmétique.
+\end{itemize}
+L'utilisation du format \tff générique rend la traduction et la
+vérification de preuves indépendantes du prouveur externe utilisé, et
+offre donc la possibilité d'en utiliser plusieurs en parallèle ou en
+fonction des besoins.
+
+Cette traduction s'appuie sur les traductions déjà existantes, notamment
+celles implantées pour la tactique \sledgehammer~\cite{Paulson10} en
+\isabellehol, mais présente également de nouveaux concepts, notamment en
+ce qui concerne la \emph{monomorphisation}, c'est-à-dire la suppression
+de la quantification sur les variables de type.
+
+Cette traduction générique est utilisée pour implanter la nouvelle
+tactique \beagletac, faisant appel au prouveur du premier ordre avec
+arithmétique \beagle~\cite{DBLP:conf/cade/BaumgartnerW13} (sans
+vérification de preuves dans la version actuelle). Bien qu'offrant moins
+de garantie de correction que \metistac, la tactique faisant appel au
+prouveur du premier ordre interne à \holfour, cette première version de
+\beagletac est plus expressive car elle combine raisonnement
+propositionnel avec arithmétique. Des expériences montrent également son
+efficacité: \todo Rapport entre les temps de calcul \beagletac et ceux
+\metistac.
+
+
+\subsection{Assistants de preuves basés sur la logique d'ordre supérieur
+et prouveurs du premier ordre}
+
+\todo Chantal
+
+\begin{itemize}
+\item différences
+\item description de \holfour et \beagle
 \end{itemize}
 
-TODO Chantal
+
+\subsection{Interface: le format \tff}
+
+\todo Chantal
+
+\begin{itemize}
+\item description de TFF
+\end{itemize}
+
+
+\subsection{Plan}
+
+Le papier est organisé comme suit.
+
+\todo Chantal
