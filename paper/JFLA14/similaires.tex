@@ -1,18 +1,44 @@
 \section{Travaux similaires et futurs}
 \label{sec:similaires}
 
-TODO Chantal
+\paragraph{L'interaction sceptique entre assistants de preuve et
+  prouveurs automatiques externes}
+a déjà été largement étudiée, pour différents types d'assistants de
+preuve -- basés sur la théorie des
+types~\cite{DBLP:conf/cpp/ArmandFGKTW11,DBLP:conf/types/Besson06} ou sur
+la logique d'ordre supérieur~\cite{Paulson10,KaliszykU12} -- et
+différents types de prouveurs automatiques -- du premier
+ordre~\cite{Paulson10}, de Satisfiabilité Modulo
+Théories~\cite{Paulson10,DBLP:conf/cpp/ArmandFGKTW11,Bohme12}, de
+terminaison~\cite{KaliszykU12},
+d'arithmétique~\cite{DBLP:conf/types/Besson06}\dots. L'interaction
+présentée dans cet article est destinée en particulier à être utilisée
+avec des prouveurs du premier ordre \textbf{avec arithmétique}, ce dont
+il a fallu tenir compte pour utiliser au mieux cette capacité du
+prouveur externe (partie~\ref{sec:traduction:nouveautes}).
 
-Travaux similaires:
-\begin{itemize}
-\item monomorphisation
-\item traduction pensée pour intégrer l'arithmétique
-\end{itemize}
+\paragraph{Une traduction prouvée de l'ordre supérieur vers le premier
+  ordre}
+est déjà implantée pour la plupart des applications citées ci-dessus.
+Notre traduction reprend les idées présentée dans ces travaux
+($\lambda$-lifting, traitement de l'arithmétique non
+linéaire~\cite{Bohme12}, instantiation des arguments booléens), mais en
+réalisant un traitement particulier pour l'arithmétique linéaire comme
+expliqué ci-dessus, ainsi qu'une monomorphisation à l'aide de points
+fixes (partie~\ref{sec:traduction:nouveautes}). Si les expériences
+présentées dans cet article montrent l'efficacité absolue de notre
+algorithme de monorphisation, nous nous réservons comme travaux futurs
+une comparaison avec les algorithmes de monomorphisation existants. Un
+point particulièrement intéressant serait une comparaison avec une
+traduction vers le format \tffone proposé récemment par Blanchette et
+Paskevich~\cite{DBLP:conf/cade/BlanchetteP13}.
 
-Travail futur:
-\begin{itemize}
-\item comparaison de la nouvelle monomorphisation avec l'état de l'art
-\item améliorer la vérification de traces et évaluer son efficacité
-\end{itemize}
+\paragraph{La vérification de traces} présentée ici constitue un premier
+prototype basé sur l'idée de rejouer la preuve à l'aide des prouveurs
+automatiques internes à \holfour, comme c'est le cas pour la tactique
+\sledgehammer~\cite{Paulson10}. Bien que beaucoup moins efficace pour
+l'instant, elle illustre l'aspect selon lequel notre tactique permet de
+combiner raisonnement propositionnel et arithmétique: la vérification de
+traces peut se faire à l'aide des tactiques \metistac et \coopertac,
+mais sans nécessité d'une tactique interne combinant les deux.
 
-\paragraph{Remerciements}
