@@ -44,41 +44,148 @@ ce qui concerne la \emph{monomorphisation}, c'est-à-dire la suppression
 de la quantification sur les variables de type.
 
 Cette traduction générique est utilisée pour implanter la nouvelle
-tactique \beagletac, faisant appel au récent prouveur du premier ordre
-avec arithmétique \beagle~\cite{DBLP:conf/cade/BaumgartnerW13} (sans
-vérification de preuves dans la version actuelle). Bien qu'offrant moins
-de garantie de correction que \metistac, la tactique faisant appel au
-prouveur du premier ordre interne à \holfour, cette première version de
-\beagletac est plus expressive car elle combine raisonnement
-propositionnel avec arithmétique. Des expériences montrent également son
-efficacité: \todo Rapport entre les temps de calcul \beagletac et ceux
-\metistac. Il s'agit ici d'une des premières utilisations de \beagle,
-fournissant ainsi un ensemble de tests conséquent et montrant son
-efficacité sur des problèmes concrets.
+tactique \beagletac (présentée en \textsc{Figure~\ref{fig:beagletac}}),
+faisant appel au récent prouveur du premier ordre avec arithmétique
+\beagle~\cite{DBLP:conf/cade/BaumgartnerW13} (sans vérification de
+preuves dans la version actuelle). Bien qu'offrant moins de garantie de
+correction que \metistac, la tactique faisant appel au prouveur du
+premier ordre interne à \holfour, cette première version de \beagletac
+est plus expressive car elle combine raisonnement propositionnel avec
+arithmétique. Des expériences montrent également son efficacité: \todo
+Rapport entre les temps de calcul \beagletac et ceux \metistac. Il
+s'agit ici d'une des premières utilisations de \beagle, fournissant
+ainsi un ensemble de tests conséquent et montrant son efficacité sur des
+problèmes concrets.
+
+\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (conjecture) {conjecture};
+  \node [block, right of=conjecture,  node distance=3cm] (HOL1)
+  {traduction};
+  \node [block, right of=HOL1, node distance=3cm] (TFF1)
+  {but};
+  \node [block, right of=TFF1, node distance=3cm] (Beagle)
+  {preuve automatique};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2)
+  {trace de preuve};
+  \node [block, below of=HOL1, node distance=2cm] (HOL2)
+  {preuve rejouée};
+  \node [cloud, below of=conjecture, node distance=2cm] (theorem)
+  {théorème};
+  \node [label=\holfour, draw=black, ultra thick,
+  fit=(conjecture) (theorem) (HOL1) (HOL2)] {};
+  \node [label=Interface \tff, draw=black, ultra thick, fit=(TFF1) (TFF2)]
+  {};
+  \node [label=\beagle, draw=black, ultra thick, fit=(Beagle)] {};
+  % Draw edges
+  \draw [-to,black,ultra thick] (conjecture) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick,dashed] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick,dashed] (TFF2) -- (HOL2);
+  \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
+  \draw [-to,black,ultra thick] (Beagle.south) to       [out=270,in=270] (theorem.south);
+\end{tikzpicture}
+\caption{La tactique \beagletac: la version courante utilise \beagle
+  comme un oracle (flèches pleines), mais ses traces peuvent être
+  rejouées à l'aide de \metistac et \coopertac (flèches pointillées).}
+\label{fig:beagletac}
+\end{center}
+\end{figure}
+
+Le code présenté dans cet article est disponible à l'adresse
+\url{https://github.com/barakeel/HOLtoTFF}.
 
 
-\subsection{Assistants de preuves basés sur la logique d'ordre supérieur
-et prouveurs du premier ordre}
+\subsection{Assistants de preuves et prouveurs automatiques}
 
-\todo Chantal
+Les assistants de preuve sont des logiciels basés sur un petit noyau
+implantant un vérificateur pour une logique très expressive, permettant
+d'énoncer et de prouver de manière très sûre des théorèmes dans une
+grande variété de domaines. Au-dessus de ce petit noyau, une interface
+utilisateur contenant notamment un ensemble de tactique permet d'établir
+les preuves pas à pas. La grande expressivité de la logique implantée
+par ces prouveurs limite l'automatisation de la recherche de preuve
+possible, demandant ainsi une assez grande expertise pour être utilisés.
 
-\begin{itemize}
-\item différences
-\item description de \holfour et \beagle
-\end{itemize}
+\emph{A contrario}, les prouveurs automatiques implantent une logique
+moins expressive, mais pour laquelle une recherche de preuve -- bien
+qu'incomplète -- est possible. Ils demandent donc moins de travail à
+l'utilisateur, mais offrent très peu de garanties de sûreté.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabularx}{\textwidth}{ |c|X|X| }
+  \hline
+  & Assistants de preuve & Prouveurs automatiques\\
+  \hline
+  Prouveurs & \holfour, \isabellehol, \hollight, \coq, \ldots
+  & \beagle, \spass, \vampire, \zthree, \verit \ldots\\
+  \hline
+  Logique & Ordre supérieur ou Théorie des types & Premier ordre et combinaison de théories\\
+  \hline
+  Utilisation & Guidage fastidieux de l'utilisateur & Preuve entièrement automatisée\\
+  \hline
+  Sûreté & Basé sur un petit noyau vérifiable & Code très grand
+  difficile à prouver, retourne parfois des traces vérifiables \emph{a
+    posteriori}\\
+  \hline
+\end{tabularx}
+\caption{Différences entre assistants de preuve et prouveurs automatiques}
+\label{tab:assistants_automatiques}
+\end{center}
+\end{table}
+
+La \textsc{Table}~\ref{tab:assistants_automatiques} résument leurs
+points forts et faibles, soulignant leur complémentarité: une
+interaction entre les deux permettrait d'offre à la fois
+l'automatisation lorsqu'elle est possible et la sûreté.
+
+Dans cet article, nous nous intéressons plus particulièrement aux
+assistants de preuve basés sur la logique d'ordre supérieur, notamment
+\holfour, et aux prouveurs du premier ordre avec théories, comme
+\beagle. La logique implantée par les deuxièmes étant un sous-ensemble
+de celle implantée par les assistants de preuves basés sur la logique
+d'ordre supérieur, elle définit une interface commune leur permettant de
+communiquer.
 
 
 \subsection{Interface: le format \tff}
 
-\todo Chantal
+Cette interface est décrite par le format générique \tff\footnote{Le
+  format \tff est décrit à l'adresse
+  \url{http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml\#TypeSystem}.}
+(signifiant ``Typed First-Order Form''), promu par \tptp\footnote{La
+  bibliothèque \tptp est disponible à l'adresse
+  \url{http://www.cs.miami.edu/~tptp}.} (signifiant ``Thousands of
+Problems for Theorem Provers'') regroupant une grande base de données de
+problèmes pour prouveurs du premier ordre. Il permet de décrire tout
+problème du premier ordre avec arithmétique (entière, rationnelle ou
+réelle). Il propose également un format générique pour les traces de
+preuves (\todo référence?).
 
-\begin{itemize}
-\item description de TFF
-\end{itemize}
+L'utilisation d'un format générique permet de ne pas dépendre de
+prouveurs en particuliers, comme l'est la traduction décrite dans la
+partie~\ref{sec:traduction}.
 
 
 \subsection{Plan}
 
-Le papier est organisé comme suit.
+Le papier est organisé comme suit. La partie~\ref{sec:traduction}
+présente une traduction de la logique d'ordre supérieur vers la logique
+du premier ordre, entièrement implantée et prouvée en \holfour. Elle
+présente de nouveaux aspects, notamment concernant la monomorphisation
+(partie~\ref{sec:traduction:nouveautes}). Cette traduction est utilisée
+pour définir la nouvelle tactique \beagletac
+(partie~\ref{sec:experiences:beagletac}), dont l'efficacité est ensuite
+testée (partie~\ref{sec:experiences:experiences}). La partie
+\ref{sec:traces} décrit comment, dans un deuxième temps, vérifier les
+traces au format \tff générées par certains prouveurs (dont \beagle).
+Enfin, nous discutions des travaux similaires et futurs
+(partie~\ref{sec:similaires}) avant de conclure.
 
-\todo Chantal
+
+
+

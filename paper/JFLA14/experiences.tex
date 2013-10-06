@@ -1,13 +1,30 @@
-\section{Expériences avec \beagle}
-\subsection{Software, hardware et tests}
+\section{Utilisation de \beagle et expériences}
+\label{sec:experiences}
+
+\subsection{Présentation de \beagle}
+\beagle est prouveur automatique supportant le premier ordre, les types
+monomororphes et l'arithmétique. sur les problèmes arithmétiques. Il
+accepte en entrée des problèmes au format \tff. Des résultats
+expérimentaux(sur une version obsolète) ainsi que la théorie détaillée
+de \beagle peuvent être trouvés dans
+~\cite{DBLP:conf/cade/BaumgartnerW13}.
+
+
+\subsection{La tactique \beagletac}
+\label{sec:experiences:beagletac}
+
+\todo
+
+
+\subsection{Expériences}
+\label{sec:experiences:experiences}
+
+\subsubsection{Software, hardware et tests}
 \beagle est en cours de dévellopement et nos tests ont utilisés la version 0.7 de \beagle.
  Ces expériences ont été menés sur un processeur deux coeurs cadencées à 2.1Ghz avec 3,7 GB de mémoire vive. Les problèmes testés sont les 271 premiers problèmes que \metis résout lors de la construction de \holfour.
 
-\subsection{Présentation de \beagle}
-\beagle est prouveur automatique supportant le premier ordre, les types monomororphes et l'arithmétique. sur les problèmes arithmétiques. Il accepte en entrée des problèmes au format \tff. Des résultats expérimentaux(sur une version obsolète) ainsi que la théorie détaillée de \beagle peuvent être trouvés dans ~\cite{DBLP:conf/cade/BaumgartnerW13}.
 
-
-\subsection{Impact de la monomorphisation}
+\subsubsection{Impact de la monomorphisation}
 
 \begin{tabularx}{\textwidth}{|X|X|}
 \hline
@@ -54,7 +71,7 @@ Avant monomorphisation & Après monomorphisation \\
 
 
 
-\subsection{Efficacité de \beagle}
+\subsubsection{Efficacité de \beagle}
 A travers ses exemples, il est difficile de juger de la qualité de \beagle
 face à \metis puisque \metis résout l'ensemble de ses buts 
 rapidement.
