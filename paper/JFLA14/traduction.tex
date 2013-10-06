@@ -1,9 +1,48 @@
 \section{Une traduction prouvée de l'un vers l'autre}
-
-TODO Thibault
-
+ 
+A mettre quelque part (Où trouver le code source?)
+ \path{https://github.com/barakeel/HOLtoTFF}. Some examples can be found in paperexample.sml.
 
 \subsection{Présentation}
+
+Voici comment \beagletac fonctionne: (à déplacer à un autre endroit) 
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (problem) {problème};
+  \node [block, right of=problem,  node distance=3cm] (HOL1) 
+  {traduction};
+  \node [block, right of=HOL1,  node distance=3cm] (HOLTFF1) 
+  {impression};
+  \node [block, right of=HOLTFF1, node distance=3cm] (TFF1) 
+  {fichier problème};
+  \node [block, right of=TFF1, node distance=3cm, yshift = -1cm] (Beagle) 
+  {recherche de preuve};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
+  {fichier preuve};  
+  \node [block, below of=HOLTFF1, node distance=2cm] (HOLTFF2) 
+  {lecture};
+  \node [block, below of=HOL1, node distance=2cm] (HOL2) 
+  {rejouage};
+  \node [cloud, below of=problem, node distance=2cm] (theorem) 
+  {théorème};
+  \node [label=HOL4, draw=black, ultra thick, 
+  fit=(problem) (theorem) (HOLTFF1) (HOL1) (HOL2)] {}; 
+  \node [label=TFF format interface, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
+  {}; 
+  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
+  % Draw edges
+  \draw [-to,black,ultra thick] (problem) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (HOLTFF1);
+  \draw [-to,black,ultra thick] (HOLTFF1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick,dashed] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick,dashed] (TFF2) -- (HOLTFF2);
+  \draw [-to,black,ultra thick,dashed] (HOLTFF2) -- (HOL2);
+  \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
+  \draw [-to,black,ultra thick] (Beagle.south) to [out=270,in=270] (theorem.south);
+\end{tikzpicture}
+
 
 \begin{itemize}
 \item fonctionnement de la traduction
@@ -14,17 +53,17 @@ TODO Thibault
 
 \subsection{Preuve de correction}
 
-\begin{itemize}
-\item énoncé des théorèmes de correction
-\item idée de la preuve
-\end{itemize}
+\begin{thm}(Correction de la traduction)
+\\Si le problème traduit est un théorème alors le problème dans sa forme original est un théorème.
+\end{thm}
+
+\begin{proof}(Idée de la preuve)
+\\La traduction est correcte car chaque étape de la traduction est correcte [voir présentation de la traduction]. Cette affirmation est soutenue par l'expérience [voir expérience avec Beagle].
+\end{proof}
 
 
 \subsection{Nouveaux aspects}
 
-\begin{itemize}
-\item monomorphisation
-\item traduction des entiers naturels
-\item 
+\subsubsection{Monomorphisation}
 
-\end{itemize}
+

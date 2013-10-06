@@ -7,8 +7,8 @@ load "blibSyntax"; open blibSyntax;
 load "beaglePrintresult"; open beaglePrintresult;
 load "blibReader"; open blibReader; 
 load "numSyntax"; open numSyntax;
-
-
+load "blibClauseset"; open blibClauseset;
+load "blibExtractvar"; open blibExtractvar;
 load "int_arithTheory"; open int_arithTheory;
 load "beagle"; open beagle;
 *)

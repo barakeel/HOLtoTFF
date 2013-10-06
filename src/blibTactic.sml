@@ -233,6 +233,10 @@ fun BOOL_BV_TAC_w goal =
   CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal
 fun BOOL_BV_TAC goal = 
   wrap "tactic" "BOOL_BV_TAC" "" BOOL_BV_TAC_w goal 
+  
+(* TO_INT_TAC *)
+fun TO_INT_TAC_w goal =
+  CONV_HYP_TAC  
            
 fun BEAGLE_CLAUSE_SET_TAC goal =
   wrap "tactic" "BEAGLE_CLAUSE_SET_TAC" ""

@@ -1,34 +1,25 @@
 structure blibClauseset :> blibClauseset =
 struct
 
-open HolKernel Abbrev boolLib
+open HolKernel Abbrev boolLib 
+     numSyntax intSyntax int_arithTheory arithmeticTheory integerTheory
      blibBtools blibDatatype 
      blibSyntax blibBrule 
-     blibExtractvar blibExtracttype 
+     blibExtractvar blibExtracttype blibFreshvar
 
 (*
-load "blibBrule";
-open blibBrule;
-load "blibExtractvar";
-open blibExtractvar;
-load "intSyntax";
-open intSyntax;
-load "blibBtools";
-open blibBtools;
-load "blibSyntax";
-open blibSyntax;
-load "blibFreshvar";
-open blibFreshvar;
-load "int_arithTheory";
-open int_arithTheory; 
-load "integerTheory";
-open integerTheory;
-load "arithmeticTheory";
-open arithmeticTheory;
-load "numSyntax";
-open numSyntax;
-load "blibDatatype";
-open blibDatatype;
+load "numSyntax";open numSyntax;
+load "intSyntax";open intSyntax;
+load "int_arithTheory";open int_arithTheory; 
+load "integerTheory";open integerTheory;
+load "arithmeticTheory";open arithmeticTheory;
+load "blibBtools";open blibBtools;
+load "blibDatatype";open blibDatatype;
+load "blibSyntax";open blibSyntax;
+load "blibBrule";open blibBrule;
+load "blibExtractvar";open blibExtractvar;
+load "blibFreshvar";open blibFreshvar;
+load "blibClauseset"; open blibClauseset;
 *)
 
 
@@ -166,7 +157,7 @@ val usedv = all_var term;
 *)
 
 (* replace all numeral type by an integer type *)
-fun INT_NUM_FUN_CONV_SUB usedv term =
+fun NUM_INT_FUN_CONV_SUB usedv term =
   if is_leaf term then raise UNCHANGED
   else
   if rator term = int_injection
@@ -175,13 +166,13 @@ fun INT_NUM_FUN_CONV_SUB usedv term =
     if is_leaf t then raise UNCHANGED      
     else
       case nodeconst t of
-        Plus => let val (t1,t2) = dest_plus t in
+        Plus => let val (t1,t2) = numSyntax.dest_plus t in
                   SYM (SPECL [t1,t2] INT_ADD)
                 end
-      | Minus => let val (t1,t2) = dest_minus t in
+      | Minus => let val (t1,t2) = numSyntax.dest_minus t in
                    SPECL [t1,t2] INT_NUM_SUB
                  end
-      | Mult => let val (t1,t2) = dest_mult t in
+      | Mult => let val (t1,t2) = numSyntax.dest_mult t in
                   SYM (SPECL [t1,t2] INT_MUL)
                 end
       | _ => let val (_,argl) = strip_comb t in 
@@ -194,10 +185,10 @@ fun INT_NUM_FUN_CONV_SUB usedv term =
         Eq => let val (t1,t2) = dest_eq term in
                SYM (SPECL [t1,t2] INT_INJ)    
               end
-      | Less => let val (t1,t2) = dest_less term in
+      | Less => let val (t1,t2) = numSyntax.dest_less term in
                  SYM (SPECL [t1,t2] INT_LE) 
                 end
-      | Leq => let val (t1,t2) = dest_leq term in
+      | Leq => let val (t1,t2) = numSyntax.dest_leq term in
                 SYM (SPECL [t1,t2] INT_LT)
                end
       | _ => let val (operator,argl) = strip_comb term in
@@ -210,25 +201,41 @@ fun ARG_CONV conv term =
   then (RAND_CONV conv THENC RATOR_CONV (ARG_CONV conv)) term
   else raise UNCHANGED 
       
-fun INT_NUM_FUN_CONV_aux usedv term =
+fun NUM_INT_FUN_CONV_aux usedv term =
   if is_leaf term then raise UNCHANGED
   else
-  ((INT_NUM_FUN_CONV_SUB usedv) THENC 
-  (ARG_CONV (INT_NUM_FUN_CONV_aux usedv))) 
+  ((NUM_INT_FUN_CONV_SUB usedv) THENC 
+  (ARG_CONV (NUM_INT_FUN_CONV_aux usedv))) 
   term
 
-fun INT_NUM_FUN_CONV usedv term = 
-  STRIP_QUANT_CONV (INT_NUM_FUN_CONV_aux usedv) term  
+fun NUM_INT_FUN_CONV usedv term = 
+  STRIP_QUANT_CONV (NUM_INT_FUN_CONV_aux usedv) term  
+
+fun num_int_fun goal =
+  let val hypl = fst goal in
+  let val thml = map (NUM_INT_FUN_CONV (all_var_goal goal)) hypl in
+  let val newhypl = map (rhs o concl) thml in
+  let val defl = List.concat (map hyp thml) in
+    (defl @ newhypl,snd goal)
+  end end end end
+  
 
 (* 
+load "blibTactic"; open blibTactic;
 show_assums := true;
-val term = ``!z:num. f z h = (0:num) + x``;
-val term = ``P (x:num) (y:bool):bool``;
-val thm = INT_NUM_FUN_CONV (all_var term) term;
+val t1 = ``!z:num. f z h = (0:num) + (x:num)``;
+val t2 = ``(x:num) + (y:num) = 0``;
+val goal : goal = ([t1,t2],F);
+val thm = NUM_INT_FUN_CONV (all_var term) term;
+val revextdef = hd (hyp thm);
+numfun_test revextdef;
+numfun_axiom revextdef;
+
+CONV_HYP_TAC
 *)
 
 (* remove all &(int_injection) operator *)
-fun INT_NUM_FORALL_CONV_FST term =   
+fun NUM_INT_FORALL_CONV_FST term =   
   let val (var,t) = dest_forall term in
     if type_of var = ``:num``
     then
@@ -251,10 +258,10 @@ fun INT_NUM_FORALL_CONV_FST term =
     else raise UNCHANGED
   end
  
-fun INT_NUM_FORALL_CONV term =
+fun NUM_INT_FORALL_CONV term =
   if is_forall term 
   then 
-    ((QUANT_CONV INT_NUM_FORALL_CONV) THENC INT_NUM_FORALL_CONV_FST)
+    ((QUANT_CONV NUM_INT_FORALL_CONV) THENC NUM_INT_FORALL_CONV_FST)
       term  
   else 
     raise UNCHANGED 
@@ -281,41 +288,42 @@ fun int_var_conv term =
 end
 
 fun REMOVE_INT_INJECTION_CONV  term =
-  (int_var_conv THENC INT_NUM_FORALL_CONV THENC normalForms.CNF_CONV) term
+  (int_var_conv THENC NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV) term
 
 (*
 val term = ``∀x. &x + 2 * &y + &z = 0``;
 val i = ``&(y:num)``; val t = ``&(y:num)``;
 int_var_conv term;
-(int_var_conv THENC INT_NUM_FORALL_CONV THENC normalForms.CNF_CONV) term;
+(int_var_conv THENC NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV) term;
 *)
- 
-fun numfun_axiom revextdef =
+fun numfun_test revextdef =
   let val (bvl,eqt) = strip_forall revextdef in
   let val t1 = lhs eqt in
-  let val t2 = rhs eqt in
   let val (oper,arg) = dest_comb t1 in
-    if oper = int_injection 
-    then
-      let val th1 = ASSUME revextdef in
-      let val eqth1 = STRIP_QUANT_CONV SYM_CONV revextdef in  
-      let val th2 = EQ_MP eqth1 th1 in
-      let val axiom1 = INT_POS in
-      let val th3 = SPEC arg axiom1 in
-      let val th4 = GENL bvl (SUBS [SYM (SPEC_ALL th2)] th3) in
-      let val th5 = (INT_NUM_FORALL_CONV THENC normalForms.CNF_CONV)
-                     (concl th4) 
-      in
-      let val th6 = EQ_MP th5 th4 in
-        [th6]
-      end end end end end end end end
-    else []
-  end end end end 
+    oper = int_injection 
+  end end end
+
+fun numfun_axiom revextdef =
+  let val (bvl,eqt) = strip_forall revextdef in
+  let val (oper,arg) = dest_comb (lhs eqt) in
+  let val th1 = ASSUME revextdef in
+  let val eqth1 = STRIP_QUANT_CONV SYM_CONV revextdef in  
+  let val th2 = EQ_MP eqth1 th1 in
+  let val axiom1 = INT_POS in
+  let val th3 = SPEC arg axiom1 in
+  let val th4 = GENL bvl (SUBS [SYM (SPEC_ALL th2)] th3) in
+  let val th5 = (NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV)
+                (concl th4) 
+  in
+  let val th6 = EQ_MP th5 th4 in
+      th6
+  end end end end end end end end end end
+
 
 (* test 
+show_assums:=true;
 val revextdef = ``∀x x1. (& (f x x1)) = (f' (&x) x1 : int)``;
 *)
-
 
 
 

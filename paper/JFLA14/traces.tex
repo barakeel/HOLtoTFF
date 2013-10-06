@@ -3,23 +3,38 @@
 
 \subsection{Vérification des preuves}
 
-\subsubsection{Le parser}
-Le parser du vérificateur peut actuellement lire des preuves dont les étapes sont des clauses au format \tff dont la numération respecte la convention \tff pour les \textit{split}. Les dictionnaires injectifs pour les variables,constantes et types produit par l'impression du problème sont utilisés pour lire le fichier preuve au format \tff. En résumé, le parser lit seulement les fichiers preuves, contenant seulement des clauses, dont le fichier problème a été créé par \holfour.
+\subsubsection{Le lecteur}
+Le lecteur du vérificateur peut actuellement lire des preuves dont les étapes sont des clauses au format \tff dont la numération respecte la convention \tff pour les \textit{split}. Les dictionnaires injectifs pour les variables,constantes et types produit par l'impression du problème sont utilisés pour lire le fichier preuve au format \tff. En résumé, le lecteur accepte seulement des fichiers preuves, contenant seulement des clauses, dont le fichier problème a été créé par \holfour.
 
 \subsubsection{La reconstruction de la preuve}
-Les tactiques \metistac et \coopertac (Une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger)
+Les tactiques \metistac et \coopertac (une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger)
 sont utilisés conjointement pour rejouer les étapes de la preuve. 
 Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grace à la numérotation des clauses.
 
 \subsubsection{Objectifs}
 L'objectif principal du vérificateur de preuve est de prouver le problème intialement posé dans HOL4 de façon à ce que le théorème prouvé puisse etre réutilisé comme partie d'une preuve en HOL4. Son objectif secondaire est de vérifier la validité des preuves produites par le prouveur appelé par HOL4.
 
+\subsection{Preuve de correction}
+\begin{thm}(Correction)
+\\Une conjecture dont la preuve a été rejouée dans \holfour est un théorème.
+\end{thm}
+
+\begin{proof}(Idée de la preuve)
+\\La preuve de ce théorème ce décompose en deux parties la preuve de la traduction et la preuve du rejouage.
+\\La traduction est correcte. [voir preuve de correction]
+\\Le rejouage est correcte: Chaque étape de la preuve est rejouée par \metistac ou \coopertac, il est nécessaire de montrer que \metistac est \coopertac sont correctes, ce qui a été fait dans les papiers suivants.
+\end{proof}
+
+
+
 \subsection{Application à \beagle}
 \begin{itemize}
 \item génération de traces par Beagle (au niveau de la boucle entre
   l'ancien ensemble de clauses et le nouveau)
-\item optimisé pour Beagle
-\item nettoyage des preuves
+
+\item optimisation
+
 \item quelques expériences
+
 \end{itemize}
 
