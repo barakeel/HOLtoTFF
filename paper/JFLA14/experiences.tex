@@ -2,12 +2,10 @@
 \label{sec:experiences}
 
 \subsection{Présentation de \beagle}
-\beagle est prouveur automatique supportant le premier ordre, les types
-monomororphes et l'arithmétique. sur les problèmes arithmétiques. Il
-accepte en entrée des problèmes au format \tff. Des résultats
-expérimentaux(sur une version obsolète) ainsi que la théorie détaillée
-de \beagle peuvent être trouvés dans
-~\cite{DBLP:conf/cade/BaumgartnerW13}.
+\beagle est un prouveur du premier ordre avec arithmétique très récent,
+prenant en entrée le format \tff. Des résultats expérimentaux (sur une
+version obsolète) ainsi que la théorie détaillée de \beagle peuvent être
+trouvés dans~\cite{DBLP:conf/cade/BaumgartnerW13}.
 
 
 \subsection{La tactique \beagletac}
@@ -20,8 +18,29 @@ de \beagle peuvent être trouvés dans
 \label{sec:experiences:experiences}
 
 \subsubsection{Software, hardware et tests}
-\beagle est en cours de dévellopement et nos tests ont utilisés la version 0.7 de \beagle.
- Ces expériences ont été menés sur un processeur deux coeurs cadencées à 2.1Ghz avec 3,7 GB de mémoire vive. Les problèmes testés sont les 271 premiers problèmes que \metis résout lors de la construction de \holfour.
+Les tests sont effectués avec la version~$0.7$ de \beagle (\todo:
+version de \holfour), sur un processeur deux cœurs cadencé à $2,1$~GHz
+avec $3,7$~Go de mémoire vive (\todo 3,7??).
+
+Lors de la construction de \holfour, certains buts sont résolus par la
+tactique \metistac. La plupart de ces buts ne font intervenir que du
+raisonnement propositionnel, mais certains nécessitent de le combiner
+avec un raisonnement arithmétique, auquel cas les lemmes arithmétiques à
+utiliser sont fournis à \metistac. Pour les expériences, nous avons
+utilisé \beagletac sur $271$ de ces buts, sans donner aucun lemme
+arithmétique.
+
+
+\subsubsection{Résultats}
+
+\todo Temps de calcul, nombre de buts résolus\dots avec \metistac et
+avec \beagletac. Conclusion sur l'efficacité comparée de \beagletac et
+\metistac, puis celle de \beagle et \metis.
+
+A travers ces exemples, il est difficile de juger de la qualité de \beagle
+face à \metis puisque \metis résout l'ensemble de ces buts 
+rapidement.
+Cependant quelques exemples nous montre que \beagle est plus efficace 
 
 
 \subsubsection{Impact de la monomorphisation}
@@ -33,10 +52,10 @@ Avant monomorphisation & Après monomorphisation \\
 \begin{tikzpicture}[scale=1.5]
     \slice{0/100*360}
           {70/100*360}
-          {70\%}{insatisfaisable}{green}
+          {70\%}{insatisfiable}{green}
     \slice{70/100*360}
           {84/100*360}
-          {14\%}{satisfaisable}{red}      
+          {14\%}{satisfiable}{red}      
     \slice{84/100*360}
           {91/100*360}
           {7\%}{inconnu}{red}
@@ -51,10 +70,10 @@ Avant monomorphisation & Après monomorphisation \\
 \begin{tikzpicture}[scale=1.5]
     \slice{0/100*360}
           {80/100*360}
-          {80\%}{insatisfaisable}{green}
+          {80\%}{insatisfiable}{green}
     \slice{80/100*360}
           {81/100*360}
-          {1\%}{satisfaisable}{red}  
+          {1\%}{satisfiable}{red}  
     \slice{81/100*360}
           {86/100*360}
           {5\%}{inconnu, yshift=6}{red}   
@@ -71,10 +90,11 @@ Avant monomorphisation & Après monomorphisation \\
 
 
 
-\subsubsection{Efficacité de \beagle}
-A travers ses exemples, il est difficile de juger de la qualité de \beagle
-face à \metis puisque \metis résout l'ensemble de ses buts 
-rapidement.
-Cependant quelques exemples nous montre que \beagle est plus efficace 
-De plus \beagle combine raisonnement du premier ordre et l'arithmétique, ce qui grâce à notre traduction permet à \beagletac de résoudre des problèmes combinant ordre supérieur et arithmétique.
+\subsubsection{Expressivité}
+
+Grâce à notre traduction, \beagletac permet de résoudre des problèmes
+combinant d'ordre supérieur avec arithmétique, lorsque le raisonnement
+propositionnel est du premier ordre. Cette tactique est donc plus
+expressive que \metistac, puisqu'il n'est pas besoin de fournir les
+lemmes arithmétiques utilisés.
 
