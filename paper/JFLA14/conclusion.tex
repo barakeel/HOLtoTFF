@@ -1,7 +1,30 @@
 \section{Conclusion}
 
-TODO Chantal
+Cet article présente une traduction de la logique d'ordre supérieure
+polymorphe vers la logique du premier ordre monomorphe avec
+arithmétique, faisant notamment intervenir un nouvel algorithme de
+monomorphisation. Cette traduction est implantée et prouvée correcte en
+\holfour, permettant à cet assistant de preuve de bénéficier de
+prouveurs du premier ordre avec (ou sans) arithmétique tout en ayant
+confiance dans la traduction. L'application à \beagle permet de fournir
+une tactique utilisable et efficace à \holfour, combinant raisonnement
+propositionnel et arithmétique linéaire. Un premier prototype permet de
+vérifier les traces au format \tff afin de garantir la correction,
+prototype également appliquée à \beagle.
 
-\begin{itemize}
-\item une nouvelle tactique combinant METIS et arithmétique
-\end{itemize}
+Le travail présenté ici constitue donc une base pour l'interaction entre
+\holfour et des prouveurs externes, qui peut être encore largement
+développée. Les résultats expérimentaux sont encourageants quant aux
+perspectives offertes par une telle intégration. Ce travail constitue
+également une première utilisation réelle de \beagle, montrant son
+efficacité et son utilité.
+
+
+\paragraph{Remerciements}
+
+Les auteurs sont particulièrement reconnaissants envers Peter
+Baumgartner et Josh Bax pour leurs explications sur le fonctionnement de
+\beagle, ainsi que leur aide pour la résolution de certaines des erreurs
+produites par des versions préliminaires de la traduction. Les auteurs
+remercient également Alexis Saurin pour son aide lors de la rédaction de
+cet article.

@@ -1,13 +1,77 @@
-\section{Expériences avec \beagle}
-\subsection{Software, hardware et tests}
-\beagle est en cours de dévellopement et nos tests ont utilisés la version 0.7 de \beagle.
- Ces expériences ont été menés sur un processeur deux coeurs cadencées à 2.1Ghz avec 3,7 GB de mémoire vive. Les problèmes testés sont les 271 premiers problèmes que \metis résout lors de la construction de \holfour.
+\section{Utilisation de \beagle et expériences}
+\label{sec:experiences}
 
 \subsection{Présentation de \beagle}
-\beagle est prouveur automatique supportant le premier ordre, les types monomorphes et l'arithmétique. sur les problèmes arithmétiques. Il accepte en entrée des problèmes au format \tff. Des résultats expérimentaux(sur une version obsolète) ainsi que la théorie détaillée de \beagle peuvent être trouvés dans ~\cite{Waldmann13}.
+\beagle est un prouveur du premier ordre avec arithmétique très récent,
+prenant en entrée le format \tff. Des résultats expérimentaux (sur une
+version plus ancienne) ainsi que la théorie détaillée de \beagle peuvent être trouvés dans~\cite{DBLP:conf/cade/BaumgartnerW13}.
 
 
-\subsection{Impact de la monomorphisation}
+\subsection{La tactique \beagletac}
+\label{sec:experiences:beagletac}
+
+Voici un diagramme représentant l'ensemble des étapes de \beagletac:
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (problem) {problème};
+  \node [block, right of=problem,  node distance=3cm] (HOL1) 
+  {traduction};
+  \node [block, right of=HOL1,  node distance=3cm] (HOLTFF1) 
+  {impression};
+  \node [block, right of=HOLTFF1, node distance=3cm] (TFF1) 
+  {fichier problème};
+  \node [block, right of=TFF1, node distance=3cm, yshift = -1cm] (Beagle) 
+  {recherche de preuve};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
+  {fichier preuve};  
+  \node [block, below of=HOLTFF1, node distance=2cm] (HOLTFF2) 
+  {lecture};
+  \node [block, below of=HOL1, node distance=2cm] (HOL2) 
+  {rejouage};
+  \node [cloud, below of=problem, node distance=2cm] (theorem) 
+  {théorème};
+  \node [label=HOL4, draw=black, ultra thick, 
+  fit=(problem) (theorem) (HOLTFF1) (HOL1) (HOL2)] {}; 
+  \node [label=TFF format interface, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
+  {}; 
+  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
+  % Draw edges
+  \draw [-to,black,ultra thick] (problem) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (HOLTFF1);
+  \draw [-to,black,ultra thick] (HOLTFF1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick] (TFF2) -- (HOLTFF2);
+  \draw [-to,black,ultra thick] (HOLTFF2) -- (HOL2);
+  \draw [-to,black,ultra thick] (HOL2) -- (theorem);
+\end{tikzpicture}
+
+\subsection{Expériences}
+\label{sec:experiences:experiences}
+
+\subsubsection{Software, hardware et tests}
+Les tests ont été effectués avec \beagle (version $0.7$) et \holfour (version mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive. 
+Nous avons imposé un time out de 15 secondes par but à Beagle.
+ 
+Lors de la construction de \holfour, certains buts sont résolus par la
+tactique \metistac. La plupart de ces buts ne font intervenir que du
+raisonnement propositionnel, mais certains nécessitent de le combiner
+avec un raisonnement arithmétique, auquel cas les lemmes arithmétiques à
+utiliser sont fournis à \metistac. Pour les expériences, nous avons
+utilisé \beagletac sur $271$ de ces buts, sans donner aucun lemme
+arithmétique.
+
+
+\subsubsection{Résultats}
+
+\todo Temps de calcul, nombre de buts résolus\dots avec \metistac et
+avec \beagletac. Conclusion sur l'efficacité comparée de \beagletac et
+\metistac, puis celle de \beagle et \metis.
+
+
+
+\subsubsection{Impact de la monomorphisation}
 
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
@@ -16,10 +80,10 @@ Avant monomorphisation & Après monomorphisation \\
 \begin{tikzpicture}[scale=1.5]
     \slice{0/100*360}
           {70/100*360}
-          {70\%}{insatisfaisable}{green}
+          {70\%}{insatisfiable}{green}
     \slice{70/100*360}
           {84/100*360}
-          {14\%}{satisfaisable}{red}      
+          {14\%}{satisfiable}{red}      
     \slice{84/100*360}
           {91/100*360}
           {7\%}{inconnu}{red}
@@ -34,10 +98,10 @@ Avant monomorphisation & Après monomorphisation \\
 \begin{tikzpicture}[scale=1.5]
     \slice{0/100*360}
           {80/100*360}
-          {80\%}{insatisfaisable}{green}
+          {80\%}{insatisfiable}{green}
     \slice{80/100*360}
           {81/100*360}
-          {1\%}{satisfaisable}{red}  
+          {1\%}{satisfiable}{red}  
     \slice{81/100*360}
           {86/100*360}
           {5\%}{inconnu, yshift=6}{red}   
@@ -65,6 +129,7 @@ x tick label style={rotate=45,anchor=east},]
 \end{tikzpicture}
 
 
+<<<<<<< HEAD
 \subsection{Efficacité de \beagle}
 A travers ses exemples, il est difficile de juger de la qualité de \beagle
 face à \metis puisque \metis résout l'ensemble de ses buts rapidement.
@@ -100,5 +165,13 @@ x tick label style={rotate=45,anchor=east}]
 \hline
 \end{tabularx}
 
-De plus \beagle combine raisonnement du premier ordre et l'arithmétique, ce qui grâce à notre traduction permet à \beagletac de résoudre des problèmes combinant ordre supérieur et arithmétique.
+
+\subsubsection{Expressivité}
+
+Grâce à notre traduction, \beagletac permet de résoudre des problèmes
+combinant d'ordre supérieur avec arithmétique, lorsque le raisonnement
+propositionnel est du premier ordre. Cette tactique est donc plus
+expressive que \metistac, puisqu'il n'est pas besoin de fournir les
+lemmes arithmétiques utilisés.
+
 

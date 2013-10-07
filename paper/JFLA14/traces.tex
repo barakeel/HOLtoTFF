@@ -1,18 +1,33 @@
-\section{Une première vérification des preuves \tff}
+\section{Vérification des preuves \tff}
+\label{sec:traces}
 %Les travaux présentés dans cette partie sont en cours de développement.
+
+Jusque ici, le prouveur externe est utilisé par \holfour comme un
+oracle: s'il résout le problème traduit, celui-ci est ajouté à \holfour
+comme un axiome. Nous n'avons donc aucune garantie que son raisonnement,
+et donc l'axiome ajouté, sont corrects.
+
+Pour utiliser des prouveurs externes sans compromettre la correction de
+\holfour, nous utilisons l'approche \emph{sceptique} consistant à
+vérifier en \holfour les traces éventuellement générées par ces
+prouveurs. Pour conserver la généricité, nous vérifiions des traces
+fournies dans le format \tff.
+
+Outre offrir plus de garanties à \holfour, la vérification de traces
+\tff peut être utilisés pour garantir les résultats donnés par des
+prouveurs du premier ordre lors d'autres utilisations.
+
 
 \subsection{Vérification des preuves}
 
 \subsubsection{Le lecteur}
 Le lecteur du vérificateur peut actuellement lire des preuves dont les étapes sont des clauses au format \tff dont la numération respecte la convention \tff pour les \textit{split}. Les dictionnaires injectifs pour les variables,constantes et types produit par l'impression du problème sont utilisés pour lire le fichier preuve au format \tff. En résumé, le lecteur accepte seulement des fichiers preuves, contenant seulement des clauses, dont le fichier problème a été créé par \holfour.
 
-\subsubsection{La reconstruction de la preuve}
+\subsubsection{Le rejouage de la preuve}
 Les tactiques \metistac et \coopertac (une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger)
 sont utilisés conjointement pour rejouer les étapes de la preuve. 
 Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grace à la numérotation des clauses.
 
-\subsubsection{Objectifs}
-L'objectif principal du vérificateur de preuve est de prouver le problème intialement posé dans HOL4 de façon à ce que le théorème prouvé puisse etre réutilisé comme partie d'une preuve en HOL4. Son objectif secondaire est de vérifier la validité des preuves produites par le prouveur appelé par HOL4.
 
 \subsection{Preuve de correction}
 \begin{thm}(Correction)
