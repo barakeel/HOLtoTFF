@@ -1,4 +1,4 @@
-structure blibClauseset :> blibClauseset =
+structure blibClauseset (*:> blibClauseset*) =
 struct
 
 open HolKernel Abbrev boolLib 
@@ -6,23 +6,6 @@ open HolKernel Abbrev boolLib
      blibBtools blibDatatype 
      blibSyntax blibBrule 
      blibExtractvar blibExtracttype blibFreshvar
-
-(*
-load "numSyntax";open numSyntax;
-load "intSyntax";open intSyntax;
-load "int_arithTheory";open int_arithTheory; 
-load "integerTheory";open integerTheory;
-load "arithmeticTheory";open arithmeticTheory;
-load "blibBtools";open blibBtools;
-load "blibDatatype";open blibDatatype;
-load "blibSyntax";open blibSyntax;
-load "blibBrule";open blibBrule;
-load "blibExtractvar";open blibExtractvar;
-load "blibFreshvar";open blibFreshvar;
-load "blibClauseset"; open blibClauseset;
-*)
-
-
 
 (* FORALL_CONJUNCTS_CONV *)
 fun forall_conjuncts_conv_w term = 
@@ -107,7 +90,7 @@ fun bool_bv_conv term =
 val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     
 *)
 
-(* INTEGER TRANSLATION *)
+(* NUMERAL TO INTEGER TRANSLATION *)
 (* preprocessing *)
 fun ORIENT_NUM_INEQ_CONV term =
   (
@@ -134,9 +117,7 @@ fun num_to_int arg =
 fun inj_fun_def term usedv =
   let val (op1,argl) = strip_comb term in
   let val argtyl1 = map type_of argl in 
-  let val namel = 
-    create_newnamel_aux "x" (length argl) (map name_of usedv) 
-  in  
+  let val namel = mk_newnamel "x" (length argl) (map name_of usedv) in  
   let val argl1 = list_mk_var (namel,argtyl1) in
   let val t1 = if has_numty term 
                then mk_comb (int_injection,list_mk_comb (op1,argl1)) 
@@ -144,7 +125,7 @@ fun inj_fun_def term usedv =
   in
   let val argtyl2 = map type_num_to_int argtyl1 in
   let val opty2 = mk_funtype argtyl2 (type_num_to_int (type_of term)) in
-  let val op2 = create_newvar_aux (mk_var (name_of op1, opty2)) usedv in
+  let val op2 = mk_newvar (mk_var (name_of op1, opty2)) usedv in
   let val argl2 = map num_to_int argl1 in
   let val t2 = list_mk_comb (op2,argl2) in
     list_mk_forall (argl1, mk_eq (t1,t2))
@@ -182,9 +163,12 @@ fun NUM_INT_FUN_CONV_SUB usedv term =
     end
   else
     case nodeconst term of
-        Eq => let val (t1,t2) = dest_eq term in
-               SYM (SPECL [t1,t2] INT_INJ)    
-              end
+        Eq => if has_numty (lhs term)
+              then
+                let val (t1,t2) = dest_eq term in
+                  SYM (SPECL [t1,t2] INT_INJ)    
+                end
+              else raise UNCHANGED
       | Less => let val (t1,t2) = numSyntax.dest_less term in
                  SYM (SPECL [t1,t2] INT_LE) 
                 end
@@ -221,10 +205,11 @@ fun num_int_fun goal =
   
 
 (* 
-load "blibTactic"; open blibTactic;
 show_assums := true;
 val t1 = ``!z:num. f z h = (0:num) + (x:num)``;
 val t2 = ``(x:num) + (y:num) = 0``;
+val term = ``(x:int) + (y:int) = 0``;
+val usedv = all_var term;
 val goal : goal = ([t1,t2],F);
 val thm = NUM_INT_FUN_CONV (all_var term) term;
 val revextdef = hd (hyp thm);
@@ -240,7 +225,7 @@ fun NUM_INT_FORALL_CONV_FST term =
     if type_of var = ``:num``
     then
       let val th1 = INT_NUM_FORALL in
-      let val newvar = create_newvar (mk_var ("y",``:int``)) term in
+      let val newvar = mk_newvar (mk_var ("y",``:int``)) (all_var term) in
       let val t1 = mk_comb (int_injection,var) in
       let val s = [t1 |-> newvar] in
       let val preabs = subst s t in
@@ -268,7 +253,7 @@ fun NUM_INT_FORALL_CONV term =
 
 fun intvar_def i term = 
   let val newi0 = mk_var (name_of (rand i),``:int``) in
-  let val newi = create_newvar newi0 term in
+  let val newi = mk_newvar newi0 (all_var term) in
     mk_eq (i,newi)
   end end
  
@@ -292,9 +277,6 @@ fun REMOVE_INT_INJECTION_CONV  term =
 
 (*
 val term = ``∀x. &x + 2 * &y + &z = 0``;
-val i = ``&(y:num)``; val t = ``&(y:num)``;
-int_var_conv term;
-(int_var_conv THENC NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV) term;
 *)
 fun numfun_test revextdef =
   let val (bvl,eqt) = strip_forall revextdef in
@@ -307,17 +289,45 @@ fun numfun_axiom revextdef =
   let val (bvl,eqt) = strip_forall revextdef in
   let val (oper,arg) = dest_comb (lhs eqt) in
   let val th1 = ASSUME revextdef in
-  let val eqth1 = STRIP_QUANT_CONV SYM_CONV revextdef in  
+  let val eqth1 = (QCONV (STRIP_QUANT_CONV SYM_CONV)) revextdef in  
   let val th2 = EQ_MP eqth1 th1 in
   let val axiom1 = INT_POS in
   let val th3 = SPEC arg axiom1 in
   let val th4 = GENL bvl (SUBS [SYM (SPEC_ALL th2)] th3) in
-  let val th5 = (NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV)
+  let val th5 = (QCONV (NUM_INT_FORALL_CONV THENC normalForms.CNF_CONV))
                 (concl th4) 
   in
   let val th6 = EQ_MP th5 th4 in
       th6
   end end end end end end end end end end
+
+fun num_int_aux usedv term =
+  let val eqth1 = (QCONV (ORIENT_NUM_INEQ_CONV THENC NUM_INT_FUN_CONV usedv)) term in
+  let val revextdefl = hyp eqth1 in
+  let val axioml = map numfun_axiom revextdefl in
+  let val t1 = rhs (concl eqth1) in
+  let val eqth2 = (QCONV REMOVE_INT_INJECTION_CONV) t1 in  
+  let val t2 = rhs (concl eqth2) in
+    t2 :: map concl axioml
+  end end end end end end
+
+fun num_int goal =
+  let val usedv = all_var_goal goal in
+  let val hypl = fst goal in
+  let val newhypl = List.concat (map (num_int_aux usedv) hypl) in
+    (newhypl,snd goal)
+  end end end
+  
+ (* 
+ val goal = ([``!x.x + 2 = (0: num)``, ``g (f x:num):num``],F); 
+ val goal = ([``!x.x + 2 = (0: int)``, ``g (f x:num):num``],F); 
+ val term = ``!x.x + 2 = (0: int)``;
+ val term =  ``g (f x:num):num``;
+
+ val usedv = all_var term;
+fun num_int_val =
+fun NUM_INT_TAC =
+*)
 
 
 (* test 

@@ -6,11 +6,36 @@ A mettre quelque part (Où trouver le code source?)
 
 \subsection{Présentation}
 
+\subsection{Ordre de la traduction et de l'impression}
+
+\begin{itemize}    
+  \item Monomorphisation: cette étape aurait pu \^etre effectuée à n'importe quel moment mais la faire en premier rend le programme plus efficace \cite{MengP08}.
+  \item Négation de la conclusion (preuve par l'absurde)
+  \item Mise sous forme normale conjonctive: pour réaliser cette étape, la fonction \textsf{CNF$\_$CONV} codé par Joe Hurd en Octobre 2001 a été utilisée.
+  \item $\lambda$-lifting: L'élimination des abstractions a été faite de la m\^eme manière dans [ref] et par utilisation des combinateurs dans [ref]  . 
+  \item Elimination des arguments booléens qui ne sont pas des variables:
+  Le type booléen $\$o$ étant réservé au prédicats, on remplace les arguments de types booléens par des variables. Ces variables seront imprimées avec un nouveau type $bool$.
+  [ref]   
+  \item Mise sous forme d'un ensemble de clauses     
+  \item Elimination de l'ordre supérieur.
+  Cette étape convertit toutes les fonctions en arguments si le problème est de l'ordre supérieur. Nous avons choisi de la faire presque en dernier pour limiter le nombre de problème considérée comme étant de l'ordre supérieur ($\exists f.\ \forall x.\ f\ x = 0$ ne sera pas une formule d'ordre supérieur). De plus, si elle est effectuée, nous conservons les constantes arithmétiques comme des fonctions afin que \beagle puisse les reconna\^itre. Des descriptions plus précises de cette étape peuvent \^etre trouvées dans [ref]
+
+  \item Instanciation des variables booléennes liées.
+  \\Cette étape a été ajoutée car \beagle boucle sur les formules du type $\forall x:bool,\ x = T \vee x = F$.
+  \item Traduction des variables de type $num$(entier positif) en des variables de type $int$(entier). Traduction des fonctions prenant en arguments des numéraux en des fonctions prenant en argument des entiers
+  \\Cette étape est nécessaire car le format TFF n'a pas de type numeral.
+\end{itemize}  
+
+
 \begin{itemize}
-\item fonctionnement de la traduction
-\item lien vers des papiers expliquant les étapes qui sont déjà dans la
+    \item Impression
+    \subitem Variables ou constantes.  
+    \subitem Types.
+    \subitem True and false constants.
+    \subitem Non-linear integer arithmetic.
+lien vers des papiers expliquant les étapes qui sont déjà dans la
   littérature
-\end{itemize}
+\end{itemize}  
 
 \subsection{Preuve de correction}
 
@@ -26,5 +51,230 @@ A mettre quelque part (Où trouver le code source?)
 \label{sec:traduction:nouveautes}
 
 \subsubsection{Monomorphisation}
+Cette étape consiste à instancier les théorèmes contenant des types polymorphiques par d'autres types. Cela est nécessaire car le format \tff n'a pas de types polymorphiques.
+  
+\begin{example}
+Soit un problème consitué d'un théorème $!x:a.\ {\color{green}C}\ x\ x$ et d'un but ${\color{blue}C} \ 42\ 42$. Si nous intancions le théorème avec la substitution $[a \mapsto num]$, le but sera aisément prouvable.
+Nous cherchons donc instancier le type de la constante ${\color{green}C} : a \rightarrow a \rightarrow bool$ de tel sorte qu'il soit égal au type de la constante du m\^eme nom ${\color{blue}C} : num \rightarrow num \rightarrow bool$ et d'appliquer la substitution sous-jacente au théorème.
+\end{example}
+ 
+\begin{remark}
+Les types polymorphiques contenus dans le but ne sont pas instanciables.
+\end{remark} 
+  
+Le raisonnement décrit dans l'exemple nous permet de limiter ainsi le nombre d'instanciation possible ainsi de diminuer la largeur du champ de recherche. Nous rappelons que cette étape est incomplète car finie.[ref]
 
+
+\subsubsection{Graphe de dépendance}
+Dans cette partie, nous présentons une représentation théorique de notre implémentation de la monomorphisation.
+\vspace{2mm}
+
+\iffalse
+\noindent For every problem, a dependency graph can be defined. 
+\begin{mydef} (Dependency graph)
+\begin{enumerate}
+  \item [-] Nodes are constants in the theorem list or in the goal. Two same constants are represented by different nodes if they are in different theorems or one is in the goal and the other is not.
+  \item [-] {\color{blue}Substitution} directed links connect two different constants that verify this properties: 
+    \subitem The initial one does not belong to the goal.
+    \subitem They have the same name.
+    \subitem The type of the destination is a type instance of the type of the origin. 
+  \item [-] {\color{green}Binding} undirected links connect two constants that verify this properties: 
+    \subitem They are from the same theorem.
+    \subitem They share a common polymorphic type.    
+\end{enumerate}    
+Each substitution links infers a substitution. When there is no ambiguity, we will identify the link and the substitution.
+\end{mydef}
+
+
+\begin{remark}
+When drawing a dependency graph or its supergraph, we will draw  constants from the same theorem (or goal) in the same row.
+\end{remark}
+
+\noindent \textit{Example of a dependency graph.} 
+\begin{center}  
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\begin{mydef} (A substitution transformation)
+The substitution transformation $\mathcal{T}_s$ of a dependency graph $G$ for a substitution link $\sigma$ from $c$ to $c'$, is defined by:
+\[\mathcal{T}_s(G) = G \cup \sigma(c) \]
+where the created image stays in the same theorem.
+\end{mydef}
+
+\noindent \textit{New dependency graph using the right substitution link as a substitution transformation.}
+
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
+  \node [cloud, fill=white, right of=c12,node distance = 3cm] (c13) {D: num};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [-to,blue,ultra thick] (c13) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\begin{mydef} (A binding transformation)
+The binding transformation $\mathcal{T}_b$ of a graph $G$, for a binding link from $c$ to $c'$ and a substitution link $\sigma$ from $c'$ to $c''$, is defined by:
+\[\mathcal{T}_b(G) = G \cup \sigma(c) \]
+where the created image stays in the same theorem.
+\end{mydef}
+\noindent \textit{New dependency graph using the binding link and the right substitution link as a binding transformation.}
+
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
+  \node [cloud, fill=white, right of=c12,node distance = 3cm] (c13) {C: num};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\begin{mydef} (A graph transformation)
+The graph transformation $\mathcal{T}$ is defined by applying all possible substitution transformations and binding transformations simultaneously to a graph $G$. 
+\end{mydef}
+
+\noindent \textit{New supergraph using the graph transformation}
+\begin{center}  
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {C: a,{\color{blue} b},{\color{green} num}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} num}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\begin{mydef} (Supergraph of a dependency graph)
+Let $G$ be a dependency and $G_i$ the dependency graph created after $i$ transformation $\mathcal{T}$. The supergraph $SG_i$ of $G_i$ is defined by:
+\begin{enumerate}
+  \item [-] Nodes are sets composed of a node in the initial graph $G$ (head node) and all its derived nodes in $G_i$ (tail nodes). They will be called a supernodes.
+  \item [-] {\color{blue}Substitution} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one  {\color{blue}substitution} link, between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
+  \item [-] {\color{green}Binding} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one {\color{green}binding} link , between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
+\end{enumerate}    
+\end{mydef}
+
+\begin{mydef} (Redundancy)
+\\A substitution link is redundant if it has the same origin and induce the same substitution as a substitution link inside the supernode of its origin. From this point, we will not draw redundant substitution link.
+\end{mydef}
+\noindent \textit{Supergraph at step 1 with a redundant substitution link.}
+\\A substitution link inside the super node is exceptionally represented.
+
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  % Place nodes
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {A: a, {\color{red}num}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: num};
+  \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
+  \draw[-to,blue,ultra thick](c11) to [in=40,out=130] (c11);
+\end{tikzpicture}
+\end{center}
+
+\begin{mydef} (Directable)
+\\A graph $G$ is directable if every binding link $b$ can be oriented, i.e.  these two things does not happen:
+\\ - The two nodes that $b$ connects are origins of substitution links.
+\\ - The two nodes that $b$ connects are destinations of substitution links.
+\end{mydef}
+
+\begin{mydef} (Partial order induced by a directable graph)
+\\Let $G$ be a directable dependency graph with no loop. We will say that a node $n_1$ is greater than another node $n_2$, if there is a path from $n_1$ to $n_2$. This order induces an order over supernodes considering only their head.
+\end{mydef}
+
+\begin{thm} (Loop theorem)
+\\There exists a dependency graph $G$ for which the transformation $\mathcal{T}$ does not find a fix point.
+\end{thm}
+
+\noindent \textit{Initial supergraph.}
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  % Place nodes
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {A: a};
+  \node [cloud, fill=white, below of=c11,node distance=1cm] (c12) 
+  {A: a $\rightarrow$ n};
+  \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\noindent \textit{Step 1.}
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  % Place nodes
+  \node [cloud, fill=white,node distance = 2cm] (c11) 
+  {A: a, {\color{red} a $\rightarrow$ n}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: a $\rightarrow$ n, {\color{red} (a $\rightarrow$ n) $\rightarrow$ n} };
+  \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\noindent \textit{Step 2.}
+
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  % Place nodes
+  \node [cloud, fill=white,node distance = 1.2cm] (c11) 
+  {A: a, 
+  {\color{red} a $\rightarrow$ n},
+  {\color{orange} (a $\rightarrow$ n) $\rightarrow$ n}
+  };
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) 
+  {A: a $\rightarrow$ n,
+  {\color{red} (a $\rightarrow$ n) $\rightarrow$ n},
+  {\color{orange} ((a $\rightarrow$ n) $\rightarrow$ n) $\rightarrow$ n}
+  };
+  \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+
+\begin{proof}(Idea)
+Let us take the previous example and induct on the number of arrows in (a $\rightarrow \ldots$ n) $\rightarrow$ n.
+\end{proof}
+\pagebreak
+\noindent Here we present two conjectures about finding a fix point: 
+\begin{thm}(Conjecture)
+\\Let $G$ be a directable graph.
+\\Let $p$ the length of the longest path in $G$. (Dependency links have length 0) 
+\\Let $G_p = \mathcal{T}^g(G)$.
+\\$G_p$ is a fix point if:
+\\- $G_p$ has no loop.
+\\- $SG_p$ has no substitutions arrows.
+\end{thm} 
+\begin{thm}(Conjecture)
+\\Let $G$ be a directable graph.
+\\Let $p$ the length of the longest path in $G$. (Dependency links have length 0) 
+\\Let $G_p = \mathcal{T}^g(G)$.
+\\If $G_p$ is not a fix point then forall $i>0$, $G_i$ is not a fix point.
+\end{thm} 
+
+\noindent \textit{Conclusion.}
+\\From each constant in a theorem, a list of substitutions can be extracted from the dependency graph. They are combined in every possible way to create a list of substitutions for the theorem. Eventually, each theorem in the problem is instantiated with all its possible substitutions.
+\fi
+
+\subsubsection{Impression des types}
 

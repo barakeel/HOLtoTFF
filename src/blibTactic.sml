@@ -190,12 +190,12 @@ fun ADD_BOOL_AXIOM_TAC goal =
 
 (* ADD_HIGHER_ORDER_TAC *)
 fun add_higher_order goal = 
-  let val appname = list_create_newname "App" (fst goal) in
+  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
     conv_hyp (QCONV (app_conv appname)) goal
   end      
   
 fun add_higher_order_val goal thm =
-  let val appname = list_create_newname "App" (fst goal) in
+  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
   let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
   let val appl = erase_double_aconv (List.concat (map hyp eqthl)) in
   let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in

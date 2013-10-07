@@ -10,6 +10,7 @@ fun FRESHVAR_ERR function message =
           origin_function = function,
           message = message}
 
+(* create namel and varl *)
 fun create_intl_aux size = 
   case size of
     0 => []
@@ -19,7 +20,7 @@ fun create_intl size = rev (create_intl_aux size)
 
 fun prepend str1 str2 = str1 ^ str2
 
-fun create_namel str size =
+fun mk_namel str size =
   let val intstrl = map Int.toString (create_intl size) in
     map (prepend str) intstrl
   end
@@ -27,7 +28,7 @@ fun create_namel str size =
 fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
 
 (* create a fresh name *)
-fun create_newname_aux name used =    
+fun mk_newname name used =    
   let val newname = ref name in
   let val n = ref 0 in
     (
@@ -41,57 +42,39 @@ fun create_newname_aux name used =
     )
   end end
 
-fun create_newname name term = 
-  create_newname_aux name (map name_of (all_var term)) 
- 
-fun list_create_newname name terml = 
-  create_newname_aux name (map name_of (all_varl terml)) 
-    
-fun create_newname_thm name thm = 
-  create_newname_aux name (map name_of (all_var_thm thm))
-
-fun create_newnamel_aux name n used =
+fun mk_newnamel name n used =
   if n = 0 then []
   else if n < 0 then raise FRESHVAR_ERR "create_newnamel" "negative number"
   else 
-    let val newname = create_newname_aux name used in
-      newname :: create_newnamel_aux name (n-1) (newname :: used)
+    let val newname = mk_newname name used in
+      newname :: mk_newnamel name (n-1) (newname :: used)
     end
   
-fun create_newnamel name n term = 
-  create_newnamel_aux name n (map name_of (all_var term))
-    
 (* create a fresh variable *)
-fun create_newvar_aux var used = 
+fun mk_newvar var used = 
   let val ty = type_of var in
   let val name = fst (dest_var var) in
   let val n = ref 0 in
-  let val var = ref (mk_var (name,ty)) in
+  let val v = ref (mk_var (name,ty)) in
     (
-    while is_member (!var) used do
+    while is_member (!v) used do
       ( n := (!n) + 1;
-        var :=  mk_var (name ^ (Int.toString (!n)),ty) ) 
+        v :=  mk_var (name ^ (Int.toString (!n)),ty) ) 
     ;
-    (!var)
+    !v
     )    
   end end end end 
   
-fun create_newvar var term = create_newvar_aux var (all_var term)  
-fun create_newvar_thm var thm = create_newvar_aux var (all_var_thm thm)
-
-fun create_newvarl_aux varl used =
+fun mk_newvarl varl used =
   case varl of
     [] => []
-  | v :: m => let val newv = create_newvar_aux v used in
-                create_newvar_aux v used :: create_newvarl_aux m (v :: used)
-              end  
-
-fun create_newvarl varl term = create_newvarl_aux varl (all_var term)   
-fun create_newvarl_thm varl thm = create_newvarl_aux varl (all_var_thm thm)
+  | var :: m => let val newv = mk_newvar var used in
+                  newv :: mk_newvarl m (newv :: used)
+                end  
 
 (* dict *)
 fun add_newname (key,name) dict =
-  let val newname = create_newname_aux name (map snd dict) in
+  let val newname = mk_newname name (map snd dict) in
     add_entry (key,newname) dict
   end  
 

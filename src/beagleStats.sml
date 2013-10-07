@@ -2,8 +2,8 @@ structure beagleStats :> beagleStats =
 struct
 
 open HolKernel Abbrev boolLib
-     blibBtools blibDatatype
-     
+     blibBtools blibDatatype 
+  
 fun PRINTTOOLS_ERR function message =
   HOL_ERR{origin_structure = "tools",
 	        origin_function = function,
@@ -114,5 +114,7 @@ fun update_all_nb filename =
     | _ => reset_all_nb ()
   end
   handle _ => reset_all_nb ()  
+ 
+ 
   
 end

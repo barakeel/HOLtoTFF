@@ -292,7 +292,7 @@ fun fnum_axiom_w (f,arity) =
     then 
       let val namel = create_namel "x" (length argl) in   
       let val varl = list_mk_var (namel,argtyl) in
-      let val newvarl = create_newvarl varl f in
+      let val newvarl = mk_newvarl varl (all_var f) in
       let val numvarl = filter has_numty varl in
       let val axiomvar = if null numvarl then ASSUME T
                     else LIST_CONJ (map num_axiom numvarl) 
@@ -367,7 +367,7 @@ fun and_strip_bvl_forall_mp bvl term =
   let val th0 = ASSUME term in
   let val th1 = CONJUNCT1 th0 in
   let val th2 = CONJUNCT2 th0 in
-  let val newbvl = create_newvarl_thm bvl th0 in
+  let val newbvl = mk_newvarl bvl (all_var_thm th0) in
   let val th3 = SPECL newbvl th1 in 
   let val th4 = SPECL newbvl th2 in
   let val th5 = CONJ th3 th4 in
@@ -398,7 +398,7 @@ show_assums:= true;
 fun fun_conv_sub_w abs term =
   (* term *)
   let val ty = type_of abs in
-  let val newname = create_newname "f" term in
+  let val newname = mk_newname "f" (map name_of (all_var term)) in
   let val v = (mk_var (newname,ty)) in (* fresh var *)
   let val (bvl,t) = strip_abs abs in
   (* axiom *)
@@ -431,7 +431,7 @@ fun fun_conv_sub_w abs term =
   let val th37 = and_strip_bvl_forall_mp bvl (concl th36) in
   let val th38 = MP th37 th36 in
   
-  let val newbvl = create_newvarl_thm bvl th38 in
+  let val newbvl = mk_newvarl bvl (all_var_thm th38) in
   let val th39 = SPECL newbvl th38 in 
   let val th40 = CONJUNCT1 th39 in
   let val th41 = SYM (CONJUNCT2 th39) in

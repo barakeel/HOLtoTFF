@@ -29,7 +29,7 @@ datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs
 fun termstructure term =
   switchargerr term
     [
-    (is_numeral ,Numeral),
+    (numSyntax.is_numeral ,Numeral),
     (is_var     ,Var),
     (is_const   ,Const),
     (is_comb    ,Comb),
