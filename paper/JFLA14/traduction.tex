@@ -18,8 +18,7 @@ A mettre quelque part (Où trouver le code source?) (déjà mis dans l'intro)
   Le type booléen $\$o$ étant réservé au prédicats, on remplace les arguments de types booléens par des variables. Ces variables seront imprimées avec un nouveau type $bool$.
   [ref]   
   \item Mise sous forme d'un ensemble de clauses     
-  \item Elimination de l'ordre supérieur.
-  Cette étape convertit toutes les fonctions en arguments si le problème est de l'ordre supérieur. Nous avons choisi de la faire presque en dernier pour limiter le nombre de problème considérée comme étant de l'ordre supérieur ($\exists f.\ \forall x.\ f\ x = 0$ ne sera pas une formule d'ordre supérieur). De plus, si elle est effectuée, nous conservons les constantes arithmétiques comme des fonctions afin que \beagle puisse les reconna\^itre. Des descriptions plus précises de cette étape peuvent \^etre trouvées dans [ref]
+  \item Elimination de l'ordre supérieur: Cette étape convertit toutes les fonctions en arguments si le problème est de l'ordre supérieur. Nous avons choisi de la faire presque en dernier pour limiter le nombre de problème considérée comme étant de l'ordre supérieur ($\exists f.\ \forall x.\ f\ x = 0$ ne sera pas une formule d'ordre supérieur). De plus, si elle est effectuée, nous conservons les constantes arithmétiques comme des fonctions afin que \beagle puisse les reconna\^itre. Des descriptions plus précises de cette étape peuvent \^etre trouvées dans [ref]
 
   \item Instanciation des variables booléennes liées.
   \\Cette étape a été ajoutée car \beagle boucle sur les formules du type $\forall x:bool,\ x = T \vee x = F$.
