@@ -1,7 +1,7 @@
 structure blibTffsyntax :> blibTffsyntax =
 struct
 
-open HolKernel Abbrev boolLib numSyntax
+open HolKernel Abbrev boolLib intSyntax
      blibBtools blibDatatype
      blibSyntax blibExtracttype
      
@@ -9,8 +9,6 @@ fun TFFSYNTAX_ERR function message =
   HOL_ERR {origin_structure = "blibTffsyntax",
            origin_function = function,
            message = message}
-
-
 
 (* TEST *)
 (* name supported by the tptp for a free variable or a type *)              
@@ -30,7 +28,25 @@ fun is_upperword str =
 (* name for positive integers *)
 fun is_numword str = success string_to_int str
   
-  
+(* utilise les numéraux  ou les entiers*)
+val dcprintdict = [
+   (Plusn,"$sum"),
+   (Minusn,"$difference"),
+   (Multn,"$product"),
+   (Lessn,"$less"),
+   (Leqn,"$lesseq"),
+   (Greatern,"$greater"),
+   (Geqn,"$greatereq"),
+   (Plusi,"$sum"),
+   (Minusi,"$difference"),
+   (Multi,"$product"),
+   (Lessi,"$less"),
+   (Leqi,"$lesseq"),
+   (Greateri,"$greater"),
+   (Geqi,"$greatereq"),
+   (Negated,"$uminus")
+   ]
+
 val rdcdict = [
   ("$sum",plus_tm),
   ("$difference",minus_tm),
@@ -39,6 +55,7 @@ val rdcdict = [
   ("$lesseq",leq_tm),
   ("$greater",greater_tm),
   ("$greatereq",geq_tm)
+  ("$uminus",negate_tm)
   ]  
 
 (* defined names *)
@@ -55,18 +72,6 @@ fun name_tff str var =
   
   
 (* DEFINED TFF CONSTANTS *)
-val dcdict = [
-   (Plus,"$sum"),
-   (Minus,"$difference"),
-   (Mult,"$product"),
-   (Less,"$less"),
-   (Leq,"$lesseq"),
-   (Greater,"$greater"),
-   (Geq,"$greatereq")
-   ]
-
-
-  
 val dcl = [plus_tm,minus_tm,mult_tm,less_tm,leq_tm,greater_tm,geq_tm]
 
 fun is_dc var = 

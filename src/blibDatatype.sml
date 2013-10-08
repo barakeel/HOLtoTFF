@@ -24,12 +24,13 @@ fun typecat holtype =
                | ("prod",_) => Prodtype
                | _ => Nodetype
 
-datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
+datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
 
 fun termstructure term =
   switchargerr term
     [
     (numSyntax.is_numeral ,Numeral),
+    (intSyntax.is_int_literal , Integer),
     (is_var     ,Var),
     (is_const   ,Const),
     (is_comb    ,Comb),
@@ -37,21 +38,33 @@ fun termstructure term =
     ]
     (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
-datatype NODECONST = Eq | Plus | Minus | Mult | Less | Greater | Geq | Leq | Newnodeconst
+datatype TERMARITH = 
+  Eq | 
+  Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
+  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated
+  Newtermarith
 
-fun nodeconst term =  
+fun termarith term =  
   switcharg term
     [
     (is_eq       ,Eq), 
-    (is_plus     ,Plus),
-    (is_minus    ,Minus),
-    (is_mult     ,Mult),
-    (is_less     ,Less),
-    (is_greater  ,Greater),
-    (is_geq      ,Geq),
-    (is_leq      ,Leq)
+    (numSyntax.is_plus     ,Plusn),
+    (numSyntax.is_minus    ,Minusn),
+    (numSyntax.is_mult     ,Multn),
+    (numSyntax.is_less     ,Lessn),
+    (numSyntax.is_greater  ,Greatern),
+    (numSyntax.is_geq      ,Geqn),
+    (numSyntax.is_leq      ,Leqn)
+    (intSyntax.is_plus     ,Plusi),
+    (intSyntax.is_minus    ,Minusi),
+    (intSyntax.is_mult     ,Multi),
+    (intSyntax.is_less     ,Lessi),
+    (intSyntax.is_greater  ,Greateri),
+    (intSyntax.is_geq      ,Geqi),
+    (intSyntax.is_leq      ,Leqi),
+    (intSyntax.is_negated  ,Negated)
     ]   
-    Newnodeconst
+    Newtermarith
 
 datatype LEAFCONST = True | False | Newleafconst
 

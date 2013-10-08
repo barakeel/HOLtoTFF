@@ -2,7 +2,7 @@
 \label{sec:traces}
 %Les travaux présentés dans cette partie sont en cours de développement.
 
-Jusque ici, le prouveur externe est utilisé par \holfour comme un
+Jusqu'ici, le prouveur externe est utilisé par \holfour comme un
 oracle: s'il résout le problème traduit, celui-ci est ajouté à \holfour
 comme un axiome. Nous n'avons donc aucune garantie que son raisonnement,
 et donc l'axiome ajouté, sont corrects.
@@ -10,7 +10,7 @@ et donc l'axiome ajouté, sont corrects.
 Pour utiliser des prouveurs externes sans compromettre la correction de
 \holfour, nous utilisons l'approche \emph{sceptique} consistant à
 vérifier en \holfour les traces éventuellement générées par ces
-prouveurs. Pour conserver la généricité, nous vérifiions des traces
+prouveurs. Pour conserver la généricité, nous vérifions des traces
 fournies dans le format \tff.
 
 Outre offrir plus de garanties à \holfour, la vérification de traces
@@ -37,19 +37,21 @@ Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte gr
 \begin{proof}(Idée de la preuve)
 \\La preuve de ce théorème ce décompose en deux parties la preuve de la traduction et la preuve du rejouage.
 \\La traduction est correcte. [voir preuve de correction]
-\\Le rejouage est correcte: Chaque étape de la preuve est rejouée par \metistac ou \coopertac, il est nécessaire de montrer que \metistac est \coopertac sont correctes, ce qui a été fait dans les papiers suivants.
+\\Le rejouage est correcte: Chaque étape de la preuve est rejouée par \metistac ou \coopertac, il est nécessaire de montrer que \metistac est \coopertac sont correctes, ce qui a été fait dans les papiers suivants [ref].
 \end{proof}
 
 
 
 \subsection{Application à \beagle}
-\begin{itemize}
-\item génération de traces par Beagle (au niveau de la boucle entre
+
+\subsubsection{génération de traces par Beagle}
+
+
+ (au niveau de la boucle entre
   l'ancien ensemble de clauses et le nouveau)
 
-\item optimisation
+ optimisation
 
-\item quelques expériences
+quelques expériences
 
-\end{itemize}
 

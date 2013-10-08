@@ -10,49 +10,14 @@ version plus ancienne) ainsi que la théorie détaillée de \beagle peuvent êtr
 \subsection{La tactique \beagletac}
 \label{sec:experiences:beagletac}
 
-Voici un diagramme représentant l'ensemble des étapes de \beagletac:
 
-\begin{tikzpicture}[node distance = 2cm, auto]
-  % Place nodes
-  \node [cloud] (problem) {problème};
-  \node [block, right of=problem,  node distance=3cm] (HOL1) 
-  {traduction};
-  \node [block, right of=HOL1,  node distance=3cm] (HOLTFF1) 
-  {impression};
-  \node [block, right of=HOLTFF1, node distance=3cm] (TFF1) 
-  {fichier problème};
-  \node [block, right of=TFF1, node distance=3cm, yshift = -1cm] (Beagle) 
-  {recherche de preuve};
-  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
-  {fichier preuve};  
-  \node [block, below of=HOLTFF1, node distance=2cm] (HOLTFF2) 
-  {lecture};
-  \node [block, below of=HOL1, node distance=2cm] (HOL2) 
-  {rejouage};
-  \node [cloud, below of=problem, node distance=2cm] (theorem) 
-  {théorème};
-  \node [label=HOL4, draw=black, ultra thick, 
-  fit=(problem) (theorem) (HOLTFF1) (HOL1) (HOL2)] {}; 
-  \node [label=TFF format interface, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
-  {}; 
-  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
-  % Draw edges
-  \draw [-to,black,ultra thick] (problem) -- (HOL1);
-  \draw [-to,black,ultra thick] (HOL1) -- (HOLTFF1);
-  \draw [-to,black,ultra thick] (HOLTFF1) -- (TFF1);
-  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
-  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
-  \draw [-to,black,ultra thick] (TFF2) -- (HOLTFF2);
-  \draw [-to,black,ultra thick] (HOLTFF2) -- (HOL2);
-  \draw [-to,black,ultra thick] (HOL2) -- (theorem);
-\end{tikzpicture}
 
 \subsection{Expériences}
 \label{sec:experiences:experiences}
 
 \subsubsection{Software, hardware et tests}
 Les tests ont été effectués avec \beagle (version $0.7$) et \holfour (version mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive. 
-Nous avons imposé un time out de 15 secondes par but à Beagle.
+Nous avons imposé un time out de 15 secondes par but à \beagle.
  
 Lors de la construction de \holfour, certains buts sont résolus par la
 tactique \metistac. La plupart de ces buts ne font intervenir que du

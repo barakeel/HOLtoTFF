@@ -67,7 +67,7 @@ problèmes concrets.
   {traduction};
   \node [block, right of=HOL1, node distance=3cm] (TFF1)
   {but};
-  \node [block, right of=TFF1, node distance=3cm] (Beagle)
+  \node [block, right of=TFF1, node distance=3cm, yshift=-1cm] (Beagle)
   {preuve automatique};
   \node [block, below of=TFF1, node distance=2cm] (TFF2)
   {trace de preuve};
@@ -87,7 +87,7 @@ problèmes concrets.
   \draw [-to,black,ultra thick,dashed] (Beagle) -- (TFF2);
   \draw [-to,black,ultra thick,dashed] (TFF2) -- (HOL2);
   \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
-  \draw [-to,black,ultra thick] (Beagle.south) to       [out=270,in=270] (theorem.south);
+  \draw [-to,black,ultra thick] (Beagle.south) to       [out=230,in=310] (theorem.south);
 \end{tikzpicture}
 \caption{La tactique \beagletac: la version courante utilise \beagle
   comme un oracle (flèches pleines), mais ses traces peuvent être
