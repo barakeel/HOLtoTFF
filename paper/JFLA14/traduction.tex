@@ -21,9 +21,11 @@ A mettre quelque part (Où trouver le code source?) (déjà mis dans l'intro)
   \item Elimination de l'ordre supérieur: Cette étape convertit toutes les fonctions en arguments si le problème est de l'ordre supérieur. Nous avons choisi de la faire presque en dernier pour limiter le nombre de problème considérée comme étant de l'ordre supérieur ($\exists f.\ \forall x.\ f\ x = 0$ ne sera pas une formule d'ordre supérieur). De plus, si elle est effectuée, nous conservons les constantes arithmétiques comme des fonctions afin que \beagle puisse les reconna\^itre. Des descriptions plus précises de cette étape peuvent \^etre trouvées dans [ref]
 
   \item Instanciation des variables booléennes liées.
-  \\Cette étape a été ajoutée car \beagle boucle sur les formules du type $\forall x:bool,\ x = T \vee x = F$.
+  
+Cette étape a été ajoutée car \beagle boucle sur les formules du type $\forall x:bool,\ x = T \vee x = F$.
   \item Traduction des variables de type $num$(entier positif) en des variables de type $int$(entier). Traduction des fonctions prenant en arguments des numéraux en des fonctions prenant en argument des entiers
-  \\Cette étape est nécessaire car le format TFF n'a pas de type numeral.
+  
+Cette étape est nécessaire car le format TFF n'a pas de type numeral.
 \end{itemize}  
 
 
@@ -40,11 +42,13 @@ lien vers des papiers expliquant les étapes qui sont déjà dans la
 \subsection{Preuve de correction}
 
 \begin{thm}(Correction de la traduction)
-\\Si le problème traduit est un théorème alors le problème dans sa forme original est un théorème.
+
+Si le problème traduit est un théorème alors le problème dans sa forme original est un théorème.
 \end{thm}
 
 \begin{proof}(Idée de la preuve)
-\\La traduction est correcte car chaque étape de la traduction est correcte [voir présentation de la traduction]. Cette affirmation est soutenue par l'expérience [voir expérience avec Beagle].
+
+La traduction est correcte car chaque étape de la traduction est correcte [voir présentation de la traduction]. Cette affirmation est soutenue par l'expérience [voir expérience avec Beagle].
 \end{proof}
 
 \subsection{Nouveaux aspects}
@@ -180,7 +184,8 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
 
 
 \begin{mydef} (Redondance) 
-\\Dans un supergraphe, une flèche de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une flèche de substitution à l'intérieur du supernoeud de son origine. A partir de ce moment, nous ne représenterons pas les flèches de substitutions redondantes.
+
+Dans un supergraphe, une flèche de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une flèche de substitution à l'intérieur du supernoeud de son origine. A partir de ce moment, nous ne représenterons pas les flèches de substitutions redondantes.
 \end{mydef}
 
 
@@ -199,12 +204,14 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
 \end{figure}
 
 \begin{thm} (Circuit)
-\\There exists a dependency graph $G$ for which the transformation $\mathcal{T}$ does not find a fix point.
+
+There exists a dependency graph $G$ for which the transformation $\mathcal{T}$ does not find a fix point.
 \end{thm}
 \begin{proof}(Contre-exemple)
 
 \begin{tabularx}{\textwidth}{ X X }
-\\\noindent \textit{Graphe initial.}
+
+\noindent \textit{Graphe initial.}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
@@ -252,7 +259,8 @@ La substitution [a $\rightarrow$ (a $\rightarrow$ n)] peut \^etre appliqué auta
 \end{proof}
 
 \begin{conjecture}
-\\Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
+
+Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
 \begin{itemize}
 \item Si $SG_p$ n'a pas de circuit interne à ses noeuds et n'a pas de flèches de substitutions non redondantes à l'extérieur de ses noeuds, alors $G_p$ est un point fixe pour $\mathcal{T}$. 
 \item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
