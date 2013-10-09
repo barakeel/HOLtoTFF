@@ -8,6 +8,7 @@ sig
   (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
+  val has_intty : term -> bool
   val is_var_or_const : term -> bool 
   val is_leaf : term -> bool
   (* quantifier *) 

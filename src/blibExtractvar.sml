@@ -13,6 +13,7 @@ fun EXTRACTVAR_ERR function message =
 fun get_varinfol2 term bvl =
   case termstructure term of
     Numeral => [((term,0),Numeralvar)]
+  | Integer => [((term,0),Integervar)]
   | Var => if is_member term bvl
            then [((term,0),Boundvar)] 
            else [((term,0),Freevar)]
@@ -42,6 +43,7 @@ fun get_varinfol2 term bvl =
              in
              case termstructure operator of
                Numeral => raise EXTRACTVAR_ERR "get_varinfol2" "operator is num"
+             | Integer => raise EXTRACTVAR_ERR "get_varinfol2" "operator is int"
              | Var =>  if is_member operator bvl
                        then ((operator,n),Boundvar) :: l
                        else ((operator,n),Freevar) :: l
@@ -80,6 +82,7 @@ fun erase_number l =
   case l of 
     [] => []
   | (_,Numeralvar) :: m => erase_number m 
+  | (_,Integervar) :: m => erase_number m 
   | a :: m =>  a :: erase_number m
 
 fun get_varinfol term = erase_number (erase_double (get_varinfol2 term [])) 

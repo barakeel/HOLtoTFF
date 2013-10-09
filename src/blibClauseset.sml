@@ -2,7 +2,7 @@ structure blibClauseset (*:> blibClauseset*) =
 struct
 
 open HolKernel Abbrev boolLib 
-     numSyntax intSyntax int_arithTheory arithmeticTheory integerTheory
+     numSyntax (* intSyntax int_arithTheory arithmeticTheory integerTheory *)
      blibBtools blibDatatype 
      blibSyntax blibBrule 
      blibExtractvar blibExtracttype blibFreshvar
@@ -89,7 +89,7 @@ fun bool_bv_conv term =
 (* test 
 val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     
 *)
-
+(*
 (* NUMERAL TO INTEGER TRANSLATION *)
 (* preprocessing *)
 fun ORIENT_NUM_INEQ_CONV term =
@@ -146,14 +146,14 @@ fun NUM_INT_FUN_CONV_SUB usedv term =
     let val t = rand term in
     if is_leaf t then raise UNCHANGED      
     else
-      case nodeconst t of
-        Plus => let val (t1,t2) = numSyntax.dest_plus t in
+      case termarith t of
+        Plusn => let val (t1,t2) = numSyntax.dest_plus t in
                   SYM (SPECL [t1,t2] INT_ADD)
                 end
-      | Minus => let val (t1,t2) = numSyntax.dest_minus t in
+      | Minusn => let val (t1,t2) = numSyntax.dest_minus t in
                    SPECL [t1,t2] INT_NUM_SUB
                  end
-      | Mult => let val (t1,t2) = numSyntax.dest_mult t in
+      | Multn => let val (t1,t2) = numSyntax.dest_mult t in
                   SYM (SPECL [t1,t2] INT_MUL)
                 end
       | _ => let val (_,argl) = strip_comb t in 
@@ -162,17 +162,17 @@ fun NUM_INT_FUN_CONV_SUB usedv term =
              end end
     end
   else
-    case nodeconst term of
+    case termarith term of
         Eq => if has_numty (lhs term)
               then
                 let val (t1,t2) = dest_eq term in
                   SYM (SPECL [t1,t2] INT_INJ)    
                 end
               else raise UNCHANGED
-      | Less => let val (t1,t2) = numSyntax.dest_less term in
+      | Lessn => let val (t1,t2) = numSyntax.dest_less term in
                  SYM (SPECL [t1,t2] INT_LE) 
                 end
-      | Leq => let val (t1,t2) = numSyntax.dest_leq term in
+      | Leqn => let val (t1,t2) = numSyntax.dest_leq term in
                 SYM (SPECL [t1,t2] INT_LT)
                end
       | _ => let val (operator,argl) = strip_comb term in
@@ -335,6 +335,7 @@ show_assums:=true;
 val revextdef = ``∀x x1. (& (f x x1)) = (f' (&x) x1 : int)``;
 *)
 
+*)
 
 
 end

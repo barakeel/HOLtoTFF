@@ -5,17 +5,21 @@ sig
 
   datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype |
                      Funtype | Prodtype | Nodetype
-  datatype NODECONST = Eq | Plus | Minus | Mult | Less | Greater | Geq | Leq |
-                       Newnodeconst
+  datatype TERMARITH = 
+  Eq | 
+  Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
+  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated |
+  Newtermarith
+  
   datatype LEAFCONST = True | False | Newleafconst
-  datatype TERMSTRUCTURE = Numeral | Var | Const | Comb | Abs  
+  datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
   datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
   
-  datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar 
+  datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar 
   
   val typecat : hol_type -> TYPECAT
   val termstructure : term -> TERMSTRUCTURE  
-  val nodeconst : term -> NODECONST
+  val termarith : term -> TERMARITH
   val leafconst : term -> LEAFCONST
   val connector : term -> CONNECTOR
 

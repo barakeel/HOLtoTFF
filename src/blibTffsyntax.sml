@@ -1,7 +1,7 @@
 structure blibTffsyntax :> blibTffsyntax =
 struct
 
-open HolKernel Abbrev boolLib intSyntax
+open HolKernel Abbrev boolLib
      blibBtools blibDatatype
      blibSyntax blibExtracttype
      
@@ -48,14 +48,16 @@ val dcprintdict = [
    ]
 
 val rdcdict = [
-  ("$sum",plus_tm),
-  ("$difference",minus_tm),
-  ("$product",mult_tm),
-  ("$less",less_tm),
-  ("$lesseq",leq_tm),
-  ("$greater",greater_tm),
-  ("$greatereq",geq_tm)
-  ("$uminus",negate_tm)
+(* 
+  ("$sum",intSyntax.plus_tm),
+  ("$difference",intSyntax.minus_tm),
+  ("$product",intSyntax.mult_tm),
+  ("$less",intSyntax.less_tm),
+  ("$lesseq",intSyntax.leq_tm),
+  ("$greater",intSyntax.great_tm),
+  ("$greatereq",intSyntax.geq_tm),
+  ("$uminus",intSyntax.negate_tm) 
+*)
   ]  
 
 (* defined names *)
@@ -67,12 +69,14 @@ fun name_tff str var =
     if is_alphanumor_ name then str ^ name else str
   end
   
-  
-  
-  
-  
+
 (* DEFINED TFF CONSTANTS *)
-val dcl = [plus_tm,minus_tm,mult_tm,less_tm,leq_tm,greater_tm,geq_tm]
+val dcl = [(*
+           plus_tm,minus_tm,mult_tm,less_tm,leq_tm,great_tm,geq_tm,negate_tm,
+           *)   
+           numSyntax.plus_tm,numSyntax.minus_tm,numSyntax.mult_tm,
+           numSyntax.less_tm,numSyntax.greater_tm,
+           numSyntax.geq_tm]
 
 fun is_dc var = 
   (is_member var dcl orelse name_of var = "=") handle _ => false
@@ -83,8 +87,7 @@ fun is_dca (term,arity) =
 fun is_dcaty ((term,arity),str) = is_dca (term,arity)
 
 (* non linear arithmetic hack *)
-val dcl2 = [plus_tm,minus_tm,less_tm,leq_tm,greater_tm,geq_tm]
-
+val dcl2 = substract dcl [(*mult_tm,*)numSyntax.mult_tm]  
 fun is_dc2 var = 
   is_member var dcl2 orelse name_of var = "=" handle _ => false
 

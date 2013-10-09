@@ -57,7 +57,13 @@ val nb_beagerr = ref (0,"Beagle err  ")
 val nb_list2   = [nb_unsat,nb_unknown,nb_sat,nb_timeout,nb_parsing,
                   nb_codeerr,nb_beagerr]
 
-val nb_all = nb_problem :: (nb_list1 @ nb_list2)
+(* Timers *)
+val metis_timer = ref (0,"Metitactime ");
+val beagtac_timer = ref (0,"Beagtactime ");
+val nb_list3 = [metis_timer,beagtac_timer];
+
+
+val nb_all = nb_problem :: (nb_list1 @ nb_list2 @ nb_list3)
 
 fun addone_nb nb = nb := ((fst (!nb)) + 1,snd (!nb))  
 
@@ -93,7 +99,7 @@ fun extract_nb str =
 
 fun reset_nb nb = nb := (0,snd (!nb))  
 fun reset_nbl nbl = app reset_nb nbl
-fun reset_all_nb () = reset_nbl (nb_problem :: (nb_list1 @ nb_list2))
+fun reset_all_nb () = reset_nbl (nb_all)
  
 fun update_nbl nbl strl =
   case (nbl,strl) of
@@ -106,11 +112,12 @@ fun update_all_nb filename =
     case strl of
       pb :: "\n" ::
       m :: fp :: f :: bool :: num :: ho :: proof :: meti :: "\n" :: 
-      unsa :: unkn :: sat :: time :: pars :: code :: beag :: fin
+      unsa :: unkn :: sat :: time :: pars :: code :: beag :: "\n" ::
+      mti :: bti :: fin
         =>
       update_nbl nb_all
         [pb,m,fp,f,bool,num,ho,proof,meti,
-         unsa,unkn,sat,time,pars,code,beag]
+         unsa,unkn,sat,time,pars,code,beag,mti,bti]
     | _ => reset_all_nb ()
   end
   handle _ => reset_all_nb ()  

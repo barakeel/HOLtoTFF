@@ -1,7 +1,7 @@
 structure blibSyntax :> blibSyntax =
 struct
 
-open HolKernel Abbrev boolLib numSyntax
+open HolKernel Abbrev boolLib numSyntax (*intSyntax*)
      blibBtools blibDatatype 
      
 fun SYNTAX_ERR function message =
@@ -16,6 +16,7 @@ fun erase_double_aconv l = erase_double_eq aconv l
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
 fun has_numty term = (type_of term = ``:num``)
+fun has_intty term = (type_of term = ``:int``)
 fun is_var_or_const term = 
   is_var term orelse is_const term
 fun is_leaf term = 
@@ -37,6 +38,8 @@ fun bound_by_quant subterm term =
 fun name_of term = 
   case termstructure term of
     Numeral => Int.toString (numSyntax.int_of_term term)
+  | Integer => raise SYNTAX_ERR "name_of" "integer"
+               (*Arbintcore.toString (intSyntax.int_of_term term)*)
   | Var => fst (dest_var term)
   | Const => fst (dest_const term)
   | Comb => raise SYNTAX_ERR "name_of" "comb"
@@ -58,6 +61,7 @@ fun get_arity term = length (snd (strip_comb term))
 fun all_fosubterm_aux term = 
   case termstructure term of
     Numeral => [term]
+  | Integer => [term]
   | Var => [term]  
   | Const => [term]
   | Comb => 

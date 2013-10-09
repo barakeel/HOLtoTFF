@@ -22,14 +22,17 @@ fun linearn term =
     Multn => 
       let val (t1,t2) = numSyntax.dest_mult term in
         not (contain_numfvc t1 andalso contain_numfvc t2)
+      end
   | _    => raise PRINTTFF_ERR "linearn" "not a numeral product"
 
-fun lineari term =
+(* fun lineari term =
   case termarith term of
     Multi => 
-      let val (t1,t2) = numSyntax.dest_mult term in
+      let val (t1,t2) = intSyntax.dest_mult term in
         not (contain_numfvc t1 andalso contain_numfvc t2)
+      end
   | _    => raise PRINTTFF_ERR "lineari" "not a integer product"
+*)
 
 (* PPTFF_TERM *)
 fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
@@ -97,6 +100,7 @@ fun pptff_term_aux pps term dict pflag bvl =
       let val arity = get_arity term in
       case termstructure operator of
         Numeral => raise PRINTTFF_ERR "pptff_term_aux" "numeral"
+      | Integer => raise PRINTTFF_ERR "pptff_term_aux" "integer"
       | Var => if is_member_aconv operator bvl
                then pptff_app pps (lookup operator (#2 dict)) argl dict false bvl
                else pptff_app pps (lookup operator (#3 dict)) argl dict false bvl 
@@ -104,14 +108,18 @@ fun pptff_term_aux pps term dict pflag bvl =
         (
         case termarith term of
           Eq => pptff_binop pps "=" term dict false bvl
-        | Mult => if linear term  (* bad hack NLIA *)
+        | Multn => if linearn term  (* bad hack NLIA *)
                   then pptff_app pps "$product" argl dict false bvl  
                   else pptff_app pps    
-                    (lookup operator (#4 dict)) argl dict false bvl  
+                    (lookup operator (#4 dict)) argl dict false bvl
+        (*| Multi =>  if lineari term  (* bad hack NLIA *)
+                  then pptff_app pps "$product" argl dict false bvl  
+                  else pptff_app pps    
+                    (lookup operator (#4 dict)) argl dict false bvl*)
         | Newtermarith => pptff_app pps 
                             (lookup operator (#4 dict)) argl dict false bvl                
         | _ => pptff_app pps 
-                 (lookup (nodeconst term) dcprintdict) argl dict false bvl
+                 (lookup (termarith term) dcprintdict) argl dict false bvl
         ) 
       | _ => raise PRINTTFF_ERR "pptff_term_aux" "abs or comb"
       end end  

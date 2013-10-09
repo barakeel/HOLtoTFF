@@ -143,6 +143,8 @@ fun add_once elem list =
  
 fun inter l1 l2 = filter (inv is_member l2) l1 
 
+fun substract l1 l2 = filter (not o (inv is_member) l2) l1
+
 fun subset l1 l2 = all (inv is_member l2) l1
 
 fun strict_subset s1 s2 = subset s1 s2 andalso not (s1 = s2)

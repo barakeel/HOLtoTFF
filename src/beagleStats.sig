@@ -41,6 +41,10 @@ sig
   val nb_beagerr : (int * string) ref
   val nb_list2   : ((int * string) ref) list
   
+  val metis_timer : (int * string) ref
+  val beagtac_timer : (int * string) ref
+  val nb_list3 : ((int * string) ref) list
+  
   val nb_all     : ((int * string) ref) list
   
   val update_nb_flag  : (int * string) ref -> (bool * string) ref -> unit

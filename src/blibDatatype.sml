@@ -1,7 +1,7 @@
 structure blibDatatype :> blibDatatype =
 struct
 
-open HolKernel Abbrev boolLib numSyntax
+open HolKernel Abbrev boolLib numSyntax (*intSyntax*)
      blibBtools
 
 fun DATATYPE_ERR function message =
@@ -26,11 +26,13 @@ fun typecat holtype =
 
 datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
 
+fun is_false term = false
+
 fun termstructure term =
   switchargerr term
     [
     (numSyntax.is_numeral ,Numeral),
-    (intSyntax.is_int_literal , Integer),
+    (is_false (*intSyntax.is_int_literal*) , Integer),
     (is_var     ,Var),
     (is_const   ,Const),
     (is_comb    ,Comb),
@@ -41,7 +43,7 @@ fun termstructure term =
 datatype TERMARITH = 
   Eq | 
   Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
-  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated
+  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated |
   Newtermarith
 
 fun termarith term =  
@@ -55,14 +57,16 @@ fun termarith term =
     (numSyntax.is_greater  ,Greatern),
     (numSyntax.is_geq      ,Geqn),
     (numSyntax.is_leq      ,Leqn)
+   (*
     (intSyntax.is_plus     ,Plusi),
     (intSyntax.is_minus    ,Minusi),
     (intSyntax.is_mult     ,Multi),
     (intSyntax.is_less     ,Lessi),
-    (intSyntax.is_greater  ,Greateri),
+    (intSyntax.is_great    ,Greateri),
     (intSyntax.is_geq      ,Geqi),
     (intSyntax.is_leq      ,Leqi),
     (intSyntax.is_negated  ,Negated)
+   *)
     ]   
     Newtermarith
 
@@ -90,7 +94,7 @@ fun connector term =
     ]
     App
 
-datatype VARCAT = Numeralvar | Freevar | Boundvar | Constvar
+datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar
 
 end
 

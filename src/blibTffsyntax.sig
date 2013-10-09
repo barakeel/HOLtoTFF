@@ -12,7 +12,7 @@ sig
   val name_tff : string -> term -> string
   (* constants *)
   val rdcdict: (string * term) list
-  val dcdict : (blibDatatype.NODECONST * string) list
+  val dcprintdict : (blibDatatype.TERMARITH * string) list
   val is_dca : (term * int) -> bool
   val is_dcaty2 : ((term * int) * string) -> bool
   

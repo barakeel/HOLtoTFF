@@ -1,7 +1,7 @@
 structure blibConv :> blibConv =
 struct
 
-open HolKernel Abbrev boolLib intSyntax
+open HolKernel Abbrev boolLib
      blibBtools blibDatatype 
      blibSyntax blibBrule 
      blibExtractvar blibFreshvar blibExtracttype 
@@ -22,6 +22,7 @@ in
 fun find_free_bool_aux term subterm = (* term should be a boolean *)
   case termstructure subterm of
     Numeral => []
+  | Integer => []
   | Var => []  
   | Const => []
   | Comb => 
@@ -143,6 +144,7 @@ fun bool_conv_sub_all term =
 fun bool_conv_aux term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
+  | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
@@ -265,6 +267,7 @@ val term = ``?x y. (x = 0) /\ (y = 0) /\ (z = 0) /\ (f (y:num) = 0)``;
 fun num_conv_aux term =   
   case termstructure term of
     Numeral => raise UNCHANGED 
+  | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
@@ -290,7 +293,7 @@ fun fnum_axiom_w (f,arity) =
   let val imagety = fst image in
     if imagety = ``:num``
     then 
-      let val namel = create_namel "x" (length argl) in   
+      let val namel = mk_newnamel "x" (length argl) [name_of f] in   
       let val varl = list_mk_var (namel,argtyl) in
       let val newvarl = mk_newvarl varl (all_var f) in
       let val numvarl = filter has_numty varl in
@@ -322,6 +325,7 @@ val arity = 1;
 fun find_free_abs_aux term subterm =
   case termstructure subterm of
     Numeral => []
+  | Integer => []
   | Var => []  
   | Const => []
   | Comb => 
@@ -500,6 +504,7 @@ fun_conv_quant_aux term;
 fun fun_conv_aux term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
+  | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
@@ -571,6 +576,7 @@ val term = ``(f a b = 2) /\ (f a = g)``;
 fun app_conv appname term = 
   case termstructure term of
     Numeral => raise UNCHANGED 
+  | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
@@ -585,27 +591,23 @@ fun app_conv appname term =
     | App => 
       let val (operator,argl) = strip_comb term in
       case termstructure operator of
-        Numeral => raise CONV_ERR "app_conv" "numeral"
-      | Var =>  ((RATOR_CONV (app_conv appname)) THENC
-                 (RAND_CONV (app_conv appname)) THENC
+        Numeral => raise CONV_ERR "app_conv" "numeral is an operator"
+      | Integer => raise CONV_ERR "app_conv" "integer is an operator"
+      | Var =>  (RATOR_CONV (app_conv appname) THENC
+                 RAND_CONV (app_conv appname) THENC
                  app_conv_sub appname) 
                 term
       | Const => 
         (
-        case nodeconst term of
-          Eq => BINOP_CONV (app_conv appname) term 
-        | Plus =>  BINOP_CONV (app_conv appname) term 
-        | Minus =>  BINOP_CONV (app_conv appname) term 
-        | Mult =>  BINOP_CONV (app_conv appname) term 
-        | Less =>  BINOP_CONV (app_conv appname) term 
-        | Greater =>  BINOP_CONV (app_conv appname) term 
-        | Geq =>  BINOP_CONV (app_conv appname) term 
-        | Leq =>  BINOP_CONV (app_conv appname) term 
-        | Newnodeconst => 
-          ((RATOR_CONV (app_conv appname)) THENC
-           (RAND_CONV (app_conv appname)) THENC
-           app_conv_sub appname) 
-          term
+        case termarith term of
+            Newtermarith => 
+             (RATOR_CONV (app_conv appname) THENC
+              RAND_CONV (app_conv appname) THENC
+              app_conv_sub appname) 
+              term
+          | Negated => RAND_CONV (app_conv appname) term 
+          | _ => BINOP_CONV (app_conv appname) term 
+      
         )
       | Comb => ((RATOR_CONV (app_conv appname)) THENC
                  (RAND_CONV (app_conv appname)) THENC

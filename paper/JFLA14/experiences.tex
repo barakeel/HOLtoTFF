@@ -30,19 +30,23 @@ arithmétique.
 
 \subsubsection{Résultats}
 
-\todo Temps de calcul, nombre de buts résolus\dots avec \metistac et
-avec \beagletac. Conclusion sur l'efficacité comparée de \beagletac et
-\metistac, puis celle de \beagle et \metis.
 
+\subsubsection{Expressivité et efficacité de \beagletac et \beagle. Comparaison avec \metistac}
+\paragraph {Dans le cas général}
 
+Les résultats inconnu et satisfiable sont dûs à un manque d'information sur les constantes de HOL4 passées à Beagle. Le résultat time out est dû à un surplus d'information où à une complexité du problème trop grande.
+Le résultat parsing error est peut-être dû à un fichier problème trop grand (plus de 1000 lignes) ou à une erreur dans l'impression.
 
-\subsubsection{Impact de la monomorphisation}
+\paragraph {Sur des problèmes de l'ordre supérieur}
 
+\paragraph {Sur les problèmes polymorphes}
+Voici dans la figure 4, l'impact absolu qu'à la monomorphisation sur le nombre de problèmes résolus.
+\begin{figure}
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
 Avant monomorphisation & Après monomorphisation \\
 \hline
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1.5,baseline=(current bounding box.center)]
     \slice{0/100*360}
           {70/100*360}
           {70\%}{insatisfiable}{green}
@@ -60,7 +64,7 @@ Avant monomorphisation & Après monomorphisation \\
           {1\%}{parsing error}{red}                            
 \end{tikzpicture}
 &
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1.5,baseline=(current bounding box.center)]
     \slice{0/100*360}
           {80/100*360}
           {80\%}{insatisfiable}{green}
@@ -80,63 +84,19 @@ Avant monomorphisation & Après monomorphisation \\
 \\
 \hline
 \end{tabularx}
-Commentaires des erreurs.
+\caption{Impact absolu de la monomorphisation}
+\end{figure}
 
-\subsection{Utilisation des différentes étapes de la traduction}
-
-\begin{tikzpicture}[scale=0.8]
-\begin{axis}[ybar,enlargelimits=0.15,legend style={at={(2,2)},anchor=north,legend columns=0},ylabel={nombre de problèmes},symbolic x coords={monomorphisation,point fixe,lambda-lifting,booléen,naturels,ordre supérieur,traduction prouvée},xtick=data,
-nodes near coords,
-nodes near coords align={vertical},
-x tick label style={rotate=45,anchor=east},]
-\addplot coordinates {(monomorphisation,139) (point fixe,112) (lambda-lifting,60) (booléen,72)(naturels,162)(ordre supérieur,86)(traduction prouvée,271)};
-\end{axis}
-\end{tikzpicture}
+D'un point de vue théorique, l'étape de monomorphisation est efficace car un point fixe est trouvé dans 112 cas sur 139 problèmes ayant besoin d'être monomorphisé.
+D'un point de vue pratique, on remarque que l'ajout de l'étape de monomorphisation améliore l'expressivité de \beagletac en agrandissant l'espace de recherche augmentant le nombre de résultat insatisfiable et minimisant le nombre de résultats inconnus ou satisfiable. Cependant l'efficacité en pâtit comme nous le montre l'augmentation des time out.
 
 
-<<<<<<< HEAD
-\subsection{Efficacité de \beagle}
-A travers ses exemples, il est difficile de juger de la qualité de \beagle
-face à \metis puisque \metis résout l'ensemble de ses buts rapidement.
-Parmi les problèmes, nous avons retenu 69 problèmes contenant au moins un théorème donné par l'utilisateur contenant uniquement des constantes arithmétiques $+$,$-$,$\leq$,$<$,$\geq$,$>$ et nous avons supprimés 79 tels théorèmes. \metis n'est donc plus en mesure de résoudre l'un de ses problèmes modifiés. Cependant \beagletac y parvient:
-
-
-\noindent \begin{tabularx}{\textwidth}{|X|X|}
-\hline
-Résultats & Utilisation du code \\
-\hline
-\begin{tikzpicture}[scale=1.5,baseline=(current bounding box.center)]
-    \slice{0/100*360}
-          {88/100*360}
-          {88\%}{insatisfaisable}{green}
-    \slice{88/100*360}
-          {97/100*360}
-          {9\%}{inconnu}{red}
-    \slice{97/100*360}
-          {100/100*360}
-          {3\%}{time out}{red}
-\end{tikzpicture}
-&
-\begin{tikzpicture}[scale=0.7,baseline=(current bounding box.center)]
-\begin{axis}[ybar,enlargelimits=0.15,legend style={at={(2,2)},anchor=north,legend columns=0},ylabel={nombre de problèmes},symbolic x coords={monomorphisation,
-point fixe,lambda-lifting,booléen,naturel,ordre supérieur,traduction prouvée},xtick=data,
-nodes near coords,
-nodes near coords align={vertical},
-x tick label style={rotate=45,anchor=east}]
-\addplot coordinates {(monomorphisation,36) (point fixe,34) (lambda-lifting,6) (booléen,15)(naturel,60)(ordre supérieur,8)(traduction prouvée,65)};
-\end{axis}
-\end{tikzpicture}
-\\
-\hline
-\end{tabularx}
-
-
-\subsubsection{Expressivité}
-
-Grâce à notre traduction, \beagletac permet de résoudre des problèmes
+\paragraph {Sur des problèmes arithmétiques}
+Pour montrer, la plus grande expressivité de \beagletac par rapport à \metistac en arithmétique nous avons effectué le test suivant:
+\\Parmi les 271 problèmes initialement testés, nous avons retenu 65 problèmes contenant au moins un lemme arithmétique et nous avons supprimés 79 tels lemmes. \metistac n'est donc plus en mesure de résoudre l'un de ses problèmes modifiés. Cependant \beagletac y parvient dans 88\% des cas car il possède par construction un ensemble de connaissance sur l'arithmétique linéaire.
+\\Grâce à notre traduction, \beagletac permet de résoudre des problèmes
 combinant d'ordre supérieur avec arithmétique, lorsque le raisonnement
 propositionnel est du premier ordre. Cette tactique est donc plus
 expressive que \metistac, puisqu'il n'est pas besoin de fournir les
 lemmes arithmétiques utilisés.
-
 

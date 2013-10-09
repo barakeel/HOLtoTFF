@@ -59,8 +59,8 @@ fun beagle_interact filename finalgoal =
       ("cd " ^ directory ^ ";" ^
        "sh " ^ directory ^ "callbeagle.sh")
       handle _ => raise BEAGLE_ERR "beagle_call" "";
-    update_SZSstatus filename;
-    (* replaying the proof *)
+    update_SZSstatus filename
+    (*(* replaying the proof *)
     let val filename1 = filename ^ "_declaration" in
     let val filename2 = filename ^ "_reading" in
     let val filename3 = filename ^ "_proving" in
@@ -92,6 +92,7 @@ fun beagle_interact filename finalgoal =
     end end end end 
     end end end;
     ()
+    *)
     )
   end
   
@@ -112,17 +113,34 @@ fun write_goodresult filename thml goal =
 fun write_badresult filename thml goal =
   write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
     (allflag_value ())
+
+
+fun update_timer start timer =
+ let val ending = Time.toMilliseconds (Time.now()) in
+ let val (n,str) = !timer in
+   timer := (n + (ending - start),str)
+ end end
  
 fun beagle_tac_aux filename thml goal = 
   (
   init_beagle_tac_aux filename;
   addone_nb nb_problem;
+  (* METIS_TAC TEST *)
+  let val startmtac = Time.toMilliseconds (Time.now ()) in
+    (
+    metisTools.METIS_TAC thml goal;
+    update_timer startmtac metis_timer
+    )
+  end handle _ => flag_update metisflag true
+  ;
+  (* BEAGLE_TAC TEST *)
     (
     flag_update mflag (is_polymorph_pb (thml,goal));
+    let val startbtac = Time.toMilliseconds (Time.now ()) in
     let val (mthml,mgoal) = if is_polymorph_pb (thml,goal)
                             then monomorph_pb (thml,goal) 
                             else (thml,goal)
-    in 
+    in
     let val (finalgoal_list,validation) = BEAGLE_NF_TAC mthml mgoal  in
                                         (* update all flags *)
     let val finalgoal = hd (finalgoal_list) in
@@ -130,6 +148,8 @@ fun beagle_tac_aux filename thml goal =
       flag_update proofflag
         (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
         beagle_interact filename finalgoal;
+        if (!SZSstatus) = "Unsatisfiable" 
+        then update_timer startbtac beagtac_timer else ();
         update_nbl1 (); 
         update_nbl2 (!SZSstatus);
         if (!SZSstatus) = "Unsatisfiable"
@@ -140,7 +160,7 @@ fun beagle_tac_aux filename thml goal =
            ()
          )
       ) 
-    end end end
+    end end end end
   )
   handle  
     HOL_ERR {origin_structure = s, origin_function = f, message = m}
@@ -155,7 +175,8 @@ fun beagle_tac_aux filename thml goal =
            write_badresult filename thml goal
            ) 
   ;
-  write_stats filename (!nb_problem) (map ! nb_list1) (map ! nb_list2); 
+  write_stats filename (!nb_problem) (map ! nb_list1) 
+    (map ! nb_list2) (map ! nb_list3); 
   ([],fn x => (mk_thm goal))
   )
 

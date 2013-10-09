@@ -45,13 +45,60 @@ Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte gr
 \subsection{Application à \beagle}
 
 \subsubsection{génération de traces par Beagle}
+  Voici le fonctionnement global de beagle et l'endroit d'où sont tirés les clauses composant la trace. 
 
+\begin{center}
+\begin{tikzpicture}[auto]
+  % Place nodes
+  \node [cloud] (NCS) {nouvel ensemble};
+  \node [cloud, fill=white, above of=NCS, node distance = 1.5cm] (init) {fichier TFF};
+  \node [label = 2, cloud, below of=NCS, node distance = 2cm] (OCS) {ancien ensemble};
+  % Draw edges
+  \draw[-to,black,ultra thick] (NCS.east) to [out=0,in=0] node[name=down]{1} (OCS.east) ;
+  \draw[-to,black,ultra thick] (OCS.west) to [out=180,in=180] node[name=up]{3} (NCS.west)  ;
+  \draw[-to,black,ultra thick] (init) -- node[name=what]{parsing et normalisation} (NCS)  ;  
+  % Place boxes
+  \node [block, right of=down, node distance=1.5cm] (rightbox)  
+  {Transfère une clause};  
+  \node [block, below of=OCS, node distance=1.5cm] (downbox)  
+  {Applique les règles possibles*};      
+  \node [block, left of=up, node distance=1.5cm] (leftbox)  
+  {Transfère les clauses créées}; 
+  \node [cloud, fill=white, below of=rightbox, node distance=2.5cm] (trace){fichier trace};
+  \draw [-to,black,ultra thick] (down.west) to [out=270,in=90] (trace)  ;  
+\end{tikzpicture}
+\end{center}
+(* Si la règle est un $Split$ la boucle se sépare en deux boucles disjointes (voir Définition).)
 
- (au niveau de la boucle entre
-  l'ancien ensemble de clauses et le nouveau)
+Lors d'une preuve linéaire (ne contenant pas de $Split$), les clauses tranférées vers l'ancien ensemble de clause sont ajoutées au fichier trace dans l'ordre où elles ont été déduites avec la numérotation correspondante.
 
- optimisation
+\begin{mydef} ($Split$)
+Soit a saturation loop state by a triplet (c, OCS ,NCS) where c is the clause which was moved from NCS to OCS. 
+A Split is defined by this inference step. 
+\\Let $a_1 \vee a_2$ a clause.
 
-quelques expériences
+\begin{prooftree}
+\AxiomC{$(a_1 \vee a_2,OCS,NCS)$}
+\RightLabel{$Split$}
+\UnaryInfC{$(a_1,OCS,NCS),(a_2,OCS,NCS),\ldots,(a_N,OCS,NCS)$}  
+\end{prooftree}  
+   
+
+Voici la règle $Split$
+Une règle permmettant de faire des raisonnement par disjonction de cas.
+En pratique, cette règle est implémenté comme un raisonnement par l'absurde avec comme hypothèse la partie gauche de la disjonction. C'est 
+Mémorisation des différents niveau de split par numérotation des différentes branches de l'arbre créés comme le montre cet exemple:
+
+Exemple.
+
+Le fait de sauvegarder l'ancien ensemble et non le nouveau ensemble permet de garder seulement les étapes importantes de la preuve et donc de gagner du temps lors du rejouage. Cependant nous devons donc compléter les quelques étapes manquantes. Par exemple, lorsque la clause F (faux) est déduite dans le nouvel ensemble à la fin d'un raisonnement par l'absurde, nous parvenons à le savoir car la numérotation nous indique que nous changeons de branche.  
+
+\subsubsection{Description sur une simple expérience}
+ Voici les étapes d'une expérience
+ 
+ Fichier preuve:
+ Représentation interne à HOL et rejouage étape par étape de la preuve.
+ 
+ 
 
 

@@ -62,8 +62,7 @@ Nous cherchons donc instancier le type de la constante ${\color{green}C} : a \ri
 
 \end{remark} 
   
-Le raisonnement décrit dans l'exemple nous permet de limiter ainsi le nombre d'instanciation possible ainsi de diminuer la largeur du champ de recherche. Nous rappelons que cette étape est incomplète car finie.[ref]
-
+Le raisonnement décrit dans l'exemple nous permet de limiter ainsi le nombre d'instanciation possible ainsi de diminuer la largeur du champ de recherche. Nous rappelons que cette étape est incomplète car entre autres finie.[ref]
 
 \subsubsection{Graphe de dépendance}
 Dans cette partie, nous présentons une représentation théorique de notre implémentation de la monomorphisation. 
@@ -84,16 +83,6 @@ Dans cette partie, nous présentons une représentation théorique de notre impl
 De chaque flèche de substitution, on peut inférer une substitution. Quand il n'y a pas d'ambiguité, nous identifierons la flèche et la substitution.
 Lorsque nous représenterons un graphe de dépendance ou son supergraphe.  (voir plus tard), nous dessinerons les constantes de la m\^eme proposition sur la m\^eme ligne. Par convention, les types polymorphiques seront représentés par les lettres a,b,c,d.
 \end{mydef}
-
-
-
-
-\iffalse
-\noindent \textit{Example of a dependency graph.} 
-\begin{center}  
-
-\end{center}
-\fi
 
 
 \begin{mydef} (A substitution transformation)
@@ -261,24 +250,19 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
 \end{center}
 La substitution [a $\rightarrow$ (a $\rightarrow$ n)] peut \^etre appliqué autant de fois que l'on veut à a sans trouver de point fixe.
 \end{proof}
-\noindent Here we present two complétentaires conjectures about finding a fix point: 
-\begin{thm}(Conjecture)
-\\Let $p$ the length of the longest path in $G$. (Dependency links have length 0) 
-\\Let $G_p = \mathcal{T}^g(G)$.
-\\$G_p$ is a fix point if:
-\\- $G_p$ has no loop.
-\\- $SG_p$ has no substitutions arrows.
-\end{thm} 
-\begin{thm}(Conjecture)
-\\Let $p$ the length of the longest path in $G$. (Dependency links have length 0) 
-\\Let $G_p = \mathcal{T}^g(G)$.
-\\If $G_p$ is not a fix point then forall $i>0$, $G_i$ is not a fix point.
-\end{thm} 
+
+\begin{conjecture}
+\\Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
+\begin{itemize}
+\item Si $SG_p$ n'a pas de circuit interne à ses noeuds et n'a pas de flèches de substitutions non redondantes à l'extérieur de ses noeuds, alors $G_p$ est un point fixe pour $\mathcal{T}$. 
+\item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
+\end{itemize}
+\end{conjecture} 
+
+\subsubsection{Extraction des substitutions à partir du graphe de dépendance final}
+
+\par En pratique, pour obtenir le graphe de dépendance final, nous limitons le nombre d'itération de $\mathcal{T}$ en bornant le nombre d'instanciation possibles. Dans {\color{red}142}\% des cas le graphe de dépendance obtenu est un point fixe. [ref interne]
+\par Soit $G_i$ le graphe de dépendance obtenu par la méthode décrite dans la partie précédente. De chaque constante du graphe provenant d'un m\^eme théorème du graphe, une liste de subsitutions peut \^etre extraite. Ses listes de substitutions sont combinés de toutes les manières possibles de façon a créer une liste de subsitutions poru ce théorème. Finalement, chaque théorème est instanciée avec sa liste de substitutions. 
 
 
-\noindent \textit{Conclusion.}
-\\From each constant in a theorem, a list of substitutions can be extracted from the dependency graph. They are combined in every possible way to create a list of substitutions for the theorem. Eventually, each theorem in the problem is instantiated with all its possible substitutions.
-
-
-\subsubsection{Impression des types}
 

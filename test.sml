@@ -22,7 +22,6 @@ load "beagle"; open beagle;
 val thml = [];
 val goal : goal = ([``(x:num = 5)``],``x:num < 10``);
 
-
 val thml = [];
 val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 BEAGLE_TAC thml goal;
