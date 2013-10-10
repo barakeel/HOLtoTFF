@@ -2,22 +2,23 @@
   logique du premier ordre}
 \label{sec:traduction}
 
-\subsection{Présentation}
-
-\todo Thibaut: rédiger cette partie
+Dans cette partie, nous expliquons notre traduction prouvée des buts
+\holfour vers le format \tff, c'est-à-dire la logique du premier ordre
+avec arithmétique. Cela se fait par étapes de différentes sortes:
 \begin{itemize}
-\item traduction des buts \holfour vers \tff : premier ordre avec
-  arithmétique
-\item traduction de l'ordre supérieur vers le premier ordre (notamment
-  monomorphisation (suppression des quantifications sur des variables de
-  type), $\lambda$-lifting et suppression des fonctions passées en
-  arguments d'autres fonctions)
-\item d'autres petites étapes intermédiaires afin que le but soit
-  prouvable par un prouveur du premier ordre qui, notamment, attend une
-  CNF sous forme d'un ensemble de clauses, avec des types bien
-  particuliers
-\item \dots
+\item des étapes effectivement de traduction de l'ordre supérieur vers
+  le premier ordre (notamment la monomorphisation, le $\lambda$-lifting
+  et la suppression des fonctions passées en arguments d'autres
+  fonctions);
+\item d'autres étapes intermédiaires pour tenir compte du fait que l'on
+  veut donner le but à un prouveur du premier ordre: il résout un
+  problème de satisfiabilité (et non de prouvabilité), attendu en forme
+  normale conjonctive présentée sous forme d'une liste de clauses, et
+  faisant intervenir certains types prédéfinis.
 \end{itemize}
+Nous présentons dans un premier temps les différentes étapes de la
+traduction, avant de détailler notre algorithme utilisé pour l'une
+d'entre elles: la monomorphisation.
 
 
 \subsection{Les étapes de la traduction}
@@ -35,7 +36,7 @@ concernant réellement le passage au premier ordre sont notées en gras.
   \item Négation de la conclusion: la prouvabilité du but est
     équivalente à la non-satisfiabilité de la formule donnée au
     prouveur.
-  \item Mise sous Forme Normale Conjonctive: cette étape est réalisée
+  \item Mise sous forme normale conjonctive: cette étape est réalisée
     par la fonction \textsf{CNF$\_$CONV} implantée en \holfour par Joe
     Hurd en octobre 2001.
   \item \textbf{$\lambda$-lifting}: Elle est
