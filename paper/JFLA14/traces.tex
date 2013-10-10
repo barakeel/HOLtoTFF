@@ -71,7 +71,7 @@ les étapes de la preuve qui ont été utilisées\footnote{Il est parfois
   nécessaires d'ajouter quelques étapes manquantes, comme la déduction
   de la clause vide lors d'un raisonnement par l'absurde.}.
 
-\begin{figure}[!h]
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}[auto]
   % Place nodes
@@ -154,7 +154,9 @@ La trace est rejouée étape par étape:
 
 \begin{itemize}
 \item Tout d'abord les axiomes $1$ à $7$ sont lus et prouvés à partir des axiomes de \holfour desquels ils ont été traduits.
-\item A l'étape $8s1$, l'indication \verb!Leftsplit! et la numérotation nous indiquent que ceci est le début d'un raisonnement par l'absurde. Nous ajoutons donc cette hypothèse à une pile sans la prouver.
+\item A l'étape $8s1$, l'indication \verb!Leftsplit! nous signale que
+  ceci est le début d'un raisonnement par l'absurde. Nous ajoutons donc
+  cette hypothèse à une pile sans la prouver.
 \item Avant de passer à l'étape suivante, la numérotation nous indique que le raisonnement par l'absurde a pris fin. Nous devons donc prouver que l'on a aboutit à une contradiction, modifier l'hypothèse par l'absurde du haut de la pile en son contraire et l'ajouter comme proposition déduite de nos axiomes $8s1'$.
 \item Les étapes $9$ et $10$ sont prouvées en utilisant toutes les étapes parentes dans l'arbre de la \textsc{Figure}~\ref{fig:rejouage}.
 \item Pour conclure, il suffit de montrer que la conjonction des propositions de la branche droite permet de déduire une contradiction.
