@@ -84,19 +84,27 @@ s'agit d'une ou plusieurs instanciations de variables de type
 (implicitement) universellement quantifiées.
 
 Cette partie présente l'heuristique développée pour la traduction de
-\holfour vers \tff. Nous présentons d'abord le problème sur un exemple,
-avant d'expliquer notre algorithme de monomorphisation. Ses performances
-seront évaluées dans la partie~\ref{sec:experiences}.
+\holfour vers \tff. Nous présentons d'abord le problème sur un exemple
+(qui servira dans toute la suite de cette partie), avant d'expliquer
+notre algorithme de monomorphisation. Ses performances seront évaluées
+dans la partie~\ref{sec:experiences}.
 
 
 \subsubsection{Exemple}
+\label{sec:traduction:nouveautes:exmp}
 
-Supposons prouvés les théorèmes $\forall x:a.\ C\ x \Rightarrow D\ x$
-et $\forall x:b.\ C\ x$ où $a$ et $b$ sont des variables de type (implicitement quantifée universellement). On cherche à démontrer le but 
-$D\ 42$. Les instanciations cherchées sont la substitution  $\{a \mapsto
-\text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b \mapsto \text{\verb!int!}\}$ pour le second théorème. Nous illusterons sur cette exemple les étapes de monomorphisation décrites dans la suite de cette partie.
+Supposons prouvés les théorèmes $\forall x:a.\ C\ x \Rightarrow D\ x$ et
+$\forall x:b.\ C\ x$ où $a$ et $b$ sont des variables de type
+(implicitement quantifée universellement). On cherche à démontrer le but
+$D\ 42$. Les instanciations cherchées sont la substitution $\{a \mapsto
+\text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b
+\mapsto \text{\verb!int!}\}$ pour le second théorème.
+
+Nous illustrerons sur cette exemple les étapes de monomorphisation
+décrites dans la suite de cette partie.
 
 \subsubsection{Graphe de dépendance}
+\label{sec:traduction:nouveautes:graphe}
 Cette partie présente de manière théorique notre algorithme de
 monomorphisation.\\
 
@@ -168,13 +176,10 @@ une même ligne.
 \end{center}
 \\
 \end{tabularx}
-\caption {Graphe de dépendance de l'exemple (à gauche) et un graphe équivalent (à droite)}
+\caption {Graphe de dépendance de l'exemple de la partie~\ref{sec:traduction:nouveautes:exmp} (à gauche) et un graphe équivalent (à droite)}
 \label{fig:dependances}
 \end{figure}
 
-\begin{remark}
-Par souci de clareté, nous continuerons d'illustrer notre propos sur un graphe équivalent à celui donné par l'exemple décrit dans la \textsc{Figure}~\ref{fig:dependances}.
-\end{remark}
 
 L'idée de l'algorithme est d'appliquer une succession de transformations
 au graphe de dépendence, jusqu'à l'obtention d'un point fixe (s'il
@@ -262,11 +267,14 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
 \end{figure}
 
 
-\begin{mydef} (Redondance)
-Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution interne au nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
+\begin{mydef} (Redondance) Dans un graphe, une arête de substitution est
+  redondante si elle a la m\^eme origine et induit la m\^eme
+  substitution qu'une arête de substitution interne au nœud de son
+  origine. De telles arêtes peuvent être retirées du graphe pour obtenir
+  un graphe équivalent.
 \end{mydef}
 
-La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons exceptionnellement représentés des arêtes internes (en noir).
+La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons ajouté des arêtes internes (en noir).
 
 \begin{figure}[h!]
 \begin{center}
@@ -386,6 +394,7 @@ Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figur
 \end{remark}
 
 \subsubsection{Création de nouveaux théorèmes à partir d'un graphe de dépendance}
+\label{sec:traduction:nouveautes:conclusion}
 
 Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir remarque). 
 D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
@@ -405,6 +414,7 @@ Dans notre programme, nous avons limité à 15 la création de nouveaux théorè
 
 
 \subsubsection{Implantation}
+\label{sec:traduction:nouveautes:implantation}
 
 Nous présentons maintenant quelques détails pratiques pour implanter notre traduction.
 
