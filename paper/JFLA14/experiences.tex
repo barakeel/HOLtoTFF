@@ -17,6 +17,12 @@ transformé; lorsqu'il répond que celui-ci est insatisfiable, il est
 ajouté comme axiome à \holfour afin de résoudre le but initial (voir
 \textsc{Figure}~\ref{fig:beagletac}).
 
+Comme \beagle ne supporte pas l'arithmétique non linéaire, la constante
+multiplicative $*$ est traduite par une constante non interprétée
+lorsque le terme est non-linéaire. Cette modification devra être retirée
+si l'on souhaite utiliser un prouveur qui supporte l'arithmétique non
+linéaire.
+
 
 \subsection{Expériences}
 \label{sec:experiences:experiences}
@@ -37,79 +43,33 @@ monomorphisation.
 
 \subsubsection{Résultats}
 
-\todo Rendre cette partie cohérente. Il existe un environnement table
-(plutôt que figure) pour les tableaux.
-
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=1.6,baseline=(current bounding box.center)]
-    \slice{0/100*360}
-          {80/100*360}
-          {80.5\%}{insatisfiable}{green}
-    \slice{80.5/100*360}
-          {81.5/100*360}
-          {1\%}{satisfiable}{red}
-    \slice{81.5/100*360}
-          {89.5/100*360}
-          {8\%}{inconnu, yshift=6}{red}
-     \slice{89.5/100*360}
-           {98.5/100*360}
-           {9\%}{timeout}{red}
-     \slice{98.5/100*360}
-           {100/100*360}
-           {1.5\%}{parsing error}{red}
-\end{tikzpicture}
-\caption{Nombre de but résolus par \beagletac}
-\end{figure}
-
-N'étant pas complet, \beagle peut parfois répondre ``inconnu'' s'il ne
-sait pas trouver la solution du problème. En revanche, les
-``satisfiable'' (dûs à un manque d'information sur les constantes de
-\holfour passées à \beagle) et ``parsing error'' (dûs à un fichier
-problème trop grand ou à une erreur dans l'impression) correspondent à
-des erreurs dans notre utiliation de \beagle.
-\begin{remark}
-Comme \beagle ne supporte pas l'arithmétique non linéaire, la constante multiplicative $*$ est traduite par une constante quelconque lorsque le terme est non-linéaire. Cette modification devra être retiré lorsqu'on testera notre traduction avec un prouveur qui supporte l'arithmétique non linéaire.
-\end{remark}
-
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{|X|X|X|X|}
-\hline
-  \beagletac & Traduction & Impression & \metistac\\ \hline
-  4.55 & 0.82 & 0.18 & 0.11 \\ \hline
-\end{tabularx}
-\caption{Temps moyen de résolution (en secondes)}
-\end{table}
-
-
-\noindent \textbf{Sur des problèmes d'ordre supérieur}
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
-\hline
-$ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
-Premier ordre & 170/185 = 91.9\% & 2.711 & 0.148 & 0.08 & 0.13 \\ \hline
-Ordre supérieur & 48/86 = 55.8\%  & 11.07 & 3.2 & 0.51 & 0.04 \\ \hline
-\end{tabularx}
-\caption{Temps moyen de résolution de problème du premier ordre et d'ordre supérieur (en secondes)}
-\end{table}
- 
-\noindent \textbf{Sur des problèmes polymorphes}
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
-\hline
-$ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
-Monomorphe & 107/132 = 81.1\% & 5.83 & 1.32 & 0.23 & 0.12\\ \hline
-Polymorphe & 111/139 = 79.9\%  & 3.32 & 0.34 & 0.13 & 0.9\\ \hline
-\end{tabularx}
-\caption{Temps moyen de résolution de problèmes monomorphes et polymorphes (en secondes)}
-\end{table}
-
-\begin{figure}[H]
 Les résultats en termes de nombre de buts résolus sont présentés dans la
 \textsc{Figure}~\ref{fig:resultats}.
+
+% \begin{figure}[H]
+% \centering
+% \begin{tikzpicture}[scale=1.6,baseline=(current bounding box.center)]
+%     \slice{0/100*360}
+%           {80/100*360}
+%           {80,5\%}{insatisfiable}{green}
+%     \slice{80.5/100*360}
+%           {81.5/100*360}
+%           {1\%}{satisfiable}{red}
+%     \slice{81.5/100*360}
+%           {89.5/100*360}
+%           {8\%}{inconnu, yshift=6}{red}
+%      \slice{89.5/100*360}
+%            {98.5/100*360}
+%            {9\%}{timeout}{red}
+%      \slice{98.5/100*360}
+%            {100/100*360}
+%            {1,5\%}{parsing error}{red}
+% \end{tikzpicture}
+% \caption{Nombre de buts résolus par \beagletac}
+% \label{fig:resultats}
+% \end{figure}
+
+\begin{figure}
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
 Sans monomorphisation & Avec monomorphisation \\
@@ -152,48 +112,155 @@ Sans monomorphisation & Avec monomorphisation \\
 \\
 \hline
 \end{tabularx}
-\caption{Impact de la monomorphisation}
+\caption{Proportion de buts résolus par \beagletac sans et avec monomorphisation}
 \label{fig:resultats}
 \end{figure}
 
-On remarque sur la \textsc{Figure}~\ref{fig:resultats} que l'ajout de
+N'étant pas complet, \beagle peut parfois répondre ``inconnu'' s'il ne
+sait pas trouver la solution du problème. En revanche, les
+``satisfiable'' (dûs à un manque d'information sur les constantes de
+\holfour passées à \beagle) et ``parsing error'' (dûs à un fichier
+problème trop grand ou à une erreur dans l'impression) correspondent à
+des erreurs dans notre utiliation de \beagle.
+
+La \textsc{Table~\ref{tab:temps_calcul}} présente les résultats en
+termes de temps de calcul: on compare le temps mis par \beagletac
+(décomposé en le temps de la traduction, celui de l'impression et celui
+mis par \beagle) au temps mis par \metistac. La tactique \metistac est
+plus rapide que \beagletac. La traduction en elle-même prend plus de
+temps que \metistac, mais c'est surtout \beagle qui apparaît comme le
+facteur de temps limitant. Comme nous le verrons plus bas, cela est
+principalement dû aux faiblesses de notre traduction actuelle. Il faut
+rappeler également que \beagle, contrairement à \metis, doit effectuer
+lui-même le raisonnement arithmétique, mais cela n'a que peu d'influence
+comme montré ci-dessous.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+\hline
+  \beagletac & Traduction & Impression & \beagle & \metistac\\ \hline
+  4,55 & 0,82 & 0,18 & 3,55 & 0,11 \\ \hline
+\end{tabularx}
+\caption{Temps moyens de résolution (en secondes)}
+\label{tab:temps_calcul}
+\end{table}
+
+Nous allons maintenant nous intéresser aux différents aspects mis en
+valeur par ces expériences.
+
+
+\paragraph{Sur des problèmes d'ordre supérieur}
+
+La \textsc{Table}~\ref{tab:temps_calcul_premier_ordre_ordre_sup} indique
+la proportion de problèmes résolus et les temps de calcul en séparant
+les problèmes qui sont initialement du premier ordre avec ceux d'ordre
+supérieur. Si \beagletac a un comportement raisonnable sur les buts qui
+sont déjà du premier ordre, il n'arrive en revanche qu'à résoudre la
+moitié des buts contenant de l'ordre supérieur. Notre traduction est
+donc moins performante que celle de \metistac (là encore, le résultat
+est légèrement biaisé par le fait que \beagle doit gérer
+l'arithmétique).
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
+\hline
+$ $ & Proportion & \beagletac & Traduction & Impression & \beagle & \metistac \\ \hline
+Premier ordre & 91,9\% & 2,711 & 0,148 & 0,08 & 2,483 & 0,13 \\ \hline
+O. supérieur & 55,8\%  & 11,07 & 3,2 & 0,51 & 7,36 & 0,04 \\ \hline
+\end{tabularx}
+\caption{Temps moyens de résolution de problème du premier ordre et d'ordre supérieur (en secondes)}
+\label{tab:temps_calcul_premier_ordre_ordre_sup}
+\end{table}
+ 
+\paragraph{Sur des problèmes polymorphes}
+
+La \textsc{Table}~\ref{tab:temps_calcul_mono_poly} indique
+la proportion de problèmes résolus et les temps de calcul en séparant
+les problèmes qui sont initialement monomorphent avec ceux qui sont
+polymorphes. On constate qu'aussi bien la proportion de buts résolus que
+les temps de calcul sont voisins dans les deux cas, ce qui indique que
+notre algorithme de monomorphisation est efficace et bien adapté à notre
+traduction actuelle. Sa simplicité se reflète dans le temps mis par la
+traduction puisqu'il ne produit pas de délai supplémentaire.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
+\hline
+$ $ & Proportion & \beagletac & Traduction & Impression & \beagle & \metistac \\ \hline
+Monomorphe & 81,1\% & 5,83 & 1,32 & 0,23 & 4,28 & 0,12\\ \hline
+Polymorphe & 79,9\%  & 3,32 & 0,34 & 0,13 & 2,85 & 0,9\\ \hline
+\end{tabularx}
+\caption{Temps moyen de résolution de problèmes monomorphes et polymorphes (en secondes)}
+\label{tab:temps_calcul_mono_poly}
+\end{table}
+
+La \textsc{Figure}~\ref{fig:resultats} compare la proportion de buts
+résolus sans et avec monomorphisation. On remarque que l'ajout de
 l'étape de monomorphisation permet à \beagletac de résoudre $10\%$ de
-buts supplémentaires. On constante cependant que cette étape augmente la
-taille des buts, faisant ainsi croître le nombre de timeouts. Concernant l'algorithme en lui-même, un point fixe a été trouvé dans 102
-cas des 139 problèmes ayant besoin d'être monomorphisés, soit $73\%$ des
-cas.
+buts supplémentaires. On constate cependant que cette étape augmente la
+taille des buts, faisant ainsi croître le nombre de timeouts. Concernant
+l'algorithme en lui-même, un point fixe a été trouvé dans 102 cas des
+139 problèmes ayant besoin d'être monomorphisés, soit $73\%$ des cas.
 
 \vspace{1mm}
 
-\noindent \textbf{Sur des problèmes arithmétiques}
+\paragraph{Sur des problèmes arithmétiques}
+
+La \textsc{Table}~\ref{tab:temps_calcul_arith} indique la proportion de
+problèmes résolus et les temps de calcul en séparant les problèmes
+contenant de l'arithmétique de ceux qui n'en contiennent pas. Là encore,
+la proportion de buts résolus et les temps de calcul sont voisins dans
+les deux cas, ce qui montre l'efficacité de notre tactique à résoudre
+des buts arithmétique.
+
 \begin{table}[H]
-\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
 \hline
-$ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
-Non-arithmétique & 89/109 = 81.6\% & 5.91 & 1.51 & 0.25 & 0.08\\ \hline
-Arithmétique & 129/162 = 79.6\%  & 3.62 & 0.34 & 0.13 & 0.13\\ \hline
+$ $ & Problèmes résolus & \beagletac & Traduction & Impression & \beagle & \metistac \\ \hline
+Non-arithmétique & 81,6\% & 5,91 & 1,51 & 0,25 & 4,15 & 0,08\\ \hline
+Arithmétique & 79,6\%  & 3,62 & 0,34 & 0,13 & 3,15 & 0,13\\ \hline
 \end{tabularx}
-\caption{Temps moyen de résolution de problèmes non-arithmétiques et arithmétiques (en secondes)}
+\caption{Temps moyens de résolution de problèmes non-arithmétiques et arithmétiques (en secondes)}
+\label{tab:temps_calcul_arith}
 \end{table}
 
 
 
+% Comme expliqué ci-dessus, parmi les 271 problèmes initialement testés,
+% nous avons retenu 65 problèmes contenant au moins un lemme arithmétique.
+% Alors que \metistac a besoin de ce lemme pour résoudre le but,
+% \beagletac y parvient dans $88\%$ des cas sans l'aide d'aucun lemme.
+% \beagletac permet donc de résoudre des problèmes combinant d'ordre
+% supérieur avec arithmétique, lorsque le raisonnement propositionnel est
+% du premier ordre. Cette tactique est donc plus expressive que \metistac,
+% et fournit la première tactique \holfour capable de combiner
+% raisonnement au premier ordre et arithmétique.
 
-Comme expliqué ci-dessus, parmi les 271 problèmes initialement testés,
-nous avons retenu 65 problèmes contenant au moins un lemme arithmétique.
-Alors que \metistac a besoin de ce lemme pour résoudre le but,
-\beagletac y parvient dans $88\%$ des cas sans l'aide d'aucun lemme.
-\beagletac permet donc de résoudre des problèmes combinant d'ordre
-supérieur avec arithmétique, lorsque le raisonnement propositionnel est
-du premier ordre. Cette tactique est donc plus expressive que \metistac,
-et fournit la première tactique \holfour capable de combiner
-raisonnement au premier ordre et arithmétique.
+\paragraph {Conclusion}
+\beagletac est à l'heure actuelle bien moins rapide que
+\metistac. Outre les temps nécessaires à l'ouverture et la fermeture de
+fichiers, \beagletac pèche sur les problèmes d'ordre supérieur, ce qui
+indique que notre traduction peut être encore grandement améliorée.
+Comme indiqué dans la partie~\ref{sec:traduction}, nous avons
+principalement mis l'accent sur la monomorphisation, ce qui se reflète
+dans les résultats.
 
-\paragraph {Conclusion sur \beagletac}.
-En résumé, \beagletac est bien moins rapide que \metistac. Ce qui est en partie dû au temps d'ouverture et de fermeture de fichier ainsi qu'au temps de lancement de java. \beagletac résout bien moins bien les problèmes d'ordres supérieur.
+En revanche, \beagletac est plus expressive que \metistac, et fournit la
+première tactique \holfour capable de combiner raisonnement au premier
+ordre et arithmétique.
+
 
 \paragraph {Améliorations possibles de la traduction}
-- Faire une élimination plus fine de l'ordre supérieur [ref S Bohme] 
-- Inférer des lemmes utiles pour le problème à partir d'une heuristique sur les constantes. [ref Lawrence Paulson three years]
-- Traduire les types rationnels et réels de \holfour vers les types \tff correspondants.
+
+Voici quelques directions possibles afin d'améliorer notre traduction:
+\begin{itemize}
+\item faire une élimination plus fine de l'ordre supérieur~\cite{Bohme12};
+\item inférer les lemmes utiles pour le problème à partir d'une
+  heuristique sur les constantes~\cite{Paulson10};
+\item traduire les types rationnels et réels de \holfour vers les types
+  \tff correspondants (pour l'instant, seul l'arithmétique entière est
+  gérée).
+\end{itemize}
+
+
 
