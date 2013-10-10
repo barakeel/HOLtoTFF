@@ -20,9 +20,7 @@ Nous présentons dans un premier temps les différentes étapes de la
 traduction, avant de détailler notre algorithme utilisé pour l'une
 d'entre elles: la monomorphisation.
 
-
 \subsection{Les étapes de la traduction}
-
 La traduction est une succession de petites étapes, chacune étant
 prouvée correcte. Nous présentons ici l'ordre de ces étapes, en
 précisant quel outil a été utilisé pour les implanter. Les étapes
@@ -45,8 +43,7 @@ concernant réellement le passage au premier ordre sont notées en gras.
     type de retour des prédicats. Il ne peut être utilisé pour les
     arguments booléens des fonctions; leur type est donc remplacé par un
     nouveau type \verb!bool! \cite{MengP08}.
-  \item Mise sous forme d'un ensemble de clauses
-    A partir d'une formule sous forme normal conjonctive, les quantificateurs existentiels sont éliminés en créant de nouvelles constantes et les quantificateurs universels sont ensuites distribués par rapport au conjonctions. Nous obtenons un ensemble de clauses de la forme $\forall x1,\ldots,x_n.\ f[x_1,\ldots,x_n]$ .
+  \item Mise sous forme d'un ensemble de clauses par élimination des     quantifcateurs existentiels et distribution des quantificateurs universels par rapport au conjonctions.
   \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
     les fonctions passées en arguments à d'autres fonctions \cite{Hurd03}\cite{MengP08}.
     Les fonctions arithmétiques sont néanmoins conservées, puisqu'elles
@@ -82,19 +79,27 @@ s'agit d'une ou plusieurs instanciations de variables de type
 (implicitement) universellement quantifiées.
 
 Cette partie présente l'heuristique développée pour la traduction de
-\holfour vers \tff. Nous présentons d'abord le problème sur un exemple,
-avant d'expliquer notre algorithme de monomorphisation. Ses performances
-seront évaluées dans la partie~\ref{sec:experiences}.
+\holfour vers \tff. Nous présentons d'abord le problème sur un exemple
+(qui servira dans toute la suite de cette partie), avant d'expliquer
+notre algorithme de monomorphisation. Ses performances seront évaluées
+dans la partie~\ref{sec:experiences}.
 
 
 \subsubsection{Exemple}
+\label{sec:traduction:nouveautes:exmp}
 
-Supposons prouvés les théorèmes $\forall x:a.\ C\ x \Rightarrow D\ x$
-et $\forall x:b.\ C\ x$ où $a$ et $b$ sont des variables de type (implicitement quantifée universellement). On cherche à démontrer le but 
-$D\ 42$. Les instanciations cherchées sont la substitution  $\{a \mapsto
-\text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b \mapsto \text{\verb!int!}\}$ pour le second théorème. Nous illusterons sur cette exemple les étapes de monomorphisation décrites dans la suite de cette partie.
+Supposons prouvés les théorèmes $\forall x:a.\ C\ x \Rightarrow D\ x$ et
+$\forall x:b.\ C\ x$ où $a$ et $b$ sont des variables de type
+(implicitement quantifée universellement). On cherche à démontrer le but
+$D\ 42$. Les instanciations cherchées sont la substitution $\{a \mapsto
+\text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b
+\mapsto \text{\verb!int!}\}$ pour le second théorème.
+
+Nous illustrerons sur cette exemple les étapes de monomorphisation
+décrites dans la suite de cette partie.
 
 \subsubsection{Graphe de dépendance}
+\label{sec:traduction:nouveautes:graphe}
 Cette partie présente de manière théorique notre algorithme de
 monomorphisation.\\
 
@@ -131,7 +136,7 @@ Par convention, dans tous les exemples de graphes de dépendance donnés
 ci-dessous, nous représentons les constante d'une même proposition sur
 une même ligne.
 
-\begin{figure} [h!]
+\begin{figure}
 \begin{tabularx} {\textwidth}{ X  X }
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm]
@@ -166,13 +171,9 @@ une même ligne.
 \end{center}
 \\
 \end{tabularx}
-\caption {Graphe de dépendance de l'exemple (à gauche) et un graphe équivalent (à droite)}
+\caption {Graphe de dépendance de l'exemple de la partie~\ref{sec:traduction:nouveautes:exmp} (à gauche) et un graphe équivalent (à droite)}
 \label{fig:dependances}
 \end{figure}
-
-\begin{remark}
-Par souci de clareté, nous continuerons d'illustrer notre propos sur un graphe équivalent à celui donné par l'exemple décrit dans la \textsc{Figure}~\ref{fig:dependances}.
-\end{remark}par
 
 L'idée de l'algorithme est d'appliquer une succession de transformations
 au graphe de dépendence, jusqu'à l'obtention d'un point fixe (s'il
@@ -185,7 +186,7 @@ pour chaque type d'arête.
   substitution $\sigma : c \to c'$ instancie les types de $c$ à l'aide  des substitutions induites par $\sigma$. Ces types sont ensuite ajoutés au nœud $c$.
 \end{mydef}
 
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11) 
@@ -193,7 +194,7 @@ pour chaque type d'arête.
   \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
   {D: $a$ , $\color{blue} \text{\verb!int!}$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  \node [cloud, fill=white, below of=c12,node distance = 2.5cm] (c32) 
   {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
@@ -211,7 +212,7 @@ pour chaque type d'arête.
   $\sigma : c' \to c''$ instancie les types de $c$ à l'aide des substitutions induites par $\sigma$. Ces types sont ensuite ajoutés au nœud $c$.
 \end{mydef}
 
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11) 
@@ -219,7 +220,7 @@ pour chaque type d'arête.
   \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
   {D: $a$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  \node [cloud, fill=white, below of=c12,node distance = 2.5cm] (c32) 
   {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
@@ -239,7 +240,7 @@ par l'exemple de la \textsc{Figure}~\ref{fig:etape_de_monomorphisation}
 La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comme l'application de toutes les transformations de substitution et de partage possibles à ce graphe de façon simultanée.
 \end{mydef}
 
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
@@ -247,7 +248,7 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) 
   {D: $a$,{\color{green} $b$},{\color{blue} $\text{\verb!int!}$}};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,{\color{blue} $a$}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  \node [cloud, fill=white, below of=c12,node distance = 2.5cm] (c32) 
   {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
@@ -260,13 +261,16 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
 \end{figure}
 
 
-\begin{mydef} (Redondance)
-Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution interne au nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
+\begin{mydef} (Redondance) Dans un graphe, une arête de substitution est
+  redondante si elle a la m\^eme origine et induit la m\^eme
+  substitution qu'une arête de substitution interne au nœud de son
+  origine. De telles arêtes peuvent être retirées du graphe pour obtenir
+  un graphe équivalent.
 \end{mydef}
 
-La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons exceptionnellement représentés des arêtes internes (en noir).
+La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons ajouté des arêtes internes (en noir).
 
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
@@ -274,7 +278,7 @@ La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondanc
   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12)
   {D: $a$, $b$, $\text{\verb!int!}$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,$a$};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  \node [cloud, fill=white, below of=c12,node distance = 2.5cm] (c32) 
   {D: $\text{\verb!int!}$};
   \draw [-to,gray,ultra thick] (c11)  to [out=260,in=100] (c21);
   \draw [-to,blue,ultra thick] (c21) to [out=80,in=280] (c11);
@@ -365,7 +369,7 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 \end{itemize}
 \end{conjecture}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
@@ -385,9 +389,10 @@ Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figur
 \end{remark}
 
 \subsubsection{Création de nouveaux théorèmes à partir d'un graphe de dépendance}
+\label{sec:traduction:nouveautes:conclusion}
 
-Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir remarque). 
-D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
+Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir Remarque). 
+\\D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
 \begin{example} (\textsc{Figure}~\ref{fig:point_fixe})
 \\ Les noeuds C et D de types $a$,$b$ et $\text{\verb!int!}$ induisent le même ensemble de substitutions: 
  \[\{\{a \mapsto \text{\verb!int!}\},
@@ -410,13 +415,24 @@ Dans notre programme, nous avons limité à 15 la création de nouveaux théorè
 
 
 \subsubsection{Implantation}
+Nous présentons maintenant quelques détails pratiques pour implanter notre traduction.
 
-Dans cette partie, nous présentons quelques détails techniques concernant notre traduction.
+\label{sec:traduction:nouveautes:implantation}
+\paragraph{Lors de la monomorphisation,} un graphe de dépendance est
+implanté par une liste de listes, chaque liste contenant les constantes
+d'un même théorème ainsi que les constantes créées par la répétition de
+la transformation. Les arêtes ne sont pas représentées, car toutes les
+constantes d'un même théorème sont instanciées avec les substitutions
+générées par ces mêmes constantes, ce qui théoriquement revient à
+considérer que les constantes d'un même théorème sont liés 2 à 2 par une
+arête de partage.
 
-\paragraph{Lors de la monomorphisation} , un graphe est implémenté par une liste de listes, chaque liste contenant les constantes d'un même théorèmes ainsi que les constantes créés par la répétition de la transformation. Les arêtes ne sont pas représentées, car toutes les constantes d'un même théorème sont instanciées avec les substitutions générées par ces mêmes constantes, ce qui théoriquement revient à considérer que les constantes d'un même théorème sont liés 2 à 2 par une arête de partage.
-
-\paragraph{Lors de l'impression}, des dictionnaires injectifs, faisant correspondre les variables et les constantes de \holfour avec des variables d'un fichier \tff, sont créés. Un dictionnaire associé de traduction des types vient les compléter. Ceci augmente la sûreté de l'impression et permettra de relire la preuve produite par le prouveur. La traduction des types est traité dans \cite{Blanchette12}\cite{BlanchetteBPS13}\cite{MengP08}. La traduction que nous avons choisi n'utilise pas de prédicat supplémentaire mais requiert une monomorphisation préalable. 
-
+\paragraph{Lors de l'impression,} des dictionnaires injectifs, faisant
+correspondre les variables et les constantes de \holfour avec des
+variables d'un fichier \tff, sont créés. Ceci augmente la sûreté de
+l'impression et permettra de rejouer ensuite la preuve (voir
+partie~\ref{sec:traces}). De plus, les types doivent être traduits pour
+correspondre à la distinction au premier ordre entre variables. Un éventail de traduction de types sont présentés dans \cite{Blanchette12}\cite{BlanchetteBPS13}\cite{MengP08}.
 \begin{example} (Traduction d'un type de \holfour vers un type \tff)
 \\La fonction $f: (a \rightarrow b) \rightarrow c \rightarrow d $ d'arité 2 se traduit par  $xf:(a\_F\_b\ *\ c) > d$.
 \end{example}
