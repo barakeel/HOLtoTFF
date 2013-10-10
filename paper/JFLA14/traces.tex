@@ -25,7 +25,8 @@ au format \tff contenant uniquement des clauses. Lorsque le parsing
 s'effectue à partir d'un problème généré par notre traduction, les
 variables, constantes et types du fichier de trace sont mises en
 correspondance avec celles du problème de départ à l'aide des
-dictionnaires injectifs \holfour.
+dictionnaires injectifs \holfour (voir
+partie~\ref{sec:traduction:nouveautes:implantation}).
 
 
 \subsubsection{Rejouer la preuve}
@@ -33,13 +34,13 @@ dictionnaires injectifs \holfour.
 Les tactiques \metistac et \coopertac (une implémentation de
 l'algorithme de Cooper pour l'arithmétique de
 Presburger~\cite{Norrish03completeinteger}) sont utilisées conjointement
-pour rejouer les étapes de la preuve, respectivement en fonction de la
-nature de chacune des étapges.
+pour rejouer les étapes de la preuve, en fonction de la nature de
+chacune des étapges.
 
-Les deux tactiques utilisées ici ayant été prouvées correctes [\todo
-ref], cela permet d'importer des théorèmes prouvés par des prouveurs
-automatiques fournissant des traces au format \tff dans \holfour sans en
-compromettre sa correction.
+Les deux tactiques utilisées ici ayant été prouvées correctes, cela
+permet d'importer des théorèmes prouvés par des prouveurs automatiques
+fournissant des traces au format \tff dans \holfour sans en compromettre
+sa correction.
 
 Cette utilisation de \metistac à chaque petite étape propositionnelle de
 la preuve ne peut être efficace, mais permet de fournir un premier
@@ -96,12 +97,13 @@ les étapes de la preuve qui ont été utilisées\footnote{Il est parfois
 \end{center}
 \end{figure}
 
-\subsubsection{Description sur une expérience}
+\subsubsection{Description sur un exemple}
 % Exemple.
 
-Nous allons décrire comment rejouer la preuve d'un problème donné par la formule suivante: 
- \[((x = 2) \vee (x = 4)) \wedge y = 2 * x) \Rightarrow (y = 4) \wedge (y = 8)\]
-
+Nous allons décrire comment rejouer la trace du problème suivant:
+ \[((x = 2) \vee (x = 4)) \wedge y = 2 * x) \Rightarrow (y = 4) \wedge
+ (y = 8)\]
+donnée en \textsc{Figure}~\ref{fig:rejouage}.
 \begin{figure}[h!] 
  \small
  \begin{tabularx}{\textwidth}{|X|X|}
@@ -147,17 +149,27 @@ Nous allons décrire comment rejouer la preuve d'un problème donné par la form
 \caption{Comment rejouer une preuve}
 \label{fig:rejouage}
 \end{figure} 
-La preuve est rejouée de façon linéaire:
+
+La trace est rejouée étape par étape:
 
 \begin{itemize}
 \item Tout d'abord les axiomes $1$ à $7$ sont lus et prouvés à partir des axiomes de \holfour desquels ils ont été traduits.
-\item A l'étape $8s1$, l'indication (Leftsplit) nous signale que ceci est le début d'un raisonnement par l'absurde. Nous ajoutons donc cette hypothèse à une pile sans la prouver.
+\item A l'étape $8s1$, l'indication \verb!Leftsplit! nous signale que
+  ceci est le début d'un raisonnement par l'absurde. Nous ajoutons donc
+  cette hypothèse à une pile sans la prouver.
 \item Avant de passer à l'étape suivante, la numérotation nous indique que le raisonnement par l'absurde a pris fin. Nous devons donc prouver que l'on a aboutit à une contradiction, modifier l'hypothèse par l'absurde du haut de la pile en son contraire et l'ajouter comme proposition déduite de nos axiomes $8s1'$.
 \item Les étapes $9$ et $10$ sont prouvées en utilisant toutes les étapes parentes dans l'arbre de la \textsc{Figure}~\ref{fig:rejouage}.
 \item Pour conclure, il suffit de montrer que la conjonction des propositions de la branche droite permet de déduire une contradiction.
 \end{itemize}
 
 
+\subsubsection{Conclusion}
+
+Nous avons décrit un moyen simple utilisant les prouveurs internes de
+\holfour pour rejouer les traces générées par \beagle, après légère
+transformation de ce dernier. Son efficacité pourra être largement
+améliorée, notamment en s'inspirant
+de~\cite{Paulson10,DBLP:conf/cpp/ArmandFGKTW11}
 
 
 

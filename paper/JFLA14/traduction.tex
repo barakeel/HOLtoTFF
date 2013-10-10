@@ -36,15 +36,23 @@ concernant réellement le passage au premier ordre sont notées en gras.
   \item Mise sous forme normale conjonctive: cette étape est réalisée
     par la fonction \textsf{CNF$\_$CONV} implantée en \holfour par Joe
     Hurd en octobre 2001.
-  \item \textbf{$\lambda$-lifting}: Elle est implantée de la même manière que dans \cite{Bohme12}.  Cette étape auraient pu être remplacés par l'utilisation de combinateurs \cite{Hurd03}. Ces deux approches ont été testés dans le développement de Sledgehammer \cite{MengP08}.
+  \item \textbf{$\lambda$-lifting}: cette étape consiste à éliminer les
+    variables libres apparaissant dans des définitions locale. Elle est
+    implantée de la même manière que dans \cite{Bohme12}. Cette étape
+    auraient pu être remplacés par l'utilisation de combinateurs
+    \cite{Hurd03}. Ces deux approches ont été testés dans le
+    développement de Sledgehammer \cite{MengP08}.
   \item Élimination des arguments booléens qui ne sont pas des
     variables: le format \tff propose un type $\$o$ pour désigner le
     type de retour des prédicats. Il ne peut être utilisé pour les
     arguments booléens des fonctions; leur type est donc remplacé par un
     nouveau type \verb!bool! \cite{MengP08}.
-  \item Mise sous forme d'un ensemble de clauses par élimination des     quantifcateurs existentiels et distribution des quantificateurs universels par rapport au conjonctions.
+  \item Mise sous forme d'un ensemble de clauses par élimination des
+    quantificateurs existentiels et distribution des quantificateurs
+    universels par rapport au conjonctions.
   \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
-    les fonctions passées en arguments à d'autres fonctions \cite{Hurd03}\cite{MengP08}.
+    les fonctions passées en arguments à d'autres
+    fonctions~\cite{Hurd03,MengP08}.
     Les fonctions arithmétiques sont néanmoins conservées, puisqu'elles
     font partie de notre langage cible. Elle est réalisée en fin de
     traduction afin de limiter son application: par exemple,

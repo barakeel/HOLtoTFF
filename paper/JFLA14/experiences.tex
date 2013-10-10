@@ -10,11 +10,11 @@ version plus ancienne) ainsi que la théorie détaillée de \beagle peuvent êtr
 \subsection{La tactique \beagletac}
 \label{sec:experiences:beagletac}
 
-Grâce à cette traduction, nous avons implanté la tactique \beagletac
-exportant le but courant transformé par la traduction présentée dans la
-partie précédente au format \tff. \beagle est ensuite appelé sur ce but
-transformé; lorsqu'il répond que celui-ci est insatisfiable, il est
-ajouté comme axiome à \holfour afin de résoudre le but initial (voir
+Nous avons implanté une tactique \beagletac exportant le but courant
+transformé par la traduction présentée dans la partie précédente au
+format \tff, puis appelant \beagle sur ce but transformé; lorsqu'il
+répond que celui-ci est insatisfiable, il est ajouté comme axiome à
+\holfour afin de résoudre le but initial (voir
 \textsc{Figure}~\ref{fig:beagletac}).
 
 Comme \beagle ne supporte pas l'arithmétique non linéaire, la constante
@@ -28,7 +28,8 @@ linéaire.
 \label{sec:experiences:experiences}
 
 \subsubsection{Software, hardware et tests}
-Les tests ont été effectués avec \beagle (version $0.7$) et \holfour (version mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive.
+Les tests ont été effectués avec \beagle (version $0.7$) et \holfour
+(version de mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive.
 Nous avons imposé un timeout de 15 secondes par but à \beagle.
 
 Lors de la construction de \holfour, certains buts sont résolus par la
@@ -69,7 +70,7 @@ Les résultats en termes de nombre de buts résolus sont présentés dans la
 % \label{fig:resultats}
 % \end{figure}
 
-\begin{figure}
+\begin{figure}[!h]
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
 Sans monomorphisation & Avec monomorphisation \\
@@ -117,9 +118,9 @@ Sans monomorphisation & Avec monomorphisation \\
 \end{figure}
 
 N'étant pas complet, \beagle peut parfois répondre ``inconnu'' s'il ne
-sait pas trouver la solution du problème. En revanche, les
-``satisfiable'' (dûs à un manque d'information sur les constantes de
-\holfour passées à \beagle) et ``parsing error'' (dûs à un fichier
+sait pas trouver la solution du problème. En revanche, les réponses
+``satisfiable'' (dues à un manque d'information sur les constantes de
+\holfour passées à \beagle) et ``parsing error'' (dues à un fichier
 problème trop grand ou à une erreur dans l'impression) correspondent à
 des erreurs dans notre utiliation de \beagle.
 
@@ -168,7 +169,7 @@ $ $ & Proportion & \beagletac & Traduction & Impression & \beagle & \metistac \\
 Premier ordre & 91,9\% & 2,711 & 0,148 & 0,08 & 2,483 & 0,13 \\ \hline
 O. supérieur & 55,8\%  & 11,07 & 3,2 & 0,51 & 7,36 & 0,04 \\ \hline
 \end{tabularx}
-\caption{Temps moyens de résolution de problème du premier ordre et d'ordre supérieur (en secondes)}
+\caption{Temps moyens de résolution de problèmes du premier ordre et d'ordre supérieur (en secondes)}
 \label{tab:temps_calcul_premier_ordre_ordre_sup}
 \end{table}
  
@@ -176,7 +177,7 @@ O. supérieur & 55,8\%  & 11,07 & 3,2 & 0,51 & 7,36 & 0,04 \\ \hline
 
 La \textsc{Table}~\ref{tab:temps_calcul_mono_poly} indique
 la proportion de problèmes résolus et les temps de calcul en séparant
-les problèmes qui sont initialement monomorphent avec ceux qui sont
+les problèmes qui sont initialement monomorphes avec ceux qui sont
 polymorphes. On constate qu'aussi bien la proportion de buts résolus que
 les temps de calcul sont voisins dans les deux cas, ce qui indique que
 notre algorithme de monomorphisation est efficace et bien adapté à notre
@@ -211,13 +212,13 @@ problèmes résolus et les temps de calcul en séparant les problèmes
 contenant de l'arithmétique de ceux qui n'en contiennent pas. Là encore,
 la proportion de buts résolus et les temps de calcul sont voisins dans
 les deux cas, ce qui montre l'efficacité de notre tactique à résoudre
-des buts arithmétique.
+des buts arithmétiques.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
 \hline
 $ $ & Proportion & \beagletac & Traduction & Impression & \beagle & \metistac \\ \hline
-Non-arithmétique & 81,6\% & 5,91 & 1,51 & 0,25 & 4,15 & 0,08\\ \hline
+Non-arith. & 81,6\% & 5,91 & 1,51 & 0,25 & 4,15 & 0,08\\ \hline
 Arithmétique & 79,6\%  & 3,62 & 0,34 & 0,13 & 3,15 & 0,13\\ \hline
 \end{tabularx}
 \caption{Temps moyens de résolution de problèmes non-arithmétiques et arithmétiques (en secondes)}
@@ -246,7 +247,7 @@ principalement mis l'accent sur la monomorphisation, ce qui se reflète
 dans les résultats.
 
 En revanche, \beagletac est plus expressive que \metistac, et fournit la
-première tactique \holfour capable de combiner raisonnement au premier
+première tactique de \holfour capable de combiner raisonnement au premier
 ordre et arithmétique.
 
 Voici quelques directions possibles afin d'améliorer notre traduction:
@@ -255,7 +256,7 @@ Voici quelques directions possibles afin d'améliorer notre traduction:
 \item inférer les lemmes utiles pour le problème à partir d'une
   heuristique sur les constantes~\cite{Paulson10};
 \item traduire les types rationnels et réels de \holfour vers les types
-  \tff correspondants (pour l'instant, seul l'arithmétique entière est
+  \tff correspondants (pour l'instant, seule l'arithmétique entière est
   gérée).
 \end{itemize}
 
