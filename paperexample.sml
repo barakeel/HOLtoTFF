@@ -89,8 +89,8 @@ val clthml1 = inst_cll substll1 clthml1;
   (* direct final result *)
 val substll = repeat_create_substll 
                      (clthml,clgoal) 
-                     (make_list_n (length thml) [])
-                     (make_list_n (length thml) 1);
+                     (mk_list (length thml) [])
+                     (mk_list (length thml) 1);
 val (thml,goal) = monomorph_pb (thml,goal);
 
 (* lambda-lifting *)

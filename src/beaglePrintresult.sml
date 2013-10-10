@@ -10,7 +10,6 @@ fun PRINTRESULT_ERR function message =
 	         origin_function = function,
            message = message}
 
-
 (* Path (absolute) *)
 val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
 
@@ -29,17 +28,10 @@ fun output_nb file nb =
 
 fun output_nbl file nbl = app (output_nb file) nbl
 
-fun write_stats filename nb_pb nbl1 nbl2 nbl3 =
+fun write_stats filename nbl =
   let val file = TextIO.openOut (mk_statspath filename) in
     (  
-    output_nb file nb_pb;
-    TextIO.output (file,"\n");
-    output_nbl file nbl1;
-    TextIO.output (file,"\n");
-    output_nbl file nbl2;
-    TextIO.output (file,"\n");
-    output_nbl file nbl3;
-    TextIO.output (file,"\n");
+    output_nbl file nbl;
     TextIO.closeOut file 
     )
   end

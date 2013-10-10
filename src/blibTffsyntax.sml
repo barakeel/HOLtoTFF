@@ -73,7 +73,7 @@ fun name_tff str var =
 (* DEFINED TFF CONSTANTS *)
 val dcl = [(*
            plus_tm,minus_tm,mult_tm,less_tm,leq_tm,great_tm,geq_tm,negate_tm,
-           *)   
+           *)
            numSyntax.plus_tm,numSyntax.minus_tm,numSyntax.mult_tm,
            numSyntax.less_tm,numSyntax.greater_tm,
            numSyntax.geq_tm]

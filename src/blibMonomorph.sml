@@ -202,7 +202,7 @@ fun monomorph_pb_w (thml,goal) =
   let val clgoal = get_cl_goal goal in
   let val substll = repeat_create_substll 
                      (clthml,clgoal) 
-                     (make_list_n (length thml) [[]])                    
+                     (mk_list (length thml) [[]])                    
   in
     (inst_thml substll thml,goal) 
   end end end

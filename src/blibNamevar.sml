@@ -52,6 +52,13 @@ fun give_pred_type tyadict term (v,a) =
     else ((v,a),tyname)
   end
 
+fun give_predc_type tyadict term (c,a) = 
+  let val tyname = lookup (type_of c,a) tyadict in
+    if is_pred_in c term andalso not (is_dc c)
+    then ((c,a),change_to_predty tyname)
+    else ((c,a),tyname)
+  end
+
 (* link variables to their tff type *)
 fun add_bvty tyadict (bv,a) = ((bv,a),lookup (type_of bv,a) tyadict)
 
@@ -67,7 +74,7 @@ fun create_fvatydict term tyadict =
 
 fun create_catydict term tyadict =
   let val cal = get_cal term in
-    map (give_pred_type tyadict term) cal
+    map (give_predc_type tyadict term) cal
   end 
 (* end pred *)     
    

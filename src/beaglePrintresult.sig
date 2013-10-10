@@ -22,10 +22,7 @@ sig
   val outputll : TextIO.outstream -> string list -> string list -> unit
   val writell : string -> string list -> string list -> unit
   val write_stats : string -> 
-                   (int * string) -> 
-                   (int * string) list -> 
-                   (int * string) list ->
-                   (int * string) list -> 
+                    (int * string) list -> 
                     unit
   (* this path is stored in a fix location and will be read by a script *)
   val write_tffpath : string -> unit

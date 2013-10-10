@@ -24,29 +24,87 @@ tactique \metistac. La plupart de ces buts ne font intervenir que du
 raisonnement propositionnel, mais certains nécessitent de le combiner
 avec un raisonnement arithmétique, auquel cas les lemmes arithmétiques à
 utiliser sont fournis à \metistac. Pour les expériences, nous avons
-utilisé \beagletac sur $271$ de ces buts, sans donner aucun lemme
-arithmétique.
+utilisé \beagletac sur 271 de ces buts.
 
 
 \subsubsection{Résultats}
 
+Présentation du contexte dans le
 
-\subsubsection{Expressivité et efficacité de \beagletac et \beagle. Comparaison avec \metistac}
 \paragraph {Dans le cas général}
 
-Les résultats inconnu et satisfiable sont dûs à un manque d'information sur les constantes de HOL4 passées à Beagle. Le résultat time out est dû à un surplus d'information où à une complexité du problème trop grande.
-Le résultat parsing error est peut-être dû à un fichier problème trop grand (plus de 1000 lignes) ou à une erreur dans l'impression.
-
-\paragraph {Sur des problèmes de l'ordre supérieur}
-
-\paragraph {Sur les problèmes polymorphes}
-Voici dans la figure 4, l'impact absolu qu'à la monomorphisation sur le nombre de problèmes résolus.
 \begin{figure}
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
+\hline
+Nombre de problèmes & insatisfiable & satisfiable & unknown & time out & parsing error\\
+\hline
+Nombre de problèmes & insatisfiable & satisfiable & unknown & time out & parsing error\\
+\hline
+\end{tabularx}
+\caption{Expressivité général de \beagletac sur des problèmes résolus par \metistac}
+\end{figure}
+\beagletac a résolu 80.4\% des 271 problèmes proposés. Nous avons donc testés la vitesse de  \metistac et de \beagletac sur ces 218 problèmes.
+
+\begin{figure}
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+\hline
+  & \metistac  & \beagletac & Traduction & Impression\\
+\hline
+Temps moyen (secondes) & 0.11 & 4.55 & 0.82 & 0.18 \\
+\hline
+\end{tabularx}
+\caption{Temps moyen mis par \metistac, \beagletac et les étapes de \beagletac interne à \holfour.}
+\end{figure}
+
+Les résultats inconnu et satisfiable sont dûs à un manque d'information sur les constantes de HOL4 passées à Beagle. Le résultat time out est dû à un surplus d'information où à une complexité du problème trop grande.
+Le résultat parsing error est dû à un fichier problème trop grand (plus de 1000 lignes), les problèmes de ce type ont été testé sur d'autres prouveur sans erreur de parsing.
+
+\noindent \textbf{Sur des problèmes de l'ordre supérieur:}
+
+\noindent \begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+$ $ & Premier ordre & Ordre supérieur \\ \hline
+Problèmes résolus & 170/185 = 91.9\% & 48/86 = 55.8\% \\\hline
+\end{tabularx}
+
+\begin{figure}[h!]
+\begin{tabularx}{\textwidth}{|c|X|X|X|X|}
+\hline
+$ $ & \metistac  & \beagletac & Traduction & Impression\\ \hline
+Premier ordre & 0.11 & 4.55 & 0.82 & 0.18 \\ \hline
+Ordre supérieur  & 0.11 & 4.55 & 0.82 & 0.18 \\ \hline
+\end{tabularx}
+\caption{Temps moyen (en secondes) mis par les différentes fonctions sur des problèmes du premier ordre et d'ordre supérieur.}
+\end{figure}
+
+
+\textbf{Sur les problèmes polymorphes}
+
+\noindent \begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+$ $ & Monomorphes & Polymorphes \\ \hline
+Problèmes résolus & 107/132 = 81.1\% & 111/139 = 79.9\% \\\hline
+\end{tabularx}
+
+\begin{figure}[h!]
+\begin{tabularx}{\textwidth}{|c|X|X|X|X|}
+\hline
+$ $ & \metistac  & \beagletac & Traduction & Impression\\ \hline
+Premier ordre & 0.11 & 4.55 & 0.82 & 0.18 \\ \hline
+Ordre supérieur  & 0.11 & 4.55 & 0.82 & 0.18 \\ \hline
+\end{tabularx}
+\caption{Temps moyen (en secondes) mis par les différentes fonctions sur des problèmes du premier ordre et d'ordre supérieur.}
+\end{figure}
+
+Nous avons retranché l'étape de monomorphisation pour calculer l'impact absolu de la monomorphisation présentés dans la figure ... . 
+
+
+\begin{figure}[!h]
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
 Avant monomorphisation & Après monomorphisation \\
 \hline
-\begin{tikzpicture}[scale=1.5,baseline=(current bounding box.center)]
+\begin{tikzpicture}[scale=1,baseline=(current bounding box.center)]
     \slice{0/100*360}
           {70/100*360}
           {70\%}{insatisfiable}{green}
@@ -64,7 +122,7 @@ Avant monomorphisation & Après monomorphisation \\
           {1\%}{parsing error}{red}                            
 \end{tikzpicture}
 &
-\begin{tikzpicture}[scale=1.5,baseline=(current bounding box.center)]
+\begin{tikzpicture}[scale=1,baseline=(current bounding box.center)]
     \slice{0/100*360}
           {80/100*360}
           {80\%}{insatisfiable}{green}
@@ -86,12 +144,20 @@ Avant monomorphisation & Après monomorphisation \\
 \end{tabularx}
 \caption{Impact absolu de la monomorphisation}
 \end{figure}
-
-D'un point de vue théorique, l'étape de monomorphisation est efficace car un point fixe est trouvé dans 112 cas sur 139 problèmes ayant besoin d'être monomorphisé.
+D'un point de vue théorique, l'étape de monomorphisation est efficace car un point fixe est trouvé dans 102 cas sur 139 problèmes ayant besoin d'être monomorphisé. 
 D'un point de vue pratique, on remarque que l'ajout de l'étape de monomorphisation améliore l'expressivité de \beagletac en agrandissant l'espace de recherche augmentant le nombre de résultat insatisfiable et minimisant le nombre de résultats inconnus ou satisfiable. Cependant l'efficacité en pâtit comme nous le montre l'augmentation des time out.
 
 
-\paragraph {Sur des problèmes arithmétiques}
+\textbf{Sur des problèmes arithmétiques}
+
+\noindent \begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+$ $ & Non-arithmétiques & Arithmétiques \\ \hline
+Problèmes résolus & 89/109 = 81.6\% & 129/162 = 79.6\% \\\hline
+\end{tabularx}
+
+
+
 Pour montrer, la plus grande expressivité de \beagletac par rapport à \metistac en arithmétique nous avons effectué le test suivant:
 \\Parmi les 271 problèmes initialement testés, nous avons retenu 65 problèmes contenant au moins un lemme arithmétique et nous avons supprimés 79 tels lemmes. \metistac n'est donc plus en mesure de résoudre l'un de ses problèmes modifiés. Cependant \beagletac y parvient dans 88\% des cas car il possède par construction un ensemble de connaissance sur l'arithmétique linéaire.
 \\Grâce à notre traduction, \beagletac permet de résoudre des problèmes
@@ -100,3 +166,9 @@ propositionnel est du premier ordre. Cette tactique est donc plus
 expressive que \metistac, puisqu'il n'est pas besoin de fournir les
 lemmes arithmétiques utilisés.
 
+
+
+
+
+\paragraph {Ce que cela nous apprend sur \beagletac}.
+En résumé \beagletac est bien moins rapide que \metistac. En outre l'ouverture et la fermeture de fichier ainsi que l'ouverture de java. Même le temps de traduction est supérieur à celui mis par \metistac pour trouver la solution. Bien que cette étude n'ait pas été centralisé sur l'efficacité de \beagle

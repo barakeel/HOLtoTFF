@@ -13,6 +13,15 @@ fun BEAGLE_ERR function message =
 	    origin_function = function,
             message = message}
 
+
+fun start_ctime ctime =
+  ctime := Time.toMilliseconds (Time.now())
+  
+fun end_ctime ctime =
+  let val fin = Time.toMilliseconds (Time.now()) in
+    ctime := fin - (!ctime)
+  end
+
 (* STATUS *)
 val SZSstatus = ref "Undefined"
 
@@ -49,10 +58,13 @@ fun proof_to_stringl proof = map step_to_string proof
 (* BEAGLE INTERACTION *)
 fun beagle_interact filename finalgoal =
   (* print the problem *)
+  (
+  start_ctime impctime;
   let 
     val dict = write_tff (mk_tffpath filename) (!nb_problem) finalgoal false
   in
     (
+    end_ctime impctime;
     (* call beagle on tffpath *)
     write_tffpath (mk_tffpath filename); 
     OS.Process.system 
@@ -95,6 +107,7 @@ fun beagle_interact filename finalgoal =
     *)
     )
   end
+  )
   
 fun init_beagle_tac_aux filename =
   (
@@ -102,7 +115,9 @@ fun init_beagle_tac_aux filename =
   SZSstatus := "Undefined";
   write_SZSstatus filename (!SZSstatus);
   reset_allflag ();
-  update_all_nb (mk_statspath filename)
+  reset_all_nb ();
+  update_all_nb (mk_statspath filename);
+  metctime := 0; beactime := 0; tractime := 0; impctime := 0
   )
 
 (* BEAGLE_TAC *)
@@ -114,29 +129,56 @@ fun write_badresult filename thml goal =
   write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
     (allflag_value ())
 
+fun updateadd_nb nb n = nb := (fst(!nb) + n, snd (!nb))
 
-fun update_timer start timer =
- let val ending = Time.toMilliseconds (Time.now()) in
- let val (n,str) = !timer in
-   timer := (n + (ending - start),str)
- end end
+fun addone_faultl () =
+  (
+  addone_nb (list_nth 0 faultl);
+  if fst(!hoflag) 
+  then addone_nb (list_nth 1 faultl)
+  else addone_nb (list_nth 2 faultl);
+  if fst(!mflag) 
+  then addone_nb (list_nth 3 faultl)
+  else addone_nb (list_nth 4 faultl);
+  if fst (!numflag)
+  then addone_nb (list_nth 5 faultl)
+  else addone_nb (list_nth 6 faultl)
+  )
+
+
+ 
+fun update_4timers n =
+  (
+  updateadd_nb (list_nth n timerl) (!metctime);  
+  updateadd_nb (list_nth (n + 1) timerl) (!beactime);
+  updateadd_nb (list_nth (n + 2) timerl) (!tractime);
+  updateadd_nb (list_nth (n + 3) timerl) (!impctime)
+  )
+
+fun update_timerl () =
+  (
+  update_4timers 0;
+  if fst(!hoflag) then update_4timers 4 else update_4timers 8;
+  if fst(!mflag)  then update_4timers 12 else update_4timers 16;
+  if fst (!numflag) then update_4timers 20 else update_4timers 24
+  )
+ 
+fun metis_test thml goal = 
+  (
+  start_ctime metctime;
+  metisTools.METIS_TAC thml goal;
+  end_ctime metctime
+  )
+  handle _ => flag_update metisflag true
  
 fun beagle_tac_aux filename thml goal = 
   (
   init_beagle_tac_aux filename;
   addone_nb nb_problem;
-  (* METIS_TAC TEST *)
-  let val startmtac = Time.toMilliseconds (Time.now ()) in
-    (
-    metisTools.METIS_TAC thml goal;
-    update_timer startmtac metis_timer
-    )
-  end handle _ => flag_update metisflag true
-  ;
-  (* BEAGLE_TAC TEST *)
     (
     flag_update mflag (is_polymorph_pb (thml,goal));
-    let val startbtac = Time.toMilliseconds (Time.now ()) in
+    start_ctime tractime;
+    start_ctime beactime;
     let val (mthml,mgoal) = if is_polymorph_pb (thml,goal)
                             then monomorph_pb (thml,goal) 
                             else (thml,goal)
@@ -145,22 +187,30 @@ fun beagle_tac_aux filename thml goal =
                                         (* update all flags *)
     let val finalgoal = hd (finalgoal_list) in
       (
+      end_ctime tractime;
       flag_update proofflag
         (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
         beagle_interact filename finalgoal;
+        end_ctime beactime;
         if (!SZSstatus) = "Unsatisfiable" 
-        then update_timer startbtac beagtac_timer else ();
+        then 
+          (
+          metis_test thml goal;
+          update_timerl ()
+          )
+        else ();
         update_nbl1 (); 
         update_nbl2 (!SZSstatus);
         if (!SZSstatus) = "Unsatisfiable"
         then write_goodresult filename thml goal
         else 
-          (write_badresult filename thml goal;
+          (addone_faultl ();
+          write_badresult filename thml goal;
            write_tff (mk_tfferrpath filename) (!nb_problem) finalgoal true;
            ()
          )
       ) 
-    end end end end
+    end end end
   )
   handle  
     HOL_ERR {origin_structure = s, origin_function = f, message = m}
@@ -174,9 +224,8 @@ fun beagle_tac_aux filename thml goal =
            write_err (mk_errpath filename) "" "" "code error";
            write_badresult filename thml goal
            ) 
-  ;
-  write_stats filename (!nb_problem) (map ! nb_list1) 
-    (map ! nb_list2) (map ! nb_list3); 
+  ; 
+  write_stats filename (map ! nb_all); 
   ([],fn x => (mk_thm goal))
   )
 

@@ -12,19 +12,40 @@ load "blibExtractvar"; open blibExtractvar;
 load "int_arithTheory"; open int_arithTheory;
 load "beagle"; open beagle;
 *)
-load "Cooper"; open Cooper;
-COOPER_TAC ([],``?x:num. x < 1``);
 
+(* debugging *)
+val thml = [mk_thm ([], ``∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)``)];
+val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,
+            ``Abbrev (m2 = LENGTH (FILTER ($= x) l2))``],
+ ``MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
+   MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)``);
+
+val thml =
+[ mk_thm ([] , ``∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)``) ];
+
+val goal =
+([``∀k'.
+   ALOOKUP ls k' =
+   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
+     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
+   else NONE``, ``∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls)``],
+ ``EL m (MAP SND ls) = EL n'' (r::MAP SND ls)``);
+
+BEAGLE_TAC thml goal;
+ ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
+ n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
+ EL n'' (q::MAP FST ls) = FST (EL n ls)]
 (* PROBLEM TEST *)   
-beagle_tac_aux filename thml goal;
+load "beagle"; open beagle;
+val thml = [];
+val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
+BEAGLE_TAC thml goal;
 
 load "beagle"; open beagle;
 val thml = [];
-val goal : goal = ([``(x:num = 5)``],``x:num < 10``);
-
-val thml = [];
 val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 BEAGLE_TAC thml goal;
+
 
 (* nlia test *)
 val thml = [] ;

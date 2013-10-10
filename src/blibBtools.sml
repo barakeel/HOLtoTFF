@@ -102,13 +102,28 @@ fun string_to_int_aux l =
 fun string_to_int str = string_to_int_aux (rev (String.explode str))
 
 (********* LISTTOOLS **********) 
-fun make_list_n n a =
-  case n of 
-    0 => []
-  | _ => if n < 0 then raise BTOOLS_ERR "make_n_emptyl" "negative number"
-         else
-           a :: make_list_n (n -1) a
+fun mk_list n a =
+  if n < 0 then raise BTOOLS_ERR "mk_list" "negative number"
+  else
+    case n of 
+      0 => []
+    | _ => a :: mk_list (n -1) a
 
+fun mk_reflist n a =
+  if n < 0 then raise BTOOLS_ERR "mk_reflist" "negative number"
+  else
+    case n of 
+      0 => []
+    | _ => (ref a) :: mk_reflist (n -1) a
+  
+
+fun list_nth n l =
+  if n < 0 then raise BTOOLS_ERR "list_nth" "list too short"
+  else
+    case n of 
+      0 => hd l
+    | _ => list_nth (n-1) (tl l)
+   
 (* NUMBER *)
 fun suml nl =
   case nl of
@@ -196,12 +211,12 @@ fun lookup elem couplelist =
 
 
 (* condition *)
-fun make_list_n n a =
+fun mk_list n a =
   case n of 
     0 => []
   | _ => if n < 0 then raise BTOOLS_ERR "make_n_emptyl" "negative number"
          else
-           a :: make_list_n (n -1) a
+           a :: mk_list (n -1) a
 
 (* NUMBER *)
 fun suml nl =

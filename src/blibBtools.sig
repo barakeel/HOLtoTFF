@@ -24,7 +24,9 @@ sig
   val string_to_int : string -> int
   
 (* LIST *)
-  val make_list_n : int -> 'a -> 'a list
+  val mk_list : int -> 'a -> 'a list
+  val mk_reflist : int -> 'a -> ('a ref) list
+  val list_nth : int -> 'a list -> 'a
   (* arithmetic *)
   val suml : int list -> int
   val multl : int list -> int list -> int list
