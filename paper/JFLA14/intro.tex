@@ -50,14 +50,13 @@ Cette traduction générique est utilisée pour implanter la nouvelle
 tactique \beagletac (présentée en \textsc{Figure~\ref{fig:beagletac}}),
 faisant appel au récent prouveur du premier ordre avec arithmétique
 \beagle~\cite{DBLP:conf/cade/BaumgartnerW13} (sans vérification de
-preuves dans la version actuelle). Bien qu'offrant moins de garantie de
-correction que \metistac et étant pour l'instant moins rapide, la
-tactique faisant appel au prouveur du premier ordre interne à \holfour,
-cette première version de \beagletac est plus expressive car elle
-combine raisonnement propositionnel avec arithmétique. Il s'agit ici
-d'une des premières utilisations de \beagle, fournissant ainsi un
-ensemble de tests conséquent et montrant son efficacité sur des
-problèmes concrets.
+preuves dans la version actuelle). Bien qu'offrant moins de garanties de
+correction que \metistac -- la tactique faisant appel au prouveur du
+premier ordre interne à \holfour -- et étant pour l'instant moins
+rapide, cette première version de \beagletac est plus expressive car
+elle combine raisonnement propositionnel avec arithmétique. Il s'agit
+ici d'une des premières utilisations de \beagle, fournissant ainsi un
+ensemble de tests conséquent.
 
 \begin{figure}[!h]
 \begin{center}
@@ -99,20 +98,20 @@ problèmes concrets.
 
 Le code présenté dans cet article est disponible à l'adresse
 \url{https://github.com/barakeel/HOLtoTFF}. En particulier, les exemples
-présentés dans cet article sont disponibles dans le fichier
-\verb!paperexample.sml!.
+présentés ici sont disponibles dans le fichier \verb!paperexample.sml!.
 
 
-\subsection{Assistants de preuves et prouveurs automatiques}
+\subsection{Assistants de preuve et prouveurs automatiques}
 
 Les assistants de preuve sont des logiciels basés sur un petit noyau
 implantant un vérificateur pour une logique très expressive, permettant
 d'énoncer et de prouver de manière très sûre des théorèmes dans une
 grande variété de domaines. Au-dessus de ce petit noyau, une interface
-utilisateur contenant notamment un ensemble de tactique permet d'établir
-les preuves pas à pas. La grande expressivité de la logique implantée
-par ces prouveurs limite l'automatisation de la recherche de preuve
-possible, demandant ainsi une assez grande expertise pour être utilisés.
+utilisateur contenant notamment un ensemble de tactiques permet
+d'établir les preuves pas à pas. La grande expressivité de la logique
+implantée par ces prouveurs limite l'automatisation possible pour la
+recherche de preuve, demandant ainsi une assez grande expertise pour
+être utilisés.
 
 \emph{A contrario}, les prouveurs automatiques implantent une logique
 moins expressive, mais pour laquelle une recherche de preuve -- bien
@@ -130,10 +129,10 @@ l'utilisateur, mais offrent très peu de garanties de sûreté.
   \hline
   Logique & Ordre supérieur ou Théorie des types & Premier ordre et combinaison de théories\\
   \hline
-  Utilisation & Guidage fastidieux de l'utilisateur & Preuve entièrement automatisée\\
+  Automatisation & Guidage fastidieux de l'utilisateur & Preuve entièrement automatisée\\
   \hline
   Sûreté & Basé sur un petit noyau vérifiable & Code très grand
-  difficile à prouver, retourne parfois des traces vérifiables \emph{a
+  difficile à prouver, mais retourne parfois des traces vérifiables \emph{a
     posteriori}\\
   \hline
 \end{tabularx}
@@ -144,16 +143,15 @@ l'utilisateur, mais offrent très peu de garanties de sûreté.
 
 La \textsc{Table}~\ref{tab:assistants_automatiques} résument leurs
 points forts et faibles, soulignant leur complémentarité: une
-interaction entre les deux permettrait d'offre à la fois
+interaction entre les deux permettrait d'offrir à la fois
 l'automatisation lorsqu'elle est possible et la sûreté.
 
 Dans cet article, nous nous intéressons plus particulièrement aux
 assistants de preuve basés sur la logique d'ordre supérieur, notamment
 \holfour, et aux prouveurs du premier ordre avec théories, comme
 \beagle. La logique implantée par les deuxièmes étant un sous-ensemble
-de celle implantée par les assistants de preuves basés sur la logique
-d'ordre supérieur, elle définit une interface commune leur permettant de
-communiquer.
+de celle implantée par les premiers, elle définit une interface commune
+leur permettant de communiquer.
 
 
 \subsection{Interface: le format \tff}
@@ -168,7 +166,7 @@ Problems for Theorem Provers'') regroupant une grande base de données de
 problèmes pour prouveurs du premier ordre. Il permet de décrire tout
 problème du premier ordre avec arithmétique (entière, rationnelle ou
 réelle). Il propose également un format générique pour les traces de
-preuves\footnote{Le standard des preuves écrites au format \tff est présenté à l'adresse \url{http://www.cs.miami.edu/~tptp/TPTP/QuickGuide/Derivations.htm})}
+preuves\footnote{Le standard des preuves écrites au format \tff est présenté à l'adresse \url{http://www.cs.miami.edu/~tptp/TPTP/QuickGuide/Derivations.htm}.}.
 
 
 L'utilisation d'un format générique permet de ne pas dépendre de
@@ -188,7 +186,7 @@ pour définir la nouvelle tactique \beagletac
 testée (partie~\ref{sec:experiences:experiences}). La partie
 \ref{sec:traces} décrit comment, dans un deuxième temps, vérifier les
 traces au format \tff générées par certains prouveurs (dont \beagle).
-Enfin, nous discutions des travaux similaires et futurs
+Enfin, nous discutons des travaux similaires et futurs
 (partie~\ref{sec:similaires}) avant de conclure.
 
 

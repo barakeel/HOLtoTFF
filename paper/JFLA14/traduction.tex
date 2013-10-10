@@ -28,11 +28,11 @@ prouvée correcte. Nous présentons ici l'ordre de ces étapes, en
 précisant quel outil a été utilisé pour les implanter. Les étapes
 concernant réellement le passage au premier ordre sont notées en gras.
 \begin{enumerate}
-\item \textbf{Monomorphisation}: \cite{MengP08} a montré qu'il était
-  préférable -- notamment pour des raisons d'efficacité -- d'effectuer
-  cet étape en premier. La
-  partie~\ref{sec:traduction:nouveautes} décrit notre
-  algorithme de monomorphisation.
+\item \textbf{Monomorphisation}: Meng et Paulson~\cite{MengP08} ont
+  montré qu'il était préférable -- notamment pour des raisons
+  d'efficacité -- d'effectuer cet étape en premier. La
+  partie~\ref{sec:traduction:nouveautes} décrit notre algorithme de
+  monomorphisation.
   \item Négation de la conclusion: la prouvabilité du but est
     équivalente à la non-satisfiabilité de la formule donnée au
     prouveur.
@@ -53,7 +53,7 @@ concernant réellement le passage au premier ordre sont notées en gras.
   \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
     les fonctions passées en arguments à d'autres fonctions [\todo ref].
     Les fonctions arithmétiques sont néanmoins conservées, puisqu'elles
-    dont partie de notre langage cible. Elle est réalisée en fin de
+    font partie de notre langage cible. Elle est réalisée en fin de
     traduction afin de limiter son application: par exemple,
     l'élimination de l'ordre supérieur dans la formule $\exists f.\
     \forall x.\ f\ x = 0$ aura déjà été réalisée par les étapes
@@ -72,7 +72,7 @@ originel.
 \subsection{Algorithme de monomorphisation}
 \label{sec:traduction:nouveautes}
 
-Cette étape consiste à instancier les variables de type apparaissant des
+Cette étape consiste à instancier les variables de type apparaissant dans
 les théorèmes prouvés en amont par plusieurs types concrets, le format
 \tff n'ayant pas de polymorphisme. La difficulté est de trouver les
 types concrets avec lesquels instancier ces variables tout en conservant
@@ -101,7 +101,7 @@ $D\ 42$. Les instanciations cherchées sont la substitution $\{a \mapsto
 \text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b
 \mapsto \text{\verb!int!}\}$ pour le second théorème.
 
-Nous illustrerons sur cette exemple les étapes de monomorphisation
+Nous illustrerons sur cet exemple les étapes de monomorphisation
 décrites dans la suite de cette partie.
 
 \subsubsection{Graphe de dépendance}
@@ -115,16 +115,16 @@ Un graphe de dépendance est constitué de nœuds et de deux types
 d'arêtes.
 \begin{enumerate}
 \item[$\bullet$] Les nœuds sont les constantes présentes dans la liste
-  de théorèmes et dans le but, associées à leur type. Deux même
-  constantes sont représentée par des nœuds différents si elles
+  de théorèmes et dans le but, associées à leur type. Deux mêmes
+  constantes sont représentées par des nœuds différents si elles
   proviennent de deux propositions (théorèmes ou buts) différentes.
 \item[$\bullet$] Les arêtes de {\color{blue}substitution} sont orientées
   et relient deux
   constantes vérifiant les propriétés suivantes:
   \begin{itemize}
-  \item la constante origine n'appartient pas au but. (On rappelle que
+  \item la constante origine n'appartient pas au but (on rappelle que
     l'on ne cherche à instancier que les variables de type des théorèmes
-    prouvés en amont.);
+    prouvés en amont);
   \item elles ont le même nom;
   \item le type du destinataire est une instance du type de l'origine.
   \end{itemize}
@@ -139,7 +139,7 @@ d'arêtes.
 \end{mydef}
 
 Par convention, dans tous les exemples de graphes de dépendance donnés
-ci-dessous, nous représentons les constante d'une même proposition sur
+ci-dessous, nous représentons les constantes d'une même proposition sur
 une même ligne.
 
 \begin{figure} [h!]
@@ -209,7 +209,7 @@ pour chaque type d'arête.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\caption{Transformation de substitution associée à l'arête de substitution à droite}
+\caption{Transformation de substitution associée à l'arête de substitution de droite}
 \label{fig: substitutions}
 \end{figure}
 
@@ -235,13 +235,13 @@ pour chaque type d'arête.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\caption{Transformation de partage associée à l'arête de partage au centre et à l'arête de substitution à droite}
+\caption{Transformation de partage associée à l'arête de partage (au centre) et à l'arête de substitution de droite}
 \label{fig: substitutions}
 \end{figure}
 
 Ces deux transformations sont appliquées simultanément afin de
 transformer un graphe de dépendance. Cette transformation est illustrée
-par l'exemple de la \textsc{Figure}~\ref{fig:etape_de_monomorphisation}
+par l'exemple de la \textsc{Figure}~\ref{fig:etape_de_monomorphisation}.
 
 \begin{mydef} (Transformation d'un graphe)
 La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comme l'application de toutes les transformations de substitution et de partage possibles à ce graphe de façon simultanée.
@@ -360,7 +360,7 @@ $\mathcal{T}$ n'a pas de point fixe.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-La substitution \{$a \mapsto (a \rightarrow n)$\} peut être appliquée autant de fois que l'on veut à a sans trouver de point fixe.
+La substitution \{$a \mapsto (a \rightarrow n)$\} peut être appliquée autant de fois que l'on veut à $a$ sans trouver de point fixe.
 \end{proof}
 
 
@@ -371,11 +371,13 @@ déterminée par la conjecture suivante.
 \begin{conjecture}
 Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de $G$. \\Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
 \begin{itemize}
-\item Si $G_p$ n'a pas de circuit interne à ses nœuds et n'a pas de arêtes de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
+\item Si $G_p$ n'a pas de circuit interne à ses nœuds et n'a pas d'arête de substitution non redondante à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
 \item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
 \end{itemize}
 \end{conjecture}
 
+La \textsc{Figure}~\ref{fig:point_fixe} montre le point fixe de
+$\mathcal{T}$ sur notre exemple.
 \begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
@@ -391,33 +393,34 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 \end{figure}
 
 \begin{remark}
-Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figure}~\ref{fig:point_fixe} n'est pas surprenant car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
+Le fait que l'on ait obtenu un point fixe après 2 étapes dans la
+\textsc{Figure}~\ref{fig:point_fixe} vérifie la conjecture ci-dessus car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
 \end{remark}
 
 \subsubsection{Création de nouveaux théorèmes à partir d'un graphe de dépendance}
 \label{sec:traduction:nouveautes:conclusion}
 
-Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir remarque). 
 D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
-Exemple
 
 D'un ensemble de noeuds appartenant à un même théorème, on peut déduire un ensemble de substitutions en combinant les ensembles de subtitutions correspondants à chaque noeud.
-Exemple
-Remarque
 
-Finalement nous instancions chaque théorème à l'aide de leur ensemble de substitutions correspondants et créons ainsi de nouveaux théorèmes susceptibles d'être utilisés par un prouveur ne supportant pas les types polymorphes.
+Finalement nous instancions chaque théorème à l'aide de leur ensemble de substitutions correspondant et créons ainsi de nouveaux théorèmes susceptibles d'être utilisés par un prouveur ne supportant pas les types polymorphes.
 
 
 
-\begin{remark} (Borne a posteriori)
-Dans notre programme, nous avons limité à 15 la création de nouveaux théorèmes, ce qui limite du même coup le nombre d'itérations que le programme effectue avant de renvoyer le graphe de dépendance final.
-\end{remark}
 
 
 \subsubsection{Implantation}
 \label{sec:traduction:nouveautes:implantation}
 
-Nous présentons maintenant quelques détails pratiques pour implanter notre traduction.
+Nous présentons maintenant quelques détails pratiques pour implanter
+notre traduction.
+
+\paragraph{Pour gérer les cas où la transformation sur le graphe de
+  dépendance n'a pas de point fixe,} nous avons limité à 15 la création
+de nouveaux théorèmes, ce qui limite du même coup le nombre d'itérations
+que le programme effectue avant de renvoyer le graphe de dépendance
+final.
 
 \paragraph{Lors de la monomorphisation,} un graphe de dépendance est
 implanté par une liste de listes, chaque liste contenant les constantes
@@ -434,7 +437,7 @@ variables d'un fichier \tff, sont créés. Ceci augmente la sûreté de
 l'impression et permettra de rejouer ensuite la preuve (voir
 partie~\ref{sec:traces}). De plus, les types doivent être traduits pour
 correspondre à la distinction au premier ordre entre variables,
-fonctions et prédicats. (\todo ref type TFF)
+fonctions et prédicats.
 
-\todo Exemple:
+
 
