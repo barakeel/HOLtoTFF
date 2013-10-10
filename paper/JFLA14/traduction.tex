@@ -256,10 +256,12 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
-  {C: a,{\color{blue} b},{\color{green} \text{\verb!int!}}};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} \text{\verb!int!}}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
+  {C: $a$,{\color{blue} $b$},{\color{green} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) 
+  {D: $a$,{\color{green} $b$},{\color{blue} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,{\color{blue} $a$}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
   \draw [-to,blue,ultra thick] (c12) -- (c32);
@@ -275,20 +277,22 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
 Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution interne au nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
 \end{mydef}
 
-La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons exceptionnellement représentés des arêtes internes.
+La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons exceptionnellement représentés des arêtes internes (en noir).
 
 \begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
-  {C: a,{\color{blue} b},{\color{green} \text{\verb!int!}}};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} \text{\verb!int!}}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
-  \draw [-to,gray,ultra thick] (c11)  to [out=280,in=80] (c21);
-  \draw [-to,blue,ultra thick] (c21) to [out=100,in=260] (c11);
-  \draw [-to,gray,ultra thick] (c11) to [out=130,in=75] (c11);
-  \draw [-to,gray,ultra thick] (c12) to [out=130,in=25] (c12);
+  {C: $a$, $b$, $\text{\verb!int!}$};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12)
+  {D: $a$, $b$, $\text{\verb!int!}$};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,$a$};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!}$};
+  \draw [-to,gray,ultra thick] (c11)  to [out=260,in=100] (c21);
+  \draw [-to,blue,ultra thick] (c21) to [out=80,in=280] (c11);
+  \draw [-to,black,ultra thick] (c11) to [out=130,in=75] (c11);
+  \draw [-to,black,ultra thick] (c12) to [out=130,in=25] (c12);
   \draw [-to,gray,ultra thick, ] (c12) -- (c32);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
@@ -345,20 +349,20 @@ $\mathcal{T}$ n'a pas de point fixe.
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
   \node [cloud, fill=white,node distance = 1.2cm] (c11)
-  {A: a,
-  {\color{red} a $\rightarrow$ n},
-  {\color{orange} (a $\rightarrow$ n) $\rightarrow$ n}
+  {A: $a$,
+  {\color{red} $a \rightarrow n$},
+  {\color{orange} $(a \rightarrow n) \rightarrow n$}
   };
   \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12)
-  {A: a $\rightarrow$ n,
-  {\color{red} (a $\rightarrow$ n) $\rightarrow$ n},
-  {\color{orange} ((a $\rightarrow$ n) $\rightarrow$ n) $\rightarrow$ n}
+  {A: $a \rightarrow n$,
+  {\color{red} $(a \rightarrow n) \rightarrow n$},
+  {\color{orange} $((a \rightarrow n) \rightarrow n) \rightarrow n$}
   };
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-La substitution \{a $\mapsto$ (a $\rightarrow$ n)\} peut être appliquée autant de fois que l'on veut à a sans trouver de point fixe.
+La substitution \{$a \mapsto (a \rightarrow n)$\} peut être appliquée autant de fois que l'on veut à a sans trouver de point fixe.
 \end{proof}
 
 
@@ -378,10 +382,10 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
-  {C: a,{\color{red} b},{\color{red} \text{\verb!int!}}};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{red} b},{\color{red} \text{\verb!int!}}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{red} a},{\color{orange} \text{\verb!int!}}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
+  {C: $a$,{\color{red} $b$},{\color{red} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: $a$,{\color{red} $b$},{\color{red} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,{\color{red} $a$},{\color{orange} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: $\text{\verb!int!}$};
 \end{tikzpicture}
 \end{center}
 \caption{Point fixe de la transformation $\mathcal{T}$ après 2 étapes de monomorphisation}
@@ -389,7 +393,7 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 \end{figure}
 
 \begin{remark}
-Le fait que l'on est obtenu ce point fixe après 2 étapes n'est pas surprenant car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
+Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figure}~\ref{fig:point_fixe} n'est pas surprenant car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
 \end{remark}
 
 \subsubsection{Extraction des substitutions à partir du graphe de
