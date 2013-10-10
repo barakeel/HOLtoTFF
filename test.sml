@@ -13,6 +13,13 @@ load "int_arithTheory"; open int_arithTheory;
 load "beagle"; open beagle;
 *)
 
+
+val thml = [];
+val goal = ([``(x = 2) \/ (x = 4)``, ``y = 2 * x``], ``(y = 4) \/ (y = 8)``);
+BEAGLE_TAC thml goal;
+
+
+
 (* debugging *)
 val thml = [mk_thm ([], ``∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)``)];
 val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,

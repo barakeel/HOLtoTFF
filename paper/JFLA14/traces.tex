@@ -103,11 +103,63 @@ les étapes de la preuve qui ont été utilisées\footnote{Il est parfois
 \subsubsection{Description sur une expérience}
 % Exemple.
 
-\todo
- Voici les étapes d'une expérience
- Fichier preuve:
- Représentation interne à HOL
- rejouage étape par étape de la preuve.
+Nous allons décrire le rejouage de la preuve d'un problème donné par la formule suivante: 
+ \[((x = 2) \vee (x = 4)) \wedge y = 2 * x) \Rightarrow (y = 4) \wedge (y = 8)\]
+
+\begin{figure}[h!] 
+ \small
+ \begin{tabularx}{\textwidth}{|X|X|}
+ \hline
+ Fichier preuve & Arbre de la preuve \\
+ \hline
+ \begin{center}
+ \begin{alltt}
+ tff(1,axiom, ...).
+ ...
+ tff(4,axiom,(xy!=8),...).
+ tff(5,axiom,(xy!=4),...).
+ tff(6,axiom,(xx=2 | xx=4),...).
+ tff(7,axiom,(product(2, xx)=xy),...).
+ tff(8s1,plan,((xx=2),Leftsplit).
+ tff(9,plain,((xx=4),...).
+ tff(10,plain,((xx!=2),...).
+ \end{alltt} 
+ \end{center}
+ &
+ \begin{center}
+ \begin{tikzpicture}[]
+   \node [cloud, fill=white,node distance=0.8cm]
+   (7) {1 à 7};
+   \node [cloud, fill=green!20, below of=7, xshift=-0.8cm, node distance=0.8cm] (8s1) {8s1};
+   \node [cloud, fill=green!20, below of=8s1, xshift=-0.8cm, node distance=0.8cm] (F1) {Faux};
+   \node [cloud, fill=green!20, below of=7, xshift=0.8cm, node distance=0.8cm] (8s11) {8s1'};
+   \node [cloud, fill=white, below of=8s11, xshift=0.8cm, node distance=0.8cm] (9) {9};
+   \node [cloud, fill=white, below of=9, xshift=0.8cm, node distance=0.8cm] (10) {10};
+   \node [cloud, fill=white, below of=10, xshift=0.8cm, node distance=0.8cm] (F2) {Faux};
+   \draw[-to,thick]       (7) -- (8s1);
+   \draw[-to,thick]       (8s1) -- (F1);
+   
+   \draw[-to,thick]       (7) to [out=0,in=90] (9);
+   \draw[-to,thick]       (8s11) -- (9);
+   \draw[-to,thick]       (9) -- (10);
+   \draw[-to,thick]       (10) -- (F2);
+ \end{tikzpicture}
+ \end{center}
+ \\ \hline
+ \end{tabularx}
+ \normalsize
+\caption{Description du rejouage d'une preuve}
+\label{fig:rejouage}
+\end{figure} 
+La preuve est rejouée de façon linéaire:
+
+\begin{itemize}
+\item Tout d'abord les axiomes $1$ à $7$ sont lus et prouvés à partir des axiomes de \holfour desquels ils ont été traduits.
+\item A l'étape $8s1$, l'indication $Leftsplit$ et la numérotation nous indiquent que ceci est le début d'un raisonnement par l'absurde. Nous ajoutons donc cet hypothèse à une pile sans la prouver.
+\item Avant de passer à l'étape suivante, la numérotation nous indique que le raisonnement par l'absurde a pris fin. Nous devons donc prouver que l'on a aboutit a une contradiction et modifier l'hypothèse par l'absurde du haut de la pile en son contraire et l'ajouter comme proposition déduite de nos axiomes $8s1'$.
+\item L'étape $9$ et $10$ sont prouvés en utilisant toutes les étapes parentes dans l'arbre de la figure ... .
+\item Pour conclure, il suffit de montrer que l'ensemble des propositions de la branche droite permettent de déduire une contradiction.
+\end{itemize}
 
 
 

@@ -68,6 +68,11 @@ sait pas trouver la solution du problème. En revanche, les
 \holfour passées à \beagle) et ``parsing error'' (dûs à un fichier
 problème trop grand ou à une erreur dans l'impression) correspondent à
 des erreurs dans notre utiliation de \beagle.
+\begin{remark}
+Comme \beagle ne supporte pas l'arithmétique non linéaire, la constante multiplicative $*$ est traduite par une constante quelconque lorsque le terme est non-linéaire. Cette modification devra être retiré lorsqu'on testera notre traduction avec un prouveur qui supporte l'arithmétique non linéaire.
+\end{remark}
+
+
 
 \begin{figure}
 \begin{tabularx}{\textwidth}{|X|X|X|X|}

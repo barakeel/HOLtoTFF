@@ -345,8 +345,10 @@ fun read_proof proof0 rdict =
 exception unprovable;
 
 fun PROVE_GOAL goal =
+  (
   (#2 (metisTools.METIS_TAC [] goal)) []
-  (* handle _ => (#2 (Cooper.COOPER_TAC goal)) [] *)
+  handle _ => (#2 (numLib.DECIDE_TAC goal)) []
+  )
   handle _ => raise unprovable
 
 

@@ -71,7 +71,7 @@ fun beagle_interact filename finalgoal =
       ("cd " ^ directory ^ ";" ^
        "sh " ^ directory ^ "callbeagle.sh")
       handle _ => raise BEAGLE_ERR "beagle_call" "";
-    update_SZSstatus filename
+    update_SZSstatus filename;
     (* replaying the proof *)
     let val filename1 = filename ^ "_declaration" in
     let val filename2 = filename ^ "_reading" in

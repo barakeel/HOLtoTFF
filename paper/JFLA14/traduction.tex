@@ -67,17 +67,6 @@ Chaque étape étant prouvée correcte en \holfour, il en résulte qu'une
 preuve d'un problème traduit constitue également une preuve du problème
 originel.
 
-\todo (Mettre plutôt ça dans la partie~\ref{sec:experiences:beagletac})
-\begin{itemize}
-    \item Impression
-    \subitem Variables ou constantes.
-    \subitem Types.
-    \subitem True and false constants.
-    \subitem Non-linear integer arithmetic.
-lien vers des papiers expliquant les étapes qui sont déjà dans la
-  littérature
-\end{itemize}
-
 
 \subsection{Algorithme de monomorphisation}
 \label{sec:traduction:nouveautes}
@@ -396,26 +385,31 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figure}~\ref{fig:point_fixe} n'est pas surprenant car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
 \end{remark}
 
-\subsubsection{Extraction des substitutions à partir du graphe de
-  dépendance final}
+\subsubsection{Création de nouveaux théorèmes à partir d'un graphe de dépendance}
 
-\todo À clarifier
+Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir remarque). 
+D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
+Exemple
 
-Soit $G_i$ le graphe de dépendance obtenu par la méthode décrite dans la
-partie précédente. De chaque constante du graphe provenant d'un même
-théorème du graphe, une liste de subsitutions peut être extraite. Ces
-listes de substitutions sont combinées de toutes les manières possibles
-de façon a créer une liste de subsitutions pour ce théorème. Finalement,
-chaque théorème est instancié avec sa liste de substitutions.
+D'un ensemble de noeuds appartenant à un même théorème, on peut déduire un ensemble de substitutions en combinant les ensembles de subtitutions correspondants à chaque noeud.
+Exemple
+Remarque
+
+Finalement nous instancions chaque théorème à l'aide de leur ensemble de substitutions correspondants et créons ainsi de nouveaux théorèmes susceptibles d'être utilisés par un prouveur ne supportant pas les types polymorphes.
+
+
+
+\begin{remark} (Borne a posteriori)
+Dans notre programme, nous avons limité à 15 la création de nouveaux théorèmes, ce qui limite du même coup le nombre d'itérations que le programme effectue avant de renvoyer le graphe de dépendance final.
+\end{remark}
 
 
 \subsubsection{Implantation}
 
-\todo Quelles sont les structures de données utilisées? En particulier
-pour représenter les graphes.
+Dans cette partie nous présentons quelques détails techniques concernant notre traduction.
 
+\paragraph{Lors de la monomorphisation} , un graphe est représentés par une liste de listes, chaque liste contenant les constantes d'un même théorèmes ainsi que les constantes créés par la répétition de la transformation. Les arêtes ne sont pas représentées, car on instancie toutes les constantes d'un même théorème avec les substitutions générées par ces mêmes constantes, ce qui théoriquement revient à considérer que les constantes d'un même théorème sont liés 2 à 2 par une arête de partage.
 
-\todo Cette partie ne parle donc plus de la traduction des entiers?
-
-
+\paragraph{Lors de l'impression}, des dictionnaires injectifs pour les variables et les constantes sont créées, ce qui  augmente la sûreté de l'impression et permettra de rejouer la preuve plus tard. De plus, les types doivent être traduit pour correspondre à la distinction au premier ordre entre variables, fonctions et prédicats. (voir ref type TFF)
+Exemple:
 
