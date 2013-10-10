@@ -214,7 +214,7 @@ pour chaque type d'arête.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\caption{Transformation de substitution associée à l'arête de substitution de droite}
+\caption{Transformation de substitution associée à l'arête de substitution à droite}
 \label{fig: substitutions}
 \end{figure}
 
@@ -224,14 +224,13 @@ pour chaque type d'arête.
   $\sigma : c' \to c''$ instancie les types de $c$ à l'aide des substitutions induites par $\sigma$. Ces types sont ensuite ajoutés au nœud $c$.
 \end{mydef}
 
-
 \begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11) 
-  {C: $a$};
+  {C: $a$ , $\color{green} \text{\verb!int!}$};
   \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
-  {D: $a$ , $\color{blue} \text{\verb!int!}$};
+  {D: $a$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
   \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
   {D: $\text{\verb!int!}$};
@@ -241,7 +240,7 @@ pour chaque type d'arête.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\caption{Transformation de partage associée à l'arête de partage et à l'arête de substitution de droite}
+\caption{Transformation de partage associée à l'arête de partage au centre et à l'arête de substitution à droite}
 \label{fig: substitutions}
 \end{figure}
 
@@ -273,12 +272,30 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comm
 
 
 \begin{mydef} (Redondance)
-Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution à l'intérieur du nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
+Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution interne au nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
 \end{mydef}
 
-La \textsc{Figure}~\ref{fig:redondance} illustre la notion de redondance.
+La notion de redondance est illustrée par la \textsc{Figure}~\ref{fig:redondance}, dans laquelle nous avons exceptionnellement représentés des arêtes internes.
 
-
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11)
+  {C: a,{\color{blue} b},{\color{green} \text{\verb!int!}}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} \text{\verb!int!}}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
+  \draw [-to,gray,ultra thick] (c11)  to [out=280,in=80] (c21);
+  \draw [-to,blue,ultra thick] (c21) to [out=100,in=260] (c11);
+  \draw [-to,gray,ultra thick] (c11) to [out=130,in=75] (c11);
+  \draw [-to,gray,ultra thick] (c12) to [out=130,in=25] (c12);
+  \draw [-to,gray,ultra thick, ] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+\caption{Elimination des arêtes redondantes (en gris)}
+\label{fig:redondance}
+\end{figure}
 
 
 Les transformations successives d'un graphe de dépendance ne terminent
@@ -350,16 +367,30 @@ d'itérations pour calculer la substitution finale. Cette borne est
 déterminée par la conjecture suivante.
 
 \begin{conjecture}
-<<<<<<< HEAD
-=======
-
->>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
-Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
+Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de $G$. \\Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
 \begin{itemize}
-\item Si $SG_p$ n'a pas de circuit interne à ses nœuds et n'a pas de arêtes de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
+\item Si $G_p$ n'a pas de circuit interne à ses nœuds et n'a pas de arêtes de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
 \item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
 \end{itemize}
 \end{conjecture}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] (c11)
+  {C: a,{\color{red} b},{\color{red} \text{\verb!int!}}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{red} b},{\color{red} \text{\verb!int!}}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{red} a},{\color{orange} \text{\verb!int!}}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
+\end{tikzpicture}
+\end{center}
+\caption{Point fixe de la transformation $\mathcal{T}$ après 2 étapes de monomorphisation}
+\label{fig:point_fixe}
+\end{figure}
+
+\begin{remark}
+Le fait que l'on est obtenu ce point fixe après 2 étapes n'est pas surprenant car le nombre maximal d'arêtes de substitution d'un chemin sans circuit du graphe initial (\textsc{Figure}~\ref{fig:dependances}) est de 2.
+\end{remark}
 
 \subsubsection{Extraction des substitutions à partir du graphe de
   dépendance final}
