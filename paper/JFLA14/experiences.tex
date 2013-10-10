@@ -73,45 +73,41 @@ Comme \beagle ne supporte pas l'arithmétique non linéaire, la constante multip
 \end{remark}
 
 
-
-\begin{figure}
+\begin{table}[H]
 \begin{tabularx}{\textwidth}{|X|X|X|X|}
 \hline
   \beagletac & Traduction & Impression & \metistac\\ \hline
   4.55 & 0.82 & 0.18 & 0.11 \\ \hline
 \end{tabularx}
-\caption{Temps moyen en secondes mis par \metistac, \beagletac et les étapes de \beagletac interne à \holfour sur les 218 problèmes résolus par \beagletac.}
-\end{figure}
+\caption{Temps moyen de résolution (en secondes)}
+\end{table}
 
 
 \noindent \textbf{Sur des problèmes d'ordre supérieur}
 
-\begin{figure}[h!]
-
+\begin{table}[H]
 \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
 \hline
-\centering
 $ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
 Premier ordre & 170/185 = 91.9\% & 2.711 & 0.148 & 0.08 & 0.13 \\ \hline
 Ordre supérieur & 48/86 = 55.8\%  & 11.07 & 3.2 & 0.51 & 0.04 \\ \hline
 \end{tabularx}
-\caption{Temps moyen (en secondes) sur les problèmes résolus par \beagletac.}
-\end{figure}
+\caption{Temps moyen de résolution de problème du premier ordre et d'ordre supérieur (en secondes)}
+\end{table}
  
+\noindent \textbf{Sur des problèmes polymorphes}
 
-\textbf{Sur des problèmes polymorphes}
-
-\begin{figure}[h!]
+\begin{table}[H]
 \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
 \hline
 $ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
 Monomorphe & 107/132 = 81.1\% & 5.83 & 1.32 & 0.23 & 0.12\\ \hline
 Polymorphe & 111/139 = 79.9\%  & 3.32 & 0.34 & 0.13 & 0.9\\ \hline
 \end{tabularx}
-\caption{Temps moyen (en secondes) mis par les différentes fonctions sur des problèmes du premier ordre et d'ordre supérieur.}
-\end{figure}
+\caption{Temps moyen de résolution de problèmes monomorphes et polymorphes (en secondes)}
+\end{table}
 
-\begin{figure}[!h]
+\begin{figure}[H]
 Les résultats en termes de nombre de buts résolus sont présentés dans la
 \textsc{Figure}~\ref{fig:resultats}.
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
@@ -167,17 +163,18 @@ taille des buts, faisant ainsi croître le nombre de timeouts. Concernant l'algo
 cas des 139 problèmes ayant besoin d'être monomorphisés, soit $73\%$ des
 cas.
 
+\vspace{1mm}
 
-\textbf{Sur des problèmes arithmétiques}
-\begin{figure}[h!]
+\noindent \textbf{Sur des problèmes arithmétiques}
+\begin{table}[H]
 \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
 \hline
 $ $ & Problèmes résolus & \beagletac & Traduction & Impression & \metistac \\ \hline
 Non-arithmétique & 89/109 = 81.6\% & 5.91 & 1.51 & 0.25 & 0.08\\ \hline
 Arithmétique & 129/162 = 79.6\%  & 3.62 & 0.34 & 0.13 & 0.13\\ \hline
 \end{tabularx}
-\caption{Temps moyen (en secondes) mis par les différentes fonctions sur des problèmes du premier ordre et d'ordre supérieur.}
-\end{figure}
+\caption{Temps moyen de résolution de problèmes non-arithmétiques et arithmétiques (en secondes)}
+\end{table}
 
 
 
