@@ -2,5 +2,5 @@
 echo "Calling beagle..." 
 filepath=$(head -1 filepath.txt) 
 timeout 15s \
-  java -jar beagle.jar "-genvars" "-proofstatus" "$filepath"
+  java -jar beagle.jar "-genvars" "-proof" "$filepath"
 #
