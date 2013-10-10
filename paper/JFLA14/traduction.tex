@@ -410,6 +410,7 @@ Dans cette partie nous présentons quelques détails techniques concernant notre
 
 \paragraph{Lors de la monomorphisation} , un graphe est représentés par une liste de listes, chaque liste contenant les constantes d'un même théorèmes ainsi que les constantes créés par la répétition de la transformation. Les arêtes ne sont pas représentées, car on instancie toutes les constantes d'un même théorème avec les substitutions générées par ces mêmes constantes, ce qui théoriquement revient à considérer que les constantes d'un même théorème sont liés 2 à 2 par une arête de partage.
 
-\paragraph{Lors de l'impression}, des dictionnaires injectifs pour les variables et les constantes sont créées, ce qui  augmente la sûreté de l'impression et permettra de rejouer la preuve plus tard. De plus, les types doivent être traduit pour correspondre à la distinction au premier ordre entre variables, fonctions et prédicats. (voir ref type TFF)
-Exemple:
+\paragraph{Lors de l'impression}, des dictionnaires injectifs, faisant correspondre les variables et les constantes de \holfour avec des variables d'un fichier \tff, sont créés. Ceci augmente la sûreté de l'impression et permettra de rejouer la preuve plus tard. De plus, les types doivent être traduit pour correspondre à la distinction au premier ordre entre variables, fonctions et prédicats. (voir ref type TFF)
+
+\todo Exemple:
 
