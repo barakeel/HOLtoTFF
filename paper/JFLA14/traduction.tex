@@ -39,18 +39,16 @@ concernant réellement le passage au premier ordre sont notées en gras.
   \item Mise sous forme normale conjonctive: cette étape est réalisée
     par la fonction \textsf{CNF$\_$CONV} implantée en \holfour par Joe
     Hurd en octobre 2001.
-  \item \textbf{$\lambda$-lifting}: Elle est
-    implantée de la même manière que dans [\todo ref] et par utilisation
-    des combinateurs de [\todo ref].
+  \item \textbf{$\lambda$-lifting}: Elle est implantée de la même manière que dans \cite{Bohme12}.  Cette étape auraient pu être remplacés par l'utilisation de combinateurs \cite{Hurd03}. Ces deux approches ont été testés dans le développement de Sledgehammer \cite{MengP08}.
   \item Élimination des arguments booléens qui ne sont pas des
     variables: le format \tff propose un type $\$o$ pour désigner le
     type de retour des prédicats. Il ne peut être utilisé pour les
     arguments booléens des fonctions; leur type est donc remplacé par un
-    nouveau type \verb!bool! [\todo ref].
-  \item Mise sous forme d'un ensemble de clauses (\todo : en quoi ça
-    diffère de la mise en CNF?).
+    nouveau type \verb!bool! \cite{MengP08}.
+  \item Mise sous forme d'un ensemble de clauses
+    A partir d'une formule sous forme normal conjonctive, les quantificateurs existentiels sont éliminés en créant de nouvelles constantes et les quantificateurs universels sont ensuites distribués par rapport au conjonctions. Nous obtenons un ensemble de clauses de la forme $\forall x1,\ldots,x_n.\ f[x_1,\ldots,x_n]$ .
   \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
-    les fonctions passées en arguments à d'autres fonctions [\todo ref].
+    les fonctions passées en arguments à d'autres fonctions \cite{Hurd03}\cite{MengP08}.
     Les fonctions arithmétiques sont néanmoins conservées, puisqu'elles
     dont partie de notre langage cible. Elle est réalisée en fin de
     traduction afin de limiter son application: par exemple,
@@ -174,7 +172,7 @@ une même ligne.
 
 \begin{remark}
 Par souci de clareté, nous continuerons d'illustrer notre propos sur un graphe équivalent à celui donné par l'exemple décrit dans la \textsc{Figure}~\ref{fig:dependances}.
-\end{remark}
+\end{remark}par
 
 L'idée de l'algorithme est d'appliquer une succession de transformations
 au graphe de dépendence, jusqu'à l'obtention d'un point fixe (s'il
@@ -372,9 +370,10 @@ Soit $p$ le nombre maximal d'arêtes de substitution d'un chemin sans circuit de
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
   {C: $a$,{\color{red} $b$},{\color{red} $\text{\verb!int!}$}};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: $a$,{\color{red} $b$},{\color{red} $\text{\verb!int!}$}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$,{\color{red} $a$},{\color{orange} $\text{\verb!int!}$}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: $\text{\verb!int!}$};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) 
+  {D: $a$,{\color{red} $b$},{\color{red} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c21) {C: $b$,{\color{red} $a$},{\color{orange} $\text{\verb!int!}$}};
+  \node [cloud, fill=white, below of=c12,node distance = 2.4cm] (c32) {D: $\text{\verb!int!}$};
 \end{tikzpicture}
 \end{center}
 \caption{Point fixe de la transformation $\mathcal{T}$ après 2 étapes de monomorphisation}
@@ -389,13 +388,19 @@ Le fait que l'on est obtenu un point fixe après 2 étapes dans la \textsc{Figur
 
 Dans cette étape, nous décrivons la créations de nouveaux théorèmes à partir d'un graphe de dépendance obtenu par point fixe ou non (voir remarque). 
 D'un noeud du graphe, nous pouvons extraire des arêtes de substitutions (internes ou externes) dont l'origine est ce noeud lesquels induisent un ensemble de substitutions pour ce noeud.
-Exemple
+\begin{example} (\textsc{Figure}~\ref{fig:point_fixe})
+\\ Les noeuds C et D de types $a$,$b$ et $\text{\verb!int!}$ induisent le même ensemble de substitutions: 
+ \[\{\{a \mapsto \text{\verb!int!}\},
+    \{b \mapsto \text{\verb!int!}\},
+    \{a \mapsto b \},
+    \{b \mapsto a \}, 
+    \{a \mapsto a \}, 
+    \{b \mapsto b \}
+\}\]
+\end{example}
 
-D'un ensemble de noeuds appartenant à un même théorème, on peut déduire un ensemble de substitutions en combinant les ensembles de subtitutions correspondants à chaque noeud.
-Exemple
-Remarque
-
-Finalement nous instancions chaque théorème à l'aide de leur ensemble de substitutions correspondants et créons ainsi de nouveaux théorèmes susceptibles d'être utilisés par un prouveur ne supportant pas les types polymorphes.
+D'un ensemble de noeuds appartenant à un même théorème, on peut déduire un ensemble de substitutions en combinant de toutes les manières possibles les ensembles de subtitutions correspondants à chaque noeud.
+Finalement, nous instancions chaque théorème à l'aide de leur ensemble de substitutions correspondants et créons ainsi de nouveaux théorèmes susceptibles d'être utilisés par un prouveur ne supportant pas les types polymorphes.
 
 
 
@@ -410,7 +415,10 @@ Dans cette partie, nous présentons quelques détails techniques concernant notr
 
 \paragraph{Lors de la monomorphisation} , un graphe est implémenté par une liste de listes, chaque liste contenant les constantes d'un même théorèmes ainsi que les constantes créés par la répétition de la transformation. Les arêtes ne sont pas représentées, car toutes les constantes d'un même théorème sont instanciées avec les substitutions générées par ces mêmes constantes, ce qui théoriquement revient à considérer que les constantes d'un même théorème sont liés 2 à 2 par une arête de partage.
 
-\paragraph{Lors de l'impression}, des dictionnaires injectifs, faisant correspondre les variables et les constantes de \holfour avec des variables d'un fichier \tff, sont créés. Ceci augmente la sûreté de l'impression et permettra de rejouer la preuve plus tard. De plus, les types doivent être traduit pour correspondre à la distinction au premier ordre entre variables, fonctions et prédicats. (\todo ref type TFF)
+\paragraph{Lors de l'impression}, des dictionnaires injectifs, faisant correspondre les variables et les constantes de \holfour avec des variables d'un fichier \tff, sont créés. Un dictionnaire associé de traduction des types vient les compléter. Ceci augmente la sûreté de l'impression et permettra de relire la preuve produite par le prouveur. La traduction des types est traité dans \cite{Blanchette12}\cite{BlanchetteBPS13}\cite{MengP08}. La traduction que nous avons choisi n'utilise pas de prédicat supplémentaire mais requiert une monomorphisation préalable. 
 
-\todo Exemple:
+\begin{example} (Traduction d'un type de \holfour vers un type \tff)
+\\La fonction $f: (a \rightarrow b) \rightarrow c \rightarrow d $ d'arité 2 se traduit par  $xf:(a\_F\_b\ *\ c) > d$.
+\end{example}
+
 
