@@ -20,21 +20,12 @@ prouveurs du premier ordre lors d'autres utilisations.
 
 \subsection{Vérification des preuves}
 \subsubsection{Parsing}
-
-\subsubsection{Le lecteur}
 Les traces supportées actuellement par notre tactiques sont les fichiers
 au format \tff contenant uniquement des clauses. Lorsque le parsing
 s'effectue à partir d'un problème généré par notre traduction, les
 variables, constantes et types du fichier de trace sont mises en
 correspondance avec celles du problème de départ à l'aide des
 dictionnaires injectifs \holfour. (\todo il faudra avoir expliqué ce que c'est).
-
-\subsubsection{Le rejouage de la preuve}
-Les tactiques \metistac et \coopertac (une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger voir \cite{Norrish03completeinteger})
-sont utilisés conjointement pour rejouer les étapes de la preuve. 
-Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grâce à la numérotation des clauses (voir section génération de traces par beagles).
-=======
-
 
 
 \subsubsection{Rejouer la preuve}
@@ -58,7 +49,6 @@ dans \holfour.
 
 \subsection{Application à \beagle}
 
-\subsubsection{Génération de traces par Beagle}
 Nous appliquons ce procédé à la tactique \beagletac, afin d'implanter
 complètement le schéma de la \textsc{Figure}~\ref{fig:beagletac}. Cela
 nécessite tout d'abord de la part de \beagle d'être capable de générer
@@ -111,7 +101,6 @@ les étapes de la preuve qui ont été utilisées\footnote{Il est parfois
 \end{figure}
 
 \subsubsection{Description sur une expérience}
-=======
 % Exemple.
 
 \todo

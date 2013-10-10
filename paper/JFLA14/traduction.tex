@@ -82,7 +82,6 @@ lien vers des papiers expliquant les étapes qui sont déjà dans la
 \subsection{Algorithme de monomorphisation}
 \label{sec:traduction:nouveautes}
 
-
 Cette étape consiste à instancier les variables de type apparaissant des
 les théorèmes prouvés en amont par plusieurs types concrets, le format
 \tff n'ayant pas de polymorphisme. La difficulté est de trouver les
@@ -103,16 +102,10 @@ seront évaluées dans la partie~\ref{sec:experiences}.
 
 \subsubsection{Exemple}
 
-\todo Il serait mieux que cet exemple soit un ``running example'',
-c'est-à-dire le même que les exemples qui arrivent ensuite dans cette
-section.
-
-Supposons prouvé le théorème $\forall x:a.\ {\color{green}C}\ x\ x$ où
-$a$ est une variable de type (implicitement quantifiée universellement).
-On cherche à démontrer le but ${\color{blue}C} \ 42\ 42$.
-L'instanciation cherchée est la substitution $\{a \mapsto
-\text{\verb!int!}\}$.
-
+Supposons prouvés les théorèmes $\forall x:a.\ C\ x \Rightarrow D\ x$
+et $\forall x:b.\ C\ x$ où $a$ et $b$ sont des variables de type (implicitement quantifée universellement). On cherche à démontrer le but 
+$D\ 42$. Les instanciations cherchées sont la substitution  $\{a \mapsto
+\text{\verb!int!}\}$ pour le premier théorème et la substitution $\{b \mapsto \text{\verb!int!}\}$ pour le second théorème. Nous illusterons sur cette exemple les étapes de monomorphisation décrites dans la suite de cette partie.
 
 \subsubsection{Graphe de dépendance}
 Cette partie présente de manière théorique notre algorithme de
@@ -124,7 +117,7 @@ Un graphe de dépendance est constitué de nœuds et de deux types
 d'arêtes.
 \begin{enumerate}
 \item[$\bullet$] Les nœuds sont les constantes présentes dans la liste
-  de théorèmes et dans le but, associées à leur type. Deux m\^eme
+  de théorèmes et dans le but, associées à leur type. Deux même
   constantes sont représentée par des nœuds différents si elles
   proviennent de deux propositions (théorèmes ou buts) différentes.
 \item[$\bullet$] Les arêtes de {\color{blue}substitution} sont orientées
@@ -134,25 +127,65 @@ d'arêtes.
   \item la constante origine n'appartient pas au but. (On rappelle que
     l'on ne cherche à instancier que les variables de type des théorèmes
     prouvés en amont.);
-  \item elles ont le m\^eme nom;
+  \item elles ont le même nom;
   \item le type du destinataire est une instance du type de l'origine.
   \end{itemize}
-\item[$\bullet$] Les ar\^etes de {\color{green}partage} sont non
+\item[$\bullet$] Les arêtes de {\color{green}partage} sont non
   orientées et relient deux constantes
   vérifiant les propriétés suivantes:
   \begin{itemize}
-  \item elles appartiennent à un m\^eme théorème;
-  \item elles partagent une m\^eme variable de type.
+  \item elles appartiennent à un même théorème;
+  \item elles partagent une même variable de type.
   \end{itemize}
 \end{enumerate}
 \end{mydef}
 
 Par convention, dans tous les exemples de graphes de dépendance donnés
 ci-dessous, nous représentons les constante d'une même proposition sur
-une même ligne. Les lettres $a,b,c,d$ désignent les variables de type.
+une même ligne.
 
-\todo DONNER UN EXEMPLE (comme le graphe de dépendance de l'exemple
-au-dessus)
+\begin{figure} [h!]
+\begin{tabularx} {\textwidth}{ X  X }
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm]
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {C: $a \rightarrow bool$};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) 
+  {D : $a \rightarrow bool$};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b \rightarrow bool$};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!} \rightarrow \text{\verb!bool!}$};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+&
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm)]
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {C: $a$};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
+  {D : $a$};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: $b$};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!}$};
+  \draw[-to,blue,ultra thick](c11) -- (c21);
+  \draw [-to,blue,ultra thick] (c21) -- (c11);
+  \draw [-to,blue,ultra thick] (c12) -- (c32);
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
+\\
+\end{tabularx}
+\caption {Graphe de dépendance de l'exemple (à gauche) et un graphe équivalent (à droite)}
+\label{fig:dependances}
+\end{figure}
+
+\begin{remark}
+Par souci de clareté, nous continuerons d'illustrer notre propos sur un graphe équivalent à celui donné par l'exemple décrit dans la \textsc{Figure}~\ref{fig:dependances}.
+\end{remark}
 
 L'idée de l'algorithme est d'appliquer une succession de transformations
 au graphe de dépendence, jusqu'à l'obtention d'un point fixe (s'il
@@ -162,141 +195,90 @@ pour chaque type d'arête.
 
 \begin{mydef} (Transformation de substitution) La transformation de
   substitution d'un graphe de dépendence $G$ pour l'arête de
-  substitution $\sigma : c \to c'$ ajoute les types associés à $c'$ au
-  nœud $c$.
+  substitution $\sigma : c \to c'$ instancie les types de $c$ à l'aide  des substitutions induites par $\sigma$. Ces types sont ensuite ajoutés au nœud $c$.
 \end{mydef}
 
-\todo Donner un exemple
-
-\iffalse
-\noindent \textit{New dependency graph using the right substitution link as a substitution transformation.}
-
+\begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
-  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
-  \node [cloud, fill=white, right of=c12,node distance = 3cm] (c13) {D: num};
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {C: $a$};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
+  {D: $a$ , $\color{blue} \text{\verb!int!}$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
   \draw [-to,blue,ultra thick] (c12) -- (c32);
-  \draw [-to,blue,ultra thick] (c13) -- (c32);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\fi
+\caption{Transformation de substitution associée à l'arête de substitution de droite}
+\label{fig: substitutions}
+\end{figure}
 
 \begin{mydef} (Transformation de partage) La transformation de
   partage d'un graphe de dépendence $G$ pour l'arête de
-  partage $\sigma : c \leftrightarrow c'$ et l'arête de substitution
-  $\sigma : c' \to c''$ ajoute les types associés à $c''$ au
-  nœud $c$.
+  partage $\rho : c \leftrightarrow c'$ et l'arête de substitution
+  $\sigma : c' \to c''$ instancie les types de $c$ à l'aide des substitutions induites par $\sigma$. Ces types sont ensuite ajoutés au nœud $c$.
 \end{mydef}
 
-\todo Donner un exemple.
 
-\iffalse
+\begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
-  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
-  \node [cloud, fill=white, right of=c12,node distance = 3cm] (c13) {C: num};
+  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  {C: $a$};
+  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) 
+  {D: $a$ , $\color{blue} \text{\verb!int!}$};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) 
+  {D: $\text{\verb!int!}$};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
   \draw [-to,blue,ultra thick] (c12) -- (c32);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-\fi
+\caption{Transformation de partage associée à l'arête de partage et à l'arête de substitution de droite}
+\label{fig: substitutions}
+\end{figure}
 
-<<<<<<< HEAD
-\begin{mydef} (Une transformation d'un graphe)
-La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme l'application de toutes les transformations de substitution et de partage possible à ce graphe de façon simultanée. Soit $G_0$ le graphe d'un problème, nous appellerons $G_1,G_2,\ldots,G_i$ les graphes créés après $1,2,\ldots,i$ itérations de $\mathcal{T}$.
-=======
 Ces deux transformations sont appliquées simultanément afin de
 transformer un graphe de dépendance. Cette transformation est illustrée
 par l'exemple de la \textsc{Figure}~\ref{fig:etape_de_monomorphisation}
 
 \begin{mydef} (Transformation d'un graphe)
-La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme l'application de toutes les transformations de substitution et de partage possibles à ce graphe de façon simultanée.
->>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
+La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est définie comme l'application de toutes les transformations de substitution et de partage possibles à ce graphe de façon simultanée.
 \end{mydef}
 
 \begin{figure}[h!]
-\begin{tabularx}{\textwidth}{ X X }
-
-\centering
-\begin{tikzpicture}[node distance = 3cm, auto]
-  \node [cloud, fill=white,node distance = 3cm] (c11) {C: a};
-  \node [cloud, fill=white, right of=c11,node distance = 3cm] (c12) {D: a};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
-  \draw[-to,blue,ultra thick](c11) -- (c21);
-  \draw [-to,blue,ultra thick] (c21) -- (c11);
-  \draw [-to,blue,ultra thick] (c12) -- (c32);
-  \draw [green,ultra thick] (c11) -- (c12);
-\end{tikzpicture}
-&
+\begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11)
-  {C: a,{\color{blue} b},{\color{green} num}};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} num}};
+  {C: a,{\color{blue} b},{\color{green} \text{\verb!int!}}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} \text{\verb!int!}}};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
-  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: \text{\verb!int!}};
   \draw[-to,blue,ultra thick](c11) -- (c21);
   \draw [-to,blue,ultra thick] (c21) -- (c11);
   \draw [-to,blue,ultra thick] (c12) -- (c32);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
-\end{tabularx}
-\caption{Une itération de la transformation $\mathcal{T}$ sur un graphe $G_0=SG_0$ (à gauche) donnant un supergraphe $SG_1$ (à droite).}
+\end{center}
+\caption{Une itération de la transformation $\mathcal{T}$ sur le graphe de notre exemple}
 \label{fig:etape_de_monomorphisation}
 \end{figure}
 
-Par la suite, nous noterons $G_O$ le graphe d'un problème, et
-$G_1,G_2,\ldots,G_i$ les graphes créés après $1,2,\ldots,i$ itérations
-de $\mathcal{T}$.
-
-\todo Je ne comprends pas à quoi sert la notion de supergraphe.
-
-\begin{mydef} (Supergraph)
-Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ transformation $\mathcal{T}$. The supergraph $SG_i$ of $G_i$ is defined by:
-\begin{enumerate}
-  \item [-] Nodes are sets composed of a node in the initial graph $G_0$ (head node) and all its derived nodes in $G_i$ (tail nodes). They will be called a supernodes.
-  \item [-] {\color{blue}Substitution} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one  {\color{blue}substitution} link, between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
-  \item [-] {\color{green}Binding} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one {\color{green}partage} link , between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
-\end{enumerate}
-\end{mydef}
-
-
-
 
 \begin{mydef} (Redondance)
-
-Dans un supergraphe, une flèche de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une flèche de substitution à l'intérieur du supernœud de son origine. A partir de ce moment, nous ne représenterons pas les flèches de substitutions redondantes.
+Dans un graphe, une arête de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une arête de substitution à l'intérieur du nœud de son origine. A partir de ce moment, nous ne représenterons pas les arêtes de substitutions redondantes.
 \end{mydef}
 
 La \textsc{Figure}~\ref{fig:redondance} illustre la notion de redondance.
 
 
-\begin{figure}[h!]
-\begin{center}
-\begin{tikzpicture}[node distance = 3cm, auto]
-  % Place nodes
-  \node [cloud, fill=white,node distance = 3cm] (c11)
-  {A: a, {\color{red}num}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: num};
-  \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
-  \draw[-to,blue,ultra thick](c11) to [in=40,out=130] (c11);
-\end{tikzpicture}
-\end{center}
-\caption{Supergraph at step 1 with a redundant substitution link. A
-  substitution link inside the super node is exceptionally represented.}
-\label{fig:redondance}
-\end{figure}
 
 
 Les transformations successives d'un graphe de dépendance ne terminent
@@ -320,9 +302,9 @@ $\mathcal{T}$ n'a pas de point fixe.
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
   \node [cloud, fill=white,node distance = 3cm] (c11)
-  {A: a};
+  {A: $a$};
   \node [cloud, fill=white, below of=c11,node distance=1cm] (c12)
-  {A: a $\rightarrow$ n};
+  {A: $a \rightarrow n$};
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
@@ -333,8 +315,8 @@ $\mathcal{T}$ n'a pas de point fixe.
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
   \node [cloud, fill=white,node distance = 2cm] (c11)
-  {A: a, {\color{red} a $\rightarrow$ n}};
-  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: a $\rightarrow$ n, {\color{red} (a $\rightarrow$ n) $\rightarrow$ n} };
+  {A: $a, {\color{red} a \rightarrow n}$};
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: $a \rightarrow n$, ${\color{red} (a \rightarrow n) \rightarrow n}$ };
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
@@ -359,7 +341,7 @@ $\mathcal{T}$ n'a pas de point fixe.
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-La substitution \{a $\mapsto$ (a $\rightarrow$ n)\} peut \^etre appliquée autant de fois que l'on veut à a sans trouver de point fixe.
+La substitution \{a $\mapsto$ (a $\rightarrow$ n)\} peut être appliquée autant de fois que l'on veut à a sans trouver de point fixe.
 \end{proof}
 
 
@@ -374,7 +356,7 @@ déterminée par la conjecture suivante.
 >>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
 Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
 \begin{itemize}
-\item Si $SG_p$ n'a pas de circuit interne à ses nœuds et n'a pas de flèches de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
+\item Si $SG_p$ n'a pas de circuit interne à ses nœuds et n'a pas de arêtes de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
 \item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
 \end{itemize}
 \end{conjecture}
@@ -385,8 +367,8 @@ Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p =
 \todo À clarifier
 
 Soit $G_i$ le graphe de dépendance obtenu par la méthode décrite dans la
-partie précédente. De chaque constante du graphe provenant d'un m\^eme
-théorème du graphe, une liste de subsitutions peut \^etre extraite. Ces
+partie précédente. De chaque constante du graphe provenant d'un même
+théorème du graphe, une liste de subsitutions peut être extraite. Ces
 listes de substitutions sont combinées de toutes les manières possibles
 de façon a créer une liste de subsitutions pour ce théorème. Finalement,
 chaque théorème est instancié avec sa liste de substitutions.
