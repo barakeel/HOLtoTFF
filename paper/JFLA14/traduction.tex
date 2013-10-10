@@ -1,95 +1,172 @@
 \section{Une traduction prouvée de la logique d'ordre supérieur vers la
   logique du premier ordre}
 \label{sec:traduction}
- 
-A mettre quelque part (Où trouver le code source?) (déjà mis dans l'intro)
-\path{https://github.com/barakeel/HOLtoTFF}. Some examples can be found in paperexample.sml.
 
-\subsection{Présentation}
-
-\subsection{Ordre de la traduction et de l'impression}
-
-\begin{itemize}    
-  \item Monomorphisation: cette étape aurait pu \^etre effectuée à n'importe quel moment mais la faire en premier rend le programme plus efficace \cite{MengP08}.
-  \item Négation de la conclusion (preuve par l'absurde)
-  \item Mise sous forme normale conjonctive: pour réaliser cette étape, la fonction \textsf{CNF$\_$CONV} codé par Joe Hurd en Octobre 2001 a été utilisée.
-  \item $\lambda$-lifting: L'élimination des abstractions a été faite de la m\^eme manière dans [ref] et par utilisation des combinateurs dans [ref]  . 
-  \item Elimination des arguments booléens qui ne sont pas des variables:
-  Le type booléen $\$o$ étant réservé au prédicats, on remplace les arguments de types booléens par des variables. Ces variables seront imprimées avec un nouveau type $bool$.
-  [ref]   
-  \item Mise sous forme d'un ensemble de clauses     
-  \item Elimination de l'ordre supérieur: Cette étape convertit toutes les fonctions en arguments si le problème est de l'ordre supérieur. Nous avons choisi de la faire presque en dernier pour limiter le nombre de problème considérée comme étant de l'ordre supérieur ($\exists f.\ \forall x.\ f\ x = 0$ ne sera pas une formule d'ordre supérieur). De plus, si elle est effectuée, nous conservons les constantes arithmétiques comme des fonctions afin que \beagle puisse les reconna\^itre. Des descriptions plus précises de cette étape peuvent \^etre trouvées dans [ref]
-
-  \item Instanciation des variables booléennes liées.
-  \\Cette étape a été ajoutée car \beagle boucle sur les formules du type $\forall x:bool,\ x = T \vee x = F$.
-  \item Traduction des variables de type $num$(entier positif) en des variables de type $int$(entier). Traduction des fonctions prenant en arguments des numéraux en des fonctions prenant en argument des entiers
-  \\Cette étape est nécessaire car le format TFF n'a pas de type numeral.
-\end{itemize}  
+Dans cette partie, nous expliquons notre traduction prouvée des buts
+\holfour vers le format \tff, c'est-à-dire la logique du premier ordre
+avec arithmétique. Cela se fait par étapes de différentes sortes:
+\begin{itemize}
+\item des étapes effectivement de traduction de l'ordre supérieur vers
+  le premier ordre (notamment la monomorphisation, le $\lambda$-lifting
+  et la suppression des fonctions passées en arguments d'autres
+  fonctions);
+\item d'autres étapes intermédiaires pour tenir compte du fait que l'on
+  veut donner le but à un prouveur du premier ordre: il résout un
+  problème de satisfiabilité (et non de prouvabilité), attendu en forme
+  normale conjonctive présentée sous forme d'une liste de clauses, et
+  faisant intervenir certains types prédéfinis.
+\end{itemize}
+Nous présentons dans un premier temps les différentes étapes de la
+traduction, avant de détailler notre algorithme utilisé pour l'une
+d'entre elles: la monomorphisation.
 
 
+\subsection{Les étapes de la traduction}
+
+La traduction est une succession de petites étapes, chacune étant
+prouvée correcte. Nous présentons ici l'ordre de ces étapes, en
+précisant quel outil a été utilisé pour les implanter. Les étapes
+concernant réellement le passage au premier ordre sont notées en gras.
+\begin{enumerate}
+\item \textbf{Monomorphisation}: \cite{MengP08} a montré qu'il était
+  préférable -- notamment pour des raisons d'efficacité -- d'effectuer
+  cet étape en premier. La
+  partie~\ref{sec:traduction:nouveautes} décrit notre
+  algorithme de monomorphisation.
+  \item Négation de la conclusion: la prouvabilité du but est
+    équivalente à la non-satisfiabilité de la formule donnée au
+    prouveur.
+  \item Mise sous forme normale conjonctive: cette étape est réalisée
+    par la fonction \textsf{CNF$\_$CONV} implantée en \holfour par Joe
+    Hurd en octobre 2001.
+  \item \textbf{$\lambda$-lifting}: Elle est
+    implantée de la même manière que dans [\todo ref] et par utilisation
+    des combinateurs de [\todo ref].
+  \item Élimination des arguments booléens qui ne sont pas des
+    variables: le format \tff propose un type $\$o$ pour désigner le
+    type de retour des prédicats. Il ne peut être utilisé pour les
+    arguments booléens des fonctions; leur type est donc remplacé par un
+    nouveau type \verb!bool! [\todo ref].
+  \item Mise sous forme d'un ensemble de clauses (\todo : en quoi ça
+    diffère de la mise en CNF?).
+  \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
+    les fonctions passées en arguments à d'autres fonctions [\todo ref].
+    Les fonctions arithmétiques sont néanmoins conservées, puisqu'elles
+    dont partie de notre langage cible. Elle est réalisée en fin de
+    traduction afin de limiter son application: par exemple,
+    l'élimination de l'ordre supérieur dans la formule $\exists f.\
+    \forall x.\ f\ x = 0$ aura déjà été réalisée par les étapes
+    précédentes.
+  \item Case-split des variables booléennes liées.
+  \item Correspondance entre types entiers: le type \holfour \verb!num!
+    représentant les entiers positifs est déplié en un entier \verb!int!
+    et la propriété qu'il est positif.
+\end{enumerate}
+
+Chaque étape étant prouvée correcte en \holfour, il en résulte qu'une
+preuve d'un problème traduit constitue également une preuve du problème
+originel.
+
+\todo (Mettre plutôt ça dans la partie~\ref{sec:experiences:beagletac})
 \begin{itemize}
     \item Impression
-    \subitem Variables ou constantes.  
+    \subitem Variables ou constantes.
     \subitem Types.
     \subitem True and false constants.
     \subitem Non-linear integer arithmetic.
 lien vers des papiers expliquant les étapes qui sont déjà dans la
   littérature
-\end{itemize}  
+\end{itemize}
 
-\subsection{Preuve de correction}
 
-\begin{thm}(Correction de la traduction)
-\\Si le problème traduit est un théorème alors le problème dans sa forme original est un théorème.
-\end{thm}
-
-\begin{proof}(Idée de la preuve)
-\\La traduction est correcte car chaque étape de la traduction est correcte [voir présentation de la traduction]. Cette affirmation est soutenue par l'expérience [voir expérience avec Beagle].
-\end{proof}
-
-\subsection{Nouveaux aspects}
+\subsection{Algorithme de monomorphisation}
 \label{sec:traduction:nouveautes}
 
-\subsubsection{Monomorphisation}
-Cette étape consiste à instancier les théorèmes contenant des types polymorphiques par d'autres types. Cela est nécessaire car le format \tff n'a pas de types polymorphiques.
-  
-\begin{example}
-Soit un problème consitué d'un théorème $!x:a.\ {\color{green}C}\ x\ x$ et d'un but ${\color{blue}C} \ 42\ 42$. Si nous intancions le théorème avec la substitution $[a \mapsto num]$, le but sera aisément prouvable.
-Nous cherchons donc instancier le type de la constante ${\color{green}C} : a \rightarrow a \rightarrow bool$ de tel sorte qu'il soit égal au type de la constante du m\^eme nom ${\color{blue}C} : num \rightarrow num \rightarrow bool$ et d'appliquer la substitution sous-jacente au théorème.
-\end{example}
- 
-\begin{remark}
 
-\end{remark} 
-  
-Le raisonnement décrit dans l'exemple nous permet de limiter ainsi le nombre d'instanciation possible ainsi de diminuer la largeur du champ de recherche. Nous rappelons que cette étape est incomplète car entre autres finie.[ref]
+Cette étape consiste à instancier les variables de type apparaissant des
+les théorèmes prouvés en amont par plusieurs types concrets, le format
+\tff n'ayant pas de polymorphisme. La difficulté est de trouver les
+types concrets avec lesquels instancier ces variables tout en conservant
+la prouvabilité; cette étape est
+incomplète~\cite{DBLP:conf/frocos/BobotP11}, mais des heuristiques
+donnent de bonnes performances~\cite{DBLP:conf/cade/BlanchetteP13}.
+
+La correction de la monomorphisation est simple à établir, puisqu'il
+s'agit d'une ou plusieurs instanciations de variables de type
+(implicitement) universellement quantifiées.
+
+Cette partie présente l'heuristique développée pour la traduction de
+\holfour vers \tff. Nous présentons d'abord le problème sur un exemple,
+avant d'expliquer notre algorithme de monomorphisation. Ses performances
+seront évaluées dans la partie~\ref{sec:experiences}.
+
+
+\subsubsection{Exemple}
+
+\todo Il serait mieux que cet exemple soit un ``running example'',
+c'est-à-dire le même que les exemples qui arrivent ensuite dans cette
+section.
+
+Supposons prouvé le théorème $\forall x:a.\ {\color{green}C}\ x\ x$ où
+$a$ est une variable de type (implicitement quantifiée universellement).
+On cherche à démontrer le but ${\color{blue}C} \ 42\ 42$.
+L'instanciation cherchée est la substitution $\{a \mapsto
+\text{\verb!int!}\}$.
+
 
 \subsubsection{Graphe de dépendance}
-Dans cette partie, nous présentons une représentation théorique de notre implémentation de la monomorphisation. 
-\vspace{2mm}
+Cette partie présente de manière théorique notre algorithme de
+monomorphisation.\\
 
-\noindent Pour chaque problème un graphe de dépendance peut \^etre défini.
+Étant donné un problème, nous définissons un graphe de dépendance comme suit.
 \begin{mydef} (Graphe de dépendance)
+Un graphe de dépendance est constitué de nœuds et de deux types
+d'arêtes.
 \begin{enumerate}
-  \item [-] Les constantes présentes dans la liste de théorèmes et dans le but sont les noeuds du graphe. Deux m\^eme constantes sont representé par des noeuds différents si elles proviennent de deux propositions (théorèmes ou buts) différentes.
-  \item [-] Les flèches de {\color{blue}substitution} relient deux constantes vérifiant: 
-    \subitem La constante origine n'appartient pas au but. (Les types polymorphiques contenus dans le but ne sont pas instanciables.)
-    \subitem Elles ont le m\^eme nom.
-    \subitem Le type du destinataire est une instance du type de l'origine.
-  \item [-] Les ar\^etes de {\color{green}partage} relient deux constantes vérifiant:
-    \subitem Elles appartiennent à un m\^eme théorème.
-    \subitem Elles partagent une m\^eme variable polymorphique.   
-\end{enumerate}    
-De chaque flèche de substitution, on peut inférer une substitution. Quand il n'y a pas d'ambiguité, nous identifierons la flèche et la substitution.
-Lorsque nous représenterons un graphe de dépendance ou son supergraphe.  (voir plus tard), nous dessinerons les constantes de la m\^eme proposition sur la m\^eme ligne. Par convention, les types polymorphiques seront représentés par les lettres a,b,c,d.
+\item[$\bullet$] Les nœuds sont les constantes présentes dans la liste
+  de théorèmes et dans le but, associées à leur type. Deux m\^eme
+  constantes sont représentée par des nœuds différents si elles
+  proviennent de deux propositions (théorèmes ou buts) différentes.
+\item[$\bullet$] Les arêtes de {\color{blue}substitution} sont orientées
+  et relient deux
+  constantes vérifiant les propriétés suivantes:
+  \begin{itemize}
+  \item la constante origine n'appartient pas au but. (On rappelle que
+    l'on ne cherche à instancier que les variables de type des théorèmes
+    prouvés en amont.);
+  \item elles ont le m\^eme nom;
+  \item le type du destinataire est une instance du type de l'origine.
+  \end{itemize}
+\item[$\bullet$] Les ar\^etes de {\color{green}partage} sont non
+  orientées et relient deux constantes
+  vérifiant les propriétés suivantes:
+  \begin{itemize}
+  \item elles appartiennent à un m\^eme théorème;
+  \item elles partagent une m\^eme variable de type.
+  \end{itemize}
+\end{enumerate}
 \end{mydef}
 
+Par convention, dans tous les exemples de graphes de dépendance donnés
+ci-dessous, nous représentons les constante d'une même proposition sur
+une même ligne. Les lettres $a,b,c,d$ désignent les variables de type.
 
-\begin{mydef} (A substitution transformation)
-The substitution transformation $\mathcal{T}_s$ of a dependency graph $G$ for a substitution link $\sigma$ from $c$ to $c'$, is defined by:
-\[\mathcal{T}_s(G) = G \cup \sigma(c) \]
-where the created image stays in the same theorem.
+\todo DONNER UN EXEMPLE (comme le graphe de dépendance de l'exemple
+au-dessus)
+
+L'idée de l'algorithme est d'appliquer une succession de transformations
+au graphe de dépendence, jusqu'à l'obtention d'un point fixe (s'il
+existe) nous donnant l'instanciation voulue. Nous définissons tout
+d'abord deux types de transformations sur un graphe de dépendence, une
+pour chaque type d'arête.
+
+\begin{mydef} (Transformation de substitution) La transformation de
+  substitution d'un graphe de dépendence $G$ pour l'arête de
+  substitution $\sigma : c \to c'$ ajoute les types associés à $c'$ au
+  nœud $c$.
 \end{mydef}
+
+\todo Donner un exemple
 
 \iffalse
 \noindent \textit{New dependency graph using the right substitution link as a substitution transformation.}
@@ -110,11 +187,14 @@ where the created image stays in the same theorem.
 \end{center}
 \fi
 
-\begin{mydef} (A partage transformation)
-The partage transformation $\mathcal{T}_b$ of a graph $G$, for a partage link from $c$ to $c'$ and a substitution link $\sigma$ from $c'$ to $c''$, is defined by:
-\[\mathcal{T}_b(G) = G \cup \sigma(c) \]
-où l'image créé est lié au m\^eme théorème que $c$.S
+\begin{mydef} (Transformation de partage) La transformation de
+  partage d'un graphe de dépendence $G$ pour l'arête de
+  partage $\sigma : c \leftrightarrow c'$ et l'arête de substitution
+  $\sigma : c' \to c''$ ajoute les types associés à $c''$ au
+  nœud $c$.
 \end{mydef}
+
+\todo Donner un exemple.
 
 \iffalse
 \begin{center}
@@ -132,8 +212,17 @@ où l'image créé est lié au m\^eme théorème que $c$.S
 \end{center}
 \fi
 
+<<<<<<< HEAD
 \begin{mydef} (Une transformation d'un graphe)
 La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme l'application de toutes les transformations de substitution et de partage possible à ce graphe de façon simultanée. Soit $G_0$ le graphe d'un problème, nous appellerons $G_1,G_2,\ldots,G_i$ les graphes créés après $1,2,\ldots,i$ itérations de $\mathcal{T}$.
+=======
+Ces deux transformations sont appliquées simultanément afin de
+transformer un graphe de dépendance. Cette transformation est illustrée
+par l'exemple de la \textsc{Figure}~\ref{fig:etape_de_monomorphisation}
+
+\begin{mydef} (Transformation d'un graphe)
+La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme l'application de toutes les transformations de substitution et de partage possibles à ce graphe de façon simultanée.
+>>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
 \end{mydef}
 
 \begin{figure}[h!]
@@ -152,7 +241,7 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme
 \end{tikzpicture}
 &
 \begin{tikzpicture}[node distance = 3cm, auto]
-  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  \node [cloud, fill=white,node distance = 3cm] (c11)
   {C: a,{\color{blue} b},{\color{green} num}};
   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{green} b},{\color{blue} num}};
   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{blue} a}};
@@ -163,9 +252,15 @@ La transformation $\mathcal{T}$ d'un graphe de dépendance $G$ est défini comme
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{tabularx}
-\caption{Une itération de la transformation $\mathcal{T}$ sur un graphe $G_0=SG_0$ (à droite) donnant un supergraphe $SG_1$ (à gauche).}
-\label{fig:étape de monomorphisation}
+\caption{Une itération de la transformation $\mathcal{T}$ sur un graphe $G_0=SG_0$ (à gauche) donnant un supergraphe $SG_1$ (à droite).}
+\label{fig:etape_de_monomorphisation}
 \end{figure}
+
+Par la suite, nous noterons $G_O$ le graphe d'un problème, et
+$G_1,G_2,\ldots,G_i$ les graphes créés après $1,2,\ldots,i$ itérations
+de $\mathcal{T}$.
+
+\todo Je ne comprends pas à quoi sert la notion de supergraphe.
 
 \begin{mydef} (Supergraph)
 Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ transformation $\mathcal{T}$. The supergraph $SG_i$ of $G_i$ is defined by:
@@ -173,44 +268,60 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
   \item [-] Nodes are sets composed of a node in the initial graph $G_0$ (head node) and all its derived nodes in $G_i$ (tail nodes). They will be called a supernodes.
   \item [-] {\color{blue}Substitution} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one  {\color{blue}substitution} link, between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
   \item [-] {\color{green}Binding} undirected links connect two nodes $sn_1$ and $sn_2$ when there is at least one {\color{green}partage} link , between a constant in $sn_1$ and a constant in $sn_2$, in $G_i$.
-\end{enumerate}    
+\end{enumerate}
 \end{mydef}
 
 
 
 
-\begin{mydef} (Redondance) 
-\\Dans un supergraphe, une flèche de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une flèche de substitution à l'intérieur du supernoeud de son origine. A partir de ce moment, nous ne représenterons pas les flèches de substitutions redondantes.
+\begin{mydef} (Redondance)
+
+Dans un supergraphe, une flèche de substitution est redondante si elle a la m\^eme origine et induit la m\^eme substitution qu'une flèche de substitution à l'intérieur du supernœud de son origine. A partir de ce moment, nous ne représenterons pas les flèches de substitutions redondantes.
 \end{mydef}
+
+La \textsc{Figure}~\ref{fig:redondance} illustre la notion de redondance.
 
 
 \begin{figure}[h!]
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
-  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  \node [cloud, fill=white,node distance = 3cm] (c11)
   {A: a, {\color{red}num}};
   \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: num};
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
   \draw[-to,blue,ultra thick](c11) to [in=40,out=130] (c11);
 \end{tikzpicture}
 \end{center}
-\caption{Supergraph at step 1 with a redundant substitution link. A substitution link inside the super node is exceptionally represented.}
+\caption{Supergraph at step 1 with a redundant substitution link. A
+  substitution link inside the super node is exceptionally represented.}
+\label{fig:redondance}
 \end{figure}
 
+
+Les transformations successives d'un graphe de dépendance ne terminent
+pas toujours (ce qui rejoint le fait que la monomorphisation est
+incomplète). Nous donnons maintenant un exemple de graphe de dépendance
+pour lequel les transformations successives font grossir indéfiniment
+les types possibles à chaque nœud.
+
 \begin{thm} (Circuit)
-\\There exists a dependency graph $G$ for which the transformation $\mathcal{T}$ does not find a fix point.
+Il existe un graphe de dépendance pour lequel la transformation
+$\mathcal{T}$ n'a pas de point fixe.
 \end{thm}
 \begin{proof}(Contre-exemple)
 
+  La transformation $\mathcal{T}$ n'a pas de point fixe pour le graphe suivant:
+
 \begin{tabularx}{\textwidth}{ X X }
-\\\noindent \textit{Graphe initial.}
+
+\noindent \textit{Graphe initial.}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
-  \node [cloud, fill=white,node distance = 3cm] (c11) 
+  \node [cloud, fill=white,node distance = 3cm] (c11)
   {A: a};
-  \node [cloud, fill=white, below of=c11,node distance=1cm] (c12) 
+  \node [cloud, fill=white, below of=c11,node distance=1cm] (c12)
   {A: a $\rightarrow$ n};
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
   \draw [green,ultra thick] (c11) -- (c12);
@@ -221,7 +332,7 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
-  \node [cloud, fill=white,node distance = 2cm] (c11) 
+  \node [cloud, fill=white,node distance = 2cm] (c11)
   {A: a, {\color{red} a $\rightarrow$ n}};
   \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) {A: a $\rightarrow$ n, {\color{red} (a $\rightarrow$ n) $\rightarrow$ n} };
   \draw[-to,blue,ultra thick](c11) to [in=0,out=0] (c12);
@@ -234,12 +345,12 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   % Place nodes
-  \node [cloud, fill=white,node distance = 1.2cm] (c11) 
-  {A: a, 
+  \node [cloud, fill=white,node distance = 1.2cm] (c11)
+  {A: a,
   {\color{red} a $\rightarrow$ n},
   {\color{orange} (a $\rightarrow$ n) $\rightarrow$ n}
   };
-  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12) 
+  \node [cloud, fill=white, below of=c11,node distance = 1.2cm] (c12)
   {A: a $\rightarrow$ n,
   {\color{red} (a $\rightarrow$ n) $\rightarrow$ n},
   {\color{orange} ((a $\rightarrow$ n) $\rightarrow$ n) $\rightarrow$ n}
@@ -248,21 +359,46 @@ Let $G=G_0$ be a dependency and $G_i$ the dependency graph created after $i$ tra
   \draw [green,ultra thick] (c11) -- (c12);
 \end{tikzpicture}
 \end{center}
-La substitution [a $\rightarrow$ (a $\rightarrow$ n)] peut \^etre appliqué autant de fois que l'on veut à a sans trouver de point fixe.
+La substitution \{a $\mapsto$ (a $\rightarrow$ n)\} peut \^etre appliquée autant de fois que l'on veut à a sans trouver de point fixe.
 \end{proof}
 
+
+$\mathcal{T}$ pouvant ne pas terminer, nous limitons le nombre
+d'itérations pour calculer la substitution finale. Cette borne est
+déterminée par la conjecture suivante.
+
 \begin{conjecture}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
 Soit $p$ le nombre maximal de substitutions dans les chemins de $G$. Soit $G_p = \mathcal{T}^p(G)$. On conjecture que:
 \begin{itemize}
-\item Si $SG_p$ n'a pas de circuit interne à ses noeuds et n'a pas de flèches de substitutions non redondantes à l'extérieur de ses noeuds, alors $G_p$ est un point fixe pour $\mathcal{T}$. 
+\item Si $SG_p$ n'a pas de circuit interne à ses nœuds et n'a pas de flèches de substitutions non redondantes à l'extérieur de ses nœuds, alors $G_p$ est un point fixe pour $\mathcal{T}$.
 \item Si $G_p$ n'est pas un point fixe pour $\mathcal{T}$, alors pour tout $i>0$, $G_i$ n'est pas un point fixe pour $\mathcal{T}$.
 \end{itemize}
-\end{conjecture} 
+\end{conjecture}
 
-\subsubsection{Extraction des substitutions à partir du graphe de dépendance final}
+\subsubsection{Extraction des substitutions à partir du graphe de
+  dépendance final}
 
-\par En pratique, pour obtenir le graphe de dépendance final, nous limitons le nombre d'itération de $\mathcal{T}$ en bornant le nombre d'instanciation possibles. Dans {\color{red}142}\% des cas le graphe de dépendance obtenu est un point fixe. [ref interne]
-\par Soit $G_i$ le graphe de dépendance obtenu par la méthode décrite dans la partie précédente. De chaque constante du graphe provenant d'un m\^eme théorème du graphe, une liste de subsitutions peut \^etre extraite. Ses listes de substitutions sont combinés de toutes les manières possibles de façon a créer une liste de subsitutions poru ce théorème. Finalement, chaque théorème est instanciée avec sa liste de substitutions. 
+\todo À clarifier
+
+Soit $G_i$ le graphe de dépendance obtenu par la méthode décrite dans la
+partie précédente. De chaque constante du graphe provenant d'un m\^eme
+théorème du graphe, une liste de subsitutions peut \^etre extraite. Ces
+listes de substitutions sont combinées de toutes les manières possibles
+de façon a créer une liste de subsitutions pour ce théorème. Finalement,
+chaque théorème est instancié avec sa liste de substitutions.
+
+
+\subsubsection{Implantation}
+
+\todo Quelles sont les structures de données utilisées? En particulier
+pour représenter les graphes.
+
+
+\todo Cette partie ne parle donc plus de la traduction des entiers?
 
 
 

@@ -10,28 +10,36 @@ version plus ancienne) ainsi que la théorie détaillée de \beagle peuvent êtr
 \subsection{La tactique \beagletac}
 \label{sec:experiences:beagletac}
 
+Grâce à cette traduction, nous avons implanté la tactique \beagletac
+exportant le but courant transformé par la traduction présentée dans la
+partie précédente au format \tff. \beagle est ensuite appelé sur ce but
+transformé; lorsqu'il répond que celui-ci est insatisfiable, il est
+ajouté comme axiome à \holfour afin de résoudre le but initial (voir
+\textsc{Figure}~\ref{fig:beagletac}).
 
 
 \subsection{Expériences}
 \label{sec:experiences:experiences}
 
 \subsubsection{Software, hardware et tests}
-Les tests ont été effectués avec \beagle (version $0.7$) et \holfour (version mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive. 
-Nous avons imposé un time out de 15 secondes par but à \beagle.
- 
+Les tests ont été effectués avec \beagle (version $0.7$) et \holfour (version mai 2013 du dépot \path{https://github.com/mn200/HOL}), sur un processeur deux cœurs cadencé à $2.1$~GHz avec $3.7$~Go de mémoire vive.
+Nous avons imposé un timeout de 15 secondes par but à \beagle.
+
 Lors de la construction de \holfour, certains buts sont résolus par la
 tactique \metistac. La plupart de ces buts ne font intervenir que du
 raisonnement propositionnel, mais certains nécessitent de le combiner
 avec un raisonnement arithmétique, auquel cas les lemmes arithmétiques à
 utiliser sont fournis à \metistac. Pour les expériences, nous avons
-utilisé \beagletac sur 271 de ces buts.
+utilisé \beagletac sur $271$ de ces buts, mais sans donner aucun lemme
+arithmétique. Afin de mesurer l'impact de notre algorithme de
+monomorphisation, nous avons lancé \beagletac avec ou sans
+monomorphisation.
+
 
 
 \subsubsection{Résultats}
 
-Présentation du contexte dans le
-
-\paragraph {Dans le cas général}
+\textbf{Dans le cas général}
 
 \begin{figure}
 \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
@@ -100,9 +108,11 @@ Nous avons retranché l'étape de monomorphisation pour calculer l'impact absolu
 
 
 \begin{figure}[!h]
+Les résultats en termes de nombre de buts résolus sont présentés dans la
+\textsc{Figure}~\ref{fig:resultats}.
 \noindent \begin{tabularx}{\textwidth}{|X|X|}
 \hline
-Avant monomorphisation & Après monomorphisation \\
+Sans monomorphisation & Avec monomorphisation \\
 \hline
 \begin{tikzpicture}[scale=1,baseline=(current bounding box.center)]
     \slice{0/100*360}
@@ -110,16 +120,16 @@ Avant monomorphisation & Après monomorphisation \\
           {70\%}{insatisfiable}{green}
     \slice{70/100*360}
           {84/100*360}
-          {14\%}{satisfiable}{red}      
+          {14\%}{satisfiable}{red}
     \slice{84/100*360}
           {91/100*360}
           {7\%}{inconnu}{red}
     \slice{91/100*360}
           {99/100*360}
-          {8\%}{time out}{red}
+          {8\%}{timeout}{red}
     \slice{99/100*360}
           {100/100*360}
-          {1\%}{parsing error}{red}                            
+          {1\%}{parsing error}{red}
 \end{tikzpicture}
 &
 \begin{tikzpicture}[scale=1,baseline=(current bounding box.center)]
@@ -128,24 +138,62 @@ Avant monomorphisation & Après monomorphisation \\
           {80\%}{insatisfiable}{green}
     \slice{80/100*360}
           {81/100*360}
-          {1\%}{satisfiable}{red}  
+          {1\%}{satisfiable}{red}
     \slice{81/100*360}
           {86/100*360}
-          {5\%}{inconnu, yshift=6}{red}   
+          {5\%}{inconnu, yshift=6}{red}
      \slice{86/100*360}
            {98/100*360}
-           {12\%}{time out}{red}     
+           {12\%}{timeout}{red}
      \slice{98/100*360}
            {100/100*360}
-           {2\%}{parsing error}{red}               
+           {2\%}{parsing error}{red}
 \end{tikzpicture}
 \\
 \hline
 \end{tabularx}
-\caption{Impact absolu de la monomorphisation}
+\caption{Nombre de buts résolus et impact de la monomorphisation}
+\label{fig:resultats}
 \end{figure}
+<<<<<<< HEAD
 D'un point de vue théorique, l'étape de monomorphisation est efficace car un point fixe est trouvé dans 102 cas sur 139 problèmes ayant besoin d'être monomorphisé. 
 D'un point de vue pratique, on remarque que l'ajout de l'étape de monomorphisation améliore l'expressivité de \beagletac en agrandissant l'espace de recherche augmentant le nombre de résultat insatisfiable et minimisant le nombre de résultats inconnus ou satisfiable. Cependant l'efficacité en pâtit comme nous le montre l'augmentation des time out.
+=======
+
+N'étant pas complet, \beagle peut parfois répondre ``inconnu'' s'il ne
+sait pas trouver la solution du problème. En revanche, les
+``satisfiable'' (dûs à un manque d'information sur les constantes de
+\holfour passées à \beagle) et ``parsing error'' (dûs à un fichier
+problème trop grand ou à une erreur dans l'impression) correspondent à
+des erreurs dans notre utiliation de \beagle.
+
+
+\paragraph {Sur les problèmes d'ordre supérieur}
+
+\todo
+
+
+\paragraph {Sur les problèmes polymorphes}
+On remarque sur la \textsc{Figure}~\ref{fig:resultats} que l'ajout de
+l'étape de monomorphisation permet à \beagletac de résoudre $10\%$ de
+buts supplémentaires. On constante cependant que cette étape augmente la
+taille des buts, faisant ainsi croître le nombre de timeouts.
+
+Concernant l'algorithme en lui-même, un point fixe a été trouvé dans 112
+cas des 139 problèmes ayant besoin d'être monomorphisés, soit $81\%$ des
+cas.
+
+
+\paragraph {Sur les problèmes arithmétiques}
+Comme expliqué ci-dessus, parmi les 271 problèmes initialement testés,
+nous avons retenu 65 problèmes contenant au moins un lemme arithmétique.
+Alors que \metistac a besoin de ce lemme pour résoudre le but,
+\beagletac y parvient dans $88\%$ des cas sans l'aide d'aucun lemme.
+\beagletac permet donc de résoudre des problèmes combinant d'ordre
+supérieur avec arithmétique, lorsque le raisonnement propositionnel est
+du premier ordre. Cette tactique est donc plus expressive que \metistac,
+et fournit la première tactique \holfour capable de combiner
+raisonnement au premier ordre et arithmétique.
 
 
 \textbf{Sur des problèmes arithmétiques}
@@ -165,6 +213,8 @@ combinant d'ordre supérieur avec arithmétique, lorsque le raisonnement
 propositionnel est du premier ordre. Cette tactique est donc plus
 expressive que \metistac, puisqu'il n'est pas besoin de fournir les
 lemmes arithmétiques utilisés.
+=======
+>>>>>>> 30b154a18989504800d2692fd39f2538eb6e6e90
 
 
 

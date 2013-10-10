@@ -40,9 +40,11 @@ fonction des besoins.
 Cette traduction s'appuie sur les traductions déjà existantes, notamment
 celles implantées pour la tactique \sledgehammer~\cite{Paulson10} en
 \isabellehol, mais présente également de nouveaux concepts, notamment en
-ce qui concerne la \emph{monomorphisation}, c'est-à-dire la suppression
-de la quantification sur les variables de type. Elle permet également de
-gérer à la fois les quantificateurs du premier ordre et l'arithmétique.
+ce qui concerne la \emph{monomorphisation} (c'est-à-dire la suppression
+de la quantification sur les variables de type), où nous avons cherché à
+donner un algorithme simple mais néanmoins efficace. Elle permet
+également de gérer à la fois les quantificateurs du premier ordre et
+l'arithmétique.
 
 Cette traduction générique est utilisée pour implanter la nouvelle
 tactique \beagletac (présentée en \textsc{Figure~\ref{fig:beagletac}}),
@@ -97,7 +99,9 @@ problèmes concrets.
 \end{figure}
 
 Le code présenté dans cet article est disponible à l'adresse
-\url{https://github.com/barakeel/HOLtoTFF}.
+\url{https://github.com/barakeel/HOLtoTFF}. En particulier, les exemples
+présentés dans cet article sont disponibles dans le fichier
+\verb!paperexample.sml!.
 
 
 \subsection{Assistants de preuves et prouveurs automatiques}
@@ -165,7 +169,8 @@ Problems for Theorem Provers'') regroupant une grande base de données de
 problèmes pour prouveurs du premier ordre. Il permet de décrire tout
 problème du premier ordre avec arithmétique (entière, rationnelle ou
 réelle). Il propose également un format générique pour les traces de
-preuves (\todo référence?).
+preuves (\todo Thibaut, connais-tu un lien ou une référence décrivant le
+format \tff pour les preuves?).
 
 L'utilisation d'un format générique permet de ne pas dépendre de
 prouveurs en particuliers, comme l'est la traduction décrite dans la

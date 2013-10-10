@@ -19,34 +19,72 @@ prouveurs du premier ordre lors d'autres utilisations.
 
 
 \subsection{Vérification des preuves}
+\subsubsection{Parsing}
 
 \subsubsection{Le lecteur}
-Le lecteur du vérificateur peut actuellement lire des preuves dont les étapes sont des clauses au format \tff dont la numération respecte la convention \tff pour les \textit{split}. Les dictionnaires de variables, constantes et types produit par l'impression du problème sont utilisés pour lire le fichier preuve au format \tff. En résumé, le lecteur accepte seulement des fichiers preuves, contenant seulement des clauses, dont le fichier problème a été créé par \holfour.
+Les traces supportées actuellement par notre tactiques sont les fichiers
+au format \tff contenant uniquement des clauses. Lorsque le parsing
+s'effectue à partir d'un problème généré par notre traduction, les
+variables, constantes et types du fichier de trace sont mises en
+correspondance avec celles du problème de départ à l'aide des
+dictionnaires injectifs \holfour. (\todo il faudra avoir expliqué ce que c'est).
 
 \subsubsection{Le rejouage de la preuve}
 Les tactiques \metistac et \coopertac (une implémentation de l'algorithme de Cooper pour l'arithmétique de Presburger voir \cite{Norrish03completeinteger})
 sont utilisés conjointement pour rejouer les étapes de la preuve. 
-Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grâce à la numérotation des clauses.
+Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte grâce à la numérotation des clauses (voir section génération de traces par beagles).
+=======
 
 
-\subsection{Preuve de correction}
-\begin{thm}(Correction)
-\\Une conjecture dont la preuve a été rejouée dans \holfour est un théorème.
-\end{thm}
 
-\begin{proof}(Idée de la preuve)
-\\La preuve de ce théorème ce décompose en deux parties la preuve de la traduction et la preuve du rejouage.
-\\La traduction est correcte. [voir preuve de correction]
-\\Le rejouage est correcte: Chaque étape de la preuve est rejouée par \metistac ou \coopertac, il est nécessaire de montrer que \metistac est \coopertac sont correctes, ce qui a été fait dans les papiers suivants [ref].
-\end{proof}
+\subsubsection{Rejouer la preuve}
 
+Les tactiques \metistac et \coopertac (une implémentation de
+l'algorithme de Cooper pour l'arithmétique de
+Presburger~\cite{Norrish03completeinteger}) sont utilisées conjointement
+pour rejouer les étapes de la preuve, respectivement en fonction de la
+nature de chacune des étapges.
+
+Les deux tactiques utilisées ici ayant été prouvées correctes [\todo
+ref], cela permet d'importer des théorèmes prouvés par des prouveurs
+automatiques fournissant des traces au format \tff dans \holfour sans en
+compromettre sa correction.
+
+Cette utilisation de \metistac à chaque petite étape propositionnelle de
+la preuve ne peut être efficace, mais permet de fournir un premier
+prototype permettant d'intégrer un prouveur externe de manière sceptique
+dans \holfour.
 
 
 \subsection{Application à \beagle}
 
 \subsubsection{Génération de traces par Beagle}
-  Voici le fonctionnement global de beagle et l'endroit d'où sont tirés les clauses composant la trace. 
+Nous appliquons ce procédé à la tactique \beagletac, afin d'implanter
+complètement le schéma de la \textsc{Figure}~\ref{fig:beagletac}. Cela
+nécessite tout d'abord de la part de \beagle d'être capable de générer
+des traces au format \tff, ce qui peut être fait de manière assez simple
+étant donné son fonctionnement. Nous expliquons de manière succincte
+comment procéder, avant de présenter notre prototype de tactique
+\beagletac complète sur un exemple.
 
+
+\subsubsection{Génération de traces par Beagle}
+\todo Je propose de ne pas parler de $split$, vu que ça ne semble pas
+encore très clair alors que je pense que ça n'apporte pas grande chose
+au papier.
+
+La boucle principale de \beagle maintient à jour deux ensembles de
+clauses, comme le montre le schéma de la
+\textsc{Figure}~\ref{fig:fonctionnement_beagle}. À chaque itération,
+\beagle sélectionne une clause dans le nouvel ensemble de clauses,
+l'ajoute à l'ancien ensemble de clauses, puis en déduit de nouvelles
+clauses qui sont ajoutées au nouvel ensemble. Les clauses exportées dans
+nos traces sont donc celles de l'ancien ensemble, afin de ne garder que
+les étapes de la preuve qui ont été utilisées\footnote{Il est parfois
+  nécessaires d'ajouter quelques étapes manquantes, comme la déduction
+  de la clause vide lors d'un raisonnement par l'absurde.}.
+
+\begin{figure}[!h]
 \begin{center}
 \begin{tikzpicture}[auto]
   % Place nodes
@@ -56,49 +94,33 @@ Les raisonnements par disjonction de cas (\textit{split}) sont pris en compte gr
   % Draw edges
   \draw[-to,black,ultra thick] (NCS.east) to [out=0,in=0] node[name=down]{1} (OCS.east) ;
   \draw[-to,black,ultra thick] (OCS.west) to [out=180,in=180] node[name=up]{3} (NCS.west)  ;
-  \draw[-to,black,ultra thick] (init) -- node[name=what]{parsing et normalisation} (NCS)  ;  
+  \draw[-to,black,ultra thick] (init) -- node[name=what]{parsing et normalisation} (NCS)  ;
   % Place boxes
-  \node [block, right of=down, node distance=1.5cm] (rightbox)  
-  {Transfère une clause};  
-  \node [block, below of=OCS, node distance=1.5cm] (downbox)  
-  {Applique les règles possibles*};      
-  \node [block, left of=up, node distance=1.5cm] (leftbox)  
-  {Transfère les clauses créées}; 
+  \node [block, right of=down, node distance=1.5cm] (rightbox)
+  {Transfère une clause};
+  \node [block, below of=OCS, node distance=1.5cm] (downbox)
+  {Applique les règles possibles};
+  \node [block, left of=up, node distance=1.5cm] (leftbox)
+  {Transfère les clauses créées};
   \node [cloud, fill=white, below of=rightbox, node distance=2.5cm] (trace){fichier trace};
-  \draw [-to,black,ultra thick] (down.west) to [out=270,in=90] (trace)  ;  
+  \draw [-to,black,ultra thick] (down.west) to [out=270,in=90] (trace)  ;
 \end{tikzpicture}
+\caption{Boucle principale de \beagle}
+\label{fig:fonctionnement_beagle}
 \end{center}
-(* Si la règle est un $Split$ la boucle se sépare en deux boucles disjointes (voir Définition).)
-
-Lors d'une preuve linéaire (ne contenant pas de $Split$), les clauses tranférées vers l'ancien ensemble de clause sont ajoutées au fichier trace dans l'ordre où elles ont été déduites avec la numérotation correspondante.
-
-\begin{mydef} ($Split$)
-Soit a saturation loop state by a triplet (c, OCS ,NCS) where c is the clause which was moved from NCS to OCS. 
-A Split is defined by this inference step. 
-\\Let $a_1 \vee a_2$ a clause.
-
-\begin{prooftree}
-\AxiomC{$(a_1 \vee a_2,OCS,NCS)$}
-\RightLabel{$Split$}
-\UnaryInfC{$(a_1,OCS,NCS),(a_2,OCS,NCS),\ldots,(a_N,OCS,NCS)$}  
-\end{prooftree}  
-\end{mydef}  
-
-Voici la règle $Split$
-Une règle permmettant de faire des raisonnement par disjonction de cas.
-En pratique, cette règle est implémenté comme un raisonnement par l'absurde avec comme hypothèse la partie gauche de la disjonction. C'est 
-Mémorisation des différents niveau de split par numérotation des différentes branches de l'arbre créés comme le montre cet exemple:
-
-Exemple.
-
-Le fait de sauvegarder l'ancien ensemble et non le nouveau ensemble permet de garder seulement les étapes importantes de la preuve et donc de gagner du temps lors du rejouage. Cependant, les étapes manquantes doivent être complétées. Par exemple, lorsque la clause F (faux) est déduite dans le nouvel ensemble à la fin d'un raisonnement par l'absurde, nous parvenons à le savoir car la numérotation nous indique que nous changeons de branche.  
+\end{figure}
 
 \subsubsection{Description sur une expérience}
+=======
+% Exemple.
+
+\todo
  Voici les étapes d'une expérience
- 
  Fichier preuve:
- Représentation interne à HOL et rejouage étape par étape de la preuve.
- 
- 
+ Représentation interne à HOL
+ rejouage étape par étape de la preuve.
+
+
+
 
 
