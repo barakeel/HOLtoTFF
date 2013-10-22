@@ -1,0 +1,41 @@
+%----------------------------------------------------------------------------
+% Number   : 22
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(xy_type,type,(
+    xy: $int )).
+
+tff(xx_type,type,(
+    xx: $int )).
+
+tff(c_type,type,(
+    c: ( $int * $int ) > $o )).
+
+tff(c2_type,type,(
+    c2: ( $int * $int ) > $int )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx: $int,Xx1: $int] : (($lesseq(0,c2(Xx,Xx1)) | (~$lesseq(0,Xx) | ~$lesseq(0,Xx1)))) )).
+
+tff(axiom2_axiom,axiom,(
+    $lesseq(0,xx) )).
+
+tff(axiom3_axiom,axiom,(
+    $lesseq(0,xy) )).
+
+tff(axiom4_axiom,axiom,(
+    ~(xy = 8) )).
+
+tff(axiom5_axiom,axiom,(
+    ~(xy = 4) )).
+
+tff(axiom6_axiom,axiom,(
+    ((xx = 2) | (xx = 4)) )).
+
+tff(axiom7_axiom,axiom,(
+    (xy = $product(2,xx)) )).
+
+%----------------------------------------------------------------------------
+

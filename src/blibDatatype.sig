@@ -10,17 +10,21 @@ sig
   Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
   Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated |
   Newtermarith
+  val termarith : term -> TERMARITH
+  val is_intarith : term -> bool
   
   datatype LEAFCONST = True | False | Newleafconst
-  datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
-  datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
-  
-  datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar 
-  
-  val typecat : hol_type -> TYPECAT
-  val termstructure : term -> TERMSTRUCTURE  
-  val termarith : term -> TERMARITH
   val leafconst : term -> LEAFCONST
+  
+  datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
+  val termstructure : term -> TERMSTRUCTURE  
+    
+  datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | Notconnector
   val connector : term -> CONNECTOR
+  val is_connector : term -> bool 
+ 
+  datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar 
+  val typecat : hol_type -> TYPECAT
+
 
 end

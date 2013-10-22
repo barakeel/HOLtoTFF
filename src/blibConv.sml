@@ -34,7 +34,7 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
     | Neg => find_free_bool_unop term subterm
     | Imp_only => find_free_bool_binop term subterm
     | Disj => find_free_bool_binop term subterm
-    | App =>   
+    | Notconnector =>   
       let val (operator,argl) = strip_comb subterm in
         filter (is_interesting_in term) argl @
         find_free_bool_list term (operator :: argl)
@@ -177,148 +177,7 @@ find_free_bool term;
 bool_conv_sub subterm term;
 *)
 
-(* NUM CONV *)
-(* find *)
-local fun is_interesting_in term subterm = 
-  has_numty subterm andalso 
-  free_in subterm term andalso 
-  not (numSyntax.is_numeral subterm) andalso
-  is_var subterm
-in
-fun find_free_num term = 
-  erase_double_aconv (filter (is_interesting_in term) (all_fosubterm term))
-end 
-  
-(* term should start with a quantifier *)  
-local fun is_interesting_in term subterm = 
-  bound_by_quant subterm term andalso
-  has_numty subterm andalso 
-  not (numSyntax.is_numeral subterm) andalso
-  is_var subterm
-in 
-fun find_bound_num term =  
-  erase_double_aconv (filter (is_interesting_in term) (all_fosubterm term))
-end  
-(* end find *)
 
-fun num_axiom term = 
-  let val axiom = arithmeticTheory.ZERO_LESS_EQ in
-    SPEC term axiom
-  end
-
-(* term should have of type bool *)
-fun num_conv_conj subterml term =
-  let val axioml = map num_axiom subterml in
-    if null axioml then raise UNCHANGED
-    else   
-      let val axiom = LIST_CONJ axioml in
-      (* first part *)
-      let val th11 = ASSUME term in
-      let val th12 = CONJ axiom th11 in  
-      let val th13 = DISCH term th12 in  
-      (* second part *) 
-      let val th21 = ASSUME (concl th12) in
-      let val th22 = CONJUNCT2 th21 in
-      let val th23 = DISCH (concl th12) th22 in
-        (* together *)
-        IMP_ANTISYM_RULE th13 th23
-      end end end end end end end
-  end
-
-(* test
-val term = ``(0 < y) /\ (x = 0) /\ (?x:num . (y:num) = (y:num))``;
-val subterml = find_free_num term;
-show_assums := true;
-*)  
-fun num_conv_imp subterml term =
-  let val axioml = map num_axiom subterml in
-    if null axioml then raise UNCHANGED
-    else   
-      let val axiom = LIST_CONJ axioml in
-      (* first part *)
-      let val th11 = ASSUME term in
-      let val th12 = DISCH (concl axiom) th11 in  
-      let val th13 = DISCH term th12 in  
-      (* second part *) 
-      let val th21 = ASSUME (concl th12) in
-      let val th22 = UNDISCH th21 in
-      let val th23 = PROVE_HYP axiom th22 in
-      let val th24 = DISCH (concl th12) th23 in
-      (* together *) 
-        IMP_ANTISYM_RULE th13 th24
-      end end end end end end end end
-  end
-
-fun num_conv_forall term =
-  let val terml = find_bound_num term in
-    STRIP_QUANT_CONV (num_conv_imp terml) term  
-  end
-
-fun num_conv_exists term =
-  let val terml = find_bound_num term in
-    STRIP_QUANT_CONV (num_conv_conj terml) term  
-  end 
-
-(* test 
-val term = ``!x y. A ==> (x + y + z = f x)``;
-val term = ``?x y. (x = 0) /\ (y = 0) /\ (z = 0) /\ (f (y:num) = 0)``;
-*)
-
-fun num_conv_aux term =   
-  case termstructure term of
-    Numeral => raise UNCHANGED 
-  | Integer => raise UNCHANGED
-  | Var => raise UNCHANGED  
-  | Const => raise UNCHANGED
-  | Comb => 
-    (
-    case connector term of
-      Forall => (num_conv_forall THENC (STRIP_QUANT_CONV num_conv_aux)) term
-    | Exists => (num_conv_exists THENC (STRIP_QUANT_CONV num_conv_aux)) term        
-    | _ => COMB_CONV num_conv_aux term
-    )
-  | Abs => raise CONV_ERR "num_conv" "abstraction"
-
-fun num_conv term =
-  let val terml = find_free_num term in
-    (num_conv_aux THENC (num_conv_conj terml)) term
-  end
-  
-(* test
-val term = ``(a = 0) /\ ?x y. (x = 0) /\ (!x. x + 1 = z) /\ (f y = 0)``;
-*)
-fun fnum_axiom_w (f,arity) = 
-  let val (argl,image) = strip_type_n (type_of f,arity) in
-  let val argtyl = map fst argl in
-  let val imagety = fst image in
-    if imagety = ``:num``
-    then 
-      let val namel = mk_newnamel "x" (length argl) [name_of f] in   
-      let val varl = list_mk_var (namel,argtyl) in
-      let val newvarl = mk_newvarl varl (all_var f) in
-      let val numvarl = filter has_numty varl in
-      let val axiomvar = if null numvarl then ASSUME T
-                    else LIST_CONJ (map num_axiom numvarl) 
-      in
-      let val term = list_mk_comb (f,newvarl) in
-      let val axiom = num_axiom term in
-      let val th1 = 
-        if null numvarl then axiom
-        else DISCH (concl axiomvar) (ADD_ASSUM (concl axiomvar) axiom)
-      in 
-      let val th2 = GENL varl th1 in
-        EQ_MP (QCONV normalForms.CNF_CONV (concl th2)) th2
-      end end end end end
-      end end end end
-    else raise CONV_ERR "fnum_axiom" "not a num type"
-  end end end
-fun fnum_axiom (f,arity) = wrap "conv" "fnum_axiom" "" fnum_axiom_w (f,arity) 
-
-(* test
-val f = ``f : 'a -> num ``; 
-val arity = 1; 
-  normalForms.CNF_CONV (concl it);
-*)
 
 (* FUN_CONV *)
 (* find *)
@@ -383,8 +242,8 @@ fun and_strip_bvl_forall_mp bvl term =
 fun extl bvl thm =
   let val n = length bvl in
   let val th0 = SPECL bvl thm in 
-  let val (op1,arg1) = strip_comb_n ((lhs (concl th0)),n) in
-  let val (op2,arg2) = strip_comb_n ((rhs (concl th0)),n) in
+  let val (op1,arg1) = strip_comb_n n (lhs (concl th0)) in
+  let val (op2,arg2) = strip_comb_n n (rhs (concl th0)) in
   let val t2 = mk_eq (op1,op2) in
   let val eqth0 = list_FUN_EQ_CONV bvl t2 in
   let val th1 = EQ_MP (SYM eqth0) thm in
@@ -398,7 +257,6 @@ val (bvl,t) = strip_abs abs;
 show_assums:= true;
 *)
 
-(* term should have type bool *)
 fun fun_conv_sub_w abs term =
   (* term *)
   let val ty = type_of abs in
@@ -531,6 +389,7 @@ val term = ``P (\x. (x = \z.z) ):bool`` ;
 fun_conv term;
 find_free_abs term ;
 *)
+
 (* APP CONV *)   
 fun app_def_w appname subterm =
   let val (operator,arg) = dest_comb subterm in  
@@ -588,7 +447,7 @@ fun app_conv appname term =
     | Imp_only => BINOP_CONV (app_conv appname) term 
     | Forall => STRIP_QUANT_CONV (app_conv appname) term
     | Exists => STRIP_QUANT_CONV (app_conv appname) term    
-    | App => 
+    | Notconnector => 
       let val (operator,argl) = strip_comb term in
       case termstructure operator of
         Numeral => raise CONV_ERR "app_conv" "numeral is an operator"
@@ -632,6 +491,53 @@ val term = ``!x:num. x>y``;
 val term = ``!x:int. x>y``;
 *)
 
+(* BOOL_BV_CONV *)
+fun bool_bv_conv_sub term =
+  let val var = (hd o fst o strip_forall) term in
+  if not (has_boolty var) then raise UNCHANGED
+  else
+    (* preparation *)  
+  let val disj = SPEC var BOOL_CASES_AX in
+  let val lemma = SPEC var (ASSUME term) in
+  let val eqth1 = ASSUME (lhand (concl disj)) in
+  let val eqth2 = ASSUME (rand (concl disj)) in
+    (* first part *)
+  let val th11 = ASSUME term in
+  let val th12 = SPEC T th11 in
+  let val th13 = SPEC F th11 in
+  let val th14 = CONJ th12 th13 in
+  let val th15 = DISCH term th14 in
+    (* second part *)
+  let val goalT = ([lhand(concl disj), concl th14],concl lemma) in
+  let val (_,fnT) = SUBST_TAC [eqth1] goalT in  
+  let val th20T = ASSUME (concl th14) in
+  let val th21T = CONJUNCT1 th20T in
+  let val th22T = fnT [th21T] in
+  let val goalF = ([rand(concl disj), concl th14],concl lemma) in
+  let val (_,fnF) = SUBST_TAC [eqth2] goalF in  
+  let val th20F = ASSUME (concl th14) in
+  let val th21F = CONJUNCT2 th20F in
+  let val th22F = fnF [th21F] in
+    (* disj cases *)
+  let val th30 = DISJ_CASES disj th22T th22F in
+  let val th31 = GEN var th30 in
+  let val th32 = DISCH (concl th14) th31 in
+  (* together *)
+    IMP_ANTISYM_RULE th15 th32
+  end end end end end 
+  end end end end end
+  end end end end end 
+  end end end end end
+  end end 
+  end
+  
+fun bool_bv_conv term =
+  if not (is_forall term) then raise UNCHANGED
+  else 
+    (QUANT_CONV bool_bv_conv THENC bool_bv_conv_sub) term
 
+(* test 
+val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     
+*)
 
 end

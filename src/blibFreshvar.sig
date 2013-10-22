@@ -4,7 +4,7 @@ sig
   include Abbrev
 
   val mk_namel : string -> int -> string list
-  val list_mk_var : (string list * hol_type list) -> term list
+  val mk_varl : (string list * hol_type list) -> term list
 (* create a fresh name *)  
   val mk_newname : string -> string list -> string
   val mk_newnamel : string -> int -> string list -> string list

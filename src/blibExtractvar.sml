@@ -36,7 +36,7 @@ fun get_varinfol2 term bvl =
     | Exists => let val (qbvl,t) = strip_exists term in
                   get_varinfol2abs qbvl t bvl 
                 end
-    | App => let val (operator,argl) = strip_comb term in
+    | Notconnector => let val (operator,argl) = strip_comb term in
              let 
                val n = length argl 
                val l = get_varinfol2l argl bvl 

@@ -1,0 +1,313 @@
+%----------------------------------------------------------------------------
+% Number   : 1
+%----------------------------------------------------------------------------
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIcharI_F_listIcharI_P_listIcharI_type,type,(
+    ty_listIcharI_F_listIcharI_P_listIcharI: $tType )).
+
+tff(ty_listIcharI_P_listIcharI_type,type,(
+    ty_listIcharI_P_listIcharI: $tType )).
+
+tff(ty_listIaI_F_listIaI_P_listIaI_type,type,(
+    ty_listIaI_F_listIaI_P_listIaI: $tType )).
+
+tff(ty_listIaI_P_listIaI_type,type,(
+    ty_listIaI_P_listIaI: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(ty_char_F_bool_type,type,(
+    ty_char_F_bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(ty_listIcharI_F_num_type,type,(
+    ty_listIcharI_F_num: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(toolong_type,type,(
+    toolong: $tType )).
+
+tff(ty_listIcharI_P_listIcharI_F_listIcharI_type,type,(
+    ty_listIcharI_P_listIcharI_F_listIcharI: $tType )).
+
+tff(ty_listIaI_type,type,(
+    ty_listIaI: $tType )).
+
+tff(ty_listIaI_F_num_type,type,(
+    ty_listIaI_F_num: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI_type,type,(
+    ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI: $tType )).
+
+tff(ty_listIaI_P_listIaI_F_listIaI_type,type,(
+    ty_listIaI_P_listIaI_F_listIaI: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_listIaI_P_listIaI_F_listIaI * ty_listIaI_P_listIaI ) > ty_listIaI )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_listIaI_F_listIaI_P_listIaI * ty_listIaI ) > ty_listIaI_P_listIaI )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI * ty_a_F_bool ) > ty_listIaI_F_listIaI_P_listIaI )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_listIaI_F_num * ty_listIaI ) > $int )).
+
+tff(xApp4_type,type,(
+    xApp4: ( ty_listIcharI_P_listIcharI_F_listIcharI * ty_listIcharI_P_listIcharI ) > ty_listIcharI )).
+
+tff(xApp5_type,type,(
+    xApp5: ( ty_listIcharI_F_listIcharI_P_listIcharI * ty_listIcharI ) > ty_listIcharI_P_listIcharI )).
+
+tff(xApp6_type,type,(
+    xApp6: ( toolong * ty_char_F_bool ) > ty_listIcharI_F_listIcharI_P_listIcharI )).
+
+tff(xApp7_type,type,(
+    xApp7: ( ty_num_F_num * $int ) > $int )).
+
+tff(xApp8_type,type,(
+    xApp8: ( ty_listIcharI_F_num * ty_listIcharI ) > $int )).
+
+tff(xt_type,type,(
+    xt: ty_listIcharI )).
+
+tff(xApp9_type,type,(
+    xApp9: ( ty_char_F_bool * ty_char ) > $o )).
+
+tff(xP_type,type,(
+    xP: ty_char_F_bool )).
+
+tff(xh_type,type,(
+    xh: ty_char )).
+
+tff(cSND_type,type,(
+    cSND: ty_listIaI_P_listIaI_F_listIaI )).
+
+tff(cSPLITP_type,type,(
+    cSPLITP: ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI )).
+
+tff(cLENGTH_type,type,(
+    cLENGTH: ty_listIaI_F_num )).
+
+tff(cSND1_type,type,(
+    cSND1: ty_listIcharI_P_listIcharI_F_listIcharI )).
+
+tff(cSPLITP1_type,type,(
+    cSPLITP1: toolong )).
+
+tff(cSUC_type,type,(
+    cSUC: ty_num_F_num )).
+
+tff(cLENGTH1_type,type,(
+    cLENGTH1: ty_listIcharI_F_num )).
+
+tff(c1_type,type,(
+    c1: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx: ty_listIcharI_F_num,Xx1: ty_listIcharI] : ($lesseq(0,xApp8(Xx,Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx2: ty_num_F_num,Xx11: $int] : (($lesseq(0,xApp7(Xx2,Xx11)) | ~$lesseq(0,Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx3: ty_listIaI_F_num,Xx12: ty_listIaI] : ($lesseq(0,xApp3(Xx3,Xx12))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xb: $int,Xa: $int] : ((~$lesseq(Xa,Xb) | ($less(Xa,xApp7(cSUC,Xb)) | (~$lesseq(0,Xa) | ~$lesseq(0,Xb))))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [X: ty_a_F_bool,Xl: ty_listIaI,Xb: $int,Xa: $int] : (($lesseq(xApp3(cLENGTH,xApp(cSND,xApp1(xApp2(cSPLITP,X),Xl))),xApp3(cLENGTH,Xl)) | (~$lesseq(0,Xa) | ~$lesseq(0,Xb)))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xb: $int,Xa: $int] : ((~$less(xApp8(cLENGTH1,xApp4(cSND1,xApp5(xApp6(cSPLITP1,xP),xt))),xApp7(cSUC,xApp8(cLENGTH1,xt))) | (~$lesseq(0,Xa) | ~$lesseq(0,Xb)))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [Xb: $int,Xa: $int] : ((~xApp9(xP,xh) | (~$lesseq(0,Xa) | ~$lesseq(0,Xb)))) )).
+
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+% Number   : 3
+%----------------------------------------------------------------------------
+tff(ty_listIcharI_F_listIcharI_P_listIcharI_type,type,(
+    ty_listIcharI_F_listIcharI_P_listIcharI: $tType )).
+
+tff(ty_listIcharI_P_listIcharI_type,type,(
+    ty_listIcharI_P_listIcharI: $tType )).
+
+tff(ty_listIaI_F_listIaI_P_listIaI_type,type,(
+    ty_listIaI_F_listIaI_P_listIaI: $tType )).
+
+tff(ty_listIaI_P_listIaI_type,type,(
+    ty_listIaI_P_listIaI: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_char_type,type,(
+    ty_char: $tType )).
+
+tff(ty_char_F_bool_type,type,(
+    ty_char_F_bool: $tType )).
+
+tff(ty_listIcharI_type,type,(
+    ty_listIcharI: $tType )).
+
+tff(toolong_type,type,(
+    toolong: $tType )).
+
+tff(ty_listIcharI_P_listIcharI_F_listIcharI_type,type,(
+    ty_listIcharI_P_listIcharI_F_listIcharI: $tType )).
+
+tff(ty_listIcharI_F_num_type,type,(
+    ty_listIcharI_F_num: $tType )).
+
+tff(ty_num_F_num_type,type,(
+    ty_num_F_num: $tType )).
+
+tff(ty_listIcharI_F_listIcharI_type,type,(
+    ty_listIcharI_F_listIcharI: $tType )).
+
+tff(ty_listIaI_type,type,(
+    ty_listIaI: $tType )).
+
+tff(ty_listIaI_F_num_type,type,(
+    ty_listIaI_F_num: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI_type,type,(
+    ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI: $tType )).
+
+tff(ty_listIaI_P_listIaI_F_listIaI_type,type,(
+    ty_listIaI_P_listIaI_F_listIaI: $tType )).
+
+tff(ty_listIaI_F_listIaI_type,type,(
+    ty_listIaI_F_listIaI: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_listIaI_F_listIaI * ty_listIaI ) > ty_listIaI )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_listIaI_P_listIaI_F_listIaI * ty_listIaI_P_listIaI ) > ty_listIaI )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_listIaI_F_listIaI_P_listIaI * ty_listIaI ) > ty_listIaI_P_listIaI )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI * ty_a_F_bool ) > ty_listIaI_F_listIaI_P_listIaI )).
+
+tff(xApp4_type,type,(
+    xApp4: ( ty_listIaI_F_num * ty_listIaI ) > $int )).
+
+tff(xApp5_type,type,(
+    xApp5: ( ty_listIcharI_F_listIcharI * ty_listIcharI ) > ty_listIcharI )).
+
+tff(xApp6_type,type,(
+    xApp6: ( ty_num_F_num * $int ) > $int )).
+
+tff(xApp7_type,type,(
+    xApp7: ( ty_listIcharI_F_num * ty_listIcharI ) > $int )).
+
+tff(xApp8_type,type,(
+    xApp8: ( ty_listIcharI_P_listIcharI_F_listIcharI * ty_listIcharI_P_listIcharI ) > ty_listIcharI )).
+
+tff(xApp9_type,type,(
+    xApp9: ( ty_listIcharI_F_listIcharI_P_listIcharI * ty_listIcharI ) > ty_listIcharI_P_listIcharI )).
+
+tff(xApp10_type,type,(
+    xApp10: ( toolong * ty_char_F_bool ) > ty_listIcharI_F_listIcharI_P_listIcharI )).
+
+tff(xt_type,type,(
+    xt: ty_listIcharI )).
+
+tff(xApp11_type,type,(
+    xApp11: ( ty_char_F_bool * ty_char ) > $o )).
+
+tff(xP_type,type,(
+    xP: ty_char_F_bool )).
+
+tff(xh_type,type,(
+    xh: ty_char )).
+
+tff(cNIL_type,type,(
+    cNIL: ty_listIaI )).
+
+tff(cTL_type,type,(
+    cTL: ty_listIaI_F_listIaI )).
+
+tff(cSND_type,type,(
+    cSND: ty_listIaI_P_listIaI_F_listIaI )).
+
+tff(cSPLITP_type,type,(
+    cSPLITP: ty_a_F_bool_F_listIaI_F_listIaI_P_listIaI )).
+
+tff(cLENGTH_type,type,(
+    cLENGTH: ty_listIaI_F_num )).
+
+tff(cTL1_type,type,(
+    cTL1: ty_listIcharI_F_listIcharI )).
+
+tff(cSUC_type,type,(
+    cSUC: ty_num_F_num )).
+
+tff(cLENGTH1_type,type,(
+    cLENGTH1: ty_listIcharI_F_num )).
+
+tff(cSND1_type,type,(
+    cSND1: ty_listIcharI_P_listIcharI_F_listIcharI )).
+
+tff(cSPLITP1_type,type,(
+    cSPLITP1: toolong )).
+
+tff(cNIL1_type,type,(
+    cNIL1: ty_listIcharI )).
+
+tff(c3_type,type,(
+    c3: ( $int * $int ) > $o )).
+
+tff(axiom1_axiom,axiom,(
+    ! [Xx: ty_listIcharI_F_num,Xx1: ty_listIcharI] : ($lesseq(0,xApp7(Xx,Xx1))) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx2: ty_num_F_num,Xx11: $int] : (($lesseq(0,xApp6(Xx2,Xx11)) | ~$lesseq(0,Xx11))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [Xx3: ty_listIaI_F_num,Xx12: ty_listIaI] : ($lesseq(0,xApp4(Xx3,Xx12))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [Xb: $int,Xa: $int,Xp: $int] : ((~$lesseq(Xa,Xb) | ($less(Xa,xApp6(cSUC,Xb)) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp)))))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [Xb: $int,Xa: $int,Xp: $int] : ((~$less(Xa,Xp) | (~$less(Xb,Xa) | ($less(Xb,Xp) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp))))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [Xl: ty_listIaI,Xb: $int,Xa: $int,Xp: $int] : (((Xl = cNIL) | ($less(xApp4(cLENGTH,xApp(cTL,Xl)),xApp4(cLENGTH,Xl)) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp)))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [X: ty_a_F_bool,Xl: ty_listIaI,Xb: $int,Xa: $int,Xp: $int] : (($lesseq(xApp4(cLENGTH,xApp1(cSND,xApp2(xApp3(cSPLITP,X),Xl))),xApp4(cLENGTH,Xl)) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xb: $int,Xa: $int,Xp: $int] : ((~$less(xApp7(cLENGTH1,xApp5(cTL1,xApp8(cSND1,xApp9(xApp10(cSPLITP1,xP),xt)))),xApp6(cSUC,xApp7(cLENGTH1,xt))) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xb: $int,Xa: $int,Xp: $int] : ((~(xApp8(cSND1,xApp9(xApp10(cSPLITP1,xP),xt)) = cNIL1) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xb: $int,Xa: $int,Xp: $int] : ((~xApp11(xP,xh) | (~$lesseq(0,Xb) | (~$lesseq(0,Xa) | ~$lesseq(0,Xp))))) )).
+
+%----------------------------------------------------------------------------
+

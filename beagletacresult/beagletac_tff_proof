@@ -1,0 +1,3 @@
+  \item Mise sous forme d'un ensemble de clauses
+    A partir d'une formule sous forme normal conjonctive, les quantificateurs existentiels sont éliminés en créant de nouvelles constantes et les quantificateurs universels sont ensuites distribués par rapport au conjonctions. Nous obtenons un ensemble de clauses de la forme $\forall x1,\ldots,x_n.\ f[x_1,\ldots,x_n]$ .
+

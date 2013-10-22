@@ -104,7 +104,7 @@ fun remove_unused_def_w def thm =
     th4
   end end end end end
 fun remove_unused_def def thm =
-  wrap "blibClauseset" "remove_unused_def" "" 
+  wrap "blibBrule" "remove_unused_def" "" 
     (remove_unused_def_w def) thm  
 
 fun remove_unused_defl defl thm = repeatchange remove_unused_def defl thm
@@ -135,7 +135,7 @@ fun extdef_conv_w term =
   end end end end end 
   end end end end end 
 fun extdef_conv term = 
-  wrap "blibClauseset" "extdef_conv" "" extdef_conv_w term  
+  wrap "blibBrule" "extdef_conv" "" extdef_conv_w term  
 
 fun remove_unused_extdefl_w extdefl thm =  
   let val th0 = conv_hypl extdef_conv extdefl thm in
@@ -143,7 +143,7 @@ fun remove_unused_extdefl_w extdefl thm =
   end
   
 fun remove_unused_extdefl appl thm =
-  wrap "blibClauseset" "remove_unused_extdefl" "" 
+  wrap "blibBrule" "remove_unused_extdefl" "" 
     (remove_unused_extdefl_w appl) thm   
 
 

@@ -36,6 +36,7 @@ sig
   val erase_double : ''a list -> ''a list
   val erase_double_eq : ('a -> 'a -> bool) -> 'a list -> 'a list
   val add_once : ''a -> ''a list -> ''a list
+  val remove : ''a -> ''a list -> ''a list
   val inter : ''a list -> ''a list -> ''a list
   val substract : ''a list -> ''a list -> ''a list
   val subset : ''a list -> ''a list -> bool

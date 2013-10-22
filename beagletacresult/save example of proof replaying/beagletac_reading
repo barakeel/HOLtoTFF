@@ -1,0 +1,508 @@
+(* Axioms *)
+0 ≤ z
+0 ≤ x
+∀X X1 X7 X6. ¬App (App $IN X) X1 ∨ App X1 X ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X X1 X7 X6. App (App $IN X) X1 ∨ ¬App X1 X ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X2 XP X7 X6. App (App $IN X2) XP ∨ ¬App XP X2 ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X2 XP X7 X6. ¬App (App $IN X2) XP ∨ App XP X2 ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X3 Xy X7 X6.
+  ¬App (App $IN X3) (App (App $INSERT Xy) ∅) ∨ (Xy = X3) ∨ ¬(0 ≤ X7) ∨
+  ¬(0 ≤ X6)
+∀X3 X7 X6.
+  App (App $IN X3) (App (App $INSERT X3) ∅) ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X4 X5 X7 X6.
+  ¬App (App $IN X4) (App (App $INSERT X5) ∅) ∨ (X5 = X4) ∨ ¬(0 ≤ X7) ∨
+  ¬(0 ≤ X6)
+∀X4 X7 X6.
+  App (App $IN X4) (App (App $INSERT X4) ∅) ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+∀X6. App (App $IN X6) (App (App $INSERT X6) ∅) ∨ ¬(0 ≤ X6)
+∀X6 X7.
+  ¬App (App $IN X6) (App (App $INSERT X7) ∅) ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6) ∨
+  (X7 = X6)
+∀X7 X6. App (App (App $INSERT z) ∅) x ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6) ∨ (z = x)
+∀X7 X6. ¬App (App (App $INSERT z) ∅) x ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6) ∨ z ≠ x
+(* Proof *)
+2 : z = x
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X7. ¬(0 ≤ X7)
+2 : ¬App (App (App $INSERT x) ∅) x
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X6. ¬(0 ≤ X6)
+2 : ∀X4_72. App (App (App $INSERT X4_72) ∅) X4_72
+3 : ∀X7. ¬(0 ≤ X7)
+2 : ∀X3_85. App (App (App $INSERT X3_85) ∅) X3_85
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X6. ¬(0 ≤ X6)
+3 : ∀X7. ¬(0 ≤ X7)
+3 : ∀X7. ¬(0 ≤ X7)
+2 : ∀X5_97 X2_98. (X5_97 = X2_98) ∨ ¬App (App (App $INSERT X5_97) ∅) X2_98
+2 : ∀Xy_109 X_111.
+  (Xy_109 = X_111) ∨ ¬App (App (App $INSERT Xy_109) ∅) X_111
+(* Proven Axioms *)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z] |- 0 ≤ z
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z] |- 0 ≤ x
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X X1 X7 X6. ¬App (App $IN X) X1 ∨ App X1 X ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X X1 X7 X6. App (App $IN X) X1 ∨ ¬App X1 X ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X2 XP X7 X6.
+     App (App $IN X2) XP ∨ ¬App XP X2 ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X2 XP X7 X6.
+     ¬App (App $IN X2) XP ∨ App XP X2 ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X3 Xy X7 X6.
+     ¬App (App $IN X3) (App (App $INSERT Xy) ∅) ∨ (Xy = X3) ∨
+     ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X3 X7 X6.
+     App (App $IN X3) (App (App $INSERT X3) ∅) ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X4 X5 X7 X6.
+     ¬App (App $IN X4) (App (App $INSERT X5) ∅) ∨ (X5 = X4) ∨
+     ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X4 X7 X6.
+     App (App $IN X4) (App (App $INSERT X4) ∅) ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X6. App (App $IN X6) (App (App $INSERT X6) ∅) ∨ ¬(0 ≤ X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X6 X7.
+     ¬App (App $IN X6) (App (App $INSERT X7) ∅) ∨ ¬(0 ≤ X7) ∨
+     ¬(0 ≤ X6) ∨ (X7 = X6)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X7 X6.
+     App (App (App $INSERT z) ∅) x ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6) ∨ (z = x)
+
+[∀x' y x''' y''.
+   x' ≠ y ∨ App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x' y x''' y''.
+   (x' = y) ∨ ¬App (App $IN x') (App (App $INSERT y) ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   x'' ≠ y' ∨ App (App $IN x'') (App (App $INSERT y') ∅) ∨ ¬(0 ≤ x''') ∨
+   ¬(0 ≤ y''),
+ ∀x'' y' x''' y''.
+   (x'' = y') ∨ ¬App (App $IN x'') (App (App $INSERT y') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   ¬App P' x''''' ∨ App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P' x'''''.
+   App P' x''''' ∨ ¬App (App $IN x''''') P' ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   ¬App P x'''' ∨ App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y'' P x''''.
+   App P x'''' ∨ ¬App (App $IN x'''') P ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   ¬App (App (App $INSERT z) ∅) x ∨ x ≠ z ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   x''' ≠ y'' ∨ App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   App (App (App $INSERT z) ∅) x ∨ (x = z) ∨ ¬(0 ≤ x''') ∨ ¬(0 ≤ y''),
+ ∀x''' y''.
+   (x''' = y'') ∨ ¬App (App $IN x''') (App (App $INSERT y'') ∅) ∨
+   ¬(0 ≤ x''') ∨ ¬(0 ≤ y''), 0 ≤ x, 0 ≤ z]
+|- ∀X7 X6.
+     ¬App (App (App $INSERT z) ∅) x ∨ ¬(0 ≤ X7) ∨ ¬(0 ≤ X6) ∨ z ≠ x

@@ -40,6 +40,8 @@ fun termstructure term =
     ]
     (DATATYPE_ERR "termstructure" "unknown termstructure")   
 
+
+
 datatype TERMARITH = 
   Eq | 
   Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
@@ -56,8 +58,8 @@ fun termarith term =
     (numSyntax.is_less     ,Lessn),
     (numSyntax.is_greater  ,Greatern),
     (numSyntax.is_geq      ,Geqn),
-    (numSyntax.is_leq      ,Leqn)
-   (*
+    (numSyntax.is_leq      ,Leqn),
+    (* to be removed for numeral test *)
     (intSyntax.is_plus     ,Plusi),
     (intSyntax.is_minus    ,Minusi),
     (intSyntax.is_mult     ,Multi),
@@ -66,9 +68,18 @@ fun termarith term =
     (intSyntax.is_geq      ,Geqi),
     (intSyntax.is_leq      ,Leqi),
     (intSyntax.is_negated  ,Negated)
-   *)
     ]   
     Newtermarith
+
+fun is_intarith term =
+  intSyntax.is_plus term orelse
+  intSyntax.is_minus term orelse
+  intSyntax.is_mult term orelse
+  intSyntax.is_less term orelse
+  intSyntax.is_great term orelse  
+  intSyntax.is_geq term orelse
+  intSyntax.is_leq term orelse
+  intSyntax.is_negated term
 
 datatype LEAFCONST = True | False | Newleafconst
 
@@ -80,7 +91,7 @@ fun leafconst term =
     ]
     Newleafconst
 
-datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | App
+datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | Notconnector
 
 fun connector term =
   switcharg term
@@ -92,7 +103,15 @@ fun connector term =
     (is_forall   ,Forall),
     (is_exists   ,Exists)
     ]
-    App
+    Notconnector
+
+fun is_connector term =
+  is_conj term orelse
+  is_disj term orelse
+  is_neg term orelse
+  is_imp_only term orelse
+  is_forall term orelse
+  is_exists term
 
 datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar
 

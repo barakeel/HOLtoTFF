@@ -22,7 +22,7 @@ fun find_atoml term =
     | Neg => find_atoml_unop term 
     | Imp_only => find_atoml_binop term
     | Disj => find_atoml_binop term 
-    | App => [term]
+    | Notconnector => [term]
     )             
   | _ => [term]  
 and find_atoml_quant term =

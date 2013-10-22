@@ -1,0 +1,70 @@
+(* Type dictionnary *)
+( $int * $int ) > bool : :num -> num -> bool
+( ty_num_F_num_F_bool_F_num_F_bool * $int ) > ty_num_F_bool_F_num_F_bool : :(num -> (num -> bool) -> num -> bool) ->
+ num -> (num -> bool) -> num -> bool
+( ty_num_F_bool_F_num_F_bool * ty_num_F_bool ) > ty_num_F_bool : :((num -> bool) -> num -> bool) -> (num -> bool) -> num -> bool
+( ty_num_F_bool * $int ) > bool : :(num -> bool) -> num -> bool
+( ty_num_F_num_F_bool_F_bool * $int ) > ty_num_F_bool_F_bool : :(num -> (num -> bool) -> bool) -> num -> (num -> bool) -> bool
+( ty_num_F_bool_F_bool * ty_num_F_bool ) > bool : :((num -> bool) -> bool) -> (num -> bool) -> bool
+( ty_c_F_c_F_bool_F_c_F_bool * ty_c ) > ty_c_F_bool_F_c_F_bool : :(γ -> (γ -> bool) -> γ -> bool) -> γ -> (γ -> bool) -> γ -> bool
+( ty_c_F_bool_F_c_F_bool * ty_c_F_bool ) > ty_c_F_bool : :((γ -> bool) -> γ -> bool) -> (γ -> bool) -> γ -> bool
+( ty_c_F_c_F_bool_F_bool * ty_c ) > ty_c_F_bool_F_bool : :(γ -> (γ -> bool) -> bool) -> γ -> (γ -> bool) -> bool
+( ty_c_F_bool_F_bool * ty_c_F_bool ) > bool : :((γ -> bool) -> bool) -> (γ -> bool) -> bool
+( ty_c * ty_c ) > bool : :γ -> γ -> bool
+( ty_a_F_a_F_bool_F_a_F_bool * ty_a ) > ty_a_F_bool_F_a_F_bool : :(α -> (α -> bool) -> α -> bool) -> α -> (α -> bool) -> α -> bool
+( ty_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_F_bool : :((α -> bool) -> α -> bool) -> (α -> bool) -> α -> bool
+( ty_a_F_a_F_bool_F_bool * ty_a ) > ty_a_F_bool_F_bool : :(α -> (α -> bool) -> bool) -> α -> (α -> bool) -> bool
+( ty_a_F_bool_F_bool * ty_a_F_bool ) > bool : :((α -> bool) -> bool) -> (α -> bool) -> bool
+( ty_a * ty_a ) > bool : :α -> α -> bool
+( ty_c_F_bool * ty_c ) > bool : :(γ -> bool) -> γ -> bool
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_num_F_bool_F_num_F_bool : :(num -> bool) -> num -> bool
+ty_num_F_bool_F_bool : :(num -> bool) -> bool
+ty_c_F_bool_F_c_F_bool : :(γ -> bool) -> γ -> bool
+ty_c_F_bool_F_bool : :(γ -> bool) -> bool
+ty_a_F_bool_F_a_F_bool : :(α -> bool) -> α -> bool
+ty_a_F_bool_F_bool : :(α -> bool) -> bool
+bool : :bool
+$int : :num
+ty_num_F_bool : :num -> bool
+ty_num_F_num_F_bool_F_num_F_bool : :num -> (num -> bool) -> num -> bool
+ty_num_F_num_F_bool_F_bool : :num -> (num -> bool) -> bool
+ty_c_F_bool : :γ -> bool
+ty_c : :γ
+ty_c_F_c_F_bool_F_c_F_bool : :γ -> (γ -> bool) -> γ -> bool
+ty_c_F_c_F_bool_F_bool : :γ -> (γ -> bool) -> bool
+ty_a_F_bool : :α -> bool
+ty_a : :α
+ty_a_F_a_F_bool_F_a_F_bool : :α -> (α -> bool) -> α -> bool
+ty_a_F_a_F_bool_F_bool : :α -> (α -> bool) -> bool
+(* Variables dictionnary *)
+c3 : $<=
+c2 : $=
+cEMPTY2 : ∅
+cINSERT2 : $INSERT
+cIN2 : $IN
+cEMPTY1 : ∅
+cINSERT1 : $INSERT
+cIN1 : $IN
+c1 : $=
+cEMPTY : ∅
+cINSERT : $INSERT
+cIN : $IN
+c : $=
+xz : z
+xx : x
+xApp14 : App
+xApp13 : App
+xApp12 : App
+xApp11 : App
+xApp10 : App
+xApp9 : App
+xApp8 : App
+xApp7 : App
+xApp6 : App
+xApp5 : App
+xApp4 : App
+xApp3 : App
+xApp2 : App
+xApp1 : App
+xApp : App

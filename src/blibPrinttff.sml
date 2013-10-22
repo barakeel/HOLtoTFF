@@ -95,7 +95,7 @@ fun pptff_term_aux pps term dict pflag bvl =
     | Exists => let val (qbvl,t) = strip_exists term in
                           pptff_quant pps "?" qbvl t dict pflag bvl
                         end
-    | App => 
+    | Notconnector => 
       let val (operator,argl) = strip_comb term in
       let val arity = get_arity term in
       case termstructure operator of

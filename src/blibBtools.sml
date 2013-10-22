@@ -155,6 +155,11 @@ end
 
 fun add_once elem list =
   if is_member elem list then list else elem :: list
+
+fun remove elem list = 
+  case list of
+    [] => []
+  | a :: m => if a = elem then remove elem m else a :: remove elem m
  
 fun inter l1 l2 = filter (inv is_member l2) l1 
 

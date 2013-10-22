@@ -1,0 +1,134 @@
+Number: 1
+Status: Time out
+Info: polymorph fixpoint num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h] |- LENGTH (SND (SPLITP P t)) < SUC (LENGTH t)
+
+Number: 3
+Status: Time out
+Info: polymorph fixpoint num higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- ∀l. l ≠ [] ⇒ LENGTH (TL l) < LENGTH l
+ [] |- ∀m n p. m < n ∧ n < p ⇒ m < p
+ [] |- a ≤ b ⇒ a < SUC b
+Goal:  [¬P h, SND (SPLITP P t) ≠ ""]
+|- LENGTH (TL (SND (SPLITP P t))) < SUC (LENGTH t)
+
+structure: 
+function : 
+message  : code error
+Number: 11
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
+
+structure: 
+function : 
+message  : code error
+Number: 12
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
+
+structure: 
+function : 
+message  : code error
+Number: 13
+Status: Unknown
+Info: num proof 
+Thm list: 
+Goal:  [x = -y, 2 * x = 2 * y] |- x = 0
+
+structure: 
+function : 
+message  : code error
+Number: 14
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0] |- x = 10
+
+structure: 
+function : 
+message  : code error
+Number: 15
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0] |- x = 10
+
+structure: 
+function : 
+message  : code error
+Number: 16
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0] |- x = 10
+
+structure: 
+function : 
+message  : code error
+Number: 17
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0] |- x = 10
+
+structure: 
+function : 
+message  : code error
+Number: 18
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0, x > 11] |- F
+
+structure: 
+function : 
+message  : code error
+Number: 19
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0, x > y, y > 10 + 4] |- F
+
+structure: tactic - boolSyntax
+function : PROBLEM_TO_GOAL_TAC - mk_conj
+message  :  - Non-boolean argument
+structure: 
+function : 
+message  : code error
+Number: 20
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [x − 10 = 0, x > 10 ⇒ x < 10] |- F
+
+structure: 
+function : 
+message  : code error
+Number: 21
+Status: Unsatisfiable
+Info: higher-order proof 
+Thm list: 
+Goal:  [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
+
+structure: 
+function : 
+message  : code error
+Number: 22
+Status: Unsatisfiable
+Info: num proof 
+Thm list: 
+Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
+
+Number: 20
+Status: Undefined
+Thm list: 
+Goal: 

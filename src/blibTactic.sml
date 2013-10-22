@@ -3,56 +3,17 @@ struct
 
 open HolKernel Abbrev boolLib
      blibBtools blibDatatype
-     blibSyntax blibBrule blibBconv blibPredicate
+     blibSyntax blibBrule blibBconv blibBtactic
+     blibPredicate
      blibExtractvar blibExtracttype blibFreshvar blibHO
-     blibConv blibClauseset 
+     blibConv blibNumconv
      beagleStats
-
 
 fun TACTIC_ERR function message =
   HOL_ERR {origin_structure = "blibTactic",
 	         origin_function = function,
            message = message}
 
-(************ TOOLS ***************)
-(* TAC BUILDER *)
-fun mk_tac1 goalbuilder valbuilder goal =
-  let val goal_list = [goalbuilder goal] in
-  let val validation = fn [thm] => valbuilder goal thm  
-                       | _     => raise TACTIC_ERR "mk_tac1" ""           
-  in
-     (goal_list,validation)
-  end end
-
-(* CONV_HYP_TAC *) 
-fun conv_hyp conv goal =
-  let val eqthl = map (QCONV conv) (fst goal) in
-  let val terml = erase_double_aconv (map (rhs o concl) eqthl) in
-    (terml,snd goal)
-  end end
-  
-fun conv_hyp_val conv goal thm =
-  let val eqthl = map (QCONV conv) (fst goal) in
-  let val allhyp = List.concat (map hyp eqthl) in
-    if null allhyp then 
-      let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-      let val th0 = list_PROVE_HYP lemmal thm in
-        thm_test th0 goal "conv_hyp_val"
-      end end
-    else raise TACTIC_ERR "conv_hyp_val" "no hypothesis allowed"
-  end end 
-   
-fun CONV_HYP_TAC conv goal =
-  mk_tac1 (conv_hyp conv) (conv_hyp_val conv) goal
-
-(* list_ASSUME_TAC *)
-fun list_ASSUME_TAC_w thml goal =
-  case thml of
-    [] => ALL_TAC goal
-  | thm :: m => ((ASSUME_TAC thm) THEN (list_ASSUME_TAC_w m)) goal
-fun list_ASSUME_TAC thml goal =     
-  wrap "tactic" "list_ASSUME_TAC" "" list_ASSUME_TAC_w thml goal
-  
 (*********** PROBLEM_TO_GOAL_TAC ************)
   (* CONJ_HYP_TAC *)
 fun conj_hyp goal = 
@@ -61,7 +22,7 @@ fun conj_hyp goal =
 fun conj_hyp_val goal thm =
   let val lemma = LIST_CONJ (map ASSUME (fst goal)) in
   let val th1 = PROVE_HYP lemma thm in
-    thm_test th1 goal "conj_hyp_val"
+    th1
   end end
 
 fun CONJ_HYP_TAC goal = 
@@ -123,8 +84,6 @@ fun BEAGLE_CONV_TAC_w goal =
   CNF_CONV_TAC THEN
   BOOL_CONV_TAC THEN
   CNF_CONV_TAC THEN
-  NUM_CONV_TAC THEN
-  CNF_CONV_TAC
   )
   goal
 fun BEAGLE_CONV_TAC goal = 
@@ -141,7 +100,7 @@ fun erase_exists_val goal thm =
   let val th4 = conv_concl (QCONV strip_forall_not_conv) th3 in
   let val th5 = NOT_ELIM th4 in
   let val th6 = UNDISCH th5 in
-    thm_test th6 goal "erase_exists_val"
+    th6
   end end end end end 
   end end
  
@@ -201,7 +160,7 @@ fun add_higher_order_val goal thm =
   let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
   let val th0 = list_PROVE_HYP lemmal thm in
   let val th1 = remove_unused_extdefl appl th0 in
-    thm_test th1 goal "add_higher_order_val"
+    th1
   end end end end end end 
   
 fun ADD_HIGHER_ORDER_TAC_w goal =
@@ -221,7 +180,7 @@ in
   fun ADD_FNUM_AXIOMS_TAC_w goal =
     let val varal1 = all_vara_goal goal in
     let val varal2 = filter is_interesting varal1 in
-    let val axioml = map fnum_axiom varal2 in
+    let val axioml = map numf_axiom varal2 in
       list_ASSUME_TAC axioml goal
     end end end
 end    
@@ -235,9 +194,7 @@ fun BOOL_BV_TAC goal =
   wrap "tactic" "BOOL_BV_TAC" "" BOOL_BV_TAC_w goal 
   
 (* TO_INT_TAC *)
-fun TO_INT_TAC_w goal =
-  CONV_HYP_TAC  
-           
+  
 fun BEAGLE_CLAUSE_SET_TAC goal =
   wrap "tactic" "BEAGLE_CLAUSE_SET_TAC" ""
   (
@@ -246,6 +203,7 @@ fun BEAGLE_CLAUSE_SET_TAC goal =
   STRIP_CONJ_ONLY_HYP_TAC THEN
   ERASE_FORALL_TAC THEN
   ADD_HIGHER_ORDER_TAC THEN
+  NUM_CONV_TAC THEN
   ADD_FNUM_AXIOMS_TAC THEN
   BOOL_BV_TAC THEN
   ADD_BOOL_AXIOM_TAC

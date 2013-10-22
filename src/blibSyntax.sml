@@ -22,6 +22,7 @@ fun is_var_or_const term =
 fun is_leaf term = 
   is_var term orelse is_const term orelse is_numeral term
 
+
 (* QUANTIFIER *) 
 fun strip_quant term =
   case connector term of
@@ -46,12 +47,12 @@ fun name_of term =
   | Abs => raise SYNTAX_ERR "name_of" "abs" 
   
 (* TERM *)   
-fun strip_comb_n (term,n) =
+fun strip_comb_n n term =
   if n = 0 then (term,[])
 else 
-  if n > 0 then let val (operator,arg) = dest_comb term in
-                 let val (operator2,argl) = strip_comb_n (operator,n - 1) in
-                   (operator2,argl @ [arg])
+  if n > 0 then let val (oper,arg) = dest_comb term in
+                 let val (oper2,argl) = strip_comb_n (n-1) oper in
+                   (oper2,argl @ [arg])
                  end end 
 else 
   raise SYNTAX_ERR "" ""
@@ -73,7 +74,7 @@ fun all_fosubterm_aux term =
     | Neg => all_fosubterm_aux_unop term
     | Imp_only => all_fosubterm_aux_binop term
     | Disj => all_fosubterm_aux_binop term
-    | App => let val (operator,argl) = strip_comb term in
+    | Notconnector => let val (operator,argl) = strip_comb term in
                term :: all_fosubterm_aux_list (operator :: argl)            
              end
     )  
@@ -109,8 +110,8 @@ fun is_subset_goal goal1 goal2 =
   aconv (snd goal1) (snd goal2) andalso
   is_subset (fst goal1) (fst goal2)
  
-fun thm_test thm goal msg = 
-  if is_subset_goal (mk_goal thm) goal then thm
+fun validation_test thm goal msg = 
+  if is_subset_goal (mk_goal thm) goal then true
   else raise SYNTAX_ERR msg ""
  
 fun goal_to_string goal = 

@@ -25,7 +25,7 @@ fun mk_namel str size =
     map (prepend str) intstrl
   end
 
-fun list_mk_var (strl,tyl) = map mk_var (combine (strl,tyl))
+fun mk_varl (strl,tyl) = map mk_var (combine (strl,tyl))
 
 (* create a fresh name *)
 fun mk_newname name used =    

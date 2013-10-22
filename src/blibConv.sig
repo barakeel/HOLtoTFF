@@ -16,13 +16,8 @@ val bool_conv : conv
 
 val app_conv : string -> conv
 
-val num_conv : conv
-  val find_free_num : term -> term list
-  val find_bound_num : term -> term list
-  val num_axiom : term -> thm
-  val num_conv_conj : term list -> term -> thm
-  val num_conv_imp : term list -> term -> thm
-  
-val fnum_axiom : (term * int) -> thm
+val bool_bv_conv : conv
+  val bool_bv_conv_sub : conv 
+
 
 end

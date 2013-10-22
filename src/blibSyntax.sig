@@ -17,7 +17,7 @@ sig
   (* var *)
   val name_of : term -> string
   (* term *)
-  val strip_comb_n : (term * int) -> (term * term list)
+  val strip_comb_n : int -> term -> (term * term list)
   val get_arity : term -> int
   val all_fosubterm : term -> term list
   (* thm *)
@@ -27,7 +27,7 @@ sig
   val only_hypg : goal -> term
   val mk_goal : thm -> goal 
   val is_subset_goal : goal -> goal -> bool
-  val thm_test : thm -> goal -> string -> thm
+  val validation_test : thm -> goal -> string -> bool
   val goal_to_string : goal -> string
   
 end

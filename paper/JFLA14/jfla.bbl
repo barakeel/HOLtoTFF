@@ -1,0 +1,85 @@
+\begin{thebibliography}{10}
+
+\bibitem{DBLP:conf/cpp/ArmandFGKTW11}
+M.~Armand, G.~Faure, B.~Gr{\'e}goire, C.~Keller, L.~Th{\'e}ry, and B.~Werner.
+\newblock A modular integration of sat/smt solvers to coq through proof
+  witnesses.
+\newblock In J.-P. Jouannaud and Z.~Shao, editors, {\em CPP}, volume 7086 of
+  {\em Lecture Notes in Computer Science}, pages 135--150. Springer, 2011.
+
+\bibitem{DBLP:conf/cade/BaumgartnerW13}
+P.~Baumgartner and U.~Waldmann.
+\newblock Hierarchic superposition with weak abstraction.
+\newblock In Bonacina \cite{DBLP:conf/cade/2013}, pages 39--57.
+
+\bibitem{DBLP:conf/types/Besson06}
+F.~Besson.
+\newblock Fast reflexive arithmetic tactics the linear case and beyond.
+\newblock In T.~Altenkirch and C.~McBride, editors, {\em TYPES}, volume 4502 of
+  {\em Lecture Notes in Computer Science}, pages 48--62. Springer, 2006.
+
+\bibitem{DBLP:conf/cade/BlanchetteP13}
+J.~C. Blanchette and A.~Paskevich.
+\newblock Tff1: The tptp typed first-order form with rank-1 polymorphism.
+\newblock In Bonacina \cite{DBLP:conf/cade/2013}, pages 414--420.
+
+\bibitem{DBLP:conf/frocos/BobotP11}
+F.~Bobot and A.~Paskevich.
+\newblock Expressing polymorphic types in a many-sorted language.
+\newblock In C.~Tinelli and V.~Sofronie-Stokkermans, editors, {\em FroCoS},
+  volume 6989 of {\em Lecture Notes in Computer Science}, pages 87--102.
+  Springer, 2011.
+
+\bibitem{Bohme12}
+S.~B\"ohme.
+\newblock {\em Proving Theorems of Higher-Order Logic with SMT Solvers}.
+\newblock PhD thesis, Technische Universit\"at M\"unchen, 2012.
+
+\bibitem{DBLP:conf/cade/2013}
+M.~P. Bonacina, editor.
+\newblock {\em Automated Deduction - CADE-24 - 24th International Conference on
+  Automated Deduction, Lake Placid, NY, USA, June 9-14, 2013. Proceedings},
+  volume 7898 of {\em Lecture Notes in Computer Science}. Springer, 2013.
+
+\bibitem{Hurd03}
+J.~Hurd.
+\newblock {First-order proof tactics in higher-order logic theorem provers}.
+\newblock {\em Design and Application of Strategies/Tactics in Higher Order
+  Logics, number NASA/CP-2003-212448 in NASA Technical Reports}, pages 56--68,
+  2003.
+
+\bibitem{Hurd05}
+J.~Hurd.
+\newblock {System Description: The Metis Proof Tactic}.
+\newblock {\em Empirically Successful Automated Reasoning in Higher-Order Logic
+  (ESHOL)}, pages 103--104, 2005.
+
+\bibitem{KaliszykU12}
+C.~Kaliszyk and J.~Urban.
+\newblock Learning-assisted automated reasoning with flyspeck.
+\newblock {\em CoRR}, abs/1211.7012, 2012.
+
+\bibitem{Paulson10}
+J.~C.~B. Lawrence C.~Paulson.
+\newblock Three years of experience with sledgehammer, a practical link between
+  automatic and interactive theorem provers.
+\newblock In S.~S. G.~Sutcliffe, E.~Ternovska, editor, {\em IWIL-2010}, 2010.
+
+\bibitem{Lescuyer11}
+S.~Lescuyer.
+\newblock {\em {Formalizing and Implementing a Reflexive Tactic for Automated
+  Deduction in Coq}}.
+\newblock PhD thesis, {Université Paris-Sud}, 2011.
+
+\bibitem{MengP08}
+J.~Meng and L.~C. Paulson.
+\newblock Translating higher-order clauses to first-order clauses.
+\newblock {\em J. Autom. Reasoning}, 40(1):35--60, 2008.
+
+\bibitem{Norrish03completeinteger}
+M.~Norrish.
+\newblock Complete integer decision procedures as derived rules in hol.
+\newblock In {\em Theorem Proving in Higher Order Logics, TPHOLs 2003, volume
+  2758 of Lect. Notes in Comp. Sci}, pages 71--86. Springer-Verlag, 2003.
+
+\end{thebibliography}
