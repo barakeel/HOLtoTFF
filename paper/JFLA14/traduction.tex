@@ -26,9 +26,10 @@ prouvée correcte. Nous présentons ici l'ordre de ces étapes, en
 précisant quel outil a été utilisé pour les implanter. Les étapes
 concernant réellement le passage au premier ordre sont notées en gras.
 \begin{enumerate}
-\item \textbf{Monomorphisation}: Il est souvent admis que pour des raisons d'efficacité, il est préférable d'effectuer cette étape en premier. La
-  partie~\ref{sec:traduction:nouveautes} décrit notre algorithme de
-  monomorphisation.
+\item \textbf{Monomorphisation}: il est souvent admis que pour des
+  raisons d'efficacité, il est préférable d'effectuer cette étape en
+  premier. La partie~\ref{sec:traduction:nouveautes} décrit notre
+  algorithme de monomorphisation.
   \item Négation de la conclusion: la prouvabilité du but est
     équivalente à la non-satisfiabilité de la formule donnée au
     prouveur.
@@ -46,7 +47,7 @@ concernant réellement le passage au premier ordre sont notées en gras.
     type de retour des prédicats. Il ne peut être utilisé pour les
     arguments booléens des fonctions; leur type est donc remplacé par un
     nouveau type \verb!bool! \cite{MengP08}.
-  \item Mise sous forme d'un ensemble de clauses par élimination  des quantificateurs existentiels et distribution des quantificateurs universels par rapport au conjonctions.
+  \item Mise sous forme d'un ensemble de clauses par élimination  des quantificateurs existentiels et distribution des quantificateurs universels par rapport aux conjonctions.
   \item \textbf{Défonctionalisation}: cette étape consiste à éliminer
     les fonctions passées en arguments à d'autres
     fonctions~\cite{Hurd03,MengP08}.
