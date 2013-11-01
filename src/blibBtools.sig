@@ -26,7 +26,7 @@ sig
 (* LIST *)
   val mk_list : int -> 'a -> 'a list
   val mk_reflist : int -> 'a -> ('a ref) list
-  val list_nth : int -> 'a list -> 'a
+  val nth : int -> 'a list -> 'a
   (* arithmetic *)
   val suml : int list -> int
   val multl : int list -> int list -> int list
@@ -47,7 +47,7 @@ sig
   (* sort *)
   val quicksort : (('a * 'a) -> bool) -> 'a list -> 'a list
   (* dictionnary *)
-  val repeatchange : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
+  val repeat_change : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
   val add_entry : (''a * 'b) -> (''a * 'b) list -> (''a * 'b) list
   val lookup : ''a -> (''a * 'b) list -> 'b
   (* condition *)  

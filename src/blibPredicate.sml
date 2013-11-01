@@ -12,17 +12,17 @@ fun PREDICATE_ERR function message =
 
 
 fun find_atoml term =
-  case termstructure term of
+  case structterm term of
     Comb =>
     (
-    case connector term of
+    case structcomb term of
       Forall => find_atoml_quant term 
     | Exists => find_atoml_quant term   
     | Conj => find_atoml_binop term 
     | Neg => find_atoml_unop term 
     | Imp_only => find_atoml_binop term
     | Disj => find_atoml_binop term 
-    | Notconnector => [term]
+    | Notstructcomb => [term]
     )             
   | _ => [term]  
 and find_atoml_quant term =

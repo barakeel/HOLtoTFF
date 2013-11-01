@@ -20,21 +20,21 @@ local fun is_interesting_in term subterm =
   not (subterm = F) 
 in
 fun find_free_bool_aux term subterm = (* term should be a boolean *)
-  case termstructure subterm of
+  case structterm subterm of
     Numeral => []
   | Integer => []
   | Var => []  
   | Const => []
   | Comb => 
     (
-    case connector subterm of
+    case structcomb subterm of
       Forall => find_free_bool_quant term subterm
     | Exists => find_free_bool_quant term subterm   
     | Conj => find_free_bool_binop term subterm
     | Neg => find_free_bool_unop term subterm
     | Imp_only => find_free_bool_binop term subterm
     | Disj => find_free_bool_binop term subterm
-    | Notconnector =>   
+    | Notstructcomb =>   
       let val (operator,argl) = strip_comb subterm in
         filter (is_interesting_in term) argl @
         find_free_bool_list term (operator :: argl)
@@ -142,14 +142,14 @@ fun bool_conv_sub_all term =
   wrap "conv" "bool_conv_sub_all" "" (REPEATC bool_conv_sub_one) term
 
 fun bool_conv_aux term = 
-  case termstructure term of
+  case structterm term of
     Numeral => raise UNCHANGED 
   | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connector term of
+    case structcomb term of
       Forall => ((STRIP_QUANT_CONV bool_conv_sub_all) THENC 
                  (STRIP_QUANT_CONV bool_conv_aux)) 
                    term
@@ -182,14 +182,14 @@ bool_conv_sub subterm term;
 (* FUN_CONV *)
 (* find *)
 fun find_free_abs_aux term subterm =
-  case termstructure subterm of
+  case structterm subterm of
     Numeral => []
   | Integer => []
   | Var => []  
   | Const => []
   | Comb => 
     (
-    case connector subterm of
+    case structcomb subterm of
       Forall => let val (bvl,t) = strip_forall subterm in
                   find_free_abs_aux term t
                 end  
@@ -360,14 +360,14 @@ fun_conv_quant_aux term;
 
 (* term of type bool *)
 fun fun_conv_aux term = 
-  case termstructure term of
+  case structterm term of
     Numeral => raise UNCHANGED 
   | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connector term of
+    case structcomb term of
       Forall => ((STRIP_QUANT_CONV fun_conv_sub_all) THENC
                  (STRIP_QUANT_CONV fun_conv_aux)) 
                    term
@@ -391,86 +391,78 @@ find_free_abs term ;
 *)
 
 (* APP CONV *)   
-fun app_def_w appname subterm =
-  let val (operator,arg) = dest_comb subterm in  
+fun app_axiom_w appname term =
+  let val (oper,arg) = dest_comb term in  
+  let val opty = type_of oper in
   (* app *)
-  let val ty = type_of operator in
-  let val appty = mk_type ("fun",[ty,ty]) in  
-  let val APP = mk_var (appname,appty) in
+  let val appty = mk_type ("fun",[opty,opty]) in  
+  let val app = mk_var (appname,appty) in
   (* operator *)
-  let val newoperator = mk_var ("f",type_of operator) in
+  let val newoper = mk_var ("f",opty) in
   (* arg *)
   let val newarg = mk_var ("x",type_of arg) in
   (* term *)
-  let val t0 = list_mk_comb (APP,newoperator :: [newarg]) in 
-  let val t1 = mk_eq (t0,mk_comb (newoperator,newarg)) in
-  let val t2 = list_mk_forall ([newoperator,newarg],t1) in
-    t2
+  let val t1 = list_mk_abs ([newoper,newarg],mk_comb (newoper,newarg)) in
+  let val t2 = mk_eq (app,t1) in
+  (* axiom *)
+  let val th1 = ASSUME t2 in
+  let val th2 = CONV_RULE (list_FUN_EQ_CONV [newoper,newarg]) th1 in
+  let val th3 = CONV_RULE (REDEPTH_CONV BETA_CONV) th2 in
+    th3
   end end end end end
-  end end end end 
-fun app_def appname subterm =
-  wrap "conv" "app_def" "" (app_def_w appname) subterm 
+  end end end end end
+  end
+fun app_axiom appname term =
+  wrap "conv" "app_axiom" "" (app_axiom_w appname) term 
+  
 
 (* test
 show_assums :=  true;
-val subterm = ``f a b c``;
+val term = ``f a b c``;
+val appname = "App";
 *)
 
 (* subterm is just a combination *)
 fun app_conv_sub_w appname subterm =
-  let val (operator,arg) = dest_comb subterm in  
-  let val th1 = ASSUME (app_def appname subterm) in
-  let val th2 = SPECL [operator,arg] th1 in
-  let val th3 = SYM th2 in
-    th3
-  end end end end
+  let val (oper,arg) = dest_comb subterm in  
+  let val th1 = app_axiom appname subterm in
+  let val th2 = SYM (SPECL [oper,arg] th1) in
+    th2
+  end end end
 fun app_conv_sub appname subterm =
   wrap "conv" "app_conv_sub" "" (app_conv_sub_w appname) subterm
 
 (* test
 show_assums :=  true;
+val subterm = ``f a b c``;
 val term = ``(f a b = 2) /\ (f a = g)``;
+val goal = ([term],F);
 *)
 
 fun app_conv appname term = 
-  case termstructure term of
+  case structterm term of
     Numeral => raise UNCHANGED 
   | Integer => raise UNCHANGED
   | Var => raise UNCHANGED  
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case connector term of  
-      Conj => BINOP_CONV (app_conv appname) term 
-    | Disj => BINOP_CONV (app_conv appname) term 
-    | Neg => RAND_CONV (app_conv appname) term
-    | Imp_only => BINOP_CONV (app_conv appname) term 
-    | Forall => STRIP_QUANT_CONV (app_conv appname) term
-    | Exists => STRIP_QUANT_CONV (app_conv appname) term    
-    | Notconnector => 
-      let val (operator,argl) = strip_comb term in
-      case termstructure operator of
+    case structcomb term of  
+      Binop => BINOP_CONV (app_conv appname) term 
+    | Unop => RAND_CONV (app_conv appname) term 
+      let val (operator,_) = dest_comb term in
+      case structterm operator of
         Numeral => raise CONV_ERR "app_conv" "numeral is an operator"
       | Integer => raise CONV_ERR "app_conv" "integer is an operator"
-      | Var =>  (RATOR_CONV (app_conv appname) THENC
-                 RAND_CONV (app_conv appname) THENC
-                 app_conv_sub appname) 
+      | Var => (RAND_CONV (app_conv appname) THENC app_conv_sub appname) 
+               term
+      | Const => (RAND_CONV (app_conv appname) THENC app_conv_sub appname) 
                 term
-      | Const => 
-        (
-        case termarith term of
-            Newtermarith => 
-             (RATOR_CONV (app_conv appname) THENC
-              RAND_CONV (app_conv appname) THENC
-              app_conv_sub appname) 
-              term
-          | Negated => RAND_CONV (app_conv appname) term 
-          | _ => BINOP_CONV (app_conv appname) term 
-      
-        )
-      | Comb => ((RATOR_CONV (app_conv appname)) THENC
-                 (RAND_CONV (app_conv appname)) THENC
-                 app_conv_sub appname) 
+      | Comb => (
+                 RATOR_CONV (app_conv appname) THENC 
+                 RAND_CONV (app_conv appname) THENC 
+                 app_conv_sub appname
+                 ) 
                 term
       | Abs => raise CONV_ERR "app_conv" "abs" 
       end   

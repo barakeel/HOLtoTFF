@@ -18,8 +18,6 @@ val thml = [];
 val goal = ([``(x = 2) \/ (x = 4)``, ``y = 2 * x``], ``(y = 4) \/ (y = 8)``);
 BEAGLE_TAC thml goal;
 
-
-
 (* debugging *)
 val thml = [mk_thm ([], ``∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)``)];
 val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,
@@ -30,25 +28,13 @@ val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,
 val thml =
 [ mk_thm ([] , ``∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)``) ];
 
-val goal =
-([``∀k'.
-   ALOOKUP ls k' =
-   if ∃y'. (k' = FST y') ∧ ∃n. n < LENGTH ls ∧ (y' = EL n ls) then
-     SOME (EL (LEAST n. EL n (MAP FST ls) = k') (MAP SND ls))
-   else NONE``, ``∀m'. m' < m ⇒ EL m' (MAP FST ls) ≠ FST (EL n ls)``],
- ``EL m (MAP SND ls) = EL n'' (r::MAP SND ls)``);
-
 BEAGLE_TAC thml goal;
- ∀m. m < n'' ⇒ EL m (q::MAP FST ls) ≠ FST (EL n ls), q ≠ FST (EL n ls),
- n < m, n < LENGTH ls, EL m (MAP FST ls) = FST (EL n ls),
- EL n'' (q::MAP FST ls) = FST (EL n ls)]
 (* PROBLEM TEST *)   
-load "beagle"; open beagle;
+
 val thml = [];
 val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
 BEAGLE_TAC thml goal;
 
-load "beagle"; open beagle;
 val thml = [];
 val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
 BEAGLE_TAC thml goal;
@@ -61,6 +47,8 @@ val goal = ([``(x * y = 4)``],``(y * x = 4)``);
 val thml = [] ;
 val goal : goal = ([],
                    `` P (λll. (let n = LEAST n. ∃e. (e = 0) in ll)) : bool ``);
+                   
+                  
 (* monomorphisation *)
 val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
 val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);

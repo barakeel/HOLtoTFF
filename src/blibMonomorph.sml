@@ -70,7 +70,7 @@ fun merge_subst subst1 subst2 =
   let val l1 = get_redl subst1 in
   let val l2 = get_redl subst2 in
   let val l3 = inter l1 l2 in
-  let val subst1aux = repeatchange remove_red l3 subst1 in
+  let val subst1aux = repeat_change remove_red l3 subst1 in
     normalize_subst (subst1aux @ subst2)
   end end end end  
 

@@ -117,12 +117,12 @@ fun mk_reflist n a =
     | _ => (ref a) :: mk_reflist (n -1) a
   
 
-fun list_nth n l =
-  if n < 0 then raise BTOOLS_ERR "list_nth" "list too short"
+fun nth n l =
+  if n < 0 then raise BTOOLS_ERR "nth" "list too short"
   else
     case n of 
       0 => hd l
-    | _ => list_nth (n-1) (tl l)
+    | _ => nth (n-1) (tl l)
    
 (* NUMBER *)
 fun suml nl =
@@ -195,10 +195,10 @@ fun quicksort << xs = let
     qs xs
   end
  
-fun repeatchange change l changing = 
+fun repeat_change change l changing = 
   case l of
     [] => changing
-  | a :: m => repeatchange change m (change a changing)
+  | a :: m => repeat_change change m (change a changing)
 
 
 (* dictionnary *)
@@ -287,10 +287,10 @@ fun quicksort << xs = let
     qs xs
   end
  
-fun repeatchange change l changing = 
+fun repeat_change change l changing = 
   case l of
     [] => changing
-  | a :: m => repeatchange change m (change a changing)
+  | a :: m => repeat_change change m (change a changing)
 
 
 (* dictionnary *)

@@ -18,21 +18,20 @@ fun contain_numfvc term = not (null (filter has_numty (get_fvcl term)))
 fun contain_intfvc term = not (null (filter has_intty (get_fvcl term)))
 
 fun linearn term =
-  case termarith term of
+  case arith term of
     Multn => 
       let val (t1,t2) = numSyntax.dest_mult term in
         not (contain_numfvc t1 andalso contain_numfvc t2)
       end
   | _    => raise PRINTTFF_ERR "linearn" "not a numeral product"
 
-(* fun lineari term =
-  case termarith term of
+fun lineari term =
+  case arith term of
     Multi => 
       let val (t1,t2) = intSyntax.dest_mult term in
         not (contain_numfvc t1 andalso contain_numfvc t2)
       end
   | _    => raise PRINTTFF_ERR "lineari" "not a integer product"
-*)
 
 (* PPTFF_TERM *)
 fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
@@ -65,7 +64,7 @@ fun pptff_qbvl pps qbvl bvdict tyadict =
 *)
 (* pflag : flag is turn off when going inside atom *)
 fun pptff_term_aux pps term dict pflag bvl =
-  case termstructure term of
+  case structterm term of
     Numeral => add_string pps (name_of term)
   | Integer => add_string pps (name_of term)
   | Var => if is_member_aconv term bvl
@@ -73,32 +72,43 @@ fun pptff_term_aux pps term dict pflag bvl =
            else add_string pps (lookup term (#3 dict)) (*freevar*)
   | Const => 
     (
-    case leafconst term of
+    case structleafc term of
       False => if pflag
                then add_string pps "$false"
                else add_string pps "bfalse"
     | True => if pflag
               then add_string pps "$true"
               else add_string pps "btrue"
-    | Newleafconst => add_string pps (lookup term (#4 dict))
+    | Otherleafc => add_string pps (lookup term (#4 dict))
     )
   | Comb => 
     (
-    case connector term of  
-      Conj => pptff_binop pps "&" term dict pflag bvl
-    | Disj => pptff_binop pps "|" term dict pflag bvl
-    | Neg => pptff_unop pps "~" term dict pflag bvl 
-    | Imp_only => pptff_binop pps "=>" term dict pflag bvl
-    | Forall => let val (qbvl,t) = strip_forall term in
-                          pptff_quant pps "!" qbvl t dict pflag bvl
-                        end       
-    | Exists => let val (qbvl,t) = strip_exists term in
-                          pptff_quant pps "?" qbvl t dict pflag bvl
-                        end
-    | Notconnector => 
+    (* hack NLIA *) 
+    (* to be removed if/when the external prover supports NLIA *)
+    if numeralSyntax.is_mult term 
+    then 
+      if not (lineari term)
+      then pptff_app pps "$product" argl dict false bvl
+      else pptff_app pps (lookup operator (#4 dict)) argl dict false bvl
+    else 
+    if intSyntax.is_mult term
+    then 
+      if not (linearn term)
+      then pptff_app pps "$product" argl dict false bvl
+      else pptff_app pps (lookup operator (#4 dict)) argl dict false bvl
+    else
+    (* end hack NLIA *)
+    case structcomb term of
+      InBinop => pptff_binop pps (inbinop_symb term) term dict pflag bvl
+      PreBinop => 
+    | Quant => let val (qbvl,t) = strip_quant term in
+                 pptff_quant pps (quant_symb term) qbvl t dict pflag bvl
+               end
+              
+    | Notstructcomb => 
       let val (operator,argl) = strip_comb term in
       let val arity = get_arity term in
-      case termstructure operator of
+      case structterm operator of
         Numeral => raise PRINTTFF_ERR "pptff_term_aux" "numeral"
       | Integer => raise PRINTTFF_ERR "pptff_term_aux" "integer"
       | Var => if is_member_aconv operator bvl
@@ -106,20 +116,19 @@ fun pptff_term_aux pps term dict pflag bvl =
                else pptff_app pps (lookup operator (#3 dict)) argl dict false bvl 
       | Const => 
         (
-        case termarith term of
+        case arith term of
           Eq => pptff_binop pps "=" term dict false bvl
         | Multn => if linearn term  (* bad hack NLIA *)
-                  then pptff_app pps "$product" argl dict false bvl  
-                  else pptff_app pps    
-                    (lookup operator (#4 dict)) argl dict false bvl
-        (*| Multi =>  if lineari term  (* bad hack NLIA *)
+                   then pptff_app pps "$product" argl dict false bvl  
+                   else 
+        | Multi =>  if lineari term  (* bad hack NLIA *)
                   then pptff_app pps "$product" argl dict false bvl  
                   else pptff_app pps    
                     (lookup operator (#4 dict)) argl dict false bvl*)
-        | Newtermarith => pptff_app pps 
+        | Newarith => pptff_app pps 
                             (lookup operator (#4 dict)) argl dict false bvl                
         | _ => pptff_app pps 
-                 (lookup (termarith term) dcprintdict) argl dict false bvl
+                 (lookup (arith term) dcprintdict) argl dict false bvl
         ) 
       | _ => raise PRINTTFF_ERR "pptff_term_aux" "abs or comb"
       end end  

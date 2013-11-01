@@ -25,7 +25,7 @@ fun is_leaf term =
 
 (* QUANTIFIER *) 
 fun strip_quant term =
-  case connector term of
+  case structcomb term of
     Forall => strip_forall term
   | Exists => strip_exists term
   | _ => raise SYNTAX_ERR "strip_quant" "" 
@@ -37,7 +37,7 @@ fun bound_by_quant subterm term =
 
 (* VAR *)
 fun name_of term = 
-  case termstructure term of
+  case structterm term of
     Numeral => Int.toString (numSyntax.int_of_term term)
   | Integer => raise SYNTAX_ERR "name_of" "integer"
                (*Arbintcore.toString (intSyntax.int_of_term term)*)
@@ -60,21 +60,21 @@ else
 fun get_arity term = length (snd (strip_comb term))
 
 fun all_fosubterm_aux term = 
-  case termstructure term of
+  case structterm term of
     Numeral => [term]
   | Integer => [term]
   | Var => [term]  
   | Const => [term]
   | Comb => 
     (
-    case connector term of
+    case structcomb term of
       Forall => all_fosubterm_aux_quant term
     | Exists => all_fosubterm_aux_quant term   
     | Conj => all_fosubterm_aux_binop term
     | Neg => all_fosubterm_aux_unop term
     | Imp_only => all_fosubterm_aux_binop term
     | Disj => all_fosubterm_aux_binop term
-    | Notconnector => let val (operator,argl) = strip_comb term in
+    | Notstructcomb => let val (operator,argl) = strip_comb term in
                term :: all_fosubterm_aux_list (operator :: argl)            
              end
     )  

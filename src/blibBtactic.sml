@@ -26,7 +26,7 @@ fun mk_tac1 goalbuilder valbuilder goal =
   end end
 
 (* CONV_HYP_TAC *) 
-fun conv_hyp conv goal =
+fun conv_hypg conv goal =
   let val eqthl = map (QCONV conv) (fst goal) in
   let val terml = erase_double_aconv (map (rhs o concl) eqthl) in
     (terml,snd goal)
@@ -44,7 +44,7 @@ fun conv_hyp_val conv goal thm =
   end end 
    
 fun CONV_HYP_TAC conv goal =
-  mk_tac1 (conv_hyp conv) (conv_hyp_val conv) goal
+  mk_tac1 (conv_hypg conv) (conv_hyp_val conv) goal
 
 (* list_ASSUME_TAC *)
 fun list_ASSUME_TAC_w thml goal =

@@ -133,26 +133,26 @@ fun updateadd_nb nb n = nb := (fst(!nb) + n, snd (!nb))
 
 fun addone_faultl () =
   (
-  addone_nb (list_nth 0 faultl);
+  addone_nb (nth 0 faultl);
   if fst(!hoflag) 
-  then addone_nb (list_nth 1 faultl)
-  else addone_nb (list_nth 2 faultl);
+  then addone_nb (nth 1 faultl)
+  else addone_nb (nth 2 faultl);
   if fst(!mflag) 
-  then addone_nb (list_nth 3 faultl)
-  else addone_nb (list_nth 4 faultl);
+  then addone_nb (nth 3 faultl)
+  else addone_nb (nth 4 faultl);
   if fst (!numflag)
-  then addone_nb (list_nth 5 faultl)
-  else addone_nb (list_nth 6 faultl)
+  then addone_nb (nth 5 faultl)
+  else addone_nb (nth 6 faultl)
   )
 
 
  
 fun update_4timers n =
   (
-  updateadd_nb (list_nth n timerl) (!metctime);  
-  updateadd_nb (list_nth (n + 1) timerl) (!beactime);
-  updateadd_nb (list_nth (n + 2) timerl) (!tractime);
-  updateadd_nb (list_nth (n + 3) timerl) (!impctime)
+  updateadd_nb (nth n timerl) (!metctime);  
+  updateadd_nb (nth (n + 1) timerl) (!beactime);
+  updateadd_nb (nth (n + 2) timerl) (!tractime);
+  updateadd_nb (nth (n + 3) timerl) (!impctime)
   )
 
 fun update_timerl () =

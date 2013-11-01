@@ -139,53 +139,27 @@ fun ERASE_FORALL_TAC goal =
   wrap "tactic" "ERASE_FORALL" ""
     (CONV_HYP_TAC (QCONV normalForms.CNF_CONV)) goal
 
-(* ADD_BOOL_AXIOM_TAC *)
-fun ADD_BOOL_AXIOM_TAC_w goal =
-  if has_boolarg_goal goal 
-  then ASSUME_TAC (CONJUNCT1 BOOL_EQ_DISTINCT) goal
-  else ALL_TAC goal
-fun ADD_BOOL_AXIOM_TAC goal = 
-  wrap "tactic" "ADD_BOOL_AXIOM_TAC" "" ADD_BOOL_AXIOM_TAC_w goal
 
 (* ADD_HIGHER_ORDER_TAC *)
-fun add_higher_order goal = 
-  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
-    conv_hyp (QCONV (app_conv appname)) goal
-  end      
-  
-fun add_higher_order_val goal thm =
-  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
-  let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
-  let val appl = erase_double_aconv (List.concat (map hyp eqthl)) in
-  let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-  let val th0 = list_PROVE_HYP lemmal thm in
-  let val th1 = remove_unused_extdefl appl th0 in
-    th1
-  end end end end end end 
-  
 fun ADD_HIGHER_ORDER_TAC_w goal =
-  if firstorder_goal goal
-  then ALL_TAC goal
-  else (flag_on hoflag;
-        mk_tac1 add_higher_order add_higher_order_val goal)
+  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
+  let fun add_higher_order goal = 
+    conv_hypg (QCONV (app_conv appname)) goal
+  in  
+  let fun add_higher_order_val goal thm =
+    let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
+    let val appl = erase_double_aconv (List.concat (map hyp eqthl)) in
+    let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
+    let val th0 = list_PROVE_HYP lemmal thm in
+    let val th1 = remove_defl appl th0 in
+      th1
+    end end end end end
+  in
+  if firstorder_goal goal then ALL_TAC goal
+  else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
+
 fun ADD_HIGHER_ORDER_TAC goal = 
   wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 
-
-(* ADD_FNUM_AXIOMS_TAC *)
-local fun is_interesting (var,arity) = 
-  let val (_,(imagety,_)) = strip_type_n (type_of var,arity) in
-    imagety = ``:num`` andalso arity > 0
-  end 
-in 
-  fun ADD_FNUM_AXIOMS_TAC_w goal =
-    let val varal1 = all_vara_goal goal in
-    let val varal2 = filter is_interesting varal1 in
-    let val axioml = map numf_axiom varal2 in
-      list_ASSUME_TAC axioml goal
-    end end end
-end    
-fun ADD_FNUM_AXIOMS_TAC goal = 
-  wrap "tactic" "ADD_FNUM_AXIOMS_TAC" "" ADD_FNUM_AXIOMS_TAC_w goal 
 
 (* BOOL_BV_TAC *)
 fun BOOL_BV_TAC_w goal =
@@ -193,7 +167,13 @@ fun BOOL_BV_TAC_w goal =
 fun BOOL_BV_TAC goal = 
   wrap "tactic" "BOOL_BV_TAC" "" BOOL_BV_TAC_w goal 
   
-(* TO_INT_TAC *)
+(* ADD_BOOL_AXIOM_TAC *)
+fun ADD_BOOL_AXIOM_TAC_w goal =
+  if has_boolarg_goal goal 
+  then ASSUME_TAC (CONJUNCT1 BOOL_EQ_DISTINCT) goal
+  else ALL_TAC goal
+fun ADD_BOOL_AXIOM_TAC goal = 
+  wrap "tactic" "ADD_BOOL_AXIOM_TAC" "" ADD_BOOL_AXIOM_TAC_w goal
   
 fun BEAGLE_CLAUSE_SET_TAC goal =
   wrap "tactic" "BEAGLE_CLAUSE_SET_TAC" ""
@@ -203,8 +183,7 @@ fun BEAGLE_CLAUSE_SET_TAC goal =
   STRIP_CONJ_ONLY_HYP_TAC THEN
   ERASE_FORALL_TAC THEN
   ADD_HIGHER_ORDER_TAC THEN
-  NUM_CONV_TAC THEN
-  ADD_FNUM_AXIOMS_TAC THEN
+  NUM_INT_TAC THEN
   BOOL_BV_TAC THEN
   ADD_BOOL_AXIOM_TAC
   )

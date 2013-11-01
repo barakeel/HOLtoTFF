@@ -78,7 +78,7 @@ fun add_newname (key,name) dict =
     add_entry (key,newname) dict
   end  
 
-fun add_newnamel entry dict = repeatchange add_newname entry dict 
+fun add_newnamel entry dict = repeat_change add_newname entry dict 
 
 
 end

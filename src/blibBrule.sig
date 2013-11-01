@@ -17,10 +17,7 @@ sig
   val EXTL : term list -> rule
   val list_TRANS : thm list -> thm
   
-  val extdef_conv : conv
-  val remove_unused_def : term -> rule
-  val remove_unused_defl : term list -> rule
-  val remove_unused_extdefl : term list -> rule
-  
+  val remove_def : term -> rule
+  val remove_defl : term list -> rule
   
 end

@@ -1,30 +1,32 @@
 signature blibDatatype =
 sig
 
-  include Abbrev
+include Abbrev
+  
+datatype STRUCTVAR = Freevar | Boundvar | Constvar
 
-  datatype TYPECAT = Booltype | Numtype | Alphatype | Leaftype |
-                     Funtype | Prodtype | Nodetype
-  datatype TERMARITH = 
+datatype STRUCTTERM = Numeral | Integer | Var | Const | Comb | Abs  
+fun structterm : term -> STRUCTTERM
+
+datatype STRUCTTYPE = Booltype | Numtype | Alphatype | Leaftype | 
+                      Funtype | Prodtype | Nodetype
+fun structtype : hol_type -> STRUCTTYPE 
+
+datatype STRUCTCOMB = 
+  Conj | Disj | Neg | Imp_only | Forall | Exists | 
   Eq | 
   Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
-  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated |
-  Newtermarith
-  val termarith : term -> TERMARITH
-  val is_intarith : term -> bool
-  
-  datatype LEAFCONST = True | False | Newleafconst
-  val leafconst : term -> LEAFCONST
-  
-  datatype TERMSTRUCTURE = Numeral | Integer | Var | Const | Comb | Abs  
-  val termstructure : term -> TERMSTRUCTURE  
-    
-  datatype CONNECTOR = Conj | Disj | Neg | Imp_only | Forall | Exists | Notconnector
-  val connector : term -> CONNECTOR
-  val is_connector : term -> bool 
- 
-  datatype VARCAT = Numeralvar | Integervar | Freevar | Boundvar | Constvar 
-  val typecat : hol_type -> TYPECAT
+  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated   
+  Othercomb
+fun structcomb : term -> STRUCTCOMB
+fun is_connector : term -> bool
+fun is_numarith  : term -> bool
+fun is_intarith  : term -> bool
 
+datatype STRUCTARITY = Binop | Unop | Quant | Otherarity
+fun structarity : term -> STRUCTARITY
+
+datatype STRUCTLEAFC = True | False | Otherleafc
+fun structleafc : term -> STRUCTLEAFC
 
 end
