@@ -22,7 +22,7 @@ fun find_atoml term =
     | Neg => find_atoml_unop term 
     | Imp_only => find_atoml_binop term
     | Disj => find_atoml_binop term 
-    | Notstructcomb => [term]
+    | _ => [term]
     )             
   | _ => [term]  
 and find_atoml_quant term =
@@ -32,33 +32,26 @@ and find_atoml_binop term =
 and find_atoml_unop term =
   find_atoml (rand term)
 
-fun find_pred_one atom =
-  let val (operator,argl) = strip_comb atom in
-    [operator]
-  end
-  
+fun find_pred_one atom =  fst (strip_comb atom)
+
 fun find_pred term = 
   let val atoml = find_atoml term in
-    erase_double_aconv (List.concat (map find_pred_one atoml))          
+    erase_double (map find_pred_one atoml)          
   end 
 
 fun is_pred_in var term = 
   is_member_aconv var (find_pred term)
 
-fun find_unpred_arg arg =
-  filter is_var_or_const (all_fosubterm arg)
-
-fun find_unpred_aux atom =
-  let val (operator,argl) = strip_comb atom in
-    erase_double_aconv (List.concat (map (find_unpred_arg) argl))
-  end      
-
-fun find_unpred term =
+fun has_boolarg_one term =
+  let val argl = snd (strip_comb term) in
+    exists has_boolty argl orelse
+    exists has_boolarg_one argl
+  end
+           
+fun has_boolarg term = 
   let val atoml = find_atoml term in
-   erase_double_aconv (List.concat (map find_unpred_aux atoml))
-  end              
-
-fun has_boolarg term = not (null (filter has_boolty (find_unpred term)))
+    exists has_boolarg_one atoml
+  end
 
 fun has_boolarg_thm thm =
   let val l = (hyp thm) @ [concl thm] in

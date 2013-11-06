@@ -113,7 +113,7 @@ fun firstorder_err term =
   in  
    firstorder_bval_err bval andalso 
    firstorder_fval_err fval andalso
-   firstorder_cal_err (filter (not o is_dca) cal)
+   firstorder_cal_err cal
   end  
   
 (* goal *)  

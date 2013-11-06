@@ -15,8 +15,28 @@ load "beagle"; open beagle;
 
 
 val thml = [];
-val goal = ([``(x = 2) \/ (x = 4)``, ``y = 2 * x``], ``(y = 4) \/ (y = 8)``);
+val goal = ([``(x:num = 2) \/ (x = 4)``, ``y:num = 2 * x:num``], 
+  ``(y:num = 4) \/ (y = 8)``);
+
 BEAGLE_TAC thml goal;
+BEAGLE_NF_TAC thml goal;
+
+val (goal1,_) = PROBLEM_TO_GOAL_TAC thml goal;
+val (goal2,_) = BEAGLE_CONV_TAC (hd goal1);
+val (goal3,_) = ERASE_EXISTS_TAC (hd goal2);
+val (goal4,_) = FORALL_CONJUNCTS_TAC (hd goal3);
+val (goal5,_) = FORALL_CONJUNCTS_TAC (hd goal4);
+val (goal6,_) = STRIP_CONJ_ONLY_HYP_TAC (hd goal5); (* to be changed *)
+val (goal7,_) = ERASE_FORALL_TAC (hd goal6);
+val (goal8,_) = ADD_HIGHER_ORDER_TAC (hd goal7);
+val (goal9,_) = NUM_INT_TAC (hd goal8);
+
+
+
+val (goal10,_) = BOOL_BV_TAC (hd goal9);
+val (goal11,_) = ADD_BOOL_AXIOM_TAC (hd goal10);
+
+
 
 (* debugging *)
 val thml = [mk_thm ([], ``∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)``)];

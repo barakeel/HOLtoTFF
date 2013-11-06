@@ -12,6 +12,7 @@ fun SYNTAX_ERR function message =
 (* ACONV *)
 fun is_member_aconv t l = is_member_eq aconv t l 
 fun erase_double_aconv l = erase_double_eq aconv l 
+fun merge_aconv terml = erase_double_aconv (List.concat terml)
  
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
@@ -59,35 +60,6 @@ else
 
 fun get_arity term = length (snd (strip_comb term))
 
-fun all_fosubterm_aux term = 
-  case structterm term of
-    Numeral => [term]
-  | Integer => [term]
-  | Var => [term]  
-  | Const => [term]
-  | Comb => 
-    (
-    case structcomb term of
-      Forall => all_fosubterm_aux_quant term
-    | Exists => all_fosubterm_aux_quant term   
-    | Conj => all_fosubterm_aux_binop term
-    | Neg => all_fosubterm_aux_unop term
-    | Imp_only => all_fosubterm_aux_binop term
-    | Disj => all_fosubterm_aux_binop term
-    | Notstructcomb => let val (operator,argl) = strip_comb term in
-               term :: all_fosubterm_aux_list (operator :: argl)            
-             end
-    )  
-  | Abs => term :: all_fosubterm_aux (snd (strip_abs term))
-         
-and all_fosubterm_aux_list terml = 
-  erase_double_aconv (List.concat (map (all_fosubterm_aux) terml))
-and all_fosubterm_aux_quant term = all_fosubterm_aux (snd (strip_quant term))
-and all_fosubterm_aux_binop term = all_fosubterm_aux_list [lhand term,rand term] 
-and all_fosubterm_aux_unop term = all_fosubterm_aux (rand term)
-
-fun all_fosubterm term = 
-  wrap "blibSyntax" "all_subterm" "" erase_double_aconv (all_fosubterm_aux term)
 
 (* THM *)
 fun only_hyp thm = 

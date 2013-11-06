@@ -55,10 +55,19 @@ fun erase_last4char str =
   then ""
   else substring (str,0,(String.size str)-4)
 
-fun change_to_predty str = (erase_last4char str) ^ "$o"
-(* test
-last2char "hello";
-*)
+fun bool_to_o_type str = (erase_last4char str) ^ "$o"
+
+fun first_n_char n str = String.substring (str,0,n)
+fun erase_n_char n str = String.substring (str,n,String.size str - n)
+fun last_char str = String.substring (str,String.size str -1,1)
+
+fun char_place_aux ch str n =
+  if first_n_char 1 str = ch then n
+  else char_place_aux ch (erase_n_char 1 str) (n + 1)
+fun char_place ch str = char_place_aux ch str 0
+
+fun char_in ch str = success (char_place ch) str 
+
 
 (* name *)
 fun name_strn str n = str ^ (Int.toString n) 
@@ -181,7 +190,7 @@ fun list_subset ll1 ll2 =
     | _  => subset (hd ll1) (hd ll2) andalso
             list_subset (tl ll1) (tl ll2)
     
-fun list_merge ll = erase_double (List.concat ll)
+fun merge ll = erase_double (List.concat ll)
 
 fun quicksort << xs = let
   fun qs [] = []
@@ -214,7 +223,6 @@ fun lookup elem couplelist =
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
 
-
 (* condition *)
 fun mk_list n a =
   case n of 
@@ -222,76 +230,6 @@ fun mk_list n a =
   | _ => if n < 0 then raise BTOOLS_ERR "make_n_emptyl" "negative number"
          else
            a :: mk_list (n -1) a
-
-(* NUMBER *)
-fun suml nl =
-  case nl of
-    [] => 0
-  | n :: m => n + suml m
-  
-fun multl al bl =
-  if not (length al = length bl) 
-  then raise BTOOLS_ERR "multl" "different length"
-  else
-    case al of
-      [] => []
-    | _  => (hd al) * (hd bl) :: multl (tl al) (tl bl) 
-
-(* SET *)
-fun is_member_eq equal elem list  = exists (equal elem) list
-
-fun erase_double_eq equal list  =
-  case list of
-   [] => []
- | a :: m => if is_member_eq equal a m 
-             then erase_double_eq equal m 
-             else a :: erase_double_eq equal m
-
-local fun equal x y = (x = y) in
-  fun is_member elem list = is_member_eq equal elem list 
-  fun erase_double list = erase_double_eq equal list 
-end
-
-fun add_once elem list =
-  if is_member elem list then list else elem :: list
- 
-fun inter l1 l2 = filter (inv is_member l2) l1 
-
-fun subset l1 l2 = all (inv is_member l2) l1
-
-fun strict_subset s1 s2 = subset s1 s2 andalso not (s1 = s2)
-
-fun is_maxset s sl = not (exists (strict_subset s) sl)
-
-fun list_subset ll1 ll2 =
-  if not (length ll1 = length ll2) 
-  then 
-    raise BTOOLS_ERR "list_subset" "different length" 
-  else 
-    case ll1 of
-      [] => true
-    | _  => subset (hd ll1) (hd ll2) andalso
-            list_subset (tl ll1) (tl ll2)
-    
-fun list_merge ll = erase_double (List.concat ll)
-
-fun quicksort << xs = let
-  fun qs [] = []
-    | qs [x] = [x]
-    | qs (p::xs) = let
-        val lessThanP = (fn x => << (x, p))
-        in
-          qs (filter lessThanP xs) @ p :: (qs (filter (not o lessThanP) xs))
-        end
-  in
-    qs xs
-  end
- 
-fun repeat_change change l changing = 
-  case l of
-    [] => changing
-  | a :: m => repeat_change change m (change a changing)
-
 
 (* dictionnary *)
   (* doesn't overwrite only the first add entry can do something *)

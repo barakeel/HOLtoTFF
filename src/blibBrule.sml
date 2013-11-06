@@ -9,24 +9,14 @@ fun BRULE_ERR function message =
 	         origin_function = function,
            message = message}
 
+fun CONV_RULE conv thm = EQ_MP (QCONV conv (concl thm)) thm  
 
-fun conv_concl conv thm =
-  let val conclt = concl thm in
-  let val eqthm = conv conclt in
-    EQ_MP eqthm thm
-  end end     
-  handle UNCHANGED => thm
-  
-fun conv_onehyp conv term thm =
-  let val eqth1 = conv term in
-  let val (lemma1,lemma2) = EQ_IMP_RULE eqth1 in
-  let val lemma3 = UNDISCH lemma2 in
-  let val th3 = PROVE_HYP lemma3 thm in
-    th3
-  end end end end 
-  handle UNCHANGED => thm
+fun CONV_HYPO_RULE conv term thm =
+  let val (_,lemma) = EQ_IMP_RULE (QCONV conv term) in
+    PROVE_HYP (UNDISCH lemma) thm
+  end
  
-fun conv_hypl conv terml thm = repeat_change (conv_onehyp conv) terml thm 
+fun CONV_HYPL_RULE conv terml thm = repeat_change (CONV_HYPO_RULE conv) terml thm 
  
 fun list_PROVE_HYP thml thm =
   case thml of
@@ -83,7 +73,7 @@ fun EXTL bvl thm =
   case rev bvl of
     [] => thm
   | bv :: m => let val th0 = SPECL bvl thm in
-                 EXTL (rev m) ( GENL(rev m) (EXT (GEN bv th0)) )  
+                 EXTL (rev m) ( GENL (rev m) (EXT (GEN bv th0)) )  
                end             
 
 fun list_TRANS eqthml =

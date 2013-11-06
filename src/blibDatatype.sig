@@ -2,31 +2,44 @@ signature blibDatatype =
 sig
 
 include Abbrev
-  
+
+(* writer *)  
 datatype STRUCTVAR = Freevar | Boundvar | Constvar
 
 datatype STRUCTTERM = Numeral | Integer | Var | Const | Comb | Abs  
-fun structterm : term -> STRUCTTERM
+val structterm : term -> STRUCTTERM
 
 datatype STRUCTTYPE = Booltype | Numtype | Alphatype | Leaftype | 
                       Funtype | Prodtype | Nodetype
-fun structtype : hol_type -> STRUCTTYPE 
+val structtype : hol_type -> STRUCTTYPE 
 
 datatype STRUCTCOMB = 
   Conj | Disj | Neg | Imp_only | Forall | Exists | 
   Eq | 
   Plusn | Minusn | Multn | Lessn | Greatern | Geqn | Leqn | 
-  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated   
+  Plusi | Minusi | Multi | Lessi | Greateri | Geqi | Leqi | Negated |  
   Othercomb
-fun structcomb : term -> STRUCTCOMB
-fun is_connector : term -> bool
-fun is_numarith  : term -> bool
-fun is_intarith  : term -> bool
+val structcomb : term -> STRUCTCOMB
+val is_connector : term -> bool
+val is_numarith  : term -> bool
+val is_intarith  : term -> bool
 
 datatype STRUCTARITY = Binop | Unop | Quant | Otherarity
-fun structarity : term -> STRUCTARITY
+val structarity : term -> STRUCTARITY
+
+datatype STRUCTINFIX = Prefix | Infix | Suffix | Otherinfix
+val structinfix : term -> STRUCTINFIX
+val op_symb : term -> string
 
 datatype STRUCTLEAFC = True | False | Otherleafc
-fun structleafc : term -> STRUCTLEAFC
+val structleafc : term -> STRUCTLEAFC
+
+(* reader *)
+val is_tfffunctor : string -> bool 
+val read_tfffunctor : string -> term
+val is_tfftruefalse : string -> bool
+val read_tfftruefalse : string -> term
+
+
 
 end

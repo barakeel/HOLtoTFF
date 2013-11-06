@@ -12,27 +12,6 @@ fun PRINTTFF_ERR function message =
           origin_function = function,
           message = message}
 
-
-(* bad hack NLIA *)
-fun contain_numfvc term = not (null (filter has_numty (get_fvcl term)))
-fun contain_intfvc term = not (null (filter has_intty (get_fvcl term)))
-
-fun linearn term =
-  case arith term of
-    Multn => 
-      let val (t1,t2) = numSyntax.dest_mult term in
-        not (contain_numfvc t1 andalso contain_numfvc t2)
-      end
-  | _    => raise PRINTTFF_ERR "linearn" "not a numeral product"
-
-fun lineari term =
-  case arith term of
-    Multi => 
-      let val (t1,t2) = intSyntax.dest_mult term in
-        not (contain_numfvc t1 andalso contain_numfvc t2)
-      end
-  | _    => raise PRINTTFF_ERR "lineari" "not a integer product"
-
 (* PPTFF_TERM *)
 fun pptff_qbvl_aux pps qbvl bvdict tyadict  =
   case qbvl of
@@ -68,44 +47,49 @@ fun pptff_term_aux pps term dict pflag bvl =
     Numeral => add_string pps (name_of term)
   | Integer => add_string pps (name_of term)
   | Var => if is_member_aconv term bvl
-           then add_string pps (lookup term (#2 dict)) (*boundvar*)
-           else add_string pps (lookup term (#3 dict)) (*freevar*)
+           then add_string pps (lookup term (#2 dict)) (* boundvar *)
+           else add_string pps (lookup term (#3 dict)) (* freevar *)
   | Const => 
     (
     case structleafc term of
-      False => if pflag
-               then add_string pps "$false"
-               else add_string pps "bfalse"
-    | True => if pflag
-              then add_string pps "$true"
-              else add_string pps "btrue"
+      False => if pflag then add_string pps "$false"
+                        else add_string pps "bfalse"
+    | True => if pflag then add_string pps "$true"
+                       else add_string pps "btrue"
     | Otherleafc => add_string pps (lookup term (#4 dict))
     )
   | Comb => 
     (
-    (* hack NLIA *) 
-    (* to be removed if/when the external prover supports NLIA *)
-    if numeralSyntax.is_mult term 
-    then 
-      if not (lineari term)
-      then pptff_app pps "$product" argl dict false bvl
-      else pptff_app pps (lookup operator (#4 dict)) argl dict false bvl
-    else 
-    if intSyntax.is_mult term
-    then 
-      if not (linearn term)
-      then pptff_app pps "$product" argl dict false bvl
-      else pptff_app pps (lookup operator (#4 dict)) argl dict false bvl
-    else
-    (* end hack NLIA *)
     case structcomb term of
-      InBinop => pptff_binop pps (inbinop_symb term) term dict pflag bvl
-      PreBinop => 
+      Eq => pptff_binop_infix pps "=" term dict false bvl
+    (* hack NLIA *)
+    | Multn => if linearn term  
+               then pptff_binop_prefix pps
+                      (op_symb term) term dict false bvl  
+               else pptff_binop_prefix pps    
+                 (lookup (fst (strip_comb term)) (#4 dict)) term dict false bvl
+    | Multi => if lineari term  
+               then pptff_binop_prefix pps
+                      (op_symb term) term dict false bvl  
+               else pptff_binop_prefix pps    
+                 (lookup (fst (strip_comb term)) (#4 dict)) term dict false bvl
+    (* end hack NLIA *)
+    | _ =>
+    ( 
+    case structarity term of
+      Binop => 
+        (
+        case structinfix term of
+          Infix => pptff_binop_infix pps (op_symb term) term dict pflag bvl
+        | Prefix => pptff_binop_prefix pps (op_symb term) term dict pflag bvl
+        | _ => raise PRINTTFF_ERR "pptff_term_aux" "neither prefix nor infix"
+        )
+    | Unop => pptff_unop pps (op_symb term) term dict pflag bvl
     | Quant => let val (qbvl,t) = strip_quant term in
-                 pptff_quant pps (quant_symb term) qbvl t dict pflag bvl
+                 pptff_quant pps (op_symb term) qbvl t dict pflag bvl
                end
               
-    | Notstructcomb => 
+    | _ => 
       let val (operator,argl) = strip_comb term in
       let val arity = get_arity term in
       case structterm operator of
@@ -114,25 +98,10 @@ fun pptff_term_aux pps term dict pflag bvl =
       | Var => if is_member_aconv operator bvl
                then pptff_app pps (lookup operator (#2 dict)) argl dict false bvl
                else pptff_app pps (lookup operator (#3 dict)) argl dict false bvl 
-      | Const => 
-        (
-        case arith term of
-          Eq => pptff_binop pps "=" term dict false bvl
-        | Multn => if linearn term  (* bad hack NLIA *)
-                   then pptff_app pps "$product" argl dict false bvl  
-                   else 
-        | Multi =>  if lineari term  (* bad hack NLIA *)
-                  then pptff_app pps "$product" argl dict false bvl  
-                  else pptff_app pps    
-                    (lookup operator (#4 dict)) argl dict false bvl*)
-        | Newarith => pptff_app pps 
-                            (lookup operator (#4 dict)) argl dict false bvl                
-        | _ => pptff_app pps 
-                 (lookup (arith term) dcprintdict) argl dict false bvl
-        ) 
+      | Const => pptff_app pps (lookup operator (#4 dict)) argl dict false bvl    
       | _ => raise PRINTTFF_ERR "pptff_term_aux" "abs or comb"
       end end  
-    )
+    ))
   | Abs => raise PRINTTFF_ERR "pptff_term_aux" "abs"
   handle _ => raise PRINTTFF_ERR "pptff_term_aux" ""
 and pptff_argl pps argl dict pflag bvl = 
@@ -150,7 +119,7 @@ and pptff_unop pps str term dict pflag bvl =
   add_string pps str;
   pptff_term_aux pps (rand term) dict pflag bvl
   )
-and pptff_binop pps str term dict pflag bvl = 
+and pptff_binop_infix pps str term dict pflag bvl = 
   (
   add_string pps "(";
   pptff_term_aux pps (lhand term) dict pflag bvl;
@@ -158,6 +127,8 @@ and pptff_binop pps str term dict pflag bvl =
   pptff_term_aux pps (rand term) dict pflag bvl;
   add_string pps ")"
   )
+and pptff_binop_prefix pps str term dict pflag bvl =
+  pptff_app pps str [lhand term, rand term] dict pflag bvl    
 and pptff_quant pps str qbvl term dict pflag bvl = 
   (
   add_string pps (str ^ " ");
@@ -306,7 +277,7 @@ fun pptff_tff_w pps nb goal =
       let 
       (* dict *)
         val tyadict = create_tyadict term
-        val simpletyadict = erase_dtyname (get_simpletyadict tyadict)
+        val simpletyadict = get_simpletyadict tyadict (* wip erase_dtyname *) 
         val bvdict = create_bvdict term  
         val bvatydict = create_bvatydict term tyadict
         val fvdict = create_fvdict term 
@@ -322,7 +293,7 @@ fun pptff_tff_w pps nb goal =
         pptff_commentline pps;
         pptff_tyadict pps simpletyadict;
         pptff_fvatydict pps fvdict fvatydict;
-        pptff_catydict pps cdict (filter (not o is_dcaty2) catydict);
+        pptff_catydict pps cdict catydict;
         if has_boolarg term then pptff_btrue_bfalse pps else ();
         pptff_axioml pps (fst goal) dict;
         pptff_conjecture pps "conjecture" (snd goal) dict;

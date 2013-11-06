@@ -138,7 +138,7 @@ fun inst_cl_aux substl cl =
 
 fun inst_cl substl cl = 
   let val newsubstl = erase_double ([] :: substl) in
-    wrap "blibMonomorph" "inst_cl" "" list_merge (inst_cl_aux newsubstl cl)
+    wrap "blibMonomorph" "inst_cl" "" merge (inst_cl_aux newsubstl cl)
   end
   
 fun inst_cll substll clthml =
@@ -180,7 +180,7 @@ fun create_substll clthml clpb = map (inv create_substl clpb) clthml
 
 (* repeat till finding a fix point with arbitrary parameters*)
 fun repeat_create_substll (clthml,clgoal) substll =
-  let val clpb = (list_merge (clthml @ [clgoal])) in
+  let val clpb = (merge (clthml @ [clgoal])) in
   let val newsubstll = create_substll clthml clpb in
   let val n = suml (map length substll) in
   let val newn = suml (map length newsubstll) in

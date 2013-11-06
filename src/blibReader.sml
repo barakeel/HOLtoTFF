@@ -2,7 +2,7 @@ structure blibReader :> blibReader =
 struct
 
 open HolKernel Abbrev boolLib numSyntax
-     blibBtools blibBrule
+     blibDatatype blibBtools blibBrule
      blibSyntax blibTffsyntax blibFreshvar
      beaglePrintresult
      
@@ -11,25 +11,7 @@ fun READER_ERR function message =
           origin_function = function,
           message = message}
  
-(* TOOLS *) 
-fun first_n_char n str = String.substring (str,0,n)
-fun erase_n_char n str = String.substring (str,n,String.size str - n)
-fun last_char str = String.substring (str,String.size str -1,1)
-(* test
-erase_n_char 1 "hello";
-last_char "hello";
-*)
-
-fun char_place_aux ch str n =
-  if first_n_char 1 str = ch then n
-  else char_place_aux ch (erase_n_char 1 str) (n + 1)
-fun char_place ch str = char_place_aux ch str 0
-
-fun char_in ch str = success (char_place ch) str 
-(* test
-char_in "," "hel,lo";
-*)
-
+(* TOOLS *)
 fun split_char ch str =  
   if char_in ch str  
   then
@@ -105,19 +87,17 @@ fun get_tffargl tffterm =
 fun is_beaglec tffvar = 
   (first_n_char 1 tffvar = "#") andalso 
   is_lowerword (erase_n_char 1 tffvar)
-  
-exception unreadable;  
-  
-fun remember_var tffvar rvdict = 
+    
+fun read_var tffvar rvdict = 
   if is_member tffvar (map fst rvdict) 
     then lookup tffvar rvdict
-  else if success string_to_int tffvar
-    then mk_numeral (Arbnum.fromString tffvar)
-  else if is_member tffvar (map fst rdcdict)
-    then lookup tffvar rdcdict
+  else if success Arbnum.fromString tffvar
+    then intSyntax.mk_injected (mk_numeral (Arbnum.fromString tffvar))
+  else if is_tfffunctor tffvar 
+    then read_tfffunctor tffvar
   else if is_beaglec tffvar
-    then mk_var (erase_n_char 1 tffvar,``:num``)
-  else raise unreadable
+    then mk_var (erase_n_char 1 tffvar,``:num``) (* wip *)
+  else raise READER_ERR "read_var" tffvar
 
 fun is_tffvar tffterm = 
   is_upperword tffterm orelse 
@@ -128,9 +108,9 @@ fun is_tffvar tffterm =
 (* do something more for constants dictionnary*)    
 fun read_tffterm tffterm rvdict =
   if is_tffvar tffterm
-  then remember_var tffterm rvdict
+  then read_var tffterm rvdict
   else 
-    let val oper = remember_var (get_tffoperator tffterm) rvdict in 
+    let val oper = read_var (get_tffoperator tffterm) rvdict in 
     let val tffargl = get_tffargl tffterm in
       list_mk_comb (oper,map (inv read_tffterm rvdict) tffargl)
     end end
@@ -172,7 +152,6 @@ fun read_tffdisj tffdisj rvdict =
         list_mk_disj (map (inv read_tfflit rvdict) litl)
       end 
   end
-
 
 (* test
 val tffdisj =  
@@ -347,7 +326,7 @@ exception unprovable;
 fun PROVE_GOAL goal =
   (
   (#2 (metisTools.METIS_TAC [] goal)) []
-  handle _ => (#2 (numLib.DECIDE_TAC goal)) []
+  handle _ => (#2 (Cooper.COOPER_TAC goal)) []
   )
   handle _ => raise unprovable
 

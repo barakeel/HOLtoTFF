@@ -1,4 +1,4 @@
-Problems    : 22
+Problems    : 23
 Polymorph   : 3
 Fixpoint    : 3
 Lambda-lift : 0
@@ -12,7 +12,7 @@ Unkown      : 0
 Sat         : 0
 Time out    : 2
 Parsing err : 0
-Code err    : 12
+Code err    : 13
 Beagle err  : 0
 timerl      : 477
 timerl      : 14488

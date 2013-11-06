@@ -15,7 +15,7 @@ fun vara_to_tya (var,a) = (type_of var,a)
 fun all_tya_aux varal = map vara_to_tya varal
 
 fun all_tya term = 
-  let val varal = (map fst (get_varinfol term)) in
+  let val varal = (map fst (info_varl term)) in
     erase_double (all_tya_aux varal)
   end
   

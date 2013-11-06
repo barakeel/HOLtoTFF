@@ -19,7 +19,7 @@ local fun is_interesting_in term subterm =
   not (subterm = T) andalso
   not (subterm = F) 
 in
-fun find_free_bool_aux term subterm = (* term should be a boolean *)
+fun find_free_bool_aux term subterm =
   case structterm subterm of
     Numeral => []
   | Integer => []
@@ -28,13 +28,13 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
   | Comb => 
     (
     case structcomb subterm of
-      Forall => find_free_bool_quant term subterm
-    | Exists => find_free_bool_quant term subterm   
-    | Conj => find_free_bool_binop term subterm
+      Conj => find_free_bool_binop term subterm
+    | Disj => find_free_bool_binop term subterm
     | Neg => find_free_bool_unop term subterm
     | Imp_only => find_free_bool_binop term subterm
-    | Disj => find_free_bool_binop term subterm
-    | Notstructcomb =>   
+    | Forall => find_free_bool_quant term subterm
+    | Exists => find_free_bool_quant term subterm   
+    | _ =>   
       let val (operator,argl) = strip_comb subterm in
         filter (is_interesting_in term) argl @
         find_free_bool_list term (operator :: argl)
@@ -43,7 +43,7 @@ fun find_free_bool_aux term subterm = (* term should be a boolean *)
     )             
   | Abs => raise CONV_ERR "find_free_bool_aux" "abstraction"
 and find_free_bool_list term subterml =
-  List.concat (map (find_free_bool_aux term) subterml)
+  merge_aconv (map (find_free_bool_aux term) subterml)
 and find_free_bool_quant term subterm =
   let val (bvl,t) = strip_quant subterm in
     find_free_bool_aux term t
@@ -163,7 +163,6 @@ fun bool_conv_aux term =
 fun bool_conv term =
   wrap "conv" "bool_conv" "" (bool_conv_sub_all THENC bool_conv_aux) term
 
-
 (* test
 val term = ``!x. g (!z. z = 0) /\ g (!z. x = z)``;
 val term = ``!x. x + 1 = 0``;
@@ -176,8 +175,6 @@ bool_conv term;
 find_free_bool term;
 bool_conv_sub subterm term;
 *)
-
-
 
 (* FUN_CONV *)
 (* find *)
@@ -218,7 +215,6 @@ fun fun_axiom_w abs =
   end end end end end
 fun fun_axiom abs = wrap "conv" "fun_axiom" "" fun_axiom_w abs 
 
-
 fun eq_conj_subs thm =
   let val th0 = CONJUNCT1 thm in
   let val th1 = CONJUNCT2 thm in
@@ -238,18 +234,6 @@ fun and_strip_bvl_forall_mp bvl term =
     DISCH term th6
   end end end end end 
   end end end
-
-fun extl bvl thm =
-  let val n = length bvl in
-  let val th0 = SPECL bvl thm in 
-  let val (op1,arg1) = strip_comb_n n (lhs (concl th0)) in
-  let val (op2,arg2) = strip_comb_n n (rhs (concl th0)) in
-  let val t2 = mk_eq (op1,op2) in
-  let val eqth0 = list_FUN_EQ_CONV bvl t2 in
-  let val th1 = EQ_MP (SYM eqth0) thm in
-      th1
-  end end end end end
-  end end 
 
 (* test   
 val newbvl = bvl;
@@ -299,7 +283,7 @@ fun fun_conv_sub_w abs term =
   let val th41 = SYM (CONJUNCT2 th39) in
   let val th42 = TRANS th40 th41 in
   let val th43 = GENL newbvl th42 in
-  let val th44 = extl bvl th43 in 
+  let val th44 = EXTL bvl th43 in 
   let val th45 = SYM th44 in
   let val th46 = SUBS [th45] th35 in (* substitution *)
   let val th47 = DISCH t4 th46 in
@@ -447,9 +431,12 @@ fun app_conv appname term =
   | Const => raise UNCHANGED
   | Comb => 
     (
-    case structcomb term of  
+    case structarity term of  
       Binop => BINOP_CONV (app_conv appname) term 
     | Unop => RAND_CONV (app_conv appname) term 
+    | Quant => STRIP_QUANT_CONV (app_conv appname) term
+    | _ =>
+      (
       let val (operator,_) = dest_comb term in
       case structterm operator of
         Numeral => raise CONV_ERR "app_conv" "numeral is an operator"
@@ -464,8 +451,9 @@ fun app_conv appname term =
                  app_conv_sub appname
                  ) 
                 term
-      | Abs => raise CONV_ERR "app_conv" "abs" 
-      end   
+      | Abs => raise CONV_ERR "app_conv" "abs is an operator" 
+      end
+      )   
     )      
   | Abs => raise CONV_ERR "app_conv" "abs" 
 

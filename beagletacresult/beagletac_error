@@ -131,4 +131,12 @@ Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
 Number: 20
 Status: Undefined
 Thm list: 
-Goal: 
+Goal: structure: blibPrinttff - blibPrinttff - blibPrinttff - blibSyntax
+function : write_tff - pptff_tff - pptff_term - name_of
+message  :  -  - y ≠ 8 - integer
+Number: 23
+Status: Undefined
+Info: proof 
+Thm list: 
+Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
+

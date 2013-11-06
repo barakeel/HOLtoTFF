@@ -26,7 +26,7 @@ fun mk_tac1 goalbuilder valbuilder goal =
   end end
 
 (* CONV_HYP_TAC *) 
-fun conv_hypg conv goal =
+fun conv_hyp conv goal =
   let val eqthl = map (QCONV conv) (fst goal) in
   let val terml = erase_double_aconv (map (rhs o concl) eqthl) in
     (terml,snd goal)
@@ -34,7 +34,7 @@ fun conv_hypg conv goal =
   
 fun conv_hyp_val conv goal thm =
   let val eqthl = map (QCONV conv) (fst goal) in
-  let val allhyp = List.concat (map hyp eqthl) in
+  let val allhyp = merge_aconv (map hyp eqthl) in
     if null allhyp then 
       let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
       let val th0 = list_PROVE_HYP lemmal thm in
@@ -44,7 +44,7 @@ fun conv_hyp_val conv goal thm =
   end end 
    
 fun CONV_HYP_TAC conv goal =
-  mk_tac1 (conv_hypg conv) (conv_hyp_val conv) goal
+  mk_tac1 (conv_hyp conv) (conv_hyp_val conv) goal
 
 (* list_ASSUME_TAC *)
 fun list_ASSUME_TAC_w thml goal =
@@ -54,5 +54,16 @@ fun list_ASSUME_TAC_w thml goal =
 fun list_ASSUME_TAC thml goal =     
   wrap "tactic" "list_ASSUME_TAC" "" list_ASSUME_TAC_w thml goal
   
+(* REMOVE_HYPL_TAC *) 
+fun REMOVE_HYPL_TAC hypl goal = 
+  let fun remove_hypl hypl goal =
+    (filter (not o (inv is_member_aconv hypl)) (fst goal), snd goal) 
+  in
+  let fun remove_hypl_val hypl goal thm = repeat_change ADD_ASSUM hypl thm 
+  in
+    mk_tac1 (remove_hypl hypl) (remove_hypl_val hypl) goal
+  end end  
+ 
+ 
   
 end

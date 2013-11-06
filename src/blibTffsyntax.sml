@@ -3,14 +3,35 @@ struct
 
 open HolKernel Abbrev boolLib
      blibBtools blibDatatype
-     blibSyntax blibExtracttype
+     blibSyntax
      
 fun TFFSYNTAX_ERR function message =
   HOL_ERR {origin_structure = "blibTffsyntax",
            origin_function = function,
            message = message}
 
-(* TEST *)
+
+(* WRITER *)
+(* hack NLIA *)
+fun contain_numfvc term = not (null (filter has_numty (all_vars term)))
+fun contain_intfvc term = not (null (filter has_intty (all_vars term)))
+
+fun linearn term =
+  case structcomb term of
+    Multn => 
+      let val (t1,t2) = numSyntax.dest_mult term in
+        not (contain_numfvc t1 andalso contain_numfvc t2)
+      end
+  | _    => raise TFFSYNTAX_ERR "linearn" "not a numeral product"
+
+fun lineari term =
+  case structcomb term of
+    Multi => 
+      let val (t1,t2) = intSyntax.dest_mult term in
+        not (contain_numfvc t1 andalso contain_numfvc t2)
+      end
+  | _    => raise TFFSYNTAX_ERR "lineari" "not a integer product"
+  
 (* name supported by the tptp for a free variable or a type *)              
 fun is_lowerword str =
   case String.explode str of
@@ -25,81 +46,16 @@ fun is_upperword str =
   | [a] => Char.isUpper a  
   | a :: m => (Char.isUpper a) andalso (is_alphanumor_charl m)
 
-(* name for positive integers *)
-fun is_numword str = success string_to_int str
-  
-(* utilise les numéraux  ou les entiers*)
-val dcprintdict = [
-   (Plusn,"$sum"),
-   (Minusn,"$difference"),
-   (Multn,"$product"),
-   (Lessn,"$less"),
-   (Leqn,"$lesseq"),
-   (Greatern,"$greater"),
-   (Geqn,"$greatereq"),
-   (Plusi,"$sum"),
-   (Minusi,"$difference"),
-   (Multi,"$product"),
-   (Lessi,"$less"),
-   (Leqi,"$lesseq"),
-   (Greateri,"$greater"),
-   (Geqi,"$greatereq"),
-   (Negated,"$uminus")
-   ]
-
-val rdcdict = [
-(* 
-  ("$sum",intSyntax.plus_tm),
-  ("$difference",intSyntax.minus_tm),
-  ("$product",intSyntax.mult_tm),
-  ("$less",intSyntax.less_tm),
-  ("$lesseq",intSyntax.leq_tm),
-  ("$greater",intSyntax.great_tm),
-  ("$greatereq",intSyntax.geq_tm),
-  ("$uminus",intSyntax.negate_tm) 
-*)
-  ]  
-
-(* defined names *)
-fun is_defword str = is_member str (map fst rdcdict)
- 
-(* VAR NAME *)
+(* name for variables *)
 fun name_tff str var =
   let val name = name_of var in 
     if is_alphanumor_ name then str ^ name else str
   end
   
-
-(* DEFINED TFF CONSTANTS *)
-val dcl = [(*
-           plus_tm,minus_tm,mult_tm,less_tm,leq_tm,great_tm,geq_tm,negate_tm,
-           *)
-           numSyntax.plus_tm,numSyntax.minus_tm,numSyntax.mult_tm,
-           numSyntax.less_tm,numSyntax.greater_tm,
-           numSyntax.geq_tm]
-
-fun is_dc var = 
-  (is_member var dcl orelse name_of var = "=") handle _ => false
-
-fun is_dca (term,arity) = 
-  (is_dc term andalso arity = 2) orelse (name_of term = "=" andalso arity = 2)
-
-fun is_dcaty ((term,arity),str) = is_dca (term,arity)
-
-(* non linear arithmetic hack *)
-val dcl2 = substract dcl [(*mult_tm,*)numSyntax.mult_tm]  
-fun is_dc2 var = 
-  is_member var dcl2 orelse name_of var = "=" handle _ => false
-
-fun is_dca2 (term,arity) = 
-  (is_dc2 term andalso arity = 2) orelse (name_of term = "=" andalso arity = 2)
-
-fun is_dcaty2 ((term,arity),str) = is_dca2 (term,arity)
-  
-(* DEFINED TFF TYPES *) (* all types starting with "$" *)
-fun is_dtyname name = (substring (name,0,1) = "$")
-fun has_not_dtyname ((ty,arity),name) = (not o is_dtyname) name  
-fun erase_dtyname tyadict = filter has_not_dtyname tyadict
-    
+(* READER *)  
+(* test for positive integers *)
+fun is_numword str = success string_to_int str
+(* test for defined names *)
+fun is_defword str = false (* wip is_member str (map fst ropdict) *)   
 
 end

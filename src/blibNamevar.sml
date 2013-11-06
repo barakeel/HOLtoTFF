@@ -48,14 +48,14 @@ fun create_cdict term =
 fun give_pred_type tyadict term (v,a) = 
   let val tyname = lookup (type_of v,a) tyadict in
     if is_pred_in v term 
-    then ((v,a),change_to_predty tyname)
+    then ((v,a),bool_to_o_type tyname)
     else ((v,a),tyname)
   end
 
 fun give_predc_type tyadict term (c,a) = 
   let val tyname = lookup (type_of c,a) tyadict in
-    if is_pred_in c term andalso not (is_dc c)
-    then ((c,a),change_to_predty tyname)
+    if is_pred_in c term 
+    then ((c,a),bool_to_o_type tyname)
     else ((c,a),tyname)
   end
 

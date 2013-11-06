@@ -5,6 +5,7 @@ sig
   (* aconv *)
   val is_member_aconv : term -> term list -> bool
   val erase_double_aconv : term list -> term list 
+  val merge_aconv : term list list -> term list 
   (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
@@ -19,7 +20,6 @@ sig
   (* term *)
   val strip_comb_n : int -> term -> (term * term list)
   val get_arity : term -> int
-  val all_fosubterm : term -> term list
   (* thm *)
   val only_hyp : thm -> term
   val is_refl : thm -> bool

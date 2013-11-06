@@ -68,22 +68,13 @@ fun BOOL_CONV_TAC_w goal =
 fun BOOL_CONV_TAC goal = 
   wrap "tactic" "BOOL_CONV_TAC" "" BOOL_CONV_TAC_w goal 
 
-fun NUM_CONV_TAC_w goal =
-  let val eqthl = map (QCONV num_conv) (fst goal) in
-    (flag_update numflag (not (all is_refl eqthl));
-     CONV_HYP_TAC (QCONV (num_conv THENC normalForms.CNF_CONV)) goal)
-  end
-fun NUM_CONV_TAC goal =
-  wrap "tactic" "NUM_CONV_TAC" "" NUM_CONV_TAC_w goal
-
-
 fun BEAGLE_CONV_TAC_w goal = 
   (
   CNF_CONV_TAC THEN
   FUN_CONV_TAC THEN
   CNF_CONV_TAC THEN
   BOOL_CONV_TAC THEN
-  CNF_CONV_TAC THEN
+  CNF_CONV_TAC
   )
   goal
 fun BEAGLE_CONV_TAC goal = 
@@ -97,7 +88,7 @@ fun erase_exists_val goal thm =
   let val th1 = DISCH (only_hyp thm) thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = GENL bvl th2 in
-  let val th4 = conv_concl (QCONV strip_forall_not_conv) th3 in
+  let val th4 = CONV_RULE (QCONV strip_forall_not_conv) th3 in
   let val th5 = NOT_ELIM th4 in
   let val th6 = UNDISCH th5 in
     th6
@@ -141,22 +132,26 @@ fun ERASE_FORALL_TAC goal =
 
 
 (* ADD_HIGHER_ORDER_TAC *)
+(* to be replaced with add_higher_order_one_tac *)
+
 fun ADD_HIGHER_ORDER_TAC_w goal =
   let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
   let fun add_higher_order goal = 
-    conv_hypg (QCONV (app_conv appname)) goal
+    conv_hyp (QCONV (app_conv appname)) goal
   in  
   let fun add_higher_order_val goal thm =
     let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
-    let val appl = erase_double_aconv (List.concat (map hyp eqthl)) in
+    let val appl = merge_aconv (map hyp eqthl) in
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
     let val th0 = list_PROVE_HYP lemmal thm in
     let val th1 = remove_defl appl th0 in
       th1
     end end end end end
   in
-  if firstorder_goal goal then ALL_TAC goal
-  else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
+    if firstorder_goal goal then ALL_TAC goal
+    else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
+  end end end
+
 
 fun ADD_HIGHER_ORDER_TAC goal = 
   wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 

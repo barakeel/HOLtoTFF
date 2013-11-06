@@ -3,9 +3,9 @@ sig
 
   include Abbrev
  
-  val conv_concl : conv -> thm -> thm 
-  val conv_onehyp : conv -> term -> thm -> thm
-  val conv_hypl : conv -> term list -> thm -> thm
+  val CONV_RULE : conv -> thm -> thm 
+  val CONV_HYPO_RULE : conv -> term -> thm -> thm
+  val CONV_HYPL_RULE : conv -> term list -> thm -> thm
   val list_PROVE_HYP : thm list -> thm -> thm 
   val list_conj_hyp_rule : thm -> thm
   val unconj_hyp_rule : term -> thm -> thm

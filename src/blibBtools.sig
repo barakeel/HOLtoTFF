@@ -11,10 +11,15 @@ sig
 (* STRING *)
   val space : int -> string 
   val indent : int -> string
-  
   val last2char : string -> string 
   val erase_last4char : string -> string
-  val change_to_predty : string -> string
+  val bool_to_o_type : string -> string
+  val first_n_char : int -> string -> string
+  val erase_n_char : int -> string -> string
+  val last_char : string -> string
+  val char_place : string -> string -> int 
+  val char_in : string -> string -> bool
+  
   
   val name_strn : string -> int -> string
   val list_name_str : string -> int -> string list
@@ -43,7 +48,7 @@ sig
   val strict_subset : ''a list -> ''a list -> bool 
   val is_maxset : ''a list -> ''a list list -> bool
   val list_subset : ''a list list -> ''a list list -> bool
-  val list_merge : ''a list list -> ''a list
+  val merge : ''a list list -> ''a list
   (* sort *)
   val quicksort : (('a * 'a) -> bool) -> 'a list -> 'a list
   (* dictionnary *)
