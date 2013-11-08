@@ -27,7 +27,6 @@ sig
   val only_hypg : goal -> term
   val mk_goal : thm -> goal 
   val is_subset_goal : goal -> goal -> bool
-  val validation_test : thm -> goal -> string -> bool
   val goal_to_string : goal -> string
   
 end

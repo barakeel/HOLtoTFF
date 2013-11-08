@@ -62,8 +62,12 @@ fun inj_fun_axiom (op1,a) =
   let val (argtyal,imtya) = strip_type_n (type_of op1,a) in 
   let val argtyl = map fst argtyal in
   let val namel = mk_list a "x" in  
-  let val argln = mk_newvarl (mk_varl (namel,argtyl)) (!used) in
-  let val argli = mk_newvarl (mk_varl (namel,map type_num_to_int argtyl)) (!used) 
+  let val opty2 = mk_funtype (map type_num_to_int argtyl,
+                              type_num_to_int (fst imtya)) in
+  let val op2 = mk_newvar (mk_var (name_of op1, opty2)) (!used) in
+  let val argln = mk_newvarl (mk_varl (namel,argtyl)) (op2 :: !used) in
+  let val argli = mk_newvarl (mk_varl (namel,map type_num_to_int argtyl)) 
+                    (op2 :: (!used)) 
   in
   let val injectl = map inject_num argln in
   let val coercl = map coerc_int (mk_couplel argln argli) in
@@ -74,9 +78,8 @@ fun inj_fun_axiom (op1,a) =
                else t1
   in
   let val t3 = list_mk_abs (argli,t2) in
-  let val opty2 = mk_funtype (map type_num_to_int argtyl,
-                              type_num_to_int (fst imtya)) in
-  let val op2 = mk_newvar (mk_var (name_of op1, opty2)) (!used) in
+
+
   let val t4 = mk_eq (op2,t3) in
       (* axiom *)
   let val th1 = ASSUME t4 in 
@@ -211,7 +214,7 @@ fun intfv_def term =
  
 local fun test term t = 
   if not (free_in t term) then false 
-  else if not (is_comb t) then false
+  else if not (structterm t = Comb) then false
   else if not (rator t = intSyntax.int_injection) then false
   else if not (is_var (rand t) orelse is_const (rand t)) then false
   else if numSyntax.is_numeral (rand t) then false
@@ -282,12 +285,23 @@ show_assums := true;
 val term1 = ``!z:num (y:num). f z (g y:bool) = (0:num) + (x:num)``;
 val term2 = ``!z:num (y:num). (&z) = ((&(h y:num)):int)``;
 val term3 = ``!z . 0 = (0 + (z:num))``;
-val goal = ([term2],F);
+val term = `` App x y = (5:int)``; (* shouldn't change *)
+
 val term1 = `` (& (y:num):int) = f (0:int) ``;
 val term2 = `` (& (y:num):int) = 0:int ``;
 val goal = ([term1,term2],F);
 val term = ``∀y. (&(y:num):int) + (&(z:num):int) = 0``;
 val goal = ([term],F);
+
+(* error1 variable name problem *)
+val term1 = `` App x y = (5:num)``;
+val term2 = `` App (x:int) (y:num) : bool ``;
+val goal = ([term1,term2],F);
+
+val term1 = `` App x y = (5:num)``;
+val term2 = `` App1 (x:int) (y:num) : bool ``;
+val goal = ([term1,term2],F);
+
 *)
 
 end

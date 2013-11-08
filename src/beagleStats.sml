@@ -60,21 +60,7 @@ val nb_beagerr = ref (0,"Beagle err  ")
 val nb_list2   = [nb_unsat,nb_unknown,nb_sat,nb_timeout,nb_parsing,
                   nb_codeerr,nb_beagerr]
 
-(* timerl *)
-val timerl = mk_reflist 28 (0,"timerl      ")
-                           
-val metctime = ref 0;
-val beactime = ref 0;
-val tractime = ref 0;
-val impctime = ref 0;
-
-val faultl = [ref (0,"faultl      "),ref (0,"faultl      "),
-              ref (0,"faultl      "),ref (0,"faultl      "),
-              ref (0,"faultl      "),ref (0,"faultl      "),
-              ref (0,"faultl      ")];
-
-
-val nb_all = nb_problem :: (nb_list1 @ nb_list2 @ timerl @ faultl)
+val nb_all = nb_problem :: (nb_list1 @ nb_list2)
 
 fun addone_nb nb = nb := ((fst (!nb)) + 1,snd (!nb))  
 
@@ -105,7 +91,6 @@ fun update_nbl2 str =
   | "Undefined" => addone_nb nb_codeerr
   | _ => addone_nb nb_beagerr
  
-
 fun extract_nb str = 
   string_to_int (String.substring (str,14,(String.size str) - 15)) 
 
@@ -125,6 +110,57 @@ fun update_all_nb filename =
   end
   handle _ => reset_all_nb ()  
  
+(* TIMER TOOLS *)
+val timerl = mk_reflist 28 (0,"timerl      ")
+                           
+val mettimec = ref 0;
+val beatimec = ref 0;
+val tratimec = ref 0;
+val imptimec = ref 0;
+ 
+val faultl = [ref (0,"faultl      "),ref (0,"faultl      "),
+              ref (0,"faultl      "),ref (0,"faultl      "),
+              ref (0,"faultl      "),ref (0,"faultl      "),
+              ref (0,"faultl      ")]; 
+ 
+fun start_timec timec =
+  timec := Time.toMilliseconds (Time.now())
+  
+fun end_timec timec =
+  timec := Time.toMilliseconds (Time.now()) - (!timec)
  
   
+fun updateadd_nb nb n = nb := (fst(!nb) + n, snd (!nb))
+
+fun addone_faultl () =
+  (
+  addone_nb (nth 0 faultl);
+  if fst(!hoflag) 
+  then addone_nb (nth 1 faultl)
+  else addone_nb (nth 2 faultl);
+  if fst(!mflag) 
+  then addone_nb (nth 3 faultl)
+  else addone_nb (nth 4 faultl);
+  if fst (!numflag)
+  then addone_nb (nth 5 faultl)
+  else addone_nb (nth 6 faultl)
+  )
+
+fun update_4timers n =
+  (
+  updateadd_nb (nth n timerl) (!mettimec);  
+  updateadd_nb (nth (n + 1) timerl) (!beatimec);
+  updateadd_nb (nth (n + 2) timerl) (!tratimec);
+  updateadd_nb (nth (n + 3) timerl) (!imptimec)
+  )
+
+fun update_timerl () =
+  (
+  update_4timers 0;
+  if fst(!hoflag) then update_4timers 4 else update_4timers 8;
+  if fst(!mflag)  then update_4timers 12 else update_4timers 16;
+  if fst (!numflag) then update_4timers 20 else update_4timers 24
+  )
+   
+    
 end

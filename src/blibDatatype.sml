@@ -1,7 +1,7 @@
 structure blibDatatype :> blibDatatype =
 struct
 
-open HolKernel Abbrev boolLib numSyntax (*intSyntax*)
+open HolKernel Abbrev boolLib numSyntax intSyntax
      blibBtools
 
 fun DATATYPE_ERR function message =
@@ -27,19 +27,22 @@ fun structterm term =
     (DATATYPE_ERR "structterm" "unknown structterm")   
 
 
-datatype STRUCTTYPE = Booltype | Numtype | Alphatype | Leaftype | 
+datatype STRUCTTYPE = Booltype | Numtype | Inttype | Alphatype | Leaftype | 
                       Funtype | Prodtype | Nodetype
 
 fun structtype holtype =
-  case (holtype = ``:bool``,holtype = ``:num``,is_vartype holtype) of
-    (true,_,_) => Booltype
-  | (_,true,_) => Numtype
-  | (_,_,true) => Alphatype
-  | (_,_,_) => case (dest_type holtype) of  
-                 (_,[]) => Leaftype
-               | ("fun",_) => Funtype
-               | ("prod",_) => Prodtype
-               | _ => Nodetype
+  case (holtype = ``:bool``,holtype = ``:num``,
+        holtype = ``:int``,is_vartype holtype) 
+  of
+    (true,_,_,_) => Booltype
+  | (_,true,_,_) => Numtype
+  | (_,_,true,_) => Inttype
+  | (_,_,_,true) => Alphatype
+  | _ => case (dest_type holtype) of  
+           (_,[]) => Leaftype
+         | ("fun",_) => Funtype
+         | ("prod",_) => Prodtype
+         | _ => Nodetype
 
 datatype STRUCTCOMB = 
   Conj | Disj | Neg | Imp_only | Forall | Exists | 

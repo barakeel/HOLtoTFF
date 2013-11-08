@@ -1,31 +1,22 @@
 TODO
 
-Question :
-- How to translate a rule or something that produces a theorem into a tactic?
-- How tactic works ?
-- How to make the path portable ?
- 
-Test 
-- Debug parsing error
+Test:
+- test the proof replayer
+- test the change made to the higher order conversion step
 
-To do:
-- output an error if there is a bound and a free variables of the same name.
-- erase defined constant before printing
-- add axioms for constant present in the formula
-- make a validation
+Cleaning:
+- rewrite and optimize the monomorphisation step
+- rewrite conversions in a shorter and more readable way
 
-Pretty printing:
-- to be done
-  
-Infer axiom from a theory:
-- do it manually for each constant
-  
-Rewriting:   
+Infer axioms from a theory:
+- do it manually for each constant (COND should be translated)
 
 Output:
 - add comments to be printed in the standard input when the file is generated
 - add comments to the file if the user wants to (tptp standard comment)
-- should returns every dictionary created to be able to follow them into the proof
  
 Documentation:
 - explanation of what each signature function does.
+
+Pretty printing:
+- to be done

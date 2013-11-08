@@ -1,17 +1,38 @@
 %----------------------------------------------------------------------------
-% Number   : 23
+% Number   : 12
 %----------------------------------------------------------------------------
-tff(ty_int_type,type,(
-    ty_int: $tType )).
+tff(ty_b_type,type,(
+    ty_b: $tType )).
 
-tff(xy_type,type,(
-    xy: ty_int )).
+tff(ty_b_F_int_type,type,(
+    ty_b_F_int: $tType )).
 
-tff(xx_type,type,(
-    xx: ty_int )).
+tff(ty_a_type,type,(
+    ty_a: $tType )).
 
-tff(cint_mul_type,type,(
-    cint_mul: ( ty_int * ty_int ) > ty_int )).
+tff(xf1_type,type,(
+    xf1: ty_a > ty_b_F_int )).
+
+tff(xa_type,type,(
+    xa: ty_a )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_b_F_int * ty_b ) > $int )).
+
+tff(xg_type,type,(
+    xg: ty_b_F_int )).
+
+tff(xb_type,type,(
+    xb: ty_b )).
 
 tff(axiom1_axiom,axiom,(
-    ~(xy = 
+    (xf1(xa) = xg) )).
+
+tff(axiom2_axiom,axiom,(
+    (xApp1(xf1(xa),xb) = 2) )).
+
+tff(axiom3_axiom,axiom,(
+    ~(xApp1(xg,xb) = 2) )).
+
+%----------------------------------------------------------------------------
+

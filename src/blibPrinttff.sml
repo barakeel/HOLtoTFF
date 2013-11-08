@@ -223,10 +223,8 @@ fun pptff_catydict pps cdict catydict =
 (* boolean *)
 fun pptff_btrue_bfalse pps =
   (
-  pptff_type pps "btrue" "bool";
-  nl2 pps;
-  pptff_type pps "bfalse" "bool";
-  nl2 pps 
+  pptff_type pps "btrue"  "bool"; nl2 pps;
+  pptff_type pps "bfalse" "bool"; nl2 pps 
   )
 
 (* AXIOM *)
@@ -239,13 +237,13 @@ fun pptff_axiom pps name term dict =
   nl2 pps
   ) 
 
-fun pptff_axioml_aux pps terml dict start =
+fun pptff_axioml_aux pps terml dict n =
   case terml of
     [] => ()
   | t :: m =>  
     (
-    pptff_axiom pps ("axiom" ^ (Int.toString start)) t dict;
-    pptff_axioml_aux pps m dict (start + 1)
+    pptff_axiom pps ("axiom" ^ (Int.toString n)) t dict;
+    pptff_axioml_aux pps m dict (n + 1)
     )
 
 fun pptff_axioml pps terml dict = pptff_axioml_aux pps terml dict 1;      
@@ -260,6 +258,9 @@ fun pptff_conjecture pps name term dict =
     add_string pps " )).";
     nl2 pps
     )
+
+fun is_tffdty str = first_n_char 1 str = "$" 
+fun test_tffdty ((ty,a),str) = is_tffdty str
 
 fun pptff_tff_w pps nb goal =
   let val terml = (fst goal) @ [snd goal] in
@@ -291,7 +292,7 @@ fun pptff_tff_w pps nb goal =
         pptff_commentline pps;
         pptff_number pps nb;
         pptff_commentline pps;
-        pptff_tyadict pps simpletyadict;
+        pptff_tyadict pps (filter (not o test_tffdty) simpletyadict);
         pptff_fvatydict pps fvdict fvatydict;
         pptff_catydict pps cdict catydict;
         if has_boolarg term then pptff_btrue_bfalse pps else ();

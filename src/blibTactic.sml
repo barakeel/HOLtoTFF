@@ -130,32 +130,6 @@ fun ERASE_FORALL_TAC goal =
   wrap "tactic" "ERASE_FORALL" ""
     (CONV_HYP_TAC (QCONV normalForms.CNF_CONV)) goal
 
-
-(* ADD_HIGHER_ORDER_TAC *)
-(* to be replaced with add_higher_order_one_tac *)
-
-fun ADD_HIGHER_ORDER_TAC_w goal =
-  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
-  let fun add_higher_order goal = 
-    conv_hyp (QCONV (app_conv appname)) goal
-  in  
-  let fun add_higher_order_val goal thm =
-    let val eqthl = map (QCONV (app_conv appname)) (fst goal) in
-    let val appl = merge_aconv (map hyp eqthl) in
-    let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th0 = list_PROVE_HYP lemmal thm in
-    let val th1 = remove_defl appl th0 in
-      th1
-    end end end end end
-  in
-    if firstorder_goal goal then ALL_TAC goal
-    else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
-  end end end
-
-
-fun ADD_HIGHER_ORDER_TAC goal = 
-  wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 
-
 (* BOOL_BV_TAC *)
 fun BOOL_BV_TAC_w goal =
   CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal

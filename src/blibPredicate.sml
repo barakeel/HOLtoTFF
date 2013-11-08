@@ -32,16 +32,6 @@ and find_atoml_binop term =
 and find_atoml_unop term =
   find_atoml (rand term)
 
-fun find_pred_one atom =  fst (strip_comb atom)
-
-fun find_pred term = 
-  let val atoml = find_atoml term in
-    erase_double (map find_pred_one atoml)          
-  end 
-
-fun is_pred_in var term = 
-  is_member_aconv var (find_pred term)
-
 fun has_boolarg_one term =
   let val argl = snd (strip_comb term) in
     exists has_boolty argl orelse

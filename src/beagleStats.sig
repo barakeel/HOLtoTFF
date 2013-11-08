@@ -43,10 +43,10 @@ sig
   
   val timerl : ((int * string) ref) list
   val faultl : ((int * string) ref) list
-  val metctime : int ref
-  val beactime : int ref
-  val tractime : int ref
-  val impctime : int ref
+  val mettimec : int ref
+  val beatimec : int ref
+  val tratimec : int ref
+  val imptimec : int ref
   
   val nb_all     : ((int * string) ref) list
   val reset_all_nb : unit -> unit

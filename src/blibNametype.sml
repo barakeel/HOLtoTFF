@@ -18,6 +18,7 @@ fun name_leaftype ty =
   case structtype ty of
     Booltype => fst (dest_type ty)
   | Numtype => fst (dest_type ty)
+  | Inttype => fst (dest_type ty)
   | Alphatype =>  name_alphatype ty
   | Leaftype => fst (dest_type ty)
   | _ => raise NAMETYPE_ERR "name_leaftype" "node type"
@@ -33,6 +34,7 @@ fun prename_simplety ty =
   case structtype ty of
     Booltype => name_tfftype ty
   | Numtype => name_tfftype ty
+  | Inttype => name_tfftype ty
   | Alphatype => name_tfftype ty
   | Leaftype => name_tfftype ty
   | Funtype => let val (str,l) = dest_type ty in
@@ -73,7 +75,10 @@ fun add_simpletya (ty,arity) tyadict =
                       add_entry ((ty,0),str) tyadict
                     end 
       | Numtype => let val str = "$int" in
-                     add_entry ((ty,0),str) tyadict
+                     erase_double (((ty,0),str) :: tyadict)
+                   end
+      | Inttype => let val str = "$int" in
+                     erase_double (((ty,0),str) :: tyadict)
                    end
       | _ => let val str = name_simplety ty in
                add_newnamel [((ty,0),str)] tyadict

@@ -36,12 +36,17 @@ fun bound_by_quant subterm term =
    free_in subterm t andalso not (free_in subterm term)
  end  
 
+fun name_of_posint term =
+  rm_last_n_char 1 (Arbintcore.toString (intSyntax.int_of_term term))
+
 (* VAR *)
 fun name_of term = 
   case structterm term of
     Numeral => Int.toString (numSyntax.int_of_term term)
-  | Integer => raise SYNTAX_ERR "name_of" "integer"
-               (*Arbintcore.toString (intSyntax.int_of_term term)*)
+  | Integer => 
+      if intSyntax.is_negated term
+      then "$uminus(" ^ name_of_posint (intSyntax.dest_negated term) ^ ")"
+      else name_of_posint term
   | Var => fst (dest_var term)
   | Const => fst (dest_const term)
   | Comb => raise SYNTAX_ERR "name_of" "comb"
@@ -81,12 +86,13 @@ fun is_subset l1 l2 = all (is_member_aconv_rev l2) l1
 fun is_subset_goal goal1 goal2 = 
   aconv (snd goal1) (snd goal2) andalso
   is_subset (fst goal1) (fst goal2)
- 
-fun validation_test thm goal msg = 
-  if is_subset_goal (mk_goal thm) goal then true
-  else raise SYNTAX_ERR msg ""
+
+fun terml_to_string terml =
+  case terml of
+    [] => ""
+  | t :: m => (term_to_string t) ^ ", " ^ (terml_to_string m)  
  
 fun goal_to_string goal = 
-  thm_to_string (mk_thm goal)
+  "([" ^ terml_to_string (fst goal) ^ "]" ^ "," ^ term_to_string (snd goal) ^ ")"
 
 end

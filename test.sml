@@ -10,9 +10,10 @@ load "numSyntax"; open numSyntax;
 load "blibNumconv"; open blibNumconv;
 load "blibExtractvar"; open blibExtractvar;
 load "int_arithTheory"; open int_arithTheory;
+load "blibTactic"; open blibTactic;
 load "beagle"; open beagle;
+load "blibConv"; open blibConv;
 *)
-
 
 val thml = [];
 val goal = ([``(x:num = 2) \/ (x = 4)``, ``y:num = 2 * x:num``], 
@@ -25,18 +26,12 @@ val (goal1,_) = PROBLEM_TO_GOAL_TAC thml goal;
 val (goal2,_) = BEAGLE_CONV_TAC (hd goal1);
 val (goal3,_) = ERASE_EXISTS_TAC (hd goal2);
 val (goal4,_) = FORALL_CONJUNCTS_TAC (hd goal3);
-val (goal5,_) = FORALL_CONJUNCTS_TAC (hd goal4);
-val (goal6,_) = STRIP_CONJ_ONLY_HYP_TAC (hd goal5); (* to be changed *)
+val (goal6,_) = STRIP_CONJ_ONLY_HYP_TAC (hd goal4); 
 val (goal7,_) = ERASE_FORALL_TAC (hd goal6);
 val (goal8,_) = ADD_HIGHER_ORDER_TAC (hd goal7);
 val (goal9,_) = NUM_INT_TAC (hd goal8);
-
-
-
 val (goal10,_) = BOOL_BV_TAC (hd goal9);
 val (goal11,_) = ADD_BOOL_AXIOM_TAC (hd goal10);
-
-
 
 (* debugging *)
 val thml = [mk_thm ([], ``∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)``)];
@@ -49,14 +44,15 @@ val thml =
 [ mk_thm ([] , ``∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)``) ];
 
 BEAGLE_TAC thml goal;
-(* PROBLEM TEST *)   
 
+
+(* PROBLEM TEST *)   
 val thml = [];
 val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
 BEAGLE_TAC thml goal;
 
 val thml = [];
-val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
+val goal : goal = ([],``((f a b = 2:int) /\ (f a = g)) ==> (g b = 2:int)``);
 BEAGLE_TAC thml goal;
 
 
@@ -98,7 +94,7 @@ val thml = [mk_thm ([],``(x <= y) ==> (x < SUC y)``)];
 val goal : goal = ([], ``(a <= b) ==> (a < SUC b)``);
 (* higher order *)
 val thml = [];
-val goal : goal = ([],``((f a b = 2) /\ (f a = g)) ==> (g b = 2)``);
+val goal : goal = ([],``((f a b = 2:int) /\ (f a = g)) ==> (g b = 2:int)``);
 (* boolarg *)
 val thml = [];
 val goal : goal = ([]val th1 = mk_thm ([],

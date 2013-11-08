@@ -17,7 +17,7 @@ fun split_char ch str =
   then
     let val p = char_place ch str in
       first_n_char p str :: 
-      split_char ch (erase_n_char (p+1) str)  
+      split_char ch (rm_first_n_char (p+1) str)  
     end
   else [str]
 
@@ -37,7 +37,7 @@ fun split_outerchar ch str =
     then
       let val p = lookup (ch,0) l in
         first_n_char p str :: 
-        split_outerchar ch (erase_n_char (p+1) str)  
+        split_outerchar ch (rm_first_n_char (p+1) str)  
       end
     else [str]
   end
@@ -51,7 +51,7 @@ fun is_closebefore str =
   is_member (")",1) (tl (rev (map fst (number_par str)))) 
 
 fun erase_outerpar str =
-  if first_n_char 1 str = "(" andalso last_char str = ")" andalso
+  if first_n_char 1 str = "(" andalso last_n_char 1 str = ")" andalso
   not (is_closebefore str)
   then String.substring (str,1,String.size str - 2)
   else str
@@ -60,8 +60,8 @@ fun erase_spaces str =
   if str = "" then ""
   else 
     if first_n_char 1 str = " "
-    then erase_spaces (erase_n_char 1 str)
-    else (first_n_char 1 str) ^ (erase_spaces (erase_n_char 1 str))
+    then erase_spaces (rm_first_n_char 1 str)
+    else (first_n_char 1 str) ^ (erase_spaces (rm_first_n_char 1 str))
   
 (* test
 readl "beagletacresult/beagletac_tff_proof";
@@ -81,12 +81,12 @@ fun get_tffoperator tffterm =
 
 fun get_tffargl tffterm =
   let val p = char_place "(" tffterm in
-     split_outerchar "," (erase_outerpar (erase_n_char p tffterm))
+     split_outerchar "," (erase_outerpar (rm_first_n_char p tffterm))
   end
 
 fun is_beaglec tffvar = 
   (first_n_char 1 tffvar = "#") andalso 
-  is_lowerword (erase_n_char 1 tffvar)
+  is_lowerword (rm_first_n_char 1 tffvar)
     
 fun read_var tffvar rvdict = 
   if is_member tffvar (map fst rvdict) 
@@ -96,7 +96,7 @@ fun read_var tffvar rvdict =
   else if is_tfffunctor tffvar 
     then read_tfffunctor tffvar
   else if is_beaglec tffvar
-    then mk_var (erase_n_char 1 tffvar,``:num``) (* wip *)
+    then mk_var (rm_first_n_char 1 tffvar,``:num``) (* wip *)
   else raise READER_ERR "read_var" tffvar
 
 fun is_tffvar tffterm = 
@@ -118,19 +118,19 @@ fun read_tffterm tffterm rvdict =
 fun read_tfflit tfflit rvdict =
   let val lit = erase_outerpar tfflit in
     if char_in "~" lit
-    then mk_neg (read_tfflit (erase_n_char 1 lit) rvdict)
+    then mk_neg (read_tfflit (rm_first_n_char 1 lit) rvdict)
     else 
       if not (char_in "=" lit) then read_tffterm lit rvdict
       else if not (char_in "!" lit) then
         let val p = char_place "=" lit in
         let val t1 = first_n_char p lit in
-        let val t2 = erase_n_char (p+1) lit in 
+        let val t2 = rm_first_n_char (p+1) lit in 
           mk_eq (read_tffterm t1 rvdict,read_tffterm t2 rvdict)
         end end end
       else
         let val p = char_place "!" lit in
         let val t1 = first_n_char p lit in
-        let val t2 = erase_n_char (p+2) lit in 
+        let val t2 = rm_first_n_char (p+2) lit in 
           mk_neg (mk_eq (read_tffterm t1 rvdict,read_tffterm t2 rvdict))
         end end end
   end
@@ -233,7 +233,7 @@ fun is_intro line =
   
 fun get_intro_aux line =
   let val p1 = char_place "," line in
-  let val p2 = char_place "," (erase_n_char (p1 + 1) line) in
+  let val p2 = char_place "," (rm_first_n_char (p1 + 1) line) in
     String.substring (line,p1 + 1, p2)
   end end
 

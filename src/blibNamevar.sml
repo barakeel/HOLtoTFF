@@ -15,7 +15,6 @@ fun NAMEVAR_ERR function message =
 fun name_tff_bv term = name_tff "X" term
 fun app_name_tff_bv term = (term,name_tff_bv term)
 
-(* give a new name if the name is already used *)     
 fun create_bvdict term =
   let val bvl = get_bvl term in 
   let val bvnamel = map app_name_tff_bv bvl in
@@ -43,28 +42,20 @@ fun create_cdict term =
   end end
 
 
-(* pred *)
-(* "bool" to "$o" *)
+(* All functions that returns "bool" are actually predicates returing "$o" *)
 fun give_pred_type tyadict term (v,a) = 
   let val tyname = lookup (type_of v,a) tyadict in
-    if is_pred_in v term 
-    then ((v,a),bool_to_o_type tyname)
+    if success (last_n_char 6) tyname
+    then
+      if last_n_char 6 tyname = "> bool"
+      then ((v,a), (rm_last_n_char 6 tyname) ^ ">$o")
+      else ((v,a),tyname)
     else ((v,a),tyname)
   end
 
-fun give_predc_type tyadict term (c,a) = 
-  let val tyname = lookup (type_of c,a) tyadict in
-    if is_pred_in c term 
-    then ((c,a),bool_to_o_type tyname)
-    else ((c,a),tyname)
-  end
-
-(* link variables to their tff type *)
-fun add_bvty tyadict (bv,a) = ((bv,a),lookup (type_of bv,a) tyadict)
-
 fun create_bvatydict term tyadict =
   let val bval = get_bval term in
-    map (add_bvty tyadict) bval
+    map (give_pred_type tyadict term) bval
   end 
 
 fun create_fvatydict term tyadict =
@@ -74,7 +65,7 @@ fun create_fvatydict term tyadict =
 
 fun create_catydict term tyadict =
   let val cal = get_cal term in
-    map (give_predc_type tyadict term) cal
+    map (give_pred_type tyadict term) cal
   end 
 (* end pred *)     
    

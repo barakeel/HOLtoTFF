@@ -31,10 +31,8 @@ fun collapse_lowestarity_aux varal varalfix =
     end
 fun collapse_lowestarity varal = 
   erase_double (collapse_lowestarity_aux varal varal)
-
-(* VARIABLE *)
-
-(* bound *)
+ 
+(* bound variables *)
 fun firstorder_bval bval =
   case bval of
     [] => true
@@ -51,7 +49,7 @@ fun firstorder_bval_err bval =
       then firstorder_bval_err m
       else raise HIGHERORDER_ERR "firstorder_bval" (term_to_string bv)
 
-(* free *)
+(* free variables *)
 fun firstorder_fval_aux fval fvlal =
   case fval of
     [] => true
@@ -72,7 +70,7 @@ fun firstorder_fval_err_aux fval fvlal =
 fun firstorder_fval_err fval = 
   firstorder_fval_err_aux fval (collapse_lowestarity fval)      
 
-(* constant *)
+(* constants *)
 fun firstorder_cal_aux cal clal =
   case cal of
     [] => true

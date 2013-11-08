@@ -35,7 +35,6 @@ fun wrap s f m function x =
                         message = m}
 
 (********** STRINGTOOOLS ***********)
-(* modify string *)
 fun space n =
   case n of
     0 => ""
@@ -45,25 +44,17 @@ fun space n =
 
 fun indent n = "\n" ^ (space n)
 
-fun last2char str = 
-  if size str < 2
-  then ""
-  else substring (str,(size str) - 2, 2);
-
-fun erase_last4char str = 
-  if size str < 4 
-  then ""
-  else substring (str,0,(String.size str)-4)
-
-fun bool_to_o_type str = (erase_last4char str) ^ "$o"
-
 fun first_n_char n str = String.substring (str,0,n)
-fun erase_n_char n str = String.substring (str,n,String.size str - n)
-fun last_char str = String.substring (str,String.size str -1,1)
+fun rm_first_n_char n str = String.substring (str,n,String.size str - n)
+
+fun last_n_char n str = String.substring (str,String.size str - n,n)
+fun rm_last_n_char n str = String.substring (str,0,String.size str - n)
+
+
 
 fun char_place_aux ch str n =
   if first_n_char 1 str = ch then n
-  else char_place_aux ch (erase_n_char 1 str) (n + 1)
+  else char_place_aux ch (rm_first_n_char 1 str) (n + 1)
 fun char_place ch str = char_place_aux ch str 0
 
 fun char_in ch str = success (char_place ch) str 

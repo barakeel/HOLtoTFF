@@ -9,7 +9,7 @@ datatype STRUCTVAR = Freevar | Boundvar | Constvar
 datatype STRUCTTERM = Numeral | Integer | Var | Const | Comb | Abs  
 val structterm : term -> STRUCTTERM
 
-datatype STRUCTTYPE = Booltype | Numtype | Alphatype | Leaftype | 
+datatype STRUCTTYPE = Booltype | Numtype | Inttype | Alphatype | Leaftype | 
                       Funtype | Prodtype | Nodetype
 val structtype : hol_type -> STRUCTTYPE 
 

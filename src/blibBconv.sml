@@ -1,7 +1,7 @@
 structure blibBconv :> blibBconv =
 struct
 
-open HolKernel Abbrev boolLib
+open HolKernel Abbrev boolLib blibDatatype
      blibBtools blibBrule
 
 fun BCONV_ERR function message =
@@ -9,22 +9,28 @@ fun BCONV_ERR function message =
 	         origin_function = function,
            message = message}
 
-fun repeat_n_conv n conv = 
+fun REPEAT_N_CONV n conv = 
   case n of
     0 => ALL_CONV
-  | n => if n < 0 then raise BCONV_ERR "repeat_n_conv" ""  
+  | n => if n < 0 then raise BCONV_ERR "REPEAT_N_CONV" ""  
          else
-           conv THENC repeat_n_conv (n - 1) conv
+           conv THENC REPEAT_N_CONV (n - 1) conv
 
 fun not_strip_exists_conv term =
   let val n = length (fst (strip_exists (dest_neg term))) in
-    repeat_n_conv n (STRIP_QUANT_CONV NOT_EXISTS_CONV) term
+    REPEAT_N_CONV n (STRIP_QUANT_CONV NOT_EXISTS_CONV) term
   end  
 
 fun strip_forall_not_conv term = 
   if is_forall term 
   then ((LAST_FORALL_CONV FORALL_NOT_CONV) THENC strip_forall_not_conv) term
   else raise UNCHANGED
+ 
+fun ARG_CONV conv term =
+  if structterm term = Comb 
+  then (RAND_CONV conv THENC RATOR_CONV (ARG_CONV conv)) term 
+  else raise UNCHANGED 
+ 
   
 (* FORALL_CONJUNCTS_CONV *)
 fun forall_conjuncts_conv_w term = 

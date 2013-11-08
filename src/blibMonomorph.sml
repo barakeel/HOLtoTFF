@@ -123,7 +123,6 @@ fun is_matchable c1 c2 =
 
 fun match_c_c c1 c2 = raw_subst (raw_match_type (type_of c1) (type_of c2) ([],[]))
 
-
 (* may return an empty list *)
 fun match_c_cl c cl =
   let val newcl = filter (is_matchable c) cl in
@@ -151,7 +150,6 @@ fun inst_cll substll clthml =
       | _  => inst_cl (hd substll) (hd clthml) :: 
               inst_cll (tl substll) (tl clthml)
               
-
 fun inst_thm substl thm  = 
   let val newsubstl = erase_double ([] :: substl) in
     LIST_CONJ (map (inv INST_TYPE thm) newsubstl)
@@ -178,9 +176,9 @@ fun create_substl clthm clpb =
 
 fun create_substll clthml clpb = map (inv create_substl clpb) clthml
 
-(* repeat till finding a fix point with arbitrary parameters*)
+(* main loop of the monomorphisation *)
 fun repeat_create_substll (clthml,clgoal) substll =
-  let val clpb = (merge (clthml @ [clgoal])) in
+  let val clpb = merge (clthml @ [clgoal]) in
   let val newsubstll = create_substll clthml clpb in
   let val n = suml (map length substll) in
   let val newn = suml (map length newsubstll) in
@@ -196,7 +194,7 @@ fun repeat_create_substll (clthml,clgoal) substll =
     )
   end end end end end 
 
-(* MONOMORPHISATION *)  
+(* main function *)  
 fun monomorph_pb_w (thml,goal) =
   let val clthml = map get_cl_thm thml in
   let val clgoal = get_cl_goal goal in

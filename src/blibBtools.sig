@@ -11,15 +11,13 @@ sig
 (* STRING *)
   val space : int -> string 
   val indent : int -> string
-  val last2char : string -> string 
-  val erase_last4char : string -> string
-  val bool_to_o_type : string -> string
   val first_n_char : int -> string -> string
-  val erase_n_char : int -> string -> string
-  val last_char : string -> string
+  val rm_first_n_char : int -> string -> string
+  val last_n_char : int -> string -> string
+  val rm_last_n_char : int -> string -> string
+ 
   val char_place : string -> string -> int 
   val char_in : string -> string -> bool
-  
   
   val name_strn : string -> int -> string
   val list_name_str : string -> int -> string list

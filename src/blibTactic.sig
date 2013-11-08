@@ -17,7 +17,6 @@ include Abbrev
     val FORALL_CONJUNCTS_TAC : tactic
     val STRIP_CONJ_ONLY_HYP_TAC : tactic
     val ERASE_FORALL_TAC : tactic
-    val ADD_HIGHER_ORDER_TAC : tactic 
     val BOOL_BV_TAC : tactic
     val ADD_BOOL_AXIOM_TAC : tactic
 

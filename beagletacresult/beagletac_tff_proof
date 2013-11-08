@@ -1,1 +1,23 @@
-Undefined
+Undefined%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SZSstatus: Unsatisfiable
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tff(1,axiom,(
+    (xf1(xa)=xg),
+    file('problem.p',axiom))).
+
+tff(2,axiom,(
+    (xApp1(xf1(xa), xb)=2),
+    file('problem.p',axiom))).
+
+tff(3,axiom,(
+    (xApp1(xg, xb)!=2),
+    file('problem.p',axiom))).
+
+tff(4,plain,(
+    (#e_1!=2),
+    inference(Unknown,[status(thm)],[])).
+
+tff(5,plain,(
+    (xApp1(xg, xb)=#e_1),
+    inference(Unknown,[status(thm)],[])).
+

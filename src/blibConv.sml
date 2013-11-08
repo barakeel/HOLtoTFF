@@ -3,9 +3,9 @@ struct
 
 open HolKernel Abbrev boolLib
      blibBtools blibDatatype 
-     blibSyntax blibBrule 
+     blibSyntax blibBconv blibBrule blibBtactic
      blibExtractvar blibFreshvar blibExtracttype 
-     blibNamevar
+     blibNamevar blibHO beagleStats
 
 fun CONV_ERR function message =
   HOL_ERR{origin_structure = "blibConv",
@@ -403,19 +403,27 @@ fun app_axiom appname term =
 (* test
 show_assums :=  true;
 val term = ``f a b c``;
+val arity = 3;
+val lowarity = 1;
 val appname = "App";
 *)
 
-(* subterm is just a combination *)
-fun app_conv_sub_w appname subterm =
-  let val (oper,arg) = dest_comb subterm in  
-  let val th1 = app_axiom appname subterm in
+fun app_conv_basic appname term =
+  let val (oper,arg) = dest_comb term in  
+  let val th1 = app_axiom appname term in
   let val th2 = SYM (SPECL [oper,arg] th1) in
     th2
   end end end
-fun app_conv_sub appname subterm =
-  wrap "conv" "app_conv_sub" "" (app_conv_sub_w appname) subterm
 
+fun app_conv_sub appname lowarity arity term =
+   if lowarity = arity
+      then raise UNCHANGED
+   else if lowarity < arity
+      then ((app_conv_basic appname) THENC 
+           (app_conv_sub appname lowarity (arity -1)))
+           term
+   else raise CONV_ERR "app_conv_sub" "lowarity > arity"
+   
 (* test
 show_assums :=  true;
 val subterm = ``f a b c``;
@@ -423,53 +431,69 @@ val term = ``(f a b = 2) /\ (f a = g)``;
 val goal = ([term],F);
 *)
 
-fun app_conv appname term = 
+fun app_conv appname fvclal bvl term = 
   case structterm term of
-    Numeral => raise UNCHANGED 
-  | Integer => raise UNCHANGED
-  | Var => raise UNCHANGED  
-  | Const => raise UNCHANGED
-  | Comb => 
+    Comb =>
     (
     case structarity term of  
-      Binop => BINOP_CONV (app_conv appname) term 
-    | Unop => RAND_CONV (app_conv appname) term 
-    | Quant => STRIP_QUANT_CONV (app_conv appname) term
+      Binop => BINOP_CONV (app_conv appname fvclal bvl) term 
+    | Unop => RAND_CONV (app_conv appname fvclal bvl) term 
+    | Quant => let val (qbvl,_) = strip_quant term in
+                 STRIP_QUANT_CONV (app_conv appname fvclal (qbvl @ bvl)) term
+               end
     | _ =>
-      (
-      let val (operator,_) = dest_comb term in
-      case structterm operator of
-        Numeral => raise CONV_ERR "app_conv" "numeral is an operator"
-      | Integer => raise CONV_ERR "app_conv" "integer is an operator"
-      | Var => (RAND_CONV (app_conv appname) THENC app_conv_sub appname) 
-               term
-      | Const => (RAND_CONV (app_conv appname) THENC app_conv_sub appname) 
-                term
-      | Comb => (
-                 RATOR_CONV (app_conv appname) THENC 
-                 RAND_CONV (app_conv appname) THENC 
-                 app_conv_sub appname
-                 ) 
-                term
-      | Abs => raise CONV_ERR "app_conv" "abs is an operator" 
-      end
-      )   
-    )      
-  | Abs => raise CONV_ERR "app_conv" "abs" 
+       let val (oper,_) = strip_comb term in
+       let val arity = get_arity term in
+       let val lowarity = if is_member oper bvl then 0 else lookup oper fvclal
+       in
+        (ARG_CONV (app_conv appname fvclal bvl) THENC 
+        app_conv_sub appname lowarity arity) 
+        term 
+       end end end
+     )
+  | _ => raise UNCHANGED 
 
 
+local change_arity tyl (fvc,a)  =
+  if is_member (type_of fvc) tyl then (fvc,0) else (fvc,a)
+in
+fun APP_CONV appname goal term =
+  let val fvclal1 = collapse_lowestarity (merge (map get_fvcal (fst goal))) in
+  let val tyl = map type_of (get_bvl_goal goal) in
+  let val fvclal2 = map (change_arity tyl) fvclal1 in
+    app_conv appname fvclal [] term
+  end end end   
+end
 
+      
 (* test
-val term = ``(f a b = 2) /\ (f a = g)``;
+val term = ``(f a b = 2:num) /\ (f a = g)``;
+val goal = ([term],F);
+val appname = "App";
  *)  
-(* test
-val def = ``!x y. APP x y = x y``;
-val def = ``!x. APP x  = x ``;
-vval th2 = MK_ABS th1;
-define_conv def;
-val term = ``!x:num. x>y``;
-val term = ``!x:int. x>y``;
-*)
+ 
+fun ADD_HIGHER_ORDER_TAC_w goal =
+  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
+  let fun add_higher_order goal = 
+    conv_hyp (QCONV (APP_CONV appname goal)) goal
+  in  
+  let fun add_higher_order_val goal thm =
+    let val eqthl = map (QCONV (APP_CONV appname goal)) (fst goal) in
+    let val defl = merge_aconv (map hyp eqthl) in
+    let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
+    let val th0 = list_PROVE_HYP lemmal thm in
+    let val th1 = remove_defl defl th0 in
+      th1
+    end end end end end
+  in
+    if firstorder_goal goal 
+    then ALL_TAC goal
+    else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
+  end end end
+
+fun ADD_HIGHER_ORDER_TAC goal = 
+  wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 
+ 
 
 (* BOOL_BV_CONV *)
 fun bool_bv_conv_sub term =
