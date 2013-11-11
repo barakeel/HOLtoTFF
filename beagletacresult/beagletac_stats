@@ -1,51 +1,16 @@
-Problems    : 12
-Polymorph   : 2
-Fixpoint    : 2
+Problems    : 13
+Polymorph   : 1
+Fixpoint    : 1
 Lambda-lift : 0
-Bool Conv   : 2
+Bool Conv   : 1
 Num Conv    : 0
-Higher Order: 4
-Proof       : 7
-Metis fail  : 1
-Unsat       : 3
-Unkown      : 1
+Higher Order: 0
+Proof       : 4
+Metis fail  : 0
+Unsat       : 1
+Unkown      : 3
 Sat         : 0
 Time out    : 0
-Parsing err : 3
-Code err    : 5
+Parsing err : 0
+Code err    : 9
 Beagle err  : 0
-timerl      : 1383782454243
-timerl      : 8481
-timerl      : 870
-timerl      : 65
-timerl      : 68
-timerl      : 6083
-timerl      : 697
-timerl      : 51
-timerl      : 1383782454175
-timerl      : 2398
-timerl      : 173
-timerl      : 14
-timerl      : 0
-timerl      : 0
-timerl      : 0
-timerl      : 0
-timerl      : 1383782454243
-timerl      : 8481
-timerl      : 870
-timerl      : 65
-timerl      : 0
-timerl      : 0
-timerl      : 0
-timerl      : 0
-timerl      : 1383782454243
-timerl      : 8481
-timerl      : 870
-timerl      : 65
-faultl      : 4
-faultl      : 2
-faultl      : 2
-faultl      : 2
-faultl      : 2
-faultl      : 0
-faultl      : 4

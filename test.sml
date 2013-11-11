@@ -7,22 +7,38 @@ load "blibSyntax"; open blibSyntax;
 load "beaglePrintresult"; open beaglePrintresult;
 load "blibReader"; open blibReader; 
 load "numSyntax"; open numSyntax;
-load "blibNumconv"; open blibNumconv;
+
 load "blibExtractvar"; open blibExtractvar;
 load "int_arithTheory"; open int_arithTheory;
+load "blibBtactic"; open blibBtactic;
 load "blibTactic"; open blibTactic;
+load "blibNumconv"; open blibNumconv;
 load "beagle"; open beagle;
+
 load "blibConv"; open blibConv;
+load "blibMonomorph"; open blibMonomorph;
 *)
 
+REWRITE_CONV [th1] ``2:int = 3``;
+val th1 = ASSUME ``(x = y) = (y = x)``;
+
+
 val thml = [];
-val goal = ([``(x:num = 2) \/ (x = 4)``, ``y:num = 2 * x:num``], 
-  ``(y:num = 4) \/ (y = 8)``);
+val goal = ([``(f x = 4)``], F );
+
+val thml = [];
+val goal = ([``(f x = 4:num)``], F );
 
 BEAGLE_TAC thml goal;
-BEAGLE_NF_TAC thml goal;
 
-val (goal1,_) = PROBLEM_TO_GOAL_TAC thml goal;
+val (mthml,_) = monomorph_pb (thml,goal);
+val (finalgoall,valid) = BEAGLE_NF_TAC mthml goal;
+is_correct_tac1 goal (finalgoall,valid);
+val th1 = mk_thm (hd finalgoall);
+val th2 = valid [th1];
+mk_thm (hd finalgoall);
+
+val (goal1,_) = PROBLEM_TO_GOAL_TAC mthml goal;
 val (goal2,_) = BEAGLE_CONV_TAC (hd goal1);
 val (goal3,_) = ERASE_EXISTS_TAC (hd goal2);
 val (goal4,_) = FORALL_CONJUNCTS_TAC (hd goal3);
@@ -39,9 +55,6 @@ val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,
             ``Abbrev (m2 = LENGTH (FILTER ($= x) l2))``],
  ``MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
    MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)``);
-
-val thml =
-[ mk_thm ([] , ``∀n l. n < LENGTH l ⇒ ∀f. EL n (MAP f l) = f (EL n l)``) ];
 
 BEAGLE_TAC thml goal;
 

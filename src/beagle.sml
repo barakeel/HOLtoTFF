@@ -2,7 +2,7 @@ structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib
-     blibBtools blibSyntax
+     blibBtools blibSyntax blibBtactic
      blibExtractvar
      blibHO blibMonomorph blibTactic
      blibPrinttff blibReader
@@ -33,7 +33,7 @@ fun write_SZSstatus filename szsstatus =
   end end
   
 (* BEAGLE_NF *)               
-fun BEAGLE_NF_TAC thml goal =
+fun BEAGLE_NF_TAC_w thml goal =
   (
   PROBLEM_TO_GOAL_TAC thml THEN
   BEAGLE_CONV_TAC THEN
@@ -41,6 +41,8 @@ fun BEAGLE_NF_TAC thml goal =
   )
   goal 
 
+fun BEAGLE_NF_TAC thml goal = 
+  wrap "beagle" "BEAGLE_NF_TAC" "" (BEAGLE_NF_TAC_w thml) goal 
 
 fun step_to_string (cl,n) =
   (Int.toString n) ^ " : " ^ (term_to_string cl)
@@ -48,7 +50,7 @@ fun proof_to_stringl proof = map step_to_string proof
 
   
 (* BEAGLE INTERACTION *)
-fun beagle_interact filename finalgoal =
+fun beagle_interact_w filename finalgoal =
   (
   let 
     val dict = write_tff (mk_tffpath filename) (!nb_problem) finalgoal false
@@ -102,16 +104,16 @@ fun beagle_interact filename finalgoal =
     )
   end
   )
+fun beagle_interact filename finalgoal =
+  wrap "beagle" "beagle_interact" "" (beagle_interact_w filename) finalgoal
   
 fun init_beagle_tac_aux filename =
   (
   show_assums := true;
   SZSstatus := "Undefined";
   write_SZSstatus filename (!SZSstatus);
-  reset_allflag ();
-  reset_all_nb ();
-  update_all_nb (mk_statspath filename);
-  mettimec := 0; beatimec := 0; tratimec := 0; imptimec := 0
+  reset_allflag (); reset_all_nb ();
+  update_all_nb (mk_statspath filename)
   )
 
 (* BEAGLE_TAC *)
@@ -124,24 +126,21 @@ fun write_badresult filename thml goal =
     (allflag_value ())
 
 
-
-
 fun beagle_tac_aux filename thml goal = 
   (
   init_beagle_tac_aux filename;
   addone_nb nb_problem;
-    (
-    flag_update mflag (is_polymorph_pb (thml,goal));
-    let val (mthml,mgoal) = if is_polymorph_pb (thml,goal)
+  flag_update mflag (is_polymorph_pb (thml,goal));
+    (  
+    let val (mthml,_) = if is_polymorph_pb (thml,goal)
                             then monomorph_pb (thml,goal) 
                             else (thml,goal)
     in
-    let val (finalgoall,validation) = BEAGLE_NF_TAC mthml mgoal  in
+    let val (finalgoall,valid) = BEAGLE_NF_TAC mthml goal  in
                                           (* update all flags *)
     let val finalgoal = hd (finalgoall) in
       (
-      flag_update proofflag
-        (is_subset_goal (mk_goal (validation [mk_thm finalgoal])) goal);
+      flag_update proofflag (is_correct_tac1 goal (finalgoall,valid));
       beagle_interact filename finalgoal;
       update_nbl1 (); 
       update_nbl2 (!SZSstatus);

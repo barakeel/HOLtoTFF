@@ -41,7 +41,6 @@ fun create_cdict term =
     add_newnamel cnamel []
   end end
 
-
 (* All functions that returns "bool" are actually predicates returing "$o" *)
 fun give_pred_type tyadict term (v,a) = 
   let val tyname = lookup (type_of v,a) tyadict in

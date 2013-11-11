@@ -1,38 +1,152 @@
 %----------------------------------------------------------------------------
-% Number   : 12
+% Number   : 13
 %----------------------------------------------------------------------------
-tff(ty_b_type,type,(
-    ty_b: $tType )).
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
 
-tff(ty_b_F_int_type,type,(
-    ty_b_F_int: $tType )).
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_listIaI_type,type,(
+    ty_listIaI: $tType )).
 
 tff(ty_a_type,type,(
     ty_a: $tType )).
 
-tff(xf1_type,type,(
-    xf1: ty_a > ty_b_F_int )).
+tff(x_type,type,(
+    x: ( ty_listIaI * ty_a ) > $int )).
 
-tff(xa_type,type,(
-    xa: ty_a )).
+tff(xn_type,type,(
+    xn: ( ty_listIaI * ty_a ) > $int )).
 
-tff(xApp1_type,type,(
-    xApp1: ( ty_b_F_int * ty_b ) > $int )).
+tff(x1_type,type,(
+    x1: ( ty_listIaI * ty_a ) > $int )).
 
-tff(xg_type,type,(
-    xg: ty_b_F_int )).
+tff(x2_type,type,(
+    x2: ( ty_listIaI * ty_a ) > $int )).
 
-tff(xb_type,type,(
-    xb: ty_b )).
+tff(xEL_type,type,(
+    xEL: ( $int * ty_listIaI ) > ty_a )).
+
+tff(x3_type,type,(
+    x3: $int )).
+
+tff(xm1_type,type,(
+    xm1: $int )).
+
+tff(xl1_type,type,(
+    xl1: ty_listIaI )).
+
+tff(xm2_type,type,(
+    xm2: $int )).
+
+tff(xLENGTH_type,type,(
+    xLENGTH: ty_listIaI > $int )).
+
+tff(xx_type,type,(
+    xx: ty_a )).
+
+tff(xl2_type,type,(
+    xl2: ty_listIaI )).
+
+tff(cIN_type,type,(
+    cIN: ( ty_a * ty_a_F_bool ) >$o )).
+
+tff(cLIST_TO_SET_type,type,(
+    cLIST_TO_SET: ty_listIaI > ty_a_F_bool )).
+
+tff(cAbbrev_type,type,(
+    cAbbrev: bool >$o )).
+
+tff(cFILTER_type,type,(
+    cFILTER: ( ty_a_F_bool * ty_listIaI ) > ty_listIaI )).
+
+tff(c_type,type,(
+    c: ty_a > ty_a_F_bool )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
 
 tff(axiom1_axiom,axiom,(
-    (xf1(xa) = xg) )).
+    ~(btrue = bfalse) )).
 
 tff(axiom2_axiom,axiom,(
-    (xApp1(xf1(xa),xb) = 2) )).
+    $lesseq(0,xm1) )).
 
 tff(axiom3_axiom,axiom,(
-    ~(xApp1(xg,xb) = 2) )).
+    $lesseq(0,xm2) )).
+
+tff(axiom4_axiom,axiom,(
+    $lesseq(0,x3) )).
+
+tff(axiom5_axiom,axiom,(
+    ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(btrue) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(bfalse) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl1)),cLIST_TO_SET(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl2)),cLIST_TO_SET(cFILTER(c(xx),xl2))) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2)))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a,X1: $int] : ((~(xm2 = xLENGTH(cFILTER(c(xx),xl2))) | (~(X = xEL(X1,Xl)) | (~$less(X1,xLENGTH(Xl)) | (cIN(X,cLIST_TO_SET(Xl)) | ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : (((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ($less(x(Xl,X),xLENGTH(Xl)) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : (((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ((X = xEL(x(Xl,X),Xl)) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : ((~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ((X = xEL(xn(Xl,X),Xl)) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : ((~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ($less(xn(Xl,X),xLENGTH(Xl)) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a,X1: $int] : ((~(xm2 = xLENGTH(cFILTER(c(xx),xl2))) | (~(X = xEL(X1,Xl)) | (~$less(X1,xLENGTH(Xl)) | (cIN(X,cLIST_TO_SET(Xl)) | (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl1)),cLIST_TO_SET(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl2)),cLIST_TO_SET(cFILTER(c(xx),xl2))) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2)))))) )).
+
+tff(axiom15_axiom,axiom,(
+    (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(btrue) | ~(xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
+
+tff(axiom16_axiom,axiom,(
+    (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(bfalse) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
+
+tff(axiom17_axiom,axiom,(
+    (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(btrue) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
+
+tff(axiom18_axiom,axiom,(
+    (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl1)),cLIST_TO_SET(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl2)),cLIST_TO_SET(cFILTER(c(xx),xl2))) | (xm2 = xLENGTH(cFILTER(c(xx),xl2)))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a,X1: $int] : (((xm2 = xLENGTH(cFILTER(c(xx),xl2))) | (~(X = xEL(X1,Xl)) | (~$less(X1,xLENGTH(Xl)) | (cIN(X,cLIST_TO_SET(Xl)) | (~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : ((~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ($less(x1(Xl,X),xLENGTH(Xl)) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : ((~(xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ((X = xEL(x1(Xl,X),Xl)) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : (((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ((X = xEL(x2(Xl,X),Xl)) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a] : (((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(X,cLIST_TO_SET(Xl)) | ($less(x2(Xl,X),xLENGTH(Xl)) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [Xl: ty_listIaI,X: ty_a,X1: $int] : (((xm2 = xLENGTH(cFILTER(c(xx),xl2))) | (~(X = xEL(X1,Xl)) | (~$less(X1,xLENGTH(Xl)) | (cIN(X,cLIST_TO_SET(Xl)) | ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | ~$lesseq(0,X1))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl1)),cLIST_TO_SET(cFILTER(c(xx),xl1))) | (~cIN(xEL(x3,cFILTER(c(xx),xl2)),cLIST_TO_SET(cFILTER(c(xx),xl2))) | (xm2 = xLENGTH(cFILTER(c(xx),xl2)))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ((xm1 = xLENGTH(cFILTER(c(xx),xl1))) | (cAbbrev(bfalse) | (xm2 = xLENGTH(cFILTER(c(xx),xl2))))) )).
 
 %----------------------------------------------------------------------------
 

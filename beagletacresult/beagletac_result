@@ -1,18 +1,6 @@
-Number: 4
+Number: 6
 Status: Unsatisfiable
-Info: metis-fail proof 
+Info: proof 
 Thm list: 
-Goal:  [y = 2 * x, (x = 2) ∨ (x = 4)] |- (y = 4) ∨ (y = 8)
-
-Number: 11
-Status: Unsatisfiable
-Info: higher-order proof 
-Thm list: 
-Goal:  [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
-
-Number: 12
-Status: Unsatisfiable
-Info: higher-order proof 
-Thm list: 
-Goal:  [] |- (f a b = 2) ∧ (f a = g) ⇒ (g b = 2)
+Goal: ([(x = 2) ∨ (x = 4), y = 2 * x, ],(y = 4) ∨ (y = 8))
 

@@ -454,14 +454,14 @@ fun app_conv appname fvclal bvl term =
   | _ => raise UNCHANGED 
 
 
-local change_arity tyl (fvc,a)  =
+local fun change_arity tyl (fvc,a)  =
   if is_member (type_of fvc) tyl then (fvc,0) else (fvc,a)
 in
 fun APP_CONV appname goal term =
   let val fvclal1 = collapse_lowestarity (merge (map get_fvcal (fst goal))) in
   let val tyl = map type_of (get_bvl_goal goal) in
   let val fvclal2 = map (change_arity tyl) fvclal1 in
-    app_conv appname fvclal [] term
+    app_conv appname fvclal2 [] term
   end end end   
 end
 

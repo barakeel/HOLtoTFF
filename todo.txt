@@ -1,4 +1,3 @@
-TODO
 
 Test:
 - test the proof replayer
@@ -7,9 +6,11 @@ Test:
 Cleaning:
 - rewrite and optimize the monomorphisation step
 - rewrite conversions in a shorter and more readable way
+- rewrite BEAGLE proof output and reader.
+
 
 Infer axioms from a theory:
-- do it manually for each constant (COND should be translated)
+- do it manually for each constant (COND (if then else) should be translated first)
 
 Output:
 - add comments to be printed in the standard input when the file is generated

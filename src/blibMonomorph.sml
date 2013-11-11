@@ -205,7 +205,7 @@ fun monomorph_pb_w (thml,goal) =
     (inst_thml substll thml,goal) 
   end end end
 fun monomorph_pb pb = 
-wrap "blibMonomorph" "monomorph_pb" "" monomorph_pb_w pb
+  wrap "blibMonomorph" "monomorph_pb" "" monomorph_pb_w pb
 
 end
 

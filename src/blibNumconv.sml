@@ -101,15 +101,22 @@ fun inj_fun_axiom (op1,a) =
 
 local fun test (var,a) = (a > 0) andalso not (var = intSyntax.int_injection)
 in
-fun get_funl term = filter test (get_fvcal term)
+fun get_fal term = filter test (get_fvcal term)
 end
 
-fun get_funl_list terml = merge (map get_funl terml)
-fun get_funl_goal (terml,concl) = get_funl_list (concl :: terml)
+fun get_fal_list terml = merge (map get_fal terml)
+fun get_fal_goal (terml,concl) = get_fal_list (concl :: terml)
+
+fun is_numty ty = ty = ``:num``
+
+fun test_intf_tac (f,arity) = 
+  let val (argtyl,imty) = strip_type_n (type_of f,arity) in
+     exists is_numty ((fst imty) :: (map fst argtyl))
+  end
 
 fun INTF_TAC goal =
-  let val funl = get_funl_goal goal in
-  let val funaxioml = map inj_fun_axiom funl in
+  let val fal = filter test_intf_tac (get_fal_goal goal) in
+  let val funaxioml = map inj_fun_axiom fal in
   let val funrthml = map (SYM o SPEC_ALL) funaxioml in
   let val oprthml = [
   SYM (SPEC_ALL integerTheory.INT_INJ),
@@ -123,7 +130,7 @@ fun INTF_TAC goal =
   let val eqthl = map (QCONV (REWRITE_CONV (funrthml @ oprthml))) (fst goal) in 
   let val defl = merge_aconv (map hyp eqthl) in
   let val randl = map (rand o concl) eqthl in
-  let val finalgoal = (defl @ randl,F) in
+  let val finalgoal = (erase_double_aconv (defl @ randl),F) in
   let fun intf goal = finalgoal in
   let fun intf_val goal thm =
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in 
@@ -183,9 +190,8 @@ fun INTBV_TAC goal = CONV_HYP_TAC (intbv_conv THENC normalForms.CNF_CONV) goal
 fun intf_axiom_test axiom =
   let val term = concl axiom in
   let val (_,eqt) = strip_forall term in
-  let val (oper,_) = dest_comb (rhs eqt) in
-    oper = intSyntax.int_injection
-  end end end
+    has_numty (rhs eqt) 
+  end end
   
 fun intf_axiom axiom =
   let val term = concl axiom in
@@ -266,7 +272,7 @@ fun NUM_INT_TAC goal =
   let val (goall5,val5) = list_ASSUME_TAC thml3 (hd goall4) in
   let val (goall6,val6) = REMOVE_HYPL_TAC vdefl (hd goall5) in
   let val (goall7,val7) = INTBV_TAC (hd goall6) in
-   (goall7, 
+  let val (finalgoall,valid) = (goall7, 
      val0 o (mk_list 1) o 
      val1 o (mk_list 1) o 
      val2 o (mk_list 1) o 
@@ -275,9 +281,13 @@ fun NUM_INT_TAC goal =
      val5 o (mk_list 1) o 
      val6 o (mk_list 1) o 
      val7)
+  in
+    if is_correct_tac1 goal (finalgoall,valid)
+    then (finalgoall,valid)
+    else raise NUMCONV_ERR "NUM_INT_TAC" "not correct"
   end end end end end
   end end end end end 
-  end
+  end end
   )
   
 (* test      

@@ -6,27 +6,29 @@ open HolKernel Abbrev boolLib
      blibSyntax blibBrule blibBconv
 
 fun BTACTIC_ERR function message =
-  HOL_ERR {origin_structure = "blibBTactic",
+  HOL_ERR {origin_structure = "blibBtactic",
 	         origin_function = function,
            message = message}
 
 
 (* TAC BUILDER *)
-fun is_correct_tac1 goal (goall,validation) =
-  let val th1 = mk_thm (hd goall) in
-  let val th2 = validation [th1] in
-    is_subset_goal (mk_goal th1) goal
+
+fun is_correct_tac1 goal (goall,valid) =
+  let val th1 = mk_thm (hd goall) in 
+  (* mk_thm to be removed when sure about the code *)
+  let val th2 = valid [th1] in
+    is_subset_goal (mk_goal th2) goal
   end end
 
 fun mk_tac1 goalbuilder valbuilder goal =
   let val goall = [goalbuilder goal] in
-  let val validation = fn [thm] => valbuilder goal thm  
+  let val valid = fn [thm] => valbuilder goal thm  
                        | _     => raise BTACTIC_ERR "mk_tac1" 
-                                        "list length should be one"           
+                                        "list length is not one"           
   in
-    if is_correct_tac1 goal (goall,validation) 
-    then (goall,validation)
-    else raise BTACTIC_ERR "mk_tac1:" (goal_to_string (hd goall)) 
+    if is_correct_tac1 goal (goall,valid) 
+    then (goall,valid)
+    else raise BTACTIC_ERR "mk_tac1:" ""
   end end
 
 (* CONV_HYP_TAC *) 
