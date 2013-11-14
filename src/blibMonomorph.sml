@@ -12,15 +12,10 @@ fun MONOMORPH_ERR function message =
             origin_function = function,
             message = message}
 
-
 (* TEST *)
 fun is_polymorph term = (polymorphic o type_of) term
-fun is_polymorph_thm thm = 
-  exists is_polymorph (get_cl_thm thm)
+fun is_polymorph_thm thm =  exists is_polymorph (get_cl_thm thm)
 fun is_polymorph_pb (thml,goal) = exists is_polymorph_thm thml
-
-fun is_monomorphable c = is_polymorph c andalso not (name_of c = "=") 
-
 
 (* SUBSTITION SET *)
 fun get_redl subst =
@@ -65,7 +60,6 @@ fun normalize_substl substl =
   erase_double (map normalize_subst substl)
   
 (* SUBSTITUTION ARITHMETIC *)
-(* every entry is normalized and should return normalized *)
 fun merge_subst subst1 subst2 =
   let val l1 = get_redl subst1 in
   let val l2 = get_redl subst2 in
@@ -108,52 +102,22 @@ fun is_identity {redex = red, residue = res} = (red = res)
 
 fun remove_identity s = filter (not o is_identity) s 
 
-fun get_maxsubstl sl = 
+fun get_max_substl sl = 
    erase_double ( map (remove_identity)  
       (filter (inv is_maxset sl) sl)) 
 
-(* MATCH *)
-fun mk_identity vty = {redex = vty, residue = vty}
-
-fun raw_subst (subst,vtyl) = normalize_subst (subst @ map mk_identity vtyl)
-
-fun is_matchable c1 c2 =
-  name_of c1 = name_of c2 andalso 
-  success (match_type (type_of c1)) (type_of c2)
-
-fun match_c_c c1 c2 = raw_subst (raw_match_type (type_of c1) (type_of c2) ([],[]))
-
-(* may return an empty list *)
-fun match_c_cl c cl =
-  let val newcl = filter (is_matchable c) cl in
-    map (match_c_c c) newcl
-  end
- 
 (* INSTANTIATION *) 
 fun inst_cl_aux substl cl = 
   case substl of 
     [] => []
-  | s :: m => map (Term.inst s) cl :: inst_cl_aux m cl
+  | s :: m => map (Term.inst s) cl @ inst_cl_aux m cl
 
 fun inst_cl substl cl = 
-  let val newsubstl = erase_double ([] :: substl) in
-    wrap "blibMonomorph" "inst_cl" "" merge (inst_cl_aux newsubstl cl)
-  end
+    wrap "blibMonomorph" "inst_cl" "" erase_double (inst_cl_aux substl cl)
   
-fun inst_cll substll clthml =
-  if not (length substll = length clthml)
-  then 
-    raise MONOMORPH_ERR "inst_cll" "list of different length" 
-  else
-    case clthml of
-        [] => []
-      | _  => inst_cl (hd substll) (hd clthml) :: 
-              inst_cll (tl substll) (tl clthml)
-              
 fun inst_thm substl thm  = 
-  let val newsubstl = erase_double ([] :: substl) in
-    LIST_CONJ (map (inv INST_TYPE thm) newsubstl)
-  end
+  if null substl then raise MONOMORPH_ERR "inst_thm" "" 
+  else LIST_CONJ (map (inv INST_TYPE thm) substl)
 
 fun inst_thml substll thml =
   if not (length substll = length thml) 
@@ -165,47 +129,69 @@ fun inst_thml substll thml =
       | _  => inst_thm (hd substll) (hd thml) :: 
               inst_thml (tl substll) (tl thml)
 
-(* SUBSTITUTION CREATION FROM A PROBLEM *) 
-fun create_substl clthm clpb =
-  let val mclthm = filter is_monomorphable clthm in
-  let val substll1 = map (inv match_c_cl clpb) mclthm in
-  let val substll2 = map (normalize_substl) substll1 in
-  let val substll3 = filter (not o null) substll2 in
-    list_mult_subst substll3
-  end end end end 
 
-fun create_substll clthml clpb = map (inv create_substl clpb) clthml
+(* Substitution creation from constants *)
+fun mk_identity vty = {redex = vty, residue = vty}
 
-(* main loop of the monomorphisation *)
-fun repeat_create_substll (clthml,clgoal) substll =
-  let val clpb = merge (clthml @ [clgoal]) in
-  let val newsubstll = create_substll clthml clpb in
-  let val n = suml (map length substll) in
-  let val newn = suml (map length newsubstll) in
-  let val maxn = suml (map length (map get_maxsubstl newsubstll)) in
-    (
-    if newn <= n then flag_on fixpflag else ()
-    ;
-    if newn <= n orelse maxn > 15
-    then 
-      map get_maxsubstl substll
-    else 
-      repeat_create_substll (inst_cll newsubstll clthml,clgoal) newsubstll
-    )
-  end end end end end 
+fun raw_subst (subst,vtyl) = (subst @ map mk_identity vtyl)
 
-(* main function *)  
-fun monomorph_pb_w (thml,goal) =
-  let val clthml = map get_cl_thm thml in
-  let val clgoal = get_cl_goal goal in
-  let val substll = repeat_create_substll 
-                     (clthml,clgoal) 
-                     (mk_list (length thml) [[]])                    
-  in
-    (inst_thml substll thml,goal) 
+fun is_matchable c1 c2 =
+  name_of c1 = name_of c2 andalso success (match_type (type_of c1)) (type_of c2)
+
+fun match_c_c c1 c2 = 
+  normalize_subst (raw_subst (raw_match_type (type_of c1) (type_of c2) ([],[])))
+
+fun match_c_cl c cl =
+  let val newcl = filter (is_matchable c) cl in
+    map (match_c_c c) newcl
+  end
+
+fun match_pcl_thm pcl cl = map (inv match_c_cl cl) pcl
+    
+(* Constants creation *)
+fun infer_newcl_thm pcl cl =
+  let val substll = match_pcl_thm pcl cl in
+  let val substl = merge substll in
+  let val newcl = inst_cl substl pcl in
+    newcl
   end end end
-fun monomorph_pb pb = 
-  wrap "blibMonomorph" "monomorph_pb" "" monomorph_pb_w pb
+  
+fun infer_newcl_thml pcll cl = merge (map (inv infer_newcl_thm cl) pcll)
+
+(* Substitutions creation *)
+(* creation of a list of substitution for a theorem in a problem *) 
+fun create_substl pcl cl =
+  let val substll1 = match_pcl_thm pcl cl in
+    get_max_substl (list_mult_subst substll1)
+  end
+
+fun create_substll pcll cl = map (inv create_substl cl) pcll
+
+
+(* Main function *) 
+(* loop *)
+fun monomorph_pb_loop pcll cl1 =
+  let val cl2 = erase_double (cl1 @ (infer_newcl_thml pcll cl1)) in
+    if length cl1 = length cl2 then create_substll pcll cl1 
+    else
+      let val substll2 = create_substll pcll cl2 in
+      let val n2 = suml (map length substll2) in
+        if n2 <= 15 then monomorph_pb_loop pcll cl2
+        else create_substll pcll cl1 
+      end end
+  end
+
+fun monomorph_pb_w (thml,goal) =
+  let val pthml = filter is_polymorph_thm thml in
+  let val npthml = filter (not o is_polymorph_thm) thml in
+  let val pcll =  map ((filter is_polymorph) o get_cl_thm) pthml in
+  let val cl = merge (get_cl_goal goal :: map get_cl_thm thml) in
+  let val substll = monomorph_pb_loop pcll cl in 
+    (npthml @ inst_thml substll pthml,goal) 
+  end end end end end
+
+fun monomorph_pb pb = wrap "blibMonomorph" "monomorph_pb" "" monomorph_pb_w pb
+
 
 end
 

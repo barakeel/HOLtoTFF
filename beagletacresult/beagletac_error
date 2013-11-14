@@ -1,150 +1,52 @@
-structure: Thm
-function : GEN
-message  : variable occurs free in hypotheses
+structure: beagle
+function : beagle_interact
+message  : 
 Number: 1
-Status: Undefined
-Info: polymorph fixpoint bool 
+Status: Unsatisfiable
+Info: proof 
 Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
+Goal: ([],x + 1 = x + 1)
 
-structure: Thm
-function : GEN
-message  : variable occurs free in hypotheses
+structure: beagle
+function : beagle_interact
+message  : 
 Number: 2
-Status: Undefined
-Info: polymorph fixpoint bool 
+Status: Unsatisfiable
+Info: proof 
 Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
+Goal: ([],x + 1 = x + 1)
 
-structure: Thm
-function : GEN
-message  : variable occurs free in hypotheses
-Number: 3
-Status: Undefined
-Info: polymorph fixpoint bool 
-Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
-
-structure: beagle - tactic - Thm
-function : BEAGLE_NF_TAC - BEAGLE_CLAUSE_SET_TAC - GEN
-message  :  -  - variable occurs free in hypotheses
-Number: 4
-Status: Undefined
-Info: polymorph fixpoint bool 
-Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
-
-structure: beagle - tactic - blibBtactic
-function : BEAGLE_NF_TAC - BEAGLE_CLAUSE_SET_TAC - mk_tac1:
-message  :  -  - ([n' = (λx x1. &n' x x1), n = (λx x1. &n x x1), n'' = (λx x1. &n'' x x1), n''' = (λx x1. &n''' x x1), $IN = (λx1 x. x1 ∈ x), EL = (λx x. EL (Num x) x), LIST_TO_SET = (λx. set x), $= = (λx1. $= x1), Abbrev = (λx. Abbrev x), FILTER = (λx x. FILTER x x), LENGTH = (λx. &LENGTH x), (&m1 = LENGTH (FILTER ($= x) l1)) ∨ Abbrev T ∨
-&m2 ≠ LENGTH (FILTER ($= x) l2), (&m1 = LENGTH (FILTER ($= x) l1)) ∨ Abbrev F ∨
-&m2 ≠ LENGTH (FILTER ($= x) l2), (&m1 = LENGTH (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l1) ∈ LIST_TO_SET (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l2) ∈ LIST_TO_SET (FILTER ($= x) l2)) ∨
-&m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x'' n''''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ x'' ∈ LIST_TO_SET l ∨
-  ¬(&n'''' < LENGTH l) ∨ ¬(x'' = EL (&n'''') l) ∨
-  &m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  n' l x'' < LENGTH l ∨ &m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  (x'' = EL (n' l x'') l) ∨ &m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  (x'' = EL (n l x'') l) ∨ &m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  n l x'' < LENGTH l ∨ &m2 ≠ LENGTH (FILTER ($= x) l2), ∀l x'' n''''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ x'' ∈ LIST_TO_SET l ∨
-  ¬(&n'''' < LENGTH l) ∨ ¬(x'' = EL (&n'''') l) ∨
-  &m2 ≠ LENGTH (FILTER ($= x) l2), &m1 ≠ LENGTH (FILTER ($= x) l1) ∨
-¬(EL (&x') (FILTER ($= x) l1) ∈ LIST_TO_SET (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l2) ∈ LIST_TO_SET (FILTER ($= x) l2)) ∨
-&m2 ≠ LENGTH (FILTER ($= x) l2), &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ Abbrev T ∨
-&m2 ≠ LENGTH (FILTER ($= x) l2), &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ Abbrev F ∨
-(&m2 = LENGTH (FILTER ($= x) l2)), &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ Abbrev T ∨
-(&m2 = LENGTH (FILTER ($= x) l2)), &m1 ≠ LENGTH (FILTER ($= x) l1) ∨
-¬(EL (&x') (FILTER ($= x) l1) ∈ LIST_TO_SET (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l2) ∈ LIST_TO_SET (FILTER ($= x) l2)) ∨
-(&m2 = LENGTH (FILTER ($= x) l2)), ∀l x'' n''''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ x'' ∈ LIST_TO_SET l ∨
-  ¬(&n'''' < LENGTH l) ∨ ¬(x'' = EL (&n'''') l) ∨
-  (&m2 = LENGTH (FILTER ($= x) l2)), ∀l x''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  n'' l x'' < LENGTH l ∨ (&m2 = LENGTH (FILTER ($= x) l2)), ∀l x''.
-  &m1 ≠ LENGTH (FILTER ($= x) l1) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  (x'' = EL (n'' l x'') l) ∨ (&m2 = LENGTH (FILTER ($= x) l2)), ∀l x''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  (x'' = EL (n''' l x'') l) ∨ (&m2 = LENGTH (FILTER ($= x) l2)), ∀l x''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ ¬(x'' ∈ LIST_TO_SET l) ∨
-  n''' l x'' < LENGTH l ∨ (&m2 = LENGTH (FILTER ($= x) l2)), ∀l x'' n''''.
-  (&m1 = LENGTH (FILTER ($= x) l1)) ∨ x'' ∈ LIST_TO_SET l ∨
-  ¬(&n'''' < LENGTH l) ∨ ¬(x'' = EL (&n'''') l) ∨
-  (&m2 = LENGTH (FILTER ($= x) l2)), (&m1 = LENGTH (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l1) ∈ LIST_TO_SET (FILTER ($= x) l1)) ∨
-¬(EL (&x') (FILTER ($= x) l2) ∈ LIST_TO_SET (FILTER ($= x) l2)) ∨
-(&m2 = LENGTH (FILTER ($= x) l2)), (&m1 = LENGTH (FILTER ($= x) l1)) ∨ Abbrev F ∨
-(&m2 = LENGTH (FILTER ($= x) l2)), ],F)
-Number: 5
-Status: Undefined
-Info: polymorph fixpoint bool 
-Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
-
-structure: beagle - tactic - blibBtactic
-function : BEAGLE_NF_TAC - BEAGLE_CLAUSE_SET_TAC - mk_tac1:
-message  :  -  - ([f1 = (λx1. f x1), f = (λx. f (Num x)), f1 x ≠ 4, &y ≠ 4, (&x = 2) ∨ (f (&x) = 4), &y = 2 * &x, ],F)
+structure: beagle - boolSyntax
+function : beagle_interact - mk_eq
+message  :  - lhs and rhs have different types
 Number: 7
-Status: Undefined
+Status: Unsatisfiable
+Info: higher-order proof 
 Thm list: 
-Goal: ([(x = 2) ∨ (f x = 4), y = 2 * x, ],(y = 4) ∨ (f x = 4))
+Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
 
-structure: beagle - tactic - blibBtactic
-function : BEAGLE_NF_TAC - BEAGLE_CLAUSE_SET_TAC - mk_tac1:
-message  :  -  - ([f1 = (λx1. f x1), f1 x = 4, ],F)
+structure: beagle - beagle - boolSyntax
+function : beagle_interact - PROVE_FINAL_GOAL - mk_eq
+message  :  -  - lhs and rhs have different types
 Number: 8
-Status: Undefined
+Status: Unsatisfiable
+Info: higher-order proof 
 Thm list: 
-Goal: ([f x = 4, ],F)
+Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
 
-structure: beagle - tactic - blibBtactic
-function : BEAGLE_NF_TAC - BEAGLE_CLAUSE_SET_TAC - mk_tac1:
-message  :  -  - 
+structure: beagle - beagle - blibReader
+function : beagle_interact - PROVE_FINAL_GOAL - read_tfflit
+message  :  -  - #e_1, 2
 Number: 9
-Status: Undefined
+Status: Unsatisfiable
+Info: higher-order proof 
 Thm list: 
-Goal: ([f x = 4, ],F)
+Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
 
-structure: beagle - blibPrinttff - blibPrinttff - blibHO
-function : beagle_interact - write_tff - pptff_tff - firstorder_fval
-message  :  -  -  - f1
-Number: 10
-Status: Undefined
-Info: proof 
-Thm list: 
-Goal: ([f x = 4, ],F)
-
+structure: beagle - beagle - blibReader
+function : beagle_interact - PROVE_FINAL_GOAL - read_tfflit
+message  :  -  - btrue, bfalse
 Number: 11
-Status: Unknown
-Info: proof 
-Thm list: 
-Goal: ([f x = 4, ],F)
-
-Number: 12
-Status: Unknown
-Info: proof 
-Thm list: 
-Goal: ([f x = 4, ],F)
-
-Number: 13
 Status: Unknown
 Info: polymorph fixpoint bool proof 
 Thm list: 

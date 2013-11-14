@@ -37,8 +37,8 @@ val structleafc : term -> STRUCTLEAFC
 (* reader *)
 val is_tfffunctor : string -> bool 
 val read_tfffunctor : string -> term
-val is_tfftruefalse : string -> bool
-val read_tfftruefalse : string -> term
+val is_tffbool : string -> bool
+val read_tffbool : string -> term
 
 
 

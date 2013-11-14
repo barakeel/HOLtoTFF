@@ -1,4 +1,4 @@
-structure blibReader :> blibReader =
+structure blibReader (* :> blibReader *) =
 struct
 
 open HolKernel Abbrev boolLib numSyntax
@@ -10,6 +10,9 @@ fun READER_ERR function message =
   HOL_ERR{origin_structure = "blibReader",
           origin_function = function,
           message = message}
+ 
+(* global reference *)
+val rbcdict: (string * term) list ref = ref []
  
 (* TOOLS *)
 fun split_char ch str =  
@@ -95,19 +98,32 @@ fun read_var tffvar rvdict =
     then intSyntax.mk_injected (mk_numeral (Arbnum.fromString tffvar))
   else if is_tfffunctor tffvar 
     then read_tfffunctor tffvar
+  else if is_tffbool tffvar 
+    then read_tffbool tffvar
   else if is_beaglec tffvar
-    then mk_var (rm_first_n_char 1 tffvar,``:num``) (* wip *)
+    then if is_member tffvar (map fst (!rbcdict)) 
+         then lookup tffvar (!rbcdict)
+         else 
+           (
+           let val v = mk_var (tffvar,``:int``) in
+           let val newv = mk_newvar v ((map snd (!rbcdict)) @ (map snd rvdict)) in
+             rbcdict := add_entry (tffvar,newv) (!rbcdict)
+           end end
+           ;
+           lookup tffvar (!rbcdict)
+           )
   else raise READER_ERR "read_var" tffvar
 
-fun is_tffvar tffterm = 
-  is_upperword tffterm orelse 
-  is_lowerword tffterm orelse
-  is_defword tffterm orelse
-  is_numword tffterm
+fun is_tffvar tffterm rvdict = 
+  is_member tffterm (map fst rvdict)  orelse 
+  success Arbnum.fromString tffterm orelse
+  is_tfffunctor tffterm orelse
+  is_tffbool tffterm orelse
+  is_beaglec tffterm
 
 (* do something more for constants dictionnary*)    
 fun read_tffterm tffterm rvdict =
-  if is_tffvar tffterm
+  if is_tffvar tffterm rvdict
   then read_var tffterm rvdict
   else 
     let val oper = read_var (get_tffoperator tffterm) rvdict in 
@@ -126,12 +142,14 @@ fun read_tfflit tfflit rvdict =
         let val t1 = first_n_char p lit in
         let val t2 = rm_first_n_char (p+1) lit in 
           mk_eq (read_tffterm t1 rvdict,read_tffterm t2 rvdict)
+          handle _ => raise READER_ERR "read_tfflit" (t1 ^ ", " ^ t2)
         end end end
       else
         let val p = char_place "!" lit in
         let val t1 = first_n_char p lit in
         let val t2 = rm_first_n_char (p+2) lit in 
           mk_neg (mk_eq (read_tffterm t1 rvdict,read_tffterm t2 rvdict))
+          handle _ => raise READER_ERR "read_tfflit" (t1 ^ ", " ^ t2)
         end end end
   end
 
@@ -171,8 +189,9 @@ fun rev_dict rdict =
     [] => []
   | (a,nm) :: m => (nm,a) :: rev_dict m
   
-fun mk_rvdict fvdict cdict =
-  rev_dict cdict @ rev_dict fvdict
+fun mk_rvdict fvdict cdict = rev_dict cdict @ rev_dict fvdict
+
+fun mk_rdict dict = (mk_rtyadict (#1 dict), mk_rvdict (#3 dict) (#4 dict))
 
 (* create the bvdict *)
 fun prep_tffbvl clause =
@@ -300,27 +319,24 @@ fun read_axioml linel rdict =
            :: read_axioml m rdict
       else read_axioml (tl linel) rdict
 
-fun skip_split level proof0 = 
-  case proof0 of
-    [] => []
-  | (str,rule,lvl) :: m => 
-      if lvl <= level 
-      then proof0
-      else skip_split level m 
 
-fun read_proof proof0 rdict = 
-  case proof0 of
+fun read_infl infl rdict = 
+  case infl of
     [] => []
-  | (str,rule,lvl) :: m =>
-      if rule = "Leftsplit" 
-      then
-        (read_tffclause str rdict,lvl) :: read_proof m rdict
-        handle unreadable => read_proof (skip_split (lvl - 1) proof0) rdict 
-      else
-        (read_tffclause str rdict,lvl) :: read_proof m rdict
-        handle unreadable => read_proof m rdict
+  | (str,rule,lvl) :: m => (read_tffclause str rdict,lvl) :: 
+                           read_infl m rdict
+
+fun read_proof linel rdict =
+  (
+  rbcdict := [];
+  let val axioml = read_axioml linel rdict in
+  let val proof = read_infl (format_proof linel) rdict in
+    (axioml,proof)
+  end end
+  )
+  
      
- 
+(* PROVING *) 
 exception unprovable;
 
 fun PROVE_GOAL goal =

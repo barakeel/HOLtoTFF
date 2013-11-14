@@ -224,16 +224,18 @@ fun read_tfffunctor tffvar =
   |  "$uminus"    => intSyntax.negate_tm
   | _  => raise DATATYPE_ERR "read_tfffunctor" tffvar
 
-fun is_tfftruefalse tffvar =
-  is_member tffvar ["$true","$$true","$false","$$false"]
+fun is_tffbool tffvar =
+  is_member tffvar ["$true","$$true","$false","$$false","btrue","bfalse"]
   
-fun read_tfftruefalse tffvar =
+fun read_tffbool tffvar =
   case tffvar of
     "$true"   => T
   | "$$true"  => T   
   | "$false"  => F
   | "$$false" => F
-  | _  => raise DATATYPE_ERR "read_tfftruefalse" tffvar
+  | "btrue"   => T
+  | "bfalse"  => F
+  | _  => raise DATATYPE_ERR "read_tffbool" tffvar
 
 
 

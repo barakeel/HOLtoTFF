@@ -1,4 +1,5 @@
-structure beagle :> beagle =
+structure beagle (*:> beagle*)
+ =
 struct
 
 open HolKernel Abbrev boolLib
@@ -50,60 +51,52 @@ fun proof_to_stringl proof = map step_to_string proof
 
   
 (* BEAGLE INTERACTION *)
+fun PROVE_FINAL_GOAL_w filename dict finalgoal =
+  let val filename1 = filename ^ "_declaration" in
+  let val filename2 = filename ^ "_reading" in
+  let val filename3 = filename ^ "_proving" in
+  (* reading *)
+  let val rdict = mk_rdict dict in
+  let val linel = readl (filename ^ "_tff_proof") in
+  (* axiom *)
+  let val hypl = fst finalgoal in
+  let val (axioml,proof) = read_proof linel rdict in
+  let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
+  (* proof *)
+    (
+    writel filename1 ["(* Type dictionnary *)"];
+    writell filename1 (map fst rtyadict) (map (type_to_string o snd) (#1 dict));
+    writel filename1 ["(* Variables dictionnary *)"];
+    writell filename1 (map fst rvdict) (map (term_to_string o snd) (#2 rvdict));
+    writel filename2 ["(* Axioms *)"];
+    writel filename2 (map term_to_string axioml);
+    writel filename2 ["(* Proof *)"];
+    writel filename2 (proof_to_stringl proof);
+    writel filename2 ["(* Proven Axioms *)"];
+    writel filename2 (map thm_to_string thmaxioml);
+    PROVE_PROOF filename3 thmaxioml proof
+    )
+  end end end 
+  end end end end end
+
+fun PROVE_FINAL_GOAL filename dict finalgoal =
+  wrap "beagle" "PROVE_FINAL_GOAL" "" (PROVE_FINAL_GOAL_w filename dict) finalgoal
+
 fun beagle_interact_w filename finalgoal =
-  (
   let 
     val dict = write_tff (mk_tffpath filename) (!nb_problem) finalgoal false
   in
     (
-    (* call beagle on tffpath *)
     write_tffpath (mk_tffpath filename); 
-    OS.Process.system 
-      ("cd " ^ directory ^ ";" ^
-       "sh " ^ directory ^ "callbeagle.sh")
+    OS.Process.system ("cd " ^ directory ^ ";" ^
+                       "sh " ^ directory ^ "callbeagle.sh")
       handle _ => raise BEAGLE_ERR "beagle_call" "";
-    update_SZSstatus filename
-    
-    (*
-    (* replaying the proof *)
-    let val filename1 = filename ^ "_declaration" in
-    let val filename2 = filename ^ "_reading" in
-    let val filename3 = filename ^ "_proving" in
-    (* reading *)
-    let val rtyadict = mk_rtyadict (#1 dict) in
-    let val rvdict = mk_rvdict (#3 dict) (#4 dict) in
-    let val rdict = (mk_rtyadict (#1 dict),mk_rvdict (#3 dict) (#4 dict)) in
-    let val linel = readl (filename ^ "_tff_proof") in
-      (* axiom *)
-    let val hypl = fst finalgoal in
-    let val axioml = read_axioml linel rdict in
-    let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
-      (* proof *)
-
-    let val proof = read_proof (format_proof linel) rdict in
-      (
-      writel filename1 ["(* Type dictionnary *)"];
-      writell filename1 (map fst rtyadict) (map (type_to_string o snd) rtyadict);
-      writel filename1 ["(* Variables dictionnary *)"];
-      writell filename1 (map fst rvdict) (map (term_to_string o snd) rvdict);
-      writel filename2 ["(* Axioms *)"];
-      writel filename2 (map term_to_string axioml);
-      writel filename2 ["(* Proof *)"];
-      writel filename2 (proof_to_stringl proof);
-      writel filename2 ["(* Proven Axioms *)"];
-      writel filename2 (map thm_to_string thmaxioml);
-      PROVE_PROOF filename3 thmaxioml proof
-      )
-    end
-
-    
-
+    update_SZSstatus filename;
+    PROVE_FINAL_GOAL filename dict finalgoal;
     ()
-  
-  *)
     )
   end
-  )
+
 fun beagle_interact filename finalgoal =
   wrap "beagle" "beagle_interact" "" (beagle_interact_w filename) finalgoal
   

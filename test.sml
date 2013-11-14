@@ -19,17 +19,16 @@ load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
 *)
 
-REWRITE_CONV [th1] ``2:int = 3``;
-val th1 = ASSUME ``(x = y) = (y = x)``;
 
 
 val thml = [];
-val goal = ([``(f x = 4)``], F );
-
-val thml = [];
-val goal = ([``(f x = 4:num)``], F );
-
+val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
 BEAGLE_TAC thml goal;
+
+val thml = [];
+val goal : goal = ([],``((f a b = 2:int) /\ (f a = g)) ==> (g b = 2:int)``);
+BEAGLE_TAC thml goal;
+
 
 val (mthml,_) = monomorph_pb (thml,goal);
 val (finalgoall,valid) = BEAGLE_NF_TAC mthml goal;
@@ -40,7 +39,7 @@ mk_thm (hd finalgoall);
 
 val (goal1,_) = PROBLEM_TO_GOAL_TAC mthml goal;
 val (goal2,_) = BEAGLE_CONV_TAC (hd goal1);
-val (goal3,_) = ERASE_EXISTS_TAC (hd goal2);
+val (goal3,_) = ERASE_EXISTS> _TAC (hd goal2);
 val (goal4,_) = FORALL_CONJUNCTS_TAC (hd goal3);
 val (goal6,_) = STRIP_CONJ_ONLY_HYP_TAC (hd goal4); 
 val (goal7,_) = ERASE_FORALL_TAC (hd goal6);
@@ -101,6 +100,10 @@ val thml = [];,``P (x = x + 1) ==> P F ``);
 (* easy problems *)
 val thml = [];
 val goal : goal = ([],``x + 1 = x + 1``);
+
+val thml = [];
+val goal = ([``(f x = 4:num)``], F );
+
 
 (* suc *)
 val thml = [mk_thm ([],``(x <= y) ==> (x < SUC y)``)];

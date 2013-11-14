@@ -2,18 +2,20 @@ signature blibReader =
 sig
   
   include Abbrev
-  
+ 
+  (* dictionnaries *)
+  val mk_rdict : ((hol_type * int) * string) list *
+                 (term * string) list *
+                 (term * string) list *
+                 (term * string) list ->
+                 (string * hol_type) list * (string * term) list
   (* reading *)
-    (* types *)
-  val mk_rtyadict : (('a * 'b) * 'c) list -> ('c * 'a) list
-    (* variables *)
-  val mk_rvdict :  ('a * 'b) list -> ('a * 'b) list -> ('b * 'a) list
   val read_axioml : string list -> 
                     (string * hol_type) list * 
                     (string * term) list ->
                     term list                     
   val format_proof : string list -> (string * string * int) list
-  val read_proof : (string * string * int) list ->
+  val read_infl : (string * string * int) list ->
                    (string * hol_type) list * 
                    (string * term) list ->
                    (term * int) list                
