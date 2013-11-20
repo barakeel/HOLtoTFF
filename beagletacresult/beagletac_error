@@ -1,56 +1,45 @@
-structure: beagle
-function : beagle_interact
-message  : 
+structure: beagle - beagle
+function : beagle_interact - PROVE_FINAL_GOAL
+message  :  - 
 Number: 1
-Status: Unsatisfiable
-Info: proof 
+Status: Time out
+Info: polymorph higher-order proof 
 Thm list: 
-Goal: ([],x + 1 = x + 1)
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < b + 1
+Goal: ([¬P h, ],LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
 
-structure: beagle
-function : beagle_interact
-message  : 
+structure: beagle - beagle
+function : beagle_interact - PROVE_FINAL_GOAL
+message  :  - 
 Number: 2
-Status: Unsatisfiable
-Info: proof 
-Thm list: 
-Goal: ([],x + 1 = x + 1)
-
-structure: beagle - boolSyntax
-function : beagle_interact - mk_eq
-message  :  - lhs and rhs have different types
-Number: 7
-Status: Unsatisfiable
-Info: higher-order proof 
-Thm list: 
-Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
-
-structure: beagle - beagle - boolSyntax
-function : beagle_interact - PROVE_FINAL_GOAL - mk_eq
-message  :  -  - lhs and rhs have different types
-Number: 8
-Status: Unsatisfiable
-Info: higher-order proof 
-Thm list: 
-Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
-
-structure: beagle - beagle - blibReader
-function : beagle_interact - PROVE_FINAL_GOAL - read_tfflit
-message  :  -  - #e_1, 2
-Number: 9
-Status: Unsatisfiable
-Info: higher-order proof 
-Thm list: 
-Goal: ([],(f a b = 2) ∧ (f a = g) ⇒ (g b = 2))
-
-structure: beagle - beagle - blibReader
-function : beagle_interact - PROVE_FINAL_GOAL - read_tfflit
-message  :  -  - btrue, bfalse
-Number: 11
 Status: Unknown
-Info: polymorph fixpoint bool proof 
+Info: polymorph higher-order proof 
 Thm list: 
- [] |- ∀l x. MEM x l ⇔ ∃n. n < LENGTH l ∧ (x = EL n l)
-Goal: ([Abbrev (m1 = LENGTH (FILTER ($= x) l1)), Abbrev (m2 = LENGTH (FILTER ($= x) l2)), ],MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
-MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2))
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < b + 1
+Goal: ([¬P h, ],LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
+
+structure: beagle - beagle
+function : beagle_interact - PROVE_FINAL_GOAL
+message  :  - 
+Number: 4
+Status: Unknown
+Info: bool proof 
+Thm list: 
+ [] |- ∀m n. m * n = n * m
+ [] |- ∀n q. 0 < n ⇒ (q * n DIV n = q)
+ [] |- 0 < 256
+Goal: ([Abbrev (s0 = n2s (256 * s2n s DIV 256)), r0 ≠ 0, ORD c + 1 < 256, n2s (s2n s) = s, r0 = ORD c + 1, ],s0 = s)
+
+structure: beagle - beagle
+function : beagle_interact - PROVE_FINAL_GOAL
+message  :  - 
+Number: 6
+Status: Time out
+Info: polymorph higher-order proof 
+Thm list: 
+ [] |- ∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l
+ [] |- a ≤ b ⇒ a < SUC b
+Goal: ([¬P h, ],LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
 

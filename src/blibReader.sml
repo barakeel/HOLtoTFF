@@ -4,7 +4,6 @@ struct
 open HolKernel Abbrev boolLib numSyntax
      blibDatatype blibBtools blibBrule
      blibSyntax blibTffsyntax blibFreshvar
-     beaglePrintresult
      
 fun READER_ERR function message =
   HOL_ERR{origin_structure = "blibReader",
@@ -191,7 +190,11 @@ fun rev_dict rdict =
   
 fun mk_rvdict fvdict cdict = rev_dict cdict @ rev_dict fvdict
 
-fun mk_rdict dict = (mk_rtyadict (#1 dict), mk_rvdict (#3 dict) (#4 dict))
+fun mk_rdict (dict:((hol_type * int) * string) list *
+                   (term * string) list *
+                   (term * string) list *
+                   (term * string) list )
+   = (mk_rtyadict (#1 dict), mk_rvdict (#3 dict) (#4 dict))
 
 (* create the bvdict *)
 fun prep_tffbvl clause =
@@ -342,7 +345,11 @@ exception unprovable;
 fun PROVE_GOAL goal =
   (
   (#2 (metisTools.METIS_TAC [] goal)) []
-  handle _ => (#2 (Cooper.COOPER_TAC goal)) []
+  handle _ => 
+    (
+    print "cooper: ";
+    (#2 (Cooper.COOPER_TAC goal)) []
+    )
   )
   handle _ => raise unprovable
 
@@ -353,86 +360,85 @@ fun PROVE_AXIOM hypl axiom =
 fun PROVE_FALSE thml =
   list_PROVE_HYP thml (PROVE_GOAL (erase_double_aconv (map concl thml),F))
 
-
 fun PROVE_TERM thml t =
   wrap "blibReader" "PROVE_TERM" (term_to_string t)
     (list_PROVE_HYP thml) (PROVE_GOAL (erase_double_aconv (map concl thml),t))
 
   
-fun begin_ls filename state proofstep =
+fun begin_ls filepath state proofstep =
   let val (cl,clevel) = proofstep in
   let val (ls,level,thml) = hd state in
   let val th1 = if cl = T then ASSUME F else ASSUME cl 
   in
     (
-    writell filename ["BEGIN_LS"] (map thm_to_string [th1]);
+    appendll filepath ["BEGIN_LS"] (map thm_to_string [th1]);
     (cl,clevel,th1 :: thml) :: state          
     )
   end end end
 
-fun end_ls filename state = 
+fun end_ls filepath state = 
   let val (ls1,level1,thml1) = hd state in
   let val (ls2,level2,thml2) = hd (tl state) in
   let val th1 = PROVE_FALSE thml1 in
   let val lsthm = NOT_INTRO (DISCH ls1 th1) in
     (
-    writell filename ["END_LS"] [thm_to_string lsthm];
+    appendll filepath ["END_LS"] [thm_to_string lsthm];
     (ls2,level2,lsthm :: thml2) :: tl (tl state)
     )
   end end 
     handle unprovable =>
     (
-    writell filename ["END_LS_UnP: "] [term_to_string (mk_neg ls1)];
+    appendll filepath ["END_LS_UnP: "] [term_to_string (mk_neg ls1)];
     (ls2,level2,thml2) :: (tl state)
     )
   end end
   
-fun step filename state proofstep =  
+fun step filepath state proofstep =  
   let val (cl,clevel) = proofstep in 
   let val (ls,level,thml) = hd state in
   let val th1 = PROVE_TERM thml cl in
     (
-    writell filename [Int.toString level] [thm_to_string th1];
+    appendll filepath [Int.toString level] [thm_to_string th1];
     (ls,level,th1 :: thml) :: (tl state)
     )
   end 
     handle unprovable => 
     (
-    writell filename ["UnP: "] [term_to_string cl];
+    appendll filepath ["UnP: "] [term_to_string cl];
     (ls,level,thml) :: (tl state)
     )
   end end  
 
-fun end_proof filename state =
+fun end_proof filepath state =
   case state of 
     [] => raise READER_ERR "endproof" "state is empty" 
   | [(_,_,thml)] => PROVE_FALSE thml
-  | _ => end_proof filename (end_ls filename state)
+  | _ => end_proof filepath (end_ls filepath state)
   
-fun PROVE_PROOF_aux filename state proof =
+fun PROVE_PROOF_aux filepath state proof =
   case proof of
-    [] => end_proof filename state
+    [] => end_proof filepath state
   | proofstep :: m => 
     let val clevel = #2 proofstep in
     let val level = #2 (hd state) in
       if clevel = level then
-        let val newstate = step filename state proofstep in
-          PROVE_PROOF_aux filename newstate m
+        let val newstate = step filepath state proofstep in
+          PROVE_PROOF_aux filepath newstate m
         end
       else if clevel = level + 1 then
-        let val newstate = begin_ls filename state proofstep in
-          PROVE_PROOF_aux filename newstate m
+        let val newstate = begin_ls filepath state proofstep in
+          PROVE_PROOF_aux filepath newstate m
         end
       else if clevel < level then
-        let val newstate = end_ls filename state in
-          PROVE_PROOF_aux filename newstate proof
+        let val newstate = end_ls filepath state in
+          PROVE_PROOF_aux filepath newstate proof
         end
       else raise READER_ERR "PROVE_PROOF_aux" "missing split(s)"
     end end
         
-fun PROVE_PROOF filename thmaxioml proof = 
+fun PROVE_PROOF filepath thmaxioml proof = 
   let val state = [(T,1,thmaxioml)] in
-    PROVE_PROOF_aux filename state proof
+    PROVE_PROOF_aux filepath state proof
   end
 
           

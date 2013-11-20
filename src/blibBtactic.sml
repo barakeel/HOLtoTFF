@@ -1,7 +1,7 @@
 structure blibBtactic :> blibBtactic =
 struct
 
-open HolKernel Abbrev boolLib
+open HolKernel Abbrev boolLib 
      blibBtools blibDatatype
      blibSyntax blibBrule blibBconv
 
@@ -12,24 +12,18 @@ fun BTACTIC_ERR function message =
 
 
 (* TAC BUILDER *)
-
-fun is_correct_tac1 goal (goall,valid) =
-  let val th1 = mk_thm (hd goall) in 
-  (* mk_thm to be removed when sure about the code *)
-  let val th2 = valid [th1] in
-    is_subset_goal (mk_goal th2) goal
-  end end
-
-fun mk_tac1 goalbuilder valbuilder goal =
+fun mk_tac1_aux goalbuilder valbuilder goal =
   let val goall = [goalbuilder goal] in
-  let val valid = fn [thm] => valbuilder goal thm  
+  let val validation = fn [thm] => valbuilder goal thm  
                        | _     => raise BTACTIC_ERR "mk_tac1" 
                                         "list length is not one"           
   in
-    if is_correct_tac1 goal (goall,valid) 
-    then (goall,valid)
-    else raise BTACTIC_ERR "mk_tac1:" ""
+    (goall,validation)
   end end
+
+fun mk_tac1 goalbuilder valbuilder goal = 
+  VALID (mk_tac1_aux goalbuilder valbuilder) goal 
+
 
 (* CONV_HYP_TAC *) 
 fun conv_hyp conv goal =
@@ -53,12 +47,10 @@ fun CONV_HYP_TAC conv goal =
   mk_tac1 (conv_hyp conv) (conv_hyp_val conv) goal
 
 (* list_ASSUME_TAC *)
-fun list_ASSUME_TAC_w thml goal =
+fun list_ASSUME_TAC thml goal =
   case thml of
     [] => ALL_TAC goal
-  | thm :: m => ((ASSUME_TAC thm) THEN (list_ASSUME_TAC_w m)) goal
-fun list_ASSUME_TAC thml goal =     
-  wrap "tactic" "list_ASSUME_TAC" "" list_ASSUME_TAC_w thml goal
+  | thm :: m => ((ASSUME_TAC thm) THEN (list_ASSUME_TAC m)) goal
   
 (* REMOVE_HYPL_TAC *) 
 fun REMOVE_HYPL_TAC hypl goal = 

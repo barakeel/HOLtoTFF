@@ -1,10 +1,10 @@
-Problems    : 11
-Polymorph   : 0
+Problems    : 9
+Polymorph   : 1
 Fixpoint    : 0
 Lambda-lift : 0
 Bool Conv   : 0
 Num Conv    : 0
-Higher Order: 1
+Higher Order: 5
 Proof       : 5
 Metis fail  : 0
 Unsat       : 5
@@ -12,5 +12,5 @@ Unkown      : 0
 Sat         : 0
 Time out    : 0
 Parsing err : 0
-Code err    : 6
+Code err    : 4
 Beagle err  : 0

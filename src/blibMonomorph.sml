@@ -5,7 +5,6 @@ open HolKernel Abbrev boolLib
      blibBtools blibDatatype
      blibSyntax
      blibExtractvar blibNamevar
-     beagleStats
 
 fun MONOMORPH_ERR function message =
     HOL_ERR{origin_structure = "blibMonomorph",

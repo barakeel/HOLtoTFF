@@ -1,0 +1,51 @@
+Problems    : 271
+Polymorph   : 139
+Fixpoint    : 102
+Lambda-lift : 60
+Bool Conv   : 72
+Num Conv    : 162
+Higher Order: 86
+Proof       : 271
+Metis fail  : 0
+Unsat       : 218
+Unkown      : 21
+Sat         : 3
+Time out    : 25
+Parsing err : 4
+Code err    : 0
+Beagle err  : 0
+timerl      : 23254
+timerl      : 992365
+timerl      : 178749
+timerl      : 38462
+timerl      : 1865
+timerl      : 531421
+timerl      : 153429
+timerl      : 24621
+timerl      : 21389
+timerl      : 460944
+timerl      : 25320
+timerl      : 13841
+timerl      : 9948
+timerl      : 368344
+timerl      : 37406
+timerl      : 14300
+timerl      : 13306
+timerl      : 624021
+timerl      : 141343
+timerl      : 24162
+timerl      : 16436
+timerl      : 466718
+timerl      : 43838
+timerl      : 16631
+timerl      : 6818
+timerl      : 525647
+timerl      : 134911
+timerl      : 21831
+faultl      : 53
+faultl      : 38
+faultl      : 15
+faultl      : 28
+faultl      : 25
+faultl      : 33
+faultl      : 20

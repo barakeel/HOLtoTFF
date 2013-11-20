@@ -1,5 +1,4 @@
-structure beagle (*:> beagle*)
- =
+structure beagle :> beagle =
 struct
 
 open HolKernel Abbrev boolLib
@@ -7,33 +6,25 @@ open HolKernel Abbrev boolLib
      blibExtractvar
      blibHO blibMonomorph blibTactic
      blibPrinttff blibReader
-     beaglePrintresult beagleStats
 
 fun BEAGLE_ERR function message =
     HOL_ERR{origin_structure = "beagle",
 	    origin_function = function,
             message = message}
 
+val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
 
 (* STATUS *)
-val SZSstatus = ref "Undefined"
-
-fun update_SZSstatus filename = 
-  let val proofpath = mk_proofpath filename in
+fun get_SZSstatus proofpath = 
   let val strl = readl proofpath in
     case strl of
-      [] => SZSstatus := "Undefined"
-    | [a] => SZSstatus := "Undefined"
-    | a :: b :: m => SZSstatus := String.substring (b,13,(String.size b) - 14)
-  end end
+      [] => raise BEAGLE_ERR "get_SZSstatus" "not found"
+    | [a] => raise BEAGLE_ERR "get_SZSstatus" "not found"
+    | a :: b :: m => String.substring (b,13,(String.size b) - 14)
+                       handle _ => raise BEAGLE_ERR "get_SZSstatus" "not found"
+  end
 
-fun write_SZSstatus filename szsstatus =
-  let val proofpath = mk_proofpath filename in
-  let val file = TextIO.openOut proofpath in 
-    TextIO.output (file,szsstatus)
-  end end
-  
-(* BEAGLE_NF *)               
+(* BEAGLE NORMAL FORM *)               
 fun BEAGLE_NF_TAC_w thml goal =
   (
   PROBLEM_TO_GOAL_TAC thml THEN
@@ -51,124 +42,79 @@ fun proof_to_stringl proof = map step_to_string proof
 
   
 (* BEAGLE INTERACTION *)
-fun PROVE_FINAL_GOAL_w filename dict finalgoal =
-  let val filename1 = filename ^ "_declaration" in
-  let val filename2 = filename ^ "_reading" in
-  let val filename3 = filename ^ "_proving" in
+fun PROVE_FINAL_GOAL_w filepath dict finalgoal =
+
   (* reading *)
   let val rdict = mk_rdict dict in
-  let val linel = readl (filename ^ "_tff_proof") in
+  let val linel = readl (filepath ^ "_proof") in
   (* axiom *)
   let val hypl = fst finalgoal in
   let val (axioml,proof) = read_proof linel rdict in
   let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
-  (* proof *)
+  (* proof debugging *)
+  let val filepath1 = filepath ^ "_declaration" in
+  let val filepath2 = filepath ^ "_reading" in
+  let val filepath3 = filepath ^ "_proving" in 
     (
-    writel filename1 ["(* Type dictionnary *)"];
-    writell filename1 (map fst rtyadict) (map (type_to_string o snd) (#1 dict));
-    writel filename1 ["(* Variables dictionnary *)"];
-    writell filename1 (map fst rvdict) (map (term_to_string o snd) (#2 rvdict));
-    writel filename2 ["(* Axioms *)"];
-    writel filename2 (map term_to_string axioml);
-    writel filename2 ["(* Proof *)"];
-    writel filename2 (proof_to_stringl proof);
-    writel filename2 ["(* Proven Axioms *)"];
-    writel filename2 (map thm_to_string thmaxioml);
-    PROVE_PROOF filename3 thmaxioml proof
+    appendl filepath1 ["(* Type dictionnary *)"];
+    appendll filepath1 (map fst (#1 rdict)) (map (type_to_string o snd) (#1 rdict));
+    appendl filepath1 ["(* Variables dictionnary *)"];
+    appendll filepath1 (map fst (#2 rdict)) (map (term_to_string o snd) (#2 rdict));
+    appendl filepath2 ["(* Axioms *)"];
+    appendl filepath2 (map term_to_string axioml);
+    appendl filepath2 ["(* Proof *)"];
+    appendl filepath2 (proof_to_stringl proof);
+    appendl filepath2 ["(* Proven Axioms *)"];
+    appendl filepath2 (map thm_to_string thmaxioml);
+    PROVE_PROOF filepath3 thmaxioml proof
     )
   end end end 
   end end end end end
 
-fun PROVE_FINAL_GOAL filename dict finalgoal =
-  wrap "beagle" "PROVE_FINAL_GOAL" "" (PROVE_FINAL_GOAL_w filename dict) finalgoal
+fun PROVE_FINAL_GOAL filepath dict finalgoal =
+  wrap "beagle" "PROVE_FINAL_GOAL" "" (PROVE_FINAL_GOAL_w filepath dict) finalgoal
 
-fun beagle_interact_w filename finalgoal =
-  let 
-    val dict = write_tff (mk_tffpath filename) (!nb_problem) finalgoal false
+fun beagle_interact_w filepath finalgoal =
+  (
+  OS.Process.system ("cd " ^ directory ^ ";" ^
+                     "sh " ^ directory ^ "callbeagle.sh " ^ filepath)
+    handle _ => raise BEAGLE_ERR "beagle_interact" "OS.process.system";
+  ()
+  )
+
+
+fun beagle_interact filepath finalgoal =
+  wrap "beagle" "beagle_interact" "" (beagle_interact_w filepath) finalgoal
+
+(* MAIN FUNCTIONS *)
+fun beagle_tac_aux filepath thml goal = 
+  let val (mthml,_) = if is_polymorph_pb (thml,goal)
+                      then monomorph_pb (thml,goal) 
+                      else (thml,goal)
   in
+  let val (finalgoall,validnf) = BEAGLE_NF_TAC mthml goal in
+  let val finalgoal = hd (finalgoall) in
+  let val dict = write_tff filepath finalgoal in
     (
-    write_tffpath (mk_tffpath filename); 
-    OS.Process.system ("cd " ^ directory ^ ";" ^
-                       "sh " ^ directory ^ "callbeagle.sh")
-      handle _ => raise BEAGLE_ERR "beagle_call" "";
-    update_SZSstatus filename;
-    PROVE_FINAL_GOAL filename dict finalgoal;
-    ()
-    )
-  end
+    beagle_interact filepath finalgoal;
+    let val SZSstatus = get_SZSstatus (filepath ^ "_proof") in
+      if SZSstatus = "Unsatisfiable"
+      then 
+        let fun valid _ = 
+          validnf [PROVE_FINAL_GOAL filepath dict (hd finalgoall)]   
+        in 
+          ([], valid)
+        end
+      else raise BEAGLE_ERR "beagle_tac_aux" SZSstatus
+    end
+    ) 
+  end end end end
 
-fun beagle_interact filename finalgoal =
-  wrap "beagle" "beagle_interact" "" (beagle_interact_w filename) finalgoal
-  
-fun init_beagle_tac_aux filename =
-  (
-  show_assums := true;
-  SZSstatus := "Undefined";
-  write_SZSstatus filename (!SZSstatus);
-  reset_allflag (); reset_all_nb ();
-  update_all_nb (mk_statspath filename)
-  )
-
-(* BEAGLE_TAC *)
-fun write_goodresult filename thml goal =
-  write_result (mk_resultpath filename) thml goal (!nb_problem) (!SZSstatus) 
-    (allflag_value ())
-
-fun write_badresult filename thml goal =
-  write_result (mk_errpath filename) thml goal (!nb_problem) (!SZSstatus) 
-    (allflag_value ())
-
-
-fun beagle_tac_aux filename thml goal = 
-  (
-  init_beagle_tac_aux filename;
-  addone_nb nb_problem;
-  flag_update mflag (is_polymorph_pb (thml,goal));
-    (  
-    let val (mthml,_) = if is_polymorph_pb (thml,goal)
-                            then monomorph_pb (thml,goal) 
-                            else (thml,goal)
-    in
-    let val (finalgoall,valid) = BEAGLE_NF_TAC mthml goal  in
-                                          (* update all flags *)
-    let val finalgoal = hd (finalgoall) in
-      (
-      flag_update proofflag (is_correct_tac1 goal (finalgoall,valid));
-      beagle_interact filename finalgoal;
-      update_nbl1 (); 
-      update_nbl2 (!SZSstatus);
-      if (!SZSstatus) = "Unsatisfiable"
-      then write_goodresult filename thml goal
-      else 
-        (
-        write_badresult filename thml goal;
-        write_tff (mk_tfferrpath filename) (!nb_problem) finalgoal true;
-        ()
-        )
-      ) 
-    end end end
-    )
-    handle HOL_ERR {origin_structure = s, origin_function = f, message = m}
-        => (
-           addone_nb nb_codeerr;
-           write_err (mk_errpath filename) s f m; 
-           write_badresult filename thml goal
-           ) 
-    | _ => (
-           addone_nb nb_codeerr;
-           write_err (mk_errpath filename) "" "" "code error";
-           write_badresult filename thml goal
-           ) 
-  ; 
-  write_stats filename (map ! nb_all); 
-  ([],fn x => (mk_thm goal))
-  )
-
-(* MAIN FUNCTION *)
 fun BEAGLE_TAC thml goal = 
-  let val filename = "beagletacresult/beagletac" in 
-    beagle_tac_aux filename thml goal
+  let val filepath = "/tmp/HOLtoTFF/tff" in 
+    beagle_tac_aux filepath thml goal
   end
+ 
+fun BEAGLE_PROVE thml goal = TAC_PROOF (goal,(BEAGLE_TAC thml)) 
   
-
 end  

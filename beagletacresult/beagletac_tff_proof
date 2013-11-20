@@ -1,183 +1,67 @@
 Undefined%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SZSstatus: Unknown
+% SZSstatus: Unsatisfiable
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tff(1,axiom,(
-    (btrue!=bfalse),
+    ($lesseq(0, xx)),
     file('problem.p',axiom))).
 
 tff(2,axiom,(
-    ($lesseq(0, xm1)),
+    ($lesseq(0, xy)),
     file('problem.p',axiom))).
 
 tff(3,axiom,(
-    ($lesseq(0, xm2)),
+    (![Xs2n: ty_num_F_num, X: ty_num_F_num, Xn: $int]: (xApp(Xs2n, xApp(X, Xn))=Xn | ~$lesseq(0, Xn))),
     file('problem.p',axiom))).
 
 tff(4,axiom,(
-    ($lesseq(0, x3)),
+    (xApp(xn2s, xy)=xApp(xn2s, xx) | xy=xx),
     file('problem.p',axiom))).
 
 tff(5,axiom,(
-    (cAbbrev(btrue) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | xLENGTH(cFILTER(c(xx), xl2))!=xm2),
+    (xApp(xn2s, xy)!=xApp(xn2s, xx) | xy!=xx),
     file('problem.p',axiom))).
 
-tff(6,axiom,(
-    (cAbbrev(bfalse) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | xLENGTH(cFILTER(c(xx), xl2))!=xm2),
-    file('problem.p',axiom))).
-
-tff(7,axiom,(
-    (~cIN(xEL(x3, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1))) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | xLENGTH(cFILTER(c(xx), xl2))!=xm2),
-    file('problem.p',axiom))).
-
-tff(8,axiom,(
-    (![X1: $int, Xl: ty_listIaI]: (xLENGTH(cFILTER(c(xx), xl1))=xm1 | cIN(xEL(X1, Xl), cLIST_TO_SET(Xl)) | ~$lesseq(0, X1) | ~$less(X1, xLENGTH(Xl)) | xLENGTH(cFILTER(c(xx), xl2))!=xm2)),
-    file('problem.p',axiom))).
-
-tff(9,axiom,(
-    (![X: ty_a, Xl: ty_listIaI]: (~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | xLENGTH(cFILTER(c(xx), xl2))!=xm2 | $less(x(Xl, X), xLENGTH(Xl)))),
-    file('problem.p',axiom))).
-
-tff(10,axiom,(
-    (![Xl: ty_listIaI, X: ty_a]: (xEL(x(Xl, X), Xl)=X | ~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | xLENGTH(cFILTER(c(xx), xl2))!=xm2)),
-    file('problem.p',axiom))).
-
-tff(11,axiom,(
-    (![Xl: ty_listIaI, X: ty_a]: (xEL(xn(Xl, X), Xl)=X | ~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl2))!=xm2 | xLENGTH(cFILTER(c(xx), xl1))!=xm1)),
-    file('problem.p',axiom))).
-
-tff(12,axiom,(
-    (![X: ty_a, Xl: ty_listIaI]: (~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl2))!=xm2 | $less(xn(Xl, X), xLENGTH(Xl)) | xLENGTH(cFILTER(c(xx), xl1))!=xm1)),
-    file('problem.p',axiom))).
-
-tff(13,axiom,(
-    (![X1: $int, Xl: ty_listIaI]: (cIN(xEL(X1, Xl), cLIST_TO_SET(Xl)) | ~$lesseq(0, X1) | xLENGTH(cFILTER(c(xx), xl1))!=xm1 | ~$less(X1, xLENGTH(Xl)) | xLENGTH(cFILTER(c(xx), xl2))!=xm2)),
-    file('problem.p',axiom))).
-
-tff(14,axiom,(
-    (~cIN(xEL(x3, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1))) | xLENGTH(cFILTER(c(xx), xl2))!=xm2 | xLENGTH(cFILTER(c(xx), xl1))!=xm1),
-    file('problem.p',axiom))).
-
-tff(15,axiom,(
-    (cAbbrev(btrue) | xLENGTH(cFILTER(c(xx), xl2))!=xm2 | xLENGTH(cFILTER(c(xx), xl1))!=xm1),
-    file('problem.p',axiom))).
-
-tff(16,axiom,(
-    (xLENGTH(cFILTER(c(xx), xl2))=xm2 | cAbbrev(bfalse) | xLENGTH(cFILTER(c(xx), xl1))!=xm1),
-    file('problem.p',axiom))).
-
-tff(17,axiom,(
-    (xLENGTH(cFILTER(c(xx), xl2))=xm2 | cAbbrev(btrue) | xLENGTH(cFILTER(c(xx), xl1))!=xm1),
-    file('problem.p',axiom))).
-
-tff(18,axiom,(
-    (xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~cIN(xEL(x3, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1))) | xLENGTH(cFILTER(c(xx), xl1))!=xm1),
-    file('problem.p',axiom))).
-
-tff(19,axiom,(
-    (![X1: $int, Xl: ty_listIaI]: (cIN(xEL(X1, Xl), cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~$lesseq(0, X1) | xLENGTH(cFILTER(c(xx), xl1))!=xm1 | ~$less(X1, xLENGTH(Xl)))),
-    file('problem.p',axiom))).
-
-tff(20,axiom,(
-    (![X: ty_a, Xl: ty_listIaI]: (xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~cIN(X, cLIST_TO_SET(Xl)) | $less(x1(Xl, X), xLENGTH(Xl)) | xLENGTH(cFILTER(c(xx), xl1))!=xm1)),
-    file('problem.p',axiom))).
-
-tff(21,axiom,(
-    (![Xl: ty_listIaI, X: ty_a]: (xLENGTH(cFILTER(c(xx), xl2))=xm2 | xEL(x1(Xl, X), Xl)=X | ~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl1))!=xm1)),
-    file('problem.p',axiom))).
-
-tff(22,axiom,(
-    (![Xl: ty_listIaI, X: ty_a]: (xLENGTH(cFILTER(c(xx), xl2))=xm2 | xEL(x2(Xl, X), Xl)=X | ~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl1))=xm1)),
-    file('problem.p',axiom))).
-
-tff(23,axiom,(
-    (![X: ty_a, Xl: ty_listIaI]: (xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~cIN(X, cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl1))=xm1 | $less(x2(Xl, X), xLENGTH(Xl)))),
-    file('problem.p',axiom))).
-
-tff(24,axiom,(
-    (![X1: $int, Xl: ty_listIaI]: (xLENGTH(cFILTER(c(xx), xl1))=xm1 | cIN(xEL(X1, Xl), cLIST_TO_SET(Xl)) | xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~$lesseq(0, X1) | ~$less(X1, xLENGTH(Xl)))),
-    file('problem.p',axiom))).
-
-tff(25,axiom,(
-    (xLENGTH(cFILTER(c(xx), xl2))=xm2 | ~cIN(xEL(x3, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1))) | xLENGTH(cFILTER(c(xx), xl1))=xm1),
-    file('problem.p',axiom))).
-
-tff(26,axiom,(
-    (xLENGTH(cFILTER(c(xx), xl2))=xm2 | cAbbrev(bfalse) | xLENGTH(cFILTER(c(xx), xl1))=xm1),
-    file('problem.p',axiom))).
-
-tff(27,plain,(
-    (xLENGTH(cFILTER(c(xx), xl2))=#e_1),
+tff(6,plain,(
+    (xApp(xn2s, xy)=#e_1),
     inference(Unknown,[status(thm)],[])).
 
-tff(28s0,plain,(
-    (xm2=#e_1 | cAbbrev(bfalse) | xm1!=#e_2),
+tff(7s0,plain,(
+    (#e_2=#e_1 | xy=xx),
     inference(Split,[status(thm)],[])).
 
-tff(28s1,plain,(
-    (xm1!=#e_2),
+tff(7s1,plain,(
+    (xy=xx),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(28s2,plain,(
-    (xLENGTH(cFILTER(c(xx), xl1))=#e_2),
+tff(7s2,plain,(
+    (xApp(xn2s, xx)=#e_2),
     inference(Unknown,[status(thm)],[])).
 
-tff(28s3s0,plain,(
-    (xm2=#e_1 | cAbbrev(bfalse)),
+tff(8,plain,(
+    (#e_2=#e_1),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(9,plain,(
+    (xy!=xx),
+    inference(Rightsplit,[status(thm)],[])).
+
+tff(10,plain,(
+    (xApp(xn2s, xx)=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(11,plain,(
+    (![Xs2n: ty_num_F_num]: (xApp(Xs2n, #e_1)=xy)),
+    inference(Unknown,[status(thm)],[])).
+
+tff(12s0,plain,(
+    (xy=#e_1 | xx!=#e_1),
     inference(Split,[status(thm)],[])).
 
-tff(28s3s1,plain,(
-    (cAbbrev(bfalse)),
+tff(12s1,plain,(
+    (xx!=#e_1),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(28s3s2s0,plain,(
-    (cAbbrev(btrue) | xm2!=#e_1),
-    inference(Split,[status(thm)],[])).
-
-tff(28s3s2s1,plain,(
-    (xm2!=#e_1),
-    inference(Leftsplit,[status(thm)],[])).
-
-tff(28s3s2s2,plain,(
-    (![X1: $int, Xl: ty_listIaI]: (cIN(xEL(X1, Xl), cLIST_TO_SET(Xl)) | ~$lesseq(0, X1) | ~$less(X1, xLENGTH(Xl)))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s3,plain,(
-    (![X1_91: $int]: (cIN(xEL(X1_91, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~$lesseq(0, X1_91) | ~$less(X1_91, #e_1))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s4,plain,(
-    (![X1_91: $int]: (cIN(xEL(X1_91, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1))) | ~$lesseq(0, X1_91) | ~$less(X1_91, #e_2))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s5,plain,(
-    (![X: ty_a, Xl: ty_listIaI]: (~cIN(X, cLIST_TO_SET(Xl)) | $less(x2(Xl, X), xLENGTH(Xl)))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s6,plain,(
-    (![X_107: ty_a]: (~cIN(X_107, cLIST_TO_SET(cFILTER(c(xx), xl2))) | $less(x2(cFILTER(c(xx), xl2), X_107), #e_1))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s7,plain,(
-    (![X_107: ty_a]: (~cIN(X_107, cLIST_TO_SET(cFILTER(c(xx), xl1))) | $less(x2(cFILTER(c(xx), xl1), X_107), #e_2))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s8,plain,(
-    (![Xl: ty_listIaI, X: ty_a]: (xEL(x2(Xl, X), Xl)=X | ~cIN(X, cLIST_TO_SET(Xl)))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s9s0,plain,(
-    (~cIN(xEL(x3, cFILTER(c(xx), xl2)), cLIST_TO_SET(cFILTER(c(xx), xl2))) | ~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1)))),
-    inference(Split,[status(thm)],[])).
-
-tff(28s3s2s9s1,plain,(
-    (~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1)))),
-    inference(Leftsplit,[status(thm)],[])).
-
-tff(28s3s2s9s2,plain,(
-    (~cIN(xEL(x3, cFILTER(c(xx), xl1)), cLIST_TO_SET(cFILTER(c(xx), xl1)))),
-    inference(Unknown,[status(thm)],[])).
-
-tff(28s3s2s9s3,plain,(
-    (~$less(x3, #e_2)),
+tff(12s2,plain,(
+    (![Xs2n: ty_num_F_num]: (xApp(Xs2n, #e_1)=xx)),
     inference(Unknown,[status(thm)],[])).
 

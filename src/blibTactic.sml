@@ -7,7 +7,7 @@ open HolKernel Abbrev boolLib
      blibPredicate
      blibExtractvar blibExtracttype blibFreshvar blibHO
      blibConv blibNumconv
-     beagleStats
+
 
 fun TACTIC_ERR function message =
   HOL_ERR {origin_structure = "blibTactic",
@@ -49,24 +49,9 @@ fun PROBLEM_TO_GOAL_TAC thml goal =
   wrap "tactic" "PROBLEM_TO_GOAL_TAC" "" (PROBLEM_TO_GOAL_TAC_w thml) goal
 
 (*********** BEAGLE_CONV_TAC **********)   
-fun CNF_CONV_TAC goal = 
-  wrap "tactic" "CNF_CONV_TAC" "" (CONV_HYP_TAC normalForms.CNF_CONV) goal
-
-fun FUN_CONV_TAC_w goal = 
-  let val eqth = (QCONV fun_conv) (only_hypg goal) in
-    (flag_update funflag (not (is_refl eqth));
-     CONV_HYP_TAC fun_conv goal)
-  end
-fun FUN_CONV_TAC goal = 
-  wrap "tactic" "FUN_CONV_TAC" "" FUN_CONV_TAC_w goal  
-
-fun BOOL_CONV_TAC_w goal = 
-  let val eqth = (QCONV bool_conv) (only_hypg goal) in
-    (flag_update boolflag (not (is_refl eqth));
-     CONV_HYP_TAC bool_conv goal)
-  end
-fun BOOL_CONV_TAC goal = 
-  wrap "tactic" "BOOL_CONV_TAC" "" BOOL_CONV_TAC_w goal 
+fun CNF_CONV_TAC goal = CONV_HYP_TAC normalForms.CNF_CONV goal
+fun FUN_CONV_TAC goal = CONV_HYP_TAC fun_conv goal
+fun BOOL_CONV_TAC goal = CONV_HYP_TAC bool_conv goal
 
 fun BEAGLE_CONV_TAC_w goal = 
   (
@@ -77,6 +62,7 @@ fun BEAGLE_CONV_TAC_w goal =
   CNF_CONV_TAC
   )
   goal
+
 fun BEAGLE_CONV_TAC goal = 
   wrap "tactic" "BEAGLE_CONV_TAC" "" BEAGLE_CONV_TAC_w goal 
 

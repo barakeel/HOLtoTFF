@@ -1,6 +1,4 @@
 #!/bin/sh
 echo "Calling beagle..." 
-filepath=$(head -1 filepath.txt) 
-timeout 15s \
-  java -jar beagle.jar "-proof" "$filepath"
+timeout 20s \java -jar beagle.jar "-proof" "$1"
 #

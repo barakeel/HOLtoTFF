@@ -1,0 +1,1051 @@
+(* Axioms *)
+∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+¬App P h
+(* Proof *)
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : #e_1 ≤ #e_2
+1 : LENGTH t = #e_2
+1 : SUC #e_2 = #e_3
+1 : ¬(#e_1 < #e_3 )
+2 : ∀Xa. ¬(Xa ≤ #e_2 ) ∨ Xa < #e_3 ∨ ¬(0 ≤ Xa)
+3 : ¬(-1 < #e_3 )
+4 : ¬(-1 < -#e_3 )
+3 : ∀X. LENGTH (SND (SPLITP X t)) ≤ #e_2
+3 : ∀X. LENGTH (SND (SPLITP X (SND (SPLITP P t)))) ≤ #e_1
+(* Proven Axioms *)
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+ [¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+ [¬App P h] |- ¬App P h
+(* Axioms *)
+(* Proof *)
+(* Proven Axioms *)
+(* Axioms *)
+∀X X31 X1. LENGTH (SND (App (App X X31) X1)) ≤ LENGTH X1
+∀X2 X31 X3. LENGTH (SND (App (App X2 X31) X3)) ≤ LENGTH X3
+∀X4 X31 X5. LENGTH (SND (App (App X4 X31) X5)) ≤ LENGTH X5
+∀X6 X31 X7. LENGTH (SND (App (App X6 X31) X7)) ≤ LENGTH X7
+∀X8 X31 X9. LENGTH (SND (App (App X8 X31) X9)) ≤ LENGTH X9
+∀X10 X31 X11. LENGTH (SND (App (App X10 X31) X11)) ≤ LENGTH X11
+∀X12 X31 X13. LENGTH (SND (App (App X12 X31) X13)) ≤ LENGTH X13
+∀X14 X31 X15. LENGTH (SND (App (App X14 X31) X15)) ≤ LENGTH X15
+∀X16 X31 X17. LENGTH (SND (App (App X16 X31) X17)) ≤ LENGTH X17
+∀X18 X31 X19. LENGTH (SND (App (App X18 X31) X19)) ≤ LENGTH X19
+∀X20 X31 X21. LENGTH (SND (App (App X20 X31) X21)) ≤ LENGTH X21
+∀X22 X31 X23. LENGTH (SND (App (App X22 X31) X23)) ≤ LENGTH X23
+∀X24 X31 X25. LENGTH (SND (App (App X24 X31) X25)) ≤ LENGTH X25
+∀X26 X31 X27. LENGTH (SND (App (App X26 X31) X27)) ≤ LENGTH X27
+∀X28 X31 X29. LENGTH (SND (App (App X28 X31) X29)) ≤ LENGTH X29
+∀X30 X31 Xl. LENGTH (SND (App (App X30 X31) Xl)) ≤ LENGTH Xl
+∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < Xb + 1 ∨ ¬(0 ≤ Xa)
+¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
+¬P h
+(* Proof *)
+1 : ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < 1 + Xb ∨ ¬(0 ≤ Xa)
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : ¬(#e_1 < 1 + #e_2 )
+1 : LENGTH t = #e_2
+1 : ∀X28_70 X31_71. LENGTH (SND (App (App X28_70 X31_71) t)) ≤ #e_2
+1 : ∀X20_173 X31_174. LENGTH (SND (App (App X20_173 X31_174) t)) ≤ #e_2
+1 : ∀X4_212 X31_213. LENGTH (SND (App (App X4_212 X31_213) t)) ≤ #e_2
+1 : ∀X12_239 X31_240. LENGTH (SND (App (App X12_239 X31_240) t)) ≤ #e_2
+1 : ∀X30_56 X31_57.
+  LENGTH (SND (App (App X30_56 X31_57) (SND (SPLITP P t)))) ≤ #e_1
+1 : ∀X6_97 X31_98.
+  LENGTH (SND (App (App X6_97 X31_98) (SND (SPLITP P t)))) ≤ #e_1
+1 : ∀X14_266 X31_267.
+  LENGTH (SND (App (App X14_266 X31_267) (SND (SPLITP P t)))) ≤ #e_1
+1 : ∀X22_159 X31_160.
+  LENGTH (SND (App (App X22_159 X31_160) (SND (SPLITP P t)))) ≤ #e_1
+(* Proven Axioms *)
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X X31 X1. LENGTH (SND (App (App X X31) X1)) ≤ LENGTH X1
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X2 X31 X3. LENGTH (SND (App (App X2 X31) X3)) ≤ LENGTH X3
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X4 X31 X5. LENGTH (SND (App (App X4 X31) X5)) ≤ LENGTH X5
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X6 X31 X7. LENGTH (SND (App (App X6 X31) X7)) ≤ LENGTH X7
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X8 X31 X9. LENGTH (SND (App (App X8 X31) X9)) ≤ LENGTH X9
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X10 X31 X11. LENGTH (SND (App (App X10 X31) X11)) ≤ LENGTH X11
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X12 X31 X13. LENGTH (SND (App (App X12 X31) X13)) ≤ LENGTH X13
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X14 X31 X15. LENGTH (SND (App (App X14 X31) X15)) ≤ LENGTH X15
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X16 X31 X17. LENGTH (SND (App (App X16 X31) X17)) ≤ LENGTH X17
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X18 X31 X19. LENGTH (SND (App (App X18 X31) X19)) ≤ LENGTH X19
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X20 X31 X21. LENGTH (SND (App (App X20 X31) X21)) ≤ LENGTH X21
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X22 X31 X23. LENGTH (SND (App (App X22 X31) X23)) ≤ LENGTH X23
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X24 X31 X25. LENGTH (SND (App (App X24 X31) X25)) ≤ LENGTH X25
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X26 X31 X27. LENGTH (SND (App (App X26 X31) X27)) ≤ LENGTH X27
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X28 X31 X29. LENGTH (SND (App (App X28 X31) X29)) ≤ LENGTH X29
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X30 X31 Xl. LENGTH (SND (App (App X30 X31) Xl)) ≤ LENGTH Xl
+
+[∀SPLITP'''''''''''''''' P' l''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''''' P') l'''')) ≤
+   LENGTH l'''',
+ ∀SPLITP''''''''''''''' P' l''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''''''' P') l'''''''')) ≤
+   LENGTH l'''''''',
+ ∀SPLITP'''''''''''''' P' l''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''''' P') l'''''''''''')) ≤
+   LENGTH l'''''''''''',
+ ∀SPLITP''''''''''''' P' l.
+   LENGTH (SND (App (App SPLITP''''''''''''' P') l)) ≤ LENGTH l,
+ ∀SPLITP'''''''''''' P' l'''''''.
+   LENGTH (SND (App (App SPLITP'''''''''''' P') l''''''')) ≤
+   LENGTH l''''''',
+ ∀SPLITP''''''''''' P' l'''''''''''.
+   LENGTH (SND (App (App SPLITP''''''''''' P') l''''''''''')) ≤
+   LENGTH l''''''''''',
+ ∀SPLITP'''''''''' P' l'''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''''''' P') l''''''''''''''')) ≤
+   LENGTH l''''''''''''''',
+ ∀SPLITP''''''''' P' l'''.
+   LENGTH (SND (App (App SPLITP''''''''' P') l''')) ≤ LENGTH l''',
+ ∀SPLITP'''''''' P' l''''''.
+   LENGTH (SND (App (App SPLITP'''''''' P') l'''''')) ≤ LENGTH l'''''',
+ ∀SPLITP''''''' P' l''''''''''.
+   LENGTH (SND (App (App SPLITP''''''' P') l'''''''''')) ≤
+   LENGTH l'''''''''',
+ ∀SPLITP'''''' P' l''''''''''''''.
+   LENGTH (SND (App (App SPLITP'''''' P') l'''''''''''''')) ≤
+   LENGTH l'''''''''''''',
+ ∀SPLITP''''' P' l''.
+   LENGTH (SND (App (App SPLITP''''' P') l'')) ≤ LENGTH l'',
+ ∀SPLITP'''' P' l'''''.
+   LENGTH (SND (App (App SPLITP'''' P') l''''')) ≤ LENGTH l''''',
+ ∀SPLITP''' P' l'''''''''.
+   LENGTH (SND (App (App SPLITP''' P') l''''''''')) ≤ LENGTH l''''''''',
+ ∀SPLITP'' P' l'''''''''''''.
+   LENGTH (SND (App (App SPLITP'' P') l''''''''''''')) ≤
+   LENGTH l''''''''''''',
+ ∀SPLITP' P' l'. LENGTH (SND (App (App SPLITP' P') l')) ≤ LENGTH l',
+ ∀b a. ¬(0 ≤ a) ∨ a < b + 1 ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < Xb + 1 ∨ ¬(0 ≤ Xa)
+ [¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
+ [¬P h] |- ¬P h
+(* Axioms *)
+∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+∀Xa Xb. ¬(Xa ≤ Xb) ∨ Xa < Xb + 1
+¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
+¬App P h
+(* Proof *)
+1 : ∀Xa Xb. ¬(Xa ≤ Xb) ∨ Xa < 1 + Xb
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : #e_1 ≤ #e_2
+1 : LENGTH t = #e_2
+1 : ¬(#e_1 < 1 + #e_2 )
+(* Proven Axioms *)
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. a < b + 1 ∨ ¬(a ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. a < b + 1 ∨ ¬(a ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ∀Xa Xb. ¬(Xa ≤ Xb) ∨ Xa < Xb + 1
+ [¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)]
+|- ¬(LENGTH (SND (SPLITP P t)) < LENGTH t + 1)
+ [¬App P h] |- ¬App P h
+(* Axioms *)
+∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+¬App P h
+(* Proof *)
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : #e_1 ≤ #e_2
+1 : LENGTH t = #e_2
+1 : SUC #e_2 = #e_3
+1 : ¬(#e_1 < #e_3 )
+2 : ∀Xa. ¬(Xa ≤ #e_2 ) ∨ Xa < #e_3 ∨ ¬(0 ≤ Xa)
+3 : ¬(-1 < #e_3 )
+4 : ¬(-1 < -#e_3 )
+3 : ∀X. LENGTH (SND (SPLITP X t)) ≤ #e_2
+3 : ∀X. LENGTH (SND (SPLITP X (SND (SPLITP P t)))) ≤ #e_1
+(* Proven Axioms *)
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+ [¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+ [¬App P h] |- ¬App P h
+(* Axioms *)
+∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+(y = x) ∨ (App n2s y = App n2s x)
+y ≠ x ∨ App n2s y ≠ App n2s x
+(* Proof *)
+2 : App n2s y ≠ App n2s x
+2 : y = x
+1 : ∀Xs2n. App Xs2n (App n2s x) = y
+(* Proven Axioms *)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)]
+|- ∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- (y = x) ∨ (App n2s y = App n2s x)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- y ≠ x ∨ App n2s y ≠ App n2s x
+(* Axioms *)
+∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+¬App P h
+(* Proof *)
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : #e_1 ≤ #e_2
+1 : LENGTH t = #e_2
+1 : SUC #e_2 = #e_3
+1 : ¬(#e_1 < #e_3 )
+2 : ∀Xa. ¬(Xa ≤ #e_2 ) ∨ Xa < #e_3 ∨ ¬(0 ≤ Xa)
+3 : ¬(-1 < #e_3 )
+4 : ¬(-1 < -#e_3 )
+3 : ∀X. LENGTH (SND (SPLITP X t)) ≤ #e_2
+3 : ∀X. LENGTH (SND (SPLITP X (SND (SPLITP P t)))) ≤ #e_1
+(* Proven Axioms *)
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+ [¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+ [¬App P h] |- ¬App P h
+(* Axioms *)
+(* Proof *)
+(* Proven Axioms *)
+(* Axioms *)
+∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+¬App P h
+(* Proof *)
+1 : LENGTH (SND (SPLITP P t)) = #e_1
+1 : #e_1 ≤ #e_2
+1 : LENGTH t = #e_2
+1 : ¬(#e_1 < #e_3 )
+1 : SUC #e_2 = #e_3
+1 : ∀X. LENGTH (SND (SPLITP X t)) ≤ #e_2
+1 : ∀X. LENGTH (SND (SPLITP X (SND (SPLITP P t)))) ≤ #e_1
+2 : ∀Xa_60. ¬(Xa_60 ≤ #e_2 ) ∨ Xa_60 < #e_3 ∨ ¬(0 ≤ Xa_60)
+2 : ∀Xa_60. ¬(Xa_60 ≤ #e_2 ) ∨ Xa_60 < #e_3 ∨ ¬(0 ≤ Xa_60)
+3 : ¬(-1 < #e_3 )
+4 : ¬(-1 < -#e_3 )
+3 : ∀X_87.
+  LENGTH (SND (SPLITP X_87 t)) < #e_3 ∨
+  ¬(0 ≤ LENGTH (SND (SPLITP X_87 t)))
+4 : ¬(0 ≤ #e_1 )
+4 : ∀Xl_66 X_65.
+  ¬(0 ≤ LENGTH Xl_66) ∨
+  LENGTH (SND (SPLITP X_65 Xl_66)) < SUC (LENGTH Xl_66) ∨
+  ¬(0 ≤ LENGTH (SND (SPLITP X_65 Xl_66)))
+5 : #e_2 ≠ #e_1
+(* Proven Axioms *)
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀X Xl. LENGTH (SND (SPLITP X Xl)) ≤ LENGTH Xl
+
+[∀P' l. LENGTH (SND (SPLITP P' l)) ≤ LENGTH l,
+ ∀b a. ¬(0 ≤ a) ∨ a < SUC b ∨ ¬(a ≤ b) ∨ ¬(0 ≤ b), ¬App P h,
+ ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ∀Xb Xa. ¬(0 ≤ Xb) ∨ ¬(Xa ≤ Xb) ∨ Xa < SUC Xb ∨ ¬(0 ≤ Xa)
+ [¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))]
+|- ¬(LENGTH (SND (SPLITP P t)) < SUC (LENGTH t))
+ [¬App P h] |- ¬App P h
+(* Axioms *)
+∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+(App n2s y = App n2s x) ∨ (y = x)
+App n2s y ≠ App n2s x ∨ y ≠ x
+(* Proof *)
+1 : App n2s y = #e_1
+2 : y ≠ x
+2 : App n2s x = #e_2
+2 : ∀Xs2n. App Xs2n #e_1 = y
+3 : x ≠ #e_1
+3 : App n2s x = #e_1
+3 : #e_2 = #e_1
+3 : ∀Xs2n. App Xs2n #e_1 = x
+1 : App n2s x = #e_2
+(* Proven Axioms *)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)]
+|- ∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- (App n2s y = App n2s x) ∨ (y = x)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- App n2s y ≠ App n2s x ∨ y ≠ x
+(* Axioms *)
+∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+(y = x) ∨ (App n2s y = App n2s x)
+y ≠ x ∨ App n2s y ≠ App n2s x
+(* Proof *)
+1 : ∀Xs2n Xn_6 X_5. App Xs2n Xn_6 = App X_5 Xn_6
+2 : App n2s y ≠ App n2s x
+2 : ∀X_69. App n2s x ≠ App X_69 y
+2 : ∀X_83 X_80. App X_83 x ≠ App X_80 y
+2 : y = x
+1 : ∀Xs2n. App Xs2n (App n2s x) = y
+(* Proven Axioms *)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)]
+|- ∀Xs2n X Xn. App Xs2n (App X Xn) = Xn
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- (y = x) ∨ (App n2s y = App n2s x)
+
+[∀s2n n2s' n. App s2n (App n2s' n) = n, App n2s x ≠ App n2s y ∨ x ≠ y,
+ (App n2s x = App n2s y) ∨ (x = y)] |- y ≠ x ∨ App n2s y ≠ App n2s x
+(* Axioms *)
+0 ≤ x
+0 ≤ y
+∀Xs2n X Xn. (App Xs2n (App X Xn) = Xn) ∨ ¬(0 ≤ Xn)
+(App n2s y = App n2s x) ∨ (y = x)
+App n2s y ≠ App n2s x ∨ y ≠ x
+(* Proof *)
+1 : App n2s y = #e_1
+2 : y = x
+2 : App n2s x = #e_2
+1 : App n2s x = #e_1
+1 : ∀Xs2n. App Xs2n #e_1 = y
+2 : x ≠ #e_1
+2 : ∀Xs2n. App Xs2n #e_1 = x
+(* Proven Axioms *)
+
+[∀s2n n2s' n. (App s2n (App n2s' n) = n) ∨ ¬(0 ≤ n),
+ App n2s x ≠ App n2s y ∨ x ≠ y, (App n2s x = App n2s y) ∨ (x = y),
+ 0 ≤ x, 0 ≤ y] |- 0 ≤ x
+
+[∀s2n n2s' n. (App s2n (App n2s' n) = n) ∨ ¬(0 ≤ n),
+ App n2s x ≠ App n2s y ∨ x ≠ y, (App n2s x = App n2s y) ∨ (x = y),
+ 0 ≤ x, 0 ≤ y] |- 0 ≤ y
+
+[∀s2n n2s' n. (App s2n (App n2s' n) = n) ∨ ¬(0 ≤ n),
+ App n2s x ≠ App n2s y ∨ x ≠ y, (App n2s x = App n2s y) ∨ (x = y),
+ 0 ≤ x, 0 ≤ y] |- ∀Xs2n X Xn. (App Xs2n (App X Xn) = Xn) ∨ ¬(0 ≤ Xn)
+
+[∀s2n n2s' n. (App s2n (App n2s' n) = n) ∨ ¬(0 ≤ n),
+ App n2s x ≠ App n2s y ∨ x ≠ y, (App n2s x = App n2s y) ∨ (x = y),
+ 0 ≤ x, 0 ≤ y] |- (App n2s y = App n2s x) ∨ (y = x)
+
+[∀s2n n2s' n. (App s2n (App n2s' n) = n) ∨ ¬(0 ≤ n),
+ App n2s x ≠ App n2s y ∨ x ≠ y, (App n2s x = App n2s y) ∨ (x = y),
+ 0 ≤ x, 0 ≤ y] |- App n2s y ≠ App n2s x ∨ y ≠ x

@@ -3,7 +3,7 @@ struct
 
 open HolKernel Abbrev boolLib 
      blibBtools blibDatatype 
-     blibSyntax blibBrule blibBtactic
+     blibSyntax blibBrule blibBconv blibBtactic
      blibExtractvar blibExtracttype blibFreshvar
 
 
@@ -257,8 +257,17 @@ fun intfv_axiom def =
     th2
   end end end end
 
+fun ADD_CONDINT_TAC goal =
+  let val cl = get_cl_goal goal in
+  let val condint = Term.inst [``:'a`` |-> ``:int``] boolSyntax.conditional in
+  let val axiom = INST_TYPE [``:'a`` |-> ``:int``] COND_CLAUSES in
+    if is_member condint cl 
+    then ASSUME_TAC axiom goal
+    else ALL_TAC goal
+  end end end
+                          
 (* MAIN FUNCTION *)
-fun NUM_INT_TAC goal =
+fun NUM_INT_TAC_v goal =
   (
   used := all_var_goal goal;
   let val (goall0,val0) = (ORIENT_NUM_INEQ_TAC goal) in
@@ -272,7 +281,9 @@ fun NUM_INT_TAC goal =
   let val (goall5,val5) = list_ASSUME_TAC thml3 (hd goall4) in
   let val (goall6,val6) = REMOVE_HYPL_TAC vdefl (hd goall5) in
   let val (goall7,val7) = INTBV_TAC (hd goall6) in
-  let val (finalgoall,valid) = (goall7, 
+  let val (goall8,val8) = ADD_CONDINT_TAC (hd goall7) in
+  let val (finalgoall,validation) = 
+     (goall7, 
      val0 o (mk_list 1) o 
      val1 o (mk_list 1) o 
      val2 o (mk_list 1) o 
@@ -280,15 +291,16 @@ fun NUM_INT_TAC goal =
      val4 o (mk_list 1) o 
      val5 o (mk_list 1) o 
      val6 o (mk_list 1) o 
-     val7)
+     val7 o (mk_list 1) o 
+     val8)
   in
-    if is_correct_tac1 goal (finalgoall,valid)
-    then (finalgoall,valid)
-    else raise NUMCONV_ERR "NUM_INT_TAC" "not correct"
+    (finalgoall,validation)
   end end end end end
   end end end end end 
-  end end
+  end end end
   )
+  
+fun NUM_INT_TAC goal = VALID NUM_INT_TAC_v goal  
   
 (* test      
 show_assums := true;

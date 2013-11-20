@@ -4,7 +4,7 @@ sig
 (* FUNCTION *)
   val inv :('a -> 'b -> 'c) -> 'b -> 'a -> 'c
   val repeat_n_fun :  int -> ('a -> 'a) -> 'a -> 'a
-  (* error handling *)
+  (* error *)
   val success : ('a -> 'b) -> 'a -> bool
   val wrap : string -> string -> string -> ('a -> 'b) -> 'a -> 'b
 
@@ -60,8 +60,9 @@ sig
   val switchargerr : 'a -> (('a -> bool) * 'b) list -> exn -> 'b
 
 (* FILE MANAGEMENT *)
-  val readl : string -> string list 
-  
+  val readl : string -> string list
+  val appendl : string -> string list -> unit
+  val appendll : string -> string list -> string list -> unit
   
   
 end

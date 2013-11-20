@@ -1,0 +1,854 @@
+%----------------------------------------------------------------------------
+% Number   : 271
+%----------------------------------------------------------------------------
+tff(ty_a_P_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_P_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_P_a_F_bool: $tType )).
+
+tff(ty_a_F_a_P_a_type,type,(
+    ty_a_F_a_P_a: $tType )).
+
+tff(ty_a_P_a_type,type,(
+    ty_a_P_a: $tType )).
+
+tff(ty_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_P_a_F_bool_F_llistIaI_type,type,(
+    ty_a_P_a_F_bool_F_llistIaI: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_F_bool_F_a_F_a_F_num_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool_F_a_F_a_F_num: $tType )).
+
+tff(ty_a_F_bool_F_a_F_a_F_num_type,type,(
+    ty_a_F_bool_F_a_F_a_F_num: $tType )).
+
+tff(ty_a_F_a_F_num_type,type,(
+    ty_a_F_a_F_num: $tType )).
+
+tff(ty_llistIaI_type,type,(
+    ty_llistIaI: $tType )).
+
+tff(ty_llistIaI_F_optionIaI_type,type,(
+    ty_llistIaI_F_optionIaI: $tType )).
+
+tff(ty_optionIaI_type,type,(
+    ty_optionIaI: $tType )).
+
+tff(toolong5_type,type,(
+    toolong5: $tType )).
+
+tff(toolong4_type,type,(
+    toolong4: $tType )).
+
+tff(toolong3_type,type,(
+    toolong3: $tType )).
+
+tff(ty_a_F_bool_F_a_F_a_F_a_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_F_a_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_a_F_a_F_a_P_bool_type,type,(
+    ty_a_F_a_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_a_F_a_P_bool_type,type,(
+    ty_a_F_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_bool_F_a_P_bool_type,type,(
+    ty_bool_F_a_P_bool: $tType )).
+
+tff(ty_a_P_bool_type,type,(
+    ty_a_P_bool: $tType )).
+
+tff(bool_type,type,(
+    bool: $tType )).
+
+tff(ty_a_P_a_F_bool_type,type,(
+    ty_a_P_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_type,type,(
+    ty_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_F_bool_F_a_P_a_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool_F_a_P_a_F_bool: $tType )).
+
+tff(ty_a_type,type,(
+    ty_a: $tType )).
+
+tff(ty_a_F_a_F_a_P_a_type,type,(
+    ty_a_F_a_F_a_P_a: $tType )).
+
+tff(ty_a_P_a_F_a_P_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_a_P_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_a_P_bool_type,type,(
+    ty_a_F_a_P_bool: $tType )).
+
+tff(ty_a_F_a_P_bool_F_a_F_bool_type,type,(
+    ty_a_F_a_P_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_optionIaI_type,type,(
+    ty_a_F_optionIaI: $tType )).
+
+tff(ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI_type,type,(
+    ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI: $tType )).
+
+tff(toolong2_type,type,(
+    toolong2: $tType )).
+
+tff(toolong1_type,type,(
+    toolong1: $tType )).
+
+tff(ty_num_F_llistIaI_F_optionIaI_type,type,(
+    ty_num_F_llistIaI_F_optionIaI: $tType )).
+
+tff(toolong_type,type,(
+    toolong: $tType )).
+
+tff(ty_a_P_a_F_bool_F_a_F_bool_F_bool_type,type,(
+    ty_a_P_a_F_bool_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_bool_type,type,(
+    ty_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_a_F_bool_F_bool_type,type,(
+    ty_a_F_a_F_bool_F_bool: $tType )).
+
+tff(ty_a_F_a_F_bool_F_a_F_bool_type,type,(
+    ty_a_F_a_F_bool_F_a_F_bool: $tType )).
+
+tff(ty_a_F_bool_F_a_P_bool_type,type,(
+    ty_a_F_bool_F_a_P_bool: $tType )).
+
+tff(ty_a_F_num_type,type,(
+    ty_a_F_num: $tType )).
+
+tff(xApp_type,type,(
+    xApp: ( ty_a_F_a_P_bool * ty_a ) > ty_a_P_bool )).
+
+tff(xApp1_type,type,(
+    xApp1: ( ty_bool_F_a_P_bool * bool ) > ty_a_P_bool )).
+
+tff(xApp2_type,type,(
+    xApp2: ( ty_a_F_bool_F_a_P_bool * ty_a ) > ty_bool_F_a_P_bool )).
+
+tff(xf_type,type,(
+    xf: ty_a_F_a_P_bool )).
+
+tff(xApp3_type,type,(
+    xApp3: ( ty_a_F_a_F_bool_F_a_F_bool * ty_a ) > ty_a_F_bool_F_a_F_bool )).
+
+tff(x_type,type,(
+    x: ty_a )).
+
+tff(xApp4_type,type,(
+    xApp4: ( ty_a_F_a_F_bool_F_bool * ty_a ) > ty_a_F_bool_F_bool )).
+
+tff(xy_type,type,(
+    xy: ty_a )).
+
+tff(xi_type,type,(
+    xi: toolong1 )).
+
+tff(xApp5_type,type,(
+    xApp5: ( ty_a_P_a_F_bool_F_a_F_bool_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool_F_bool )).
+
+tff(xApp6_type,type,(
+    xApp6: ( ty_a_F_a_F_a_P_bool * ty_a ) > ty_a_F_a_P_bool )).
+
+tff(xApp7_type,type,(
+    xApp7: ( ty_a_F_a_F_a_F_a_P_bool * ty_a ) > ty_a_F_a_F_a_P_bool )).
+
+tff(xApp8_type,type,(
+    xApp8: ( ty_a_F_bool_F_a_F_a_F_a_F_a_P_bool * ty_a_F_bool ) > ty_a_F_a_F_a_F_a_P_bool )).
+
+tff(xApp9_type,type,(
+    xApp9: ( toolong3 * ty_a_P_a_F_bool ) > ty_a_F_bool_F_a_F_a_F_a_F_a_P_bool )).
+
+tff(xApp10_type,type,(
+    xApp10: ( toolong4 * ty_a_F_bool ) > toolong3 )).
+
+tff(xApp11_type,type,(
+    xApp11: ( toolong5 * $int ) > toolong4 )).
+
+tff(xApp12_type,type,(
+    xApp12: ( toolong * $int ) > toolong5 )).
+
+tff(xf2_type,type,(
+    xf2: toolong )).
+
+tff(xApp13_type,type,(
+    xApp13: ( ty_llistIaI_F_optionIaI * ty_llistIaI ) > ty_optionIaI )).
+
+tff(xApp14_type,type,(
+    xApp14: ( ty_num_F_llistIaI_F_optionIaI * $int ) > ty_llistIaI_F_optionIaI )).
+
+tff(xApp15_type,type,(
+    xApp15: ( ty_a_F_num * ty_a ) > $int )).
+
+tff(xApp16_type,type,(
+    xApp16: ( ty_a_F_a_F_num * ty_a ) > ty_a_F_num )).
+
+tff(xApp17_type,type,(
+    xApp17: ( ty_a_F_bool_F_a_F_a_F_num * ty_a_F_bool ) > ty_a_F_a_F_num )).
+
+tff(xApp18_type,type,(
+    xApp18: ( ty_a_P_a_F_bool_F_a_F_bool_F_a_F_a_F_num * ty_a_P_a_F_bool ) > ty_a_F_bool_F_a_F_a_F_num )).
+
+tff(xApp19_type,type,(
+    xApp19: ( toolong1 * ty_a_F_bool ) > ty_a_P_a_F_bool_F_a_F_bool_F_a_F_a_F_num )).
+
+tff(xj_type,type,(
+    xj: toolong1 )).
+
+tff(xApp20_type,type,(
+    xApp20: ( ty_a_P_a_F_bool_F_llistIaI * ty_a_P_a_F_bool ) > ty_llistIaI )).
+
+tff(xApp21_type,type,(
+    xApp21: ( toolong2 * ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI ) > ty_a_P_a_F_bool_F_llistIaI )).
+
+tff(xApp22_type,type,(
+    xApp22: ( ty_a_F_optionIaI * ty_a ) > ty_optionIaI )).
+
+tff(xApp23_type,type,(
+    xApp23: ( ty_a_F_bool_F_bool * ty_a_F_bool ) > $o )).
+
+tff(xApp24_type,type,(
+    xApp24: ( ty_a_F_bool_F_a_F_bool_F_bool * ty_a_F_bool ) > ty_a_F_bool_F_bool )).
+
+tff(xApp25_type,type,(
+    xApp25: ( ty_a_F_a_P_bool_F_a_F_bool * ty_a_F_a_P_bool ) > ty_a_F_bool )).
+
+tff(xf1_type,type,(
+    xf1: ty_a_F_a_P_bool )).
+
+tff(xApp26_type,type,(
+    xApp26: ( ty_a_P_a_F_bool_F_bool * ty_a_P_a_F_bool ) > $o )).
+
+tff(xApp27_type,type,(
+    xApp27: ( ty_a_P_a_F_a_P_a_F_bool_F_bool * ty_a_P_a ) > ty_a_P_a_F_bool_F_bool )).
+
+tff(xApp28_type,type,(
+    xApp28: ( ty_a_F_a_P_a * ty_a ) > ty_a_P_a )).
+
+tff(xApp29_type,type,(
+    xApp29: ( ty_a_F_a_F_a_P_a * ty_a ) > ty_a_F_a_P_a )).
+
+tff(xx_type,type,(
+    xx: ty_a )).
+
+tff(xApp30_type,type,(
+    xApp30: ( ty_a_F_bool_F_a_P_a_F_bool * ty_a_F_bool ) > ty_a_P_a_F_bool )).
+
+tff(xApp31_type,type,(
+    xApp31: ( ty_a_P_a_F_bool_F_a_F_bool_F_a_P_a_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool_F_a_P_a_F_bool )).
+
+tff(xApp32_type,type,(
+    xApp32: ( ty_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_F_bool )).
+
+tff(xApp33_type,type,(
+    xApp33: ( ty_a_F_bool_F_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_F_bool_F_a_F_bool )).
+
+tff(xApp34_type,type,(
+    xApp34: ( ty_a_P_a_F_bool_F_a_F_bool * ty_a_P_a_F_bool ) > ty_a_F_bool )).
+
+tff(xApp35_type,type,(
+    xApp35: ( ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool * ty_a_F_bool ) > ty_a_P_a_F_bool_F_a_F_bool )).
+
+tff(xX_type,type,(
+    xX: ty_a_F_bool )).
+
+tff(xlo_type,type,(
+    xlo: ty_a_P_a_F_bool )).
+
+tff(c2_type,type,(
+    c2: ty_a_F_bool_F_a_P_bool )).
+
+tff(cSUBSET_type,type,(
+    cSUBSET: ty_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cINSERT_type,type,(
+    cINSERT: ty_a_F_a_F_bool_F_a_F_bool )).
+
+tff(cEMPTY_type,type,(
+    cEMPTY: ty_a_F_bool )).
+
+tff(cIN_type,type,(
+    cIN: ty_a_F_a_F_bool_F_bool )).
+
+tff(cFINITE_type,type,(
+    cFINITE: ty_a_F_bool_F_bool )).
+
+tff(cfinite_prefixes_type,type,(
+    cfinite_prefixes: ty_a_P_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(clinear_order_type,type,(
+    clinear_order: ty_a_P_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cLNTH_type,type,(
+    cLNTH: ty_num_F_llistIaI_F_optionIaI )).
+
+tff(cLUNFOLD_type,type,(
+    cLUNFOLD: toolong2 )).
+
+tff(clinear_order_to_list_f_type,type,(
+    clinear_order_to_list_f: ty_a_P_a_F_bool_F_optionIa_P_a_F_bool_P_aI )).
+
+tff(cSOME_type,type,(
+    cSOME: ty_a_F_optionIaI )).
+
+tff(cPSUBSET_type,type,(
+    cPSUBSET: ty_a_F_bool_F_a_F_bool_F_bool )).
+
+tff(cGSPEC_type,type,(
+    cGSPEC: ty_a_F_a_P_bool_F_a_F_bool )).
+
+tff(cIN1_type,type,(
+    cIN1: ty_a_P_a_F_a_P_a_F_bool_F_bool )).
+
+tff(c5_type,type,(
+    c5: ty_a_F_a_F_a_P_a )).
+
+tff(crrestrict_type,type,(
+    crrestrict: ty_a_P_a_F_bool_F_a_F_bool_F_a_P_a_F_bool )).
+
+tff(cDIFF_type,type,(
+    cDIFF: ty_a_F_bool_F_a_F_bool_F_a_F_bool )).
+
+tff(cminimal_elements_type,type,(
+    cminimal_elements: ty_a_F_bool_F_a_P_a_F_bool_F_a_F_bool )).
+
+tff(c6_type,type,(
+    c6: ( $int * $int ) > $o )).
+
+tff(btrue_type,type,(
+    btrue: bool )).
+
+tff(bfalse_type,type,(
+    bfalse: bool )).
+
+tff(axiom1_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom2_axiom,axiom,(
+    ! [Xx: ty_a_F_num,Xx1: ty_a] : ($lesseq(0,xApp15(Xx,Xx1))) )).
+
+tff(axiom3_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom4_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom5_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom6_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom7_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom8_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom9_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom10_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom11_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom12_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom13_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom14_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom15_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom16_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom17_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom18_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom19_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom20_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom21_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),btrue)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom22_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom23_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom24_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),btrue)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom25_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom26_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),btrue)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom27_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom28_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom29_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom30_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom31_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom32_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom33_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom34_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom35_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom36_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom37_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom38_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom39_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom40_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom41_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom42_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom43_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom44_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom45_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom46_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom47_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom48_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom49_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom50_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom51_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom52_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom53_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom54_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom55_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom56_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom57_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom58_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom59_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom60_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom61_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom62_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom63_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom64_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom65_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom66_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),bfalse)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom67_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom68_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom69_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom70_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom71_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom72_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom73_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom74_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom75_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom76_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom77_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom78_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom79_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom80_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom81_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom82_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom83_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom84_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom85_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom86_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((~xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom87_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom88_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom89_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom90_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom91_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom92_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom93_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom94_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom95_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom96_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom97_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom98_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom99_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom100_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom101_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom102_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom103_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom104_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom105_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),bfalse)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom106_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom107_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),bfalse)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom108_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom109_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),btrue)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom110_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),bfalse)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom111_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom112_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom113_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom114_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom115_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom116_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom117_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom118_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom119_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom120_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom121_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom122_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom123_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom124_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom125_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom126_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom127_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom128_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom129_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom130_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom131_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom132_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom133_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom134_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom135_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom136_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom137_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom138_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom139_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom140_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom141_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom142_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom143_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom144_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom145_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom146_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom147_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom148_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom149_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),btrue)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom150_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf1,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom151_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xf,X5) = xApp1(xApp2(c2,X5),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom152_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp(xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3),Xz) = xApp1(xApp2(c2,Xz),bfalse)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom153_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~$lesseq(X6,X7) | (~(xApp13(xApp14(cLNTH,X6),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xx)) | (~(xApp13(xApp14(cLNTH,X7),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))))) = xApp22(cSOME,xy)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))))) )).
+
+tff(axiom154_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom155_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp4(cIN,xy),xApp34(xApp35(cminimal_elements,xX),xlo)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom156_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom157_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom158_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom159_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cSUBSET,xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo))),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom160_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp24(cPSUBSET,xApp25(cGSPEC,xf)),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom161_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | ((xApp34(xApp35(cminimal_elements,xX),xlo) = xApp32(xApp3(cINSERT,x),cEMPTY)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom162_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xy),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom163_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp4(cIN,xx),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom164_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(cfinite_prefixes,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom165_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(xApp5(clinear_order,xlo),xX) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom166_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,xx),xy)),xlo) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom167_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X2: ty_a_P_a_F_bool,X1: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (xApp23(cFINITE,xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7))))))) )).
+
+tff(axiom168_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ($lesseq(xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3),xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom169_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xi,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X1)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+tff(axiom170_axiom,axiom,(
+    ! [X5: ty_a,X6: $int,X7: $int,X4: ty_a_F_bool,X2: ty_a_P_a_F_bool,X: ty_a_F_bool,X1: ty_a,X3: ty_a,Xz: ty_a] : ((xApp26(xApp27(cIN1,xApp28(xApp29(c5,Xz),X1)),X2) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xlo) | (~xApp23(xApp5(cfinite_prefixes,X2),X) | (~xApp23(xApp5(clinear_order,X2),X) | (~(X4 = xApp25(cGSPEC,xApp6(xApp7(xApp8(xApp9(xApp10(xApp11(xApp12(xf2,X6),X7),X4),X2),X),X1),X3))) | (~xApp26(xApp27(cIN1,xApp28(xApp29(c5,X1),X3)),X2) | ((xApp13(xApp14(cLNTH,xApp15(xApp16(xApp17(xApp18(xApp19(xj,X4),X2),X),X1),X3)),xApp20(xApp21(cLUNFOLD,clinear_order_to_list_f),X2)) = xApp22(cSOME,X3)) | (~xApp23(xApp24(cPSUBSET,X4),xApp25(cGSPEC,xf1)) | (xApp26(xApp27(cIN1,xApp28(xApp29(c5,X5),xx)),xApp30(xApp31(crrestrict,xlo),xApp32(xApp33(cDIFF,xX),xApp34(xApp35(cminimal_elements,xX),xlo)))) | (~$lesseq(0,X6) | ~$lesseq(0,X7)))))))))))) )).
+
+%----------------------------------------------------------------------------
+

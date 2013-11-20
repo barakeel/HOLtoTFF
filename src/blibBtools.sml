@@ -315,18 +315,46 @@ fun switchargerr arg condresultl error =
     | (cond,result) :: m => if cond arg
                             then result
                             else switchargerr arg m error         
-(* FILE MANAGEMENT *)  
-fun readl filename = 
+ 
+(* FILE MANAGEMENT *)
+fun readl filepath = 
   let
-    val file = TextIO.openIn filename
+    val file = TextIO.openIn filepath
     fun loop file =
       case TextIO.inputLine file of
         SOME line => line :: loop file
       | NONE      => []
   in
     loop file before TextIO.closeIn file
+  end 
+  
+fun outputl file linel =
+  case linel of
+    [] => ()
+  | line :: m => (TextIO.output (file,line ^ "\n"); outputl file m) 
+  
+fun appendl filepath linel =
+  let val file = TextIO.openAppend filepath in 
+    (outputl file linel;
+     TextIO.closeOut file)  
   end  
+ 
+fun outputll file linel1 linel2 =
+  if not (length linel1 = length linel2)
+  then
+    raise BTOOLS_ERR "outputll" "lists of different length"
+  else 
+    case (linel1,linel2) of
+      ([],_) => ()
+    | (_,[]) => ()  
+    | (l1 :: m1,l2 :: m2) => (TextIO.output (file,l1 ^ " : " ^ l2 ^ "\n"); 
+                                    outputll file m1 m2)  
 
+fun appendll filepath linel1 linel2 =
+  let val file = TextIO.openAppend filepath in 
+    (outputll file linel1 linel2;
+     TextIO.closeOut file)  
+  end     
 
  
 end

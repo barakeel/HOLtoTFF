@@ -1,0 +1,430 @@
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+$int > $int : :int -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+xSUC : SUC
+(* Type dictionnary *)
+ty_a > bool : :α -> bool
+ty_listIdI > $int : :δ list -> int
+( ty_c * ty_listIdI ) > ty_b_P_listIaI : :γ -> δ list -> β # α list
+ty_b_P_listIaI > ty_listIaI : :β # α list -> α list
+ty_listIaI > $int : :α list -> int
+( ty_a_F_listIaI_F_d_P_listIdI * ty_a ) > ty_listIaI_F_d_P_listIdI : :(α -> α list -> δ # δ list) -> α -> α list -> δ # δ list
+( ty_listIaI_F_d_P_listIdI * ty_listIaI ) > ty_d_P_listIdI : :(α list -> δ # δ list) -> α list -> δ # δ list
+ty_d_P_listIdI > ty_listIdI : :δ # δ list -> δ list
+( ty_a_F_listIdI_F_d_P_listIdI * ty_a ) > ty_listIdI_F_d_P_listIdI : :(α -> δ list -> δ # δ list) -> α -> δ list -> δ # δ list
+( ty_listIdI_F_d_P_listIdI * ty_listIdI ) > ty_d_P_listIdI : :(δ list -> δ # δ list) -> δ list -> δ # δ list
+ty_listIcI > $int : :γ list -> int
+( ty_a_F_listIcI_F_d_P_listIdI * ty_a ) > ty_listIcI_F_d_P_listIdI : :(α -> γ list -> δ # δ list) -> α -> γ list -> δ # δ list
+( ty_listIcI_F_d_P_listIdI * ty_listIcI ) > ty_d_P_listIdI : :(γ list -> δ # δ list) -> γ list -> δ # δ list
+ty_listIbI > $int : :β list -> int
+( ty_a_F_listIbI_F_d_P_listIdI * ty_a ) > ty_listIbI_F_d_P_listIdI : :(α -> β list -> δ # δ list) -> α -> β list -> δ # δ list
+( ty_listIbI_F_d_P_listIdI * ty_listIbI ) > ty_d_P_listIdI : :(β list -> δ # δ list) -> β list -> δ # δ list
+( ty_a_F_listIaI_F_b_P_listIaI * ty_a ) > ty_listIaI_F_b_P_listIaI : :(α -> α list -> β # α list) -> α -> α list -> β # α list
+( ty_listIaI_F_b_P_listIaI * ty_listIaI ) > ty_b_P_listIaI : :(α list -> β # α list) -> α list -> β # α list
+( ty_a_F_listIdI_F_b_P_listIaI * ty_a ) > ty_listIdI_F_b_P_listIaI : :(α -> δ list -> β # α list) -> α -> δ list -> β # α list
+( ty_listIdI_F_b_P_listIaI * ty_listIdI ) > ty_b_P_listIaI : :(δ list -> β # α list) -> δ list -> β # α list
+( ty_a_F_listIcI_F_b_P_listIaI * ty_a ) > ty_listIcI_F_b_P_listIaI : :(α -> γ list -> β # α list) -> α -> γ list -> β # α list
+( ty_listIcI_F_b_P_listIaI * ty_listIcI ) > ty_b_P_listIaI : :(γ list -> β # α list) -> γ list -> β # α list
+( ty_a_F_listIbI_F_b_P_listIaI * ty_a ) > ty_listIbI_F_b_P_listIaI : :(α -> β list -> β # α list) -> α -> β list -> β # α list
+( ty_listIbI_F_b_P_listIaI * ty_listIbI ) > ty_b_P_listIaI : :(β list -> β # α list) -> β list -> β # α list
+( ty_a_F_listIaI_F_d_P_listIbI * ty_a ) > ty_listIaI_F_d_P_listIbI : :(α -> α list -> δ # β list) -> α -> α list -> δ # β list
+( ty_listIaI_F_d_P_listIbI * ty_listIaI ) > ty_d_P_listIbI : :(α list -> δ # β list) -> α list -> δ # β list
+ty_d_P_listIbI > ty_listIbI : :δ # β list -> β list
+( ty_a_F_listIdI_F_d_P_listIbI * ty_a ) > ty_listIdI_F_d_P_listIbI : :(α -> δ list -> δ # β list) -> α -> δ list -> δ # β list
+( ty_listIdI_F_d_P_listIbI * ty_listIdI ) > ty_d_P_listIbI : :(δ list -> δ # β list) -> δ list -> δ # β list
+( ty_a_F_listIcI_F_d_P_listIbI * ty_a ) > ty_listIcI_F_d_P_listIbI : :(α -> γ list -> δ # β list) -> α -> γ list -> δ # β list
+( ty_listIcI_F_d_P_listIbI * ty_listIcI ) > ty_d_P_listIbI : :(γ list -> δ # β list) -> γ list -> δ # β list
+( ty_a_F_listIbI_F_d_P_listIbI * ty_a ) > ty_listIbI_F_d_P_listIbI : :(α -> β list -> δ # β list) -> α -> β list -> δ # β list
+( ty_listIbI_F_d_P_listIbI * ty_listIbI ) > ty_d_P_listIbI : :(β list -> δ # β list) -> β list -> δ # β list
+( ty_a_F_listIaI_F_d_P_listIcI * ty_a ) > ty_listIaI_F_d_P_listIcI : :(α -> α list -> δ # γ list) -> α -> α list -> δ # γ list
+( ty_listIaI_F_d_P_listIcI * ty_listIaI ) > ty_d_P_listIcI : :(α list -> δ # γ list) -> α list -> δ # γ list
+ty_d_P_listIcI > ty_listIcI : :δ # γ list -> γ list
+( ty_a_F_listIdI_F_d_P_listIcI * ty_a ) > ty_listIdI_F_d_P_listIcI : :(α -> δ list -> δ # γ list) -> α -> δ list -> δ # γ list
+( ty_listIdI_F_d_P_listIcI * ty_listIdI ) > ty_d_P_listIcI : :(δ list -> δ # γ list) -> δ list -> δ # γ list
+( ty_a_F_listIcI_F_d_P_listIcI * ty_a ) > ty_listIcI_F_d_P_listIcI : :(α -> γ list -> δ # γ list) -> α -> γ list -> δ # γ list
+( ty_listIcI_F_d_P_listIcI * ty_listIcI ) > ty_d_P_listIcI : :(γ list -> δ # γ list) -> γ list -> δ # γ list
+( ty_a_F_listIbI_F_d_P_listIcI * ty_a ) > ty_listIbI_F_d_P_listIcI : :(α -> β list -> δ # γ list) -> α -> β list -> δ # γ list
+( ty_listIbI_F_d_P_listIcI * ty_listIbI ) > ty_d_P_listIcI : :(β list -> δ # γ list) -> β list -> δ # γ list
+bool : :bool
+ty_listIaI_F_d_P_listIdI : :α list -> δ # δ list
+ty_listIdI_F_d_P_listIdI : :δ list -> δ # δ list
+ty_listIcI_F_d_P_listIdI : :γ list -> δ # δ list
+ty_listIbI_F_d_P_listIdI : :β list -> δ # δ list
+ty_d_P_listIdI : :δ # δ list
+ty_listIaI_F_b_P_listIaI : :α list -> β # α list
+ty_listIdI_F_b_P_listIaI : :δ list -> β # α list
+ty_listIcI_F_b_P_listIaI : :γ list -> β # α list
+ty_listIbI_F_b_P_listIaI : :β list -> β # α list
+ty_b_P_listIaI : :β # α list
+ty_listIaI_F_d_P_listIbI : :α list -> δ # β list
+ty_listIdI_F_d_P_listIbI : :δ list -> δ # β list
+ty_listIcI_F_d_P_listIbI : :γ list -> δ # β list
+ty_listIbI_F_d_P_listIbI : :β list -> δ # β list
+ty_d_P_listIbI : :δ # β list
+ty_listIaI_F_d_P_listIcI : :α list -> δ # γ list
+ty_listIdI_F_d_P_listIcI : :δ list -> δ # γ list
+ty_listIcI_F_d_P_listIcI : :γ list -> δ # γ list
+ty_listIbI_F_d_P_listIcI : :β list -> δ # γ list
+ty_d_P_listIcI : :δ # γ list
+ty_a : :α
+ty_listIdI : :δ list
+ty_c : :γ
+$int : :int
+ty_listIaI : :α list
+ty_a_F_listIaI_F_d_P_listIdI : :α -> α list -> δ # δ list
+ty_a_F_listIdI_F_d_P_listIdI : :α -> δ list -> δ # δ list
+ty_listIcI : :γ list
+ty_a_F_listIcI_F_d_P_listIdI : :α -> γ list -> δ # δ list
+ty_listIbI : :β list
+ty_a_F_listIbI_F_d_P_listIdI : :α -> β list -> δ # δ list
+ty_a_F_listIaI_F_b_P_listIaI : :α -> α list -> β # α list
+ty_a_F_listIdI_F_b_P_listIaI : :α -> δ list -> β # α list
+ty_a_F_listIcI_F_b_P_listIaI : :α -> γ list -> β # α list
+ty_a_F_listIbI_F_b_P_listIaI : :α -> β list -> β # α list
+ty_a_F_listIaI_F_d_P_listIbI : :α -> α list -> δ # β list
+ty_a_F_listIdI_F_d_P_listIbI : :α -> δ list -> δ # β list
+ty_a_F_listIcI_F_d_P_listIbI : :α -> γ list -> δ # β list
+ty_a_F_listIbI_F_d_P_listIbI : :α -> β list -> δ # β list
+ty_a_F_listIaI_F_d_P_listIcI : :α -> α list -> δ # γ list
+ty_a_F_listIdI_F_d_P_listIcI : :α -> δ list -> δ # γ list
+ty_a_F_listIcI_F_d_P_listIcI : :α -> γ list -> δ # γ list
+ty_a_F_listIbI_F_d_P_listIcI : :α -> β list -> δ # γ list
+(* Variables dictionnary *)
+cSND3 : SND
+cSND2 : SND
+cSND1 : SND
+cSND : SND
+xh : h
+xP1 : P
+xt : t
+xLENGTH3 : LENGTH
+xP : P
+xSPLITP : SPLITP
+xLENGTH2 : LENGTH
+xApp31 : App
+xApp30 : App
+xApp29 : App
+xApp28 : App
+xLENGTH1 : LENGTH
+xApp27 : App
+xApp26 : App
+xLENGTH : LENGTH
+xApp25 : App
+xApp24 : App
+xApp23 : App
+xApp22 : App
+xApp21 : App
+xApp20 : App
+xApp19 : App
+xApp18 : App
+xApp17 : App
+xApp16 : App
+xApp15 : App
+xApp14 : App
+xApp13 : App
+xApp12 : App
+xApp11 : App
+xApp10 : App
+xApp9 : App
+xApp8 : App
+xApp7 : App
+xApp6 : App
+xApp5 : App
+xApp4 : App
+xApp3 : App
+xApp2 : App
+xApp1 : App
+xApp : App
+(* Type dictionnary *)
+ty_a > bool : :α -> bool
+ty_listIdI > $int : :δ list -> int
+( ty_c * ty_listIdI ) > ty_b_P_listIaI : :γ -> δ list -> β # α list
+ty_b_P_listIaI > ty_listIaI : :β # α list -> α list
+ty_listIaI > $int : :α list -> int
+( ty_a_F_listIaI_F_d_P_listIdI * ty_a ) > ty_listIaI_F_d_P_listIdI : :(α -> α list -> δ # δ list) -> α -> α list -> δ # δ list
+( ty_listIaI_F_d_P_listIdI * ty_listIaI ) > ty_d_P_listIdI : :(α list -> δ # δ list) -> α list -> δ # δ list
+ty_d_P_listIdI > ty_listIdI : :δ # δ list -> δ list
+( ty_a_F_listIdI_F_d_P_listIdI * ty_a ) > ty_listIdI_F_d_P_listIdI : :(α -> δ list -> δ # δ list) -> α -> δ list -> δ # δ list
+( ty_listIdI_F_d_P_listIdI * ty_listIdI ) > ty_d_P_listIdI : :(δ list -> δ # δ list) -> δ list -> δ # δ list
+ty_listIcI > $int : :γ list -> int
+( ty_a_F_listIcI_F_d_P_listIdI * ty_a ) > ty_listIcI_F_d_P_listIdI : :(α -> γ list -> δ # δ list) -> α -> γ list -> δ # δ list
+( ty_listIcI_F_d_P_listIdI * ty_listIcI ) > ty_d_P_listIdI : :(γ list -> δ # δ list) -> γ list -> δ # δ list
+ty_listIbI > $int : :β list -> int
+( ty_a_F_listIbI_F_d_P_listIdI * ty_a ) > ty_listIbI_F_d_P_listIdI : :(α -> β list -> δ # δ list) -> α -> β list -> δ # δ list
+( ty_listIbI_F_d_P_listIdI * ty_listIbI ) > ty_d_P_listIdI : :(β list -> δ # δ list) -> β list -> δ # δ list
+( ty_a_F_listIaI_F_b_P_listIaI * ty_a ) > ty_listIaI_F_b_P_listIaI : :(α -> α list -> β # α list) -> α -> α list -> β # α list
+( ty_listIaI_F_b_P_listIaI * ty_listIaI ) > ty_b_P_listIaI : :(α list -> β # α list) -> α list -> β # α list
+( ty_a_F_listIdI_F_b_P_listIaI * ty_a ) > ty_listIdI_F_b_P_listIaI : :(α -> δ list -> β # α list) -> α -> δ list -> β # α list
+( ty_listIdI_F_b_P_listIaI * ty_listIdI ) > ty_b_P_listIaI : :(δ list -> β # α list) -> δ list -> β # α list
+( ty_a_F_listIcI_F_b_P_listIaI * ty_a ) > ty_listIcI_F_b_P_listIaI : :(α -> γ list -> β # α list) -> α -> γ list -> β # α list
+( ty_listIcI_F_b_P_listIaI * ty_listIcI ) > ty_b_P_listIaI : :(γ list -> β # α list) -> γ list -> β # α list
+( ty_a_F_listIbI_F_b_P_listIaI * ty_a ) > ty_listIbI_F_b_P_listIaI : :(α -> β list -> β # α list) -> α -> β list -> β # α list
+( ty_listIbI_F_b_P_listIaI * ty_listIbI ) > ty_b_P_listIaI : :(β list -> β # α list) -> β list -> β # α list
+( ty_a_F_listIaI_F_d_P_listIbI * ty_a ) > ty_listIaI_F_d_P_listIbI : :(α -> α list -> δ # β list) -> α -> α list -> δ # β list
+( ty_listIaI_F_d_P_listIbI * ty_listIaI ) > ty_d_P_listIbI : :(α list -> δ # β list) -> α list -> δ # β list
+ty_d_P_listIbI > ty_listIbI : :δ # β list -> β list
+( ty_a_F_listIdI_F_d_P_listIbI * ty_a ) > ty_listIdI_F_d_P_listIbI : :(α -> δ list -> δ # β list) -> α -> δ list -> δ # β list
+( ty_listIdI_F_d_P_listIbI * ty_listIdI ) > ty_d_P_listIbI : :(δ list -> δ # β list) -> δ list -> δ # β list
+( ty_a_F_listIcI_F_d_P_listIbI * ty_a ) > ty_listIcI_F_d_P_listIbI : :(α -> γ list -> δ # β list) -> α -> γ list -> δ # β list
+( ty_listIcI_F_d_P_listIbI * ty_listIcI ) > ty_d_P_listIbI : :(γ list -> δ # β list) -> γ list -> δ # β list
+( ty_a_F_listIbI_F_d_P_listIbI * ty_a ) > ty_listIbI_F_d_P_listIbI : :(α -> β list -> δ # β list) -> α -> β list -> δ # β list
+( ty_listIbI_F_d_P_listIbI * ty_listIbI ) > ty_d_P_listIbI : :(β list -> δ # β list) -> β list -> δ # β list
+( ty_a_F_listIaI_F_d_P_listIcI * ty_a ) > ty_listIaI_F_d_P_listIcI : :(α -> α list -> δ # γ list) -> α -> α list -> δ # γ list
+( ty_listIaI_F_d_P_listIcI * ty_listIaI ) > ty_d_P_listIcI : :(α list -> δ # γ list) -> α list -> δ # γ list
+ty_d_P_listIcI > ty_listIcI : :δ # γ list -> γ list
+( ty_a_F_listIdI_F_d_P_listIcI * ty_a ) > ty_listIdI_F_d_P_listIcI : :(α -> δ list -> δ # γ list) -> α -> δ list -> δ # γ list
+( ty_listIdI_F_d_P_listIcI * ty_listIdI ) > ty_d_P_listIcI : :(δ list -> δ # γ list) -> δ list -> δ # γ list
+( ty_a_F_listIcI_F_d_P_listIcI * ty_a ) > ty_listIcI_F_d_P_listIcI : :(α -> γ list -> δ # γ list) -> α -> γ list -> δ # γ list
+( ty_listIcI_F_d_P_listIcI * ty_listIcI ) > ty_d_P_listIcI : :(γ list -> δ # γ list) -> γ list -> δ # γ list
+( ty_a_F_listIbI_F_d_P_listIcI * ty_a ) > ty_listIbI_F_d_P_listIcI : :(α -> β list -> δ # γ list) -> α -> β list -> δ # γ list
+( ty_listIbI_F_d_P_listIcI * ty_listIbI ) > ty_d_P_listIcI : :(β list -> δ # γ list) -> β list -> δ # γ list
+bool : :bool
+ty_listIaI_F_d_P_listIdI : :α list -> δ # δ list
+ty_listIdI_F_d_P_listIdI : :δ list -> δ # δ list
+ty_listIcI_F_d_P_listIdI : :γ list -> δ # δ list
+ty_listIbI_F_d_P_listIdI : :β list -> δ # δ list
+ty_d_P_listIdI : :δ # δ list
+ty_listIaI_F_b_P_listIaI : :α list -> β # α list
+ty_listIdI_F_b_P_listIaI : :δ list -> β # α list
+ty_listIcI_F_b_P_listIaI : :γ list -> β # α list
+ty_listIbI_F_b_P_listIaI : :β list -> β # α list
+ty_b_P_listIaI : :β # α list
+ty_listIaI_F_d_P_listIbI : :α list -> δ # β list
+ty_listIdI_F_d_P_listIbI : :δ list -> δ # β list
+ty_listIcI_F_d_P_listIbI : :γ list -> δ # β list
+ty_listIbI_F_d_P_listIbI : :β list -> δ # β list
+ty_d_P_listIbI : :δ # β list
+ty_listIaI_F_d_P_listIcI : :α list -> δ # γ list
+ty_listIdI_F_d_P_listIcI : :δ list -> δ # γ list
+ty_listIcI_F_d_P_listIcI : :γ list -> δ # γ list
+ty_listIbI_F_d_P_listIcI : :β list -> δ # γ list
+ty_d_P_listIcI : :δ # γ list
+ty_a : :α
+ty_listIdI : :δ list
+ty_c : :γ
+$int : :int
+ty_listIaI : :α list
+ty_a_F_listIaI_F_d_P_listIdI : :α -> α list -> δ # δ list
+ty_a_F_listIdI_F_d_P_listIdI : :α -> δ list -> δ # δ list
+ty_listIcI : :γ list
+ty_a_F_listIcI_F_d_P_listIdI : :α -> γ list -> δ # δ list
+ty_listIbI : :β list
+ty_a_F_listIbI_F_d_P_listIdI : :α -> β list -> δ # δ list
+ty_a_F_listIaI_F_b_P_listIaI : :α -> α list -> β # α list
+ty_a_F_listIdI_F_b_P_listIaI : :α -> δ list -> β # α list
+ty_a_F_listIcI_F_b_P_listIaI : :α -> γ list -> β # α list
+ty_a_F_listIbI_F_b_P_listIaI : :α -> β list -> β # α list
+ty_a_F_listIaI_F_d_P_listIbI : :α -> α list -> δ # β list
+ty_a_F_listIdI_F_d_P_listIbI : :α -> δ list -> δ # β list
+ty_a_F_listIcI_F_d_P_listIbI : :α -> γ list -> δ # β list
+ty_a_F_listIbI_F_d_P_listIbI : :α -> β list -> δ # β list
+ty_a_F_listIaI_F_d_P_listIcI : :α -> α list -> δ # γ list
+ty_a_F_listIdI_F_d_P_listIcI : :α -> δ list -> δ # γ list
+ty_a_F_listIcI_F_d_P_listIcI : :α -> γ list -> δ # γ list
+ty_a_F_listIbI_F_d_P_listIcI : :α -> β list -> δ # γ list
+(* Variables dictionnary *)
+cSND3 : SND
+cSND2 : SND
+cSND1 : SND
+cSND : SND
+xh : h
+xP1 : P
+xt : t
+xLENGTH3 : LENGTH
+xP : P
+xSPLITP : SPLITP
+xLENGTH2 : LENGTH
+xApp31 : App
+xApp30 : App
+xApp29 : App
+xApp28 : App
+xLENGTH1 : LENGTH
+xApp27 : App
+xApp26 : App
+xLENGTH : LENGTH
+xApp25 : App
+xApp24 : App
+xApp23 : App
+xApp22 : App
+xApp21 : App
+xApp20 : App
+xApp19 : App
+xApp18 : App
+xApp17 : App
+xApp16 : App
+xApp15 : App
+xApp14 : App
+xApp13 : App
+xApp12 : App
+xApp11 : App
+xApp10 : App
+xApp9 : App
+xApp8 : App
+xApp7 : App
+xApp6 : App
+xApp5 : App
+xApp4 : App
+xApp3 : App
+xApp2 : App
+xApp1 : App
+xApp : App
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+$int > $int : :int -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+xSUC : SUC
+(* Type dictionnary *)
+( ty_b_F_a * ty_b ) > ty_a : :(β -> α) -> β -> α
+( ty_a_F_b * ty_a ) > ty_b : :(α -> β) -> α -> β
+ty_a : :α
+ty_b : :β
+ty_b_F_a : :β -> α
+ty_a_F_b : :α -> β
+(* Variables dictionnary *)
+xy : y
+xx : x
+xn2s : n2s
+xApp1 : App
+xApp : App
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+$int > $int : :int -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+xSUC : SUC
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+$int > $int : :int -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+xSUC : SUC
+(* Type dictionnary *)
+( ty_a_F_bool * ty_a ) > bool : :(α -> bool) -> α -> bool
+ty_listIaI > $int : :α list -> int
+$int > $int : :int -> int
+( ty_a_F_bool * ty_listIaI ) > ty_listIaI_P_listIaI : :(α -> bool) -> α list -> α list # α list
+ty_listIaI_P_listIaI > ty_listIaI : :α list # α list -> α list
+bool : :bool
+ty_listIaI_P_listIaI : :α list # α list
+ty_a : :α
+ty_a_F_bool : :α -> bool
+ty_listIaI : :α list
+$int : :int
+(* Variables dictionnary *)
+cSPLITP : SPLITP
+cSND : SND
+xh : h
+xP : P
+xApp : App
+xt : t
+xLENGTH : LENGTH
+xSUC : SUC
+(* Type dictionnary *)
+( ty_int_F_int * $int ) > $int : :(int -> int) -> int -> int
+$int : :int
+ty_int_F_int : :int -> int
+(* Variables dictionnary *)
+xy : y
+xx : x
+xn2s : n2s
+xApp : App
+(* Type dictionnary *)
+( ty_a_F_a * ty_a ) > ty_a : :(α -> α) -> α -> α
+ty_a : :α
+ty_a_F_a : :α -> α
+(* Variables dictionnary *)
+xy : y
+xx : x
+xn2s : n2s
+xApp : App
+(* Type dictionnary *)
+( ty_num_F_num * $int ) > $int : :(num -> num) -> int -> int
+$int : :int
+ty_num_F_num : :num -> num
+(* Variables dictionnary *)
+xy : y
+xx : x
+xn2s : n2s
+xApp : App

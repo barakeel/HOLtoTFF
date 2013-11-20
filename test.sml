@@ -4,7 +4,6 @@ load "blibBtools"; open blibBtools;
 load "blibTffsyntax"; open blibTffsyntax ;
 load "blibFreshvar"; open blibFreshvar;
 load "blibSyntax"; open blibSyntax;
-load "beaglePrintresult"; open beaglePrintresult;
 load "blibReader"; open blibReader; 
 load "numSyntax"; open numSyntax;
 
@@ -19,15 +18,74 @@ load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
 *)
 
-
-
 val thml = [];
-val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
-BEAGLE_TAC thml goal;
+val goal : goal = ([``(f x:num) + 2 = 5``],``f x:num = 3``);
+BEAGLE_PROVE thml goal;
 
+
+metisTools.METIS_TAC thml goal;
 val thml = [];
 val goal : goal = ([],``((f a b = 2:int) /\ (f a = g)) ==> (g b = 2:int)``);
 BEAGLE_TAC thml goal;
+
+val thml = [];
+val goal : goal = ([``!f. f (0:int) (x:num) = 2:int``],F);
+BEAGLE_NF_TAC thml goal;
+
+val thml = [];
+val goal : goal = ([``!f. f (0:int) = 2:int``],F);
+BEAGLE_NF_TAC thml goal;
+
+
+val th1 = mk_thm ([], ``∀n. (s2n :int -> int) (n2s n) = n``);
+val thml = [th1];
+val goal:goal = ([], ``((n2s :int -> int) x = n2s y) ⇔ (x = y)``);
+
+val th1 = mk_thm ([], ``∀n. (s2n :'a -> 'a) (n2s n) = n``);
+val thml = [th1];
+val goal:goal = ([], ``((n2s :'a -> 'a) x = n2s y) ⇔ (x = y)``);
+
+val th1 = mk_thm ([], ``∀n. (s2n :num -> num) (n2s n) = n``);
+val thml = [th1];
+val goal:goal = ([], ``((n2s :num -> num) x = n2s y) ⇔ (x = y)``);
+
+BEAGLE_PROVE thml goal;
+
+(* problem 1 *)
+
+
+
+val th1 = mk_thm ([],``∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l``);
+val th2 = mk_thm ([],``a ≤ b ⇒ (a:num) < (SUC:num->num) b``);
+val thml = [th1,th2];
+val goal = ([``¬P h``],``LENGTH (SND (SPLITP P t)) < (SUC:num->num) (LENGTH t)``);
+
+val th1 = mk_thm ([],``∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l``);
+val th2 = mk_thm ([],``a ≤ b ⇒ (a:num) < SUC b``);
+val thml = [th1,th2];
+val goal = 
+([``¬(P:'a -> bool) (h:'a)``],
+``(LENGTH:'a list-> num) 
+  ((SND: 'a list # 'a list -> 'a list) 
+  (SPLITP (P:'a -> bool) (t:'a list))) < 
+  (SUC:num->num) ((LENGTH :'a list-> num) t)``);
+
+val th1 = mk_thm ([], ``∀m:num n. m * n = n * m ``);
+val th2 = mk_thm ([], ``∀n:num q. 0 < n ⇒ (q * n DIV n = q) ``);
+val th3 = mk_thm ([], ``0:num < 256``);
+
+val thml = [th1,th2,th3];
+val goal =
+([``Abbrev (s0 = n2s (256:num * s2n s DIV 256)) :bool``, ``r0 ≠ 0:num``, 
+  ``ORD c + 1 < (256:num) ``,
+ ``n2s (s2n s) = s``, ``r0 = ORD c + 1:num``] , ``s0 = s``);
+ 
+
+
+BEAGLE_TAC thml goal;
+BEAGLE_NF_TAC thml goal;
+
+
 
 
 val (mthml,_) = monomorph_pb (thml,goal);

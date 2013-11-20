@@ -1,11 +1,11 @@
-structure blibConv :> blibConv =
+structure blibConv (* :> blibConv *) =
 struct
 
 open HolKernel Abbrev boolLib
      blibBtools blibDatatype 
      blibSyntax blibBconv blibBrule blibBtactic
      blibExtractvar blibFreshvar blibExtracttype 
-     blibNamevar blibHO beagleStats
+     blibNamevar blibHO 
 
 fun CONV_ERR function message =
   HOL_ERR{origin_structure = "blibConv",
@@ -416,20 +416,16 @@ fun app_conv_basic appname term =
   end end end
 
 fun app_conv_sub appname lowarity arity term =
-   if lowarity = arity
-      then raise UNCHANGED
+   if lowarity = arity then raise UNCHANGED
    else if lowarity < arity
-      then ((app_conv_basic appname) THENC 
-           (app_conv_sub appname lowarity (arity -1)))
+      then (
+           RATOR_CONV (app_conv_sub appname lowarity (arity -1))
+           THENC app_conv_basic appname 
+           )
            term
    else raise CONV_ERR "app_conv_sub" "lowarity > arity"
    
-(* test
-show_assums :=  true;
-val subterm = ``f a b c``;
-val term = ``(f a b = 2) /\ (f a = g)``;
-val goal = ([term],F);
-*)
+
 
 fun app_conv appname fvclal bvl term = 
   case structterm term of
@@ -467,10 +463,12 @@ end
 
       
 (* test
-val term = ``(f a b = 2:num) /\ (f a = g)``;
-val goal = ([term],F);
+show_assums :=  true;
+val subterm = ``f a b ``;
 val appname = "App";
- *)  
+val term = ``(f a b = 2) /\ (f = g)``;
+val goal = ([term],F);
+*)
  
 fun ADD_HIGHER_ORDER_TAC_w goal =
   let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
@@ -488,7 +486,7 @@ fun ADD_HIGHER_ORDER_TAC_w goal =
   in
     if firstorder_goal goal 
     then ALL_TAC goal
-    else (flag_on hoflag; mk_tac1 add_higher_order add_higher_order_val goal)
+    else mk_tac1 add_higher_order add_higher_order_val goal
   end end end
 
 fun ADD_HIGHER_ORDER_TAC goal = 

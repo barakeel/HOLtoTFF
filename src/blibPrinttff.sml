@@ -5,7 +5,6 @@ open HolKernel Abbrev boolLib HOLPP
      blibBtools blibDatatype 
      blibSyntax blibTffsyntax blibPredicate
      blibExtractvar blibExtracttype blibNamevar blibNametype blibHO
-     beagleStats
 
 fun PRINTTFF_ERR function message =
   HOL_ERR{origin_structure = "blibPrinttff",
@@ -165,10 +164,6 @@ fun pptff_commentline pps =
   add_newline pps
   )
 
-fun pptff_number pps nb =
- (add_string pps ( "% Number   : " ^ (Int.toString (fst nb)) );  
-  add_newline pps)
-
 
 fun has_simplety ((ty,arity),name) = (arity = 0)
 fun get_simpletyadict tyadict = filter has_simplety tyadict
@@ -262,23 +257,22 @@ fun pptff_conjecture pps name term dict =
 fun is_tffdty str = first_n_char 1 str = "$" 
 fun test_tffdty ((ty,a),str) = is_tffdty str
 
-fun pptff_tff_w pps nb goal =
+fun pptff_tff_w pps goal =
   let val terml = (fst goal) @ [snd goal] in
-  let val term = list_mk_conj (terml) in 
-  (* this term is only there to extract variables from *)
+  let val term = list_mk_conj (terml) in  (* trick to extract variables *)
   let 
-    (* free variables or constant *)
+    (* free variables or constants *)
     val bval = get_bval term
     val fval = get_fval term
     val cal = get_cal term
     val fvcal = get_fvcal term
   in  
-    if firstorder_err term (* raise an exception *)
+    if firstorder_err term (* raise an exception if the term is not first order *)
     then 
       let 
-      (* dict *)
+        (* dictionnaries *)
         val tyadict = create_tyadict term
-        val simpletyadict = get_simpletyadict tyadict (* wip erase_dtyname *) 
+        val simpletyadict = get_simpletyadict tyadict
         val bvdict = create_bvdict term  
         val bvatydict = create_bvatydict term tyadict
         val fvdict = create_fvdict term 
@@ -289,8 +283,6 @@ fun pptff_tff_w pps nb goal =
       let val dict = (tyadict,bvdict,fvdict,cdict) in
       (
       begin_block pps CONSISTENT 0;
-        pptff_commentline pps;
-        pptff_number pps nb;
         pptff_commentline pps;
         pptff_tyadict pps (filter (not o test_tffdty) simpletyadict);
         pptff_fvatydict pps fvdict fvatydict;
@@ -306,14 +298,12 @@ fun pptff_tff_w pps nb goal =
       end end
     else raise PRINTTFF_ERR "higher_order" ""
   end end end 
-fun pptff_tff pps nb goal = 
-  wrap "blibPrinttff" "pptff_tff" "" (pptff_tff_w pps nb) goal
+fun pptff_tff pps goal = 
+  wrap "blibPrinttff" "pptff_tff" "" (pptff_tff_w pps) goal
 
-
-(* OUTPUT TFF *)
-fun write_tff_w path nb goal appendflag =
-  let val file = 
-    if appendflag then TextIO.openAppend path else TextIO.openOut path in 
+(* WRITE A TFF FILE *)
+fun write_tff_w path goal =
+  let val file = TextIO.openOut path in 
   let val pps = mk_ppstream 
                   {
                   consumer  = fn s => TextIO.output (file,s),
@@ -322,19 +312,15 @@ fun write_tff_w path nb goal appendflag =
                   } 
   in 
     (
-    let val dict = pptff_tff pps nb goal in
+    let val dict = pptff_tff pps goal in
       (TextIO.closeOut file; dict)
     end
     )  
   end end
-fun write_tff path nb goal appendflag = 
-  wrap "blibPrinttff" "write_tff" "" (write_tff_w path nb goal) appendflag
+
+fun write_tff path goal = 
+  wrap "blibPrinttff" "write_tff" "" (write_tff_w path) goal
  
-  
-(* test
-val thm = ;
-val path = ;
-*)
 
 
 end
