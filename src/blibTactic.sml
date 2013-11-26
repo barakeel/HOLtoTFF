@@ -104,7 +104,7 @@ fun strip_conj_only_hyp goal =
 fun strip_conj_only_hyp_val goal thm =
   let val terml = erase_double_aconv (strip_conj (only_hypg goal)) in
   let val thml = CONJUNCTS (ASSUME (only_hypg goal)) in
-    list_PROVE_HYP thml thm
+    LIST_PROVE_HYP thml thm
   end end
       
 fun STRIP_CONJ_ONLY_HYP_TAC goal =

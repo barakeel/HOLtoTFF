@@ -48,7 +48,7 @@ fun is_upperword str =
 
 (* name for variables *)
 fun name_tff str var =
-  let val name = name_of var in 
+  let val name = namev_of var in 
     if is_alphanumor_ name then str ^ name else str
   end
   

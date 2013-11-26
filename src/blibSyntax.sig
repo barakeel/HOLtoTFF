@@ -16,7 +16,7 @@ sig
   val strip_quant : term -> (term list * term)
   val bound_by_quant : term -> term -> bool 
   (* var *)
-  val name_of : term -> string
+  val namev_of : term -> string
   (* term *)
   val strip_comb_n : int -> term -> (term * term list)
   val get_arity : term -> int

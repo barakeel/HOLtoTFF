@@ -41,17 +41,22 @@ fun create_cdict term =
     add_newnamel cnamel []
   end end
 
-(* All functions that returns "bool" are actually predicates returing "$o" *)
 fun give_pred_type tyadict term (v,a) = 
-  let val tyname = lookup (type_of v,a) tyadict in
-    if success (last_n_char 6) tyname
-    then
-      if last_n_char 6 tyname = "> bool"
-      then ((v,a), (rm_last_n_char 6 tyname) ^ ">$o")
+  (* variables *)
+  let val atoml = find_atoml term in
+    if is_member v atoml then ((v,a),"$o")
+    else
+  (* functions that returns "bool" are actually predicates returing "$o" *)  
+    let val tyname = lookup (type_of v,a) tyadict in
+      if success (last_n_char 6) tyname
+        then
+        if last_n_char 6 tyname = "> bool"
+        then ((v,a), (rm_last_n_char 6 tyname) ^ "> $o")
+        else ((v,a),tyname)
       else ((v,a),tyname)
-    else ((v,a),tyname)
+    end
   end
-
+  
 fun create_bvatydict term tyadict =
   let val bval = get_bval term in
     map (give_pred_type tyadict term) bval

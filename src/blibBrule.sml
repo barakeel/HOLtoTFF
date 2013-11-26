@@ -18,18 +18,31 @@ fun CONV_HYPO_RULE conv term thm =
  
 fun CONV_HYPL_RULE conv terml thm = repeat_change (CONV_HYPO_RULE conv) terml thm 
  
-fun list_PROVE_HYP thml thm =
+fun LIST_PROVE_HYP thml thm =
   case thml of
     [] => thm
-  | th :: m => list_PROVE_HYP m (PROVE_HYP th thm)  
+  | th :: m => LIST_PROVE_HYP m (PROVE_HYP th thm)  
 
 fun list_conj_hyp_rule thm =
   let val hyptl = hyp thm in
   let val t1 = list_mk_conj hyptl in
   let val thl = CONJ_LIST (length hyptl) (ASSUME t1) in
-  let val th2 = list_PROVE_HYP thl thm in
+  let val th2 = LIST_PROVE_HYP thl thm in
     th2
   end end end end   
+
+(* disjunction *)
+fun LIST_DISJ_CASES_UNION term thml =
+  if not (length (strip_disj term) = length thml) 
+  then raise BRULE_ERR "LIST_DISJ_CASES" "wrong number of theorems"
+  else
+    if length (strip_disj term) = 1 
+    then hd thml
+    else
+      let val (term1,term2) = dest_disj term in
+        DISJ_CASES_UNION (ASSUME term) 
+        (hd thml) (LIST_DISJ_CASES_UNION term2 (tl thml)) 
+      end
 
 (* assume there is only one hypothesis *)
 fun unconj_hyp_rule term thm =

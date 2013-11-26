@@ -1,67 +1,75 @@
-Undefined%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SZSstatus: Unsatisfiable
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tff(1,axiom,(
-    ($lesseq(0, xx)),
-    file('problem.p',axiom))).
+    (![Xs2n: ty_int_F_int, X: ty_int_F_int, Xn: $int]: (xApp(Xs2n, xApp(X, Xn))=Xn)),
+    file('',axiom))).
 
 tff(2,axiom,(
-    ($lesseq(0, xy)),
-    file('problem.p',axiom))).
+    (xApp(xn2s, xy)=xApp(xn2s, xx) | $sum(xx, $uminus(xy))=0),
+    file('',axiom))).
 
 tff(3,axiom,(
-    (![Xs2n: ty_num_F_num, X: ty_num_F_num, Xn: $int]: (xApp(Xs2n, xApp(X, Xn))=Xn | ~$lesseq(0, Xn))),
-    file('problem.p',axiom))).
+    (xApp(xn2s, xy)!=xApp(xn2s, xx) | $sum(xx, $uminus(xy))!=0),
+    file('',axiom))).
 
-tff(4,axiom,(
-    (xApp(xn2s, xy)=xApp(xn2s, xx) | xy=xx),
-    file('problem.p',axiom))).
-
-tff(5,axiom,(
-    (xApp(xn2s, xy)!=xApp(xn2s, xx) | xy!=xx),
-    file('problem.p',axiom))).
-
-tff(6,plain,(
+tff(4s0,plain,(
     (xApp(xn2s, xy)=#e_1),
     inference(Unknown,[status(thm)],[])).
 
-tff(7s0,plain,(
-    (#e_2=#e_1 | xy=xx),
-    inference(Split,[status(thm)],[])).
-
-tff(7s1,plain,(
-    (xy=xx),
+tff(4s1,plain,(
+    ($sum(xx, $uminus(xy))!=0),
     inference(Leftsplit,[status(thm)],[])).
 
-tff(7s2,plain,(
+tff(4s2s0,plain,(
+    (xApp(xn2s, xx)=#e_2),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s2s1,plain,(
+    (xy!=xx),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(4s2s2,plain,(
+    (xApp(xn2s, xx)=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s2s3,plain,(
+    (#e_2=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s2s4s0,plain,(
+    (![Xs2n: ty_int_F_int]: (xApp(Xs2n, #e_1)=xy)),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s2s4s1,plain,(
+    (xx!=#e_1),
+    inference(Leftsplit,[status(thm)],[])).
+
+tff(4s2s4s2,plain,(
+    (![Xs2n: ty_int_F_int]: (xApp(Xs2n, #e_1)=xx)),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s3,plain,(
+    (#e_2=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(4s4,plain,(
+    (xy=xx),
+    inference(Unknown,[status(thm)],[])).
+
+tff(5,plain,(
+    (#e_2!=#e_1),
+    inference(Unknown,[status(thm)],[])).
+
+tff(6,plain,(
+    ($sum(xx, $uminus(xy))=0),
+    inference(Unknown,[status(thm)],[])).
+
+tff(7,plain,(
     (xApp(xn2s, xx)=#e_2),
     inference(Unknown,[status(thm)],[])).
 
 tff(8,plain,(
-    (#e_2=#e_1),
-    inference(Rightsplit,[status(thm)],[])).
-
-tff(9,plain,(
     (xy!=xx),
-    inference(Rightsplit,[status(thm)],[])).
-
-tff(10,plain,(
-    (xApp(xn2s, xx)=#e_1),
-    inference(Unknown,[status(thm)],[])).
-
-tff(11,plain,(
-    (![Xs2n: ty_num_F_num]: (xApp(Xs2n, #e_1)=xy)),
-    inference(Unknown,[status(thm)],[])).
-
-tff(12s0,plain,(
-    (xy=#e_1 | xx!=#e_1),
-    inference(Split,[status(thm)],[])).
-
-tff(12s1,plain,(
-    (xx!=#e_1),
-    inference(Leftsplit,[status(thm)],[])).
-
-tff(12s2,plain,(
-    (![Xs2n: ty_num_F_num]: (xApp(Xs2n, #e_1)=xx)),
     inference(Unknown,[status(thm)],[])).
 

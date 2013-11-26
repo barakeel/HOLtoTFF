@@ -19,6 +19,8 @@ fun repeat_n_fun n f x =
 fun inv f a b = f b a
 
 (* ERROR HANDLING *)
+exception NOTPROVED
+
 fun success f x =
   (f x; true) handle _ => false
   
@@ -30,6 +32,7 @@ fun wrap s f m function x =
                         origin_function = f ^ " - " ^ f1,
                         message = m ^ " - " ^ m1}           
   | UNCHANGED => raise UNCHANGED
+  | NOTPROVED => raise NOTPROVED
   | _ => raise HOL_ERR {origin_structure = s,
                         origin_function = f,
                         message = m}
@@ -335,6 +338,12 @@ fun outputl file linel =
   
 fun appendl filepath linel =
   let val file = TextIO.openAppend filepath in 
+    (outputl file linel;
+     TextIO.closeOut file)  
+  end  
+ 
+fun writel filepath linel =
+  let val file = TextIO.openOut filepath in 
     (outputl file linel;
      TextIO.closeOut file)  
   end  

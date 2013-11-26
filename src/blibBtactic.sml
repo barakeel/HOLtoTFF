@@ -37,7 +37,7 @@ fun conv_hyp_val conv goal thm =
   let val allhyp = merge_aconv (map hyp eqthl) in
     if null allhyp then 
       let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-      let val th0 = list_PROVE_HYP lemmal thm in
+      let val th0 = LIST_PROVE_HYP lemmal thm in
         th0
       end end
     else raise BTACTIC_ERR "conv_hyp_val" "no hypothesis allowed"

@@ -6,6 +6,7 @@ sig
   val repeat_n_fun :  int -> ('a -> 'a) -> 'a -> 'a
   (* error *)
   val success : ('a -> 'b) -> 'a -> bool
+  exception NOTPROVED
   val wrap : string -> string -> string -> ('a -> 'b) -> 'a -> 'b
 
 (* STRING *)
@@ -61,6 +62,7 @@ sig
 
 (* FILE MANAGEMENT *)
   val readl : string -> string list
+  val writel : string -> string list -> unit
   val appendl : string -> string list -> unit
   val appendll : string -> string list -> string list -> unit
   

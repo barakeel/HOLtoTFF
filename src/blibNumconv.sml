@@ -64,7 +64,7 @@ fun inj_fun_axiom (op1,a) =
   let val namel = mk_list a "x" in  
   let val opty2 = mk_funtype (map type_num_to_int argtyl,
                               type_num_to_int (fst imtya)) in
-  let val op2 = mk_newvar (mk_var (name_of op1, opty2)) (!used) in
+  let val op2 = mk_newvar (mk_var (namev_of op1, opty2)) (!used) in
   let val argln = mk_newvarl (mk_varl (namel,argtyl)) (op2 :: !used) in
   let val argli = mk_newvarl (mk_varl (namel,map type_num_to_int argtyl)) 
                     (op2 :: (!used)) 
@@ -134,7 +134,7 @@ fun INTF_TAC goal =
   let fun intf goal = finalgoal in
   let fun intf_val goal thm =
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in 
-    let val th1 = list_PROVE_HYP lemmal thm in
+    let val th1 = LIST_PROVE_HYP lemmal thm in
     let val th2 = remove_defl defl th1 in
       th2
     end end end
@@ -156,12 +156,12 @@ fun intbv_conv_FST term =
     if type_of bv = ``:num``
     then
       let val th1 = int_arithTheory.INT_NUM_FORALL in
-      let val eqth2 = ((RAND_CONV (RENAME_VARS_CONV [name_of bv])) 
-                      THENC (LAND_CONV (RENAME_VARS_CONV [name_of bv])))
+      let val eqth2 = ((RAND_CONV (RENAME_VARS_CONV [namev_of bv])) 
+                      THENC (LAND_CONV (RENAME_VARS_CONV [namev_of bv])))
                       (concl th1) 
       in
       let val th3 = EQ_MP eqth2 th1 in
-      let val intbv = mk_var (name_of bv,``:int``) in
+      let val intbv = mk_var (namev_of bv,``:int``) in
       let val t1 = mk_comb (intSyntax.int_injection,bv) in
       let val t2 = mk_subt_abs (intbv,t1,t) in
       let val t3 = mk_eq (mk_var ("P",``:int -> bool``),t2) in
@@ -210,7 +210,7 @@ fun intf_axiom axiom =
 
 (* FREE VARIABLES *)
 fun intfv_def term = 
-  let val v1 = mk_var (name_of (rand term),``:int``) in 
+  let val v1 = mk_var (namev_of (rand term),``:int``) in 
   let val v2 = mk_newvar v1 (!used) in
     (
     used := v2 :: (!used);
@@ -237,7 +237,7 @@ fun INTFV_TAC goal =
   let fun intfv goal = (defl @ map (rhs o concl) eqthl,F) in
   let fun intfv_val goal thm =
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th1 = list_PROVE_HYP lemmal thm in
+    let val th1 = LIST_PROVE_HYP lemmal thm in
     let val th2 = remove_defl defl th1 in
       th2
     end end end

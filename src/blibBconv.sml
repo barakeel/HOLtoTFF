@@ -48,7 +48,7 @@ fun forall_conjuncts_conv_w term =
   let val th22 = strip_conj_hyp_rule th21 in
   let val thl23 = CONJUNCTS th20 in
   let val thl24 = map (SPECL bvl) thl23 in
-  let val th25 = list_PROVE_HYP thl24 th22 in
+  let val th25 = LIST_PROVE_HYP thl24 th22 in
   let val th26 = GENL bvl th25 in 
   let val th27 = DISCH (concl th14) th26 in
   (* together *)

@@ -107,7 +107,7 @@ fun bool_conv_sub_w subterm term =
   let val lemma25 = CONJUNCT1 (ASSUME (concl th15)) in
   let val lemma26 = CONJUNCT2 (ASSUME (concl th15)) in
   let val th26 = DISJ_CASES disj1 th25T th25F in
-  let val th27 = list_PROVE_HYP [lemma25,lemma26] th26 in
+  let val th27 = LIST_PROVE_HYP [lemma25,lemma26] th26 in
   let val th28 = DISCH (concl th15) th27 in
   (* together *)
     IMP_ANTISYM_RULE th16 th28
@@ -244,7 +244,7 @@ show_assums:= true;
 fun fun_conv_sub_w abs term =
   (* term *)
   let val ty = type_of abs in
-  let val newname = mk_newname "f" (map name_of (all_var term)) in
+  let val newname = mk_newname "f" (map namev_of (all_var term)) in
   let val v = (mk_var (newname,ty)) in (* fresh var *)
   let val (bvl,t) = strip_abs abs in
   (* axiom *)
@@ -471,7 +471,7 @@ val goal = ([term],F);
 *)
  
 fun ADD_HIGHER_ORDER_TAC_w goal =
-  let val appname = mk_newname "App" (map name_of (all_var_goal goal)) in
+  let val appname = mk_newname "App" (map namev_of (all_var_goal goal)) in
   let fun add_higher_order goal = 
     conv_hyp (QCONV (APP_CONV appname goal)) goal
   in  
@@ -479,7 +479,7 @@ fun ADD_HIGHER_ORDER_TAC_w goal =
     let val eqthl = map (QCONV (APP_CONV appname goal)) (fst goal) in
     let val defl = merge_aconv (map hyp eqthl) in
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th0 = list_PROVE_HYP lemmal thm in
+    let val th0 = LIST_PROVE_HYP lemmal thm in
     let val th1 = remove_defl defl th0 in
       th1
     end end end end end

@@ -4,38 +4,44 @@ load "blibBtools"; open blibBtools;
 load "blibTffsyntax"; open blibTffsyntax ;
 load "blibFreshvar"; open blibFreshvar;
 load "blibSyntax"; open blibSyntax;
-load "blibReader"; open blibReader; 
+
 load "numSyntax"; open numSyntax;
+load "intSyntax"; open intSyntax;
 
 load "blibExtractvar"; open blibExtractvar;
 load "int_arithTheory"; open int_arithTheory;
 load "blibBtactic"; open blibBtactic;
 load "blibTactic"; open blibTactic;
 load "blibNumconv"; open blibNumconv;
-load "beagle"; open beagle;
 
+load "blibReader"; open blibReader;
 load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
+
+load "beagle"; open beagle;
 *)
+show_assums := true;
 
-val thml = [];
-val goal : goal = ([``(f x:num) + 2 = 5``],``f x:num = 3``);
+
+(snd (Cooper.COOPER_TAC goal)) [];
+(snd (metisTools.METIS_TAC [] goal)) [];
+BEAGLE_NF_TAC thml goal;
 BEAGLE_PROVE thml goal;
+PROVE_SIMP goal;
 
-
-metisTools.METIS_TAC thml goal;
 val thml = [];
+val goal : goal = ([``A ==> B``, ``B ==> C``], ``A ==> C``);
+val goal : goal = ([``(x:int = 1) ==> (y:int = 2)``, ``(y:int = 2) ==> (z:int = 3)``], 
+``(x:int = 1) ==> (z:int = 3) ``);
+
+
+val goal : goal = ([``¬((y:int) ≠ x)``,``(x:int) + (-(y:int)) ≠ 0``], F);
 val goal : goal = ([],``((f a b = 2:int) /\ (f a = g)) ==> (g b = 2:int)``);
-BEAGLE_TAC thml goal;
-
-val thml = [];
 val goal : goal = ([``!f. f (0:int) (x:num) = 2:int``],F);
-BEAGLE_NF_TAC thml goal;
-
-val thml = [];
 val goal : goal = ([``!f. f (0:int) = 2:int``],F);
-BEAGLE_NF_TAC thml goal;
-
+val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``],F);
+val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``,
+                  ``not (0:int = 2)``],F);
 
 val th1 = mk_thm ([], ``∀n. (s2n :int -> int) (n2s n) = n``);
 val thml = [th1];
@@ -49,14 +55,10 @@ val th1 = mk_thm ([], ``∀n. (s2n :num -> num) (n2s n) = n``);
 val thml = [th1];
 val goal:goal = ([], ``((n2s :num -> num) x = n2s y) ⇔ (x = y)``);
 
-BEAGLE_PROVE thml goal;
 
 (* problem 1 *)
-
-
-
 val th1 = mk_thm ([],``∀P l. LENGTH (SND (SPLITP P l)) ≤ LENGTH l``);
-val th2 = mk_thm ([],``a ≤ b ⇒ (a:num) < (SUC:num->num) b``);
+val th2 = mk_thm ([],``(a:num) ≤ b ⇒ (a:num) < (SUC:num->num) b``);
 val thml = [th1,th2];
 val goal = ([``¬P h``],``LENGTH (SND (SPLITP P t)) < (SUC:num->num) (LENGTH t)``);
 

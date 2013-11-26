@@ -20,7 +20,7 @@ sig
                    (string * term) list ->
                    (term * int) list                
   (* proving *)
-  val PROVE_GOAL  : goal -> thm
+  val PROVE_STEP  : goal -> thm
   val PROVE_AXIOM : term list -> term -> thm
   val PROVE_FALSE : thm list -> thm
   val PROVE_PROOF : string -> thm list -> (term * int) list -> thm

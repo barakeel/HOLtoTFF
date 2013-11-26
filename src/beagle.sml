@@ -43,33 +43,31 @@ fun proof_to_stringl proof = map step_to_string proof
   
 (* BEAGLE INTERACTION *)
 fun PROVE_FINAL_GOAL_w filepath dict finalgoal =
-
   (* reading *)
   let val rdict = mk_rdict dict in
   let val linel = readl (filepath ^ "_proof") in
   (* axiom *)
   let val hypl = fst finalgoal in
   let val (axioml,proof) = read_proof linel rdict in
-  let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
   (* proof debugging *)
   let val filepath1 = filepath ^ "_declaration" in
   let val filepath2 = filepath ^ "_reading" in
-  let val filepath3 = filepath ^ "_proving" in 
+  let val filepath3 = filepath ^ "_replaying" in 
     (
-    appendl filepath1 ["(* Type dictionnary *)"];
+    writel filepath1 ["(* Type dictionnary *)"];
     appendll filepath1 (map fst (#1 rdict)) (map (type_to_string o snd) (#1 rdict));
-    appendl filepath1 ["(* Variables dictionnary *)"];
+    writel filepath1 ["(* Variables dictionnary *)"];
     appendll filepath1 (map fst (#2 rdict)) (map (term_to_string o snd) (#2 rdict));
-    appendl filepath2 ["(* Axioms *)"];
+    writel filepath2 ["(* Axioms *)"];
     appendl filepath2 (map term_to_string axioml);
     appendl filepath2 ["(* Proof *)"];
     appendl filepath2 (proof_to_stringl proof);
-    appendl filepath2 ["(* Proven Axioms *)"];
-    appendl filepath2 (map thm_to_string thmaxioml);
+    let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
     PROVE_PROOF filepath3 thmaxioml proof
+    end
     )
+  end end end end
   end end end 
-  end end end end end
 
 fun PROVE_FINAL_GOAL filepath dict finalgoal =
   wrap "beagle" "PROVE_FINAL_GOAL" "" (PROVE_FINAL_GOAL_w filepath dict) finalgoal
@@ -92,7 +90,7 @@ fun beagle_tac_aux filepath thml goal =
                       then monomorph_pb (thml,goal) 
                       else (thml,goal)
   in
-  let val (finalgoall,validnf) = BEAGLE_NF_TAC mthml goal in
+  let val (finalgoall,validation_nf) = BEAGLE_NF_TAC mthml goal in
   let val finalgoal = hd (finalgoall) in
   let val dict = write_tff filepath finalgoal in
     (
@@ -100,10 +98,10 @@ fun beagle_tac_aux filepath thml goal =
     let val SZSstatus = get_SZSstatus (filepath ^ "_proof") in
       if SZSstatus = "Unsatisfiable"
       then 
-        let fun valid _ = 
-          validnf [PROVE_FINAL_GOAL filepath dict (hd finalgoall)]   
+        let fun validation _ = 
+          validation_nf [PROVE_FINAL_GOAL filepath dict (hd finalgoall)]   
         in 
-          ([], valid)
+          ([], validation)
         end
       else raise BEAGLE_ERR "beagle_tac_aux" SZSstatus
     end
@@ -111,7 +109,7 @@ fun beagle_tac_aux filepath thml goal =
   end end end end
 
 fun BEAGLE_TAC thml goal = 
-  let val filepath = "/tmp/HOLtoTFF/tff" in 
+  let val filepath = "/tmp/HOLtoTFF" in 
     beagle_tac_aux filepath thml goal
   end
  

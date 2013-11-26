@@ -43,8 +43,8 @@ fun pptff_qbvl pps qbvl bvdict tyadict =
 (* pflag : flag is turn off when going inside atom *)
 fun pptff_term_aux pps term dict pflag bvl =
   case structterm term of
-    Numeral => add_string pps (name_of term)
-  | Integer => add_string pps (name_of term)
+    Numeral => add_string pps (namev_of term)
+  | Integer => add_string pps (namev_of term)
   | Var => if is_member_aconv term bvl
            then add_string pps (lookup term (#2 dict)) (* boundvar *)
            else add_string pps (lookup term (#3 dict)) (* freevar *)
@@ -116,7 +116,9 @@ and pptff_argl pps argl dict pflag bvl =
 and pptff_unop pps str term dict pflag bvl =
   (
   add_string pps str;
-  pptff_term_aux pps (rand term) dict pflag bvl
+  add_string pps "(";
+  pptff_term_aux pps (rand term) dict pflag bvl;
+  add_string pps ")"
   )
 and pptff_binop_infix pps str term dict pflag bvl = 
   (
@@ -170,7 +172,7 @@ fun get_simpletyadict tyadict = filter has_simplety tyadict
 
 
 (* test  
-name_of (rator (rator ``a <= b``));
+namev_of (rator (rator ``a <= b``));
 *)
 
 (* end useful functions *)
@@ -302,7 +304,8 @@ fun pptff_tff pps goal =
   wrap "blibPrinttff" "pptff_tff" "" (pptff_tff_w pps) goal
 
 (* WRITE A TFF FILE *)
-fun write_tff_w path goal =
+fun write_tff path goal =
+  (
   let val file = TextIO.openOut path in 
   let val pps = mk_ppstream 
                   {
@@ -317,11 +320,10 @@ fun write_tff_w path goal =
     end
     )  
   end end
+  )
+  handle _ => raise PRINTTFF_ERR "write_tff" path
 
-fun write_tff path goal = 
-  wrap "blibPrinttff" "write_tff" "" (write_tff_w path) goal
  
-
 
 end
 
