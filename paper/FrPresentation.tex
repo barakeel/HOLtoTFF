@@ -1,6 +1,8 @@
 \documentclass{beamer}
 \usepackage{etex}
 
+
+\usepackage{multicol}
 \usepackage{calc}
 \usepackage{ifthen}
 \usepackage{beamerthemeshadow}
@@ -59,10 +61,16 @@
 \date{\today} 
 
 \frame{\titlepage} 
-%\frame{\frametitle{Table of contents}\tableofcontents} 
+
 
 \section{Introduction} 
-\subsection{Deux façon différentes de démontrer des théorèmes}
+\frame{\frametitle{Lieu du stage: Canberra} 
+\begin{center}
+\includegraphics[scale=0.13]{location.jpg}
+\end{center}
+}
+
+\subsection{Deux types de prouveurs}
 \frame{\frametitle{Deux façon différentes de démontrer des théorèmes} 
 
 \noindent \begin{tabularx}{\textwidth}{ |c|X|X| }
@@ -73,35 +81,45 @@
   & Beagle, SPASS, \ldots \\
   \hline  Expressivité & Ordre supérieur. & Premier ordre.
   \\  
-  \hline Efficacité & Un expert doit les guider. & Ils prouvent une grande diversité de problèmes. \\
+  \hline Efficacité & Guidé. & Automatique. \\
   \hline Sûreté & Petit noyau.
  & Code assez long. \\
   \hline
 \end{tabularx}
 }
-\tableofcontents
-\subsection{Comment pallier les faiblesses d'un prouveur interactif?} 
 
-\frame{\frametitle{Comment pallier les faiblesses du prouveur interactif HOL4 à l'aide du prouveur automatique Beagle ? } 
+\begin{frame}
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+\end{frame}
 
-\textit{Problème:}
-\\Le prouveur interne à HOL4 (METIS$\_$TAC), ne résout pas de problème utilisant l'arithmétique sans l'aide d'un humain.
+\subsection{Enoncé du problème} 
+\frame{\frametitle{Enoncé du problème} 
+
+\textit{Problème} 
+Voilà deux prouveurs internes à HOL4.
+\begin{enumerate}
+\item[-] Metis: ordre supérieur
+\item[-] Cooper: arithmétique
+\end{enumerate}
 \pause
-\\\textit{Solution:}
-\\Nous avons développé une nouvelle fonction BEAGLE$\_$TAC. 
-Elle appelle un prouveur automatique externe Beagle, qui a été conçu pour résoudre des problèmes arithmétiques.
+\textit{Solution} Un prouveur externe.
+ \begin{enumerate}
+  \item[-] Beagle: premier ordre et arithmétique 
+\end{enumerate}
 }
 
-\subsection{Comment BEAGLE$\_$TAC fonctionne?}
-\frame{\frametitle{Comment BEAGLE$\_$TAC fonctionne?} 
+\subsection{BEAGLE$\_$TAC}
+\frame{\frametitle{BEAGLE$\_$TAC} 
 \begin{tikzpicture}[node distance = 2cm, auto]
   % Place nodes
   \node [cloud] (conjecture) {conjecture};
   \node [block, right of=conjecture,  node distance=3cm] (HOL1) 
-  {traduction (premier ordre)};
+  {traduction};
   \node [block, right of=HOL1, node distance=3cm] (TFF1) 
   {fichier du problème};
-  \node [block, right of=TFF1, node distance=3cm] (Beagle) 
+  \node [block, right of=TFF1, node distance=3cm, yshift=-0.7cm] (Beagle) 
   {Preuve automatique};
   \node [block, below of=TFF1, node distance=2cm] (TFF2) 
   {fichier de la preuve};  
@@ -118,10 +136,9 @@ Elle appelle un prouveur automatique externe Beagle, qui a été conçu pour ré
   \draw [-to,black,ultra thick] (conjecture) -- (HOL1);
   \draw [-to,black,ultra thick] (HOL1) -- (TFF1);
   \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
-  \draw [-to,black,ultra thick,dashed] (Beagle) -- (TFF2);
-  \draw [-to,black,ultra thick,dashed] (TFF2) -- (HOL2);
+  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick] (TFF2) -- (HOL2);
   \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
-  \draw [-to,black,ultra thick] (Beagle.south) to [out=270,in=270] (theorem.south);
 \end{tikzpicture}
 }
 
@@ -139,8 +156,6 @@ Ses avantages sont:
 \end{enumerate}
 }
 
-
-\section{Présentation des prouveurs}
 \subsection{HOL4} 
 \frame{\frametitle{HOL4}
 Voici les caractéristiques de HOL4:
@@ -193,7 +208,7 @@ Voici les caractéristiques de Beagle:
 \begin{enumerate}
   \item [-] Prouveur automatique
   \item [-] Logique: premier ordre et types monomorphes
-  \item [-] Spécialité: arithmétique
+  \item [-] Raisonnement: premier ordre et arithmétique
   \item [-] Réponse: insatisfaisable, satisfaisable ou inconnu
 \end{enumerate}
 }
@@ -221,20 +236,22 @@ Voici les caractéristiques de Beagle:
 
 
 \section{Traduction vers le premier ordre}
-\subsection{Plan}
+
 \frame{\frametitle{Ordre de la traduction vers le premier ordre}
-Voici les principales étapes de la traduction: 
+Voici les étapes de la traduction: 
 \begin{enumerate}
-  \item Monomorphisation
-  \item Négation de la conclusion (preuve par l'absurde)
-  \item Mise en forme normale conjonctive (utilisée plusieurs fois)
-  \item $\lambda$-lifting 
-  \item Elimination des arguments de type booléen
-  \item Les naturels sont définis comme des entiers positifs
+  \item {\color{blue} Monomorphisation}
+  \item Négation de la conclusion (Preuve par l'absurde)
+  \item Mise en forme normale conjonctive (Arrive plusieurs fois)
+  \item {\color{blue} $\lambda$-lifting}
+  \item {\color{blue} Elimination des booléens}
   \item Mise sous forme d'un ensemble de clauses
-  \item Elimination de l'ordre supérieur
+  \item {\color{blue} Défonctionnalisation}
+  \item Injection dans les entiers
+  \item Instantiation des variables booléennes quantifiées
 \end{enumerate}
 }
+
 
 \subsection{Monomorphisation}
 \frame{\frametitle{Motivation}
@@ -271,7 +288,7 @@ Théorème 1: $\forall x:a.\ C\ x \Rightarrow D\ x$
 \end{center}
 }
 
-\frame{\frametitle{Example 1: Une co-instanciation}
+\frame{\frametitle{Exemple 1: Une co-instanciation}
 La flèche de substitution à droite induit une co-instanciation des constantes du premier théorème:
 
 \begin{center}
@@ -290,7 +307,7 @@ La flèche de substitution à droite induit une co-instanciation des constantes 
 
 
 
-\frame{\frametitle{Example 1: Toutes les co-instanciations en parallèles}
+\frame{\frametitle{Exemple 1: Toutes les co-instanciations en parallèles}
 Nous nommerons $\mathcal{T}$ cette transformation du graphe.
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
@@ -305,7 +322,7 @@ Nous nommerons $\mathcal{T}$ cette transformation du graphe.
 \end{center}
 }
 
-\frame{\frametitle{Example 1: Répétition des co-instanciations}
+\frame{\frametitle{Exemple 1: Répétition des co-instanciations}
 La transformation $\mathcal{T}$ précédente peut être répétée sur le nouveau graphe de dépendance que nous avons obtenu.
 
 \begin{center}
@@ -321,7 +338,7 @@ La transformation $\mathcal{T}$ précédente peut être répétée sur le nouvea
 Ce graphe est un point fixe pour $\mathcal{T}$.
 }
 
-\frame{\frametitle{Example 2: Un example sans point fixe}
+\frame{\frametitle{Exemple 2: Un exemple sans point fixe}
 Recommençons avec un autre graphe.
 
 \begin{center}
@@ -342,7 +359,7 @@ Recommençons avec un autre graphe.
 \end{center}
 }
 
-\frame{\frametitle{Example 2: Un example sans point fixe}
+\frame{\frametitle{Exemple 2: Un exemple sans point fixe}
 \begin{center}
 \begin{tikzpicture}[node distance = 3cm, auto]
   \node [cloud, fill=white,node distance = 3cm] (c11) 
@@ -363,8 +380,7 @@ Recommençons avec un autre graphe.
 
 
 
-
-\frame{\frametitle{Example 2: Un example sans point fixe}
+\frame{\frametitle{Exemple 2: Un exemple sans point fixe}
 \begin{center}
 \scriptsize
 \begin{tikzpicture}[scale = 0.5]
@@ -393,153 +409,71 @@ Recommençons avec un autre graphe.
 La transformation $\mathcal{T}$ ne trouve pas de point fixe.
 }
 
-\frame{\frametitle{Conjecture et contre-example}
-\begin{block}{Conjecture (contre-example ci-dessous)}
-Soit $G$ un graphe de dépendance.
-Soit $n>1$ le nombre de noeuds de $G$.
-Si $G$ n'a pas de circuit, alors un point fixe est obtenu en moins de $n-1$ étapes. 
-\end{block} 
-\begin{center}
-\begin{tikzpicture}[node distance = 3cm, auto]
-  \node [cloud, fill=white,node distance = 3cm] (c11) 
-  {C: a$\rightarrow$n};
-  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) 
-  {D: (a$\rightarrow$n)$\rightarrow$n};
-  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) 
-  {C: (a$\rightarrow$n)$\rightarrow$n};
-  \node [cloud, fill=white, below of=c12,node distance = 1.5cm] (c22) 
-  {D: b};
-  \node [cloud, fill=white, below of=c22,node distance = 1.5cm] (c32) 
-  {D: a$\rightarrow$n};
-  \draw [-to,blue,ultra thick] (c11) -- (c21);
-  \draw [-to,blue,ultra thick] (c22) -- (c12);
-  \draw [green,ultra thick] (c11) -- (c12);
-  \draw [-to,blue,ultra thick] (c22) -- (c32);
-\end{tikzpicture}
-\end{center}
-}
-
-\frame{\frametitle{Un théorème plus faible}
-
-\begin{block}{Théorème}
-Soit $p$ la longueur du plus long chemin dans $G$. Soit $G_p = \mathcal{T}^g(G)$.
-Un point fixe pour $G$ est atteint en $p$ étapes, si les conditions suivantes sont réalisées:
-\\- $G_p$ n'a pas de circuit.
-\\- $SG_p$ n'a pas de flèches de substitutions.
-\end{block} 
-\begin{block}{Conjecture}
-Soit $p$ la longueur du plus long chemin dans $G$. 
-Soit $G_p = \mathcal{T}^g(G)$.
-Si $G_p$ n'est pas un point fixe alors, pour tout $i>=0$, $G_i$ n'est pas un point fixe.
-\end{block}
-}
-
-\frame{\frametitle{Example 3}
- \begin{center}  
- \begin{tikzpicture}[node distance = 3cm, auto]
-   \node [cloud, fill=white,node distance = 3cm] (c11) 
-   {C: a $\rightarrow$ n};
-   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a};
-   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b};
-   \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: n};
-   \draw [-to,blue,ultra thick] (c12) -- (c32);
-   \draw [-to,blue,ultra thick] (c21) -- (c11);
-   \draw [green,ultra thick] (c11) -- (c12);
- \end{tikzpicture}
- \end{center}
-}
-
-\frame{\frametitle{Example 3}
- \begin{center}  
- \begin{tikzpicture}[node distance = 3cm, auto]
-   \node [cloud, fill=white,node distance = 3cm] (c11) 
-   {C: a $\rightarrow$ n,{\color{red}n $\rightarrow$ n}};
-   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{red}n}};
-   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{red}a $\rightarrow$ n}};
-   \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: n};
-   \draw [-to,blue,ultra thick] (c21) -- (c11);
-   \draw [green,ultra thick] (c11) -- (c12);
- \end{tikzpicture}
- \end{center}
-}
-
-\frame{\frametitle{Example 3}
- \begin{center}  
- \begin{tikzpicture}[node distance = 3cm, auto]
-   \node [cloud, fill=white,node distance = 3cm] (c11) 
-   {C: a $\rightarrow$ n,{\color{red}n $\rightarrow$ n}};
-   \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{red}n}};
-   \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: b,{\color{red}a $\rightarrow$ n},{\color{orange}n $\rightarrow$ n}};
-   \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: n};
-   \draw [green,ultra thick] (c11) -- (c12);
- \end{tikzpicture}
- \end{center}
-Ce graphe est un point fixe pour $\mathcal{T}$.
-}
-
-
 
 \frame{\frametitle{Instanciation des théorèmes données par l'utilisateur}
 \begin{enumerate}
 \item Terminaison: un point fixe ou une borne arbitraire
 \item Extraction d'un ensemble de substitutions pour chaque théorème
+\begin{center}
+\begin{tikzpicture}[node distance = 3cm, auto]
+  \node [cloud, fill=white,node distance = 3cm] 
+  (c11) {C: a,{\color{red} b},{\color{red}num}};
+  \node [cloud, fill=white, right of=c11,node distance = 4cm] (c12) {D: a,{\color{red} b},{\color{red}num}};
+  \node [cloud, fill=white, below of=c11,node distance = 1.5cm] (c21) {C: {\color{red} a},b,{\color{orange} num}};
+  \node [cloud, fill=white, below of=c12,node distance = 3cm] (c32) {D: num};
+  \draw [green,ultra thick] (c11) -- (c12);
+\end{tikzpicture}
+\end{center}
 \item Instanciation
 \end{enumerate}
-\begin{block}{Rêve}
-Si un point fixe est trouvé et une preuve polymorphe existe, alors il existe une fonction constructive de cette preuve vers une preuve monomorphe utilisant les théorèmes instanciés.
-\end{block} 
 }
 
 \subsection{Autres étapes}
+
 \frame{\frametitle{Ordre de la traduction vers le premier ordre}
-Voici les principales étapes de la traduction: 
+Voici les étapes de la traduction: 
 \begin{enumerate}
-  \item Monomorphisation
+  \item {\color{blue} Monomorphisation}
   \item Négation de la conclusion (Preuve par l'absurde)
   \item Mise en forme normale conjonctive (Arrive plusieurs fois)
-  \item $\lambda$-lifting 
-  \item Elimination des arguments de type booléen
-  \item Les naturels sont définis comme des entiers positifs
+  \item {\color{blue} $\lambda$-lifting}
+  \item {\color{blue} Elimination des booléens}
   \item Mise sous forme d'un ensemble de clauses
-  \item Elimination de l'ordre supérieur
+  \item {\color{blue} Défonctionnalisation}
+  \item Injection dans les entiers
+  \item Instantiation des variables booléennes quantifiées
 \end{enumerate}
 }
 
-
 \frame{\frametitle{$\lambda$-lifting}
-Cet étape élimine les $\lambda$-abstractions restantes $abs$ dans une formule $f$.
-Le $\lambda$-lifting $\mathcal{L}$ est défini par:
-\[\mathcal{L}(f[abs]) = (\forall x_1 \ldots x_n.\mbox{ } g\mbox{ }x_1 \ldots x_n = t) 
-  \Rightarrow f[abs := g] \]
-Exemple: $\mathcal{L} (P\ \lambda x.x+1) = (\forall x.\ g\ x = x + 1) \Rightarrow P\ g $
+Cette étape élimine les $\lambda$-abstractions restantes.
+\[ P\ (\lambda x.x+1) \]
+\[ \exists g.\ (\forall x.\ g\ x = x + 1) \wedge P\ g \]
 }
 
-\frame{\frametitle{Elimination des arguments de type booléen}
+\frame{\frametitle{Elimination des booléens}
+Supposons que la formule booléenne $!x.\ x=0$ soit l'argument d'une fonction $f$.
+\[P (!x.\ x=0)\]
 
-Soit $t$ un argument de type $bool$. La conversion des arguments booléens $\mathcal{B}_a$ est définie par: 
-\[
-  \mathcal{B}_a (f[t]) = (t \Rightarrow f[t := true]) \wedge (\neg t \Rightarrow f[t := false]) 
-\]
-
-Exemple: $\mathcal{B}_a (P (a \wedge b)) = (a \wedge b \Rightarrow P\ true) \wedge (\neg (a \wedge b)  \Rightarrow P\ false$)
+\[((!x.\ x=0) \Rightarrow P\ true) \wedge 
+   (\neg (!x.\ x=0)  \Rightarrow P\ false)\]
 }
 
-\frame{\frametitle{Elimination de l'ordre supérieur}
+\frame{\frametitle{Défonctionnalisation}
 
-Soit $c_a$ une constante arithmétique. Soit $App$ une nouvelle variable, qui vérifie $App\ x\ y$ = $x\ y$.
-\\L'élimination de l'ordre supérieur $\mathcal{H}$ est definie récursivement par:
+Soit $App$ vérifiant $App\ f\ x$ = $f\ x$. On effectue une défonctionnalisation lorsqu'une fonction non-arithmétique: 
 
-\[\begin{aligned}
- \mathcal{H}(x) &= x \\
-\mathcal{H}((c_a t) t_2) &=  (c_a \mathcal{H}(t)) \mathcal{H}(t_2)  \\
-\mathcal{H} (t_1 t_2) &= App\mbox{ } \mathcal{H} (t_1) \mathcal{H} (t_2)
-\end{aligned}\]
-
-Exemple: $\mathcal{H}(\forall h.\ (h\ x) + 1 = 0) = \forall h.\mbox{ } ((App\mbox{ } h\mbox{ }x) + 1 = 0)$
+ \begin{enumerate}
+ \item [-] est quantifiée
+   \[!h.\ h\ x\ y = 0\]
+   \[!h.\ App\ (App\ h\ x)\ y = 0\]
+ \item [-] a le même type qu'une fonction quantifiée
+ \item [-] a un nombre d'arguments qui varie
+   \[h\ x\ y\ z\wedge h\ x = g\]
+   \[App\ (App\ (h\ x)\ y)\ z \wedge h\ x = g\]
+ \end{enumerate}.
 }
 
-
-\section{Conclusion}
 \subsection{Résultats}
 \frame{\frametitle{Résultats sans monomorphisation}
 Nombre total de problèmes: 271
@@ -578,7 +512,7 @@ Nombre total de problèmes: 271
 }
 
 \frame{\frametitle{Résultats avec monomorphisation}
-Nombre total de problèmes: 271 (mêmes problèmes que précédemment)
+Nombre total de problèmes: 271
 \begin{center}
 \begin{tikzpicture}[scale=2.5]
 \newcounter{e}
@@ -627,7 +561,7 @@ x tick label style={rotate=45,anchor=east},]
 }
 
 \frame{\frametitle{Résultats sur des problèmes arithmétiques}
-Nombre de problèmes : 65. 
+Nombre de problèmes: 65. 
 \\Dans ces problèmes, tous les théorèmes (79) ne concernant que l'arithmétique ont été effacés. 
 \begin{center}
 \begin{tikzpicture}[scale=2.5]
@@ -655,48 +589,101 @@ Nombre de problèmes : 65.
 \end{center}
 }
 
-\frame{\frametitle{Utilisation des différentes parties de la traduction}
-\begin{center}
-\begin{tikzpicture}[scale=0.8]
-\begin{axis}[ybar,enlargelimits=0.15,legend style={at={(2,2)},anchor=north,legend columns=0},ylabel={nombre de problèmes},symbolic x coords={monomorphisation,
-point fixe,lambda-lifting,booleen,naturel,ordre superieur,preuve},xtick=data,
-nodes near coords,
-nodes near coords align={vertical},
-x tick label style={rotate=45,anchor=east},]
-\addplot coordinates {(monomorphisation,36) (point fixe,34) (lambda-lifting,6) (booleen,15)(naturel,60)(ordre superieur,8)(preuve,65)};
-\end{axis}
+\section{Rejouage de la preuve}
+\frame{\frametitle{Principe général}
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (conjecture) {conjecture};
+  \node [block, right of=conjecture,  node distance=3cm] (HOL1) 
+  {traduction (premier ordre)};
+  \node [block, right of=HOL1, node distance=3cm] (TFF1) 
+  {fichier du problème};
+  \node [block, right of=TFF1, node distance=3cm, yshift=-0.7cm] (Beagle) 
+  {Preuve automatique};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
+  {fichier de la preuve};  
+  \node [block, below of=HOL1, node distance=2cm] (HOL2) 
+  {construction de la preuve};
+  \node [cloud, below of=conjecture, node distance=2cm] (theorem) 
+  {théorème};
+  \node [label=HOL4, draw=black, ultra thick, 
+  fit=(conjecture) (theorem) (HOL1) (HOL2)] {}; 
+  \node [label=TFF format interface, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
+  {}; 
+  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
+  % Draw edges
+  \draw [-to,black,ultra thick] (conjecture) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick] (TFF2) -- (HOL2);
+  \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
 \end{tikzpicture}
-\end{center}
 }
 
-\subsection{Perspectives}
-\frame{\frametitle{Quelques améliorations possibles de la traduction}
-Trois idées d'amélioration:
+\subsection{Extraction d'une preuve}
+\frame{\frametitle{Extraction d'une preuve}
+\begin{tikzpicture}[auto]
+  % Place nodes
+  \node [cloud] (NCS) {nouvel ensemble};
+  \node [cloud, fill=white, above of=NCS, node distance = 1.5cm] (init) {fichier TFF};
+  \node [label = 2, cloud, below of=NCS, node distance = 2cm] (OCS) {ancien ensemble};
+  % Draw edges
+  \draw[-to,black,ultra thick] (NCS.east) to [out=0,in=0] node[name=down]{1} (OCS.east) ;
+  \draw[-to,black,ultra thick] (OCS.west) to [out=180,in=180] node[name=up]{3} (NCS.west)  ;
+  \draw[-to,black,ultra thick] (init) -- node[name=what]{parsing et normalisation} (NCS)  ;
+  % Place boxes
+  \node [block, right of=down, node distance=1.5cm] (rightbox)
+  {Transfère une clause};
+  \node [block, below of=OCS, node distance=1.5cm] (downbox)
+  {Applique les règles possibles};
+  \node [block, left of=up, node distance=1.5cm] (leftbox)
+  {Transfère les clauses créées};
+  \node [cloud, fill=white, below of=rightbox, node distance=2.5cm] (trace){fichier trace};
+  \draw [-to,black,ultra thick] (down.west) to [out=270,in=90] (trace)  ;
+\end{tikzpicture}
+}
+
+\subsection{Construction de la preuve}
+\frame{\frametitle{Construction de la preuve}
 \begin{enumerate}
-\item [-] Générer automatiquement des théorèmes aidant à prouver la conjecture
-\item [-] Eliminer l'ordre supérieur plus efficacement
-\item [-] Traduire les entiers, les rationnels et les réels
+\item [-] Lecture de la preuve: utilise des dictionnaires de variables et de types 
+
+\item [-] Rejouage de la preuve: chaque étape peut être résolue par metis, cooper ou une combinaison des deux. (en théorie!!) 
 \end{enumerate}
 }
 
-\frame{\frametitle{Résumé des qualités et des limites de l'interaction HOL4-BEAGLE}
+\section{Conclusion}
+
+\subsection{Résumé}
+\frame{\frametitle{Qualités et limites de l'interaction HOL4-Beagle}
 Qualités: 
 \begin{enumerate}
 \item [-] Résout des problèmes arithmétiques sans guidage
 \item [-] Un format de communication répandu
-\item [-] Une traduction correcte (préservant l'insatisfaisabilité)
+\item [-] Une traduction correcte préservant l'insatisfaisabilité
 \end{enumerate} 
 Limites: 
 \begin{enumerate}
-\item [-] Une preuve non rejouée (BEAGLE$\_$TAC est un oracle) 
+\item [-] 20\% des conjectures non prouvées par Beagle 
+\item [-] Echec du rejouage de la preuve dans beaucoup de cas 
 \item [-] Une traduction incomplète
-\item [-] Une traduction ne préservant pas la satisfaisabilité (Impossible de générer des contre-exemples)
+\item [-] Une traduction ne préservant pas la satisfaisabilité
 \end{enumerate} 
 }
 
-\frame{\frametitle{Quelques questions?}
-Merci d'avoir écouté ma présentation. J'ai beaucoup apprécié cette année passée au LMFI. 
+\subsection{Perspectives}
+\frame{\frametitle{Améliorations possibles de la traduction}
+
+\begin{enumerate}
+\item [-] Traduire les rationnels et les réels
+\item [-] Générer automatiquement des théorèmes aidant à prouver la conjecture
+\item [-] Normalisation des formules arithmétiques dans les preuves.
+ \[x < y + 1 + 2 \longrightarrow x - y < 3\]
+\end{enumerate}
 }
+
+
 
 \end{document}
 

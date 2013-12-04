@@ -1,15 +1,17 @@
 \beamer@endinputifotherversion {3.10pt}
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@subsectionintoc {1}{1}{Deux fa\IeC {\c c}on diff\IeC {\'e}rentes de d\IeC {\'e}montrer des th\IeC {\'e}or\IeC {\`e}mes}{2}{0}{1}
-\beamer@subsectionintoc {1}{2}{Comment pallier les faiblesses d'un prouveur interactif?}{3}{0}{1}
-\beamer@subsectionintoc {1}{3}{Comment BEAGLE$\_$TAC fonctionne?}{6}{0}{1}
-\beamer@sectionintoc {2}{Pr\IeC {\'e}sentation des prouveurs}{8}{0}{2}
-\beamer@subsectionintoc {2}{1}{HOL4}{8}{0}{2}
-\beamer@subsectionintoc {2}{2}{Beagle}{10}{0}{2}
-\beamer@sectionintoc {3}{Traduction vers le premier ordre}{12}{0}{3}
-\beamer@subsectionintoc {3}{1}{Plan}{12}{0}{3}
-\beamer@subsectionintoc {3}{2}{Monomorphisation}{13}{0}{3}
-\beamer@subsectionintoc {3}{3}{Autres \IeC {\'e}tapes}{27}{0}{3}
-\beamer@sectionintoc {4}{Conclusion}{31}{0}{4}
-\beamer@subsectionintoc {4}{1}{R\IeC {\'e}sultats}{31}{0}{4}
-\beamer@subsectionintoc {4}{2}{Perspectives}{36}{0}{4}
+\beamer@subsectionintoc {1}{1}{Deux types de prouveurs}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Enonc\IeC {\'e} du probl\IeC {\`e}me}{5}{0}{1}
+\beamer@subsectionintoc {1}{3}{BEAGLE$\_$TAC}{7}{0}{1}
+\beamer@subsectionintoc {1}{4}{HOL4}{9}{0}{1}
+\beamer@subsectionintoc {1}{5}{Beagle}{11}{0}{1}
+\beamer@sectionintoc {2}{Traduction vers le premier ordre}{13}{0}{2}
+\beamer@subsectionintoc {2}{1}{Monomorphisation}{14}{0}{2}
+\beamer@subsectionintoc {2}{2}{Autres \IeC {\'e}tapes}{23}{0}{2}
+\beamer@subsectionintoc {2}{3}{R\IeC {\'e}sultats}{27}{0}{2}
+\beamer@sectionintoc {3}{Rejouage de la preuve}{31}{0}{3}
+\beamer@subsectionintoc {3}{1}{Extraction d'une preuve}{32}{0}{3}
+\beamer@subsectionintoc {3}{2}{Construction de la preuve}{33}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{34}{0}{4}
+\beamer@subsectionintoc {4}{1}{R\IeC {\'e}sum\IeC {\'e}}{34}{0}{4}
+\beamer@subsectionintoc {4}{2}{Perspectives}{35}{0}{4}

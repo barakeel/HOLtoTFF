@@ -7,9 +7,10 @@ Cleaning:
 - rewrite conversions in a shorter and more readable way
 - rewrite BEAGLE proof output and reader.
 
+
 Infer axioms from a theory:
-- do it manually for each constant (COND (if then else) should be translated first)
-- check inside the numconv if COND for integer was used to translate a difference.
+- do it manually for each constant
+
 
 Output:
 - add comments to be printed in the standard input when the file is generated
@@ -20,3 +21,6 @@ Documentation:
 
 Pretty printing:
 - to be done
+
+Replayer: 
+- put arithmetic clauses in normal form to improve prove search.

@@ -1,4 +1,4 @@
-structure blibMonomorph :> blibMonomorph =
+structure blibMonomorph (* :> blibMonomorph *) =
 struct
 
 open HolKernel Abbrev boolLib
@@ -95,6 +95,15 @@ fun list_mult_subst_aux substll =
 
 fun list_mult_subst l = 
   wrap "blibMonomorph" "list_mult_subst" "" list_mult_subst_aux (rev l)
+
+(* test *)
+(*
+list_mult_subst
+ [
+[ [{redex = ``:'a``, residue = 1}] , [{redex = ``:'a``, residue = 5}] ],
+[ [{redex = ``:'a``, residue = 1}] , [{redex = ``:'b``, residue = 2}] ]
+];
+*)
 
 (* SUBSTL MAXIMAL ELEMENTS *)
 fun is_identity {redex = red, residue = res} = (red = res)

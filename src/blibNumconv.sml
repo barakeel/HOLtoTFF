@@ -57,11 +57,19 @@ fun coerc_int (v1,v2) =
     mk_comb (intSyntax.Num_tm,v2)
   else v2
   
+  
+fun mk_listn_aux nb str start =
+  if nb = 0 then []
+  else if nb < 0 then raise NUMCONV_ERR "mk_listn_aux" "negative number" 
+  else (str ^ (Int.toString start)) :: mk_listn_aux (nb - 1) str (start + 1)
+  
+fun mk_listn nb str = mk_listn_aux nb str 1
+  
 (* INTF_TAC *)  
 fun inj_fun_axiom (op1,a) =
   let val (argtyal,imtya) = strip_type_n (type_of op1,a) in 
   let val argtyl = map fst argtyal in
-  let val namel = mk_list a "x" in  
+  let val namel = mk_listn a "x" in  
   let val opty2 = mk_funtype (map type_num_to_int argtyl,
                               type_num_to_int (fst imtya)) in
   let val op2 = mk_newvar (mk_var (namev_of op1, opty2)) (!used) in
@@ -134,7 +142,7 @@ fun INTF_TAC goal =
   let fun intf goal = finalgoal in
   let fun intf_val goal thm =
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in 
-    let val th1 = LIST_PROVE_HYP lemmal thm in
+    let val th1 = list_PROVE_HYP lemmal thm in
     let val th2 = remove_defl defl th1 in
       th2
     end end end
@@ -187,26 +195,35 @@ fun intbv_conv term =
 fun INTBV_TAC goal = CONV_HYP_TAC (intbv_conv THENC normalForms.CNF_CONV) goal
 
 (* functions axioms *)
-fun intf_axiom_test axiom =
-  let val term = concl axiom in
+fun intf_axiom_test faxiom =
+  let val term = concl faxiom in
   let val (_,eqt) = strip_forall term in
-    has_numty (rhs eqt) 
+    intSyntax.is_injected (rhs eqt) (* to be verified *)
   end end
   
-fun intf_axiom axiom =
-  let val term = concl axiom in
+(* to be verified *)
+fun intf_axiom faxiom =
+  let val term = concl faxiom in
   let val (bvl,eqt) = strip_forall term in
   let val (_,arg) = dest_comb (rhs eqt) in
-  let val th1 = ASSUME term in
-  let val axiom = integerTheory.INT_POS in
-  let val th2 = SPEC arg axiom in
-  let val th3 = GENL bvl (SUBS [SYM (SPEC_ALL th1)] th2) in
-  let val th4 = (QCONV (intbv_conv THENC normalForms.CNF_CONV))
-                (concl th3) 
+  let val axiom1 = integerTheory.INT_POS in
+  let val th1 = SPEC arg axiom1 in
+  let val th2 = GENL bvl (SUBS [SYM (SPEC_ALL faxiom)] th1) in
+  let val th3 = (QCONV (intbv_conv THENC normalForms.CNF_CONV))
+                (concl th2) 
   in
-  let val th5 = EQ_MP th4 th3 in
-      th5
-  end end end end end end end end end
+  let val th4 = EQ_MP th3 th2 in
+      th4
+  end end end end 
+  end end end end
+
+(* test 
+val term = concl (hd thml1);
+
+*)
+
+
+
 
 (* FREE VARIABLES *)
 fun intfv_def term = 
@@ -237,7 +254,7 @@ fun INTFV_TAC goal =
   let fun intfv goal = (defl @ map (rhs o concl) eqthl,F) in
   let fun intfv_val goal thm =
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th1 = LIST_PROVE_HYP lemmal thm in
+    let val th1 = list_PROVE_HYP lemmal thm in
     let val th2 = remove_defl defl th1 in
       th2
     end end end
@@ -304,6 +321,10 @@ fun NUM_INT_TAC goal = VALID NUM_INT_TAC_v goal
   
 (* test      
 show_assums := true;
+
+val term = ``!z. f (z:int) (x:num) = (0:num)``; 
+val goal = ([term],F);
+
 val term1 = ``!z:num (y:num). f z (g y:bool) = (0:num) + (x:num)``;
 val term2 = ``!z:num (y:num). (&z) = ((&(h y:num)):int)``;
 val term3 = ``!z . 0 = (0 + (z:num))``;

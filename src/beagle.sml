@@ -5,7 +5,7 @@ open HolKernel Abbrev boolLib
      blibBtools blibSyntax blibBtactic
      blibExtractvar
      blibHO blibMonomorph blibTactic
-     blibPrinttff blibReader
+     blibPrinttff blibReader blibReplayer
 
 fun BEAGLE_ERR function message =
     HOL_ERR{origin_structure = "beagle",
@@ -108,6 +108,22 @@ fun beagle_tac_aux filepath thml goal =
     ) 
   end end end end
 
+fun BEAGLE_ORACLE thml goal =
+  let val filepath = "/tmp/HOLtoTFF" in 
+  let val (mthml,_) = if is_polymorph_pb (thml,goal)
+                      then monomorph_pb (thml,goal) 
+                      else (thml,goal)
+  in
+  let val (finalgoall,validation_nf) = BEAGLE_NF_TAC mthml goal in
+  let val finalgoal = hd (finalgoall) in
+  let val dict = write_tff filepath finalgoal in
+    (
+    beagle_interact filepath finalgoal;
+    print ( (get_SZSstatus (filepath ^ "_proof")) ^ "\n")
+    )
+  end end end end end
+  
+  
 fun BEAGLE_TAC thml goal = 
   let val filepath = "/tmp/HOLtoTFF" in 
     beagle_tac_aux filepath thml goal

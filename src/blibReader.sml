@@ -179,6 +179,7 @@ read_tffdisj tffdisj rvdict;
 *)
 
 (* DICTIONNARIES *)
+(* tools *)
 fun mk_rtydict tyadict =
   case tyadict of
     [] => []  
@@ -188,37 +189,55 @@ fun rev_dict rdict =
   case rdict of
     [] => []
   | (a,nm) :: m => (nm,a) :: rev_dict m
-  
-fun mk_rvdict bvdict fvdict cdict = 
-  rev_dict bvdict @ rev_dict cdict @ rev_dict fvdict
+
+ 
+(* create free variables dictionnary *) 
+fun mk_rvdict fvdict cdict = 
+  rev_dict cdict @ rev_dict fvdict
 
 fun mk_rdict (dict:((hol_type * int) * string) list *
                    (term * string) list *
                    (term * string) list *
                    (term * string) list )
-   = (mk_rtydict (#1 dict), mk_rvdict (#2 dict) (#3 dict) (#4 dict))
+   = (mk_rtydict (#1 dict), mk_rvdict (#3 dict) (#4 dict))
 
-(* create the bvdict *)
+(* create bound variables dictionnary *)
 fun prep_tffbvl clause =
   let val p1 = char_place "[" clause in
   let val p2 = char_place "]" clause in
     split_char "," (String.substring (clause,p1 + 1,p2 - p1 - 1))
   end end
  
-fun mk_rbventry arg (rtydict,rvdict) =
-  case arg of
-    [str1,str2] => if is_member str1 (map fst rvdict)
-                   then (str1,lookup str1 rvdict)
-                   else (str1,mk_var (str1,lookup str2 rtydict))
-  | _           => raise READER_ERR "mk_var_ss" ""
+fun mk_rbvl tffbvlcpl (rtydict,rvdict) = 
+  case tffbvlcpl of
+    [] => []
+  | [str1,str2] :: m => mk_var (str1,lookup str2 rtydict) :: 
+                        mk_rbvl m (rtydict,rvdict)
+  | _ => raise READER_ERR "mk_rbvl" ""
+    
+fun mk_freshrbvl tffbvlcpl (rtydict,rvdict) =
+  let val rbvl = mk_rbvl tffbvlcpl (rtydict,rvdict) in
+    mk_newvarl rbvl (map snd rvdict)
+  end
+ 
+fun mk_rbvdict_aux tffbvlcpl freshrbvl =
+  if not (length tffbvlcpl = length freshrbvl) 
+  then raise READER_ERR "mk_rbvdict_aux" ""
+  else
+    case tffbvlcpl of
+      [] => []
+    | [str1,str2] :: m => (str1,hd freshrbvl) :: mk_rbvdict_aux m (tl freshrbvl)
+    | _ => raise READER_ERR "mk_rbvdict_aux" ""
+
 
 fun mk_rbvdict clause (rtydict,rvdict) =
   let val tffbvl = prep_tffbvl clause in
-  let val tffbvl2 = map (split_char ":") tffbvl in
-    map (inv mk_rbventry (rtydict,rvdict)) tffbvl2
-  end end
+  let val tffbvlcpl = map (split_char ":") tffbvl in
+  let val freshrbvl = mk_freshrbvl tffbvlcpl (rtydict,rvdict) in
+    mk_rbvdict_aux tffbvlcpl freshrbvl
+  end end end
+(* END DICTIONNARY *)
 
-    
 fun get_tffdisj clause = 
   let val p = char_place "]" clause in
     String.substring (clause, p + 2, String.size clause - p - 2)
@@ -307,9 +326,7 @@ fun format_proof linel =
   | [s] => []
   | [s1,s2] => []
   | s1 :: s2 :: s3 :: m =>
-      if get_intro s1 = "plain" andalso 
-         not (get_rule s3 = "Split") andalso
-         not (get_rule s3 = "Rightsplit")
+      if get_intro s1 = "plain" andalso not (get_rule s3 = "Split")
       then (get_tffclause s2, get_rule s3, length (get_location s1))
            :: format_proof m 
       else format_proof (tl linel)
@@ -342,202 +359,6 @@ fun read_proof linel rdict =
   )
 
 
-fun PROVE_GOAL goal =
-  (
-    ((#2 (metisTools.METIS_TAC [] goal)) [])
-    handle _ => 
-    (
-    print "metis failed trying cooper\n";
-    let val hypl = filter (not o Cooper.is_presburger) (fst goal) in
-    (#2 ((REMOVE_HYPL_TAC hypl THEN Cooper.COOPER_TAC) goal)) []
-    end
-    )
-  )
-  handle _ => (print "cooper failed "; raise NOTPROVED)
-
-fun mk_goall terml1 terml2 =
-  if null terml1 then []
-  else ([hd terml1],hd terml2) :: mk_goall (tl terml1) (tl terml2)
-
-fun PROVE_SIMP_ONE hypo clause =
-  let val (bvl1,disj1) = strip_forall hypo in
-  let val (bvl2,disj2) = strip_forall clause in
-  let val terml1 = strip_disj disj1 in
-  let val terml2 = strip_disj disj2 in
-    (* could be improved to cover more cases *)
-    if bvl1 = bvl2 andalso length terml1 = length terml2
-    then 
-      let val thml = map PROVE_GOAL (mk_goall terml1 terml2) in
-      let val thm = LIST_DISJ_CASES_UNION disj1 thml in
-      let val th0 = ASSUME hypo in
-      let val th1 = SPECL bvl1 th0 in
-      let val th2 = PROVE_HYP th1 thm in
-        GENL bvl1 th2
-      end end end end end
-    else raise NOTPROVED
-  end end end end
-
-
-fun PROVE_SIMP_aux hypl ccl =
-  if null hypl then raise NOTPROVED
-  else (PROVE_SIMP_ONE (hd hypl) ccl handle _ => PROVE_SIMP_aux (tl hypl) ccl)
-
-fun PROVE_SIMP goal = PROVE_SIMP_aux (fst goal) (snd goal)
-
-fun PROVE_STEP goal =
-  (
-    (
-    print "New step\n";
-    PROVE_GOAL goal
-    )
-    handle _ => 
-    (
-    print "trying simplification\n";
-    PROVE_SIMP goal
-    )
-  )
-  handle _ => (print ("simplification failed :\n" ^ goal_to_string goal ^ "\n");  
-               raise NOTPROVED)
-
-
-fun PROVE_AXIOM hypl axiom = 
-  wrap "blibReader" "PROVE_AXIOM" (goal_to_string (erase_double_aconv hypl,axiom))
-    PROVE_STEP (erase_double_aconv hypl,axiom)
-  
-
-fun begin_ls filepath state proofstep =
-  let val (cl,clevel) = proofstep in
-  let val (ls,level,thml) = hd state in
-  let val th1 = if cl = T then ASSUME F else ASSUME cl 
-  in
-    (
-    appendll filepath ["Split to level " ^ (Int.toString clevel)]
-                      [thm_to_string th1];
-    (cl,clevel,th1 :: thml) :: state          
-    )
-  end end end
-
-(* state should contain at least two elements when backing one level*)
-fun end_ls filepath state = 
-  let val (ls1,level1,thml1) = hd state in
-  let val (ls2,level2,thml2) = hd (tl state) in
-  let val goal = (erase_double_aconv (map concl thml1),F) in
-  let val th1 = LIST_PROVE_HYP thml1 (PROVE_STEP goal) in
-  let val lsthm = if is_neg ls1 
-                  then CCONTR (dest_neg ls1) th1 
-                  else NOT_INTRO (DISCH ls1 th1) 
-  in
-    (
-    appendll filepath ["Back to level " ^ (Int.toString level2)] 
-                      [thm_to_string lsthm];
-    (ls2,level2,lsthm :: thml2) :: tl (tl state)
-    )
-  end end 
-    handle NOTPROVED =>
-    (
-    appendll filepath ["Not proved - Back to level " ^ (Int.toString level2)] 
-                      [goal_to_string goal];
-    (ls2,level2,thml2) :: tl (tl state)
-    )
-  end end end
-  
-  
-fun is_previously_defined bc thml =
-  is_member bc (merge (map get_fvl (map concl thml)))
-  
-fun is_define_step clause thml =  
-  if not (is_eq clause) then false
-  else 
-    let val bc = lhs clause in
-      if not (is_member bc (map snd (!rbcdict))) then false
-      else if is_previously_defined bc thml then false
-      else true
-    end
-    
-fun step filepath state proofstep =  
-  let val (clause,clevel) = proofstep in 
-  let val (ls,level,thml) = hd state in 
-    if is_define_step clause thml
-    then
-  (* define step *)
-    let val th1 = ASSUME clause in
-    (
-    appendll filepath ["Define - lvl " ^ (Int.toString level)] 
-                      [thm_to_string th1];
-    defl := clause :: (!defl);
-    (ls,level,th1 :: thml) :: (tl state)
-    )
-    end
-    else
-  (* other step *)
-    let val goal = (erase_double_aconv (map concl thml), clause) in
-    let val th1 = LIST_PROVE_HYP thml (PROVE_STEP goal) in
-    (
-    appendll filepath ["level " ^ (Int.toString level)] 
-                      [thm_to_string th1];
-    (ls,level,th1 :: thml) :: (tl state)
-    )
-    end 
-    handle NOTPROVED => 
-    (
-    appendll filepath ["Not proved - level " ^ (Int.toString level)]
-                      [goal_to_string goal];
-    (ls,level,thml) :: (tl state)
-    )
-    end
-  end end  
-
-fun PROVE_FALSE thml =
-  LIST_PROVE_HYP thml (PROVE_STEP (erase_double_aconv (map concl thml),F))
-
-fun end_proof filepath state =
-  case state of 
-    [] => raise READER_ERR "endproof" "state is empty" 
-  | [(_,_,thml)] => let val th1 = (PROVE_FALSE thml
-                      handle NOTPROVED => 
-                      raise READER_ERR "end_proof" "Proof could not be replayed")
-                    in
-                      (
-                      appendll filepath ["Final theorem -level 1"]
-                                        [thm_to_string th1];
-                      th1
-                      )
-                    end
-  | _ => end_proof filepath (end_ls filepath state)
-  
-fun PROVE_PROOF_aux filepath state proof =
-  case proof of
-    [] => end_proof filepath state
-  | proofstep :: m => 
-    let val clevel = #2 proofstep in
-    let val level = #2 (hd state) in
-      if clevel = level then
-        let val newstate = step filepath state proofstep in
-          PROVE_PROOF_aux filepath newstate m
-        end
-      else if clevel = level + 1 then
-        let val newstate = begin_ls filepath state proofstep in
-          PROVE_PROOF_aux filepath newstate m
-        end
-      else if clevel < level then
-        let val newstate = end_ls filepath state in
-          PROVE_PROOF_aux filepath newstate proof
-        end
-      else raise READER_ERR "PROVE_PROOF_aux" "missing split(s)"
-    end end
-     
-     
-(* uses rbcdict reference initialise by read proof *)       
-fun PROVE_PROOF filepath thmaxioml proof = 
-  (
-  defl := [];
-  writel filepath ["(* Proof Replay *)"];
-  let val state = [(T,1,thmaxioml)] in
-  let val th1 = PROVE_PROOF_aux filepath state proof in
-  let val th2 = remove_defl (!defl) th1 in
-    th2
-  end end end
-  )
   
           
 end

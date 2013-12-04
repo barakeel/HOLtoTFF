@@ -14,7 +14,7 @@ val bool_conv : conv
   val bool_conv_sub_one : conv
   val bool_conv_sub_all : conv
   
-val ADD_HIGHER_ORDER_TAC : tactic 
+val DEFUNCT_TAC : tactic 
 
 val bool_bv_conv : conv
   val bool_bv_conv_sub : conv 

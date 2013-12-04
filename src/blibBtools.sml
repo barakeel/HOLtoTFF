@@ -118,14 +118,7 @@ fun mk_reflist n a =
     case n of 
       0 => []
     | _ => (ref a) :: mk_reflist (n -1) a
-  
-
-fun nth n l =
-  if n < 0 then raise BTOOLS_ERR "nth" "list too short"
-  else
-    case n of 
-      0 => hd l
-    | _ => nth (n-1) (tl l)
+ 
    
 (* NUMBER *)
 fun suml nl =
@@ -186,6 +179,12 @@ fun list_subset ll1 ll2 =
     
 fun merge ll = erase_double (List.concat ll)
 
+fun repeat_change change l changing = 
+  case l of
+    [] => changing
+  | a :: m => repeat_change change m (change a changing)
+
+(* ORDERING *)
 fun quicksort << xs = let
   fun qs [] = []
     | qs [x] = [x]
@@ -197,11 +196,6 @@ fun quicksort << xs = let
   in
     qs xs
   end
- 
-fun repeat_change change l changing = 
-  case l of
-    [] => changing
-  | a :: m => repeat_change change m (change a changing)
 
 
 (* dictionnary *)
@@ -216,8 +210,6 @@ fun lookup elem couplelist =
   [] => (elem; raise BTOOLS_ERR "lookup" "")
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
-
-(* condition *)
 fun mk_list n a =
   case n of 
     0 => []
@@ -225,20 +217,6 @@ fun mk_list n a =
          else
            a :: mk_list (n -1) a
 
-(* dictionnary *)
-  (* doesn't overwrite only the first add entry can do something *)
-fun add_entry entry dict = 
-  if is_member (fst entry) (map fst dict)
-  then dict
-  else entry :: dict
-
-fun lookup elem couplelist =
-  case couplelist of 
-  [] => (elem; raise BTOOLS_ERR "lookup" "")
-  | (a,b) :: m =>  if a = elem then b else lookup elem m
-
-
-
 (* condition *)
 fun switch condresultl defaultresult = 
     case condresultl of
@@ -279,47 +257,8 @@ fun switchargerr arg condresultl error =
     | (cond,result) :: m => if cond arg
                             then result
                             else switchargerr arg m error         
-fun switch condresultl defaultresult = 
-    case condresultl of
-      [] => defaultresult  
-    | [(cond,result)] => if cond  
-                         then result 
-                         else defaultresult
-    | (cond,result) :: m => if cond
-                            then result
-                            else switch m defaultresult                
-
-fun switcherr condresultl error = 
-    case condresultl of
-      [] => raise BTOOLS_ERR "switcherr" "emptylist" 
-    | [(cond,result)] => if cond  
-                         then result 
-                         else (raise error)
-    | (cond,result) :: m => if cond
-                            then result
-                            else switcherr m error
-
-fun switcharg arg condresultl defaultresult = 
-    case condresultl of
-      [] => defaultresult  
-    | [(cond,result)] => if cond arg
-                         then result 
-                         else defaultresult
-    | (cond,result) :: m => if cond arg
-                            then result
-                            else switcharg arg m defaultresult             
  
-fun switchargerr arg condresultl error = 
-    case condresultl of
-      [] => raise BTOOLS_ERR "switchargerr" "emptylist" 
-    | [(cond,result)] => if cond arg
-                         then result 
-                         else (raise error)
-    | (cond,result) :: m => if cond arg
-                            then result
-                            else switchargerr arg m error         
- 
-(* FILE MANAGEMENT *)
+(*********** FILE MANAGEMENT ***********)
 fun readl filepath = 
   let
     val file = TextIO.openIn filepath

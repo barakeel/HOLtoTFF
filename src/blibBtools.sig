@@ -30,7 +30,6 @@ sig
 (* LIST *)
   val mk_list : int -> 'a -> 'a list
   val mk_reflist : int -> 'a -> ('a ref) list
-  val nth : int -> 'a list -> 'a
   (* arithmetic *)
   val suml : int list -> int
   val multl : int list -> int list -> int list

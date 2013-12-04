@@ -107,7 +107,7 @@ fun bool_conv_sub_w subterm term =
   let val lemma25 = CONJUNCT1 (ASSUME (concl th15)) in
   let val lemma26 = CONJUNCT2 (ASSUME (concl th15)) in
   let val th26 = DISJ_CASES disj1 th25T th25F in
-  let val th27 = LIST_PROVE_HYP [lemma25,lemma26] th26 in
+  let val th27 = list_PROVE_HYP [lemma25,lemma26] th26 in
   let val th28 = DISCH (concl th15) th27 in
   (* together *)
     IMP_ANTISYM_RULE th16 th28
@@ -470,7 +470,7 @@ val term = ``(f a b = 2) /\ (f = g)``;
 val goal = ([term],F);
 *)
  
-fun ADD_HIGHER_ORDER_TAC_w goal =
+fun DEFUNCT_TAC_w goal =
   let val appname = mk_newname "App" (map namev_of (all_var_goal goal)) in
   let fun add_higher_order goal = 
     conv_hyp (QCONV (APP_CONV appname goal)) goal
@@ -479,7 +479,7 @@ fun ADD_HIGHER_ORDER_TAC_w goal =
     let val eqthl = map (QCONV (APP_CONV appname goal)) (fst goal) in
     let val defl = merge_aconv (map hyp eqthl) in
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th0 = LIST_PROVE_HYP lemmal thm in
+    let val th0 = list_PROVE_HYP lemmal thm in
     let val th1 = remove_defl defl th0 in
       th1
     end end end end end
@@ -489,8 +489,8 @@ fun ADD_HIGHER_ORDER_TAC_w goal =
     else mk_tac1 add_higher_order add_higher_order_val goal
   end end end
 
-fun ADD_HIGHER_ORDER_TAC goal = 
-  wrap "tactic" "ADD_HIGHER_ORDER_TAC" "" ADD_HIGHER_ORDER_TAC_w goal 
+fun DEFUNCT_TAC goal = 
+  wrap "tactic" "DEFUNCT_TAC" "" DEFUNCT_TAC_w goal 
  
 
 (* BOOL_BV_CONV *)

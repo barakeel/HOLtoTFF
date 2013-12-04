@@ -1,4 +1,4 @@
-structure blibTactic :> blibTactic =
+structure blibTactic (*:> blibTactic*) =
 struct
 
 open HolKernel Abbrev boolLib
@@ -104,7 +104,7 @@ fun strip_conj_only_hyp goal =
 fun strip_conj_only_hyp_val goal thm =
   let val terml = erase_double_aconv (strip_conj (only_hypg goal)) in
   let val thml = CONJUNCTS (ASSUME (only_hypg goal)) in
-    LIST_PROVE_HYP thml thm
+    list_PROVE_HYP thml thm
   end end
       
 fun STRIP_CONJ_ONLY_HYP_TAC goal =
@@ -137,7 +137,7 @@ fun BEAGLE_CLAUSE_SET_TAC goal =
   FORALL_CONJUNCTS_TAC THEN
   STRIP_CONJ_ONLY_HYP_TAC THEN
   ERASE_FORALL_TAC THEN
-  ADD_HIGHER_ORDER_TAC THEN
+  DEFUNCT_TAC THEN
   NUM_INT_TAC THEN
   BOOL_BV_TAC THEN
   ADD_BOOL_AXIOM_TAC
