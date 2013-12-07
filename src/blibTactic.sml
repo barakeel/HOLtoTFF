@@ -116,6 +116,28 @@ fun ERASE_FORALL_TAC goal =
   wrap "tactic" "ERASE_FORALL" ""
     (CONV_HYP_TAC (QCONV normalForms.CNF_CONV)) goal
 
+(* INT_NORMALIZE_TAC *)
+fun INT_NORMALIZE_TAC goal =
+  let val axioml1 = [
+                    STRIP_SYM integerTheory.INT_SUB_0,
+                    STRIP_SYM integerTheory.INT_SUB_LE,
+                    STRIP_SYM integerTheory.INT_SUB_LT
+                    ]
+  in
+  let val axiom2 = STRIP_SYM integerTheory.INT_NEG_MINUS1 in
+    CONV_HYP_TAC 
+      (
+      (ONCE_REWRITE_CONV axioml1) THENC
+      (ONCE_DEPTH_CONV OmegaMath.sum_normalise) THENC
+      (ONCE_REWRITE_CONV [integerTheory.INT_MUL_LID]) THENC
+      (ONCE_REWRITE_CONV [axiom2]) THENC
+      REWRITE_CONV [integerTheory.INT_ADD_LID, integerTheory.INT_ADD_RID] THENC
+      normalForms.CNF_CONV
+      )
+      goal
+  end end
+
+
 (* BOOL_BV_TAC *)
 fun BOOL_BV_TAC_w goal =
   CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal
@@ -139,6 +161,7 @@ fun BEAGLE_CLAUSE_SET_TAC goal =
   ERASE_FORALL_TAC THEN
   DEFUNCT_TAC THEN
   NUM_INT_TAC THEN
+  (*INT_NORMALIZE_TAC THEN*)
   BOOL_BV_TAC THEN
   ADD_BOOL_AXIOM_TAC
   )

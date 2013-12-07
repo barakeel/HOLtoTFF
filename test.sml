@@ -28,9 +28,10 @@ BEAGLE_NF_TAC [] goal;
 show_assums := true;
 
 (* success *)
-val th1 = mk_thm ([], ``∀n. (s2n :int -> int) (n2s n) = n``);
+val th1 = mk_thm ([], ``∀n. (s2n :num -> num) (n2s (n:num)) = (n:num)``);
 val thml = [th1];
-val goal:goal = ([], ``((n2s :int -> int) x = n2s y) ⇔ (x = y)``);
+val goal:goal = ([], 
+``((n2s :num -> num) (x:num) = n2s (y:num)) ⇔ ((x:num) = (y:num))``);
 
 val thml = [];
 val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``],F);
@@ -39,73 +40,60 @@ val thml = [];
 val goal : goal = ([``!f. f (0:num) = 2:num``,``g (0:num) = (0:num)``],F);
 BEAGLE_NF_TAC [] goal;
 
+
+val goal : goal = ([``P (x=2):bool``],``P (x-2=0):bool``);
+BEAGLE_NF_TAC [] goal;
+
+
+val goal : goal = ([``P (x=2):bool ``,``(x:int)=y``],``P (y-2=0):bool``);
+BEAGLE_NF_TAC [] goal;
+
+
 val thml = [];
 val goal : goal = 
 ([],``((f a b = 3:int) /\ (f a = g)) ==> (g b = (2+1:int))``);
 
 
+val th1 = mk_thm ([],``!z. (z = 2) = (z - 2 = 0)``);
+val th2 = mk_thm ([],``~(x = 2) = ~(x - 2 = 0)``);
+val thml = [th1];
+
 METIS_COOPER_CNF goal;
  val cooperthml = mk_cooperthml goal;
 
 (snd (Cooper.COOPER_TAC goal)) [];
-(snd (metisTools.FO_METIS_TAC [] goal)) [];
-BEAGLE_NF_TAC thml goal;
-BEAGLE_PROVE thml goal;
 
+val (newgoal,_) = BEAGLE_NF_TAC [] goal;
+(snd (metisTools.FO_METIS_TAC thml (hd newgoal))) [];
 (* need a normalisation *)
+metisTools.METIS_PROVE thml goal;
 
  
-fun normalise_eq term =
-  let val (t1,t2) = dest_eq term in
-  let val t = intSyntax.mk_minus (t1,t2) in
-    mk_eq (rand (concl (OmegaMath.sum_normalise t)),``(0:int)``)
-  end end
- 
- fun normalise_
- 
- 
- DB.match [] ``a-b < c``;
- INT_SUB_0;
- INT_LT_SUB_RADD;
- OmegaMath.sum_normalise ``5 + 2 + 2*x - (f y :int) ``;
- val term = ``(z:int) = (5:int) + (2:int) + 2 * (x:int) - (y:int) ``;
- normalise_eq ``(z:int) = (5:int) + (2:int) + 2 * (x:int) - (y:int) ``;
- 
-  val goal : goal = 
- ([``T ⇎ F``, 
- ``((x:int) = 1) ∨ ((x:int) − 2 = 0) ∨ ¬P T ∨ (x:int) − 1 ≠ 0``, 
- ``((x:int) = 1) ∨ P F ∨ (x:int) − 1 ≠ 0``, 
- ``((x:int) = 1) ∨ (x:int) ≠ 2 ∨ (x:int) − 1 ≠ 0``, 
- ``(x:int) ≠ 1 ∨ (x:int) ≠ 2 ∨ (x:int) − 1 ≠ 0``, 
- ``(x:int) ≠ 1 ∨ P T ∨ (x:int) − 1 ≠ 0``, 
- ``(x:int) ≠ 1 ∨ ((x:int) − 2 = 0) ∨ ¬P T ∨ (x:int) − 1 ≠ 0``, 
- ``(x:int) ≠ 1 ∨ ((x:int) − 2 = 0) ∨ ¬P F ∨ ((x:int) − 1 = 0)``, 
- ``(x:int) ≠ 1 ∨ P T ∨ ((x:int) − 1 = 0)``, 
- ``(x:int) ≠ 1 ∨ (x:int) ≠ 2 ∨ ((x:int) − 1 = 0)``, 
- ``((x:int) = 1) ∨ (x:int) ≠ 2 ∨ ((x:int) − 1 = 0)``, 
- ``((x:int) = 1) ∨ P F ∨ ((x:int) − 1 = 0)``, 
- ``((x:int) = 1) ∨ ((x:int) − 2 = 0) ∨ ¬P F ∨ ((x:int) − 1 = 0)``
- ], 
- ``P T ∨ -(x:int) + 1 ≠ 0``);
- ;
-SIMP_CONV (simpLib.mk_simpset[intSimps.INT_ARITH_ss]) [] ``(x:int) + y = 4 + 5``;
- REDUCE_CONV ``(x:int) − 2 = 1``;
- Cooper.COOPER_CONV ``(x:int) − 2 = 1``;
- intSimps.ADDL_CANON_CONV ``(x:int) − 2 = 0``;
- 
-val goal : goal = ([``!f. f (0:int) = y:int``,``g (0:int) = (0:int)``,
-                  ``(y:int)+3=0``],F); 
+ (snd (metisTools.METIS_TAC thml goal)) [];
 
-val cooperthml = mk_cooperthml goal;
-val hypl = fst goal;
 
-val hypl2 = keep_strongest_hyp hypl;
 
-val goal : goal =
- ([``0 ≠ (x:int) + -(y:int)``,
- ``((n2s (x:int):int) = (n2s (y:int):int)) ∨ (0 = (x:int) + -(y:int))``,
- ``((n2s (y:int):int) ≠ (n2s (x:int):int)) ∨ ((x:int) + -(y:int) ≠ 0)``], 
- ``F``);
+
+
+(* test 
+val term = ``∀x. (x = 5) \/ (y = 2 + 7 + z) \/ (x < 5)``
+val goal = ([term],F);
+*)
+
+val thml = [];
+val goal : goal = 
+([``n2s (s2n (s:num):num) = s``],
+``∀s. ∃n. (s:num) = n2s (n:num)``);
+
+val thml = [];
+val goal : goal = 
+([``!s. n2s (s2n (s:int):int) = s``],
+``∀s. ∃n. (s:int) = n2s (n:int)``);
+
+val thml = [];
+val goal : goal = 
+([``n2s (s2n (s:'a):'a) = s``],
+``∀s. ∃n. (s:'a) = n2s (n:'a)``);
  
 val goal : goal =
  ([``(x:int) = (e1:int)``, ``(y:int) = f (e1:int)``,
@@ -126,7 +114,7 @@ val goal = ([``Abbrev (m1 = LENGTH (FILTER ($= x) l1))``,
  ``MEM (EL x' (FILTER ($= x) l1)) (FILTER ($= x) l1) ∧
    MEM (EL x' (FILTER ($= x) l2)) (FILTER ($= x) l2)``);
 
-BEAGLE_TAC thml goal;
+BEAGLE_NF_TAC thml goal;
 
 
 (* PROBLEM TEST *)   

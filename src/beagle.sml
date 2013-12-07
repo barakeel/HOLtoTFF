@@ -63,7 +63,9 @@ fun PROVE_FINAL_GOAL_w filepath dict finalgoal =
     appendl filepath2 ["(* Proof *)"];
     appendl filepath2 (proof_to_stringl proof);
     let val thmaxioml = map (PROVE_AXIOM hypl) axioml in
+    (print "\nAXIOMS PROVEN\n";
     PROVE_PROOF filepath3 thmaxioml proof
+    )
     end
     )
   end end end end

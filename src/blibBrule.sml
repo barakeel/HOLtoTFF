@@ -9,6 +9,10 @@ fun BRULE_ERR function message =
 	         origin_function = function,
            message = message}
 
+
+
+fun STRIP_SYM thm = CONV_RULE (STRIP_QUANT_CONV SYM_CONV) thm 
+
 fun CONV_RULE conv thm = EQ_MP (QCONV conv (concl thm)) thm  
 
 fun CONV_HYPO_RULE conv term thm =
