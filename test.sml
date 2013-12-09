@@ -22,6 +22,9 @@ load "blibMonomorph"; open blibMonomorph;
 load "beagle"; open beagle;
 *)
 
+fun has_int_type term = (type_of term = ``:int``); 
+find_terms has_int_type ``-5``;
+
 val goal : goal = ([],``(h (x:'a) y z :bool) /\ (h (x:'a) = g)``);
 BEAGLE_NF_TAC [] goal;
 
@@ -40,9 +43,25 @@ val thml = [];
 val goal : goal = ([``!f. f (0:num) = 2:num``,``g (0:num) = (0:num)``],F);
 BEAGLE_NF_TAC [] goal;
 
+val thml = [];
+val goal : goal = (
+[
+``(g (0:int) = (0:int)) ==> ~(g (0:int) = (2:int))``, 
+``!f. f (0:int) = (2:int)``,
+``g (0:int) = (0:int)``
+],
+ F);
+OmegaMath.sum_normalise ``(x:int) + (y:int)``;
+OmegaMath.sum_normalise ``(y:int) + (x:int)``;
 
 val goal : goal = ([``P (x=2):bool``],``P (x-2=0):bool``);
-BEAGLE_NF_TAC [] goal;
+
+val (finalgoal,_) = BEAGLE_NF_TAC [] goal;
+
+
+BEAGLE_TAC [] goal;
+mk_cooperthml [] goal;
+metisTOOLS
 
 
 val goal : goal = ([``P (x=2):bool ``,``(x:int)=y``],``P (y-2=0):bool``);
@@ -69,16 +88,27 @@ val (newgoal,_) = BEAGLE_NF_TAC [] goal;
 metisTools.METIS_PROVE thml goal;
 
  
- (snd (metisTools.METIS_TAC thml goal)) [];
+ (snd (metisTools.FO_METIS_TAC thml goal)) [];
 
-
-
-
-
+metisTools.FO_METIS_TAC thml goal;
 (* test 
-val term = ``∀x. (x = 5) \/ (y = 2 + 7 + z) \/ (x < 5)``
+val term = ``∀x. (x = 5) \/ (x < 5)``
+
+val term = ``(f x = 5) \/ (f x < 5)``;
+
 val goal = ([term],F);
+val goal = (terml,F);
 *)
+
+val term1 = lhsconcl (normalForms.CNF_CONV ``A ==> ~B``);
+
+aconv ``A \/ B`` ``B \/ A``;
+normalForms.CNF_CONV ``B ==> ~A``;
+Term.compare (``A:bool``,``B:bool``);
+less_term;
+
+val terml = [``∀x. (x = 5)``,``~(2 = 5) \/ ~(3 = 5)``];
+
 
 val thml = [];
 val goal : goal = 

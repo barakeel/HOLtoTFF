@@ -137,7 +137,6 @@ fun INT_NORMALIZE_TAC goal =
       goal
   end end
 
-
 (* BOOL_BV_TAC *)
 fun BOOL_BV_TAC_w goal =
   CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal

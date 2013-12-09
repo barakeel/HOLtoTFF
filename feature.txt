@@ -9,4 +9,9 @@ Does:
 
 Supports:
   - Numeral and integers types
-  - Polymorphic types
+  - Instantiation of polymorphic types
+
+To do:
+  - One step replay of the proof 
+  - Better normalisation (closer to Beagle internal normalisation)
+  - Better way of dealing with booleans to prevent exponential instantiation

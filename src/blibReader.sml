@@ -320,17 +320,6 @@ val line = "tff(15s37s0,plain,(";
 val line = "    inference(Unknown,[status(thm)],[])).";
 *)
 
-fun format_proof linel =
-    case linel of
-    [] => []
-  | [s] => []
-  | [s1,s2] => []
-  | s1 :: s2 :: s3 :: m =>
-      if get_intro s1 = "plain" andalso not (get_rule s3 = "Split")
-      then (get_tffclause s2, get_rule s3, length (get_location s1))
-           :: format_proof m 
-      else format_proof (tl linel)
-  
 fun read_axioml linel rdict =
     case linel of
     [] => []
@@ -342,19 +331,30 @@ fun read_axioml linel rdict =
            :: read_axioml m rdict
       else read_axioml (tl linel) rdict
 
+fun format_infl linel =
+    case linel of
+    [] => []
+  | [s] => []
+  | [s1,s2] => []
+  | s1 :: s2 :: s3 :: m =>
+      if get_intro s1 = "plain" andalso not (get_rule s3 = "Split")
+      then (get_tffclause s2, get_rule s3, length (get_location s1))
+           :: format_infl m 
+      else format_infl (tl linel)
+
 fun read_infl infl rdict = 
   case infl of
     [] => []
-  | (str,rule,lvl) :: m => (read_tffclause str rdict,lvl) :: 
+  | (str,rule,lvl) :: m => (read_tffclause str rdict) :: 
                            read_infl m rdict
 
-(* initialise rbcdict *)
+(* initialise and modify rbcdict to be improved to remove the use of reference *)
 fun read_proof linel rdict =
   (
   rbcdict := [];
   let val axioml = read_axioml linel rdict in
-  let val infl = read_infl (format_proof linel) rdict in
-    (axioml,infl)
+  let val infl = read_infl (format_infl linel) rdict in
+    axioml @ infl
   end end
   )
 

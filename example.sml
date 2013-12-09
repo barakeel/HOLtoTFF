@@ -5,15 +5,21 @@ load "beagle"; open beagle;
 load "blibMonomorph"; open blibMonomorph; 
 *)
 
+normalForms.CNF_CONV ``A \/ ~A``;
+
 val (finalgoall,_) = BEAGLE_NF_TAC thml goal;
 BEAGLE_ORACLE thml goal;
 BEAGLE_PROVE thml goal;
+mk_cooperthml [] goal;
 
-(* Traduction pas à pas *)
+
 val thml = [];
 val goal : goal = 
 ([``(f = (\x.(x:int) + (1:int)) ) /\ (P T)``],
-``P (f (0:int) = (1:int)) : bool``);
+``P (f (2:int) = (3:int)) : bool``);
+
+metisTools.METIS_TAC thml goal;
+metisTools.FO_METIS_TAC thml (hd finalgoall);
 
 val (goal1,_) = (PROBLEM_TO_GOAL_TAC thml goal);
 val (goal2,_) = CNF_CONV_TAC (hd goal1);
@@ -49,18 +55,6 @@ val goal : goal =
 ([],``((f a b = 3:int) /\ (f a = g)) ==> (g b = (2+1:int))``);
 BEAGLE_PROVE thml goal;   
   
-
-
-
-
-
-
-
-
-
-
-
-
 
 (* Exemple de la présentation *)
 val goal : goal = ([],``(h (x:'a) y z :bool) /\ (h (x:'a) = g)``);

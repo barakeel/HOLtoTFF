@@ -14,7 +14,7 @@ sig
                     (string * hol_type) list * 
                     (string * term) list ->
                     term list                     
-  val format_proof : string list -> (string * string * int) list
+  val format_infl : string list -> (string * string * int) list
   val read_infl : (string * string * int) list ->
                    (string * hol_type) list * 
                    (string * term) list ->
