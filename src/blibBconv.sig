@@ -2,13 +2,11 @@ signature blibBconv =
 sig
 
   include Abbrev
-
-  val REPEAT_N_CONV : int -> conv -> conv 
-  val not_strip_exists_conv : conv
-  val strip_forall_not_conv : conv
+  
+  val STRIP_FORALL_NOT_CONV : conv
   val ARG_CONV : conv -> conv
-  val forall_conjuncts_conv : conv
-  val int_normatom_conv : conv
-  val int_normclause_conv : conv
+  val LIST_FUN_EQ_CONV : term list -> conv
+  val FORALL_CONJUNCTS_CONV : conv
+  val INT_NORM_CLAUSE_CONV : conv
   
 end  

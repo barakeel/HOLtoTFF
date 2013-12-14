@@ -12,7 +12,6 @@ sig
   val name_tff : string -> term -> string
   (* reader *)
   val is_numword   : string -> bool
-  val is_opword   : string -> bool
   
   
 end

@@ -13,7 +13,6 @@ sig
   val is_var_or_const : term -> bool 
   (* quantifier *) 
   val strip_quant : term -> (term list * term)
-  val bound_by_quant : term -> term -> bool 
   (* var *)
   val namev_of : term -> string
   (* term *)

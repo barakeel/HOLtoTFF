@@ -25,8 +25,6 @@ fun mk_tac1 goalbuilder valbuilder goal =
   VALID (mk_tac1_aux goalbuilder valbuilder) goal 
 
 
-
-
 (* CONV_HYP_TAC *) 
 fun conv_hyp conv goal =
   let val eqthl = map (QCONV conv) (fst goal) in
@@ -39,7 +37,7 @@ fun conv_hyp_val conv goal thm =
   let val allhyp = merge_aconv (map hyp eqthl) in
     if null allhyp then 
       let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-      let val th0 = list_PROVE_HYP lemmal thm in
+      let val th0 = LIST_PROVE_HYP lemmal thm in
         th0
       end end
     else raise BTACTIC_ERR "conv_hyp_val" "no hypothesis allowed"
@@ -48,11 +46,11 @@ fun conv_hyp_val conv goal thm =
 fun CONV_HYP_TAC conv goal =
   mk_tac1 (conv_hyp conv) (conv_hyp_val conv) goal
 
-(* list_ASSUME_TAC *)
-fun list_ASSUME_TAC thml goal =
+(* LIST_ASSUME_TAC *)
+fun LIST_ASSUME_TAC thml goal =
   case thml of
     [] => ALL_TAC goal
-  | thm :: m => ((ASSUME_TAC thm) THEN (list_ASSUME_TAC m)) goal
+  | thm :: m => ((ASSUME_TAC thm) THEN (LIST_ASSUME_TAC m)) goal
   
 (* REMOVE_HYPL_TAC *) 
 fun REMOVE_HYPL_TAC hypl goal = 

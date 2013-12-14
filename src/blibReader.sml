@@ -1,4 +1,4 @@
-structure blibReader (* :> blibReader *) =
+structure blibReader :> blibReader =
 struct
 
 open HolKernel Abbrev boolLib numSyntax
@@ -229,7 +229,6 @@ fun mk_rbvdict_aux tffbvlcpl freshrbvl =
     | [str1,str2] :: m => (str1,hd freshrbvl) :: mk_rbvdict_aux m (tl freshrbvl)
     | _ => raise READER_ERR "mk_rbvdict_aux" ""
 
-
 fun mk_rbvdict clause (rtydict,rvdict) =
   let val tffbvl = prep_tffbvl clause in
   let val tffbvlcpl = map (split_char ":") tffbvl in
@@ -322,14 +321,15 @@ fun read_proof_aux linel rdict =
   | [s] => []
   | [s1,s2] => []
   | s1 :: s2 :: s3 :: m =>
-      if first_n_char 4 = "tff("
-      then (get_location s1, get_intro s1, read_tffclause (get_tffclause s2) rdict, 
-            get_rule s3
-           )
-           :: read_proof m rdict
-      else read_proof_aux (tl linel) rdict
+      if not (success (first_n_char 4) s1) 
+      then read_proof_aux (tl linel) rdict
+      else if not (first_n_char 4 s1 = "tff(") 
+      then read_proof_aux (tl linel) rdict
+      else (get_location s1, read_tffclause (get_tffclause s2) rdict) :: 
+           read_proof_aux m rdict
 
-fun read_proof filepath rdict = read_proof_aux (readl filepath) rdict
+
+fun read_proof filepath dict = read_proof_aux (readl filepath) (mk_rdict dict)
 
           
 end

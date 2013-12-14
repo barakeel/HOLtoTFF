@@ -1,4 +1,4 @@
-structure blibMonomorph (* :> blibMonomorph *) =
+structure blibMonomorph :> blibMonomorph =
 struct
 
 open HolKernel Abbrev boolLib

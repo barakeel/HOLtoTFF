@@ -1,4 +1,4 @@
-structure blibTactic (*:> blibTactic*) =
+structure blibTactic :> blibTactic =
 struct
 
 open HolKernel Abbrev boolLib
@@ -6,7 +6,7 @@ open HolKernel Abbrev boolLib
      blibSyntax blibBrule blibBconv blibBtactic
      blibPredicate
      blibExtractvar blibExtracttype blibFreshvar blibHO
-     blibConv blibNumconv
+     blibConv blibNumInt
 
 
 fun TACTIC_ERR function message =
@@ -15,7 +15,7 @@ fun TACTIC_ERR function message =
            message = message}
 
 (*********** PROBLEM_TO_GOAL_TAC ************)
-  (* CONJ_HYP_TAC *)
+(* CONJ_HYP_TAC *)
 fun conj_hyp goal = 
   ([list_mk_conj (fst goal)],snd goal)
   
@@ -29,30 +29,30 @@ fun CONJ_HYP_TAC goal =
   if null (fst goal) then ALL_TAC goal 
   else mk_tac1 conj_hyp conj_hyp_val goal
   
-  (* ASSUME_THML_TAC *)
+(* ASSUME_THML_TAC *)
 fun thml_axiom thml = LIST_CONJ (map (GEN_ALL o DISCH_ALL) thml)
 
 fun ASSUME_THML_TAC thml goal =
   (if null thml then ALL_TAC else ASSUME_TAC (thml_axiom thml)) goal
 
-  (* *)
+(* *)
 fun PROBLEM_TO_GOAL_TAC_w thml goal =
   (
-  CONJ_HYP_TAC THEN
   CCONTR_TAC THEN
-  CONJ_HYP_TAC THEN
   (ASSUME_THML_TAC thml) THEN
   CONJ_HYP_TAC
   )
   goal
+  
 fun PROBLEM_TO_GOAL_TAC thml goal = 
   wrap "tactic" "PROBLEM_TO_GOAL_TAC" "" (PROBLEM_TO_GOAL_TAC_w thml) goal
 
 (*********** BEAGLE_CONV_TAC **********)   
 fun CNF_CONV_TAC goal = CONV_HYP_TAC normalForms.CNF_CONV goal
-fun FUN_CONV_TAC goal = CONV_HYP_TAC fun_conv goal
-fun BOOL_CONV_TAC goal = CONV_HYP_TAC bool_conv goal
+fun FUN_CONV_TAC goal = CONV_HYP_TAC FUN_CONV goal
+fun BOOL_CONV_TAC goal = CONV_HYP_TAC BOOL_CONV goal
 
+(* *)
 fun BEAGLE_CONV_TAC_w goal = 
   (
   CNF_CONV_TAC THEN
@@ -74,7 +74,7 @@ fun erase_exists_val goal thm =
   let val th1 = DISCH (only_hyp thm) thm in
   let val th2 = NOT_INTRO th1 in
   let val th3 = GENL bvl th2 in
-  let val th4 = CONV_RULE (QCONV strip_forall_not_conv) th3 in
+  let val th4 = CONV_RULE (QCONV STRIP_FORALL_NOT_CONV) th3 in
   let val th5 = NOT_ELIM th4 in
   let val th6 = UNDISCH th5 in
     th6
@@ -93,7 +93,7 @@ fun ERASE_EXISTS_TAC goal =
 (* FORALL_CONJUNCTS_TAC *)
 fun FORALL_CONJUNCTS_TAC goal = 
   wrap "tactic" "FORALL_CONJUNCTS_TAC" ""
-    (CONV_HYP_TAC forall_conjuncts_conv) goal
+    (CONV_HYP_TAC FORALL_CONJUNCTS_CONV) goal
 
 (* STRIP_CONJ_ONLY_HYP_TAC *)
 fun strip_conj_only_hyp goal =  
@@ -104,7 +104,7 @@ fun strip_conj_only_hyp goal =
 fun strip_conj_only_hyp_val goal thm =
   let val terml = erase_aconv (strip_conj (only_hypg goal)) in
   let val thml = CONJUNCTS (ASSUME (only_hypg goal)) in
-    list_PROVE_HYP thml thm
+    LIST_PROVE_HYP thml thm
   end end
       
 fun STRIP_CONJ_ONLY_HYP_TAC goal =
@@ -115,12 +115,11 @@ fun STRIP_CONJ_ONLY_HYP_TAC goal =
 fun ERASE_FORALL_TAC goal = (CONV_HYP_TAC normalForms.CNF_CONV) goal
 
 (* INT_NORMALIZE_TAC *)
-fun INT_NORM_TAC goal = CONV_HYP_TAC int_normclause_conv goal
+fun INT_NORM_TAC goal = CONV_HYP_TAC INT_NORM_CLAUSE_CONV goal
 
-    
 (* BOOL_BV_TAC *)
 fun BOOL_BV_TAC_w goal =
-  CONV_HYP_TAC (bool_bv_conv THENC normalForms.CNF_CONV) goal
+  CONV_HYP_TAC (BOOL_BV_CONV THENC normalForms.CNF_CONV) goal
 fun BOOL_BV_TAC goal = 
   wrap "tactic" "BOOL_BV_TAC" "" BOOL_BV_TAC_w goal 
   
@@ -131,7 +130,8 @@ fun ADD_BOOL_AXIOM_TAC_w goal =
   else ALL_TAC goal
 fun ADD_BOOL_AXIOM_TAC goal = 
   wrap "tactic" "ADD_BOOL_AXIOM_TAC" "" ADD_BOOL_AXIOM_TAC_w goal
-  
+
+(* *)  
 fun BEAGLE_CLAUSE_SET_TAC goal =
   wrap "tactic" "BEAGLE_CLAUSE_SET_TAC" ""
   (

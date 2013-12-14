@@ -1,4 +1,4 @@
-structure blibConv (* :> blibConv *) =
+structure blibConv :> blibConv  =
 struct
 
 open HolKernel Abbrev boolLib
@@ -57,7 +57,7 @@ end
 fun find_free_bool term = erase_aconv (find_free_bool_aux term term) 
 
 (* term should have type bool *)
-fun bool_conv_sub_w subterm term =
+fun BOOL_CONV_sub_w subterm term =
   (* preparation *)  
   let val disj1 = SPEC subterm BOOL_CASES_AX in
   let val eqth1 = ASSUME (lhand (concl disj1)) in
@@ -107,7 +107,7 @@ fun bool_conv_sub_w subterm term =
   let val lemma25 = CONJUNCT1 (ASSUME (concl th15)) in
   let val lemma26 = CONJUNCT2 (ASSUME (concl th15)) in
   let val th26 = DISJ_CASES disj1 th25T th25F in
-  let val th27 = list_PROVE_HYP [lemma25,lemma26] th26 in
+  let val th27 = LIST_PROVE_HYP [lemma25,lemma26] th26 in
   let val th28 = DISCH (concl th15) th27 in
   (* together *)
     IMP_ANTISYM_RULE th16 th28
@@ -119,29 +119,29 @@ fun bool_conv_sub_w subterm term =
   end end end end end
   end end end end end 
   end end end end
-fun bool_conv_sub subterm term = 
-  wrap "conv" "bool_conv_sub" 
+fun BOOL_CONV_sub subterm term = 
+  wrap "conv" "BOOL_CONV_sub" 
     ((term_to_string term) ^ " : " ^ (term_to_string subterm))
-    (bool_conv_sub_w subterm) term
+    (BOOL_CONV_sub_w subterm) term
 (* test
 val subterm = ``!f:num -> bool . f x``;
 val term = ``P (!f:num -> bool . f x) (!f:num -> bool . f x): bool``;
-bool_conv_sub subterm term;
+BOOL_CONV_sub subterm term;
 
 val term = ``P (x = x + 1) ==> P F ``;
 val subterm = ``x = x + 1``;
 *)
-fun bool_conv_sub_one term =
+fun BOOL_CONV_sub_one term =
   let val l = find_free_bool term in
     case l of
       [] => raise UNCHANGED
-    | b :: m => bool_conv_sub b term
+    | b :: m => BOOL_CONV_sub b term
   end
 
-fun bool_conv_sub_all term = 
-  wrap "conv" "bool_conv_sub_all" "" (REPEATC bool_conv_sub_one) term
+fun BOOL_CONV_sub_all term = 
+  wrap "conv" "BOOL_CONV_sub_all" "" (REPEATC BOOL_CONV_sub_one) term
 
-fun bool_conv_aux term = 
+fun BOOL_CONV_aux term = 
   case structterm term of
     Numeral => raise UNCHANGED 
   | Integer => raise UNCHANGED
@@ -150,30 +150,30 @@ fun bool_conv_aux term =
   | Comb => 
     (
     case structcomb term of
-      Forall => ((STRIP_QUANT_CONV bool_conv_sub_all) THENC 
-                 (STRIP_QUANT_CONV bool_conv_aux)) 
+      Forall => ((STRIP_QUANT_CONV BOOL_CONV_sub_all) THENC 
+                 (STRIP_QUANT_CONV BOOL_CONV_aux)) 
                    term
-    | Exists => ((STRIP_QUANT_CONV bool_conv_sub_all) THENC 
-                 (STRIP_QUANT_CONV bool_conv_aux)) 
+    | Exists => ((STRIP_QUANT_CONV BOOL_CONV_sub_all) THENC 
+                 (STRIP_QUANT_CONV BOOL_CONV_aux)) 
                    term     
-    | _ => COMB_CONV bool_conv_aux term
+    | _ => COMB_CONV BOOL_CONV_aux term
     )
-  | Abs => raise CONV_ERR "bool_conv_aux" "abstraction"
+  | Abs => raise CONV_ERR "BOOL_CONV_aux" "abstraction"
 
-fun bool_conv term =
-  wrap "conv" "bool_conv" "" (bool_conv_sub_all THENC bool_conv_aux) term
+fun BOOL_CONV term =
+  wrap "conv" "BOOL_CONV" "" (BOOL_CONV_sub_all THENC BOOL_CONV_aux) term
 
 (* test
 val term = ``!x. g (!z. z = 0) /\ g (!z. x = z)``;
 val term = ``!x. x + 1 = 0``;
 val subterml = find_free_bool term;
 val subterml2 = find_bound_bool term;
-bool_conv_quant term;
+BOOL_CONV_quant term;
 val subterm = ``!x.x``;
 val term = ``P (!x.x) (!y.y): bool ``;
-bool_conv term; 
+BOOL_CONV term; 
 find_free_bool term;
-bool_conv_sub subterm term;
+BOOL_CONV_sub subterm term;
 *)
 
 (* FUN_CONV *)
@@ -208,7 +208,7 @@ fun find_free_abs term = erase_aconv (find_free_abs_aux term term)
 fun fun_axiom_w abs =
   let val (bvl,t) = strip_abs abs in
   let val th1 = REFL abs in
-  let val th2 = list_AP_THM th1 bvl in
+  let val th2 = LIST_AP_THM th1 bvl in
   let val th3 = RAND_CONV (REDEPTH_CONV BETA_CONV) (concl th2) in
   let val th4 = EQ_MP th3 th2 in
     th4
@@ -241,7 +241,7 @@ val (bvl,t) = strip_abs abs;
 show_assums:= true;
 *)
 
-fun fun_conv_sub_w abs term =
+fun FUN_CONV_sub_w abs term =
   (* term *)
   let val ty = type_of abs in
   let val newname = mk_newname "f" (map namev_of (all_var term)) in
@@ -310,40 +310,40 @@ fun fun_conv_sub_w abs term =
   end end end end end 
   end end end end end 
   end end end end end end 
-fun fun_conv_sub abs term =
-  wrap "conv" "fun_conv_sub" 
+fun FUN_CONV_sub abs term =
+  wrap "conv" "FUN_CONV_sub" 
    ("abs: " ^ (term_to_string abs) ^ "term: " ^ (term_to_string term))
-   (fun_conv_sub_w abs) term
+   (FUN_CONV_sub_w abs) term
    
 (* test
 val term = ``P (\x y. x + y + z) : bool``;
 val abs = ``\x y. x + y + z``;
-fun_conv_sub abs term;
+FUN_CONV_sub abs term;
 fun_axiom term;
 *)
-fun fun_conv_sub_one term =
+fun FUN_CONV_sub_one term =
   let val l = find_free_abs term in
     case l of
       [] => raise UNCHANGED
-    | abs :: m => fun_conv_sub abs term
+    | abs :: m => FUN_CONV_sub abs term
   end
   
-fun fun_conv_sub_all term = REPEATC fun_conv_sub_one term
+fun FUN_CONV_sub_all term = REPEATC FUN_CONV_sub_one term
 (* test 
 show_assums :=  true;
 val abs = ``\x y . x + y``;
 val term = ``(P (\x y. x + y) (\y.y)):bool``;
-fun_conv_sub abs term;
+FUN_CONV_sub abs term;
 *)
 
 (* test 
 show_assums :=  true;
 val term = ``!z. (P (\x. x + z)):bool``;
-fun_conv_quant_aux term;
+FUN_CONV_quant_aux term;
 *)
 
 (* term of type bool *)
-fun fun_conv_aux term = 
+fun FUN_CONV_aux term = 
   case structterm term of
     Numeral => raise UNCHANGED 
   | Integer => raise UNCHANGED
@@ -352,25 +352,25 @@ fun fun_conv_aux term =
   | Comb => 
     (
     case structcomb term of
-      Forall => ((STRIP_QUANT_CONV fun_conv_sub_all) THENC
-                 (STRIP_QUANT_CONV fun_conv_aux)) 
+      Forall => ((STRIP_QUANT_CONV FUN_CONV_sub_all) THENC
+                 (STRIP_QUANT_CONV FUN_CONV_aux)) 
                    term
-    | Exists => ((STRIP_QUANT_CONV fun_conv_sub_all) THENC
-                 (STRIP_QUANT_CONV fun_conv_aux)) 
+    | Exists => ((STRIP_QUANT_CONV FUN_CONV_sub_all) THENC
+                 (STRIP_QUANT_CONV FUN_CONV_aux)) 
                    term       
-    | _ => COMB_CONV fun_conv_aux term
+    | _ => COMB_CONV FUN_CONV_aux term
     )
   | Abs => raise UNCHANGED
 
-fun fun_conv term = 
-  wrap "conv" "fun_conv" "" (fun_conv_sub_all THENC fun_conv_aux) term
+fun FUN_CONV term = 
+  wrap "conv" "FUN_CONV" "" (FUN_CONV_sub_all THENC FUN_CONV_aux) term
 
 
 (* test 
 val term = ``P (\x. x + 1) (\y.y) /\ !x. Q (\z. z + x)``;
 val term = ``P (\x z. x + z):bool``;
 val term = ``P (\x. (x = \z.z) ):bool`` ;
-fun_conv term;
+FUN_CONV term;
 find_free_abs term ;
 *)
 
@@ -390,7 +390,7 @@ fun app_axiom_w appname term =
   let val t2 = mk_eq (app,t1) in
   (* axiom *)
   let val th1 = ASSUME t2 in
-  let val th2 = CONV_RULE (list_FUN_EQ_CONV [newoper,newarg]) th1 in
+  let val th2 = CONV_RULE (LIST_FUN_EQ_CONV [newoper,newarg]) th1 in
   let val th3 = CONV_RULE (REDEPTH_CONV BETA_CONV) th2 in
     th3
   end end end end end
@@ -425,8 +425,6 @@ fun app_conv_sub appname lowarity arity term =
            term
    else raise CONV_ERR "app_conv_sub" "lowarity > arity"
    
-
-
 fun app_conv appname fvclal bvl term = 
   case structterm term of
     Comb =>
@@ -479,8 +477,8 @@ fun DEFUNCT_TAC_w goal =
     let val eqthl = map (QCONV (APP_CONV appname goal)) (fst goal) in
     let val defl = merge_aconv (map hyp eqthl) in
     let val lemmal = map (UNDISCH o fst o EQ_IMP_RULE) eqthl in
-    let val th0 = list_PROVE_HYP lemmal thm in
-    let val th1 = remove_defl defl th0 in
+    let val th0 = LIST_PROVE_HYP lemmal thm in
+    let val th1 = REMOVE_DEFL defl th0 in
       th1
     end end end end end
   in
@@ -494,7 +492,7 @@ fun DEFUNCT_TAC goal =
  
 
 (* BOOL_BV_CONV *)
-fun bool_bv_conv_sub term =
+fun BOOL_BV_CONV_sub term =
   let val var = (hd o fst o strip_forall) term in
   if not (has_boolty var) then raise UNCHANGED
   else
@@ -533,10 +531,10 @@ fun bool_bv_conv_sub term =
   end end 
   end
   
-fun bool_bv_conv term =
+fun BOOL_BV_CONV term =
   if not (is_forall term) then raise UNCHANGED
   else 
-    (QUANT_CONV bool_bv_conv THENC bool_bv_conv_sub) term
+    (QUANT_CONV BOOL_BV_CONV THENC BOOL_BV_CONV_sub) term
 
 (* test 
 val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     

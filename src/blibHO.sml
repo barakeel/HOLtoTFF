@@ -19,7 +19,7 @@ fun get_lowestarity (term,arity) termal =
                   then 
                     if a < arity 
                     then get_lowestarity (term,a) m
-                    else get_lowestarity (term,arity) m 
+                    else get_lowestarity (term,arity) m
                   else get_lowestarity (term,arity) m     
   
 fun collapse_lowestarity_aux varal varalfix =

@@ -29,11 +29,6 @@ fun strip_quant term =
   | Exists => strip_exists term
   | _ => raise SYNTAX_ERR "strip_quant" "" 
 
-fun bound_by_quant subterm term =
- let val (bvl,t) = strip_quant term in 
-   free_in subterm t andalso not (free_in subterm term)
- end  
-
 fun namev_of_posint term =
   rm_last_n_char 1 (Arbintcore.toString (intSyntax.int_of_term term))
 

@@ -28,7 +28,7 @@ fun lineari term =
   case structcomb term of
     Multi => 
       let val (t1,t2) = intSyntax.dest_mult term in
-        not (contain_numfvc t1 andalso contain_numfvc t2)
+        not (contain_intfvc t1 andalso contain_intfvc t2)
       end
   | _    => raise TFFSYNTAX_ERR "lineari" "not a integer product"
   
@@ -55,7 +55,5 @@ fun name_tff str var =
 (* READER *)  
 (* test for positive integers *)
 fun is_numword str = success string_to_int str
-(* test for defined names *)
-fun is_opword str = false (* wip is_member str (map fst ropdict) *)   
 
 end

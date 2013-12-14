@@ -8,19 +8,10 @@ fun BTOOLS_ERR function message =
 	         origin_function = function,
            message = message}
 
-(*********** FUNCTION **********)
-fun repeat_n_fun n f x = 
-  case n of
-    0 => x
-  | _ => if n < 0 
-         then raise BTOOLS_ERR "repeat_n_fun" "negative number"  
-         else f (repeat_n_fun (n - 1) f x)
-    
+(*********** FUNCTION **********)  
 fun inv f a b = f b a
 
 (* ERROR HANDLING *)
-exception NOTPROVED
-
 fun success f x =
   (f x; true) handle _ => false
   
@@ -32,7 +23,6 @@ fun wrap s f m function x =
                         origin_function = f ^ " - " ^ f1,
                         message = m ^ " - " ^ m1}           
   | UNCHANGED => raise UNCHANGED
-  | NOTPROVED => raise NOTPROVED
   | _ => raise HOL_ERR {origin_structure = s,
                         origin_function = f,
                         message = m}
@@ -287,23 +277,6 @@ fun writel filepath linel =
      TextIO.closeOut file)  
   end  
  
-fun outputll file linel1 linel2 =
-  if not (length linel1 = length linel2)
-  then
-    raise BTOOLS_ERR "outputll" "lists of different length"
-  else 
-    case (linel1,linel2) of
-      ([],_) => ()
-    | (_,[]) => ()  
-    | (l1 :: m1,l2 :: m2) => (TextIO.output (file,l1 ^ " : " ^ l2 ^ "\n"); 
-                                    outputll file m1 m2)  
-
-fun appendll filepath linel1 linel2 =
-  let val file = TextIO.openAppend filepath in 
-    (outputll file linel1 linel2;
-     TextIO.closeOut file)  
-  end     
-
  
 end
   
