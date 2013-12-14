@@ -278,7 +278,7 @@ fun outputl file linel =
 fun appendl filepath linel =
   let val file = TextIO.openAppend filepath in 
     (outputl file linel;
-     TextIO.closeOut file)  
+     TextIO.closeOut file)
   end  
  
 fun writel filepath linel =

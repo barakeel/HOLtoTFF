@@ -54,7 +54,7 @@ and find_free_bool_unop term subterm =
   find_free_bool_aux term (rand subterm)
 end  
  
-fun find_free_bool term = erase_double_aconv (find_free_bool_aux term term) 
+fun find_free_bool term = erase_aconv (find_free_bool_aux term term) 
 
 (* term should have type bool *)
 fun bool_conv_sub_w subterm term =
@@ -203,7 +203,7 @@ fun find_free_abs_aux term subterm =
              else find_free_abs_aux term t  
            end
            
-fun find_free_abs term = erase_double_aconv (find_free_abs_aux term term)
+fun find_free_abs term = erase_aconv (find_free_abs_aux term term)
 
 fun fun_axiom_w abs =
   let val (bvl,t) = strip_abs abs in

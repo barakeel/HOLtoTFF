@@ -10,13 +10,15 @@ normalForms.CNF_CONV ``A \/ ~A``;
 val (finalgoall,_) = BEAGLE_NF_TAC thml goal;
 BEAGLE_ORACLE thml goal;
 BEAGLE_PROVE thml goal;
-mk_cooperthml [] goal;
-
+mk_bcooperthml [] goal;
+get_atomlthml [] goal;
 
 val thml = [];
 val goal : goal = 
 ([``(f = (\x.(x:int) + (1:int)) ) /\ (P T)``],
 ``P (f (2:int) = (3:int)) : bool``);
+get_atomlthml [] goal;
+
 
 metisTools.METIS_TAC thml goal;
 metisTools.FO_METIS_TAC thml (hd finalgoall);
@@ -41,10 +43,7 @@ val (goal11,_) = ADD_BOOL_AXIOM_TAC (hd goal10);
 ;
 
 (* Quelques preuves *)
-val th1 = mk_thm ([], ``∀n. (f :int -> int) (g n) = n``);
-val thml = [th1];
-val goal:goal = ([], ``((f :int -> int) x = f y) ⇔ (x = y)``);  
-BEAGLE_PROVE thml goal;
+
 
 val thml = [];
 val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``],F);

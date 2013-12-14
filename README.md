@@ -21,8 +21,8 @@ Third step: Installing HOLtoTFF
 - go to the directory you want to install HOLtoTFF
 - type git clone https://github.com/barakeel
 - type cd HOLtoTFF
-- open printresult.sml and change the directory path (e.g. val directory = yourpath)
-- type Holmake
+- open beagle.sml and change the directory path (e.g. val directory = yourpath)
+- type Holmake in the termianal
 
 Fourth step: Testing
 - open test.sml with emacs 
@@ -30,6 +30,5 @@ Fourth step: Testing
 - run hol interactive mode (M-h h)
 - select any instruction and then (M-h M-r) to execute it
 - open any libraries you want to test 
-- result are shown as text files in HOLtoTFF/result
-   (Since beagle is not install it will show you only the translation to TFF in
-    result/filename_hol and result/filename_tff) 
+
+  

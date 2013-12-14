@@ -8,6 +8,7 @@ sig
   val BEAGLE_PROVE : thm list -> goal -> thm
   val BEAGLE_NF_TAC : thm list -> tactic
   val beagle_interact : string -> goal -> unit
-  val mk_cooperthml : thm list -> goal -> thm list
+  val mk_bcooperthml : thm list -> goal -> thm list
+  val get_atomlthml : thm list -> goal -> (term list * thm list)
   
 end

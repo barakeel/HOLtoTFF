@@ -66,7 +66,8 @@ fun beagle_interact filepath finalgoal =
   ()
   )
 
-fun mk_cooperthml thml goal =
+
+fun get_atomlthml thml goal =
   let val filepath = "/tmp/HOLtoTFF" in 
   let val (mthml,_) = if is_polymorph_pb (thml,goal)
                       then monomorph_pb (thml,goal) 
@@ -80,13 +81,30 @@ fun mk_cooperthml thml goal =
     let val rdict = mk_rdict dict in
     let val linel = readl (filepath ^ "_proof") in
     let val proof = read_proof linel rdict in
-      mk_cooperthml_proof_goal proof finalgoal
+      get_atomlthml_proof_goal proof finalgoal
     end end end
     )
   end end end end end
 
 
-
+fun mk_bcooperthml thml goal =
+  let val filepath = "/tmp/HOLtoTFF" in 
+  let val (mthml,_) = if is_polymorph_pb (thml,goal)
+                      then monomorph_pb (thml,goal) 
+                      else (thml,goal)
+  in
+  let val (finalgoall,validation_nf) = BEAGLE_NF_TAC mthml goal in
+  let val finalgoal = hd (finalgoall) in
+  let val dict = write_tff filepath finalgoal in
+    (
+    beagle_interact filepath finalgoal;
+    let val rdict = mk_rdict dict in
+    let val linel = readl (filepath ^ "_proof") in
+    let val proof = read_proof linel rdict in
+      mk_bcooperthml_proof_goal proof finalgoal
+    end end end
+    )
+  end end end end end
 
 (* MAIN FUNCTIONS *)
 fun BEAGLE_TAC_aux filepath thml goal = 

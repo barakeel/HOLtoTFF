@@ -1,7 +1,7 @@
 structure blibSyntax :> blibSyntax =
 struct
 
-open HolKernel Abbrev boolLib numSyntax (*intSyntax*)
+open HolKernel Abbrev boolLib 
      blibBtools blibDatatype 
      
 fun SYNTAX_ERR function message =
@@ -11,8 +11,8 @@ fun SYNTAX_ERR function message =
 
 (* ACONV *)
 fun is_member_aconv t l = is_member_eq aconv t l 
-fun erase_double_aconv l = erase_double_eq aconv l 
-fun merge_aconv terml = erase_double_aconv (List.concat terml)
+fun erase_aconv l = erase_double_eq aconv l 
+fun merge_aconv terml = erase_aconv (List.concat terml)
  
 (* TEST *) 
 fun has_boolty term = (type_of term = ``:bool``)
@@ -20,8 +20,6 @@ fun has_numty term = (type_of term = ``:num``)
 fun has_intty term = (type_of term = ``:int``)
 fun is_var_or_const term = 
   is_var term orelse is_const term
-fun is_leaf term = 
-  is_var term orelse is_const term orelse is_numeral term
 
 
 (* QUANTIFIER *) 
@@ -65,6 +63,7 @@ else
 
 fun get_arity term = length (snd (strip_comb term))
 
+fun less_term (a,b) = Term.compare (a,b) = LESS
 
 (* THM *)
 fun only_hyp thm = 

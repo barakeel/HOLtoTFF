@@ -2,7 +2,7 @@ structure blibBconv :> blibBconv =
 struct
 
 open HolKernel Abbrev boolLib blibDatatype
-     blibBtools blibBrule
+     blibBtools blibBrule blibSyntax
 
 fun BCONV_ERR function message =
   HOL_ERR {origin_structure = "blibBconv",
@@ -64,5 +64,61 @@ val term = `` !x y z. ((x = 0) /\ (y = 0)) /\ ((x = 0) /\ (z = 0))``;
 val thm = ASSUME term;
 show_assums := true;
 *)
+
+(* INTEGER NORMALISATION *)
+fun land_int_normatom_conv atom =
+  (
+  LAND_CONV
+  (
+  (ONCE_DEPTH_CONV OmegaMath.sum_normalise) THENC
+  (ONCE_REWRITE_CONV [integerTheory.INT_MUL_LID]) THENC
+  (ONCE_REWRITE_CONV [STRIP_SYM integerTheory.INT_NEG_MINUS1]) THENC
+  REWRITE_CONV [integerTheory.INT_ADD_LID, integerTheory.INT_ADD_RID]
+  )
+  atom
+  )
+  handle _ => raise UNCHANGED
+ 
+fun rand_int_normatom_conv atom =
+  (
+  RAND_CONV
+  (
+  (ONCE_DEPTH_CONV OmegaMath.sum_normalise) THENC
+  (ONCE_REWRITE_CONV [integerTheory.INT_MUL_LID]) THENC
+  (ONCE_REWRITE_CONV [STRIP_SYM integerTheory.INT_NEG_MINUS1]) THENC
+  REWRITE_CONV [integerTheory.INT_ADD_LID, integerTheory.INT_ADD_RID]
+  )
+  atom
+  )
+  handle _ => raise UNCHANGED
+  
+fun norm_eq_conv term =
+  if is_eq term 
+  then 
+    if less_term ((lhs term),(rhs term))
+    then raise UNCHANGED
+    else SYM (REFL term)
+  else raise UNCHANGED
+
+fun int_normatom_conv atom =
+  if (is_eq atom orelse intSyntax.is_less atom orelse intSyntax.is_leq atom orelse
+     intSyntax.is_great atom orelse intSyntax.is_geq atom)
+  then
+   (land_int_normatom_conv THENC rand_int_normatom_conv THENC norm_eq_conv) atom
+  else raise UNCHANGED
+(* *)
+
+fun int_normclause_conv term = 
+  let val (_,atom) = strip_forall term in
+    if is_neg atom
+    then STRIP_QUANT_CONV (RAND_CONV int_normatom_conv) term
+    else STRIP_QUANT_CONV int_normatom_conv term
+  end
+
+
+
+
+
+
 
 end

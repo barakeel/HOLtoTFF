@@ -4,14 +4,13 @@ sig
   include Abbrev
   (* aconv *)
   val is_member_aconv : term -> term list -> bool
-  val erase_double_aconv : term list -> term list 
+  val erase_aconv : term list -> term list 
   val merge_aconv : term list list -> term list 
   (* test *) 
   val has_boolty : term -> bool  
   val has_numty : term -> bool
   val has_intty : term -> bool
   val is_var_or_const : term -> bool 
-  val is_leaf : term -> bool
   (* quantifier *) 
   val strip_quant : term -> (term list * term)
   val bound_by_quant : term -> term -> bool 
@@ -20,6 +19,7 @@ sig
   (* term *)
   val strip_comb_n : int -> term -> (term * term list)
   val get_arity : term -> int
+  val less_term : (term * term) -> bool
   (* thm *)
   val only_hyp : thm -> term
   val is_refl : thm -> bool

@@ -4,7 +4,6 @@ sig
   include Abbrev
  
   val STRIP_SYM : rule
-  val CONV_RULE : conv -> thm -> thm 
   val CONV_HYPO_RULE : conv -> term -> thm -> thm
   val CONV_HYPL_RULE : conv -> term list -> thm -> thm
   val list_PROVE_HYP : thm list -> thm -> thm 

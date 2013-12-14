@@ -8,5 +8,7 @@ sig
   val strip_forall_not_conv : conv
   val ARG_CONV : conv -> conv
   val forall_conjuncts_conv : conv
+  val int_normatom_conv : conv
+  val int_normclause_conv : conv
   
 end  

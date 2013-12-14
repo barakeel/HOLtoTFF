@@ -18,30 +18,67 @@ load "blibReader"; open blibReader;
 load "blibReplayer"; open blibReplayer;
 load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
-
+load "blibBrule"; open blibBrule;
 load "beagle"; open beagle;
 *)
+
+
+(* todo:
+- optimisation (especially) on how to instantiate and paramodulate to
+*)
+BEAGLE_PROVE [] goal;
+BEAGLE_ORACLE
+BEAGLE_NF_TAC [] goal
+metisTools.FO_METIS_TAC [] goal;
+val goal : goal = ([``2=3``],``3=2``);
+get_atomlthml [] goal;
+mk_bcooperthml [] goal;
+
+val goal:goal = ([``∀n. (s2n :int -> int) (n2s (n:int)) = (n:int)``], 
+``((n2s :int -> int) (x:int) = n2s (y:int)) ⇔ ((x:int) = (y:int))``);
+
+val goal:goal = ([``x+1=y``,``y+1=z``],``x+2=z``);
+
+val term1 = ``2 = App g 0``;
+val term2 = ``0 = App g 0``;
+val goal : goal = ([],mk_disj(mk_neg term1,mk_neg term2));
+val thm = (snd (Cooper.COOPER_TAC goal)) [];
+
+val goal = ([``2*x < 4``],``x<2``);
+val thml = [];
+val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``],F);
+
+
+BEAGLE_ORACLE [] goal;
+val finalgoal = (hd o fst) (BEAGLE_NF_TAC [] goal);
+val goal1 = (hd o fst) (list_ASSUME_TAC cooperthml finalgoal);
+
+val goal2 = (hd o fst) (metisTools.FO_METIS_TAC [] goal1);
+
 
 fun has_int_type term = (type_of term = ``:int``); 
 find_terms has_int_type ``-5``;
 
 val goal : goal = ([],``(h (x:'a) y z :bool) /\ (h (x:'a) = g)``);
-BEAGLE_NF_TAC [] goal;
+;
 
 show_assums := true;
 
 (* success *)
-val th1 = mk_thm ([], ``∀n. (s2n :num -> num) (n2s (n:num)) = (n:num)``);
-val thml = [th1];
-val goal:goal = ([], 
+
+val goal:goal = ([``∀n. (s2n :num -> num) (n2s (n:num)) = (n:num)``], 
 ``((n2s :num -> num) (x:num) = n2s (y:num)) ⇔ ((x:num) = (y:num))``);
+BEAGLE_NF_TAC [] goal;
+val cooperthml = mk_bcooperthml [] goal;
+val atomlthml = get_atomlthml [] goal;
+
 
 val thml = [];
-val goal : goal = ([``!f. f (0:int) = 2:int``,``g (0:int) = (0:int)``],F);
+
 
 val thml = [];
 val goal : goal = ([``!f. f (0:num) = 2:num``,``g (0:num) = (0:num)``],F);
-BEAGLE_NF_TAC [] goal;
+
 
 val thml = [];
 val goal : goal = (
@@ -60,7 +97,7 @@ val (finalgoal,_) = BEAGLE_NF_TAC [] goal;
 
 
 BEAGLE_TAC [] goal;
-mk_cooperthml [] goal;
+mk_bcooperthml [] goal;
 metisTOOLS
 
 
@@ -78,7 +115,7 @@ val th2 = mk_thm ([],``~(x = 2) = ~(x - 2 = 0)``);
 val thml = [th1];
 
 METIS_COOPER_CNF goal;
- val cooperthml = mk_cooperthml goal;
+ val cooperthml = mk_bcooperthml goal;
 
 (snd (Cooper.COOPER_TAC goal)) [];
 
@@ -95,12 +132,15 @@ metisTools.FO_METIS_TAC thml goal;
 val term = ``∀x. (x = 5) \/ (x < 5)``
 
 val term = ``(f x = 5) \/ (f x < 5)``;
+fun has_type ty term = type_of term = ty
 
+val int_type = ``:int``;
+find_terms (has_type int_type) (``-5``);
 val goal = ([term],F);
 val goal = (terml,F);
 *)
 
-val term1 = lhsconcl (normalForms.CNF_CONV ``A ==> ~B``);
+val term1 = lhs (concl (normalForms.CNF_CONV ``A ==> ~B``));
 
 aconv ``A \/ B`` ``B \/ A``;
 normalForms.CNF_CONV ``B ==> ~A``;
@@ -108,7 +148,6 @@ Term.compare (``A:bool``,``B:bool``);
 less_term;
 
 val terml = [``∀x. (x = 5)``,``~(2 = 5) \/ ~(3 = 5)``];
-
 
 val thml = [];
 val goal : goal = 
@@ -150,9 +189,7 @@ BEAGLE_NF_TAC thml goal;
 (* PROBLEM TEST *)   
 val thml = [];
 val goal : goal = ([``(x:num = 5) /\ (y:num = 2)``],``x:num = 5``);
-BEAGLE_TAC thml goal;
-
-
+BEAGLE_TAC thml goal
 BEAGLE_PROVE thml goal;
 
 
