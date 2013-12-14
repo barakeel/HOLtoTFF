@@ -4,14 +4,10 @@ Does:
   - Translate a HOL formula into TFF format.
   - Print the formula into a TFF file
   - Call Beagle on this TFF file
-  - Return a proof 
-  - Replay the proof inside HOL.
-
+  - Return a proof.
+ 
 Supports:
   - Numeral and integers types
   - Instantiation of polymorphic types
 
-To do:
-  - One step replay of the proof 
-  - Better normalisation (closer to Beagle internal normalisation)
-  - Better way of dealing with booleans to prevent exponential instantiation
+

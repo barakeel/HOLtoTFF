@@ -10,7 +10,6 @@ fun BRULE_ERR function message =
            message = message}
 
 
-
 fun STRIP_SYM thm = CONV_RULE (STRIP_QUANT_CONV SYM_CONV) thm
 
 fun CONV_HYPO_RULE conv term thm =

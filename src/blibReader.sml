@@ -29,7 +29,7 @@ fun number_par_aux charl n place =
   case charl of
     [] => []
   | c :: m => case Char.toString c of
-               "("  => (("(",n + 1),place) :: number_par_aux m (n + 1) (place + 1)
+                "(" => (("(",n + 1),place) :: number_par_aux m (n + 1) (place + 1)
               | ")" => ((")",n),place) :: number_par_aux m (n - 1) (place + 1)
               | str => ((str,n),place) :: number_par_aux m n (place + 1)
 
@@ -287,10 +287,6 @@ fun get_intro line =
   then get_intro_aux line 
   else "NOINFO"
 
-(* test
-get_intro "hel,lo,bon";
-*)
-
 fun get_tffclause line = 
   if success String.substring (line,4,String.size line - 6)
   then String.substring (line,4,String.size line - 6)
@@ -320,45 +316,20 @@ val line = "tff(15s37s0,plain,(";
 val line = "    inference(Unknown,[status(thm)],[])).";
 *)
 
-fun read_axioml linel rdict =
+fun read_proof_aux linel rdict =
     case linel of
     [] => []
   | [s] => []
   | [s1,s2] => []
   | s1 :: s2 :: s3 :: m =>
-      if get_intro s1 = "axiom" 
-      then read_tffclause (get_tffclause s2) rdict
-           :: read_axioml m rdict
-      else read_axioml (tl linel) rdict
+      if first_n_char 4 = "tff("
+      then (get_location s1, get_intro s1, read_tffclause (get_tffclause s2) rdict, 
+            get_rule s3
+           )
+           :: read_proof m rdict
+      else read_proof_aux (tl linel) rdict
 
-fun format_infl linel =
-    case linel of
-    [] => []
-  | [s] => []
-  | [s1,s2] => []
-  | s1 :: s2 :: s3 :: m =>
-      if get_intro s1 = "plain" andalso not (get_rule s3 = "Split")
-      then (get_tffclause s2, get_rule s3, length (get_location s1))
-           :: format_infl m 
-      else format_infl (tl linel)
+fun read_proof filepath rdict = read_proof_aux (readl filepath) rdict
 
-fun read_infl infl rdict = 
-  case infl of
-    [] => []
-  | (str,rule,lvl) :: m => (read_tffclause str rdict) :: 
-                           read_infl m rdict
-
-(* initialise and modify rbcdict to be improved to remove the use of reference *)
-fun read_proof linel rdict =
-  (
-  rbcdict := [];
-  let val axioml = read_axioml linel rdict in
-  let val infl = read_infl (format_infl linel) rdict in
-    axioml @ infl
-  end end
-  )
-
-
-  
           
 end
