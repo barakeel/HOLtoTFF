@@ -4,7 +4,7 @@ struct
 open HolKernel Abbrev boolLib numSyntax
      blibExtractvar blibFreshvar blibNametype  
      blibBtools blibDatatype
-     blibSyntax blibTffsyntax blibPredicate
+     blibSyntax blibTffsyntax
      
 fun NAMEVAR_ERR function message =
   HOL_ERR{origin_structure = "blibNamevar",

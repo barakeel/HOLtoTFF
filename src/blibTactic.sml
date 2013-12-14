@@ -1,11 +1,8 @@
 structure blibTactic :> blibTactic =
 struct
 
-open HolKernel Abbrev boolLib
-     blibBtools blibDatatype
+open HolKernel Abbrev boolLib blibBtools 
      blibSyntax blibBrule blibBconv blibBtactic
-     blibPredicate
-     blibExtractvar blibExtracttype blibFreshvar blibHO
      blibConv blibNumInt
 
 

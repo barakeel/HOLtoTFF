@@ -27,5 +27,10 @@ sig
   val mk_goal : thm -> goal 
   val is_subset_goal : goal -> goal -> bool
   val goal_to_string : goal -> string
+  (* boolean argument *)
+  val find_atoml : term -> term list 
+  val has_boolarg : term -> bool
+  val has_boolarg_thm : thm -> bool
+  val has_boolarg_goal : goal -> bool
   
 end

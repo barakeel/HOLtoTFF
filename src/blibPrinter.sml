@@ -3,8 +3,9 @@ struct
 
 open HolKernel Abbrev boolLib HOLPP
      blibBtools blibDatatype 
-     blibSyntax blibTffsyntax blibPredicate
-     blibExtractvar blibExtracttype blibNamevar blibNametype blibHO
+     blibSyntax blibTffsyntax
+     blibExtractvar blibExtracttype 
+     blibNamevar blibNametype blibHO
 
 fun PRINTTFF_ERR function message =
   HOL_ERR{origin_structure = "blibPrinter",

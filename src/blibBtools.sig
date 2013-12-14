@@ -3,6 +3,7 @@ sig
   
 (* FUNCTION *)
   val inv :('a -> 'b -> 'c) -> 'b -> 'a -> 'c
+  val repeat_change : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
   (* error *)
   val success : ('a -> 'b) -> 'a -> bool
   val wrap : string -> string -> string -> ('a -> 'b) -> 'a -> 'b
@@ -27,17 +28,14 @@ sig
   
 (* LIST *)
   val mk_list : int -> 'a -> 'a list
-  val mk_reflist : int -> 'a -> ('a ref) list
   (* arithmetic *)
   val suml : int list -> int
-  val multl : int list -> int list -> int list
   (* set *) 
   val is_member : ''a -> ''a list -> bool
   val is_member_eq : ('a -> 'a -> bool) -> 'a -> 'a list ->  bool
   val erase_double : ''a list -> ''a list
   val erase_double_eq : ('a -> 'a -> bool) -> 'a list -> 'a list
   val add_once : ''a -> ''a list -> ''a list
-  val remove : ''a -> ''a list -> ''a list
   val inter : ''a list -> ''a list -> ''a list
   val substract : ''a list -> ''a list -> ''a list
   val subset : ''a list -> ''a list -> bool
@@ -48,7 +46,6 @@ sig
   (* sort *)
   val quicksort : (('a * 'a) -> bool) -> 'a list -> 'a list
   (* dictionnary *)
-  val repeat_change : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
   val add_entry : (''a * 'b) -> (''a * 'b) list -> (''a * 'b) list
   val lookup : ''a -> (''a * 'b) list -> 'b
   (* condition *)  

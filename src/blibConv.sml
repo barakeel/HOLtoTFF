@@ -1,4 +1,4 @@
-structure blibConv :> blibConv  =
+structure blibConv :> blibConv =
 struct
 
 open HolKernel Abbrev boolLib
@@ -316,8 +316,8 @@ fun FUN_CONV_sub abs term =
    (FUN_CONV_sub_w abs) term
    
 (* test
-val term = ``P (\x y. x + y + z) : bool``;
-val abs = ``\x y. x + y + z``;
+val term = ``P (\x y. x + y) : bool``;
+val abs = ``\x y. x + y``;
 FUN_CONV_sub abs term;
 fun_axiom term;
 *)

@@ -11,6 +11,10 @@ fun BTOOLS_ERR function message =
 (*********** FUNCTION **********)  
 fun inv f a b = f b a
 
+fun repeat_change change l changing = 
+  case l of
+    [] => changing
+  | a :: m => repeat_change change m (change a changing)
 (* ERROR HANDLING *)
 fun success f x =
   (f x; true) handle _ => false
@@ -31,8 +35,7 @@ fun wrap s f m function x =
 fun space n =
   case n of
     0 => ""
-  | n => if n > 0 
-         then " " ^ (space (n-1))
+  | n => if n > 0 then " " ^ (space (n-1))
          else raise BTOOLS_ERR "space" ""
 
 fun indent n = "\n" ^ (space n)
@@ -102,28 +105,13 @@ fun mk_list n a =
       0 => []
     | _ => a :: mk_list (n -1) a
 
-fun mk_reflist n a =
-  if n < 0 then raise BTOOLS_ERR "mk_reflist" "negative number"
-  else
-    case n of 
-      0 => []
-    | _ => (ref a) :: mk_reflist (n -1) a
- 
-   
+
 (* NUMBER *)
 fun suml nl =
   case nl of
     [] => 0
   | n :: m => n + suml m
   
-fun multl al bl =
-  if not (length al = length bl) 
-  then raise BTOOLS_ERR "multl" "different length"
-  else
-    case al of
-      [] => []
-    | _  => (hd al) * (hd bl) :: multl (tl al) (tl bl) 
-
 (* SET *)
 fun is_member_eq equal elem list  = exists (equal elem) list
 
@@ -141,11 +129,6 @@ end
 
 fun add_once elem list =
   if is_member elem list then list else elem :: list
-
-fun remove elem list = 
-  case list of
-    [] => []
-  | a :: m => if a = elem then remove elem m else a :: remove elem m
  
 fun inter l1 l2 = filter (inv is_member l2) l1 
 
@@ -168,12 +151,6 @@ fun list_subset ll1 ll2 =
             list_subset (tl ll1) (tl ll2)
     
 fun merge ll = erase_double (List.concat ll)
-
-fun repeat_change change l changing = 
-  case l of
-    [] => changing
-  | a :: m => repeat_change change m (change a changing)
-
 (* ORDERING *)
 fun quicksort << xs = let
   fun qs [] = []
@@ -187,9 +164,8 @@ fun quicksort << xs = let
     qs xs
   end
 
-
-(* dictionnary *)
-  (* doesn't overwrite only the first add entry can do something *)
+(* DICTIONNARY *)
+(* doesn't overwrite *)
 fun add_entry entry dict = 
   if is_member (fst entry) (map fst dict)
   then dict
@@ -207,7 +183,7 @@ fun mk_list n a =
          else
            a :: mk_list (n -1) a
 
-(* condition *)
+(* CONDITION *)
 fun switch condresultl defaultresult = 
     case condresultl of
       [] => defaultresult  

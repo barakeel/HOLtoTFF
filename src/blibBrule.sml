@@ -22,8 +22,6 @@ fun LIST_AP_THM thm terml =
     [] => thm 
   | t :: m => LIST_AP_THM (AP_THM thm t) m 
 
-
-   
 fun EXTL bvl thm =
   case rev bvl of
     [] => thm

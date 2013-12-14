@@ -2,8 +2,7 @@ structure blibHO :> blibHO =
 struct
 
 open HolKernel Abbrev boolLib 
-     blibBtools 
-     blibSyntax blibTffsyntax
+     blibBtools blibSyntax blibTffsyntax
      blibExtractvar
 
 fun HIGHERORDER_ERR function message =

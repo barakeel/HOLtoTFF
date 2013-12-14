@@ -47,10 +47,11 @@ val th1 = mk_thm ([],``!x:'c y. x ∈ {y} = (x = y)``);
 val th2 = mk_thm ([],``!(P:'a-> bool) x. x ∈ P = P x``);
 val thml = [th1,th2];
 val goal:goal = ([], ``!x:num. (x = z) = {z} x``);
-BEAGLE_ORACLE thml goal;
-(* funconv *)  
-val goal : goal = ([],``(!y:num -> num -> num . P y) ==> (P (\x y. x + y))`` );
-
+BEAGLE_ORACLE thml goal;  
+val goal : goal = ([],``(!y:num -> num -> num . P y) ==> 
+(P (\x y. (x + y):num))`` );
+val goal : goal = ([],``(!y:int -> int -> int . P y) 
+==> (P (\x y. x + y:int))`` );
 
 
  
