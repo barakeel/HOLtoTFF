@@ -27,7 +27,7 @@ load "beagle"; open beagle;
 - optimisation (especially) on how to instantiate and paramodulate to
 *)
 BEAGLE_PROVE [] goal;
-BEAGLE_ORACLE
+BEAGLE_ORACLE [] goal;
 BEAGLE_NF_TAC [] goal
 metisTools.FO_METIS_TAC [] goal;
 val goal : goal = ([``2=3``],``3=2``);
