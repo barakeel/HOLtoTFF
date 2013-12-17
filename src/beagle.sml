@@ -12,6 +12,7 @@ fun BEAGLE_ERR function message =
 
 val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
 
+
 fun get_SZSstatus proofpath = 
   let val strl = readl proofpath in
     case strl of
