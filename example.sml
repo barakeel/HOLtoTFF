@@ -10,14 +10,14 @@ normalForms.CNF_CONV ``A \/ ~A``;
 val (finalgoall,_) = BEAGLE_NF_TAC thml goal;
 BEAGLE_ORACLE thml goal;
 BEAGLE_PROVE thml goal;
-mk_bcooperthml [] goal;
-get_atomlthml [] goal;
+
+
 
 val thml = [];
 val goal : goal = 
 ([``(f = (\x.(x:int) + (1:int)) ) /\ (P T)``],
 ``P (f (2:int) = (3:int)) : bool``);
-get_atomlthml [] goal;
+
 
 
 metisTools.METIS_TAC thml goal;
