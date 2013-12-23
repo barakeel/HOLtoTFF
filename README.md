@@ -19,9 +19,9 @@ Second step: Add the HOL path to your bash.rc directory
 Third step: Installing HOLtoTFF
 - open a terminal 
 - go to the directory you want to install HOLtoTFF
-- type git clone https://github.com/barakeel
+- type git clone https://github.com/barakeel/HOLtoTFF
 - type cd HOLtoTFF
-- open beagle.sml and change the directory path (e.g. val directory = yourpath)
+- open beagle.sml and change the directory path (e.g. val directory = yourHOLtoTFFpath)
 - type Holmake in the termianal
 
 Fourth step: Testing
