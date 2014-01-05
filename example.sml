@@ -1,16 +1,10 @@
 (* LIBRARIES *)
 (* 
-load "blibTactic"; open blibTactic;
 load "beagle"; open beagle;
-load "blibMonomorph"; open blibMonomorph; 
 *)
-
-normalForms.CNF_CONV ``A \/ ~A``;
-
 val (finalgoall,_) = BEAGLE_NF_TAC thml goal;
 BEAGLE_ORACLE thml goal;
 BEAGLE_PROVE thml goal;
-
 
 
 val thml = [];
@@ -19,9 +13,7 @@ val goal : goal =
 ``P (f (2:int) = (3:int)) : bool``);
 
 
-
 metisTools.METIS_TAC thml goal;
-metisTools.FO_METIS_TAC thml (hd finalgoall);
 
 val (goal1,_) = (PROBLEM_TO_GOAL_TAC thml goal);
 val (goal2,_) = CNF_CONV_TAC (hd goal1);
