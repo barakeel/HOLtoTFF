@@ -1,0 +1,32 @@
+\frametitle {Une preuve facile}
+
+\begin{prooftree}
+\AxiomC{$A \vdash A$}
+\AxiomC{$B \vdash B$}
+\RightLabel{$\wedge_i$}
+\BinaryInfC{$A,B \vdash A \wedge B$}
+\RightLabel{$\Rightarrow_i$}
+\UnaryInfC{$A \vdash B \Rightarrow (A \wedge B) $}
+\RightLabel{$\Rightarrow_i$}
+\UnaryInfC{$\vdash A \Rightarrow (B \Rightarrow (A \wedge B)) $}
+\end{prooftree}
+
+\scriptsize
+\begin{Verbatim}[frame=single]
+(* forward proof *)
+val th1 = ASSUME ``A:bool``;
+val th2 = ASSUME ``B:bool``;
+val th3 = CONJ th1 th2;
+val th4 = DISCH ``B:bool`` th3;
+val th5 = DISCH ``A:bool`` th4;
+\end{Verbatim}
+\begin{Verbatim}[frame=single]
+(* backward proof *)
+g(`A ==> B ==> A /\ B `);
+e(DISCH_TAC);
+e(DISCH_TAC);
+e(CONJ_TAC);
+e(ACCEPT_TAC th1);
+e(ACCEPT_TAC th2);
+\end{Verbatim}
+\normalsize

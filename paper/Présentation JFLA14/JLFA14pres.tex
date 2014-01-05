@@ -1,0 +1,227 @@
+\documentclass{beamer}
+\usepackage{etex}
+
+
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{beamerthemeshadow}
+\setbeamertemplate{navigation symbols}{}
+%packages indispensables 
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+%packages utiles
+\usepackage{alltt} %program code
+\usepackage{enumerate}
+\usepackage{amssymb} %lettres mathématiques
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bussproofs} %derivation
+\usepackage{hyperref} %to write path.
+\usepackage{color} % colouring text
+\usepackage{tabularx} % table
+{\renewcommand{\arraystretch}{1.5}
+
+\usepackage{fancyvrb}
+\usepackage{pgfplots}
+%%%%%%%%%%%%%%%%% graphics %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz} % to draw
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{trees,positioning,fit}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
+\newcommand{\slice}[5]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+  % slice
+  \draw[thick,fill=#5] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
+  % outer label
+  \node[label=\midangle:#4] at (\midangle:1) {};
+
+  % inner label
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{HOL4-Beagle, de l'ordre supérieur vers le premier ordre}  
+\author{Thibault Gauthier}
+\date{\today} 
+
+\frame{\titlepage} 
+
+\section{Introduction}
+\subsection{Deux types de prouveurs}
+\frame{\frametitle{Deux façon différentes de démontrer des théorèmes} 
+
+\noindent \begin{tabularx}{\textwidth}{ |c|X|X| }
+  \hline
+  & Prouveur interactif & Prouveur automatique\\
+  \hline  
+  Prouveurs & HOL4, Coq, \ldots 
+  & Beagle, SPASS, \ldots \\
+  \hline  Expressivité & Ordre supérieur. & Premier ordre.
+  \\  
+  \hline Efficacité & Guidé. & Automatique. \\
+  \hline Sûreté & Petit noyau.
+ & Code assez long. \\
+  \hline
+\end{tabularx}
+}
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\subsection{\'Enoncé du problème} 
+\frame{\frametitle{\'Enoncé du problème} 
+
+\textit{Problème} 
+Voilà deux prouveurs internes à HOL4.
+\begin{enumerate}
+\item[-] Metis: ordre supérieur
+\item[-] Cooper: arithmétique
+\end{enumerate}
+\pause
+\textit{Solution} Un prouveur externe.
+ \begin{enumerate}
+  \item[-] Beagle: premier ordre et arithmétique 
+\end{enumerate}
+}
+
+\subsection{Schéma d'interaction}
+\frame{\frametitle{Schéma d'interaction} 
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (conjecture) {conjecture};
+  \node [block, right of=conjecture,  node distance=3cm] (HOL1) 
+  {traduction};
+  \node [block, right of=HOL1, node distance=3cm] (TFF1) 
+  {fichier du problème};
+  \node [block, right of=TFF1, node distance=3cm, yshift=-1cm] (Beagle) 
+  {Preuve automatique};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
+  {fichier de la preuve};  
+  \node [block, dashed, below of=HOL1, node distance=2cm] (HOL2) 
+  {construction de la preuve};
+  \node [cloud, below of=conjecture, node distance=2cm] (theorem) 
+  {théorème};
+  \node [label=HOL4, draw=black, ultra thick, 
+  fit=(conjecture) (theorem) (HOL1) (HOL2)] {}; 
+  \node [label=format TFF, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
+  {}; 
+  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
+  % Draw edges
+  \draw [-to,black,ultra thick] (conjecture) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick] (TFF2) -- (HOL2);
+  \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
+  \draw [-to,black,ultra thick] (Beagle.south) to [out=225,in=330](theorem.south);
+\end{tikzpicture}
+}
+
+
+
+\section{Traduction vers le premier ordre}
+
+
+\frame{\frametitle{Ordre de la traduction vers le premier ordre}
+\begin{enumerate}
+  \item {\color{blue} Monomorphisation}
+  \item Négation de la conclusion
+  \item Mise en forme normale conjonctive
+  \item {\color{blue} $\lambda$-lifting}
+  \item {\color{blue} Elimination des booléens}
+  \item Mise sous forme d'un ensemble de clauses
+  \item {\color{blue} Défonctionnalisation}
+  \item Injection des numéraux dans les entiers
+  \item Instantiation des variables booléennes quantifiées
+\end{enumerate}
+}
+
+\subsection{Monomorphisation}
+\frame{\frametitle{Monomorphisation}
+Instanciation des types polymorphes ($a$,$b$,$\ldots$) de HOL4 par des types monomorphes ($int$,$bool$,$\ldots$). 
+ \begin{exampleblock}{Problème}
+Théorème 1: $\forall y:b.\ {\color{violet!60}D} \ y$ \ \ 
+Théorème 2: $\forall x:a .\ {\color{blue!60}D}\ x \Rightarrow {\color{blue!60}C}\ x$
+\\Conjecture : ${\color{orange}C} \ 2$
+ \end{exampleblock}
+
+ \begin{exampleblock}{Unification du type de ${\color{blue!60}C} : a  \rightarrow bool$  et de ${\color{orange}C}: int \rightarrow bool$ }
+Théorème 1: $\forall y:b.\ {\color{violet!60}D} \ y$ \ \ 
+Théorème 2: $\forall x:num.\ {\color{orange}D}\ x \Rightarrow {\color{orange}C}\ x$
+ \\Conjecture: ${\color{orange}C}\ 2$
+\end{exampleblock}
+
+ \begin{exampleblock}{Unification du type de ${\color{violet!60}D} : b  \rightarrow bool$  et de ${\color{orange}D}: num \rightarrow bool$ }
+Théorème 1: $\forall y:num.\ {\color{orange}D} \ y$ \ \ 
+\\Théorème 2: $\forall x:num.\ {\color{orange}D}\ x \Rightarrow {\color{orange}C}\ x$
+\\Conjecture: ${\color{orange}C}\ 2$
+\end{exampleblock}
+}
+
+\subsection{$\lambda$-lifting}
+\frame{\frametitle{$\lambda$-lifting}                    
+\[ P\ (\lambda x.x+1) \]
+\[ \exists f.\ (\forall x.\ f\ x = x + 1) \wedge P\ f \]
+}
+
+\subsection{Elimination des booléens}
+\frame{\frametitle{Elimination des booléens}
+
+\[P (\forall x.\ x=0)\]
+\[((\forall x.\ x=0) \Rightarrow P\ true) \wedge 
+   (\neg (\forall x.\ x=0)  \Rightarrow P\ false)\]
+}
+
+\subsection{Défonctionnalisation}
+\frame{\frametitle{Défonctionnalisation}
+Soit $App$ vérifiant $App\ f\ x$ = $f\ x$. On effectue une défonctionnalisation lorsqu'une fonction non-arithmétique: 
+
+ \begin{enumerate}
+ \item [-] est quantifiée universellement
+   \[!h.\ h\ x\ y = 0\]
+   \[!h.\ App\ (App\ h\ x)\ y = 0\]
+ \item [-] a le même type qu'une fonction quantifiée universellement
+ \item [-] a un nombre d'arguments qui varie
+   \[h\ x\ y\ z\wedge h\ x = g\]
+   \[App\ (App\ (h\ x)\ y)\ z \wedge h\ x = g\]
+ \end{enumerate}.
+}
+
+
+\section{Conclusion}
+\subsection{Qualités et limites}
+\frame{\frametitle{Qualités et limites de l'interaction HOL4-Beagle}
+Qualités: 
+\begin{enumerate}
+\item [-] Résout des problèmes arithmétiques sans guidage
+\item [-] Utilise un format de communication répandu
+\item [-] Est correcte et préserve l'insatisfaisabilité
+\end{enumerate} 
+Limites: 
+\begin{enumerate}
+\item [-] 20\% des conjectures prouvées par Metis ne sont pas prouvées par Beagle.
+\item [-] Est incomplète et ne préserve pas la satisfaisabilité
+\item [-] Ne génére pas automatiquement des théorèmes aidant à prouver la conjecture
+\item [-] Ne rejoue pas la preuve
+\end{enumerate} 
+}
+
+\end{document}
+

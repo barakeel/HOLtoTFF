@@ -1,0 +1,30 @@
+
+Enoncé du problème
+  Le principe de résolution de ce problème est implémentée pour de plus larges projets tels que sledgehammer pour Isabelle/HOL et flyspeck pour HOL Light.
+
+
+Etapes de la traduction:
+  (Preuve par l'absurde)
+  (Arrive plusieurs fois)
+  L'ordre est celui le plus naturel du point de vue implémentation mais les étapes sont presque toute interchangeables, le lambda-lifting devant etre effectué avant la défonctionnalisation.
+  Les étapes 2,3,6 sont des étapes de normalisation.
+  L'étape 7 vient du fait que le type numéral est le type natif en HOL4 alors que Beagle ne reconnait que les entiers
+
+Lambda-lifting:
+
+Elimination des booléens.
+  Cette étape consiste à éliminer les formules booléennes en arguments. 
+
+  Ces deux transformations ne sont pas locales, c'est à dire qu'elle s'effectue au niveau du plus petit atome contenant la lambda-abstraction où l'argument booléen.
+
+
+
+
+Qualités et limites:
+
+Qualité:
+  Le format TPTP
+
+Limites
+  Le prouveur externe n'a donc aucune information sur les constantes non arithmétiques du problème.
+ 
