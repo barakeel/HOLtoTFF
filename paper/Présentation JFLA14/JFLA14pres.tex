@@ -8,6 +8,7 @@
 \usepackage{beamerthemeshadow}
 \setbeamertemplate{navigation symbols}{}
 %packages indispensables 
+\usepackage[frenchb]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -37,22 +38,7 @@
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
 
-\newcommand{\slice}[5]{
-  \pgfmathparse{0.5*#1+0.5*#2}
-  \let\midangle\pgfmathresult
-  % slice
-  \draw[thick,fill=#5] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
 
-  % outer label
-  \node[label=\midangle:#4] at (\midangle:1) {};
-
-  % inner label
-  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
-  \let\temp\pgfmathresult
-  \pgfmathparse{max(\temp,-0.5) + 0.8}
-  \let\innerpos\pgfmathresult
-  \node at (\midangle:\innerpos) {#3};
-}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
@@ -64,26 +50,19 @@
 
 \section{Introduction}
 \subsection{Deux types de prouveurs}
-\frame{\frametitle{Deux façon différentes de démontrer des théorèmes} 
+\frame{\frametitle{Deux types de prouveurs} 
 
 \noindent \begin{tabularx}{\textwidth}{ |c|X|X| }
   \hline
-  & Prouveur interactif & Prouveur automatique\\
+  & HOL4 & Beagle\\
   \hline  
-  Prouveurs & HOL4, Coq, \ldots 
-  & Beagle, SPASS, \ldots \\
-  \hline  Expressivité & Ordre supérieur. & Premier ordre.
-  \\  
-  \hline Efficacité & Guidé. & Automatique. \\
-  \hline Sûreté & Petit noyau.
- & Code assez long. \\
+  Type & Interactif & Automatique \\
+  \hline Expressivité & Ordre supérieur & Premier ordre\\  
+  \hline Sûreté & Petit noyau
+ & Code assez long \\
   \hline
 \end{tabularx}
 }
-
-\begin{frame}
-  \tableofcontents
-\end{frame}
 
 \subsection{\'Enoncé du problème} 
 \frame{\frametitle{\'Enoncé du problème} 
@@ -91,8 +70,8 @@
 \textit{Problème} 
 Voilà deux prouveurs internes à HOL4.
 \begin{enumerate}
-\item[-] Metis: ordre supérieur
-\item[-] Cooper: arithmétique
+\item[-] Metis: premier ordre + traduction de l'ordre supérieur vers le premier ordre
+\item[-] Cooper: arithmétique 
 \end{enumerate}
 \pause
 \textit{Solution} Un prouveur externe.
@@ -134,7 +113,9 @@ Voilà deux prouveurs internes à HOL4.
 \end{tikzpicture}
 }
 
-
+\begin{frame}
+  \tableofcontents
+\end{frame}
 
 \section{Traduction vers le premier ordre}
 
@@ -145,64 +126,98 @@ Voilà deux prouveurs internes à HOL4.
   \item Négation de la conclusion
   \item Mise en forme normale conjonctive
   \item {\color{blue} $\lambda$-lifting}
-  \item {\color{blue} Elimination des booléens}
+  \item {\'Elimination des booléens}
   \item Mise sous forme d'un ensemble de clauses
   \item {\color{blue} Défonctionnalisation}
-  \item Injection des numéraux dans les entiers
-  \item Instantiation des variables booléennes quantifiées
 \end{enumerate}
 }
 
 \subsection{Monomorphisation}
 \frame{\frametitle{Monomorphisation}
-Instanciation des types polymorphes ($a$,$b$,$\ldots$) de HOL4 par des types monomorphes ($int$,$bool$,$\ldots$). 
+Instanciation des types polymorphes ($a$,$\ldots$) par des types monomorphes ($int$,$bool$,$\ldots$). 
  \begin{exampleblock}{Problème}
-Théorème 1: $\forall y:b.\ {\color{violet!60}D} \ y$ \ \ 
-Théorème 2: $\forall x:a .\ {\color{blue!60}D}\ x \Rightarrow {\color{blue!60}C}\ x$
+Thm 1: $\forall x:a.\ {\color{violet!60}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{violet!60}C} = \lambda x:a.\ {\color{violet!60}D}\ x\ 0$
 \\Conjecture : ${\color{orange}C} \ 2$
  \end{exampleblock}
-
- \begin{exampleblock}{Unification du type de ${\color{blue!60}C} : a  \rightarrow bool$  et de ${\color{orange}C}: int \rightarrow bool$ }
-Théorème 1: $\forall y:b.\ {\color{violet!60}D} \ y$ \ \ 
-Théorème 2: $\forall x:num.\ {\color{orange}D}\ x \Rightarrow {\color{orange}C}\ x$
+\pause
+ \begin{exampleblock}{Unification de ${\color{violet!60}C} : a \rightarrow int \rightarrow bool$  et de ${\color{orange}C}: int \rightarrow int \rightarrow bool$ }
+Thm 1: $\forall x:a.\ {\color{violet!60}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{orange}C} = \lambda x:int.\ {\color{orange}D}\ x\ 0$
  \\Conjecture: ${\color{orange}C}\ 2$
 \end{exampleblock}
-
- \begin{exampleblock}{Unification du type de ${\color{violet!60}D} : b  \rightarrow bool$  et de ${\color{orange}D}: num \rightarrow bool$ }
-Théorème 1: $\forall y:num.\ {\color{orange}D} \ y$ \ \ 
-\\Théorème 2: $\forall x:num.\ {\color{orange}D}\ x \Rightarrow {\color{orange}C}\ x$
-\\Conjecture: ${\color{orange}C}\ 2$
+\pause
+ \begin{exampleblock}{Unification de ${\color{violet!60}D} : a \rightarrow  int \rightarrow bool$  et de ${\color{orange}D}: int \rightarrow int \rightarrow bool$ }
+Thm 1: $\forall x:int.\ {\color{orange}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{orange}C} = \lambda x:int.\ {\color{orange}D}\ x\ 0$
+ \\Conjecture: ${\color{orange}C}\ 2$
 \end{exampleblock}
 }
 
+
 \subsection{$\lambda$-lifting}
-\frame{\frametitle{$\lambda$-lifting}                    
-\[ P\ (\lambda x.x+1) \]
-\[ \exists f.\ (\forall x.\ f\ x = x + 1) \wedge P\ f \]
+\frame{\frametitle{$\lambda$-lifting}
+ \begin{exampleblock}{Problème}
+Thm 1: $\forall x.\ D\ x\ 0$ \ \ 
+Thm 2: $C = \lambda x.\ D\ x\ 0$
+\\Conjecture: $C\ 2$
+\end{exampleblock}
+ \begin{exampleblock}{Négation de la conclusion}
+\[\lbrace \forall x.\ D\ x\ 0 \ , \  
+C = \lambda x.\ D\ x\ 0 \ , \  
+\neg (C\ 2) \rbrace\]
+\end{exampleblock}
+
+\pause
+$\lambda$-lifting :
+\[C = \lambda x.\ D\ x\ 0 \ \rightarrowtail \
+ \exists {\color{blue}f}.\ (\forall x.\ {\color{blue}f}\ x = D\ x\ 0) \wedge C = {\color{blue}f} \]
+
+
+\begin{exampleblock}{Mise sous forme d'un ensemble de clauses}
+\[\lbrace 
+\forall x.\ D\ x\ 0 \ , \ 
+\forall x.\ f\ x = D\ x\ 0 \ , \ 
+C = f \ , \ 
+\neg (C\ 2) \rbrace \]
+\end{exampleblock}
+
 }
 
-\subsection{Elimination des booléens}
-\frame{\frametitle{Elimination des booléens}
-
-\[P (\forall x.\ x=0)\]
-\[((\forall x.\ x=0) \Rightarrow P\ true) \wedge 
-   (\neg (\forall x.\ x=0)  \Rightarrow P\ false)\]
-}
 
 \subsection{Défonctionnalisation}
 \frame{\frametitle{Défonctionnalisation}
-Soit $App$ vérifiant $App\ f\ x$ = $f\ x$. On effectue une défonctionnalisation lorsqu'une fonction non-arithmétique: 
+Soit ${\color{blue}App}$ vérifiant ${\color{blue}App}\ f\ x$ = $f\ x$. On effectue une défonctionnalisation lorsqu'une fonction non-arithmétique : 
 
  \begin{enumerate}
  \item [-] est quantifiée universellement
-   \[!h.\ h\ x\ y = 0\]
-   \[!h.\ App\ (App\ h\ x)\ y = 0\]
+   $!h.\ h\ x\ y \ \rightarrowtail \ !h.\ {\color{blue}App}\ ({\color{blue}App}\ h\ x)\ y$
  \item [-] a le même type qu'une fonction quantifiée universellement
- \item [-] a un nombre d'arguments qui varie
-   \[h\ x\ y\ z\wedge h\ x = g\]
-   \[App\ (App\ (h\ x)\ y)\ z \wedge h\ x = g\]
- \end{enumerate}.
+ \item [-] a un nombre d'arguments auxquelles la fonction est appliquée qui varie
+   $\lbrace 
+   h\ x\ y\ z \ , \ h\ x = j 
+   \rbrace  \ \rightarrowtail \ \lbrace 
+   {\color{blue}App}\ ({\color{blue}App}\ (h\ x)\ y)\ z \ , 
+   \ h\ x = j
+   \rbrace$
+\end{enumerate}
+\pause
+
+\begin{exampleblock}{Défonctionnalisation}
+\[\lbrace 
+\forall x.\ D\ x\ 0 \ , \ 
+\forall x.\ f\ x = D\ x\ 0 \ , \ 
+C = f \ , \ 
+\neg (C\ 2) \rbrace \]
+\[\lbrace 
+\forall x.\ D\ x\ 0 \ , \ 
+\forall x.\ {\color{blue}App}\ f\ x = D\ x\ 0 \ , \ 
+C = f \ , \ 
+\neg (C\ 2) \rbrace \]
+\end{exampleblock}
+
 }
+
 
 
 \section{Conclusion}
@@ -210,16 +225,16 @@ Soit $App$ vérifiant $App\ f\ x$ = $f\ x$. On effectue une défonctionnalisatio
 \frame{\frametitle{Qualités et limites de l'interaction HOL4-Beagle}
 Qualités: 
 \begin{enumerate}
-\item [-] Résout des problèmes arithmétiques sans guidage
-\item [-] Utilise un format de communication répandu
-\item [-] Est correcte et préserve l'insatisfaisabilité
+\item [-] est correcte (préserve la satisfaisabilité)
+\item [-] prouve 80\% des conjectures prouvées par Metis auxquelles on a enlevé les lemmes arithmétiques
+\item [-] utilise un format de communication répandu
+
 \end{enumerate} 
 Limites: 
 \begin{enumerate}
-\item [-] 20\% des conjectures prouvées par Metis ne sont pas prouvées par Beagle.
-\item [-] Est incomplète et ne préserve pas la satisfaisabilité
-\item [-] Ne génére pas automatiquement des théorèmes aidant à prouver la conjecture
-\item [-] Ne rejoue pas la preuve
+\item [-] est incomplète et (ne préserve pas l'insatisfaisabilité)
+\item [-] ne cherche pas automatiquement des théorèmes aidant à prouver la conjecture
+\item [-] ne rejoue pas (encore) la preuve
 \end{enumerate} 
 }
 

@@ -1,17 +1,14 @@
 (* LIBRARIES *)
 (* 
 load "beagle"; open beagle;
+show_assums:= true;
 *)
-
-(* monomorphisation *)
-val thml = [``!y:'b. D y``,``!x:'a. D x ==> C x``]
-val goal = 
 
 
 
 val thml = [];
 val goal : goal = 
-([``(f = (\x.(x:int) + (1:int)) ) /\ (P T)``],
+([``(f = (\x.(x:int) + (1:int))) /\ (P T)``],
 ``P (f (2:int) = (3:int)) : bool``);
 
 metisTools.METIS_TAC thml goal;
