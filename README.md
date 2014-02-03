@@ -1,9 +1,8 @@
 Installation (on Linux) (need emacs installed with HOL interactive mode)
 
 First step: Installing (polyml/HOL)
-- open a terminal
-- type sudo apt-get install polyml
-- open a terminal 
+- look for the latest version of polyml (http://www.polyml.org/)
+- extract and type ./configure --enable-shared instead of ./configure
 - go to the directory you want to install HOL
 - type git clone https://github.com/mn200/HOL
 - type cd HOL 
