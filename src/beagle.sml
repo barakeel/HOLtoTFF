@@ -10,7 +10,7 @@ fun BEAGLE_ERR function message =
 	    origin_function = function,
             message = message}
 
-val directory = "/home/thibault/Desktop/SMLproject/HOLtoTFF/"
+val directory = "/home/gauthier/HOLtoTFF\\ workspace/HOLtoTFF/"
 
 
 fun get_SZSstatus proofpath = 

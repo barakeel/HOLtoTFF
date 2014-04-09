@@ -324,7 +324,6 @@ fun write_tff path goal =
   )
   handle _ => raise PRINTTFF_ERR "write_tff" path
 
- 
 
 end
 

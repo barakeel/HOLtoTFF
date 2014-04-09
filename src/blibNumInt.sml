@@ -217,11 +217,7 @@ fun intf_axiom faxiom =
 
 (* test 
 val term = concl (hd thml1);
-
 *)
-
-
-
 
 (* FREE VARIABLES *)
 fun intfv_def term = 

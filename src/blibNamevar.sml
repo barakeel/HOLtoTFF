@@ -46,7 +46,7 @@ fun give_pred_type tyadict term (v,a) =
   let val atoml = find_atoml term in
     if is_member v atoml then ((v,a),"$o")
     else
-  (* functions that returns "bool" are actually predicates returing "$o" *)  
+  (* functions that returns "bool" are actually predicates returing "$o" (not always) *)  
     let val tyname = lookup (type_of v,a) tyadict in
       if success (last_n_char 6) tyname
         then
