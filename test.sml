@@ -14,7 +14,6 @@ load "blibBtactic"; open blibBtactic;
 load "blibTactic"; open blibTactic;
 load "blibNumInt"; open blibNumInt;
 load "blibReader"; open blibReader;
-load "blibReplayer"; open blibReplayer;
 load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
 load "blibBrule"; open blibBrule;
