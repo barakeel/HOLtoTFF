@@ -1,78 +1,46 @@
 structure blibNamevar :> blibNamevar =
 struct
 
-open HolKernel Abbrev boolLib numSyntax
-     blibExtractvar blibFreshvar blibNametype  
-     blibBtools blibDatatype
-     blibSyntax blibTffsyntax
-     
-fun NAMEVAR_ERR function message =
-  HOL_ERR{origin_structure = "blibNamevar",
-          origin_function = function,
-          message = message}
+open HolKernel Abbrev boolLib blibExtractvar blibNametype blibBtools 
+
+fun name_tff str name = if is_alphanum_ name then str ^ name else str
 
 (* bound variable: bv *)
-fun name_tff_bv term = name_tff "X" term
+fun name_tff_bv term = name_tff "X" (fst (dest_var term))
 fun app_name_tff_bv term = (term,name_tff_bv term)
-
 fun create_bvdict term =
-  let val bvl = get_bvl term in 
-  let val bvnamel = map app_name_tff_bv bvl in
-    add_newnamel bvnamel []
-  end end 
+  add_newnamel (map app_name_tff_bv (get_bvl term)) []
 
 (* free variable: fv *)
-fun name_tff_fv term = name_tff "x" term
+fun name_tff_fv term = name_tff "x" (fst (dest_var term))
 fun app_name_tff_fv term = (term,name_tff_fv term)
-  
 fun create_fvdict term =
-  let val fvl = get_fvl term in 
-  let val fvnamel = map app_name_tff_fv fvl in
-    add_newnamel fvnamel []
-  end end 
+  add_newnamel (map app_name_tff_bv (get_fvl term)) []
 
 (* constant: c *)
-fun name_tff_c term = name_tff "c" term
+fun name_tff_c term = name_tff "c" (fst (dest_const term))
 fun app_name_tff_c term = (term,name_tff_c term)
-
 fun create_cdict term =
-  let val cl = get_cl term in 
-  let val cnamel = map app_name_tff_c cl in
-    add_newnamel cnamel []
-  end end
+  add_newnamel (map app_name_tff_bv (get_cl term)) []
 
-fun give_pred_type tyadict term (v,a) = 
+(* small correction before printing *)
+fun give_type tyadict term (v,a) = 
   (* variables *)
   let val atoml = find_atoml term in
-    if is_member v atoml then ((v,a),"$o")
-    else
-  (* functions that returns "bool" are actually predicates returing "$o" (not always) *)  
-    let val tyname = lookup (type_of v,a) tyadict in
-      if success (last_n_char 6) tyname
-        then
-        if last_n_char 6 tyname = "> bool"
-        then ((v,a), (rm_last_n_char 6 tyname) ^ "> $o")
-        else ((v,a),tyname)
+    if is_member v atoml then ((v,a),"$o") else
+  (* functions *)  
+    let val tyname = name_tya (type_of v,a) tyadict in
+      if last_n_char 9 tyname = "> ty_bool"
+      then ((v,a), (rm_last_n_char 9 tyname) ^ "> $o")
       else ((v,a),tyname)
+      handle _ => ((v,a),tyname)
     end
   end
   
-fun create_bvatydict term tyadict =
-  let val bval = get_bval term in
-    map (give_pred_type tyadict term) bval
-  end 
-
 fun create_fvatydict term tyadict =
-  let val fval = get_fval term in
-    map (give_pred_type tyadict term) fval
-  end 
-
+  map (give_type tyadict term) (get_fval term)
 fun create_catydict term tyadict =
-  let val cal = get_cal term in
-    map (give_pred_type tyadict term) cal
-  end 
-(* end pred *)     
-   
-  
+  map (give_type tyadict term) (get_cal term)
+         
 end
   

@@ -12,4 +12,5 @@ sig
                          ((term * int) * string) list
   val create_catydict : term -> ((hol_type * int) * string) list ->
                         ((term * int) * string) list
+
 end

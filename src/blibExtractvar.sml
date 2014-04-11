@@ -4,94 +4,51 @@ struct
 open HolKernel Abbrev boolLib 
      blibBtools blibDatatype blibSyntax blibTffsyntax
 
-fun EXTRACTVAR_ERR function message =
-  HOL_ERR{origin_structure = "blibExtractvar",
-          origin_function = function,
-          message = message}
+datatype VARSORT = Bvar | Fvar | Cvar
 
 fun info_var term bvl =
-  case structterm term of
-    Numeral => []
-  | Integer => []
-  | Var => if is_member term bvl
-           then [((term,0),Boundvar)] 
-           else [((term,0),Freevar)]
-  | Const => (
-             case structleafc term of
-               True => []
-             | False => []
-             | _ => [((term,0),Constvar)]
-             )
-  | Comb => 
-    ( 
-    (* hack NLIA *)
-    case structcomb term of
-      Multn => if linearn term then info_var_binop term bvl
-                               else info_var_app term bvl
-    | Multi => if lineari term then info_var_binop term bvl
-                               else info_var_app term bvl
-    | _ =>
-    (
-    (* end hack NLIA *)
-    case structarity term of
-      Binop => info_var_binop term bvl
-    | Unop => info_var_unop term bvl
-    | Quant => let val (qbvl,t) = strip_quant term in
-                  info_var_abs qbvl t bvl
-                end       
-    | _ => info_var_app term bvl
-      
-    ))         
-    | Abs => let val (absbvl,t) = strip_abs term in
-               info_var_abs absbvl t bvl 
-             end  
+  if is_var term then 
+    if is_member term bvl then [((term,0),Bvar)] else [((term,0),Fvar)]
+  else if is_const term then 
+    if term = T orelse term = F then []
+    else [((term,0),Cvar)]
+  else if is_binop term then info_var (lhand term) bvl @ info_var (rand term) bvl
+  else if is_unop term then info_var (rand term) bvl
+  else if is_quant term then 
+    let val (qbvl,t) = strip_quant term in info_var_abs qbvl t bvl end       
+  else if is_abs term then 
+    let val (absbvl,t) = strip_abs term in info_var_abs absbvl t bvl end
+  else info_var_app term bvl
 and info_var_l terml bvl = 
   case terml of
     [] => [] 
-  | t :: m => (info_var t bvl) @ (info_var_l m bvl)
-and info_var_unop term bvl =
-  let val (oper,l) = strip_comb term in
-  let val lhs = hd l in
-    info_var lhs bvl
-  end end
-and info_var_binop term bvl = 
-  let val (oper,l) = strip_comb term in
-  let 
-    val lhs = hd l
-    val rhs = hd (tl l) 
-  in
-    (info_var lhs bvl) @ (info_var rhs bvl) 
-  end end
+  | t :: m => info_var t bvl @ info_var_l m bvl
 and info_var_abs bvl1 term bvl2 = 
-  (info_var_l bvl1 (bvl1 @ bvl2)) @ (info_var term (bvl1 @ bvl2))
+  info_var_l bvl1 (bvl1 @ bvl2) @ info_var term (bvl1 @ bvl2)
 and info_var_app term bvl =
   let val (oper,argl) = strip_comb term in
   let 
     val n = length argl 
     val l = info_var_l argl bvl 
   in
-    case structterm oper of
-      Numeral => raise EXTRACTVAR_ERR "info_var_" "oper is num"
-    | Integer => raise EXTRACTVAR_ERR "info_var_" "oper is int"
-    | Var =>  if is_member oper bvl
-              then ((oper,n),Boundvar) :: l
-              else ((oper,n),Freevar) :: l
-    | Const => ((oper,n),Constvar) :: l
-    | Comb => raise EXTRACTVAR_ERR "info_var_" "oper is comb"
-    | Abs => let val (absbvl,t) = strip_abs oper in
-               info_var_abs absbvl t bvl @ l
-             end  
+    if is_var oper then 
+      if is_member oper bvl then ((oper,n),Bvar) :: l else ((oper,n),Fvar) :: l
+    else if is_const oper then ((oper,n),Cvar) :: l
+    else if is_abs oper then 
+      let val (abvl,t) = strip_abs oper in info_var_abs abvl t bvl @ l end  
+    else raise B_ERR "info_var" "comb" 
   end end
 
+(* test
+val term = ``(\x. (z = 2))``;
+*)
 fun info_varl term = erase_double (info_var term [])
-fun list_info_varl terml = erase_double (info_var_l terml [])
 (* return a list of triple (variable,number of arguments,structure) *)
 
-
-fun is_in_bval (a,b) = (b = Boundvar)
-fun is_in_fval (a,b) = (b = Freevar)
-fun is_in_cal (a,b) = (b = Constvar)
-fun is_in_fvcal (a,b) = (b = Freevar) orelse (b = Constvar)
+fun is_in_bval (a,b) = (b = Bvar)
+fun is_in_fval (a,b) = (b = Fvar)
+fun is_in_cal (a,b) = (b = Cvar)
+fun is_in_fvcal (a,b) = (b = Fvar) orelse (b = Cvar)
 
 fun get_bval term = map fst (filter is_in_bval (info_varl term))
 fun get_fval term = map fst (filter is_in_fval (info_varl term))

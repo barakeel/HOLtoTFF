@@ -38,7 +38,7 @@ fun REMOVE_DEF def thm =
     th4
   end end end end end
 
-fun REMOVE_DEFL defl thm = repeat_change REMOVE_DEF defl thm
+fun REMOVE_DEFL defl thm = List.foldl REMOVE_DEF defl thm
 
 
 end

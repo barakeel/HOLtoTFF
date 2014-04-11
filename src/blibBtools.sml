@@ -3,154 +3,80 @@ struct
 
 open HolKernel boolLib
 
-fun BTOOLS_ERR function message =
-  HOL_ERR {origin_structure = "blibBtools",
-	         origin_function = function,
-           message = message}
-
-(*********** FUNCTION **********)  
+(* FUNCTION *)  
 fun inv f a b = f b a
+fun adj f a = (a, f a)
 
-fun repeat_change change l changing = 
-  case l of
-    [] => changing
-  | a :: m => repeat_change change m (change a changing)
-(* ERROR HANDLING *)
+fun fst_f f (a,b) = (f a, b)
+fun snd_f f (a,b) = (a, f b)
+
 fun success f x =
   (f x; true) handle _ => false
   
-fun wrap s f m function x =
+fun wrap f m function x =
   function x               
   handle  
     HOL_ERR {origin_structure = s1, origin_function = f1, message = m1}
-      => raise HOL_ERR {origin_structure = s ^ " - " ^ s1,
+      => raise HOL_ERR {origin_structure = s1,
                         origin_function = f ^ " - " ^ f1,
                         message = m ^ " - " ^ m1}           
   | UNCHANGED => raise UNCHANGED
-  | _ => raise HOL_ERR {origin_structure = s,
+  | _ => raise HOL_ERR {origin_structure = "blib",
                         origin_function = f,
                         message = m}
 
-(********** STRINGTOOOLS ***********)
-fun space n =
-  case n of
-    0 => ""
-  | n => if n > 0 then " " ^ (space (n-1))
-         else raise BTOOLS_ERR "space" ""
+fun B_ERR function message =
+  HOL_ERR{origin_structure = "blib",
+          origin_function = function,
+          message = message}
 
-fun indent n = "\n" ^ (space n)
-
+(* STRINGTOOOLS *)
 fun first_n_char n str = String.substring (str,0,n)
 fun rm_first_n_char n str = String.substring (str,n,String.size str - n)
 
 fun last_n_char n str = String.substring (str,String.size str - n,n)
 fun rm_last_n_char n str = String.substring (str,0,String.size str - n)
 
-
-
-fun char_place_aux ch str n =
-  if first_n_char 1 str = ch then n
-  else char_place_aux ch (rm_first_n_char 1 str) (n + 1)
-fun char_place ch str = char_place_aux ch str 0
-
-fun char_in ch str = success (char_place ch) str 
-
-
-(* name *)
-fun name_strn str n = str ^ (Int.toString n) 
-
-fun list_name_str_aux str n = 
-  case n of
-    0 => []
-  | n => if n < 0 then raise BTOOLS_ERR "list_name_str" ""
-         else str ^ (Int.toString n) :: list_name_str_aux str (n - 1)
-
-fun list_name_str str n = rev (list_name_str_aux str n)
-(* end name *) 
- 
-(* test *)
-(* warning: include the empty string *)
-fun is_alphanumor_charl charl= 
+(* include the empty string *)
+fun is_alphanum_charl charl= 
   case charl of
     [] => true    
   | a :: m => (Char.isAlphaNum a orelse (Char.toString a) = "_") 
-              andalso is_alphanumor_charl m  
+              andalso is_alphanum_charl m  
 
-fun is_alphanumor_ str = is_alphanumor_charl (explode str)
+fun is_alphanum_ str = is_alphanum_charl (explode str)
+fun alias str1 str2 = if is_alphanum_ str2 then str2 else str1
 
-fun string_to_int_aux l =
-  case l of
-    [] => 0
-  | c :: m => case Char.toString c of 
-                "0" => 0 + 10 * (string_to_int_aux m)
-              | "1" => 1 + 10 * (string_to_int_aux m)
-              | "2" => 2 + 10 * (string_to_int_aux m)
-              | "3" => 3 + 10 * (string_to_int_aux m)
-              | "4" => 4 + 10 * (string_to_int_aux m)
-              | "5" => 5 + 10 * (string_to_int_aux m)
-              | "6" => 6 + 10 * (string_to_int_aux m)
-              | "7" => 7 + 10 * (string_to_int_aux m)
-              | "8" => 8 + 10 * (string_to_int_aux m)
-              | "9" => 9 + 10 * (string_to_int_aux m)
-              | _   => raise BTOOLS_ERR "string_to_int" 
-                         ((String.implode l) ^ " not a number")
-                         
-fun string_to_int str = string_to_int_aux (rev (String.explode str))
+fun concats s strl = 
+  case strl of
+    [] => ""
+  | [str] => str
+  | str :: m => str ^ s ^ concats s m
 
-(********* LISTTOOLS **********) 
+(* LIST *) 
 fun mk_list n a =
-  if n < 0 then raise BTOOLS_ERR "mk_list" "negative number"
+  if n < 0 then raise B_ERR "mk_list" "Negative"
   else
     case n of 
       0 => []
     | _ => a :: mk_list (n -1) a
 
 
-(* NUMBER *)
-fun suml nl =
-  case nl of
-    [] => 0
-  | n :: m => n + suml m
-  
 (* SET *)
-fun is_member_eq equal elem list  = exists (equal elem) list
-
-fun erase_double_eq equal list  =
+fun is_member_eq eq elem list  = exists (eq elem) list
+fun erase_double_eq eq list  =
   case list of
    [] => []
- | a :: m => if is_member_eq equal a m 
-             then erase_double_eq equal m 
-             else a :: erase_double_eq equal m
+ | a :: m => if is_member_eq eq a m 
+             then erase_double_eq eq m 
+             else a :: erase_double_eq eq m
 
-local fun equal x y = (x = y) in
-  fun is_member elem list = is_member_eq equal elem list 
-  fun erase_double list = erase_double_eq equal list 
-end
+fun is_member elem list = is_member_eq equal elem list 
+fun erase_double list = erase_double_eq equal list 
 
-fun add_once elem list =
-  if is_member elem list then list else elem :: list
- 
-fun inter l1 l2 = filter (inv is_member l2) l1 
-
-fun substract l1 l2 = filter (not o (inv is_member) l2) l1
-
-fun subset l1 l2 = all (inv is_member l2) l1
-
-fun strict_subset s1 s2 = subset s1 s2 andalso not (s1 = s2)
-
-fun is_maxset s sl = not (exists (strict_subset s) sl)
-
-fun list_subset ll1 ll2 =
-  if not (length ll1 = length ll2) 
-  then 
-    raise BTOOLS_ERR "list_subset" "different length" 
-  else 
-    case ll1 of
-      [] => true
-    | _  => subset (hd ll1) (hd ll2) andalso
-            list_subset (tl ll1) (tl ll2)
-    
+fun inter l1 l2 = filter (inv is_member (erase_double l2)) (erase_double l1) 
 fun merge ll = erase_double (List.concat ll)
+
 (* ORDERING *)
 fun quicksort << xs = let
   fun qs [] = []
@@ -164,67 +90,40 @@ fun quicksort << xs = let
     qs xs
   end
 
+fun first_n n l = 
+  if n < 0 then raise B_ERR "first_n" "Negative"
+  else if n = 0 then []
+  else hd l :: (first_n (n-1) (tl l)) handle Empty => []
+ 
 (* DICTIONNARY *)
-(* doesn't overwrite *)
 fun add_entry entry dict = 
-  if is_member (fst entry) (map fst dict)
-  then dict
-  else entry :: dict
+  if is_member (fst entry) (map fst dict) then dict else entry :: dict
 
-fun lookup elem couplelist =
-  case couplelist of 
-  [] => (elem; raise BTOOLS_ERR "lookup" "")
+fun lookup elem l =
+  case l of 
+    []         => (elem; raise B_ERR "lookup" "")
   | (a,b) :: m =>  if a = elem then b else lookup elem m
 
-fun mk_list n a =
-  case n of 
-    0 => []
-  | _ => if n < 0 then raise BTOOLS_ERR "make_n_emptyl" "negative number"
-         else
-           a :: mk_list (n -1) a
+fun new_name name used =    
+  let val newname = ref name in
+  let val n = ref 0 in
+    (while is_member (!newname) used do
+      (n := (!n) + 1;
+       newname := name ^ (Int.toString (!n)))
+     ;
+     !newname)
+  end end
 
-(* CONDITION *)
-fun switch condresultl defaultresult = 
-    case condresultl of
-      [] => defaultresult  
-    | [(cond,result)] => if cond  
-                         then result 
-                         else defaultresult
-    | (cond,result) :: m => if cond
-                            then result
-                            else switch m defaultresult                
+fun inject ((key,name),dict) =
+  let val newname = new_name name (map snd dict) in
+    add_entry (key,newname) dict
+  end  
 
-fun switcherr condresultl error = 
-    case condresultl of
-      [] => raise BTOOLS_ERR "switcherr" "emptylist" 
-    | [(cond,result)] => if cond  
-                         then result 
-                         else (raise error)
-    | (cond,result) :: m => if cond
-                            then result
-                            else switcherr m error
+fun injectl l dict = List.foldl inject l dict 
 
-fun switcharg arg condresultl defaultresult = 
-    case condresultl of
-      [] => defaultresult  
-    | [(cond,result)] => if cond arg
-                         then result 
-                         else defaultresult
-    | (cond,result) :: m => if cond arg
-                            then result
-                            else switcharg arg m defaultresult             
- 
-fun switchargerr arg condresultl error = 
-    case condresultl of
-      [] => raise BTOOLS_ERR "switchargerr" "emptylist" 
-    | [(cond,result)] => if cond arg
-                         then result 
-                         else (raise error)
-    | (cond,result) :: m => if cond arg
-                            then result
-                            else switchargerr arg m error         
- 
-(*********** FILE MANAGEMENT ***********)
+
+
+(* FILE MANAGEMENT *)
 fun readl filepath = 
   let
     val file = TextIO.openIn filepath
@@ -252,7 +151,27 @@ fun writel filepath linel =
     (outputl file linel;
      TextIO.closeOut file)  
   end  
+
+(* SYNTAX *)
+fun is_binop term = 
+  is_eq term orelse is_conj term orelse is_disj term orelse is_imp_only term
+fun is_unop term = is_neg term
+fun is_quant term = is_forall term orelse is_exists term  
+
+fun strip_quant term =
+  if is_forall term then strip_forall term
+  else if is_exists term then strip_exists term
+  else raise B_ERR "strip_quant" "Bad argument"
  
- 
+fun find_atoml term =
+  if is_quant term then find_atoml_quant term
+  else if is_binop term then find_atoml_binop term
+  else if is_unop term then find_atoml_unop term
+  else [term]
+and find_atoml_quant term =
+  let val (qbvl,t) = strip_quant term in find_atoml t end  
+and find_atoml_binop term = find_atoml (lhand term) @ find_atoml (rand term)
+and find_atoml_unop term = find_atoml (rand term)
+
 end
   

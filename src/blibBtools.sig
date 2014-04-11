@@ -2,62 +2,48 @@ signature blibBtools =
 sig
   
 (* FUNCTION *)
-  val inv :('a -> 'b -> 'c) -> 'b -> 'a -> 'c
-  val repeat_change : ('a -> 'b -> 'b) -> 'a list -> 'b -> 'b
-  (* error *)
+  val inv : ('a -> 'b -> 'c) -> 'b -> 'a -> 'c
+  val fst_f = ('a -> 'b) -> 'a * 'c -> 'b * 'c
+  val snd_f = ('a -> 'b) -> 'c * 'a -> 'c * 'b
+  val adj : ('a -> 'b) -> 'a -> 'a * 'b 
   val success : ('a -> 'b) -> 'a -> bool
-  val wrap : string -> string -> string -> ('a -> 'b) -> 'a -> 'b
-
+(* ERROR *)
+  val wrap :  string -> string -> ('a -> 'b) -> 'a -> 'b
+  val B_ERR : string -> string -> exn
 (* STRING *)
-  val space : int -> string 
-  val indent : int -> string
-  val first_n_char : int -> string -> string
-  val rm_first_n_char : int -> string -> string
-  val last_n_char : int -> string -> string
-  val rm_last_n_char : int -> string -> string
- 
-  val char_place : string -> string -> int 
-  val char_in : string -> string -> bool
-  
-  val name_strn : string -> int -> string
-  val list_name_str : string -> int -> string list
-  
-  val is_alphanumor_charl : Char.char list -> bool
   val is_alphanumor_ : string -> bool
-  val string_to_int : string -> int
-  
+  val alias : string -> string -> string
+  val concats : string -> string list -> string
 (* LIST *)
   val mk_list : int -> 'a -> 'a list
-  (* arithmetic *)
-  val suml : int list -> int
   (* set *) 
   val is_member : ''a -> ''a list -> bool
   val is_member_eq : ('a -> 'a -> bool) -> 'a -> 'a list ->  bool
   val erase_double : ''a list -> ''a list
   val erase_double_eq : ('a -> 'a -> bool) -> 'a list -> 'a list
-  val add_once : ''a -> ''a list -> ''a list
   val inter : ''a list -> ''a list -> ''a list
-  val substract : ''a list -> ''a list -> ''a list
-  val subset : ''a list -> ''a list -> bool
-  val strict_subset : ''a list -> ''a list -> bool 
-  val is_maxset : ''a list -> ''a list list -> bool
-  val list_subset : ''a list list -> ''a list list -> bool
   val merge : ''a list list -> ''a list
   (* sort *)
   val quicksort : (('a * 'a) -> bool) -> 'a list -> 'a list
+  val first_n : int -> 'a list -> 'a list
   (* dictionnary *)
   val add_entry : (''a * 'b) -> (''a * 'b) list -> (''a * 'b) list
   val lookup : ''a -> (''a * 'b) list -> 'b
-  (* condition *)  
-  val switch : (bool * 'a) list -> 'a -> 'a
-  val switcherr : (bool * 'a) list -> exn -> 'a 
-  val switcharg : 'a -> (('a -> bool) * 'b) list -> 'b -> 'b
-  val switchargerr : 'a -> (('a -> bool) * 'b) list -> exn -> 'b
-
+  val inject : ((''a * string) * (''a * string) list) -> 
+                    (''a * string) list 
+  val injectl : (''a * string) list -> (''a * string) list -> 
+                     (''a * string) list  
+  
 (* FILE MANAGEMENT *)
   val readl : string -> string list
   val writel : string -> string list -> unit
   val appendl : string -> string list -> unit
   
-  
+(* SYNTAX *)
+  val is_binop : term -> bool 
+  val is_unop : term -> bool
+  val is_quant : term -> bool 
+  val strip_quant : term -> (term list * term)
+  val find_atoml : term -> term list 
+
 end

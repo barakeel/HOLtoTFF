@@ -2,10 +2,10 @@ signature blibExtractvar =
 sig
 
   include Abbrev
-  type STRUCTVAR = blibDatatype.STRUCTVAR
+  datatype VARSORT = Bvar | Fvar | Cvar
 
-  val info_varl : term -> ((term * int) * STRUCTVAR) list 
-  val list_info_varl : term list -> ((term * int) * STRUCTVAR) list 
+  val info_varl : term -> ((term * int) * VARSORT) list 
+  val list_info_varl : term list -> ((term * int) * VARSORT) list 
                     
   val get_bval : term -> (term * int) list 
   val get_fval : term -> (term * int) list 

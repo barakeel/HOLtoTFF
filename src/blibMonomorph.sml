@@ -44,7 +44,7 @@ fun monomorph_pb_aux (thml,goal) nbinst nbiter =
     let val (thml1,goal1) = monomorph_pb_one (thml,goal) in
     let val diff = List.length thml1 - List.length thml in  
     let val n = nbinst + diff in
-      if n > 100 orelse diff = 0 then (thml,goal)  
+      if n > 30 orelse diff = 0 then (thml,goal)  
       else monomorph_pb_aux (thml1,goal1) n (nbiter + 1)
     end end end
  
@@ -53,5 +53,3 @@ fun monomorph_pb pb = wrap "blibMonomorph" "monomorph_pb" ""
    (monomorph_pb_aux pb 0) 0  
       
 end
-
-           
