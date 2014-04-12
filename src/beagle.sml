@@ -1,89 +1,98 @@
 structure beagle :> beagle =
 struct
 
-open HolKernel Abbrev boolLib
-     blibBtools blibMonomorph blibExtractvar blibTactic
-     blibPrinter
-
-fun BEAGLE_ERR function message =
-    HOL_ERR{origin_structure = "beagle",
-	    origin_function = function,
-            message = message}
+open HolKernel Abbrev boolLib blibTools blibExtract 
+     blibConv blibMonomorph blibPrinter
 
 val directory = "/home/gauthier/HOLtoTFF\\ workspace/HOLtoTFF/"
 
 fun get_SZSstatus proofpath = 
   let val strl = readl proofpath in
     case strl of
-      [] => raise BEAGLE_ERR "get_SZSstatus" "not found"
-    | [a] => raise BEAGLE_ERR "get_SZSstatus" "not found"
+      [] => raise B_ERR "get_SZSstatus" "not found"
+    | [a] => raise B_ERR "get_SZSstatus" "not found"
     | a :: b :: m => String.substring (b,13,(String.size b) - 14)
-                       handle _ => raise BEAGLE_ERR "get_SZSstatus" "not found"
+                     handle _ => raise B_ERR "get_SZSstatus" "not found"
   end
 
-(* best 15 matches *)
+(* Basic lemma mining (15 best matches) *)
 fun related_thms (thml,goal) theoryl = 
-  let val cl1 = merge (get_cl_goal goal :: map get_cl_thm thml) in
+  let val cl1 = merge (map get_cl (snd goal :: fst goal) @ map get_cl_thm thml) in
   let fun matchable thm = 
      let val cl2 = get_cl_thm thm in
-       List.length (inter cl1 cl2) >= 2
+       concl thm <> snd goal andalso List.length (intersect cl1 cl2) >= 1
      end
   in
   let fun add_info thm =
-     let val cl2 = get_cl_thm thm in (thm,List.length (inter cl1 cl2)) end
+     let val cl2 = get_cl_thm thm in (thm,List.length (intersect cl1 cl2)) end
   in
   let val thml1 = map (fst o snd) (DB.matchp matchable theoryl) in
   let val thmla = map add_info thml1 in
-  let fun lessa ((_,a),(_,b)) = a < b in 
-  let val newthmla = quicksort lessa thmla in
+  let fun lessa (_,a) (_,b) = a < b in 
+  let val newthmla = sort lessa thmla in
     first_n 15 (map fst newthmla)
   end end end end
   end end end 
 
-fun pb_to_term thml goal = 
-  list_mk_conj
-    (map (concl o GEN_ALL o DISCH_ALL) thm @ (mk_neg (snd goal) :: fst goal))
+(* Normalization *)
+fun pb_to_term (thml,goal) = 
+  list_mk_conj (map (concl o GEN_ALL o DISCH_ALL) thml @ 
+               (mk_neg (snd goal) :: fst goal) )
+fun mk_clever_forall bvl t = list_mk_forall (intersect (free_vars t) bvl,t)
 
-fun beagle_nf thml goal =
-  let val term0 = pb_to_term thml goal in
-  let val term1 = conv term0 in
-  let val terml2 = conv term1 in
-    (terml2,F)
-  end end end  
+fun beagle_nf (thml,goal) =
+  let val term0 = pb_to_term (thml,goal) in
+  let val term1 = (rhs o concl) (QCONV normalForms.CNF_CONV term0) in
+  let val term2 = repeat rw_absbool term1 in
+  let val term3 = (rhs o concl) (QCONV normalForms.CNF_CONV term2) in
+  let val term4 = (rhs o concl) (QCONV APP_CONV term3) in
+  let val (_,term5) = strip_exists term4 in
+  let val (bvl,term6) = strip_forall term5 in
+  let val term7l = strip_conj term6 in   
+  let val terml8 = map (mk_clever_forall bvl) term7l in 
+  let val terml9 = map (rhs o concl o (QCONV BOOL_BV_CONV)) terml8 in
+    (terml9,F)
+  end end end end end 
+  end end end end end 
     
-fun beagle_interact filepath goal =
-  (write_tff filepath goal;
+fun beagle_interact path goal =
+  (
+  write_tff path goal;
   OS.Process.system ("cd " ^ directory ^ ";" ^
-                     "sh " ^ directory ^ "callbeagle.sh " ^ filepath)
-  handle _ => raise BEAGLE_ERR "beagle_interact" "OS.process.system")
+                     "sh " ^ directory ^ "callbeagle.sh " ^ path)
+  handle _ => raise B_ERR "beagle_interact" "OS.process.system"
+  )
 
-fun beagle_unsat filepath goal =
-  (beagle_interact filepath goal;
-   get_SZSstatus (filepath ^ "_proof") = "Unsatisfiable")
+fun beagle_unsat path thml goal =
+  (
+  let val finalgoal = beagle_nf (thml,goal) in beagle_interact path finalgoal end;
+  get_SZSstatus (path ^ "_proof") = "Unsatisfiable"
+  )
 
-(* relevance filtering done by beagle on top theorems *)
-fun beagle_filter_aux filepath thml1 thml2 goal =
-  if thml2 = [] then (thml1,concl) else
-    if (beagle_unsat filepath ((thml1 @ (tl thml2)),concl) handle _ => false)
-    then beagle_filter_aux filepath thml1 (tl thml2) concl 
-    else beagle_filter_aux filepath (hd thml2 :: thml1) (tl thml2) concl
+(* Relevance filtering *)
+fun beagle_filter_aux path thml1 thml2 goal =
+  if null thml2 then (thml1,goal) 
+  else
+    if beagle_unsat path (thml1 @ (tl thml2)) goal handle _ => false
+    then beagle_filter_aux path thml1 (tl thml2) goal 
+    else beagle_filter_aux path (hd thml2 :: thml1) (tl thml2) goal
 
-fun beagle_filter filepath goal = 
-  if not (beagle_unsat filepath goal) then goal 
-  else beagle_filter_aux filepath [] (fst goal) (snd goal)
-    
-fun BEAGLE_PROVE thml goal =
-  (* basic lemma mining *)
-  let val newthml = related_thms (thml,goal) [] in
-  let val filepath = "/tmp/HOLtoTFF" in 
-  (* monomorphisation *)
-  let val (mthml,_) = if is_polymorph_pb (newthml,goal) 
-                      then monomorph_pb (newthml,goal) 
-                      else (newthml,goal)
+
+fun beagle_filter path (thml,goal) = 
+  if not (beagle_unsat path thml goal) 
+  then raise B_ERR "BEAGLE_PROVE" "Proof not found"
+  else beagle_filter_aux path [] thml goal
+ 
+(* Main function *)    
+fun BEAGLE_PROVE rflag mflag thml goal =
+  let val path = "/tmp/HOLtoTFF" in 
+  let val rthml = if rflag then related_thms (thml,goal) [] else thml in
+  let val (mthml,_) = if is_polymorph_pb (rthml,goal) andalso mflag 
+                      then monomorph_pb (rthml,goal) 
+                      else (rthml,goal)
   in
-  let val finalgoal = beagle_nf mthml goal in
-  let val newgoal = beagle_filter filepath finalgoal in
-    val1 [TAC_PROOF (newgoal, metisTools.FO_METIS_TAC [])]
-  end end end end end end
+  let val (fthml,_) = beagle_filter path (mthml,goal) in
+    TAC_PROOF (goal, metisTools.METIS_TAC fthml) 
+  end end end end
   
 end

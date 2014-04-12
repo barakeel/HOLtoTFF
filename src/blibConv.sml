@@ -1,166 +1,143 @@
 structure blibConv :> blibConv =
 struct
 
-open HolKernel Abbrev boolLib
-     blibBtools blibDatatype 
-     blibSyntax blibBconv blibBrule blibBtactic
-     blibExtractvar blibFreshvar blibExtracttype 
-     blibNamevar blibHO 
-
-fun CONV_ERR function message =
-  HOL_ERR{origin_structure = "blibConv",
-	        origin_function = function,
-          message = message}
+open HolKernel Abbrev boolLib blibTools blibExtract 
 
 
-(* no lambda - abstraction *)
-(* Should remove exists unique and cond on boolean first *)
-
-(* LAMBDA-LIFTING *)
-thislambda-abstraction  <=>  freshvar + creation of new term at the top
-
-
-(* BOOL CONV *)
-
-UNBETA_CONV subterm term
-
-list_mk_abs (get_bvl abs, abs) = g
-ONCE_REWRITE_CONV 
-val term = ``!A f. A(f:bool) = (((f:bool) ==> A(T)) /\ (((~f) ==> A(F))))``  ;
-
-(* test
-val term = ``!z. P (\x . x + z:num) : bool``;
-val term = ``P (\x . x + z:num) : bool``;
-val abs = ``\x . x + z``;
-FUN_CONV_sub abs term;
-fun_axiom term;
-*)
-
-val thm = ASSUME term;
-val term = ``(\x:bool. B x) (!y. y:num = 0):bool``;
-REWR_CONV thm term;
-(* Problem is abstraction containing free variable *)
-
-val term = ``A(Abs) <=>  f(fv) = Abs /\ A(f(fv)) ``  ;
-val thm = ASSUME term
-
-(* 
-1 find interesting subterm
-2 abstract over it
-3 use the rewrite rule
-4 repeat the process
-*)
 exception Not_found
-(* find *)
-fun find_abs term =
-  if is_var term then raise Not_found
-  else if is_const term then raise Not_found
-  else if is_forall term then find_abs (snd (strip_forall term))
-  else if is_exists term then find_abs (snd (strip_exists term))
+
+local fun find_ab term =
+  if is_var term then 
+    if type_of term = bool then term else raise Not_found
+  else if is_const term then 
+    if type_of term = bool andalso term <> T andalso term <> F 
+    then term 
+    else raise Not_found
   else if is_comb term then 
-    find_abs (rator term) handle Not_found => find_abs (rand term)
+    if type_of term = bool then term
+    else (find_ab (rator term) handle Not_found => find_ab (rand term))
   else if is_abs term then term
   else raise Not_found
-  
-fun abs_to_subst term abs = 
+in
+fun find_absbool atom =
+  if is_var atom orelse is_const atom then raise Not_found
+  else if is_comb atom then
+    (find_ab (rator atom) handle Not_found => find_ab (rand atom))
+  else raise Not_found
+end
+
+fun abs_subst abs term = 
   let val fvl = free_vars abs in
-  let val newabs = list_mk_abs (fvl,abs) in
-  let val var = mk_var ("abs", type_of newabs) in
-    [abs |-> list_mk_comb (var,fvl)]
-  end end end
+  let val v = genvar (type_of (list_mk_abs (fvl,abs))) in
+    abs |-> list_mk_comb (v,fvl)
+  end end
 
-val newterm = mk_conj (newdef, rebuild_atoml map subst s atoml);
+fun tryl f l =
+  case l of 
+    [] => raise Not_found
+  | a :: m => ((a, f a) handle _ => tryl f m)
 
-(* same for booleans *)
+fun rw_absbool term =
+  let val atoml = find_atoml term in
+  let val (atom,ab) = tryl find_absbool atoml in
+    if is_abs ab then
+      let val s = abs_subst ab term in
+      let val t0 = subst [s] atom in
+      let val (bvl,t1) = strip_abs ab in
+      let val t2 = list_mk_comb ((#residue s),bvl) in
+      let val t3 = mk_conj (t0, mk_eq (t2,t1)) in
+      let val thm = mk_thm ([], mk_eq (atom,t3)) in  
+        (rhs o concl) (PURE_ONCE_REWRITE_CONV [thm] term)
+      end end end end end end
+    else (* it's a boolean *)
+      let val (t1,t2) = (subst [ab |-> T] atom, subst [ab |-> F] atom) in
+      let val t3 = mk_conj (mk_disj (mk_neg ab, t1), mk_disj (ab,t2)) in
+      let val thm = mk_thm ([], mk_eq (atom,t3)) in  
+        (rhs o concl) (PURE_ONCE_REWRITE_CONV [thm] term)
+      end end end
+  end end
 
 (* test 
-val term = ``P (\x. x + 1) (\y.y) /\ !x. Q (\z. z + x)``;
-val term = ``P (\x z. x + z):bool``;
-val term = ``P (\x. (x = \z.z) ):bool`` ;
-FUN_CONV term;
-find_free_abs term ;
+val term = ``P (\x. x (y:bool)) (\y.y) /\ !x. Q (\z. z + x)``;
 *)
 
-(* APP CONV *)   
-fun app_axiom appname term =
+(* APP CONV *)
+(* lowestarity *)
+fun get_lal term =
+  let fun get_la vl = 
+    let fun less (_,a) (_,b) = a < b in sort less vl end 
+  in
+  let fun change tyl (v,a) = 
+    if mem (type_of v) tyl then (v,0) else (v,a) 
+  in
+  let val fvcal = get_fvcal term in
+  let val tyl = map type_of (get_bvl term) in
+    get_la (map (change tyl) fvcal)
+  end end end end
+
+(* local conversion *)
+fun app_axiom name term =
   let val (oper,arg) = dest_comb term in
   let val opty = type_of oper in
-  let val app = mk_var (appname,mk_type ("fun",[opty,opty])) in
+  let val app = mk_var (name,mk_type ("fun",[opty,opty])) in
     mk_thm ([],mk_eq (term, list_mk_comb (app,[oper,arg])))
-  end end end
- 
-(* test
-show_assums :=  true;
-val term = ``f a b c``;
-val appname = "App";
-*)
-
-(* lowestarity *)
-fun get_la termal (term,arity) =
-  case termal of
-    [] => arity
-  | (t,a) :: m => if term = t andalso a < arity 
-                  then get_la m (term,a) 
-                  else get_la m (term,arity) 
-   
-fun collapse_la varal = map (get_la varal) varal
-
-fun get_fvclal terml =
-  let val fvclal1 = collapse_la (merge (map get_fvcal terml)) in
-  let val tyl = map type_of (get_bvl_goal terml) in
-  let fun change_arity tyl (fvc,a)  =
-    if is_member (type_of fvc) tyl then (fvc,0) else (fvc,a)
-  in
-    map (change_arity tyl) fvclal1
   end end end
 
 fun app_conv_sub name la a term =
-   if lowa = a then raise UNCHANGED
-   else if lowa < a then 
+   if la = a then raise UNCHANGED
+   else if la < a then 
      (RATOR_CONV (app_conv_sub name la (a -1)) THENC app_axiom name) term
-   else raise CONV_ERR "app_conv_sub" "lowest arity > arity"
-   
-fun app_conv name fvclal bvl term = 
+   else raise B_ERR "app_conv_sub" "lowest arity > arity"
+
+(* global conversion *) 
+fun ARG_CONV conv term =
+  if is_comb term 
+  then ((RAND_CONV conv) THENC (RATOR_CONV (ARG_CONV conv))) term 
+  else raise UNCHANGED  
+
+
+fun app_conv name lal bvl term = 
   if is_comb term then 
-    if is_binop term then BINOP_CONV (app_conv name fvclal bvl) term else
-    if is_neg term then RAND_CONV (app_conv name fvclal bvl) term else 
+    if is_binop term orelse is_eq term then BINOP_CONV (app_conv name lal bvl) term else
+    if is_neg term then RAND_CONV (app_conv name lal bvl) term else 
     if is_quant term then 
       let val (qbvl,_) = strip_quant term in
-        STRIP_QUANT_CONV (app_conv name fvclal (qbvl @ bvl)) term
+        STRIP_QUANT_CONV (app_conv name lal (qbvl @ bvl)) term
       end
     else  
-      let val (oper,_) = strip_comb term in
-      let val a = get_arity term in
-      let val la = if is_member oper bvl then 0 else lookup oper fvclal in
-        (ARG_CONV (app_conv name fvclal bvl) THENC app_conv_sub name la a) term 
+      let val (oper,argl) = strip_comb term in
+      let val a = List.length argl in
+      let val la = if mem oper bvl then 0 else assoc oper lal in
+        (ARG_CONV (app_conv name lal bvl) THENC app_conv_sub name la a) term 
       end end end
   else raise UNCHANGED
   
-fun APP_CONV appname terml term = 
-  app_conv appname (get_fvclal2 terml) [] term
-      
+fun APP_CONV term = 
+  let val name = new_name "App" (map (fst o dest_var) (get_bvl term @ free_vars term)) in
+    app_conv name (get_lal term) [] term
+  end 
+
 (* test
-show_assums :=  true;
-val subterm = ``f a b ``;
-val appname = "App";
-val term = ``(f a b = 2) /\ (f = g)``;
+val term = ``(f a b = 2) /\ (f a = g)``;
 *)
 
-(* BOOL_BV_CONV *)
+(* BOOL_BV_CONV *) (* should be done just before printing *)
 fun BOOL_BV_CONV_sub term =
   let val var = fst (dest_forall term) in
-    if not (type_of var = bool) then raise UNCHANGED else
-  let val th11 = ASSUME term in
-  let val t2 = concl (CONJ (SPEC F th11) (SPEC T th11)) in
-    mk_thm ([],mk_eq (term,t2))
-  end end end
+    if not (type_of var = bool) then raise UNCHANGED 
+    else
+      let val th11 = ASSUME term in
+      let val t2 = concl (CONJ (SPEC F th11) (SPEC T th11)) in
+        mk_thm ([],mk_eq (term,t2))
+      end end
+  end
   
 fun BOOL_BV_CONV term =
-  if not (is_forall term) then raise UNCHANGED else 
-    (QUANT_CONV BOOL_BV_CONV THENC BOOL_BV_CONV_sub) term
+  if not (is_forall term) then raise UNCHANGED 
+  else (QUANT_CONV BOOL_BV_CONV THENC BOOL_BV_CONV_sub) term
 
 (* test 
-val term = ``!x:bool y:num z:bool. x /\ (y = 0) /\ z``;     
+val term = ``!x:bool y:num z:bool. x \/ (y = 0) \/ z``;     
 *)
 
 end
