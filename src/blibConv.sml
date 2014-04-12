@@ -3,9 +3,9 @@ struct
 
 open HolKernel Abbrev boolLib blibTools blibExtract 
 
-
 exception Not_found
 
+(* Lambda-abstraction and boolean rewrite *)
 local fun find_ab term =
   if is_var term then 
     if type_of term = bool then term else raise Not_found
@@ -29,7 +29,7 @@ end
 fun abs_subst abs term = 
   let val fvl = free_vars abs in
   let val v = genvar (type_of (list_mk_abs (fvl,abs))) in
-    abs |-> list_mk_comb (v,fvl)
+    (fvl,abs |-> list_mk_comb (v,fvl))
   end end
 
 fun tryl f l =
@@ -41,11 +41,11 @@ fun rw_absbool term =
   let val atoml = find_atoml term in
   let val (atom,ab) = tryl find_absbool atoml in
     if is_abs ab then
-      let val s = abs_subst ab term in
+      let val (fvl,s) = abs_subst ab term in
       let val t0 = subst [s] atom in
       let val (bvl,t1) = strip_abs ab in
       let val t2 = list_mk_comb ((#residue s),bvl) in
-      let val t3 = mk_conj (t0, mk_eq (t2,t1)) in
+      let val t3 = mk_conj (t0, list_mk_forall ((fvl @ bvl),mk_eq (t2,t1))) in
       let val thm = mk_thm ([], mk_eq (atom,t3)) in  
         (rhs o concl) (PURE_ONCE_REWRITE_CONV [thm] term)
       end end end end end end
@@ -95,7 +95,6 @@ fun ARG_CONV conv term =
   then ((RAND_CONV conv) THENC (RATOR_CONV (ARG_CONV conv))) term 
   else raise UNCHANGED  
 
-
 fun app_conv name lal bvl term = 
   if is_comb term then 
     if is_binop term orelse is_eq term then BINOP_CONV (app_conv name lal bvl) term else
@@ -117,10 +116,7 @@ fun APP_CONV term =
     app_conv name (get_lal term) [] term
   end 
 
-(* test
-val term = ``(f a b = 2) /\ (f a = g)``;
-*)
-
+(* val term = ``(f a b = 2) /\ (f a = g)``;*)
 (* BOOL_BV_CONV *) (* should be done just before printing *)
 fun BOOL_BV_CONV_sub term =
   let val var = fst (dest_forall term) in
@@ -136,8 +132,5 @@ fun BOOL_BV_CONV term =
   if not (is_forall term) then raise UNCHANGED 
   else (QUANT_CONV BOOL_BV_CONV THENC BOOL_BV_CONV_sub) term
 
-(* test 
-val term = ``!x:bool y:num z:bool. x \/ (y = 0) \/ z``;     
-*)
-
+(* val term = ``!x:bool y:num z:bool. x \/ (y = 0) \/ z``*)
 end

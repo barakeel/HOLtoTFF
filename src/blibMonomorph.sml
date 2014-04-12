@@ -3,8 +3,6 @@ struct
 
 open HolKernel Abbrev boolLib blibTools blibExtract
 
-(* Parameters are 3 iterations and 30 instantiations *)
-
 (* Test *)
 fun is_polymorph term = (polymorphic o type_of) term
 fun is_polymorph_thm thm =  exists is_polymorph (get_cl_thm thm)
@@ -38,15 +36,15 @@ fun monomorph_pb_one (thml,goal) =
   end   
 
 (* Main function *) 
-fun monomorph_pb_aux (thml,goal) nbinst nbiter =
-  if nbiter = 3 then (thml,goal) else
-    let val (thml1,goal1) = monomorph_pb_one (thml,goal) in
-    let val diff = List.length thml1 - List.length thml in  
-    let val n = nbinst + diff in
-      if n > 30 orelse diff = 0 then (thml,goal)  
-      else monomorph_pb_aux (thml1,goal1) n (nbiter + 1)
-    end end end
+fun monomorph_pb_aux mnb (thml,goal) nbinst =
+  let val (thml1,goal1) = monomorph_pb_one (thml,goal) in
+  let val diff = List.length thml1 - List.length thml in  
+  let val n = nbinst + diff in
+    if n > mnb orelse diff = 0 
+    then (thml,goal) 
+    else monomorph_pb_aux mnb (thml1,goal1) n 
+  end end end
 
-fun monomorph_pb pb = monomorph_pb_aux pb 0 0  
+fun monomorph_pb mnb pb = monomorph_pb_aux mnb pb 0
       
 end
