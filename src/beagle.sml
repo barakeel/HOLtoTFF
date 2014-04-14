@@ -13,8 +13,8 @@ fun get_SZSstatus proofpath =
     case strl of
       [] => raise B_ERR "get_SZSstatus" "not found"
     | [a] => raise B_ERR "get_SZSstatus" "not found"
-    | a :: b :: m => String.substring (b,13,(String.size b) - 14)
-                     handle _ => raise B_ERR "get_SZSstatus" "not found"
+    | a :: b :: m => (substring (b,13,(String.size b) - 14)
+                      handle _ => raise B_ERR "get_SZSstatus" "not found")
   end
 
 (* Normalization *)
@@ -46,11 +46,11 @@ fun BEAGLE_TAC thml goal =
   in
   let val finalgoal = beagle_nf (mthml,goal) in 
     (
-    write_tff tffpath goal;
+    write_tff tffpath finalgoal;
     OS.Process.system ("cd " ^ directory ^ ";" ^
                        "sh " ^ directory ^ "callbeagle.sh " ^ tffpath)
     handle _ => raise B_ERR "BEAGLE_TAC" "OS.process.system";
-    if get_SZSstatus (tffpath ^ "_proof") = "Unsatisfiable" 
+    if get_SZSstatus (tffpath ^ "_proof") = "Theorem" 
     then ([],fn _ => mk_thm goal)
     else raise B_ERR "BEAGLE_TAC" (get_SZSstatus (tffpath ^ "_proof"))
     )

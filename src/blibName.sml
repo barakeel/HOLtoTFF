@@ -31,8 +31,8 @@ fun create_tyadict term =
 
 (* NAME VAR *)
 fun name_tff str name = 
-   if String.substring (name,0,10) = "%%genvar%%" then str ^ "Abs"
-   else alias (str ^ name) (str ^ "U")
+   (if substring (name,0,10) = "%%genvar%%" then str ^ "Abs"
+   else alias (str ^ name) (str ^ "U"))
    handle _ => alias (str ^ name) (str ^ "U")
 
 (* bound variables *)
@@ -40,8 +40,9 @@ fun name_bv bv = name_tff "V" (fst (dest_var bv))
 fun create_bvdict term = injectl (map (adj name_bv) (get_bvl term)) []
 
 (* constants *)
-fun name_c (c,a) = name_tff "c" (fst (dest_const c))
-fun create_cadict term = injectl (map (adj name_c) (get_fvcal term)) []
+fun name_fvc (c,a) = 
+  if is_var c then name_tff "v" (fst (dest_var c)) else name_tff "c" (fst (dest_const c))
+fun create_cadict term = injectl (map (adj name_fvc) (get_fvcal term)) []
 
 end
   

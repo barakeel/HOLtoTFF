@@ -91,8 +91,9 @@ fun ARG_CONV conv term =
 
 fun app_conv name lal bvl term = 
   if is_comb term then 
-    if is_binop term orelse is_eq term then BINOP_CONV (app_conv name lal bvl) term else
-    if is_neg term then RAND_CONV (app_conv name lal bvl) term else 
+    if is_binop term orelse is_eq term orelse is_bina term then 
+       BINOP_CONV (app_conv name lal bvl) term else
+    if is_unop term orelse is_una term then RAND_CONV (app_conv name lal bvl) term else 
     if is_quant term then 
       let val (qbvl,_) = strip_quant term in
         STRIP_QUANT_CONV (app_conv name lal (qbvl @ bvl)) term

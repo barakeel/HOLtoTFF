@@ -3,15 +3,14 @@ struct
 
 open HolKernel Abbrev boolLib blibTools intSyntax
 (* Extract variables *)
-datatype VARSORT = Bvar | Fvar | Cvar
 
 fun info_var term bvl =
   if is_int_literal term then []
   else if is_var term then 
-    if mem term bvl then [((term,0),Bvar)] else [((term,0),Fvar)]
+    if mem term bvl then [((term,0),0)] else [((term,0),1)]
   else if is_const term then 
     if term = T orelse term = F then []
-    else [((term,0),Cvar)]
+    else [((term,0),2)]
   else if is_binop term orelse is_bina term orelse is_eq term 
        then info_var (lhand term) bvl @ info_var (rand term) bvl
   else if is_unop term orelse is_una term then info_var (rand term) bvl
@@ -33,8 +32,8 @@ and info_var_app term bvl =
     val l = info_var_l argl bvl 
   in
     if is_var oper then 
-      if mem oper bvl then ((oper,n),Bvar) :: l else ((oper,n),Fvar) :: l
-    else if is_const oper then ((oper,n),Cvar) :: l
+      if mem oper bvl then ((oper,n),0) :: l else ((oper,n),1) :: l
+    else if is_const oper then ((oper,n),2) :: l
     else if is_abs oper then 
       let val (abvl,t) = strip_abs oper in info_var_abs abvl t bvl @ l end  
     else raise B_ERR "info_var" "comb" 
@@ -46,10 +45,10 @@ val term = ``(\x. (z = 2))``;
 fun info_varl term = mk_set (info_var term [])
 (* return a list of triple (variable,number of arguments,structure) *)
 
-fun is_bv (a,b) = (b = Bvar)
-fun is_fv (a,b) = (b = Fvar)
-fun is_c (a,b) = (b = Cvar)
-fun is_fvc (a,b) = (b = Fvar) orelse (b = Cvar)
+fun is_bv (a,b) = (b = 0)
+fun is_fv (a,b) = (b = 1)
+fun is_c (a,b) = (b = 2)
+fun is_fvc (a,b) = (b = 1) orelse (b = 2)
 
 fun get_bval term = map fst (filter is_bv (info_varl term))
 fun get_fval term = map fst (filter is_fv (info_varl term))
