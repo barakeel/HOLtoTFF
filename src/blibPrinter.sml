@@ -89,13 +89,14 @@ fun tffty nm tynm = tff nm "type" (nm ^ ": " ^ tynm)
 fun ptff_tya ((ty,a),nm) = if nm <> "$int" then tffty nm "$tType" else ""
 fun wtff_tyadict file tyadict = app ((out file) o ptff_tya) tyadict
 
+
 (* constants *)  
 fun ptff_ca tyadict ((c,a),cnm) = 
   let val (argl,im) = strip_type_n (type_of c,a) in
   let val argnml = map (inv assoc tyadict) argl in
   let val imnm = if fst im = bool then "$o" else assoc im tyadict in
     case argnml of 
-      []      => tffty cnm imnm
+      []      => tffty cnm (assoc im tyadict)
     | [argnm] => tffty cnm (argnm ^ " > " ^ imnm)
     | _       => tffty cnm ("( " ^ concats " * " argnml ^ " ) > " ^ imnm)
   end end end

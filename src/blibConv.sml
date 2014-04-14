@@ -7,8 +7,7 @@ exception Not_found
 
 (* Lambda-abstraction and boolean rewrite *)
 local fun find_ab term =
-  if is_var term then 
-    if type_of term = bool then term else raise Not_found
+  if is_var term then raise Not_found
   else if is_const term then 
     if type_of term = bool andalso term <> T andalso term <> F 
     then term 
@@ -128,5 +127,14 @@ fun BOOL_BV_CONV term =
   if not (is_forall term) then raise UNCHANGED 
   else (QUANT_CONV BOOL_BV_CONV THENC BOOL_BV_CONV_sub) term
 
-(* val term = ``!x:bool y:num z:bool. x \/ (y = 0) \/ z``*)
+(* to be done after bool bv conv *)
+fun is_free_bool term = 
+  (is_const term orelse is_var term) andalso type_of term = bool 
+  andalso term <> T andalso term <> F
+   
+fun rw_freebool term =
+  let val fb = find_term is_free_bool term in
+    mk_disj (subst [fb |-> T] term,subst [fb |-> F] term)
+  end
+
 end
