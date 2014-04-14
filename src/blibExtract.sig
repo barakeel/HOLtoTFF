@@ -5,8 +5,6 @@ sig
   
   datatype VARSORT = Bvar | Fvar | Cvar
   val info_varl : term -> ((term * int) * VARSORT) list 
-                    
-  val get_bval : term -> (term * int) list 
   val get_fval : term -> (term * int) list 
   val get_cal : term -> (term * int) list 
   val get_fvcal : term -> (term * int) list 

@@ -35,16 +35,18 @@ fun monomorph_pb_one (thml,goal) =
     (flatten (map (monomorph_thm cl) thml), goal)
   end   
 
-(* Main function *) 
-fun monomorph_pb_aux mnb (thml,goal) nbinst =
+(* Main function *) (* 3 iterations, 20 instantiations *)
+fun monomorph_pb_aux (thml,goal) nbinst nbiter =
   let val (thml1,goal1) = monomorph_pb_one (thml,goal) in
-  let val diff = List.length thml1 - List.length thml in  
+  let val diff = length thml1 - length thml in  
   let val n = nbinst + diff in
-    if n > mnb orelse diff = 0 
+    if n > 20 orelse diff = 0 
     then (thml,goal) 
-    else monomorph_pb_aux mnb (thml1,goal1) n 
+    else if nbiter < 2 
+         then monomorph_pb_aux (thml1,goal1) n (nbiter + 1)
+         else (thml1,goal1)
   end end end
 
-fun monomorph_pb mnb pb = monomorph_pb_aux mnb pb 0
+fun monomorph_pb pb = monomorph_pb_aux pb 0 0
       
 end

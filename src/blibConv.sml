@@ -64,16 +64,10 @@ val term = ``P (\x. x (y:bool)) (\y.y) /\ !x. Q (\z. z + x)``;
 (* APP CONV *)
 (* lowestarity *)
 fun get_lal term =
-  let fun get_la vl = 
-    let fun less (_,a) (_,b) = a < b in sort less vl end 
-  in
-  let fun change tyl (v,a) = 
-    if mem (type_of v) tyl then (v,0) else (v,a) 
-  in
   let val fvcal = get_fvcal term in
-  let val tyl = map type_of (get_bvl term) in
-    get_la (map (change tyl) fvcal)
-  end end end end
+  let fun less (_,a) (_,b) = a < b in 
+    sort less fvcal 
+  end end
 
 (* local conversion *)
 fun app_axiom name term =
@@ -105,7 +99,7 @@ fun app_conv name lal bvl term =
       end
     else  
       let val (oper,argl) = strip_comb term in
-      let val a = List.length argl in
+      let val a = length argl in
       let val la = if mem oper bvl then 0 else assoc oper lal in
         (ARG_CONV (app_conv name lal bvl) THENC app_conv_sub name la a) term 
       end end end

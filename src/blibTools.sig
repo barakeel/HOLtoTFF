@@ -13,14 +13,14 @@ sig
   val is_alphanum_ : string -> bool
   val alias : string -> string -> string
   val concats : string -> string list -> string
+  val numl : string -> int -> string list
 (* LIST *)
   val merge : ''a list list -> ''a list
   val first_n : int -> 'a list -> 'a list
   (* inject dict *)
   val new_name : string -> string list -> string
   val injectl : (''a * string) list -> (''a * string) list -> 
-                     (''a * string) list  
-  
+                (''a * string) list
 (* FILE MANAGEMENT *)
   val readl : string -> string list
   val writel : string -> string list -> unit

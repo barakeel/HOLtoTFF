@@ -32,6 +32,8 @@ fun concats s strl =
   | [str] => str
   | str :: m => str ^ s ^ concats s m
 
+fun numl str n = if n <= 0 then [] else numl str (n-1) @ [str ^ Int.toString n]
+
 (* SET *)
 fun merge ll = mk_set (flatten ll)
 

@@ -57,7 +57,6 @@ fun get_fvcal term = map fst (filter is_fvc (info_varl term))
 
 fun get_bvl term = map fst (get_bval term)
 fun get_cl term = map fst (get_cal term)
-fun get_fvcl term = map fst (get_fvcal term)
 fun get_cl_thm thm = merge (map get_cl (concl thm :: hyp thm))
 
 (* Extract types *)
@@ -66,10 +65,10 @@ fun all_tya term =
     mk_set (map (fst_f type_of) varal)
   end
   
-fun is_sty (ty,arity) = (arity = 0)
+fun is_sty (ty,a) = (a = 0)
 fun get_styal term = filter is_sty (all_tya term)
 
-fun is_cty (ty,arity) = (arity > 0)
+fun is_cty (ty,a) = (a > 0)
 fun get_ctyal term  = filter is_cty (all_tya term)
 
 
