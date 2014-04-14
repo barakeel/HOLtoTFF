@@ -38,12 +38,14 @@ List.length badthml;
 
 BEAGLE_TAC [] (dest_thm (List.nth (thml,13)));
 
-BEAGLE_TAC [] ([],``∀A B. A ∨ B ⇔ B ∨ A``);
 val thml = List.nth (thml,13);
 val (thml,goal) =  ([]:thm list,(dest_thm thm));
 beagle_nf ([],(dest_thm thm));
 beagle_nf ([], ([],``∀A B. A ∨ B ⇔ B ∨ A``));
 (* test *)
-
+val goal : goal = ([], ``∀A B.A ⇒ B ⇔ ¬A ∨ B``);
 val goal = dest_thm (List.nth (thml,13));
 beagle_nf ([], goal);
+
+BEAGLE_TAC [] ([], ``∀A B. A ⇒ B ⇔ ¬A ∨ B``);
+val (thml,goal) = ([]:thm list,([]: term list, ``∀A B. A ⇒ B ⇔ ¬A ∨ B``));

@@ -37,8 +37,6 @@ fun tryl f l =
     [] => raise Not_found
   | a :: m => ((a, f a) handle _ => tryl f m)
 
-
-
 fun rw_absbool term =
   let val atoml = find_atoml term in
   let val (atom,ab) = tryl find_absbool atoml in

@@ -24,21 +24,21 @@ fun pb_to_term (thml,goal) =
   )       
 fun mk_clever_forall bvl t = list_mk_forall (intersect (free_vars t) bvl,t)
 
-fun cnf_rw term = (rhs o concl) (QCONV normalForms.CNF_CONV term)
+fun rw conv term = (rhs o concl) (QCONV conv term)
 
 fun beagle_nf (thml,goal) =
   let val term1 = pb_to_term (thml,goal) in
-  let val term2 = repeat (rw_absbool o cnf_rw) term1 in
-  let val term3 = cnf_rw term2 in
-  let val term4 = (rhs o concl) (QCONV APP_CONV term3) in
+  let val term2 = repeat (rw_absbool o (rw normalForms.CNF_CONV)) term1 in
+  let val term3 = rw (normalForms.CNF_CONV) term2 in
+  let val term4 = rw APP_CONV term3 in
   let val (_,term5) = strip_exists term4 in
   let val (bvl,term6) = strip_forall term5 in
   let val term7l = strip_conj term6 in   
   let val terml8 = map (mk_clever_forall bvl) term7l in 
-  let val terml9 = map (rhs o concl o (QCONV BOOL_BV_CONV)) terml8 in
+  let val terml9 = map (rw BOOL_BV_CONV) terml8 in
     (terml9,F)
   end end end end end 
-  end end end end
+  end end end end 
 
 (* Beagle *)   
 fun BEAGLE_TAC thml goal =
