@@ -96,7 +96,7 @@ fun ptff_ca tyadict ((c,a),cnm) =
   let val argnml = map (inv assoc tyadict) argl in
   let val imnm = if fst im = bool then "$o" else assoc im tyadict in
     case argnml of 
-      []      => tffty cnm (assoc im tyadict)
+      []      => tffty cnm imnm
     | [argnm] => tffty cnm (argnm ^ " > " ^ imnm)
     | _       => tffty cnm ("( " ^ concats " * " argnml ^ " ) > " ^ imnm)
   end end end
