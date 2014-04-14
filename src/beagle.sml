@@ -36,7 +36,7 @@ fun beagle_nf (thml,goal) =
   let val term7l = strip_conj term6 in   
   let val terml8 = map (mk_clever_forall bvl) term7l in 
   let val terml9 = map (rhs o concl o (QCONV BOOL_BV_CONV)) terml8 in
-  let val terml10 = map (repeat rw_freebool) terml9 in
+  let val terml10 = strip_conj (repeat rw_freebool (list_mk_conj terml9)) in
     (terml10,F)
   end end end end end 
   end end end end end

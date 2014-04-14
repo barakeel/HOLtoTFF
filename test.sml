@@ -34,12 +34,13 @@ val thm = hd thml;
 
 load "blibTools"; open blibTools;
 val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm thml);
+List.length badthml;
 
 BEAGLE_TAC [] (dest_thm (List.nth (thml,8)));
 
-
+BEAGLE_TAC [] ([],``∀A B. A ∨ B ⇔ B ∨ A``);
 val thml = List.nth (thml,13);
 val (thml,goal) =  ([]:thm list,(dest_thm thm));
 beagle_nf ([],(dest_thm thm));
-
+beagle_nf ([], ([],``∀A B. A ∨ B ⇔ B ∨ A``));
 (* test *)
