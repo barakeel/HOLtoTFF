@@ -7,7 +7,6 @@ open HolKernel Abbrev boolLib blibTools blibExtract
 (* Global path *)
 val directory = "/home/gauthier/HOLtoTFF\\ workspace/HOLtoTFF/"
 val tffpath = "/tmp/HOLtoTFF"
-val fofpath = "/tmp/HOLtoFOF"
 
 fun get_SZSstatus proofpath = 
   let val strl = readl proofpath in

@@ -21,7 +21,14 @@ beagle_tff finalgoal;  beagle_fof finalgoal;
 write_fof "/tmp/HOLtoFOF" finalgoal;
 write_tff path finalgoal;
 
-filter is_linarith_thm thm = (inv mem) get_cl_thm [plus_tm
+filter is_linarith_thm thm = (inv mem) get_cl_thm 
+  [term
+  val one_tm         : term
+  val negate_tm      : term
+  val absval_tm      : term
+  val plus_tm        : term
+  val minus_tm       : term
+  val mult_tm        : term
 
 
 fun is_arith_term = figet_cl_term 

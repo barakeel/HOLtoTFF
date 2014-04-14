@@ -30,6 +30,9 @@ sig
   val is_binop : term -> bool 
   val is_unop : term -> bool
   val is_quant : term -> bool 
+  val is_bina : term -> bool 
+  val is_una : term -> bool
+  
   val strip_quant : term -> (term list * term)
   val find_atoml : term -> term list 
   val gen_dest_type : hol_type -> string * hol_type list

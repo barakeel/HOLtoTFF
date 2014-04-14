@@ -9,11 +9,6 @@ open HolKernel Abbrev boolLib blibTools blibExtract blibName intSyntax
 
 fun out file str = TextIO.output (file,str)
 
-fun is_bina term = 
-  is_plus term orelse is_minus term orelse is_mult term orelse 
-  is_less term orelse is_leq term orelse is_great term orelse is_geq term
-fun is_una term = is_negated term
-
 fun symb term =
   if is_conj term          then "&" 
   else if is_disj term     then "|"

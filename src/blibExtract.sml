@@ -1,19 +1,20 @@
 structure blibExtract :> blibExtract =
 struct
 
-open HolKernel Abbrev boolLib blibTools 
+open HolKernel Abbrev boolLib blibTools intSyntax
 (* Extract variables *)
 datatype VARSORT = Bvar | Fvar | Cvar
 
 fun info_var term bvl =
-  if is_var term then 
+  if is_int_literal term then []
+  else if is_var term then 
     if mem term bvl then [((term,0),Bvar)] else [((term,0),Fvar)]
   else if is_const term then 
     if term = T orelse term = F then []
     else [((term,0),Cvar)]
-  else if is_binop term orelse is_eq term 
+  else if is_binop term orelse is_bina term orelse is_eq term 
        then info_var (lhand term) bvl @ info_var (rand term) bvl
-  else if is_unop term then info_var (rand term) bvl
+  else if is_unop term orelse is_una term then info_var (rand term) bvl
   else if is_quant term then 
     let val (qbvl,t) = strip_quant term in info_var_abs qbvl t bvl end       
   else if is_abs term then 
