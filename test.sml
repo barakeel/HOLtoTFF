@@ -38,12 +38,13 @@ app (load o add_theory) theoryl;
 
 load "blibExtract"; open blibExtract;
 fun is_arith_thm thm = null (get_cl_thm thm);
-val thml = map (fst o snd) DB.matchp is_arith_thm ["int_arith","integer"];
+val thml = map (fst o snd) (DB.matchp is_arith_thm ["int_arith","integer"]);
 
 beagle_nf ([],dest_thm integerTheory.INT_LE_SUB_LADD);
 BEAGLE_TAC [] (dest_thm integerTheory.INT_LE_SUB_LADD);
 
-val newthml = filter (success o (BEAGLE_TAC [])) (map dest_thm thml);
+load "blibTools"; open blibTools;
+val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm thml);
 
-
+BEAGLE_TAC [] ([],``∀x. (-x = 0) ⇔ (x = 0)``);
 

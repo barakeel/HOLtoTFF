@@ -20,7 +20,7 @@ fun symb term =
   else if is_negated term  then "$uminus"
   else if is_plus term     then "$sum"
   else if is_minus term    then "$difference"
-  else if is_mult term     then "$product"
+  else if is_linmult term  then "$product"
   else if is_less term     then "$less"
   else if is_leq term      then "$lesseq"
   else if is_great term    then "$greater"

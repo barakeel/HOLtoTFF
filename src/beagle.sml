@@ -13,7 +13,7 @@ fun get_SZSstatus proofpath =
     case strl of
       [] => raise B_ERR "get_SZSstatus" "not found"
     | [a] => raise B_ERR "get_SZSstatus" "not found"
-    | a :: b :: m => (substring (b,13,(String.size b) - 14)
+    | a :: b :: m => (substring (b,13,(size b) - 14)
                       handle _ => raise B_ERR "get_SZSstatus" "not found")
   end
 

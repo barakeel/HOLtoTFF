@@ -23,7 +23,7 @@ and pname_styl tyl = concats "_" (map pname_sty tyl)
  
 fun name_sty (ty,a) = 
   if ty = int_ty then "$int" 
-  else if String.size (pname_sty ty) > 40 then "long" else "ty_" ^ (pname_sty ty)
+  else if size (pname_sty ty) > 40 then "long" else "ty_" ^ (pname_sty ty)
 
 (* Create the type dictionary *)
 fun create_tyadict term =

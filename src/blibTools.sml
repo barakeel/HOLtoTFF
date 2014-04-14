@@ -103,8 +103,13 @@ fun is_binop term = is_conj term orelse is_disj term orelse is_imp_only term
 fun is_unop term = is_neg term
 fun is_quant term = is_forall term orelse is_exists term  
 
+fun is_linmult term = 
+  if is_mult term
+  then is_int_literal (lhand term) orelse is_int_literal (rand term) 
+  else false
+
 fun is_bina term = 
-  is_plus term orelse is_minus term orelse is_mult term orelse 
+  is_plus term orelse is_minus term orelse is_linmult term orelse 
   is_less term orelse is_leq term orelse is_great term orelse is_geq term
 fun is_una term = is_negated term
 

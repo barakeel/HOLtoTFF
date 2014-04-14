@@ -12,7 +12,7 @@ fun info_var term bvl =
     if term = T orelse term = F then []
     else [((term,0),2)]
   else if is_binop term orelse is_bina term orelse is_eq term 
-       then info_var (lhand term) bvl @ info_var (rand term) bvl
+     then info_var (lhand term) bvl @ info_var (rand term) bvl
   else if is_unop term orelse is_una term then info_var (rand term) bvl
   else if is_quant term then 
     let val (qbvl,t) = strip_quant term in info_var_abs qbvl t bvl end       
