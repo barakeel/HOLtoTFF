@@ -42,9 +42,14 @@ val (thml,goal) =  ([]:thm list,(dest_thm thm));
 beagle_nf ([],(dest_thm thm));
 beagle_nf ([], ([],``∀A B. A ∨ B ⇔ B ∨ A``));
 (* test *)
-val goal : goal = ([], ``∀A B.A ⇒ B ⇔ ¬A ∨ B``);
+val goal : goal = ([], ``∀f g. (f = g) ⇔ ∀x. f x = g x``);
+
 val goal = dest_thm (List.nth (thml,13));
 beagle_nf ([], goal);
-
-BEAGLE_TAC [] ([], ``∀A B. A ⇒ B ⇔ ¬A ∨ B``);
+BEAGLE_TAC [] goal;
 val (thml,goal) = ([]:thm list,([]: term list, ``∀A B. A ⇒ B ⇔ ¬A ∨ B``));
+
+
+Beagle can't prove this two theorems.
+([], ``∀x. 0 ≤ x + x ⇔ 0 ≤ x``)
+([], ``∀f g. (f = g) ⇔ ∀x. f x = g x``)
