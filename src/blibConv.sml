@@ -1,7 +1,7 @@
 structure blibConv :> blibConv =
 struct
 
-open HolKernel Abbrev boolLib blibTools blibExtract 
+open HolKernel Abbrev boolLib blibTools blibExtract intSyntax
 
 exception Not_found
 
@@ -90,6 +90,7 @@ fun ARG_CONV conv term =
   else raise UNCHANGED  
 
 fun app_conv name lal bvl term = 
+  if is_int_literal term then raise UNCHANGED else
   if is_comb term then 
     if is_binop term orelse is_eq term orelse is_bina term then 
        BINOP_CONV (app_conv name lal bvl) term else

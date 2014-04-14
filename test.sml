@@ -46,5 +46,6 @@ BEAGLE_TAC [] (dest_thm integerTheory.INT_LE_SUB_LADD);
 load "blibTools"; open blibTools;
 val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm thml);
 
-BEAGLE_TAC [] ([],``∀x. (-x = 0) ⇔ (x = 0)``);
-
+BEAGLE_TAC [] ([],``0 = -10``);
+beagle_nf ([] ,([],``0 = -10``));
+is_int_literal ``0``;

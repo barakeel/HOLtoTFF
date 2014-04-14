@@ -32,6 +32,7 @@ sig
   val is_quant : term -> bool 
   val is_bina : term -> bool 
   val is_una : term -> bool
+  val is_linmult : term -> bool
   
   val strip_quant : term -> (term list * term)
   val find_atoml : term -> term list 
