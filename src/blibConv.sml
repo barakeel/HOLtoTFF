@@ -37,6 +37,8 @@ fun tryl f l =
     [] => raise Not_found
   | a :: m => ((a, f a) handle _ => tryl f m)
 
+
+
 fun rw_absbool term =
   let val atoml = find_atoml term in
   let val (atom,ab) = tryl find_absbool atoml in
@@ -47,14 +49,16 @@ fun rw_absbool term =
       let val t2 = list_mk_comb ((#residue s),bvl) in
       let val t3 = mk_conj (t0, list_mk_forall ((fvl @ bvl),mk_eq (t2,t1))) in
       let val thm = mk_thm ([], mk_eq (atom,t3)) in  
-        (rhs o concl) (PURE_ONCE_REWRITE_CONV [thm] term)
-      end end end end end end
+      let fun conv t = if t = atom then thm else raise UNCHANGED in 
+        (rhs o concl) (DEPTH_CONV conv term)
+      end end end end end end end
     else (* it's a boolean *)
       let val (t1,t2) = (subst [ab |-> T] atom, subst [ab |-> F] atom) in
       let val t3 = mk_conj (mk_disj (mk_neg ab, t1), mk_disj (ab,t2)) in
       let val thm = mk_thm ([], mk_eq (atom,t3)) in  
-        (rhs o concl) (PURE_ONCE_REWRITE_CONV [thm] term)
-      end end end
+      let fun conv t = if t = atom then thm else raise UNCHANGED in 
+        (rhs o concl) (DEPTH_CONV conv term)
+      end end end end
   end end
 
 (* test 

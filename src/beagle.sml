@@ -38,7 +38,7 @@ fun beagle_nf (thml,goal) =
   let val terml9 = map (rhs o concl o (QCONV BOOL_BV_CONV)) terml8 in
     (terml9,F)
   end end end end end 
-  end end end end end
+  end end end end
 
 (* Beagle *)   
 fun BEAGLE_TAC thml goal =
