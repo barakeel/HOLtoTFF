@@ -67,9 +67,11 @@ val term = ``P (\x. x (y:bool)) (\y.y) /\ !x. Q (\z. z + x)``;
 (* lowestarity *)
 fun get_lal term =
   let val fvcal = get_fvcal term in
+  let val tyl = map type_of (get_bvl term) in
+  let fun change_arity (fv,a) = if mem (type_of fv) tyl then (fv,0) else (fv,a) in
   let fun less (_,a) (_,b) = a < b in 
-    sort less fvcal 
-  end end
+    sort less (map change_arity fvcal) 
+  end end end end
 
 (* local conversion *)
 fun app_axiom name term =

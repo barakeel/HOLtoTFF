@@ -50,6 +50,4 @@ BEAGLE_TAC [] goal;
 val (thml,goal) = ([]:thm list,([]: term list, ``∀A B. A ⇒ B ⇔ ¬A ∨ B``));
 
 
-Beagle can't prove this two theorems.
-([], ``∀x. 0 ≤ x + x ⇔ 0 ≤ x``)
-([], ``∀f g. (f = g) ⇔ ∀x. f x = g x``)
+
