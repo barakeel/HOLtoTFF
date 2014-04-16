@@ -1,7 +1,6 @@
 (* LIBRARIES *)
 (* 
 load "blibTools"; open blibTools;
-
 load "blibName"; open blibName;
 load "blibConv"; open blibConv;
 load "blibMonomorph"; open blibMonomorph;
@@ -9,14 +8,11 @@ load "blibPrinter"; open blibPrinter;
 load "beagle"; open beagle;
 load "intSyntax"; open intSyntax;
 *)
-
+val ALT_SIMPLIFY_CONV = SIMP_CONV (simpLib.++ (pureSimps.pure_ss, boolSimps.BOOL_ss)) [];
 (* test on arithmetics theory *)
 load "blibExtract"; open blibExtract;
 fun is_arith_thm thm = 
-  let val l = (get_cl_thm thm) in
-    null l orelse ((length l = 1) andalso fst (dest_const (hd l)) = "COND")
-  end
-  handle _ => false
+  null (get_cl_thm (CONV_RULE ALT_SIMPLIFY_CONV thm))
   
 val athml = map (fst o snd) (DB.matchp is_arith_thm ["int_arith","integer"]);
 load "blibTools"; open blibTools;
@@ -24,13 +20,6 @@ val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm athml);
 
 (* test on every theory *)
 load "blibExtract"; open blibExtract;
-fun is_arith_thm thm = 
-  let val l = (get_cl_thm thm) in
-    null l orelse ((length l = 1) andalso fst (dest_const (hd l)) = "COND")
-  end
-  handle _ => false
-val thml = map (fst o snd) (DB.matchp is_arith_thm []);
-val thm = hd thml;
 
 load "blibTools"; open blibTools;
 val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm thml);
@@ -40,14 +29,12 @@ BEAGLE_TAC [] (dest_thm (List.nth (thml,13)));
 val thml = List.nth (thml,13);
 val (thml,goal) =  ([]:thm list,(dest_thm thm));
 beagle_nf ([],(dest_thm thm));
-beagle_nf ([], ([],``∀A B. A ∨ B ⇔ B ∨ A``));
+beagle_nf ([], ([],`∀f g. (∀x. f x = g x) ⇒ (f = g)``));
 (* test *)
-val goal : goal = ([], ``∀f g. (f = g) ⇔ ∀x. f x = g x``);
+val goal : goal = ([], ``∀x. 0 ≤ x + x ⇔ 0 ≤ x``)          
+val goal : goal = ([],``∀f g. (∀x. f x = g x) ⇒ (f = g)``) 
 
-val goal = dest_thm (List.nth (thml,13));
+
+val goal : goal = ([], ``(!x. (P(x:bool) = F)) ==> (P(y) = F)``);
 beagle_nf ([], goal);
 BEAGLE_TAC [] goal;
-val (thml,goal) = ([]:thm list,([]: term list, ``∀A B. A ⇒ B ⇔ ¬A ∨ B``));
-
-
-

@@ -21,13 +21,10 @@ Third step: Installing HOLtoTFF
 - type git clone https://github.com/barakeel/HOLtoTFF
 - type cd HOLtoTFF
 - open beagle.sml and change the directory path (e.g. val directory = yourHOLtoTFFpath)
-- type Holmake in the termianal
+- type Holmake in the terminal
 
-Fourth step: Testing
-- open test.sml with emacs 
-- split the window 
-- run hol interactive mode (M-h h)
-- select any instruction and then (M-h M-r) to execute it
-- open any libraries you want to test 
+Finally, launch hol in the HOLtoTFF directory.
 
+The current version map the integers of HOL4 to the integer of HOL Light, 
+but leave numeral in their bit form representation.
   
