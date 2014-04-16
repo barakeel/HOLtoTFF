@@ -48,14 +48,14 @@ fun rw_absbool term =
       let val t3 = mk_conj (t0, list_mk_forall ((fvl @ bvl),mk_eq (t2,t1))) in
       let val thm = mk_thm ([], mk_eq (atom,t3)) in  
       let fun conv t = if t = atom then thm else raise UNCHANGED in 
-        (rhs o concl) (DEPTH_CONV conv term)
+        (rhs o concl) (QCONV (DEPTH_CONV conv) term)
       end end end end end end end
     else (* it's a boolean *)
       let val (t1,t2) = (subst [ab |-> T] atom, subst [ab |-> F] atom) in
       let val t3 = mk_conj (mk_disj (mk_neg ab, t1), mk_disj (ab,t2)) in
       let val thm = mk_thm ([], mk_eq (atom,t3)) in  
       let fun conv t = if t = atom then thm else raise UNCHANGED in 
-        (rhs o concl) (DEPTH_CONV conv term)
+        (rhs o concl) (QCONV (DEPTH_CONV conv) term)
       end end end end
   end end
 
@@ -132,7 +132,7 @@ fun mk_extapp (app,operty,argty) =
 fun rw_app term =
   (
   defunctl := [];
-  let val term1 = (rhs o concl) (APP_CONV term) in
+  let val term1 = (rhs o concl) (QCONV APP_CONV term) in
      list_mk_conj (term1 :: map mk_extapp (mk_set (!defunctl)))
   end
   )
