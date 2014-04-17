@@ -73,17 +73,12 @@ fun get_lal term =
     sort less (map change_arity fvcal) 
   end end end end
 
-(* local conversion *)
-val defunctl = ref []
-
 fun app_axiom name term =
   let val (oper,arg) = dest_comb term in
   let val opty = type_of oper in
   let val app = mk_var (name,mk_type ("fun",[opty,opty])) in
-  let val appterm = list_mk_comb (app,[oper,arg]) in
-  let val thm = mk_thm ([],mk_eq (term,appterm)) in
-    (defunctl := (app,type_of oper,type_of arg) :: (!defunctl); thm)
-  end end end end end
+     mk_thm ([],mk_eq (term,list_mk_comb (app,[oper,arg])))
+  end end end
 
 fun app_conv_sub name la a term =
    if la = a then raise UNCHANGED
@@ -119,24 +114,6 @@ fun APP_CONV term =
   let val name = new_name "App" (map (fst o dest_var) (get_bvl term @ free_vars term)) in
     app_conv name (get_lal term) [] term
   end 
-
-fun mk_extapp (app,operty,argty) =
-  let val x = mk_var ("x", argty) in
-  let val f = mk_var ("f", operty) in
-  let val g = mk_var ("g", operty) in
-    list_mk_forall ([x,f,g], 
-      mk_disj (mk_neg (mk_eq(list_mk_comb (app,[f,x]),list_mk_comb (app,[g,x]))),
-               mk_eq (f,g)))         
-  end end end
-
-fun rw_app term =
-  (
-  defunctl := [];
-  let val term1 = (rhs o concl) (QCONV APP_CONV term) in
-     list_mk_conj (term1 :: map mk_extapp (mk_set (!defunctl)))
-  end
-  )
-      
 
 (* val term = ``(f a b = 2) /\ (f a = g)``;*)
 (* BOOL_BV_CONV *) (* should be done just before printing *)

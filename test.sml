@@ -20,7 +20,7 @@ val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm athml);
 
 (* test on every theory *)
 load "blibExtract"; open blibExtract;
-
+val thml =  map (fst o snd) (DB.matchp is_arith_thm []);
 load "blibTools"; open blibTools;
 val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm thml);
 List.length badthml;
@@ -36,5 +36,6 @@ val goal : goal = ([],``∀f g. (∀x. f x = g x) ⇒ (f = g)``)
 
 
 val goal : goal = ([], ``(!x. (P(x:bool) = F)) ==> (P(y) = F)``);
+val goal = dest_thm (List.nth (thml,8));
 beagle_nf ([], goal);
 BEAGLE_TAC [] goal;
