@@ -31,7 +31,7 @@ fun create_tyadict term =
 
 (* NAME VAR *)
 fun name_tff str name = 
-   (if substring (name,0,10) = "%%genvar%%" then str ^ "Abs"
+   (if substring (name,0,10) = "%%genvar%%" then str ^ "Gen"
    else alias (str ^ "U") (str ^ name) )
    handle _ => alias (str ^ "U") (str ^ name) 
 

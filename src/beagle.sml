@@ -8,14 +8,19 @@ open HolKernel Abbrev boolLib blibTools blibExtract
 val directory = "/home/gauthier/HOLtoTFF\\ workspace/HOLtoTFF/"
 val tffpath = "/tmp/HOLtoTFF"
 
-fun get_SZSstatus proofpath = 
-  let val strl = readl proofpath in
-    case strl of
-      [] => raise B_ERR "get_SZSstatus" "not found"
-    | [a] => raise B_ERR "get_SZSstatus" "not found"
-    | a :: b :: m => (substring (b,13,(size b) - 14)
-                      handle _ => raise B_ERR "get_SZSstatus" "not found")
-  end
+fun get_SZSstatus_aux strl = 
+  case strl of
+    [] => "Unreadable"
+  | a :: m => (let val l = String.tokens Char.isSpace a  in
+                if hd l = "SZS" andalso hd (tl l) = "status" 
+                then hd (tl (tl l))
+                else get_SZSstatus_aux m 
+               end
+               handle _ => get_SZSstatus_aux m)
+
+   
+fun get_SZSstatus () = get_SZSstatus_aux (readl (tffpath ^ "_status")) 
+                       handle _ => "File not found"
 
 (* Normalization *)
 fun pb_to_term (thml,goal) = 
@@ -60,9 +65,9 @@ fun BEAGLE_TAC thml goal =
     OS.Process.system ("cd " ^ directory ^ ";" ^
                        "sh " ^ directory ^ "callbeagle.sh " ^ tffpath)
     handle _ => raise B_ERR "BEAGLE_TAC" "OS.process.system";
-    if get_SZSstatus (tffpath ^ "_proof") = "Theorem" 
+    if get_SZSstatus () = "Theorem" 
     then ([],fn _ => mk_thm goal)
-    else raise B_ERR "BEAGLE_TAC" (get_SZSstatus (tffpath ^ "_proof"))
+    else raise B_ERR "BEAGLE_TAC" (get_SZSstatus ())
     )
   end end
 

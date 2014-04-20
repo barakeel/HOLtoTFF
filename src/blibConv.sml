@@ -72,12 +72,13 @@ fun get_lal term =
   let fun less (_,a) (_,b) = a < b in 
     sort less (map change_arity fvcal) 
   end end end end
+ 
 
 fun app_axiom name term =
   let val (oper,arg) = dest_comb term in
   let val opty = type_of oper in
   let val app = mk_var (name,mk_type ("fun",[opty,opty])) in
-     mk_thm ([],mk_eq (term,list_mk_comb (app,[oper,arg])))
+    mk_thm ([],mk_eq (term,list_mk_comb (app,[oper,arg])))
   end end end
 
 fun app_conv_sub name la a term =
@@ -96,8 +97,9 @@ fun app_conv name lal bvl term =
   if is_int_literal term then raise UNCHANGED else
   if is_comb term then 
     if is_binop term orelse is_eq term orelse is_bina term then 
-       BINOP_CONV (app_conv name lal bvl) term else
-    if is_unop term orelse is_una term then RAND_CONV (app_conv name lal bvl) term else 
+      BINOP_CONV (app_conv name lal bvl) term else
+    if is_unop term orelse is_una term then 
+      RAND_CONV (app_conv name lal bvl) term else 
     if is_quant term then 
       let val (qbvl,_) = strip_quant term in
         STRIP_QUANT_CONV (app_conv name lal (qbvl @ bvl)) term

@@ -26,5 +26,7 @@ Third step: Installing HOLtoTFF
 Finally, launch hol in the HOLtoTFF directory.
 
 The current version map the integers of HOL4 to the integer of HOL Light, 
-but leave numeral in their bit form representation.
+but leave numeral in their bit form representation. Moreover, it doesn't provide to
+Beagle the injectivity of App on its first argument thus preventing the interaction
+from proving results using extensionality. (To fix this you could add the extensionnality theorem to the lemmas).
   
