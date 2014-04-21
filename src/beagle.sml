@@ -12,8 +12,10 @@ fun get_SZSstatus_aux strl =
   case strl of
     [] => "Unreadable"
   | a :: m => (let val l = String.tokens Char.isSpace a  in
-                if hd l = "SZS" andalso hd (tl l) = "status" 
+                if hd l = "SZS" andalso hd (tl l) = "status"
                 then hd (tl (tl l))
+                else if hd l = "Execution" andalso hd (tl l) = "interrupted"
+                then "Time out"
                 else get_SZSstatus_aux m 
                end
                handle _ => get_SZSstatus_aux m)

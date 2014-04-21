@@ -14,25 +14,22 @@ val thm2 = INST_TYPE [alpha |-> bool, beta |-> bool] EQ_EXT;
 
 val ALT_SIMPLIFY_CONV = SIMP_CONV (simpLib.++ (pureSimps.pure_ss, boolSimps.BOOL_ss)) [];
 load "blibExtract"; open blibExtract;
-fun is_arith_thm thm = null (get_cl_thm (CONV_RULE ALT_SIMPLIFY_CONV thm));:
+fun is_arith_thm thm = null (get_cl_thm (CONV_RULE ALT_SIMPLIFY_CONV thm));
 
-(* test on arithmetics theory *) 
-val athml = map (fst o snd) (DB.matchp is_arith_thm ["int_arith","integer"]);
-load "blibTools"; open blibTools;
-val badthml = filter (not o (success (BEAGLE_TAC []))) (map dest_thm athml);
-
-(* test on every theory *)
-val thml =  map (fst o snd) (DB.matchp is_arith_thm []);
+val thml =  map (fst o snd) (DB.matchp is_arith_thm ["bool"]);
 load "blibTools"; open blibTools;
 val badthml = filter (not o (success (BEAGLE_TAC [EQ_EXT,thm1,thm2]))) (map dest_thm thml);
 List.length badthml;
 
+val thm = dest_thm (List.nth (thml,12));
+BEAGLE_TAC [EQ_EXT,thm1,thm2] thm;
 (* add necessary theorems *)
 (* instantiation of extensionality *)
-BEAGLE_TAC [] (dest_thm (EQ_EXT));
+success BEAGLE_TAC [thm2] (dest_thm (BOOL_FUN_CASES_THM));
 val thml = List.nth (thml,13);
 val (thml,goal) =  ([]:thm list,(dest_thm thm));
 beagle_nf ([],(dest_thm thm));
 beagle_nf ([], ([],));
 (* test *)
+
 beagle_nf ([], goal);
