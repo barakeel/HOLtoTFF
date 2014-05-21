@@ -27,7 +27,7 @@ fun get_SZSstatus () = get_SZSstatus_aux (readl (tffpath ^ "_status"))
 (* Normalization *)
 fun pb_to_term (thml,goal) = 
   list_mk_conj (
-    [mk_neg (snd goal)] @ (fst goal) @ map (concl o GEN_ALL o DISCH_ALL) thml
+    [mk_neg (snd goal)] @ (fst goal) @ map concl thml
   )       
 fun mk_clever_forall bvl t = list_mk_forall (intersect (free_vars t) bvl,t)
 
@@ -57,9 +57,10 @@ fun beagle_nf (thml,goal) =
 
 (* Beagle *)   
 fun BEAGLE_TAC thml goal =
-  let val (mthml,_) = if is_polymorph_pb (thml,goal)
-                      then monomorph_pb (thml,goal) 
-                      else (thml,goal)
+  let val ithml = map (GEN_ALL o DISCH_ALL) thml in
+  let val (mthml,_) = if is_polymorph_pb (ithml,goal)
+                      then monomorph_pb (ithml,goal) 
+                      else (ithml,goal)
   in
   let val finalgoal = beagle_nf (mthml,goal) in 
     (
@@ -71,6 +72,6 @@ fun BEAGLE_TAC thml goal =
     then ([],fn _ => mk_thm goal)
     else raise B_ERR "BEAGLE_TAC" (get_SZSstatus ())
     )
-  end end
+  end end end
 
 end

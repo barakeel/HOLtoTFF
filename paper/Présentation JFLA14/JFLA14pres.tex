@@ -8,7 +8,6 @@
 \usepackage{beamerthemeshadow}
 \setbeamertemplate{navigation symbols}{}
 %packages indispensables 
-\usepackage[frenchb]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -42,7 +41,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{HOL4-Beagle, de l'ordre supérieur vers le premier ordre}  
+\title{HOL4-Beagle, from higher-order to first-order}  
 \author{Thibault Gauthier}
 \date{\today} 
 
@@ -53,13 +52,11 @@
 \frame{\frametitle{Deux types de prouveurs} 
 
 \noindent \begin{tabularx}{\textwidth}{ |c|X|X| }
-  \hline
-  & HOL4 & Beagle\\
-  \hline  
-  Type & Interactif & Automatique \\
-  \hline Expressivité & Ordre supérieur & Premier ordre\\  
-  \hline Sûreté & Petit noyau
- & Code assez long \\
+  \hline & HOL4 & Beagle\\
+  \hline  Type & Interactive & Automatic \\
+  \hline Expressivité & Higher-order & First-order\\  
+  \hline Soundness & Small kernel (LCF) & Long optimized code \\
+  \hline Family & HOL Light, ProofPower, Isabelle/HOL &  Spass + T \\
   \hline
 \end{tabularx}
 }
@@ -67,16 +64,15 @@
 \subsection{\'Enoncé du problème} 
 \frame{\frametitle{\'Enoncé du problème} 
 
-\textit{Problème} 
-Voilà deux prouveurs internes à HOL4.
+\textit{Problem} Here are two HOL4 internal provers.
 \begin{enumerate}
-\item[-] Metis: premier ordre + traduction de l'ordre supérieur vers le premier ordre
-\item[-] Cooper: arithmétique 
+\item[-] Metis: first-order 
+\item[-] Cooper: arithmetic 
 \end{enumerate}
 \pause
-\textit{Solution} Un prouveur externe.
+\textit{Solution} An external prover.
  \begin{enumerate}
-  \item[-] Beagle: premier ordre et arithmétique 
+  \item[-] Beagle: first-order and arithmetic
 \end{enumerate}
 }
 
@@ -86,13 +82,13 @@ Voilà deux prouveurs internes à HOL4.
   % Place nodes
   \node [cloud] (conjecture) {conjecture};
   \node [block, right of=conjecture,  node distance=3cm] (HOL1) 
-  {traduction};
+  {translation};
   \node [block, right of=HOL1, node distance=3cm] (TFF1) 
-  {fichier du problème};
+  {problem's file};
   \node [block, right of=TFF1, node distance=3cm, yshift=-1cm] (Beagle) 
   {Preuve automatique};
   \node [block, below of=TFF1, node distance=2cm] (TFF2) 
-  {fichier de la preuve};  
+  {proof's file};  
   \node [block, dashed, below of=HOL1, node distance=2cm] (HOL2) 
   {construction de la preuve};
   \node [cloud, below of=conjecture, node distance=2cm] (theorem) 

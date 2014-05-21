@@ -1,90 +1,39 @@
 (* LIBRARIES *)
 (* 
+load "blibMonomorph"; open blibMonomorph;
 load "beagle"; open beagle;
+load "Cooper"; open Cooper;
+load "metisTools"; open metisTools;
+load "intSimps"; open intSimps;
+show_assums := true;
 *)
 
-(* monomorphisation *)
-val thml = [``!y:'b. D y``,``!x:'a. D x ==> C x``]
-val goal = 
+(* Running example *)
+val C = new_constant ("C",``:'a -> bool``);
+val D = new_constant ("D",``:'a -> int -> bool``);
+
+val thm1 = mk_thm ([],``!(x:'a). D x (0:int)``);
+val thm2 = mk_thm ([],``C = \(x:'a). D x (0:int)``);
+val goal : goal = ([],``C (2:int)``);
 
 
+val (thml,_) = monomorph_pb ([thm1,thm2],goal);
+beagle_nf (thml,goal);
 
-val thml = [];
-val goal : goal = 
-([``(f = (\x.(x:int) + (1:int)) ) /\ (P T)``],
-``P (f (2:int) = (3:int)) : bool``);
+TAC_PROOF (goal, BEAGLE_TAC [thm1,thm2]);
+TAC_PROOF (goal, METIS_TAC [thm1,thm2]);
 
-metisTools.METIS_TAC thml goal;
-Cooper.COOPER_TAC goal;
+(* Other example *)
+val P = new_constant ("P", ``:bool -> bool ``);
+val goal = ([``P T``],``P ( 2+(1:int) = 3 )``);
 
-val (finalgoall,_) = BEAGLE_NF_TAC thml goal;
-BEAGLE_ORACLE thml goal;
-beagle_proof thml goal;
+TAC_PROOF (goal, COOPER_TAC);
+TAC_PROOF (goal, METIS_TAC []);
+TAC_PROOF (goal, BEAGLE_TAC []);
 
+val easy_thm = Cooper.COOPER_PROVE ``2 + (1:int) = 3``;
+TAC_PROOF (goal, (metisTools.METIS_TAC [easy_thm])) ;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(*Etape par etape*)
-val (goal1,_) = (PROBLEM_TO_GOAL_TAC thml goal);
-val (goal2,_) = CNF_CONV_TAC (hd goal1);
-val (goal3,_) = FUN_CONV_TAC (hd goal2);
-val (goal4,_) = CNF_CONV_TAC (hd goal3);
-val (goal5,_) = BOOL_CONV_TAC (hd goal4);
-val (goal6,_) = CNF_CONV_TAC (hd goal5);
-val (goal7,_) = (
-                ERASE_EXISTS_TAC THEN 
-                FORALL_CONJUNCTS_TAC THEN
-                STRIP_CONJ_ONLY_HYP_TAC THEN
-                ERASE_FORALL_TAC
-                )
-                (hd goal6);
-val (goal8,_) = DEFUNCT_TAC (hd goal7);
-val (goal9,_) =  NUM_INT_TAC (hd goal8);
-val (goal10,_) = BOOL_BV_TAC (hd goal9);
-val (goal11,_) = ADD_BOOL_AXIOM_TAC (hd goal10);
-;
-
-(* Exemple de la présentation *)
-val goal : goal = ([],``(h (x:'a) y z :bool) /\ (h (x:'a) = g)``);
-val goal : goal = ([],``P (A /\ B):bool``);
-val goal : goal = ([``P (\x.x+1):bool``],F);
-val goal : goal = ([``f (x:num) = (y:num)``],F);
-BEAGLE_NF_TAC [] goal;
-val (goall,_) = FUN_CONV_TAC goal;
-val (goall,_) = NUM_INT_TAC goal;
-
-
-
-
-
-
-
-
-
-
-
+SIMP_TAC int_ss [] goal;
+val thm = TAC_PROOF (goal, 
+            ((SIMP_TAC int_ss []) THEN (ACCEPT_TAC (ASSUME ``P T``))));

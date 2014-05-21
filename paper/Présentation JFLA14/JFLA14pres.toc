@@ -1,5 +1,4 @@
 \beamer@endinputifotherversion {3.10pt}
-\select@language {french}
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
 \beamer@subsectionintoc {1}{1}{Deux types de prouveurs}{2}{0}{1}
 \beamer@subsectionintoc {1}{2}{\'Enonc\IeC {\'e} du probl\IeC {\`e}me}{3}{0}{1}

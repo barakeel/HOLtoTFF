@@ -29,10 +29,16 @@ fun monomorph_thm cl thm =
   let val substl = [] :: flatten (map (substl_clc cl) clp) in
     map (inv INST_TYPE thm) (normalize_substl substl)
   end end
- 
+
+fun same_thm thm1 thm2 = (concl thm1) = (concl thm2)
+fun mem_thm thm thml = exists (same_thm thm) thml
+fun mk_set_thm thml = case thml of
+    [] => []
+  | thm :: m => if mem_thm thm m then mk_set_thm m else thm :: mk_set_thm m
+
 fun monomorph_pb_one (thml,goal) = 
   let val cl = merge (map get_cl (snd goal :: fst goal) @ map get_cl_thm thml) in
-    (flatten (map (monomorph_thm cl) thml), goal)
+    (mk_set_thm (flatten (map (monomorph_thm cl) thml)), goal)
   end   
 
 (* Main function *) (* 3 iterations, 20 instantiations *)
