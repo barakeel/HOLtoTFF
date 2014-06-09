@@ -25,7 +25,6 @@ Third step: Installing HOLtoTFF
 
 Finally, launch hol in the HOLtoTFF directory.
 
-Warning, as we are optimizing the code :
+Warning :
 - numerals are left uninterpreded (only integers are mapped)
 - extensionnality theorems are not provided
-- some part of the code now uses mk_thm (As we are in the process of simplifying the proof)
