@@ -1,17 +1,16 @@
 (* LIBRARIES *)
 (* 
-load "blibMonomorph"; open blibMonomorph;
-load "beagle"; open beagle;
+load "intSimps"; open intSimps;
 load "Cooper"; open Cooper;
 load "metisTools"; open metisTools;
-load "intSimps"; open intSimps;
 show_assums := true;
+load "blibMonomorph"; open blibMonomorph;
+load "beagle"; open beagle;
 *)
 
 (* Running example *)
 val C = new_constant ("C",``:'a -> bool``);
 val D = new_constant ("D",``:'a -> int -> bool``);
-
 val thm1 = mk_thm ([],``!(x:'a). D x (0:int)``);
 val thm2 = mk_thm ([],``C = \(x:'a). D x (0:int)``);
 val goal : goal = ([],``C (2:int)``);
@@ -22,6 +21,8 @@ beagle_nf (thml,goal);
 
 TAC_PROOF (goal, BEAGLE_TAC [thm1,thm2]);
 TAC_PROOF (goal, METIS_TAC [thm1,thm2]);
+
+(* Show TFA file *)
 
 (* Other example *)
 val P = new_constant ("P", ``:bool -> bool ``);
@@ -37,3 +38,5 @@ TAC_PROOF (goal, (metisTools.METIS_TAC [easy_thm])) ;
 SIMP_TAC int_ss [] goal;
 val thm = TAC_PROOF (goal, 
             ((SIMP_TAC int_ss []) THEN (ACCEPT_TAC (ASSUME ``P T``))));
+
+(* Show TFA file *)

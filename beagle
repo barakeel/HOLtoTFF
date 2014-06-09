@@ -1,0 +1,5 @@
+#!/bin/sh
+# Assume java is in the search path
+java -Dfile.encoding=UTF-8 -Xms512M -Xmx1536M -Xss1M -XX:MaxPermSize=384M -jar `dirname "$0"`/beagle.jar "$@"
+#
+

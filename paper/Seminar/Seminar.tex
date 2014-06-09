@@ -1,0 +1,305 @@
+\documentclass{beamer}
+\usepackage{etex}
+\usepackage{booktabs}
+
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{beamerthemeshadow}
+\setbeamertemplate{navigation symbols}{}
+%packages indispensables 
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+%packages utiles
+\usepackage{alltt} %program code
+\usepackage{enumerate}
+\usepackage{amssymb} %lettres mathématiques
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bussproofs} %derivation
+\usepackage{hyperref} %to write path.
+\usepackage{color} % colouring text
+\usepackage{tabularx} % table
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\setbeamertemplate{headline}{}
+{\renewcommand{\arraystretch}{1.5}
+
+%%%%%%%%%%%%%%%%% graphics %%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgfplots}
+\usepackage{pgf-pie}
+\usepackage{tikz} % to draw
+
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{trees,positioning,fit}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Beagle as a HOL4 external ATP method}  
+\author{Thibault Gauthier}
+\date{\today} 
+
+\frame{\titlepage} 
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\subsection{Two types of provers}
+\frame{\frametitle{Two types of provers} 
+
+\noindent \begin{tabularx}{\textwidth}{ |c|X|X| }
+  \hline & HOL4 & Beagle\\
+  \hline  Type & Interactive & Automated \\
+  \hline Expressivity & Higher-order & First-order\\  
+  \hline Soundness & Small kernel (LCF) & Long optimized code \\
+  \hline Family & HOL Light, ProofPower, Isabelle/HOL &  Spass + T \\
+  \hline
+\end{tabularx}
+}
+
+\subsection{Problem statement} 
+\frame{\frametitle{Problem statement} 
+
+\textit{Problem} Here are two HOL4 internal provers.
+\begin{enumerate}
+\item[-] Metis: first-order 
+\item[-] Cooper: arithmetic 
+\end{enumerate}
+\pause
+\textit{Solution} An external prover.
+ \begin{enumerate}
+  \item[-] Beagle: first-order and arithmetic
+\end{enumerate}
+}
+
+\subsection{Interaction}
+\frame{\frametitle{Interaction} 
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [cloud] (conjecture) {conjecture};
+  \node [block, right of=conjecture,  node distance=3cm] (HOL1) 
+  {translation};
+  \node [block, right of=HOL1, node distance=3cm] (TFF1) 
+  {problem's file};
+  \node [block, right of=TFF1, node distance=3cm, yshift=-1cm] (Beagle) 
+  {automatic proof};
+  \node [block, below of=TFF1, node distance=2cm] (TFF2) 
+  {proof's file};  
+  \node [block, dashed, below of=HOL1, node distance=2cm] (HOL2) 
+  {replaying the proof};
+  \node [cloud, below of=conjecture, node distance=2cm] (theorem) 
+  {theorem};
+  \node [label=HOL4, draw=black, ultra thick, 
+  fit=(conjecture) (theorem) (HOL1) (HOL2)] {}; 
+  \node [label=format TFA, draw=black, ultra thick, fit=(TFF1) (TFF2)] 
+  {}; 
+  \node [label=Beagle, draw=black, ultra thick, fit=(Beagle)] {}; 
+  % Draw edges
+  \draw [-to,black,ultra thick] (conjecture) -- (HOL1);
+  \draw [-to,black,ultra thick] (HOL1) -- (TFF1);
+  \draw [-to,,black,ultra thick] (TFF1) -- (Beagle);
+  \draw [-to,black,ultra thick] (Beagle) -- (TFF2);
+  \draw [-to,black,ultra thick] (TFF2) -- (HOL2);
+  \draw [-to,black,ultra thick,dashed] (HOL2) -- (theorem);
+  \draw [-to,black,ultra thick] (Beagle.south) to [out=225,in=330](theorem.south);
+\end{tikzpicture}
+}
+
+
+
+\section{Translation to first-order}
+
+
+\frame{\frametitle{Translation's order}
+\begin{enumerate}
+  \item {\color{blue} Monomorphization}
+  \item Negation of the conclusion
+  \item Rewriting to conjunctive normal form
+  \item {\color{blue} $\lambda$-lifting}
+  \item Boolean argument elimination: $P(f) \ \rightarrowtail \ f \Rightarrow P(T) \wedge \neg f \Rightarrow P(F)$
+  \item Rewriting to a clause set
+  \item {\color{blue} Defunctionalization}
+  \item Mapping numeral to integers
+\end{enumerate}
+}
+
+\subsection{Monomorphization}
+\frame{\frametitle{Monomorphization}
+Instantiation of polymorphic types ($a$,$\ldots$).
+ \begin{exampleblock}{Problem}
+Thm 1: $\forall x:a.\ {\color{violet!60}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{violet!60}C} = \lambda x:a.\ {\color{violet!60}D}\ x\ 0$
+\\Conjecture : ${\color{orange}C} \ 2$
+ \end{exampleblock}
+\pause
+ \begin{exampleblock}{Matching type of ${\color{violet!60}C} : a \rightarrow bool$  and ${\color{orange}C}: int \rightarrow bool$ }
+Thm 1: $\forall x:a.\ {\color{violet!60}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{orange}C} = \lambda x:int.\ {\color{orange}D}\ x\ 0$
+ \\Conjecture: ${\color{orange}C}\ 2$
+\end{exampleblock}
+\pause
+ \begin{exampleblock}{Matching type of ${\color{violet!60}D} : a \rightarrow  int \rightarrow bool$  and ${\color{orange}D}: int \rightarrow int \rightarrow bool$ }
+Thm 1: $\forall x:int.\ {\color{orange}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{orange}C} = \lambda x:int.\ {\color{orange}D}\ x\ 0$
+ \\Conjecture: ${\color{orange}C}\ 2$
+\end{exampleblock}
+}
+
+
+\subsection{$\lambda$-lifting}
+\frame{\frametitle{$\lambda$-lifting}
+ \begin{exampleblock}{Problem}
+Thm 1: $\forall x.\ D\ x\ 0$ \ \ 
+Thm 2: $C = \lambda x.\ D\ x\ 0$
+\\Conjecture: $C\ 2$
+\end{exampleblock}
+\pause
+ \begin{exampleblock}{Negation of the conclusion}
+\[\lbrace \forall x.\ D\ x\ 0 \ , \  
+C = \lambda x.\ D\ x\ 0 \ , \  
+\neg (C\ 2) \rbrace\]
+\end{exampleblock}
+
+\pause
+$\lambda$-lifting: $\exists {\color{blue}Gen}.\ (\forall x.\ {\color{blue}Gen}\ x = D\ x\ 0) \wedge C = {\color{blue}Gen} $ \\
+\pause
+Combinators: $C = S\ (S\ (K\ D)\ I)\ (K\ 0) $
+\pause
+
+\begin{exampleblock}{Clause set}
+\[\lbrace 
+\forall x.\ D\ x\ 0 \ , \ 
+\forall x.\ Gen\ x = D\ x\ 0 \ , \ 
+C = Gen \ , \ 
+\neg (C\ 2) \rbrace \]
+\end{exampleblock}
+}
+
+
+\subsection{Defunctionalization}
+\frame{\frametitle{Defunctionalization}
+Let ${\color{blue}App}$ be the apply functor verifying ${\color{blue}App}\ f\ x$ = $f\ x$ ($ f\ x \rightarrowtail {\color{blue}App}\ f\ x$).
+ We defunctionalize a function only when: 
+
+ \begin{enumerate}
+ \item [-] it is not a mapped function
+ \pause
+ \item [-] it is quantified universally
+   $!h.\ h\ x\ y \ \rightarrowtail \ !h.\ {\color{blue}App}\ ({\color{blue}App}\ h\ x)\ y$
+ \pause
+ \item [-] it is used with different number of arguments
+   $\lbrace 
+   h\ x\ y\ z \ , \ h\ x = j 
+   \rbrace  \ \rightarrowtail \ \lbrace 
+   {\color{blue}App}\ ({\color{blue}App}\ (h\ x)\ y)\ z \ , 
+   \ h\ x = j
+   \rbrace$
+  \item [-] it has the same type as an universally quantified function
+  \pause
+\end{enumerate}
+\pause
+
+\begin{exampleblock}{Defunctionalization}
+\[\lbrace 
+\forall x.\ D\ x\ 0, \ 
+\forall x.\ Gen\ x = D\ x\ 0, \ 
+C = Gen, \ 
+\neg (C\ 2) \rbrace \]
+\[\lbrace 
+\forall x.\ D\ x\ 0, \ 
+\forall x.\ {\color{blue}App}\ Gen\ x = D\ x\ 0, \ 
+C = Gen, \ 
+\neg (C\ 2) \rbrace \]
+\end{exampleblock}
+}
+
+\frame{\frametitle{Translation's order}
+\begin{enumerate}
+  \item {\color{blue} Monomorphization}
+  \item Negation of the conclusion
+  \item Rewriting to conjunctive normal form
+  \item {\color{blue} $\lambda$-lifting}
+  \item {Boolean argument elimination}
+  \item Rewriting to a clause set
+  \item {\color{blue} Defunctionalization}
+  \item Mapping numeral to integers
+\end{enumerate}
+}
+
+\section{Demonstration}
+\frame{\frametitle{Demonstration}
+ \begin{exampleblock}{Problem}
+Thm 1: $\forall x:a.\ {\color{violet!60}D} \ x\ 0$ \ \ 
+Thm 2: ${\color{violet!60}C} = \lambda x:a.\ {\color{violet!60}D}\ x\ 0$
+\\Conjecture : ${\color{orange}C} \ 2$
+\end{exampleblock}
+\begin{exampleblock}{Translated problem}
+\[
+\lbrace 
+\forall x:a.\ {\color{violet!60}D}\ x\ 0, \ 
+\forall x:a.\ App\ Gen_0\ x = {\color{violet!60}D}\ x\ 0, \ 
+{\color{violet!60}C} = Gen_0, \  
+\] \[
+\forall x:int.\ {\color{orange}D}\ x\ 0, \ 
+\forall x:int.\ App\ Gen_1\ x = {\color{orange}D}\ x\ 0, \ 
+{\color{orange}C} = Gen_1, \ 
+\] \[ \neg ({\color{orange}C}\ 2) 
+\rbrace 
+\]
+\end{exampleblock} 
+}
+
+
+
+\section{Results}
+\frame{\frametitle{Results}
+\begin{table}[]
+\begin{tabular}{clc}
+ \begin{tikzpicture}[scale = 0.5]
+ \pie[text=inside, color ={green!90, black!40, black!30, black!20}]
+ {70/,15/,7/,8/}   
+ \end{tikzpicture}
+ &  &
+ \begin{tikzpicture}[scale = 0.5, yshift = 3]
+ \pie[text=legend,color ={green!90, black!40, black!30, black!20}]
+ {81/unsat,2/sat,8/unknown,9/time out}   
+ \end{tikzpicture}
+\end{tabular}
+\caption {With and without monomorphization}
+\end{table}
+Only $56 \%$ of higher-order problems are solved. \\
+And $79 \%$ of arithmetic problems are solved. (containing at least one mapped arithmetic constant)
+}
+
+
+
+\section{Conclusion}
+\subsection{}
+\frame{\frametitle{Summary on the current HOL4-Beagle interaction}
+Qualities: 
+\begin{enumerate}
+\item [-] Its translation is correct (preserve satisfiability).
+\item [-] It proves 81\% of conjectures solved by Metis without arithmetic lemmas.
+\item [-] It uses a well-known format, TFA (TPTP).
+
+\end{enumerate} 
+Limitations: 
+\begin{enumerate}
+\item [-] it is incomplete (doesn't preserve unsatisfiability).
+\item [-] it doesn't reconstruct the proof.
+\item [-] it doesn't support real and rational arithmetic.
+\item [-] it was not tested extensively (for example, as part of a lemma mining method).
+\end{enumerate}
+}
+\end{document}
+

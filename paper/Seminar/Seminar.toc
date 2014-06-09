@@ -1,0 +1,12 @@
+\beamer@endinputifotherversion {3.10pt}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Two types of provers}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Problem statement}{4}{0}{1}
+\beamer@subsectionintoc {1}{3}{Interaction}{6}{0}{1}
+\beamer@sectionintoc {2}{Translation to first-order}{7}{0}{2}
+\beamer@subsectionintoc {2}{1}{Monomorphization}{8}{0}{2}
+\beamer@subsectionintoc {2}{2}{$\lambda $-lifting}{11}{0}{2}
+\beamer@subsectionintoc {2}{3}{Defunctionalization}{16}{0}{2}
+\beamer@sectionintoc {3}{Demonstration}{22}{0}{3}
+\beamer@sectionintoc {4}{Results}{23}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{24}{0}{5}

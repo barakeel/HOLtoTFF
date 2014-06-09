@@ -1,0 +1,33 @@
+This is beagle, version 0.7.6 (26/3/2014)
+
+SZS status Theorem for HOLtoTFF
+
+Inference rules
+----------------------
+#Ref    : 0
+#Sup    : 0
+#Fact   : 0
+#Define : 0
+#Split  : 3
+#Close  : 0
+
+Simplification rules
+----------------------
+#Subsume      : 0
+#Demod        : 0
+#Tautology    : 1
+#SimpNegUnit  : 0
+#BGTheorySimp : 5
+
+Other
+----------------------
+#QE               : 0
+#BGSolverCalls    : 10
+
+Timing (in seconds)
+----------------------
+Parsing         : 0.20
+CNF conversion  : 0.01
+Main loop       : 0.07
+Simplification  : 0.01
+Total           : 0.52

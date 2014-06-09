@@ -7,5 +7,4 @@ include Abbrev
   val APP_CONV : conv
   val BOOL_BV_CONV : conv
   
-  
 end

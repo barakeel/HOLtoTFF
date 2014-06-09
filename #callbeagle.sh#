@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "Calling beagle..." 
+timeout 10s \java -jar beagle.jar "-proof" "$1"
+#

@@ -1,0 +1,26 @@
+%----------------------------------------------------------------------------
+tff(ty_bool_type,type,(
+    ty_bool: $tType )).
+
+tff(vx_type,type,(
+    vx: $int )).
+
+tff(btrue_type,type,(
+    btrue: ty_bool )).
+
+tff(bfalse_type,type,(
+    bfalse: ty_bool )).
+
+tff(ty_bool_axiom,axiom,(
+    ~(btrue = bfalse) )).
+
+tff(axiom1_axiom,axiom,(
+    (~($lesseq(0,vx)) | ~($lesseq(0,$sum(vx,vx)))) )).
+
+tff(axiom2_axiom,axiom,(
+    ($lesseq(0,$sum(vx,vx)) | $lesseq(0,vx)) )).
+
+tff(conjecture_conjecture,conjecture,(
+    $false )).
+
+%----------------------------------------------------------------------------
